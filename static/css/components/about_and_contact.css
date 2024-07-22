@@ -1,0 +1,151 @@
+
+
+:root{
+    --pad:15px;
+}
+
+.about,
+.contact{
+    margin-top: 17rem;
+    margin-left: var(--con-m-left);
+    padding: var(--pad) var(--pad) var(--pad) var(--pad);
+    font-size: 1.8rem;
+    font-weight: 400;
+    font-family: Dahlia,'Courier New', Courier, monospace;
+    width: 55%;
+    /* border: 1px solid white; */
+    border-radius: calc(var(--pad) + 10px);
+    background-color: darkorange;
+}
+
+.about h2,
+.contact h2{
+    font-size: 3rem;
+}
+
+.about p,
+.contact p{
+    position: relative;
+    padding-left: 40px;
+    /* font-family: "LoveRegular"; use for background in read mode */
+    font-family: "MondiaThin";
+    font-style: bold;
+    font-size: 1.3rem;
+    /* border: 1px solid rgb(219, 29, 29); */
+    border-radius: calc(var(--pad) + 0px);
+    background-color: bisque;
+    padding: 10px;
+}
+
+
+/* space */
+.sp{
+    height: 50vh;
+    width: 100%;
+    font-size: 0;
+}
+
+/* copyright */
+.cc{
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+    font-size: 1.5rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* icons */
+.con_icons{
+    width: 32px;
+    height: 32px;
+    color: black;
+    padding-left: 40px;
+}
+body.dark-mode .con_icons img{
+    filter: invert(1);
+}
+body.dark-mode .con_icons{
+    color: white;
+}
+
+be{
+    position: relative;
+    display: block;
+    height: 1rem;
+    width: 100%;
+}
+
+.contact p strong{
+    color: var(--clr2);
+}
+.about p strong{
+    font-weight: 800;
+    color: var(--clr2);
+}
+
+
+@media (min-width: 300px) and (max-width: 767px) {
+    .about,
+    .contact{
+        margin-top: 7rem;
+        width: 95%;
+        margin-left: 10px;
+        font-size: 1.3rem;
+        padding: 10px;
+    }
+
+    .about h2,
+    .contact h2{
+        font-size: 1.8rem;
+    }
+
+    .about p,
+    .contact p{
+        font-size: 0.8rem;
+        padding-left: 20px;
+        padding: 8px;
+    }
+    .sp{
+        height: 30vh;
+    }
+    .cc{
+        height: 10rem;
+        font-size: 1rem;
+    }
+    .con_icons,
+    .con_icons img{
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1380px) {
+    .about,
+    .contact{
+        margin-top: 7rem;
+        width: 95%;
+        margin-left: 10px;
+        font-size: 1.3rem;
+        padding: 10px;
+    }
+
+    .about h2,
+    .contact h2{
+        font-size: auto;
+    }
+
+    .about p,
+    .contact p{
+        font-size: auto;
+        padding-left: 20px;
+        padding: 8px;
+    }
+    .sp{
+        height: 40vh;
+    }
+    .cc{
+        height: 10rem;
+        font-size: auto;
+    }
+}

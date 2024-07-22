@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --bg1: bisque;
+    --bg2: black;
+    --clr2: rgb(221, 43, 79);
+    --c2: #dd2b4f;
+}
+
+body{
+    /* background-color: bisque; */
+    background-color: var(--bg1);
+    color: black;
+}
+
+.f0{
+    font-size: 0rem;
+}
+
+.active_highlight{
+    border: 2px solid  rgb(255, 38, 0);
+}
+
+.active_highlight_dark{
+    border: 2px solid  rgb(255, 234, 0);
+}
+
+/* // <uniquifier>: Use a unique and descriptive class name */
+/* // <weight>: Use a value from 300 to 900 */
+
+.red-hat-display-400 {
+  font-family: "Red Hat Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
