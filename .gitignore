@@ -174,3 +174,4 @@ data.txt
 user_data.csv
 app-old.py
 templates/old-base.html
+.DS_store
