@@ -16,13 +16,6 @@ An official at the Ernakulam district labour office, who looked into the issue, 
 Piravom Municipality vice-chairman K P Salim said that after the issue came up in the media, the migrant worker was moved to another premises. “We have come to know that the migrant worker wanted the kennel premises as he cannot afford to pay higher rent. There are other migrant workers living in another building in the same compound for a rent of Rs 2,500 per head a month. Nobody forced him to stay in the kennel,” he said.
 '''
 
-text2 = """
-    OpenAI has released several models for natural language processing tasks.
-    GPT-3, one of the most powerful models, can generate human-like text.
-    BERT, developed by Google, excels at understanding the context of words in a sentence.
-    Researchers continue to improve these models to enhance their performance.
-"""
-
 
 
 def generate_summary(text):

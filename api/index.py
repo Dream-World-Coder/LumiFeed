@@ -14,5 +14,9 @@ if __name__ == "__main__":
     app.run()
 
 # For Vercel serverless function export
+# Expose the app for Vercel
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.serving import run_simple
+
 def handler(request, response):
     return app(request, response)
