@@ -1,13 +1,12 @@
+def generate_html_table(data: list):
 
-def generate_html_table(data:list):
-
-    doctype = '''
+    doctype = """
                 <!doctype html>
-            '''
-    html_start = '''
+            """
+    html_start = """
                 <html lang="en">
-                '''
-    head = '''
+                """
+    head = """
             <head>
                 <meta charset="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,8 +27,8 @@ def generate_html_table(data:list):
                 <link rel="stylesheet" href="static/css/utils.css" />
                 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
             </head>
-            '''
-    body_header='''
+            """
+    body_header = """
                 <body>
                     <header class="fixed dark-glass">
                         <div class="header_wrapper full flex align-center">
@@ -88,8 +87,8 @@ def generate_html_table(data:list):
                                 <div>
                                 </div>
                     </header>
-                    '''
-    fetch_news = '''
+                    """
+    fetch_news = """
                 <!--find news type, fetch_news -->
                 <div class="fetch_news borderX" id="table-start">
                     <form action="/fetchnews" method="post">
@@ -151,8 +150,8 @@ def generate_html_table(data:list):
                         </div>
                     </form>
                 </div>
-                '''
-    container_table='''
+                """
+    container_table = """
                         <div class="container">
                         <!-- table -->
                         <table class="">
@@ -162,19 +161,19 @@ def generate_html_table(data:list):
                                 <th class="th3">READ HERE</th>
                                 <th class="th4">DIRECT LINK</th>
                             </tr>
-                    '''
+                    """
 
     for row in data[1:]:
-        container_table += f'''
+        container_table += f"""
                             <tr class="rows">
                                 <td class="td1 data_box">{row[0]}</td>
                                 <td class="td2 data_box">{row[1]}</td>
                                 <td class="td3 data_box read"><span class="rbtn">Read</span></td>
                                 <td class="td4 data_box"><a href="{row[2]}" target="_blank" rel="noopener">Link</a></td>
                             </tr>
-                            '''
+                            """
 
-    table_end='''
+    table_end = """
                 </table>
                 <div class="read flexed" id="read">
                     <div class="read__container full flex-col">
@@ -197,10 +196,10 @@ def generate_html_table(data:list):
                     </div>
                 </div>
             </div>
-            '''
+            """
     container_table += table_end
 
-    search = '''
+    search = """
             <div class="find fixed borderX flex-col f-gap-2">
                 <!-- search query -->
                 <div
@@ -229,8 +228,8 @@ def generate_html_table(data:list):
                         </button>
                     </form>
                 </div>
-            '''
-    result = '''
+            """
+    result = """
             <!-- search results -->
                 <!-- this will be genrated when search is pressedelse not -->
                 <div class="search-reasults relative flex-col f-gap-1">
@@ -239,12 +238,16 @@ def generate_html_table(data:list):
                     </div>
                 </div>
             </div>
-            '''
-    search_and_result = '''
+            """
+    search_and_result = (
+        """
                         <!-- search + result -->
-                        ''' + search  + result
+                        """
+        + search
+        + result
+    )
 
-    about = '''
+    about = """
             <!-- about + contact -->
             <div class="about-hanger" id="about"></div>
             <div class="about">
@@ -257,8 +260,8 @@ def generate_html_table(data:list):
                 </p>
                 <div class="contact-hanger" id="contact"></div>
             </div>
-            '''
-    contact = '''
+            """
+    contact = """
             <div class="contact">
                 <h2>Contact</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro praesentium fugit veniam repudiandae nobis,
@@ -269,16 +272,16 @@ def generate_html_table(data:list):
                     My Personal Website
                 </p>
             </div>
-            '''
-    footer = '''
+            """
+    footer = """
                 <footer>
                     <div class="sp" id="table-end"></div>
                     <div class="cen cc">
                         © 2024 Subhajit Gorai. All rights reserved.
                     </div>
                 </footer>
-                '''
-    scripts = '''
+                """
+    scripts = """
                 <!-- scripts -->
                 <script src="static/js/script.js"
                 ></script>
@@ -302,31 +305,44 @@ def generate_html_table(data:list):
                     type="text/javascript"
                     src="static/js/functions/read.js"
                 ></script>
-            '''
-    body_end = '''
+            """
+    body_end = """
                 </body>
-                '''
-    html_end= '''
+                """
+    html_end = """
                 </html>
-            '''
+            """
 
-
-    html = doctype + html_start + head + body_header + fetch_news+ container_table + search_and_result + about + contact + footer + scripts + body_end + html_end
-    with open('index.html', 'w') as file:
+    html = (
+        doctype
+        + html_start
+        + head
+        + body_header
+        + fetch_news
+        + container_table
+        + search_and_result
+        + about
+        + contact
+        + footer
+        + scripts
+        + body_end
+        + html_end
+    )
+    with open("index.html", "w") as file:
         file.write(html)
 
     return html
 
 
-def generate_search_reasult(matches:list) -> str:
-    no_of_matches = f'''
+def generate_search_reasult(matches: list) -> str:
+    no_of_matches = f"""
                     <div class="res__num border_res">
                         {len(matches)} Matches found
                     </div>
-                    '''
-    results = ''
-    for index,row in enumerate(matches):
-        results   += f'''
+                    """
+    results = ""
+    for index, row in enumerate(matches):
+        results += f"""
                     <div class="res border_res">
                         <div class="res__title">
                             {matches[index][1]},
@@ -342,21 +358,21 @@ def generate_search_reasult(matches:list) -> str:
                             <a target="_blank" rel="noopener" class="res__unlink news_urls_a_tag" href="{matches[index][2]}">Link</a>
                         </div>
                     </div>
-                    '''
+                    """
     return no_of_matches + results
 
 
-def gen_table(data:list) -> str:
-    html_table = '''
+def gen_table(data: list) -> str:
+    html_table = """
                     <tr class="tr1 rows">
                         <th class="th1">NO</th>
                         <th class="th2">NEWS TITLE</th>
                         <th class="th3">READ HERE</th>
                         <th class="th4">DIRECT LINK</th>
                     </tr>
-                '''
+                """
     for row in data:
-        html_table += f'''
+        html_table += f"""
                     <tr class="rows">
                         <td class="td1 data_box" id="serial_no_{row[0]}">{row[0]}</td>
                         <td class="td2 data_box">{row[1]}</td>
@@ -365,12 +381,12 @@ def gen_table(data:list) -> str:
                             <a class="news_urls_a_tag" href="{row[2]}" target="_blank" rel="noopener">Link</a>
                         </td>
                     </tr>
-                '''
+                """
     return html_table
 
 
-def gen_table_2(data:list) -> str:
-    html_table = '''
+def gen_table_2(data: list) -> str:
+    html_table = """
                     <tr class="tr1 rows">
                         <th class="th1">NO</th>
                         <th class="th2">TITLE</th>
@@ -378,9 +394,9 @@ def gen_table_2(data:list) -> str:
                         <th class="th4">READ HERE</th>
                         <th class="th5">LINK</th>
                     </tr>
-                '''
+                """
     for row in data:
-        html_table += f'''
+        html_table += f"""
                     <tr class="rows">
                         <td class="td1 data_box" id="serial_no_{row[0]}">{row[0]}</td>
                         <td class="td2 data_box">{row[1]}</td>
@@ -390,12 +406,12 @@ def gen_table_2(data:list) -> str:
                             <a class="news_urls_a_tag" href="{row[3]}" target="_blank" rel="noopener">Link</a>
                         </td>
                     </tr>
-                '''
+                """
     return html_table
 
 
 def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -> str:
-    head = '''
+    head = """
         <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -405,9 +421,9 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    '''
-    
-    style = '''
+    """
+
+    style = """
     <style>
         *{
             margin: 0;
@@ -415,13 +431,13 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             box-sizing: border-box;
         }
         body{
-            background-color: rgb(255, 245, 233);
+            background-color: rgb(215, 215, 215);
             overflow-x: hidden;
         }
         .read__container {
             position: relative;
             width: 100vw;
-            background-color: rgb(255, 245, 233);
+            background-color: rgb(215, 215, 215);
         }
         .read__navigations {
             position: fixed;
@@ -429,8 +445,8 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             left: 0;
             height: 5rem;
             width: 100vw;
-            background-color: darkorange;
-            border-bottom: 2px solid rgb(255, 201, 135);
+            background-color: rgb(102, 102, 102);
+            border-bottom: 2px solid rgb(102, 102, 102);
             z-index: 99;
             padding-right: 30px;
             display: flex;
@@ -449,8 +465,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-size: 1.15rem;
             color: rgb(0, 0, 0);
-            background-color: #e65100;
-            /* 230, 80, 0*/
+            background-color: rgb(195,195,195);
         }
         /* summary */
         .iconS{
@@ -513,10 +528,10 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
         }
     </style>
 </head>
-    '''
-    
+    """
+
     dm_icon_url = "{{url_for('static', filename='icons/dm3.svg')}}"
-    read__navigations = f'''
+    read__navigations = f"""
     <body>
     <div class="read__container">
         <div class="read__navigations">
@@ -555,9 +570,9 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             </div>
         </div>
 
-    '''
-    
-    read__page = f'''
+    """
+
+    read__page = f"""
     <div class="read__page">
             <h1 id="ajax_h1">
                 {heading}
@@ -580,9 +595,9 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
         </div>
     </div>
     <div class="ss"></div>
-    '''
-    
-    scripts_and_all ='''    
+    """
+
+    scripts_and_all = """    
             <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Dark mode
@@ -662,7 +677,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
 
 </body>
 </html>
-    '''
-    
+    """
+
     html_doc = head + style + read__navigations + read__page + scripts_and_all
     return html_doc
