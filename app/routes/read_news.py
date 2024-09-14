@@ -39,7 +39,7 @@ def read_news_in_new_tab():
         news_content=news_content,
         newsImgUrl=newsImgUrl,
     )
-    path = "templates/news.html"
+    path = "app/templates/news.html"
     final_path = makeAlternateFilePath(path=path)
     with open(final_path, "w") as f:
         f.write(html_file_str)

@@ -2,7 +2,7 @@ from flask import render_template, request, session
 from app.routes import app, obj, gen_table, gen_table_2
 
 
-@app.route("/", methods=["GET"])
+@app.route("/fetchnews", methods=["GET"])
 def fetchnews():
     city_choice = None
 
@@ -16,7 +16,7 @@ def fetchnews():
         print(e)
         return render_template("index.html", table="None")
 
-    home_url = f"http://127.0.0.1:5500/fetch?news_type={news_type}&city_choice={city_choice}&news_count={news_count}"
+    home_url = f"http://127.0.0.1:5500/fetchnews?news_type={news_type}&city_choice={city_choice}&news_count={news_count}"
     session["home_url"] = home_url
 
     if news_type == "top_n":

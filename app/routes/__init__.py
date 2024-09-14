@@ -17,9 +17,9 @@ from app.functions.news_summariser import generate_summary
 obj = NewsScrape()
 
 
-import auth
-import fetch_news
-import home
-import read_news
-import search
-import summary
+from app.routes import auth
+from app.routes import fetch_news
+from app.routes import home
+from app.routes import read_news
+from app.routes import search
+from app.routes import summary
