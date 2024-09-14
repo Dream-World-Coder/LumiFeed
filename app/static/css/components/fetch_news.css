@@ -33,6 +33,9 @@
   gap: 0px;
 }
 
+#news_count {
+  border-color: var(--v-th) !important;
+}
 .op input {
   width: 20px !important;
 }
@@ -41,6 +44,12 @@
 }
 .opp input::-webkit-inner-spin-button {
   display: none;
+}
+
+@media (width > 1024px) {
+  .btns {
+    margin-left: 60px;
+  }
 }
 
 /* ----------------------------------------------------------------- */

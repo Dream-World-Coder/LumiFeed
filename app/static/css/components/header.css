@@ -11,7 +11,7 @@ header {
   height: var(--header-height);
   width: 100%;
   padding: 5px;
-  background-color: rgba(0, 0, 0, 0.886) !important;
+  background-color: rgba(31, 31, 31, 0.886) !important;
   /* 886 --> 686 */
   z-index: 100;
   border: none !important;
