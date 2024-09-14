@@ -1,5 +1,5 @@
 :root {
-  --th-font-size: 1.6rem;
+  --th-font-size: 1rem;
   --td-font-size: 1rem;
   --p: 10px;
   --con-m-left: 6rem;
@@ -30,8 +30,7 @@ table {
 }
 th {
   font-size: var(--th-font-size);
-  font-family: "Courier New", Courier, monospace;
-  font-family: poppins;
+  font-family: poppins, sans-serif;
   font-weight: 700;
   padding: var(--p);
   background-color: var(--th-clr);

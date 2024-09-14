@@ -63,14 +63,15 @@
 }
 #c-o.visible {
   display: flex;
+  font-size: 1rem !important;
 }
 /* <button class="btn" type="submit" id="sc">Select city</button> */
 
 /* ----------------------------------------------------------------- */
 
 #sps {
-  font-size: 1.3rem;
-  font-family: MondiaThin, "Franklin Gothic Medium", "Arial Narrow", Arial,
+  font-size: 1rem;
+  font-family: poppins, "Franklin Gothic Medium", "Arial Narrow", Arial,
     sans-serif;
   font-weight: 700;
 }
@@ -80,7 +81,7 @@
   justify-content: center;
 }
 #cpc label {
-  font-size: 1.3rem !important;
+  font-size: 1rem !important;
 }
 
 @media (min-width: 300px) and (max-width: 767px) {

@@ -87,7 +87,7 @@
         <div class="header_wrapper full flex align-center">
             <!-- logo -->
             <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-                <img src="{{url_for('static', filename='images/mic.svg')}}" alt="Ad Free News Logo" itemprop="logo" />
+                <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="Ad Free News Logo" itemprop="logo" />
                 <span id="logo-text" itemprop="name">Ad Free News</span>
             </div>
 
@@ -117,7 +117,7 @@
 
             <!-- search for mobile -->
             <div class="mobile_search">
-                <img src="{{url_for('static', filename='icons/search.svg')}}" alt="search button">
+                <img src="{{url_for('static', filename='icons/search3.svg')}}" alt="search button">
             </div>
 
             <!-- buttons -->
@@ -145,7 +145,7 @@
     <div itemscope itemprop="inputOfData" class="fetch_news borderX" id="table-start">
         <!-- <form action="/" method="post"> -->
         <form action="/fetchnews" method="get">
-            <h2>Select News Type to Fetch</h2>
+            <h2>Select News Category</h2>
             <div class="options flex-col align-start">
                 <div class="op op1 flex align-center">
                     <input class="border" type="radio" name="news_type" value="top_n" id="top_news" required />
@@ -230,7 +230,7 @@
         <!-- search query -->
         <div class="search-bar borderX relative flex justify-between align-center">
             <form id="search-form" class="relative full flex justify-between align-center" action="/search_in_title" method="post" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
-                <meta itemprop="target" content="https://yourwebsite.com/search_in_title?search_part={search_term_string}">
+                <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title?search_part={search_term_string}">
                 <input type="text" name="search_part" id="search" placeholder="Search in News Titles" required itemprop="query-input">
                 <button class="search-icon bg-set" type="submit" name="submit" id="submit">
                     Search
@@ -251,8 +251,8 @@
         </div>
 
         <div class="srch flexed justify-between">
-            <form id="phone-search-form" class="relative full flex justify-between align-center" action="/search_in_title_phone" method="post" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
-                <meta itemprop="target" content="https://yourwebsite.com/search_in_title_phone?search_part={search_term_string}">
+            <form id="phone-search-form" class="relative full flex justify-between align-center" action="/search_in_title" method="post" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+                <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title_phone?search_part={search_term_string}">
                 <input type="text" name="search_part" id="phone-search-input" placeholder="Search in News Titles" required itemprop="query-input">
                 <button class="btn" type="submit" name="submit" id="sub-srch">
                     Search
@@ -330,6 +330,33 @@
     <!-- scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script>
+        function read_js_function(){
+            document.addEventListener('DOMContentLoaded', ()=>{
+                const read = document.getElementById('read');
+                const closeBtn = document.getElementById('close-preview');
+                const openBtn = document.getElementById('open-in-new-tab');
+
+                //const readbtns = document.querySelectorAll('.rbtn');
+                const read_here_btns = document.querySelectorAll('.read_here');
+
+                read_here_btns.forEach((readbtn) => {
+                    readbtn.addEventListener('click', ()=>{
+                        read.style.display = 'flex';
+                    })
+                });
+                closeBtn.addEventListener('click', ()=>{
+                    read.style.display = 'none';
+                });
+
+                openBtn.addEventListener('click', ()=>{
+                    read.style.display = 'none';
+                });
+            });
+        }
+        read_js_function();
+    </script>
+
     <!-- ajax for mobile search -->
     <script>
         $(document).ready(function(){
@@ -360,70 +387,6 @@
                 });
             });
         });
-    </script>
-
-    <!-- ajax for desktop search -->
-    <script>
-        $(document).ready(function(){
-            $('#search-form').submit((event) => {
-                event.preventDefault();
-
-                var formData = {
-                    searchPart : $('#search').val()
-                };
-
-                $.ajax({
-                    url: '/search_in_title',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        $('#ajax_desktop').html(response.html);
-                        read_js_function();
-                        attachClickHandlers();
-                        rhAJAX();
-                    },
-                    error: function(error) {
-                        console.log(error);
-                        alert('SOme ErrOR OccUrred!')
-                    }
-                });
-            });
-        });
-    </script>
-
-    <!-- attach click function -->
-    <script>
-        function attachClickHandlers() {
-            const NOTatags = document.querySelectorAll('.res__serial');
-            
-            NOTatags.forEach((a) => {
-                a.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    let href = a.getAttribute('data-href');
-                    let target_elem = document.getElementById(href);
-                    let rect = target_elem.parentElement.getBoundingClientRect();
-
-                    window.scrollTo({
-                        top: window.scrollY + rect.top - 100,
-                        behavior: 'smooth'
-                    });
-
-                    // Highlighting
-                    var target = target_elem.parentElement;
-                    var classToAdd = 'active_highlight';
-                    if (document.body.classList.contains('dark-mode')) {
-                        classToAdd = 'active_highlight_dark';
-                    }
-                    target.classList.add(classToAdd);
-                    setTimeout(() => {
-                        target.classList.remove(classToAdd);
-                    }, 1500);
-                });
-            });
-        }
-
-        attachClickHandlers();
     </script>
 
     <!-- ajax for read_here -->
@@ -459,31 +422,69 @@
         rhAJAX();
     </script>
 
+    <!-- ajax for find article  -->
     <script>
-        function read_js_function(){
-            document.addEventListener('DOMContentLoaded', ()=>{
-                const read = document.getElementById('read');
-                const closeBtn = document.getElementById('close-preview');
-                const openBtn = document.getElementById('open-in-new-tab');
+        function attachClickHandlers() {
+            const resDivs = document.querySelectorAll('.res');
+            const NOTatags = document.querySelectorAll('.res__serial');
+            resDivs.forEach((res, index) => {
+                res.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    let a = NOTatags[index];
+                    let href = a.getAttribute('data-href');
+                    let target_elem = document.getElementById(href);
+                    let rect = target_elem.parentElement.getBoundingClientRect();
 
-                //const readbtns = document.querySelectorAll('.rbtn');
-                const read_here_btns = document.querySelectorAll('.read_here');
+                    window.scrollTo({
+                        top: window.scrollY + rect.top - 100,
+                        behavior: 'smooth'
+                    });
 
-                read_here_btns.forEach((readbtn) => {
-                    readbtn.addEventListener('click', ()=>{
-                        read.style.display = 'flex';
-                    })
-                });
-                closeBtn.addEventListener('click', ()=>{
-                    read.style.display = 'none';
-                });
-
-                openBtn.addEventListener('click', ()=>{
-                    read.style.display = 'none';
+                    // Highlighting
+                    var target = target_elem.parentElement;
+                    var classToAdd = 'active_highlight';
+                    if (document.body.classList.contains('dark-mode')) {
+                        classToAdd = 'active_highlight_dark';
+                    }
+                    target.classList.add(classToAdd);
+                    setTimeout(() => {
+                        target.classList.remove(classToAdd);
+                    }, 1500);
                 });
             });
         }
-        read_js_function();
+
+        attachClickHandlers();
+    </script>
+
+    <!-- ajax for desktop search -->
+    <script>
+        $(document).ready(function(){
+            $('#search-form').submit((event) => {
+                event.preventDefault();
+
+                var formData = {
+                    searchPart : $('#search').val()
+                };
+
+                $.ajax({
+                    url: '/search_in_title',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        $('#ajax_desktop').html(response.html);
+                        read_js_function();
+                        attachClickHandlers();
+                        rhAJAX();
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        alert('SOme ErrOR OccUrred!')
+                    }
+                });
+            });
+        });
     </script>
 
     <!-- AJAX for read_in_new_tab -->

@@ -347,15 +347,12 @@ def generate_search_reasult(matches: list) -> str:
                         <div class="res__title">
                             {matches[index][1]},
                             <br>
-                            <span data-href="serial_no_{matches[index][0]}" class="res__serial">
+                            <span data-href="serial_no_{matches[index][0]}" data-url="{matches[index][2]}" class="res__serial">
                                 serial no: {matches[index][0]}
                             </span>
                         </div>
                         <div class="res__link">
-                            <span class="read_here">Read</span>
-                        </div>
-                        <div class="res__unlink">
-                            <a target="_blank" rel="noopener" class="res__unlink news_urls_a_tag" href="{matches[index][2]}">Link</a>
+                            <span class="find_article">Find Article</span>
                         </div>
                     </div>
                     """

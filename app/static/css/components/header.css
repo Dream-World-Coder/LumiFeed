@@ -32,11 +32,13 @@ header {
   flex-grow: 1;
 }
 
+#logo-img {
+  background-color: aliceblue;
+}
+
 .logo img {
-  /* for mic.svg > 35 */
   width: 40px;
   height: 40px;
-  border: 2px solid var(--clr2);
   border-radius: 35%;
   padding: 5px;
 }

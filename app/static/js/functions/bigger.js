@@ -5,15 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Applying font size 1");
     document.documentElement.style.setProperty(
       "--th-font-size",
-      is_bigger === 1 ? "2rem" : "1.6rem"
+      is_bigger === 1 ? "1.5rem" : "1rem"
     );
     document.documentElement.style.setProperty(
       "--td-font-size",
-      is_bigger === 1 ? "1.3rem" : "1.0rem"
+      is_bigger === 1 ? "1.25rem" : "1.0rem"
     );
     document.documentElement.style.setProperty(
       "--p",
-      is_bigger === 1 ? "20px" : "10px"
+      is_bigger === 1 ? "10px" : "10px"
     );
     document.documentElement.style.setProperty(
       "--ajax-p-fs",

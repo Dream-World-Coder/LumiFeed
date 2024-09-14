@@ -21,10 +21,10 @@ nav {
 
 .li3 a,
 .li4 a {
-  font-size: 1.3rem;
-  color: rgb(255, 255, 255);
+  font-size: 1.15rem;
+  color: var(--clr2);
   text-decoration: none;
-  font-family: Mondia, Arial, Helvetica, sans-serif;
+  font-family: poppins, Arial, Helvetica, sans-serif;
 }
 
 .li1,
@@ -47,7 +47,7 @@ nav {
   width: 0;
 }
 
-@media (min-width: 150px) and (max-width: 1380px) {
+@media (min-width: 150px) and (max-width: 1240px) {
   nav,
   nav .ul .li3,
   nav .ul .li4 {
@@ -58,7 +58,7 @@ nav {
   nav .ul .li2 {
     position: fixed;
     display: flex;
-    top: calc(100vh - 50px);
+    top: calc(100dvh - 50px);
     right: 20px;
   }
 
@@ -67,7 +67,7 @@ nav {
   }
 
   nav .ul .li2 {
-    right: 50px;
+    right: 55px;
   }
 
   .li1:hover,
@@ -82,15 +82,10 @@ nav {
 
   .mobile-nav {
     display: none;
-    /* margin-left: 10px;
-        height: 30px;
-        width: 30px; */
   }
 
   .mobile-nav img {
     display: none;
-    /* width: 25px;
-        height: 25px; */
   }
 }
 

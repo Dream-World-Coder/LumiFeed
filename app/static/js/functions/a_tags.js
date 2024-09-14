@@ -1,15 +1,12 @@
-// changed a to span
+// its no use, AJAX linked
 
 document.addEventListener("DOMContentLoaded", () => {
+  const find_article_btns = document.querySelectorAll(".res__link");
   const NOTatags = document.querySelectorAll(".res__serial");
-  // const topPosition_of_searchDiv = parseInt(window.getComputedStyle(document.getElementById('queryy')).top, 10);
 
   NOTatags.forEach((a) => {
     a.addEventListener("click", () => {
-      // event.preventDefault();
-      // let href = a.href;
       let href = a.getAttribute("data-href");
-      // let id = href.split('#')[1];
       let id = href;
       let target_elem = document.getElementById(id);
       let t2 = target_elem.parentElement;
@@ -20,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: "smooth",
       });
 
-      // highlighting
       var target = target_elem.parentElement;
       var classToAdd = "active_highlight";
       if (document.body.classList.contains("dark-mode")) {

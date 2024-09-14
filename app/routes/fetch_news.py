@@ -1,4 +1,4 @@
-from flask import render_template, request, session
+from flask import render_template, request, session, url_for
 from app.routes import app, obj, gen_table, gen_table_2
 
 
@@ -16,7 +16,11 @@ def fetchnews():
         print(e)
         return render_template("index.html", table="None")
 
-    home_url = f"http://127.0.0.1:5500/fetchnews?news_type={news_type}&city_choice={city_choice}&news_count={news_count}"
+    # storing the current url in session to get back from the reading page.
+    # home_url = f"http://127.0.0.1:8000/fetchnews?news_type={news_type}&city_choice={city_choice}&news_count={news_count}"
+    # it will be the same as redirect but will not use it. cuz manual
+
+    home_url = f"{url_for('index')}"
     session["home_url"] = home_url
 
     if news_type == "top_n":

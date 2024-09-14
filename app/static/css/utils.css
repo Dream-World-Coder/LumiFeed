@@ -344,7 +344,8 @@ label {
 }
 
 .animated-underline-white::before {
-  background-color: white;
+  /* background-color: white; */
+  background-color: var(--clr2);
 }
 
 .animated-underline:hover::before,

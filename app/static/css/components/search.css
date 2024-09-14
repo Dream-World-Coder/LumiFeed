@@ -39,7 +39,8 @@
         they all are just for show, bcz, js regulates the --clr of them.
     -------------- */
 
-  --cx: #8bc34a;
+  /* --cx: #8bc34a; */
+  --cx: var(--c4);
 }
 
 /* search and result */
@@ -59,21 +60,21 @@
 input {
   width: calc(var(--w) - 60px) !important;
   display: inline !important;
-  /* border: 2px solid var(--clr2) !important; */
 }
 
 .btn {
+  font-family: poppins, "Times New Roman", Times, serif !important;
+  font-size: 1rem !important;
   background-color: var(--clr2) !important;
-  /* border: calc(3px) solid var(--bg1) !important; */
-  border: calc(3px) solid var(--clr2) !important;
+  border: calc(1px) solid var(--clr2) !important;
   color: white !important;
 }
 
 .btn:hover {
   background-color: var(--bg1) !important;
-  color: rgb(0, 0, 0) !important;
+  color: var(--clr2) !important;
   transition: all 0.3s;
-  border: calc(3px) solid var(--clr2) !important;
+  border: calc(1px) solid var(--clr2) !important;
 }
 
 #search {
@@ -95,7 +96,7 @@ input {
 .search-icon {
   width: var(--icon-width);
   height: var(--icon-height);
-  background-image: url(../../icons/search.svg);
+  background-image: url(../../icons/search3.svg);
   object-fit: cover;
   transition: all 0.3s;
   background-color: transparent;
@@ -156,11 +157,11 @@ input {
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.res__unlink {
-  height: 0;
-  width: 0;
+
+/* .res__unlink {
+  font-size: 0;
   opacity: 0;
-}
+} */
 
 .res__serial {
   color: rgb(42, 42, 42);
@@ -197,9 +198,9 @@ input {
 }
 /* btnn */
 #sub-srch {
-  width: 80px;
-  height: 45px;
-  /* border-radius: 15px; */
+  width: 70px !important;
+  height: 35px !important;
+  font-size: 0.8rem !important;
   margin-right: 10px;
 }
 
@@ -210,8 +211,9 @@ input {
 }
 
 .srch input {
+  width: 75% !important;
   margin-left: 10px;
-  background-color: #e7f0fe !important;
+  background-color: var(--cx) !important;
   border: 1px solid rgb(255, 255, 255) !important;
 }
 
@@ -225,13 +227,6 @@ input {
 
 .resa::-webkit-scrollbar {
   width: 0;
-}
-
-.find-mobile.active .res {
-  background-color: #4caf50;
-}
-.find-mobile.active .res__num {
-  background-color: #cddc39;
 }
 
 body.dark-mode .find-mobile.active .res {

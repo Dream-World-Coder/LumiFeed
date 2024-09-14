@@ -100,8 +100,8 @@ body.dark-mode .res__serial{
 } */
 
 body.dark-mode .find-mobile {
-  color: black;
-  background-color: #dfdfdf;
+  color: white;
+  background-color: rgba(108, 108, 108, 1);
 }
 
 body.dark-mode #sub-srch:hover {
