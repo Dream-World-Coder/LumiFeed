@@ -6,6 +6,7 @@ from app.routes import app, generate_summary
 def make_summary():
     data = request.json
     text = data.get("textToSummarise")
-    summary = generate_summary(text)
+    # summary = generate_summary(text)
+    summary = text
     response = {"summary": summary}
     return jsonify(response)

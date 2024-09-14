@@ -17,17 +17,18 @@ Piravom Municipality vice-chairman K P Salim said that after the issue came up i
 
 
 def generate_summary(text):
-    tokens = tokenizer(text, truncation=True, padding="longest", return_tensors="pt")
-    summary_ids = model.generate(
-        tokens.input_ids,
-        max_length=300,
-        min_length=125,
-        length_penalty=2.0,
-        num_beams=4,
-        early_stopping=True,
-    )
-    summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
-    return summary
+    # tokens = tokenizer(text, truncation=True, padding="longest", return_tensors="pt")
+    # summary_ids = model.generate(
+    #     tokens.input_ids,
+    #     max_length=300,
+    #     min_length=125,
+    #     length_penalty=2.0,
+    #     num_beams=4,
+    #     early_stopping=True,
+    # )
+    # summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+    # return summary
+    pass
 
 
 # Tokenize the input text
