@@ -143,7 +143,7 @@ class NewsScrape:
             soup = make_soup(url)
             try:
                 content = (
-                    soup.body.find("div", id="wrapper")
+                    soup.body.find("main", id="wrapper")
                     .find("div", id="north-east-data")
                     .ul
                 )

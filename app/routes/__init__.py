@@ -9,7 +9,7 @@ from app.functions.html_gen import (
     make_another_page,
     generate_search_reasult,
 )
-from app.functions.file_functions import makeAlternateFilePath, cleanup_files
+from app.functions.file_functions_for_news_reading import makeAlternateFilePath, cleanup_files
 from app.functions.search_algorithms import s2x1
 from app.functions.news_summariser import generate_summary
 
