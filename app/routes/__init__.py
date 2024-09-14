@@ -15,3 +15,11 @@ from app.functions.news_summariser import generate_summary
 
 
 obj = NewsScrape()
+
+
+import auth
+import fetch_news
+import home
+import read_news
+import search
+import summary
