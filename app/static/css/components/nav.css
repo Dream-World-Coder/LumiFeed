@@ -1,99 +1,97 @@
 :root {
-    --nav-width: 280px;
+  --nav-width: 280px;
 }
 
 /* nav */
 nav {
-    position: relative;
-    height: 100%;
-    width: var(--nav-width);
+  position: relative;
+  height: 100%;
+  width: var(--nav-width);
 }
 
 .ul {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .li a {
-    z-index: 102;
+  z-index: 102;
 }
 
 .li3 a,
 .li4 a {
-    font-size: 1.3rem;
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-family: Mondia, Arial, Helvetica, sans-serif;
+  font-size: 1.3rem;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-family: Mondia, Arial, Helvetica, sans-serif;
 }
 
 .li1,
 .li2 {
-    transition: all 0.3s;
-    border-radius: 15px;
+  transition: all 0.3s;
+  border-radius: 15px;
 }
 
 .li1:hover,
 .li2:hover {
-    transform: translateY(-2px);
-    box-shadow:
-        0 0px 2px 0px rgba(221, 43, 79, 0.3),
-        0 0px 0px 4px rgba(221, 43, 79, 0.3);
-    transition: all 0.3s;
+  transform: translateY(-2px);
+  box-shadow: 0 0px 2px 0px rgba(221, 43, 79, 0.3),
+    0 0px 0px 4px rgba(221, 43, 79, 0.3);
+  transition: all 0.3s;
 }
 
 .mobile-nav,
 .mobile-nav img {
-    display: none;
-    width: 0;
+  display: none;
+  width: 0;
 }
 
 @media (min-width: 150px) and (max-width: 1380px) {
+  nav,
+  nav .ul .li3,
+  nav .ul .li4 {
+    display: none;
+  }
 
-    nav,
-    nav .ul .li3,
-    nav .ul .li4 {
-        display: none;
-    }
+  nav .ul .li1,
+  nav .ul .li2 {
+    position: fixed;
+    display: flex;
+    top: calc(100vh - 50px);
+    right: 20px;
+  }
 
-    nav .ul .li1,
-    nav .ul .li2 {
-        position: fixed;
-        display: flex;
-        top: calc(100vh - 50px);
-        right: 20px;
-    }
+  nav .ul .li1 {
+    right: 10px;
+  }
 
-    nav .ul .li1 {
-        right: 10px;
-    }
+  nav .ul .li2 {
+    right: 50px;
+  }
 
-    nav .ul .li2 {
-        right: 50px;
-    }
+  .li1:hover,
+  .li2:hover {
+    transform: none;
+    box-shadow: none;
+  }
 
-    .li1:hover,
-    .li2:hover {
-        transform: none;
-        box-shadow: none;
-    }
+  :root {
+    --nav-width: 0px;
+  }
 
-    :root {
-        --nav-width: 0px;
-    }
-
-    .mobile-nav {
-        display: none;
-        /* margin-left: 10px;
+  .mobile-nav {
+    display: none;
+    /* margin-left: 10px;
         height: 30px;
         width: 30px; */
-    }
+  }
 
-    .mobile-nav img {
-        display: none;
-        /* width: 25px;
+  .mobile-nav img {
+    display: none;
+    /* width: 25px;
         height: 25px; */
-    }
+  }
 }
 
 /* @media (min-width: 769px) and (max-width: 1024px) {} */

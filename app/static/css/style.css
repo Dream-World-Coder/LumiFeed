@@ -1,36 +1,46 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-:root{
-    --bg1: bisque;
-    --bg2: black;
-    --clr2: rgb(221, 43, 79);
-    --c2: #dd2b4f;
+:root {
+  /* --bg1: bisque; */
+  --bg1: white;
+  --bg1-val: rgb(221, 221, 221);
+  --bg2: black;
+  --clr2: rgb(221, 43, 79);
+  --c2: #dd2b4f;
+
+  /* table light mode clr */
+  --v-th: rgb(172, 172, 172);
+  /* odd */
+  --v-tr-even: rgb(196, 196, 196);
+  /* even */
+  --v-tr-odd: rgb(214, 214, 214);
 }
 
-body{
-    /* background-color: bisque; */
-    background-color: var(--bg1);
-    color: black;
+body {
+  background-color: var(--bg1);
+  color: black;
+  font-family: poppins;
 }
 
-.f0{
-    font-size: 0rem;
+a {
+  color: black;
 }
 
-.active_highlight{
-    border: 2px solid  rgb(255, 38, 0);
+.f0 {
+  font-size: 0rem;
 }
 
-.active_highlight_dark{
-    border: 2px solid  rgb(255, 234, 0);
+.active_highlight {
+  border: 2px solid rgb(255, 38, 0);
 }
 
-/* // <uniquifier>: Use a unique and descriptive class name */
-/* // <weight>: Use a value from 300 to 900 */
+.active_highlight_dark {
+  border: 2px solid rgb(255, 234, 0);
+}
 
 .red-hat-display-400 {
   font-family: "Red Hat Display", sans-serif;

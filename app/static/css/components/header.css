@@ -1,146 +1,146 @@
 :root {
-    --header-height: 5rem;
-    --fetch-news-height: 24rem;
-    --fetch-news-m-top: calc(var(--header-height) + 20px);
-    --r: 70px;
+  --header-height: 5rem;
+  --fetch-news-height: 24rem;
+  --fetch-news-m-top: calc(var(--header-height) + 20px);
+  --r: 70px;
 }
 
 header {
-    top: 0px;
-    left: 0;
-    height: var(--header-height);
-    width: 100%;
-    padding: 5px;
-    background-color: rgba(0, 0, 0, 0.886) !important;
-    /* 886 --> 686 */
-    z-index: 100;
-    border: none !important;
+  top: 0px;
+  left: 0;
+  height: var(--header-height);
+  width: 100%;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.886) !important;
+  /* 886 --> 686 */
+  z-index: 100;
+  border: none !important;
 }
 
 .header_wrapper {
-    position: relative;
-    width: calc(100% - var(--r)) !important;
-    margin-left: 20px;
+  position: relative;
+  width: calc(100% - var(--r)) !important;
+  margin-left: 20px;
 }
 
 /*-----------------
  logo
 ----------------*/
 .logo {
-    width: 40px;
-    height: 40px;
-    flex-grow: 1;
+  width: 40px;
+  height: 40px;
+  flex-grow: 1;
 }
 
 .logo img {
-    /* for mic.svg > 35 */
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--clr2);
-    border-radius: 35%;
-    padding: 5px;
+  /* for mic.svg > 35 */
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--clr2);
+  border-radius: 35%;
+  padding: 5px;
 }
 
 #logo-text {
-    font-family: Dahlia;
-    margin-left: 10px;
-    font-size: 1.3rem;
-    color: aliceblue !important;
+  font-family: Dahlia;
+  margin-left: 10px;
+  font-size: 1.3rem;
+  color: aliceblue !important;
 }
 
 /*-----------------
  buttons
 ----------------*/
 .buttons {
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 20px;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
 }
 
 .bigger-font,
 .dark_mode {
-    transition: all 0.3s;
-    z-index: 150;
+  transition: all 0.3s;
+  z-index: 150;
 }
 
 .bigger-font:hover,
 .dark_mode:hover {
-    transform: scale(1.2);
-    transition: all 0.3s;
+  transform: scale(1.2);
+  transition: all 0.3s;
 }
 
 #big_f img {
-    width: 30px;
-    height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 @media (min-width: 150px) and (max-width: 1380px) {
-    :root {
-        --header-height: 4rem;
-        --fetch-news-height: 24rem;
-        --fetch-news-m-top: calc(var(--header-height) + 20px);
-        --r: 10px;
-        /* not working */
-        --icon-height: 30px;
-        --icon-width: 30px;
-    }
+  :root {
+    --header-height: 4rem;
+    --fetch-news-height: 24rem;
+    --fetch-news-m-top: calc(var(--header-height) + 20px);
+    --r: 10px;
+    /* not working */
+    --icon-height: 30px;
+    --icon-width: 30px;
+  }
 
-    .header_wrapper {
-        width: calc(100% - 10px) !important;
-        margin-left: 5px;
-    }
+  .header_wrapper {
+    width: calc(100% - 10px) !important;
+    margin-left: 5px;
+  }
 
-    .logo,
-    .logo img {
-        width: 30px;
-        height: 30px;
-    }
+  .logo,
+  .logo img {
+    width: 30px;
+    height: 30px;
+  }
 
-    #logo-text {
-        margin-left: 5px;
-        font-size: 1.3rem;
-    }
+  #logo-text {
+    margin-left: 5px;
+    font-size: 1.3rem;
+  }
 
-    .buttons {
-        gap: 5px;
-    }
+  .buttons {
+    gap: 5px;
+  }
 
-    .dmbtn img {
-        /*
+  .dmbtn img {
+    /*
         why not working ???????[in styles.css]
         width: var(--icon-width);
         height: var(--icon-height);
         */
-        width: 30px;
-        height: 30px;
-    }
+    width: 30px;
+    height: 30px;
+  }
 
-    #big_f img {
-        width: calc(30px - 5px);
-        height: calc(30px - 5px);
-    }
+  #big_f img {
+    width: calc(30px - 5px);
+    height: calc(30px - 5px);
+  }
 
-    .mobile_search {
-        margin-right: 10px;
-    }
+  .mobile_search {
+    margin-right: 10px;
+  }
 
-    .mobile_search img {
-        width: 30px;
-        height: 30px;
-    }
+  .mobile_search img {
+    width: 30px;
+    height: 30px;
+  }
 
-    .bigger-font:hover,
-    .dark_mode:hover {
-        transform: none;
-    }
+  .bigger-font:hover,
+  .dark_mode:hover {
+    transform: none;
+  }
 }
 
 /* @media (min-width: 769px) and (max-width: 1024px) {} */
 
 @media (min-width: 1381px) and (max-width: 2440px) {
-    .mobile_search {
-        display: none;
-    }
+  .mobile_search {
+    display: none;
+  }
 }

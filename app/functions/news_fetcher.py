@@ -318,7 +318,7 @@ class NewsScrape:
                 .find("div", id="section")
                 .find("div", class_="container")
             )
-            rows = content.find_all("div", class_="row")
+            rows = content.find_all("div", class_="row")[:2]
             newsBody = (
                 rows[1]
                 .find("div", class_="leftpanel")

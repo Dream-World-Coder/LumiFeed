@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function removeDarkMode() {
     document.body.classList.remove("dark-mode");
     localStorage.setItem("is_darkmode", "false");
-    document.documentElement.style.setProperty("--bg1", "bisque");
+    document.documentElement.style.setProperty("--bg1", "var(--bg1-val)");
     // search
     document.documentElement.style.setProperty("--dim-border", "var(--c3)");
     document.documentElement.style.setProperty("--dim-bg-clr", "var(--c4)");
@@ -39,14 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
       "var(--c6)"
     );
     // table
-    document.documentElement.style.setProperty("--th-clr", "rgb(253, 179, 89)");
+    document.documentElement.style.setProperty("--th-clr", "var(--v-th)");
     document.documentElement.style.setProperty(
       "--odd-row-clr",
-      "rgb(255, 230, 198)"
+      "var(--v-tr-odd)"
     );
     document.documentElement.style.setProperty(
       "--even-row-clr",
-      "rgba(253, 179, 89, 0.4)"
+      "var(--v-tr-even)"
     );
   }
 

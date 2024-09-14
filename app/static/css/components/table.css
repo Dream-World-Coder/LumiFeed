@@ -1,105 +1,102 @@
 :root {
-    --th-font-size: 1.6rem;
-    --td-font-size: 1rem;
-    --p: 10px;
-    --con-m-left: 6rem;
+  --th-font-size: 1.6rem;
+  --td-font-size: 1rem;
+  --p: 10px;
+  --con-m-left: 6rem;
 
-    /* sry odd & even are opposite, may be i should have used 2n+1 instead 2n-1 
+  /* sry odd & even are opposite, may be i should have used 2n+1 instead 2n-1 
     dont know why, bcz 2n+1 is also same*/
-    /* light mode */
-    /* --th-clr: rgb(253, 179, 89);
-    --odd-row-clr: rgb(255, 230, 198);
-    --even-row-clr: rgba(253, 179, 89, 0.4); */
-    /* dark mode */
-    --th-clr: rgb(175, 175, 175);
-    --odd-row-clr: rgb(68, 68, 68);
-    --even-row-clr: rgb(86, 86, 86);
+
+  /* dark mode */
+  --th-clr: rgb(175, 175, 175);
+  --odd-row-clr: rgb(68, 68, 68);
+  --even-row-clr: rgb(86, 86, 86);
 }
 
 .container {
-    position: relative;
-    width: 65%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: calc(0px);
-    margin-left: var(--con-m-left);
+  position: relative;
+  width: 65%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: calc(0px);
+  margin-left: var(--con-m-left);
 }
 
 /* table */
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 th {
-    font-size: var(--th-font-size);
-    font-family: "Courier New", Courier, monospace;
-    font-weight: 700;
-    padding: var(--p);
-    background-color: var(--th-clr);
+  font-size: var(--th-font-size);
+  font-family: "Courier New", Courier, monospace;
+  font-family: poppins;
+  font-weight: 700;
+  padding: var(--p);
+  background-color: var(--th-clr);
 }
 
 tr:nth-child(2n - 1) {
-    background-color: var(--odd-row-clr);
+  background-color: var(--odd-row-clr);
 }
 tr:nth-child(2n) {
-    background-color: var(--even-row-clr);
+  background-color: var(--even-row-clr);
 }
 
 .data_box {
-    padding: var(--p) calc(var(--p) / 2) var(--p) calc(var(--p) / 2);
-    font-size: var(--td-font-size);
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: var(--p) calc(var(--p) / 2) var(--p) calc(var(--p) / 2);
+  font-size: var(--td-font-size);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .td1,
 .td3,
-.td4{
-    text-align: center;
+.td4 {
+  text-align: center;
 }
 
 .td2 {
-    width: 85%;
+  width: 85%;
 }
 
-.td3{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.td3 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 @media (min-width: 300px) and (max-width: 768px) {
-    :root {
-        --th-font-size: 1rem;
-        /* no one is working :( */
-        --con-m-left: 10px;
-    }
-    .container{
-        width: 95%;
-    }
-    th{
-        font-size: 1rem;
-    }
-    .data_box{
-        font-size: 0.8rem;
-        padding: 6px 3px 6px 3px;
-    }
+  :root {
+    --th-font-size: 1rem;
+    /* no one is working :( */
+    --con-m-left: 10px;
+  }
+  .container {
+    width: 95%;
+  }
+  th {
+    font-size: 1rem;
+  }
+  .data_box {
+    font-size: 0.8rem;
+    padding: 6px 3px 6px 3px;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1380px) {
-    :root {
-        --th-font-size: 1rem;
-        --con-m-left: 10px;
-    }
-    .container{
-        width: 95%;
-    }
-    th{
-        font-size: 1.7rem;
-    }
-    .data_box{
-        font-size: 1rem;
-        padding: 6px 3px 6px 3px;
-    }
+  :root {
+    --th-font-size: 1rem;
+    --con-m-left: 10px;
+  }
+  .container {
+    width: 95%;
+  }
+  th {
+    font-size: 1.7rem;
+  }
+  .data_box {
+    font-size: 1rem;
+    padding: 6px 3px 6px 3px;
+  }
 }
-

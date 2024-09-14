@@ -96,7 +96,7 @@ input {
 .search-icon {
     width: var(--icon-width);
     height: var(--icon-height);
-    background-image: url(../../icons/search3.svg);
+    background-image: url(../../icons/search.svg);
     object-fit: cover;
     transition: all 0.3s;
     background-color: transparent;

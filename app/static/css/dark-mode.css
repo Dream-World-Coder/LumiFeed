@@ -1,52 +1,49 @@
-
 body.dark-mode,
-.dark-mode{
-    background-color: var(--bg2);
-    color: var(--bg1);
+.dark-mode {
+  background-color: var(--bg2);
+  color: var(--bg1);
 }
 
-body.dark-mode::-webkit-scrollbar{
-    background-color: rgb(33, 33, 33);
-    color: aliceblue;
+body.dark-mode::-webkit-scrollbar {
+  background-color: rgb(33, 33, 33);
+  color: aliceblue;
 }
 
-
-body.dark-mode input{
-    border: 1px solid rgb(198, 204, 210);
-    color: var(--bg1);
+body.dark-mode input {
+  border: 1px solid rgb(198, 204, 210);
+  color: var(--bg1);
 }
 
-body.dark-mode input::placeholder{
-    color: var(--dim-border);
+body.dark-mode input::placeholder {
+  color: var(--dim-border);
 }
-
 
 /* table */
-:root{
-    --table-a-clr: rgb(255, 241, 108);
-    --table-text-clr-dm: rgb(255, 255, 255);
-    --rbtn-clr: rgb(0, 195, 0);
-    --th-text-clr: rgba(255, 255, 255, 1);
-    --ct1: rgba(92, 92, 92, 1);     /* th clr */
-    --ct2: rgba(0, 0, 0, 1);     /* actual even row */
-    --ct3: rgba(54, 54, 54, 0.89);     /*  odd row*/
+:root {
+  --table-a-clr: rgb(255, 241, 108);
+  --table-text-clr-dm: rgb(255, 255, 255);
+  /* --rbtn-clr: rgb(0, 195, 0); */
+  --rbtn-clr: var(--clr2);
+  --th-text-clr: rgba(255, 255, 255, 1);
+  --ct1: rgba(92, 92, 92, 1); /* th clr */
+  --ct2: rgba(0, 0, 0, 1); /* actual even row */
+  --ct3: rgba(54, 54, 54, 0.89); /*  odd row*/
 }
 
-body.dark-mode table{
-    color: var(--table-text-clr-dm);
+body.dark-mode table {
+  color: var(--table-text-clr-dm);
 }
 
-body.dark-mode th{
-    color: var(--th-text-clr) !important;
+body.dark-mode th {
+  color: var(--th-text-clr) !important;
 }
 
-
-body.dark-mode table a{
-    color: var(--table-a-clr);
+body.dark-mode table a {
+  color: white;
 }
 
-body.dark-mode .rbtn{
-    background-color: var(--rbtn-clr);
+body.dark-mode .rbtn {
+  background-color: var(--rbtn-clr);
 }
 
 /* 
@@ -54,53 +51,47 @@ body.dark-mode .btn{
     color: black !important;
 } */
 
-body.dark-mode .btn:hover{
-    background-color: black !important;
-    color: whitesmoke !important;
-    /* or use white */
+body.dark-mode .btn:hover {
+  background-color: black !important;
+  color: whitesmoke !important;
+  /* or use white */
 }
 
-
-body.dark-mode .fetch_news h2{
-    color: bisque;
+body.dark-mode .fetch_news h2 {
+  color: bisque;
 }
-
-
-
 
 body.dark-mode .about,
-body.dark-mode .contact{
-    background-color: rgba(108, 108, 108, 1);
+body.dark-mode .contact {
+  background-color: rgba(108, 108, 108, 1);
 }
 
 body.dark-mode .about h2,
-body.dark-mode .contact h2{
-    color: rgb(0, 0, 0);
+body.dark-mode .contact h2 {
+  color: rgb(0, 0, 0);
 }
 
 body.dark-mode .about p,
-body.dark-mode .contact p{
-    background-color: rgba(15, 15, 15, 1);
+body.dark-mode .contact p {
+  background-color: rgba(15, 15, 15, 1);
 }
-
-
 
 /* read */
-:root{
-    --rbtn-clr2: rgb(0, 195, 0);
+:root {
+  --rbtn-clr2: rgb(221, 43, 79);
 }
-body.dark-mode .read__container{
-    border: 3px solid var(--rbtn-clr2);
-    background-color: rgb(35, 35, 35);
-}
-
-body.dark-mode .read__navigations{
-    background-color: var(--rbtn-clr2);
-    border-bottom: 2px solid rgb(0, 152, 0);
+body.dark-mode .read__container {
+  border: 3px solid var(--rbtn-clr2);
+  background-color: rgb(35, 35, 35);
 }
 
-body.dark-mode .read__page::-webkit-scrollbar{
-    background-color: rgb(47, 47, 47);
+body.dark-mode .read__navigations {
+  background-color: var(--rbtn-clr2);
+  border-bottom: 2px solid var(--rbtn-clr);
+}
+
+body.dark-mode .read__page::-webkit-scrollbar {
+  background-color: rgb(47, 47, 47);
 }
 /* 
 body.dark-mode .res__serial{
@@ -108,21 +99,19 @@ body.dark-mode .res__serial{
     color: black;
 } */
 
-
-body.dark-mode .find-mobile{
-    color: black;
-    background-color: #dfdfdf;
+body.dark-mode .find-mobile {
+  color: black;
+  background-color: #dfdfdf;
 }
 
-body.dark-mode #sub-srch:hover{
-    background-color: #dfdfdf !important;
-    color: rgb(0, 0, 0) !important;
-    transition: all 0.3s;
+body.dark-mode #sub-srch:hover {
+  background-color: #dfdfdf !important;
+  color: rgb(0, 0, 0) !important;
+  transition: all 0.3s;
 }
 
-body.dark-mode .srch input{
-    background-color: rgba(255, 255, 255, 0.605) !important;
-    border: 1px solid black !important;
-    color: rgb(0, 0, 0) !important;
+body.dark-mode .srch input {
+  background-color: rgba(255, 255, 255, 0.605) !important;
+  border: 1px solid black !important;
+  color: rgb(0, 0, 0) !important;
 }
-
