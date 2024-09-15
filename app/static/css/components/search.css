@@ -64,7 +64,7 @@ input {
 
 .btn {
   font-family: poppins, "Times New Roman", Times, serif !important;
-  font-size: 1rem !important;
+  /* font-size: 1rem !important; */
   background-color: var(--clr2) !important;
   border: calc(1px) solid var(--clr2) !important;
   color: white !important;
@@ -162,11 +162,6 @@ input {
   font-size: 0;
   opacity: 0;
 } */
-
-.res__serial {
-  color: rgb(42, 42, 42);
-  font-weight: 700;
-}
 
 .find-mobile {
   position: fixed;

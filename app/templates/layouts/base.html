@@ -143,7 +143,7 @@
 
     <!--find news type, fetch_news -->
     <div itemscope itemprop="inputOfData" class="fetch_news borderX" id="table-start">
-        <form action="/fetchnews" method="get">
+        <form id="fetch-news-form" onsubmit="fetchNews(event)">
             <h2>Select News Category</h2>
             <div class="options flex-col align-start">
                 <div class="op op1 flex align-center">
@@ -154,27 +154,24 @@
                     <input class="border" type="radio" name="news_type" value="india_n" id="india_news" required />
                     <label for="india_news">India News</label>
                 </div>
-                <!-- needed:  pop up input for mobiles -->
                 <div id="cyt" class="op op3 flex align-center">
                     <input class="border" type="radio" name="news_type" value="city_n" id="city_news" required />
                     {% set cities = ['Kolkata', 'Bangalore', 'Delhi', 'Mumbai', 'Lucknow'] %}
-                    <label for="city_news">City News {{cities}}</label>
+                    <label for="city_news">City News {{ cities }}</label>
                 </div>
                 <br />
                 <div class="opp">
                     <label id="lb" for="news_count">Enter Num of News to Fetch:</label>
                     <input aria-valuemax="150" aria-valuemin="1" aria-valuenow="1" type="number" name="news_count" id="news_count" min="1" max="150" required />
                 </div>
-
+        
                 <div class="city-option flexed" id="c-o">
-                    <span id="sps" class="block op">
-                        Choose city: 
-                    </span>
+                    <span id="sps" class="block op">Choose city:</span>
                     <div id="cpc" class="op f-gap-2">
-                        {% for city in cities%}
+                        {% for city in cities %}
                         <div class="city_op flexed">
-                            <input type="radio" name="city_choice" value="{{city.lower()}}" id="{{city}}"><label
-                                for="{{city}}">{{city}}</label>
+                            <input type="radio" name="city_choice" value="{{ city.lower() }}" id="{{ city }}">
+                            <label for="{{ city }}">{{ city }}</label>
                         </div>
                         {% endfor %}
                     </div>
@@ -185,13 +182,13 @@
                     <button class="btn" type="reset">Reset</button>
                 </div>
             </div>
-        </form>
+        </form>        
     </div>
 
     <main role="main" itemscope itemtype="https://schema.org/WebPage" itemprop="mainContentOfPage">
         <div class="container">
             <!-- table -->
-            <table itemscope itemtype="https://schema.org/Table" class="">
+            <table id="news-table" itemscope itemtype="https://schema.org/Table" class="">
                 <meta itemprop="tableOfNews" content="Table of News">
                 {% block table %}
                 {% endblock %}
@@ -329,6 +326,35 @@
     <!-- scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!-- fetch news -->
+    <script>
+        function fetchNews(event) {
+            event.preventDefault(); // Prevent the default form submission
+        
+            const form = document.getElementById("fetch-news-form");
+            const formData = new FormData(form);
+        
+            const newsType = formData.get("news_type");
+            const newsCount = formData.get("news_count");
+            const cityChoice = formData.get("city_choice") || '';
+        
+            // Create URL parameters
+            const url = `/fetchnews?news_type=${newsType}&news_count=${newsCount}&city_choice=${cityChoice}`;
+        
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Store news_list in localStorage
+                    localStorage.setItem('news_list', JSON.stringify(data.news_list));
+        
+                    // Render the news table
+                    document.getElementById('news-table').innerHTML = data.news_table;
+                })
+                .catch(error => console.error('Error fetching news:', error));
+        }
+    </script>
+
+    <!-- simple js utility functions, but need to get elements each time so defined here. -->
     <script>
         function read_js_function(){
             document.addEventListener('DOMContentLoaded', ()=>{

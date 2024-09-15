@@ -1,4 +1,4 @@
-from flask import render_template, request, session, url_for
+from flask import render_template, request, session, url_for, jsonify
 from app.routes import app, obj, gen_table, gen_table_2
 
 
@@ -14,12 +14,9 @@ def fetchnews():
         news_count = int(news_count)
     except Exception as e:
         print(e)
-        return render_template("index.html", table="None")
+        return jsonify({"error": "Invalid news count"}), 400
 
-    # storing the current url in session to get back from the reading page.
-    # home_url = f"http://127.0.0.1:8000/fetchnews?news_type={news_type}&city_choice={city_choice}&news_count={news_count}"
-    # it will be the same as redirect but will not use it. cuz manual
-
+    # storing the current url in session to get back from the reading page
     home_url = f"{url_for('index')}"
     session["home_url"] = home_url
 
@@ -33,15 +30,13 @@ def fetchnews():
 
     elif news_type == "city_n":
         if city_choice is None:
-            news_table = "Please select a city"
-            return render_template("index.html", table=news_table)
+            return jsonify({"error": "Please select a city"}), 400
         else:
             news_list = obj.getCitiesNews(cityname=city_choice, num=news_count)
             news_table = gen_table(news_list)
 
     else:
-        return render_template("index.html", table="None")
+        return jsonify({"error": "Invalid news type"}), 400
 
-    session["news_list"] = news_list
-    session["news_table"] = news_table
-    return render_template("index.html", table=news_table)
+    # Return news_list and news_table as JSON
+    return jsonify({"news_list": news_list, "news_table": news_table})

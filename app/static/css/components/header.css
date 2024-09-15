@@ -46,7 +46,7 @@ header {
 #logo-text {
   font-family: Dahlia;
   margin-left: 10px;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: aliceblue !important;
 }
 
@@ -78,7 +78,13 @@ header {
   height: 30px;
 }
 
-@media (min-width: 150px) and (max-width: 1380px) {
+@media (min-width: 1025px) and (max-width: 2440px) {
+  .mobile_search {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
   :root {
     --header-height: 4rem;
     --fetch-news-height: 24rem;
@@ -102,7 +108,7 @@ header {
 
   #logo-text {
     margin-left: 5px;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
   }
 
   .buttons {
@@ -110,11 +116,6 @@ header {
   }
 
   .dmbtn img {
-    /*
-        why not working ???????[in styles.css]
-        width: var(--icon-width);
-        height: var(--icon-height);
-        */
     width: 30px;
     height: 30px;
   }
@@ -137,12 +138,15 @@ header {
   .dark_mode:hover {
     transform: none;
   }
+  /*
+      why not working ???????[in styles.css]
+      width: var(--icon-width);
+      height: var(--icon-height);
+    */
 }
 
-/* @media (min-width: 769px) and (max-width: 1024px) {} */
-
-@media (min-width: 1381px) and (max-width: 2440px) {
-  .mobile_search {
-    display: none;
+@media (max-width: 768px) {
+  #logo-text {
+    font-size: 1rem;
   }
 }
