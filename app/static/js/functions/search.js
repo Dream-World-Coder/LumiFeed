@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   bar.addEventListener("click", () => {
     if (findMobile.classList.contains("active")) {
       findMobile.classList.remove("active");
-    } else {
-      console.log("search not active");
     }
   });
 });

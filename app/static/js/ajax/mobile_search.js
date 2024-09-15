@@ -16,9 +16,9 @@ $(document).ready(function () {
       data: JSON.stringify(formData),
       success: function (response) {
         $("#ajax").html(response.html);
-        read_js_function();
-        attachClickHandlers();
-        rhAJAX();
+        toggle_news_preview();
+        find_article();
+        show_news_preview();
       },
       error: function (error) {
         alert("some error occurred!");

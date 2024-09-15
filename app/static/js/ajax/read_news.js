@@ -1,4 +1,4 @@
-function ntAJAX() {
+function read_in_new_tab() {
   $(document).on("click", "#open-in-new-tab", function () {
     const newTabBtn = $("#open-in-new-tab");
 
@@ -43,4 +43,4 @@ function ntAJAX() {
     });
   });
 }
-ntAJAX();
+read_in_new_tab();

@@ -1,4 +1,4 @@
-function attachClickHandlers() {
+function find_article() {
   const resDivs = document.querySelectorAll(".res");
   const NOTatags = document.querySelectorAll(".res__serial");
   resDivs.forEach((res, index) => {
@@ -28,4 +28,4 @@ function attachClickHandlers() {
   });
 }
 
-attachClickHandlers();
+find_article();

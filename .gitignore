@@ -85,7 +85,7 @@ cython_debug/
 # ----------------------
 
 .venv/
-web
+.web/
 static/icons
 static/images
 static/fonts
