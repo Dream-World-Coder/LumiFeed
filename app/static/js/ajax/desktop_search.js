@@ -14,9 +14,7 @@ $(document).ready(function () {
       data: JSON.stringify(formData),
       success: function (response) {
         $("#ajax_desktop").html(response.html);
-
-        toggle_news_preview();
-        find_article();
+        findArticle();
       },
       error: function (error) {
         alert("Some error occurred!");

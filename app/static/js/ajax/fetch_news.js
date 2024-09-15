@@ -15,6 +15,10 @@ function fetchNews(event) {
     .then((data) => {
       localStorage.setItem("news_list", JSON.stringify(data.news_list));
       document.getElementById("news-table").innerHTML = data.news_table;
+
+      toggle_news_preview();
+      show_news_preview();
+      read_in_new_tab();
     });
   // .catch((error) => console.error("Error fetching news:", error));
 }
