@@ -17,8 +17,6 @@ function fetchNews(event) {
       document.getElementById("news-table").innerHTML = data.news_table;
 
       show_news_preview();
-      read_in_new_tab();
-      // toggle_news_preview();
     });
   // .catch((error) => console.error("Error fetching news:", error));
 }
