@@ -1,46 +1,42 @@
 function read_in_new_tab() {
-  $(document).on("click", "#open-in-new-tab", function () {
-    const newTabBtn = $("#open-in-new-tab");
+  const newTabBtn = document.getElementById("open-in-new-tab");
 
-    newTabBtn.on("click", function () {
-      const heading = $("#ajax_h1").text();
-      const subheading = $("#ajax_h3").text();
-      const news_content = $("#ajax_p").html();
-      const newsImgUrl = $("#ajax_img").attr("src");
+  newTabBtn.addEventListener("click", function () {
+    const h1 = document.getElementById("ajax_h1");
+    const h3 = document.getElementById("ajax_h3");
+    const p = document.getElementById("ajax_p");
+    const img = document.getElementById("ajax_img");
 
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = "/read_news_in_new_tab";
-      form.target = "_blank";
+    const heading = h1.textContent;
+    const subheading = h3.textContent;
+    const news_content = p.innerHTML;
+    const newsImgUrl = img.getAttribute("src");
 
-      const inputHeading = document.createElement("input");
-      inputHeading.type = "hidden";
-      inputHeading.name = "heading";
-      inputHeading.value = heading;
-      form.appendChild(inputHeading);
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "/read_news_in_new_tab";
+    form.target = "_blank";
 
-      const inputSubheading = document.createElement("input");
-      inputSubheading.type = "hidden";
-      inputSubheading.name = "subheading";
-      inputSubheading.value = subheading;
-      form.appendChild(inputSubheading);
+    const formData = {
+      heading: heading,
+      subheading: subheading,
+      news_content: news_content,
+      newsImgUrl: newsImgUrl,
+    };
 
-      const inputNewsContent = document.createElement("input");
-      inputNewsContent.type = "hidden";
-      inputNewsContent.name = "news_content";
-      inputNewsContent.value = news_content;
-      form.appendChild(inputNewsContent);
+    for (const [key, value] of Object.entries(formData)) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = key;
+      input.value = value;
+      form.appendChild(input);
+    }
 
-      const inputNewsImgUrl = document.createElement("input");
-      inputNewsImgUrl.type = "hidden";
-      inputNewsImgUrl.name = "newsImgUrl";
-      inputNewsImgUrl.value = newsImgUrl;
-      form.appendChild(inputNewsImgUrl);
-
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
-    });
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
   });
 }
-read_in_new_tab();
+
+// Call the function when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", read_in_new_tab);

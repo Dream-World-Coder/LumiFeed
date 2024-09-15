@@ -335,7 +335,20 @@
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/bigger_font.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/city_options_toggle.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/functions/read.js')}}"></script>
+    <!-- <script type="text/javascript" src="{{url_for('static', filename='js/functions/read.js')}}"></script> -->
+    <script>
+      const read = document.getElementById("read");
+      const closeBtn = document.getElementById("close-preview");
+      const openInNewTabBtn = document.getElementById("open-in-new-tab");
+      closeBtn.addEventListener("click", () => {
+          read.style.display = "none";
+      });
+      openInNewTabBtn.addEventListener("click", () => {
+          setTimeout(() => {
+            read.style.display = "none";
+          }, 500);
+      });
+    </script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/search.js')}}"></script>
 
     <!-- utils -->

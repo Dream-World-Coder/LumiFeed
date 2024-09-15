@@ -1,25 +1,37 @@
 function show_news_preview() {
-  // Using event delegation to attach events to dynamically generated content
-  console.log(`\n\n\nshow_news_preview() is called.\n\n\n`);
+  const read = document.getElementById("read");
+  const read_here_btns = document.querySelectorAll(".read_here");
 
-  $(document).on("click", ".read_here", function () {
-    const index = $(".read_here").index(this);
-    const newsUrl = $(".news_urls_a_tag").eq(index).attr("href");
+  read_here_btns.forEach((readbtn, index) => {
+    readbtn.addEventListener("click", () => {
+      read.style.display = "flex";
+      const newsUrl = document
+        .querySelectorAll(".news_urls_a_tag")
+        [index].getAttribute("href");
 
-    $.ajax({
-      url: "/read_news_here",
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify({ url: newsUrl }),
-      success: function (response) {
-        $("#ajax_h1").text(response.heading);
-        $("#ajax_h3").text(response.subheading);
-        $("#ajax_img").attr("src", response.imgUrl);
-        $("#ajax_p").html(response.news_data_string);
-      },
-      error: function (error) {
-        alert("Some error occurred!");
-      },
+      fetch("/read_news_here", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: newsUrl }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          document.getElementById("ajax_h1").textContent = data.heading;
+          document.getElementById("ajax_h3").textContent = data.subheading;
+          document.getElementById("ajax_img").setAttribute("src", data.imgUrl);
+          document.getElementById("ajax_p").innerHTML = data.news_data_string;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Some error occurred!");
+        });
     });
   });
 }
