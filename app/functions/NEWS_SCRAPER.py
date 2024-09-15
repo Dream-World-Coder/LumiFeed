@@ -3,7 +3,7 @@ import logging
 import requests
 from bs4 import BeautifulSoup
 
-from app.functions.web_scraper import make_soup
+from app.functions._utility__scraping import make_soup
 
 # from web_scraper import make_soup
 

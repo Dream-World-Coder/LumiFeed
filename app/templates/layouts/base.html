@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- To fix : URLs -->
+<!-- To fix : URLs, remove error info from ajax -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -325,262 +325,29 @@
     </footer>
 
     <!-- scripts -->
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- fetch news -->
-    <script>
-        function fetchNews(event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            const form = document.getElementById("fetch-news-form");
-            const formData = new FormData(form);
-
-            const newsType = formData.get("news_type");
-            const newsCount = formData.get("news_count");
-            const cityChoice = formData.get("city_choice") || '';
-
-            // Create URL parameters
-            const url = `/fetchnews?news_type=${newsType}&news_count=${newsCount}&city_choice=${cityChoice}`;
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    // Store news_list in localStorage
-                    localStorage.setItem('news_list', JSON.stringify(data.news_list));
-
-                    // Render the news table
-                    document.getElementById('news-table').innerHTML = data.news_table;
-                })
-                .catch(error => console.error('Error fetching news:', error));
-        }
-    </script>
-
-    <!-- simple js utility functions, but need to get elements each time so defined here. -->
-    <script>
-        function read_js_function(){
-            document.addEventListener('DOMContentLoaded', ()=>{
-                const read = document.getElementById('read');
-                const closeBtn = document.getElementById('close-preview');
-                const openBtn = document.getElementById('open-in-new-tab');
-
-                //const readbtns = document.querySelectorAll('.rbtn');
-                const read_here_btns = document.querySelectorAll('.read_here');
-
-                read_here_btns.forEach((readbtn) => {
-                    readbtn.addEventListener('click', ()=>{
-                        read.style.display = 'flex';
-                    })
-                });
-                closeBtn.addEventListener('click', ()=>{
-                    read.style.display = 'none';
-                });
-
-                openBtn.addEventListener('click', ()=>{
-                    read.style.display = 'none';
-                });
-            });
-        }
-        read_js_function();
-    </script>
-
-    <!-- ajax for mobile search -->
-    <script>
-        $(document).ready(function(){
-            $('#phone-search-form').submit((event) => {
-                event.preventDefault();
-
-                var formData = {
-                    searchPart : $('#phone-search-input').val(),
-                    // this can be the same as {name} attr in the input
-                    // or not also, i.e. any name. [search_part]
-                    news_list: JSON.parse(localStorage.getItem("news_list")) || []
-                };
-
-                $.ajax({
-                    url: '/search_in_title',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        $('#ajax').html(response.html);
-                        read_js_function();
-                        attachClickHandlers();
-                        rhAJAX();
-                    },
-                    error: function(error) {
-                        alert('some error occurred!')
-                    }
-                });
-            });
-        });
-    </script>
-
-    <!-- ajax for read_here -->
-    <script>
-        function rhAJAX(){
-            $(document).ready(function() {
-                const readHereButtons = $('.read_here');
-                const urls = $('.news_urls_a_tag');
-
-                readHereButtons.each(function(index) {
-                    $(this).on('click', function() {
-                        var newsUrl = $(urls[index]).attr('href');
-                        $.ajax({
-                            url: '/read_news_here',
-                            type: 'POST',
-                            contentType: 'application/json',
-                            data: JSON.stringify({ url: newsUrl }),  // wrap newsUrl in an object
-                            success: function(response) {
-                                $('#ajax_h1').text(response.heading);
-                                $('#ajax_h3').text(response.subheading);
-                                $('#ajax_img').attr('src', response.imgUrl); // correct method to set the src attribute
-                                $('#ajax_p').html(response.news_data_string); // html for, '\n'
-                            },
-                            error: function(error) {
-                                console.log(error);
-                                alert('Some error occurred!');
-                            }
-                        });
-                    });
-                });
-            });
-        }
-        rhAJAX();
-    </script>
-
-    <!-- ajax for find article  -->
-    <script>
-        function attachClickHandlers() {
-            const resDivs = document.querySelectorAll('.res');
-            const NOTatags = document.querySelectorAll('.res__serial');
-            resDivs.forEach((res, index) => {
-                res.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    let a = NOTatags[index];
-                    let href = a.getAttribute('data-href');
-                    let target_elem = document.getElementById(href);
-                    let rect = target_elem.parentElement.getBoundingClientRect();
-
-                    window.scrollTo({
-                        top: window.scrollY + rect.top - 100,
-                        behavior: 'smooth'
-                    });
-
-                    // Highlighting
-                    var target = target_elem.parentElement;
-                    var classToAdd = 'active_highlight';
-                    if (document.body.classList.contains('dark-mode')) {
-                        classToAdd = 'active_highlight_dark';
-                    }
-                    target.classList.add(classToAdd);
-                    setTimeout(() => {
-                        target.classList.remove(classToAdd);
-                    }, 1500);
-                });
-            });
-        }
-
-        attachClickHandlers();
-    </script>
-
-    <!-- ajax for desktop search -->
-    <script>
-        $(document).ready(function() {
-            $('#search-form').submit((event) => {
-                event.preventDefault();
-
-                // Get search part from the form input
-                var formData = {
-                    searchPart: $('#search').val(),
-                    // Retrieve the news_list from localStorage
-                    news_list: JSON.parse(localStorage.getItem("news_list")) || []
-                };
-
-                // AJAX request to search the news
-                $.ajax({
-                    url: '/search_in_title',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        // Populate the search results into the #ajax_desktop element
-                        $('#ajax_desktop').html(response.html);
-
-                        // Optionally call custom functions like:
-                        read_js_function();
-                        attachClickHandlers();
-                        rhAJAX();
-                    },
-                    error: function(error) {
-                        alert('Some error occurred!');
-                    }
-                });
-            });
-        });
-    </script>
-
-
-    <!-- AJAX for read_in_new_tab -->
-    <script>
-        function ntAJAX(){
-            $(document).ready(function() {
-                const newTabBtn = $('#open-in-new-tab');
-
-                newTabBtn.on('click', function(){
-                    const heading = $('#ajax_h1').text();
-                    const subheading = $('#ajax_h3').text();
-                    const news_content = $('#ajax_p').html();
-                    const newsImgUrl = $('#ajax_img').attr('src');
-
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = '/read_news_in_new_tab';
-                    form.target = '_blank';
-
-                    const inputHeading = document.createElement('input');
-                    inputHeading.type = 'hidden';
-                    inputHeading.name = 'heading';
-                    inputHeading.value = heading;
-                    form.appendChild(inputHeading);
-
-                    const inputSubheading = document.createElement('input');
-                    inputSubheading.type = 'hidden';
-                    inputSubheading.name = 'subheading';
-                    inputSubheading.value = subheading;
-                    form.appendChild(inputSubheading);
-
-                    const inputNewsContent = document.createElement('input');
-                    inputNewsContent.type = 'hidden';
-                    inputNewsContent.name = 'news_content';
-                    inputNewsContent.value = news_content;
-                    form.appendChild(inputNewsContent);
-
-                    const inputNewsImgUrl = document.createElement('input');
-                    inputNewsImgUrl.type = 'hidden';
-                    inputNewsImgUrl.name = 'newsImgUrl';
-                    inputNewsImgUrl.value = newsImgUrl;
-                    form.appendChild(inputNewsImgUrl);
-
-                    document.body.appendChild(form);
-                    form.submit();
-                    document.body.removeChild(form);
-                });
-            });
-        }
-        ntAJAX();
-    </script>
-
-    <!-- other scripts -->
+    <!-- jQuery -->
     <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/functions/utils/scroll-related/smooth-scrolling.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/functions/simple_dm.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/functions/bigger.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/functions/btn_visible.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/functions/search.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/functions/utils/emailing.js')}}"></script>
 
-    <!-- additional scripts-->
-    {% block scripts %}{% endblock %}
+    <!-- ajax -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+
+    <!-- functions -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/functions/bigger_font.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/functions/city_options_toggle.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/functions/read.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/functions/search.js')}}"></script>
+
+    <!-- utils -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/utils/emailing.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/utils/scroll/smooth-scrolling.js')}}"></script>
+
 </body>
 </html>

@@ -2,24 +2,24 @@ from app import app
 from app.models import User, Read_later, Saved_article
 
 # python functions for routes
-from app.functions.news_fetcher import NewsScrape
-from app.functions.html_gen import (
+from app.functions.NEWS_SCRAPER import NewsScrape
+from app.functions.html_generator import (
     gen_table,
     gen_table_2,
     make_another_page,
     generate_search_reasult,
 )
-from app.functions.file_functions_for_news_reading import makeAlternateFilePath, cleanup_files
+from app.functions.file_management import makeAlternateFilePath, cleanup_files
 from app.functions.search_algorithms import s2x1
-from app.functions.news_summariser import generate_summary
+from app.functions.summariser import generate_summary
 
 
 obj = NewsScrape()
 
 
-from app.routes import auth
-from app.routes import fetch_news
-from app.routes import home
-from app.routes import read_news
-from app.routes import search
-from app.routes import summary
+from app.routes import _routes__auth
+from app.routes import _routes__fetch_news
+from app.routes import _routes__home
+from app.routes import _routes__read
+from app.routes import _routes__search
+from app.routes import _routes__summary

@@ -1,22 +1,20 @@
-// its no use, AJAX linked
-
-document.addEventListener("DOMContentLoaded", () => {
-  const find_article_btns = document.querySelectorAll(".res__link");
+function attachClickHandlers() {
+  const resDivs = document.querySelectorAll(".res");
   const NOTatags = document.querySelectorAll(".res__serial");
-
-  NOTatags.forEach((a) => {
-    a.addEventListener("click", () => {
+  resDivs.forEach((res, index) => {
+    res.addEventListener("click", (event) => {
+      event.preventDefault();
+      let a = NOTatags[index];
       let href = a.getAttribute("data-href");
-      let id = href;
-      let target_elem = document.getElementById(id);
-      let t2 = target_elem.parentElement;
-      let rect = t2.getBoundingClientRect();
+      let target_elem = document.getElementById(href);
+      let rect = target_elem.parentElement.getBoundingClientRect();
 
       window.scrollTo({
         top: window.scrollY + rect.top - 100,
         behavior: "smooth",
       });
 
+      // Highlighting
       var target = target_elem.parentElement;
       var classToAdd = "active_highlight";
       if (document.body.classList.contains("dark-mode")) {
@@ -28,4 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 1500);
     });
   });
-});
+}
+
+attachClickHandlers();
