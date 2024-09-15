@@ -1,4 +1,4 @@
-from flask import render_template, request, session, url_for, jsonify
+from flask import request, session, url_for, jsonify
 from app.routes import app, obj, gen_table, gen_table_india_news
 
 
