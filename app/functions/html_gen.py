@@ -480,10 +480,11 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             padding: 70px;
             font-family: Georgia, Times, 'Times New Roman', serif;
         }
-        .read__page h1 {font-size: 3.5rem;}
-        .read__page h3 {font-size: 1.5rem;}
+        .read__page h1 {font-size: 3rem; text-align: center; font-family: "Red Hat Display", 'Arial Narrow Bold', sans-serif; line-height: 3rem;}
+        .read__page h3 {font-size: 1.5rem; text-align: center; font-family: "Red Hat Display", 'Arial Narrow Bold', sans-serif;}
+        .read__page img {margin-left: calc(50% - 320px);}
         .read__page p {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
         }
         .ss{
@@ -507,7 +508,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                 margin-top: 5rem;
             }
             .read__page h1 {
-                font-size: 1.3rem;
+                font-size: 1.25rem;
             }
             .read__page h3 {
                 font-size: 0.8rem;
@@ -635,9 +636,9 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
     
             // Restore default font size
             document.querySelector('.icon4').addEventListener('click', () => {
-                // Assuming default font size is 1.5rem for desktop and 0.8rem for mobile
+                // Assuming default font size is 1.25rem for desktop and 0.8rem for mobile
                 if (window.innerWidth >= 768) {
-                    p.style.fontSize = '1.5rem';
+                    p.style.fontSize = '1.25rem';
                 } else {
                     p.style.fontSize = '0.8rem';
                 }

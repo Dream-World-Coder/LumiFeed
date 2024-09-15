@@ -166,6 +166,7 @@ class NewsScrape:
 
             except AttributeError as e:
                 logging.error(f"Error processing page {pgNo}: {e}")
+                return fetched_news_data
 
             pgNo += 1
 
