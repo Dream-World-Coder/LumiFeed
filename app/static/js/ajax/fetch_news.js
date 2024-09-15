@@ -14,11 +14,9 @@ function fetchNews(event) {
     .then((response) => response.json())
     .then((data) => {
       localStorage.setItem("news_list", JSON.stringify(data.news_list));
-
-      // Render the news table
       document.getElementById("news-table").innerHTML = data.news_table;
-    })
-    .catch((error) => console.error("Error fetching news:", error));
+    });
+  // .catch((error) => console.error("Error fetching news:", error));
 }
 
 read_in_new_tab();

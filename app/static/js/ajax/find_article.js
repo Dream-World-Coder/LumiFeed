@@ -1,4 +1,4 @@
-function find_article() {
+function findArticle() {
   const resDivs = document.querySelectorAll(".res");
   const NOTatags = document.querySelectorAll(".res__serial");
   resDivs.forEach((res, index) => {
@@ -28,4 +28,4 @@ function find_article() {
   });
 }
 
-find_article();
+findArticle();
