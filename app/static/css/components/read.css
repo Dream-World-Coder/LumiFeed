@@ -1,7 +1,7 @@
 :root {
   --read-h: 85vh;
   --read-w: 90vw;
-  --ajax-p-fs: 1.25rem;
+  --ajax-p-fs: 1rem;
 }
 
 .rbtn {
@@ -27,9 +27,9 @@
 
 .read__container {
   position: relative;
-  background-color: rgb(215, 215, 215);
+  background-color: rgb(235, 235, 235);
   border-radius: 25px;
-  border: 2px solid rgb(102, 102, 102);
+  border: 1px solid rgb(152, 152, 152);
 }
 
 .read__navigations {
@@ -60,22 +60,28 @@
   font-family: Georgia, Times, "Times New Roman", serif;
   overflow-y: scroll;
   overflow-x: hidden;
-  /* background-image: url(../../images/paper-texture.webp); */
 }
 .read__page h1 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
 }
 .read__page h3 {
   font-size: 1.5rem;
+  color: rgb(107, 107, 107);
 }
 .read__page p {
   font-size: var(--ajax-p-fs);
   font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
 }
+.read__page img {
+  border: 1px solid rgb(102, 102, 102);
+  width: min(100%, 500px);
+  height: 300px;
+  border-radius: 10px;
+}
 
 #read__preview {
   color: black;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: "Red Hat Display", "Courier New", Courier, monospace;
   font-weight: bold;
   margin-right: 0vw;
@@ -96,7 +102,7 @@
   border-radius: 0;
 }
 
-@media (min-width: 300px) and (max-width: 1380px) {
+@media (min-width: 150px) and (max-width: 768px) {
   #read {
     height: 75vh;
   }
@@ -107,10 +113,17 @@
     height: calc(100% - 2rem);
   }
   .read__page h1 {
-    font-size: 1.5rem;
+    font-size: 1.15rem;
+  }
+  .read__page h3 {
+    font-size: 0.75rem;
   }
   .read__page p {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
+  }
+  .read__page img {
+    width: min(100%, 350px);
+    height: 150px;
   }
   .read__icons,
   .read__icons img {
@@ -122,7 +135,35 @@
   }
 }
 
-/* @media (min-width: 769px) and (max-width: 1024px) {} */
-
-@media (min-width: 1381px) and (max-width: 2440px) {
+@media (min-width: 769px) and (max-width: 1025px) {
+  #read {
+    height: 75vh;
+  }
+  .read__navigations {
+    height: 2rem;
+  }
+  .read__page {
+    height: calc(100% - 2rem);
+  }
+  .read__page h1 {
+    font-size: 1.25rem;
+  }
+  .read__page h3 {
+    font-size: 0.85rem;
+  }
+  .read__page p {
+    font-size: 0.75rem;
+  }
+  .read__page img {
+    width: min(100%, 350px);
+    height: 150px;
+  }
+  .read__icons,
+  .read__icons img {
+    width: 20px;
+    height: 20px;
+  }
+  #read__preview {
+    top: 3px;
+  }
 }

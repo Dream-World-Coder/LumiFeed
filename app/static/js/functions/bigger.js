@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   let is_bigger = localStorage.getItem("is_bigger") === "1" ? 1 : 0;
 
+  // for phone and mac
   const applyFontSize = () => {
-    console.log("Applying font size 1");
     document.documentElement.style.setProperty(
       "--th-font-size",
       is_bigger === 1 ? "1.5rem" : "1rem"
@@ -17,24 +17,24 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     document.documentElement.style.setProperty(
       "--ajax-p-fs",
-      is_bigger === 1 ? "1.5rem" : "1.25rem"
+      is_bigger === 1 ? "1.5rem" : "1rem"
     );
   };
 
+  // for tablet
   const applyFontSize2 = () => {
-    console.log("Applying font size 2");
     document.documentElement.style.setProperty(
       "--th-font-size",
-      is_bigger === 1 ? "2.5rem" : "1.6rem"
+      is_bigger === 1 ? "1.5rem" : "1.25rem"
     );
     document.documentElement.style.setProperty(
       "--td-font-size",
-      is_bigger === 1 ? "1.8rem" : "1.0rem"
+      is_bigger === 1 ? "1.25rem" : "1.0rem"
     );
-    document.documentElement.style.setProperty("--p", "20px"); // Seems fixed for both states
+    document.documentElement.style.setProperty("--p", "10px"); // Seems fixed for both states
     document.documentElement.style.setProperty(
       "--ajax-p-fs",
-      is_bigger === 1 ? "1.5rem" : "1.25rem"
+      is_bigger === 1 ? "1.5rem" : "1rem"
     );
   };
 
@@ -43,10 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
     bigFont.addEventListener("click", () => {
       is_bigger = is_bigger === 1 ? 0 : 1;
       localStorage.setItem("is_bigger", is_bigger);
-      // console.log(`Window dimensions: ${window.innerWidth}x${window.innerHeight}`);
       if (window.innerWidth < 768) {
         applyFontSize();
-      } else if (window.innerWidth >= 768 && window.innerWidth <= 1240) {
+      } else if (window.innerWidth >= 768 && window.innerWidth <= 1024) {
         applyFontSize2();
       } else {
         applyFontSize();
@@ -54,8 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Apply font size on page load based on initial state
-  // console.log(`Initial window dimensions: ${window.innerWidth}x${window.innerHeight}`);
   if (window.innerWidth < 768) {
     applyFontSize();
   } else if (window.innerWidth >= 768 && window.innerWidth <= 1240) {

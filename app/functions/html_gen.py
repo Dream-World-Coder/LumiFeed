@@ -428,13 +428,20 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             box-sizing: border-box;
         }
         body{
-            background-color: rgb(215, 215, 215);
+            background-color: rgb(237, 237, 237);
             overflow-x: hidden;
+        }
+        html.invert body{
+            background-color: rgb(37, 37, 37);
+            color: aliceblue;
+        }
+        html.invert .read__page h3{
+            color: rgb(180,180,180);
         }
         .read__container {
             position: relative;
             width: 100vw;
-            background-color: rgb(215, 215, 215);
+            background-color: inherit;
         }
         .read__navigations {
             position: fixed;
@@ -445,7 +452,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             background-color: rgb(102, 102, 102);
             border-bottom: 2px solid rgb(102, 102, 102);
             z-index: 99;
-            padding-right: 30px;
+            padding-right: 70px;
             display: flex;
             justify-content: flex-end;
             align-items: center;
@@ -464,8 +471,8 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             color: rgb(0, 0, 0);
             background-color: rgb(195,195,195);
         }
-        /* summary */
-        .iconS{
+
+        .iconH{
             width: 4.25rem;
             position: absolute;
             top: 24px;
@@ -473,29 +480,54 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             font-size: 1rem;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
+        .iconH a{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* summary */
+        .icon5{
+            width: 4.25rem;
+            font-size: 0.8rem;
+        }
         .read__page {
-            margin-top: 6rem;
+            margin-top: 3rem;
             position: relative;
             width: 100vw;
             padding: 70px;
             font-family: Georgia, Times, 'Times New Roman', serif;
         }
-        .read__page h1 {font-size: 3rem; text-align: center; font-family: "Red Hat Display", 'Arial Narrow Bold', sans-serif; line-height: 3rem;}
-        .read__page h3 {font-size: 1.5rem; text-align: center; font-family: "Red Hat Display", 'Arial Narrow Bold', sans-serif;}
-        .read__page img {margin-left: calc(50% - 320px);}
+        .read__page h1 {
+            font-size: 2.5rem;
+        }
+        .read__page h3 {
+            font-size: 1.5rem;
+            color: rgb(107,107,107);
+        }
         .read__page p {
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
+        }
+        .read__page img{
+            border: 1px solid rgb(102, 102, 102);
+            width: min(100%, 500px);
+            height: 300px;
+            border-radius: 10px;
         }
         .ss{
             width: 100vw;
             height: 40vh;
         }
         .invert{
-            filter: invert(1);
+            filter: invert(0);
+            /* colors are changed manually, thats better */
         }
-        @media (min-width: 300px) and (max-width: 767px) {
-            .iconS{
+        @media (max-width: 768px) {
+            .iconH{
                 width: 3.85rem;
                 top: 16px;
                 left: 20px;
@@ -503,6 +535,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             }
             .read__navigations{
                 height: 4rem;
+                padding-right: 20px;
             }
             .read__page{
                 margin-top: 5rem;
@@ -514,18 +547,18 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                 font-size: 0.8rem;
             }
             .read__page p {
-                font-size: 0.8rem;
+                font-size: 0.65rem;
+            }
+            .read__page img{
+                width: min(100%, 350px);
+                height: 150px;
             }
             .read__page{
                 padding: 20px;
             }
-            .read__page img{
-                width: 100%;
-                height: 20vh;
-            }
         }
     </style>
-</head>
+</head> 
     """
 
     dm_icon_url = "{{url_for('static', filename='icons/dm3.svg')}}"
@@ -533,7 +566,18 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
     <body>
     <div class="read__container">
         <div class="read__navigations">
-            <div class="icon icon5">
+            <div id="summary" class="icon icon5">
+                Summary
+            </div>
+            <div class="icon icon1">
+                <img src="static/icons/dm3.svg" alt="" srcset=""
+                width="24px" height="24px">
+            </div>
+            <div class="icon icon2">A+</div>
+            <div class="icon icon3">A-</div>
+            <div class="icon icon4">A</div>
+            <!-- Home button -->
+            <div class="icon iconH">
                 <a href="{home_url}">
                     <svg 
                         fill="#000000" 
@@ -542,7 +586,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                         xmlns="http://www.w3.org/2000/svg" 
                         xmlns:xlink="http://www.w3.org/1999/xlink" 
                         width="24px" 
-                        height="24px" 
+                        height="24px"
                         viewBox="0 0 49.983 49.983" 
                         xml:space="preserve">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -556,18 +600,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                     </svg>
                 </a>
             </div>
-            <div class="icon icon1">
-                <img src="{dm_icon_url}" alt="" srcset=""
-                width="24px" height="24px">
-            </div>
-            <div class="icon icon2">A+</div>
-            <div class="icon icon3">A-</div>
-            <div class="icon icon4">A</div>
-            <div id="summary" class="icon iconS">
-                Summary
-            </div>
         </div>
-
     """
 
     read__page = f"""
@@ -636,11 +669,11 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
     
             // Restore default font size
             document.querySelector('.icon4').addEventListener('click', () => {
-                // Assuming default font size is 1.25rem for desktop and 0.8rem for mobile
+                // Assuming default font size is 1rem for desktop and 0.8rem for mobile
                 if (window.innerWidth >= 768) {
-                    p.style.fontSize = '1.25rem';
+                    p.style.fontSize = '1rem';
                 } else {
-                    p.style.fontSize = '0.8rem';
+                    p.style.fontSize = '0.65rem';
                 }
             });
         });

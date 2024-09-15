@@ -26,6 +26,8 @@ def read_news_here():
 @app.route("/read_news_in_new_tab", methods=["POST"])
 def read_news_in_new_tab():
     home_url = session.get("home_url", "")
+    # the home_url is stored in session [from /fetch_news]
+    # for making the back home href in news.html
 
     heading = request.form.get("heading")
     subheading = request.form.get("subheading")
@@ -40,10 +42,12 @@ def read_news_in_new_tab():
         newsImgUrl=newsImgUrl,
     )
     path = "app/templates/news.html"
+    # making alternate file path if it already exits
     final_path = makeAlternateFilePath(path=path)
     with open(final_path, "w") as f:
         f.write(html_file_str)
 
+    # storing the file names in session to delete them later
     if "file_paths" not in session:
         session["file_paths"] = []
     session["file_paths"].append(final_path)
@@ -51,6 +55,7 @@ def read_news_in_new_tab():
     return render_template(os.path.basename(final_path))
 
 
+# deleting the news.html files after the request
 @app.teardown_request
 def teardown_request(exception=None):
     file_paths = session.pop("file_paths", [])
