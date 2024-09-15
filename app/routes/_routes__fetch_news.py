@@ -1,5 +1,5 @@
 from flask import render_template, request, session, url_for, jsonify
-from app.routes import app, obj, gen_table, gen_table_2
+from app.routes import app, obj, gen_table, gen_table_india_news
 
 
 @app.route("/fetchnews", methods=["GET"])
@@ -26,7 +26,7 @@ def fetchnews():
 
     elif news_type == "india_n":
         news_list = obj.getIndiaNews(num=news_count)
-        news_table = gen_table_2(news_list)
+        news_table = gen_table_india_news(news_list)
 
     elif news_type == "city_n":
         if city_choice is None:

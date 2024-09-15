@@ -5,7 +5,7 @@ from app.models import User, Read_later, Saved_article
 from app.functions.NEWS_SCRAPER import NewsScrape
 from app.functions.html_generator import (
     gen_table,
-    gen_table_2,
+    gen_table_india_news,
     make_another_page,
     generate_search_reasult,
 )

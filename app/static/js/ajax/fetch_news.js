@@ -18,5 +18,3 @@ function fetchNews(event) {
     });
   // .catch((error) => console.error("Error fetching news:", error));
 }
-
-read_in_new_tab();

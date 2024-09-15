@@ -3,7 +3,6 @@ function show_news_preview() {
   console.log(`\n\n\nshow_news_preview() is called.\n\n\n`);
 
   $(document).on("click", ".read_here", function () {
-    // Find the index of the clicked button
     const index = $(".read_here").index(this);
     const newsUrl = $(".news_urls_a_tag").eq(index).attr("href");
 
@@ -25,5 +24,4 @@ function show_news_preview() {
   });
 }
 
-// Initialize the function
 show_news_preview();
