@@ -99,3 +99,4 @@ templates/old-base.html
 .vscode/
 instance/
 app/templates/news/
+lumifeed.pdf
