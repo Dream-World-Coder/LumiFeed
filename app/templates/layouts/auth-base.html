@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title -->
+    <title>LumiFeed - {% block title %}{% endblock %}</title>
+    <meta name="author" content="Subhajit Gorai">
+    <!-- Linking CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/fonts.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/dark-mode.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/header.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/nav.css')}}" />
+    <!-- Linking Favicon -->
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}" type="image/x-icon" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+    <header class="fixed dark-glass" itemscope itemtype="https://schema.org/WPHeader">
+        <div class="header_wrapper full flex align-center">
+            <!-- logo -->
+            <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="Ad Free News Logo" itemprop="logo" />
+                <span id="logo-text" itemprop="name">Ad Free News</span>
+            </div>
+
+            <!-- nav -->
+            <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                <div class="ul relative flexed justify-evenly">
+                    <div class="li li1 animated-underline-white">
+                        <a href="#about" class="flexed" rel="noopener">About</a>
+                    </div>
+                    <div class="li li2 animated-underline-white">
+                        <a href="#contact" class="flexed" rel="noopener">Contact</a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- buttons -->
+            <div class="buttons">
+                <!-- dark mode -->
+                <div class="dark_mode dmbtn">
+                    <span id="dm">
+                        <img src="{{url_for('static', filename='icons/dm.svg')}}" alt="dark mode button" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <footer role="footer" itemscope itemtype="https://schema.org/WPFooter">
+        <div class="sp" id="table-end"></div>
+        <div class="cen cc">
+            © 2024 Subhajit Gorai. All rights reserved.
+            <meta name="copyright" content="Subhajit Gorai">
+        </div>
+    </footer>
+</body>
+</html>

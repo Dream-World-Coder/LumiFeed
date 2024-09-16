@@ -56,10 +56,12 @@
 
 /* icons */
 .con_icons {
-  width: 32px;
+  display: inline-flex;
+  width: fit-content;
   height: 32px;
   color: black;
   padding-left: 40px;
+  /* border: 1px solid; */
 }
 
 .con_icons3 img {
