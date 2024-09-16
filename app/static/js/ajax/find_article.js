@@ -10,7 +10,7 @@ function findArticle() {
       let rect = target_elem.parentElement.getBoundingClientRect();
 
       window.scrollTo({
-        top: window.scrollY + rect.top - 100,
+        top: window.scrollY + rect.top - 300,
         behavior: "smooth",
       });
 
