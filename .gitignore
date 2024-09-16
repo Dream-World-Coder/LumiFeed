@@ -98,3 +98,4 @@ templates/old-base.html
 .env
 .vscode/
 instance/
+app/templates/news/

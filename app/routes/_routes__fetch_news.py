@@ -18,6 +18,7 @@ def fetchnews():
 
     # storing the current url in session to get back from the reading page
     home_url = f"{url_for('index')}"
+    session.clear()
     session["home_url"] = home_url
 
     if news_type == "top_n":
