@@ -13,6 +13,7 @@
 import os
 
 
+# for render
 class Config:
     # Fetch environment variables
     FLASK_APP = os.environ.get("FLASK_APP", "run")  # Default to 'run' if not set
