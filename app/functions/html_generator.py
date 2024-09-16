@@ -191,11 +191,22 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             /* colors are changed manually, thats better */
         }
         @media (max-width: 768px) {
+            .read__navigations{
+                gap: 0.25rem;
+            }
+            .icon{
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 0.8rem;
+            }
             .iconH{
-                width: 3.85rem;
+                width: 3.5rem;
                 top: 16px;
                 left: 20px;
-                font-size: 0.85rem;
+            }
+            .icon5{
+                width: 3.5rem;
+                font-size: 0.65rem;
             }
             .read__navigations{
                 height: 4rem;

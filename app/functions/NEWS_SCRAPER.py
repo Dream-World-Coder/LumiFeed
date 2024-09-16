@@ -14,12 +14,13 @@ from app.functions._utility__scraping import make_soup
 
 class NewsScrape:
     def __init__(self) -> None:
-        self.cities = ["kolkata", "delhi", "mumbai", "bengaluru", "pune", "chennai"]
         self.urls = {
             "indianExpressMain": "https://indianexpress.com/",
             "indianExpressIndia": "https://indianexpress.com/section/india/",
             "indianExpressCities": "https://indianexpress.com/section/cities/",
         }
+        self.cities = ["kolkata", "delhi", "mumbai", "bengaluru", "pune", "chennai"]
+        self.max_pages = 15
 
     def validateNum(self, num):
         if not str(num).isdigit():
@@ -33,10 +34,8 @@ class NewsScrape:
     # collecting news
     # --------------------
     def getTopNews(self, num=10) -> list:
-        """
-        all the news are not in a fixed place so
-        ther are multiplpe same news fetched.
-        """
+        # all the news are not in a fixed place so ther are multiplpe same news fetched.
+
         news_num = self.validateNum(num)
 
         url = self.urls["indianExpressMain"]
@@ -44,6 +43,7 @@ class NewsScrape:
         count = 0
         serial = 0
 
+        # making soup
         soup = None
         try:
             res = requests.get(url, timeout=5, allow_redirects=True)
@@ -52,6 +52,7 @@ class NewsScrape:
         except Exception as e:
             print(e)
 
+        # the main place to scrape from
         content = (
             soup.body.find("main", id="wrapper")
             .find("div", id="body-section")
@@ -60,31 +61,48 @@ class NewsScrape:
             .find("div", id="HP_LATEST_NEWS")
             .find("div", class_="left-part")
         )
+
+        # list of all the news div containers
         news_list = content.find_all("div", class_="other-article")
+        context_part = news_list[0].find("div", class_="content-txt").h3.a
 
         news_title_of_first = ""  # flash some meessage
-        serial += 1
         count += 1
-        context_part = news_list[0].find("div", class_="content-txt").h3.a
+
+        # data scraped
+        serial += 1
         news_title = context_part.text
         news_link = quote(context_part.get("href", "#"), safe=":/")
+
+        # zipped list
         zip_list = [serial, news_title, news_link]
         fetched_news_data.append(zip_list)
 
+        # storing the title of first news to break later on if same title encountered
         news_title_of_first = news_title
 
-        while count < news_num:
+        while count < news_num and count < len(news_list):
             for news in news_list[1:]:
                 if count >= news_num:
                     break
+
                 serial += 1
                 context_part = news.find("div", class_="content-txt").h3.a
                 news_title = context_part.text
+
+                # break if same news is encounered --end of list
                 if news_title == news_title_of_first:
                     serial -= 1
                     print(f"no more news available, {count=}")
                     return fetched_news_data
+
                 news_link = quote(context_part.get("href", "#"), safe=":/")
+
+                if count == len(news_list) - 1:
+                    serial = serial
+                    news_title = "No more news available"
+                    news_link = "javascript:void(0);"
+
                 zip_list = [serial, news_title, news_link]
                 fetched_news_data.append(zip_list)
                 count += 1
@@ -99,7 +117,7 @@ class NewsScrape:
         count = 0
         serial = 0
 
-        while count < news_num:
+        while count < news_num and pgNo <= self.max_pages:
             url = baseUrl + f"page/{pgNo}/"
             soup = make_soup(url)
             content = (
@@ -138,7 +156,7 @@ class NewsScrape:
         count = 0
         serial = 0
 
-        while count < news_num:
+        while count < news_num and pgNo <= self.max_pages:
             url = baseUrl + f"{cityname}/page/{pgNo}/"
             soup = make_soup(url)
             try:
