@@ -1,13 +1,12 @@
 :root {
+  --b-rad: 10px;
+
   --w: 310px;
-  /* --t: calc(var(--fetch-news-height) + var(--fetch-news-m-top)); */
   --t: calc(var(--fetch-news-height) + var(--fetch-news-m-top));
   --r: 70px;
-  /* --find-h: 3.5rem; */
   --res-h: 70vh;
   --icon-width: 40px;
   --icon-height: 40px;
-  --b-rad: 30px;
   --clr1: rgb(204, 112, 0);
   --clr201: rgba(159, 114, 59, 0.347);
   --clr2: rgb(221, 43, 79);
@@ -36,10 +35,8 @@
   --res-link-bg-clr: var(--bg1);
 
   /* -----------
-        they all are just for show, bcz, js regulates the --clr of them.
+        they all are just for show, bcz, js regulates the clr of them.
     -------------- */
-
-  /* --cx: #8bc34a; */
   --cx: var(--c4);
 }
 
@@ -80,6 +77,7 @@ input {
 #search {
   background-color: transparent;
   border-color: var(--v-th) !important;
+  border-radius: 20px !important;
 }
 
 #search-form,
@@ -136,13 +134,13 @@ input {
 .res__num {
   padding: 15px;
   margin-bottom: 15px;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: var(--res-bg-clr);
 }
 
 .res {
   background-color: var(--res-bg-clr);
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
 }

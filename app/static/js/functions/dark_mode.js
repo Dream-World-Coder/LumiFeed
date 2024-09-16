@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("dark-mode");
     localStorage.setItem("is_darkmode", "true");
     document.documentElement.style.setProperty("--bg1", "aliceblue");
+    // -------
     // search
+    // -------
     document.documentElement.style.setProperty(
       "--dim-border",
       "rgba(108,108,108,0.9)"
@@ -20,33 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
       "--res-link-bg-clr",
       "var(--bg1)"
     );
-    // table
-    document.documentElement.style.setProperty("--th-clr", "var(--ct1)");
-    document.documentElement.style.setProperty("--odd-row-clr", "var(--ct2)");
-    document.documentElement.style.setProperty("--even-row-clr", "var(--ct3)");
   }
 
   function removeDarkMode() {
     document.body.classList.remove("dark-mode");
     localStorage.setItem("is_darkmode", "false");
     document.documentElement.style.setProperty("--bg1", "var(--bg1-val)");
+    // -------
     // search
-    document.documentElement.style.setProperty("--dim-border", "var(--c3)");
-    document.documentElement.style.setProperty("--dim-bg-clr", "var(--c4)");
+    // -------
+    document.documentElement.style.setProperty("--dim-border", "var(--c3)"); // border
+    document.documentElement.style.setProperty("--dim-bg-clr", "var(--c4)"); // bg
     document.documentElement.style.setProperty("--dim-clr", "var(--c5)");
     document.documentElement.style.setProperty(
       "--res-link-bg-clr",
       "var(--c6)"
-    );
-    // table
-    document.documentElement.style.setProperty("--th-clr", "var(--v-th)");
-    document.documentElement.style.setProperty(
-      "--odd-row-clr",
-      "var(--v-tr-odd)"
-    );
-    document.documentElement.style.setProperty(
-      "--even-row-clr",
-      "var(--v-tr-even)"
     );
   }
 

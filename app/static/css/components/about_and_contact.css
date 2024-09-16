@@ -13,7 +13,8 @@
   font-weight: 400;
   width: 65%;
   border-radius: calc(var(--pad) - 5px);
-  background-color: var(--v-th);
+  border: 1px solid var(--c3);
+  background-color: var(--c4);
 }
 
 .about h2,
@@ -31,6 +32,7 @@
   font-style: bold;
   font-size: 1rem;
   border-radius: calc(var(--pad) - 5px);
+  border: 1px solid var(--c3);
   background-color: var(--bg1-val);
   padding: 10px;
 }

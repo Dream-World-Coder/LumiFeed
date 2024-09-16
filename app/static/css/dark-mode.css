@@ -22,20 +22,11 @@ body.dark-mode input::placeholder {
 :root {
   --table-a-clr: rgb(255, 241, 108);
   --table-text-clr-dm: rgb(255, 255, 255);
-  /* --rbtn-clr: rgb(0, 195, 0); */
   --rbtn-clr: var(--clr2);
-  --th-text-clr: rgba(255, 255, 255, 1);
-  --ct1: rgba(92, 92, 92, 1); /* th clr */
-  --ct2: rgba(0, 0, 0, 1); /* actual even row */
-  --ct3: rgba(54, 54, 54, 0.89); /*  odd row*/
 }
 
 body.dark-mode table {
   color: var(--table-text-clr-dm);
-}
-
-body.dark-mode th {
-  color: var(--th-text-clr) !important;
 }
 
 body.dark-mode table a {
@@ -58,22 +49,23 @@ body.dark-mode .btn:hover {
 }
 
 body.dark-mode .fetch_news h2 {
-  color: bisque;
+  color: rgb(196, 196, 196);
 }
 
 body.dark-mode .about,
 body.dark-mode .contact {
-  background-color: rgba(108, 108, 108, 1);
+  background-color: rgba(108, 108, 108, 0.5);
+  border: 1px solid rgba(108, 108, 108, 0.9);
+}
+body.dark-mode .about p,
+body.dark-mode .contact p {
+  background-color: rgba(15, 15, 15, 1);
+  border: 1px solid rgba(68, 68, 68, 0.9);
 }
 
 body.dark-mode .about h2,
 body.dark-mode .contact h2 {
-  color: rgb(0, 0, 0);
-}
-
-body.dark-mode .about p,
-body.dark-mode .contact p {
-  background-color: rgba(15, 15, 15, 1);
+  color: rgb(196, 196, 196);
 }
 
 /* read */

@@ -4,13 +4,17 @@
   --p: 10px;
   --con-m-left: 6rem;
 
-  /* sry odd & even are opposite, may be i should have used 2n+1 instead 2n-1 
-    dont know why, bcz 2n+1 is also same*/
+  /* odd & even are properly set */
+  --th-clr: rgb(172, 172, 172);
+  --odd-row-clr: rgb(214, 214, 214);
+  --even-row-clr: rgb(196, 196, 196);
 
-  /* dark mode */
-  --th-clr: rgb(175, 175, 175);
-  --odd-row-clr: rgb(68, 68, 68);
-  --even-row-clr: rgb(86, 86, 86);
+  /* table light mode clr */
+  --v-th: var(--th-clr);
+  --v-tr-even: var(--even-row-clr);
+  --v-tr-odd: var(--odd-row-clr);
+
+  --th-text-clr: rgba(255, 255, 255, 1);
 }
 
 .container {
@@ -37,11 +41,54 @@ th {
   background-color: var(--th-clr);
 }
 
+body.dark-mode th {
+  background-color: rgba(92, 92, 92, 1);
+}
+
 tr:nth-child(2n - 1) {
-  background-color: var(--odd-row-clr);
+  background-color: var(--even-row-clr);
+}
+body.dark-mode tr:nth-child(2n - 1) {
+  background-color: rgba(54, 54, 54, 0.89);
 }
 tr:nth-child(2n) {
-  background-color: var(--even-row-clr);
+  background-color: var(--odd-row-clr);
+}
+body.dark-mode tr:nth-child(2n) {
+  background-color: rgb(0, 0, 0);
+}
+
+table tbody tr {
+  border-left: 1px solid rgba(172, 172, 172, 1) !important;
+  border-right: 1px solid rgba(172, 172, 172, 1) !important;
+}
+
+table tbody tr:first-child {
+  border-top: 1px solid rgba(172, 172, 172, 1) !important;
+}
+
+table tbody tr:last-child {
+  border-bottom: 1px solid rgba(172, 172, 172, 1) !important;
+}
+
+body.dark-mode table tbody tr {
+  border-left: 1px solid rgba(108, 108, 108, 0.9) !important;
+  border-right: 1px solid rgba(108, 108, 108, 0.9) !important;
+}
+
+body.dark-mode table tbody tr:first-child {
+  border-top: 1px solid rgba(108, 108, 108, 0.9) !important;
+}
+
+body.dark-mode table tbody tr:last-child {
+  border-bottom: 1px solid rgba(108, 108, 108, 0.9) !important;
+}
+
+table,
+tbody {
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px !important;
 }
 
 .data_box {

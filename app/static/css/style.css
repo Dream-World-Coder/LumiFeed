@@ -11,13 +11,6 @@
   --bg2: black;
   --clr2: rgb(221, 43, 79);
   --c2: #dd2b4f;
-
-  /* table light mode clr */
-  --v-th: rgb(172, 172, 172);
-  /* odd */
-  --v-tr-even: rgb(196, 196, 196);
-  /* even */
-  --v-tr-odd: rgb(214, 214, 214);
 }
 
 body {
