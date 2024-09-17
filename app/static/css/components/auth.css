@@ -471,7 +471,17 @@ label i svg {
   margin-left: 110px;
   margin-right: 20px;
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
 }
+
+/* .signin-image figure img {
+  max-width: 240px;
+  max-height: 240px;
+} */
 
 @media screen and (max-width: 1200px) {
   .container {
