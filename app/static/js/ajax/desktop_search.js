@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+
 // $(document).ready(function () {
 //   $("#search-form").submit((event) => {
 //     event.preventDefault();

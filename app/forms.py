@@ -1,22 +1,50 @@
+# forms.py
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms import RadioField, IntegerField, StringField, SubmitField
+from wtforms.validators import InputRequired, NumberRange, DataRequired
 
 
-class RegistrationForm(FlaskForm):
-    username = StringField(
-        "Username", validators=[DataRequired(), Length(min=2, max=20)]
+class NewsForm(FlaskForm):
+    news_type = RadioField(
+        "News Type",
+        choices=[
+            ("top_n", "Top News"),
+            ("india_n", "India News"),
+            ("city_n", "City News"),
+        ],
+        validators=[InputRequired()],
+        render_kw={"class": "border"},
     )
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    confirm_password = PasswordField(
-        "Confirm Password", validators=[DataRequired(), EqualTo("password")]
+
+    news_count = IntegerField(
+        "Num of News to Fetch",
+        validators=[InputRequired(), NumberRange(min=1, max=300)],
+        render_kw={
+            "aria-valuemax": "300",
+            "aria-valuemin": "1",
+            "aria-valuenow": "1",
+            "id": "news_count",
+            "min": "1",
+            "max": "300",
+        },
     )
-    submit = SubmitField("Sign Up")
+
+    city_choice = RadioField(
+        "City Choice",
+        choices=[
+            ("kolkata", "Kolkata"),
+            ("bangalore", "Bangalore"),
+            ("delhi", "Delhi"),
+            ("mumbai", "Mumbai"),
+            ("lucknow", "Lucknow"),
+        ],
+        render_kw={"class": "city_op flexed"},
+    )
+
+    submit = SubmitField("Fetch", render_kw={"class": "btn"})
+    reset = SubmitField("Reset", render_kw={"class": "btn", "type": "reset"})
 
 
-class LoginForm(FlaskForm):
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    remember = BooleanField("Remember Me")
-    submit = SubmitField("Login")
+class SearchForm(FlaskForm):
+    search_part = StringField("Search in News Titles", validators=[DataRequired()])
+    submit = SubmitField("Search")
