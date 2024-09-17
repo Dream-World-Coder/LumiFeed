@@ -1,9 +1,10 @@
 body.dark-mode,
 .dark-mode {
-  background-color: var(--bg2);
-  color: var(--bg1);
+  background-color: black;
+  color: aliceblue;
 }
-
+/* -------  general
+----------------------------------- */
 body.dark-mode::-webkit-scrollbar {
   background-color: rgb(33, 33, 33);
   color: aliceblue;
@@ -18,9 +19,14 @@ body.dark-mode input::placeholder {
   color: var(--dim-border);
 }
 
-/* table */
+body.dark-mode .btn:hover {
+  background-color: black !important;
+  color: whitesmoke !important;
+}
+
+/* -------  table
+----------------------------------- */
 :root {
-  --table-a-clr: rgb(255, 241, 108);
   --table-text-clr-dm: rgb(255, 255, 255);
   --rbtn-clr: var(--clr2);
 }
@@ -33,25 +39,37 @@ body.dark-mode table a {
   color: white;
 }
 
-body.dark-mode .rbtn {
-  background-color: var(--rbtn-clr);
-}
-
-/* 
-body.dark-mode .btn{
-    color: black !important;
-} */
-
-body.dark-mode .btn:hover {
-  background-color: black !important;
-  color: whitesmoke !important;
-  /* or use white */
-}
-
 body.dark-mode .fetch_news h2 {
   color: rgb(196, 196, 196);
 }
 
+body.dark-mode th {
+  background-color: rgba(92, 92, 92, 1);
+}
+
+body.dark-mode tr:nth-child(2n - 1) {
+  background-color: rgba(54, 54, 54, 0.89);
+}
+
+body.dark-mode tr:nth-child(2n) {
+  background-color: rgb(0, 0, 0);
+}
+
+body.dark-mode table tbody tr {
+  border-left: 1px solid rgba(108, 108, 108, 0.9) !important;
+  border-right: 1px solid rgba(108, 108, 108, 0.9) !important;
+}
+
+body.dark-mode table tbody tr:first-child {
+  border-top: 1px solid rgba(108, 108, 108, 0.9) !important;
+}
+
+body.dark-mode table tbody tr:last-child {
+  border-bottom: 1px solid rgba(108, 108, 108, 0.9) !important;
+}
+
+/* -------  about & contact
+----------------------------------- */
 body.dark-mode .about,
 body.dark-mode .contact {
   background-color: rgba(108, 108, 108, 0.5);
@@ -63,34 +81,31 @@ body.dark-mode .contact p {
   border: 1px solid rgba(68, 68, 68, 0.9);
 }
 
+body.dark-mode .about p strong {
+  color: var(--rbtn-clr);
+}
+body.dark-mode .contact p strong {
+  color: var(--rbtn-clr);
+}
+
 body.dark-mode .about h2,
 body.dark-mode .contact h2 {
   color: rgb(196, 196, 196);
 }
 
-/* read */
-:root {
-  --rbtn-clr2: rgb(221, 43, 79);
+body.dark-mode .con_icons img {
+  filter: invert(1);
 }
-body.dark-mode .read__container {
-  border: 3px solid var(--rbtn-clr2);
-  background-color: rgb(35, 35, 35);
+body.dark-mode .con_icons {
+  color: white;
 }
 
-body.dark-mode .read__navigations {
-  background-color: var(--rbtn-clr2);
-  border-bottom: 2px solid var(--rbtn-clr);
+/* -------  search
+----------------------------------- */
+body.dark-mode .find-mobile {
+  background-color: rgba(108, 108, 108, 0.5);
+  border: 1px solid rgba(108, 108, 108, 0.9);
 }
-
-body.dark-mode .read__page::-webkit-scrollbar {
-  background-color: rgb(47, 47, 47);
-}
-/* 
-body.dark-mode .res__serial{
-    background-color: var(--clr2);
-    color: black;
-} */
-
 body.dark-mode .find-mobile {
   color: white;
   background-color: rgba(108, 108, 108, 1);
@@ -106,4 +121,39 @@ body.dark-mode .srch input {
   background-color: rgba(255, 255, 255, 0.605) !important;
   border: 1px solid black !important;
   color: rgb(0, 0, 0) !important;
+}
+
+body.dark-mode .find-mobile.active .res {
+  background-color: rgba(171, 171, 171, 0.85);
+}
+body.dark-mode .find-mobile.active .res__num {
+  background-color: rgba(171, 171, 171, 0.85);
+}
+
+/* -------  read
+----------------------------------- */
+:root {
+  --rbtn-clr2: rgb(221, 43, 79);
+}
+
+body.dark-mode .rbtn {
+  background-color: var(--rbtn-clr);
+}
+
+body.dark-mode .read__container {
+  border: 1px solid rgba(108, 108, 108, 0.9);
+  background-color: rgb(35, 35, 35);
+}
+
+body.dark-mode .read__navigations {
+  background-color: rgba(108, 108, 108, 0.5);
+  border-bottom: 2px solid rgba(108, 108, 108, 0.9);
+}
+
+body.dark-mode .read__page::-webkit-scrollbar {
+  background-color: rgb(102, 102, 102);
+}
+
+body.dark-mode .read__page img {
+  border: 1px solid rgba(108, 108, 108, 0.9);
 }

@@ -333,10 +333,11 @@ label {
   bottom: 0;
   left: 0;
   width: 0px;
-  height: 2px;
+  height: 100%;
   transition: all 0.3s;
   z-index: 200;
   transform-origin: right;
+  mix-blend-mode: difference;
 }
 
 .animated-underline::before {

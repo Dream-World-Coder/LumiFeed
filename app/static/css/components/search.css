@@ -40,8 +40,6 @@
   --cx: var(--c4);
 }
 
-/* search and result */
-
 .find {
   position: fixed;
   top: calc(var(--t) - 22rem);
@@ -54,32 +52,6 @@
   top: calc(var(--t) - 26rem);
 }
 
-input {
-  width: calc(var(--w) - 60px) !important;
-  display: inline !important;
-}
-
-.btn {
-  font-family: poppins, "Times New Roman", Times, serif !important;
-  /* font-size: 1rem !important; */
-  background-color: var(--clr2) !important;
-  border: calc(1px) solid var(--clr2) !important;
-  color: white !important;
-}
-
-.btn:hover {
-  background-color: var(--bg1) !important;
-  color: var(--clr2) !important;
-  transition: all 0.3s;
-  border: calc(1px) solid var(--clr2) !important;
-}
-
-#search {
-  background-color: transparent;
-  border-color: var(--v-th) !important;
-  border-radius: 20px !important;
-}
-
 #search-form,
 #search,
 #submit {
@@ -90,7 +62,6 @@ input {
   display: flex;
 }
 
-/* s-icon */
 .search-icon {
   width: var(--icon-width);
   height: var(--icon-height);
@@ -106,7 +77,6 @@ input {
   transition: all 0.3s;
 }
 
-/* search results */
 .search-reasults {
   display: flex;
   border-radius: var(--b-rad);
@@ -156,11 +126,6 @@ input {
   padding-bottom: 5px;
 }
 
-/* .res__unlink {
-  font-size: 0;
-  opacity: 0;
-} */
-
 .find-mobile {
   position: fixed;
   bottom: 0;
@@ -183,24 +148,23 @@ input {
 }
 
 .srch {
-  /* border: 1px solid; */
   margin-top: 20px;
   margin-bottom: 40px;
   width: 100%;
   height: fit-content;
 }
-/* btnn */
+
 #sub-srch {
   width: 70px !important;
   height: 35px !important;
   font-size: 0.8rem !important;
   margin-right: 10px;
-}
 
-#sub-srch:hover {
-  background-color: var(--cx) !important;
-  color: rgb(255, 255, 255) !important;
-  transition: all 0.3s;
+  &:hover {
+    background-color: var(--cx) !important;
+    color: rgb(255, 255, 255) !important;
+    transition: all 0.3s;
+  }
 }
 
 .srch input {
@@ -211,8 +175,6 @@ input {
 }
 
 .resa {
-  /* border: 1px solid; */
-  /* min-height: calc(68vh - 100px); */
   margin-left: 10px;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -222,18 +184,10 @@ input {
   width: 0;
 }
 
-body.dark-mode .find-mobile.active .res {
-  background-color: rgba(171, 171, 171, 0.85);
-}
-body.dark-mode .find-mobile.active .res__num {
-  background-color: rgba(171, 171, 171, 0.85);
-}
-
 @media (min-width: 300px) and (max-width: 1380px) {
   .find {
     display: none;
   }
-
   .find-mobile {
     height: 0%;
     opacity: 0;
@@ -244,11 +198,8 @@ body.dark-mode .find-mobile.active .res__num {
     transition: all 0.3s;
   }
 }
-/* 
-@media (min-width: 769px) and (max-width: 1024px) {
-} */
 
-@media (min-width: 1381px) and (max-width: 4440px) {
+@media (min-width: 1381px) and (max-width: 5440px) {
   .find-mobile {
     display: none;
   }

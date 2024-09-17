@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- To fix : URLs, remove error info from ajax -->
-<head>
+  <!-- To fix : URLs, remove error info from ajax -->
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Title -->
     <title>LumiFeed - Ad Free News, Summaries, and Key Points</title>
     <!-- Meta Description -->
-    <meta name="description" content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX.">
+    <meta
+      name="description"
+      content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+    />
     <!-- Meta Keywords -->
-    <meta name="keywords" content="LumiFeed, ad free news, news summary, key points, Kolkata news, Indian news, summaries">
+    <meta name="keywords" content="LumiFeed, ad free news, news summary, key points, Kolkata news, Indian news, summaries" />
     <!-- Author -->
-    <meta name="author" content="Subhajit Gorai">
+    <meta name="author" content="Subhajit Gorai" />
     <!-- Linking CSS -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/components/fonts.css')}}" />
@@ -28,343 +30,376 @@
     <!-- Linking Favicon -->
     <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}" type="image/x-icon" />
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
 
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="LumiFeed - Ad Free News, Summaries, and Key Points">
-    <meta property="og:description" content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX.">
-    <meta property="og:image" content="{{url_for('static', filename='images/social-preview.png')}}">
-    <meta property="og:url" content="https://yourwebsite.com">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="LumiFeed">
+    <meta property="og:title" content="LumiFeed - Ad Free News, Summaries, and Key Points" />
+    <meta
+      property="og:description"
+      content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+    />
+    <meta property="og:image" content="{{url_for('static', filename='images/social-preview.png')}}" />
+    <meta property="og:url" content="https://yourwebsite.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LumiFeed" />
 
     <!-- Twitter Card Metadata -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="LumiFeed - Ad Free News, Summaries, and Key Points">
-    <meta name="twitter:description" content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX.">
-    <meta name="twitter:image" content="{{url_for('static', filename='images/social-preview.png')}}">
-    <meta name="twitter:site" content="@yourtwitterhandle">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LumiFeed - Ad Free News, Summaries, and Key Points" />
+    <meta
+      name="twitter:description"
+      content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+    />
+    <meta name="twitter:image" content="{{url_for('static', filename='images/social-preview.png')}}" />
+    <meta name="twitter:site" content="@yourtwitterhandle" />
 
     <!-- Robots Metadata -->
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow" />
 
     <!-- Theme Color for Mobile Browsers -->
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#ffffff" />
 
     <!-- Scripts for SEO -->
     <!-- Schema.org markup for Google -->
     <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "NewsArticle",
-            "headline": "LumiFeed - Ad Free News, Summaries, and Key Points",
-            "image": [
-                "https://yourwebsite.com/static/images/social-preview.png"
-            ],
-            "datePublished": "2024-07-15",
-            "dateModified": "2024-07-15",
-            "author": {
-                "@type": "Person",
-                "name": "Subhajit Gorai"
-            },
-            "publisher": {
-                "@type": "Organization",
-                "name": "LumiFeed",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://yourwebsite.com/static/images/logo.png"
-                }
-            },
-            "description": "LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
-        }
+      {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": "LumiFeed - Ad Free News, Summaries, and Key Points",
+        "image": ["https://yourwebsite.com/static/images/social-preview.png"],
+        "datePublished": "2024-07-15",
+        "dateModified": "2024-07-15",
+        "author": {
+          "@type": "Person",
+          "name": "Subhajit Gorai"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LumiFeed",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://yourwebsite.com/static/images/logo.png"
+          }
+        },
+        "description": "LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+      }
     </script>
 
     <!-- css for loader -->
     <style>
-        .loader-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+      .loader-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      .loader {
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
-          
-        .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
+        100% {
+          transform: rotate(360deg);
         }
-          
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <div id="loader" class="loader-container" style="display: none;">
-        <div class="loader"></div>
+  <body>
+    <div id="loader" class="loader-container" style="display: none">
+      <div class="loader"></div>
     </div>
-      
+
     <header class="fixed dark-glass" itemscope itemtype="https://schema.org/WPHeader">
-        <div class="header_wrapper full flex align-center">
-            <!-- logo -->
-            <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-                <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="LumiFeed Logo" itemprop="logo" />
-                <span id="logo-text" itemprop="name">LumiFeed</span>
-            </div>
-
-            <!-- nav -->
-            <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
-                <div class="ul relative flexed justify-evenly">
-                    <div class="li li1">
-                        <a class="f0 flexed" href="#table-end" rel="noopener">
-                            <img id="eee" src="{{url_for('static', filename='icons/dd1.svg')}}" alt="" />
-                            End of Table
-                        </a>
-                    </div>
-                    <div class="li li2">
-                        <a class="f0 flexed" href="#table-start" rel="noopener">
-                            <img id="uuu" src="{{url_for('static', filename='icons/dd2.svg')}}" alt="" />
-                            Start of Table
-                        </a>
-                    </div>
-                    <div class="li li5">
-                        <form id="login-form" action="/login" method="POST">
-                            {# <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /> #}
-                            <button type="submit" class="flexed" rel="noopener">Login</button>
-                        </form>
-                    </div>
-                    <div class="li li3 animated-underline-white">
-                        <a href="#about" class="flexed" rel="noopener">About</a>
-                    </div>
-                    <div class="li li4 animated-underline-white">
-                        <a href="#contact" class="flexed" rel="noopener">Contact</a>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- search for mobile -->
-            <div class="mobile_search">
-                <img src="{{url_for('static', filename='icons/search3.svg')}}" alt="search button">
-            </div>
-
-            <!-- buttons -->
-            <div class="buttons">
-                <!-- dark mode -->
-                <div class="dark_mode dmbtn">
-                    <span id="dm">
-                        <img src="{{url_for('static', filename='icons/dm2.svg')}}" alt="dark mode button" />
-                    </span>
-                </div>
-                <div class="bigger-font">
-                    <span id="big_f">
-                        <img src="{{url_for('static', filename='icons/bigger.svg')}}" alt="bigger fonts button" />
-                    </span>
-                </div>
-            </div>
-
-            <div class="mobile-nav flexed">
-                <img src="{{url_for('static', filename='icons/ham.svg')}}" alt="navigation button for mobiles">
-            <div>
+      <div class="header-wrapper full flex align-center">
+        <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+          <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="LumiFeed Logo" itemprop="logo" />
+          <span id="logo-text" itemprop="name">LumiFeed</span>
         </div>
+
+        <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
+          <div class="ul relative flexed justify-evenly">
+            <div class="li li1">
+              <a class="f0 flexed" href="#table-end" rel="noopener">
+                <img id="eee" src="{{url_for('static', filename='icons/dd1.svg')}}" alt="" />
+                End of Table
+              </a>
+            </div>
+            <div class="li li2">
+              <a class="f0 flexed" href="#table-start" rel="noopener">
+                <img id="uuu" src="{{url_for('static', filename='icons/dd2.svg')}}" alt="" />
+                Start of Table
+              </a>
+            </div>
+            <div class="li li5">
+              <form id="login-form" action="/login" method="POST">
+                {#
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                #}
+                <button type="submit" class="flexed" rel="noopener">Login</button>
+              </form>
+            </div>
+            <div class="li li3 animated-underline-white">
+              <a href="#about" class="flexed" rel="noopener">About</a>
+            </div>
+            <div class="li li4 animated-underline-white">
+              <a href="#contact" class="flexed" rel="noopener">Contact</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="mobile-search-btn">
+          <img src="{{url_for('static', filename='icons/search3.svg')}}" alt="search button" />
+        </div>
+
+        <div class="buttons">
+          <div class="dark-mode-btn dmbtn">
+            <span id="dm">
+              <img src="{{url_for('static', filename='icons/dm2.svg')}}" alt="dark mode button" />
+            </span>
+          </div>
+          <div class="bigger-font-btn">
+            <span id="big_f">
+              <img src="{{url_for('static', filename='icons/bigger.svg')}}" alt="bigger fonts button" />
+            </span>
+          </div>
+        </div>
+      </div>
     </header>
 
     <!--find news type, fetch_news -->
     <div itemscope itemprop="inputOfData" class="fetch_news borderX" id="table-start">
-        <form id="fetch-news-form" onsubmit="fetchNews(event)">
-            {# <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /> #}
-            <h2>Select News Category</h2>
-            <div class="options flex-col align-start">
-                <div class="op op1 flex align-center">
-                    <input class="border" type="radio" name="news_type" value="top_n" id="top_news" required />
-                    <label for="top_news">Top News</label>
-                </div>
-                <div class="op op2 flex align-center">
-                    <input class="border" type="radio" name="news_type" value="india_n" id="india_news" required />
-                    <label for="india_news">India News</label>
-                </div>
-                <div id="cyt" class="op op3 flex align-center">
-                    <input class="border" type="radio" name="news_type" value="city_n" id="city_news" required />
-                    {% set cities = ['Kolkata', 'Bangalore', 'Delhi', 'Mumbai', 'Lucknow'] %}
-                    <label for="city_news">City News {{ cities }}</label>
-                </div>
-                <br />
-                <div class="opp">
-                    <label id="lb" for="news_count">Enter Num of News to Fetch:</label>
-                    <input aria-valuemax="150" aria-valuemin="1" aria-valuenow="1" type="number" name="news_count" id="news_count" min="1" max="150" required />
-                </div>
+      <form id="fetch-news-form" onsubmit="fetchNews(event)">
+        {#
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        #}
+        <h2>Select News Category</h2>
+        <div class="options flex-col align-start">
+          <div class="op op1 flex align-center">
+            <input class="border" type="radio" name="news_type" value="top_n" id="top_news" required />
+            <label for="top_news">Top News</label>
+          </div>
+          <div class="op op2 flex align-center">
+            <input class="border" type="radio" name="news_type" value="india_n" id="india_news" required />
+            <label for="india_news">India News</label>
+          </div>
+          <div id="cyt" class="op op3 flex align-center">
+            <input class="border" type="radio" name="news_type" value="city_n" id="city_news" required />
+            {% set cities = ['Kolkata', 'Bangalore', 'Delhi', 'Mumbai', 'Lucknow'] %}
+            <label for="city_news">City News {{ cities }}</label>
+          </div>
 
-                <div class="city-option flexed" id="c-o">
-                    <span id="sps" class="block op">Choose city:</span>
-                    <div id="cpc" class="op f-gap-2">
-                        {% for city in cities %}
-                        <div class="city_op flexed">
-                            <input type="radio" name="city_choice" value="{{ city.lower() }}" id="{{ city }}">
-                            <label for="{{ city }}">{{ city }}</label>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <br />
-                <div class="btns flex f-gap-2">
-                    <button class="btn" type="submit">Fetch</button>
-                    <button class="btn" type="reset">Reset</button>
-                </div>
+          <br />
+
+          <div class="opp">
+            <label id="lb" for="news_count">Enter Num of News to Fetch:</label>
+            <input aria-valuemax="300" aria-valuemin="1" aria-valuenow="1" type="number" name="news_count" id="news_count" min="1" max="300" required />
+          </div>
+
+          <div class="city-option flexed" id="c-o">
+            <span id="sps" class="block op">Choose city:</span>
+            <div id="cpc" class="op f-gap-2">
+              {% for city in cities %}
+              <div class="city_op flexed">
+                <input type="radio" name="city_choice" value="{{ city.lower() }}" id="{{ city }}" />
+                <label for="{{ city }}">{{ city }}</label>
+              </div>
+              {% endfor %}
             </div>
-        </form>
+          </div>
+
+          <br />
+
+          <div class="btns flex f-gap-2">
+            <button class="btn" type="submit">Fetch</button>
+            <button class="btn" type="reset">Reset</button>
+          </div>
+        </div>
+      </form>
     </div>
 
     <main role="main" itemscope itemtype="https://schema.org/WebPage" itemprop="mainContentOfPage">
-        <div class="container">
-            <!-- table -->
-            <table id="news-table" itemscope itemtype="https://schema.org/Table" class="">
-                <meta itemprop="tableOfNews" content="Table of News">
-                {% block table %}
-                {% endblock %}
-            </table>
-            <div class="read flexed" id="read">
-                <div class="read__container full flex-col">
-                    <div class="read__navigations flex align-center f-gap-2">
-                        <span id="read__preview">PREVIEW</span>
-                        <div class="read__icons ri1" id="open-in-new-tab">
-                            <img src="{{url_for('static', filename='icons/open1.svg')}}" alt="open preview in new tab">
-                        </div>
-                        <div class="read__icons ri2" id="close-preview">
-                            <img src="{{url_for('static', filename='icons/cross1.svg')}}" alt="close preview">
-                        </div>
-                    </div>
-                    <div class="read__page bg-set" itemscope itemtype="https://schema.org/NewsArticle">
-                        <meta itemprop="NewsArticle" content="News Article">
-                        <br>
-                        <h1 id="ajax_h1" itemprop="headline"></h1>
-                        <br>
-                        <h3 id="ajax_h3" itemprop="description"></h3>
-                        <br>
-                        <img id="ajax_img" src="" alt="news article image" itemprop="image">
-                        <br>
-                        <br>
-                        <p id="ajax_p" itemprop="articleBody"></p>
-                    </div>
-                </div>
+      <div class="container">
+        <!-- table -->
+        <table id="news-table" itemscope itemtype="https://schema.org/Table" class="">
+          <meta itemprop="tableOfNews" content="Table of News" />
+          {% block table %} {% endblock %}
+        </table>
+        <div class="read flexed" id="read">
+          <div class="read__container full flex-col">
+            <div class="read__navigations flex align-center f-gap-2">
+              <span id="read__preview">PREVIEW</span>
+              <div class="read__icons ri1" id="open-in-new-tab">
+                <img src="{{url_for('static', filename='icons/open1.svg')}}" alt="open preview in new tab" />
+              </div>
+              <div class="read__icons ri2" id="close-preview">
+                <img src="{{url_for('static', filename='icons/cross1.svg')}}" alt="close preview" />
+              </div>
             </div>
+            <div class="read__page bg-set" itemscope itemtype="https://schema.org/NewsArticle">
+              <meta itemprop="NewsArticle" content="News Article" />
+              <br />
+              <h1 id="ajax_h1" itemprop="headline"></h1>
+              <br />
+              <h3 id="ajax_h3" itemprop="description"></h3>
+              <br />
+              <img id="ajax_img" src="" alt="news article image" itemprop="image" />
+              <br />
+              <br />
+              <p id="ajax_p" itemprop="articleBody"></p>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
 
     <!-- search + result -->
     <div itemscope itemtype="https://schema.org/SearchResultsPage" id="queryy" class="find fixed borderX flex-col f-gap-2">
-        <!-- search query -->
-        <div class="search-bar borderX relative flex justify-between align-center">
-            <form id="search-form" class="relative full flex justify-between align-center" action="/search_in_title" method="post" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
-                {# <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /> #}
-                <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title?search_part={search_term_string}">
-                <input type="text" name="search_part" id="search" placeholder="Search in News Titles" required itemprop="query-input">
-                <button class="search-icon bg-set" type="submit" name="submit" id="submit">
-                    Search
-                </button>
-            </form>
-        </div>
+      <!-- search query -->
+      <div class="search-bar borderX relative flex justify-between align-center">
+        <form
+          id="search-form"
+          class="relative full flex justify-between align-center"
+          action="/search_in_title"
+          method="post"
+          itemprop="potentialAction"
+          itemscope
+          itemtype="https://schema.org/SearchAction"
+        >
+          {#
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          #}
+          <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title?search_part={search_term_string}" />
+          <input type="text" name="search_part" id="search" placeholder="Search in News Titles" required itemprop="query-input" />
+          <button class="search-icon bg-set" type="submit" name="submit" id="submit">Search</button>
+        </form>
+      </div>
 
-        <!-- search results -->
-        <div class="search-reasults relative flex-col f-gap-1">
-            <div id="ajax_desktop" class="res__container full" itemprop="mainContentOfPage">
-            </div>
-        </div>
+      <!-- search results -->
+      <div class="search-reasults relative flex-col f-gap-1">
+        <div id="ajax_desktop" class="res__container full" itemprop="mainContentOfPage"></div>
+      </div>
     </div>
 
     <!--  for mobiles -->
     <div itemscope itemtype="https://schema.org/SearchResultsPage" class="find-mobile flex-col align-center">
-        <div class="horizontal-bar">
-        </div>
+      <div class="horizontal-bar"></div>
 
-        <div class="srch flexed justify-between">
-            <!-- form -->
-            <form id="phone-search-form" class="relative full flex justify-between align-center" action="/search_in_title" method="post" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
-                <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title_phone?search_part={search_term_string}">
-                <input type="text" name="search_part" id="phone-search-input" placeholder="Search in News Titles" required itemprop="query-input">
-                <button class="btn" type="submit" name="submit" id="sub-srch">
-                    Search
-                </button>
-            </form>
-        </div>
+      <div class="srch flexed justify-between">
+        <!-- form -->
+        <form
+          id="phone-search-form"
+          class="relative full flex justify-between align-center"
+          action="/search_in_title"
+          method="post"
+          itemprop="potentialAction"
+          itemscope
+          itemtype="https://schema.org/SearchAction"
+        >
+          <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title_phone?search_part={search_term_string}" />
+          <input type="text" name="search_part" id="phone-search-input" placeholder="Search in News Titles" required itemprop="query-input" />
+          <button class="btn" type="submit" name="submit" id="sub-srch">Search</button>
+        </form>
+      </div>
 
-        <div class="resa relative flex-col f-gap-1">
-            <div id="ajax" class="res__container full" itemprop="mainContentOfPage">
-            </div>
-        </div>
+      <div class="resa relative flex-col f-gap-1">
+        <div id="ajax" class="res__container full" itemprop="mainContentOfPage"></div>
+      </div>
     </div>
 
     <!-- about + contact -->
     <div class="about-hanger" id="about"></div>
     <div role="aboutInformation" itemscope itemtype="https://schema.org/AboutPage" class="about">
-        <h2>About</h2>
-        <p>
-            Welcome to <strong>Lumifeed</strong>, your go-to source for the latest news from India and all around the globe.
-            This website curates news from the IndianExpress, without violating their terms and conditions, and provides a <strong>seamless reading experience free from advertisements and mess.</strong>
-            Each news article includes a <strong>high quality summary</strong> generated using advanced AI, allowing you to <strong>quickly grasp the key points.</strong>
-            For a deeper dive, links to the full articles on the Indian Express website are also provided.
-            <strong>Enjoy staying informed without the distractions.</strong>Mention: 
-            <a target="_blank" href="https://icons8.com/icon/2CHAe9tWR9IY/news">News</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-            <br><br>
-            Thanks for visiting, stay safe!
-        </p>
-        <div class="contact-hanger" id="contact"></div>
+      <h2>About</h2>
+      <p>
+        Welcome to
+        <strong>Lumifeed</strong>
+        , your go-to source for the latest news from India and all around the globe. This website curates news from the IndianExpress, without violating their terms and conditions, and provides a
+        <strong>seamless reading experience free from advertisements and mess.</strong>
+        Each news article includes a
+        <strong>high quality summary</strong>
+        generated using advanced AI, allowing you to
+        <strong>quickly grasp the key points.</strong>
+        For a deeper dive, links to the full articles on the Indian Express website are also provided.
+        <strong>Enjoy staying informed without the distractions.</strong>
+        <br />
+        favicon taken from:
+        <a target="_blank" href="https://icons8.com/icon/2CHAe9tWR9IY/news">News</a>
+        icon by
+        <a target="_blank" href="https://icons8.com">Icons8</a>
+        <br />
+        <br />
+        Thanks for visiting, stay safe!
+      </p>
+      <div class="contact-hanger" id="contact"></div>
     </div>
     <div role="contactInformation" itemscope itemtype="https://schema.org/ContactPage" class="contact">
-        <h2>Contact</h2>
-        <p>
-            <em itemprop="Author" itemscope itemtype="https://schema.org/Author" name="Subhajit Gorai">
-                Subhajit Gorai
-            </em>
-            <br>
-            Information Technology Student, Sophomore, IIEST Shibpur<br>
-            Age: 18 Years<br><br>
+      <h2>Contact</h2>
+      <p>
+        <em itemprop="Author" itemscope itemtype="https://schema.org/Author" name="Subhajit Gorai">Subhajit Gorai</em>
+        <br />
+        Information Technology Student, Sophomore, IIEST Shibpur
+        <br />
+        Age: 18 Years
+        <br />
+        <br />
 
-            I'm always excited to connect with fellow tech enthusiasts and news readers.
-            Feel free to reach out to me through any of the following platforms:<br><br>
+        I'm always excited to connect with fellow tech enthusiasts and news readers. Feel free to reach out to me through any of the following platforms:
+        <br />
+        <br />
 
-            <a rel="noopener" target="_blank" href="https://github.com/Dream-World-Coder/LumiFeed" class="con_icons con_icons1 bg-set flexed justify-start f-gap-2">
-                <img src="static/icons/g1.svg" alt="GitHub Profile" width="32px" height="32px" itemprop="url">
-                <span itemprop="name">You can Contribute, It's open source.</span>
-            </a>
-            <br>
-            <a rel="noopener" target="_blank" href="https://www.linkedin.com/in/subhajit-gorai-376874283" class="con_icons con_icons2 bg-set flexed justify-start f-gap-2">
-                <img src="static/icons/ln1.svg" alt="LinkedIn Profile" width="32px" height="32px" itemprop="url">
-                <span itemprop="name">LinkedIn</span>
-            </a>
-            <br>
-            <a rel="noopener" target="_blank" href="https://subhajit.pages.dev" class="con_icons con_icons3 bg-set flexed justify-start f-gap-2">
-                <img src="static/icons/w2.svg" alt="Portfolio" width="32px" height="32px" itemprop="url">
-                <span itemprop="name">My Portfolio website</span>
-            </a>
-            <br>
-            <a id="e-mail" class="con_icons con_icons4 bg-set flexed justify-start f-gap-2" href="mailto:goraisubhajit53@gmail.com">
-                <img src="static/icons/e1.svg" alt="Email" width="32px" height="32px">
-                <span itemprop="email">My Email</span>
-            </a>
-            <br><br>
+        <a rel="noopener" target="_blank" href="https://github.com/Dream-World-Coder/LumiFeed" class="con_icons con_icons1 bg-set flexed justify-start f-gap-2">
+          <img src="static/icons/g1.svg" alt="GitHub Profile" width="32px" height="32px" itemprop="url" />
+          <span itemprop="name">You can Contribute, It's open source.</span>
+        </a>
+        <br />
+        <a rel="noopener" target="_blank" href="https://www.linkedin.com/in/subhajit-gorai-376874283" class="con_icons con_icons2 bg-set flexed justify-start f-gap-2">
+          <img src="static/icons/ln1.svg" alt="LinkedIn Profile" width="32px" height="32px" itemprop="url" />
+          <span itemprop="name">LinkedIn</span>
+        </a>
+        <br />
+        <a rel="noopener" target="_blank" href="https://subhajit.pages.dev" class="con_icons con_icons3 bg-set flexed justify-start f-gap-2">
+          <img src="static/icons/w2.svg" alt="Portfolio" width="32px" height="32px" itemprop="url" />
+          <span itemprop="name">My Portfolio website</span>
+        </a>
+        <br />
+        <a id="e-mail" class="con_icons con_icons4 bg-set flexed justify-start f-gap-2" href="mailto:goraisubhajit53@gmail.com">
+          <img src="static/icons/e1.svg" alt="Email" width="32px" height="32px" />
+          <span itemprop="email">My Email</span>
+        </a>
+        <br />
+        <br />
 
-            Your <strong>feedback and suggestions are always welcome</strong>. Don't be shy to reach out!<br>
-        </p>
+        Your
+        <strong>feedback and suggestions are always welcome</strong>
+        . Don't be shy to reach out!
+        <br />
+      </p>
     </div>
 
     <footer role="footer" itemscope itemtype="https://schema.org/WPFooter">
-        <div class="sp" id="table-end"></div>
-        <div class="cen cc">
-            © 2024 Subhajit Gorai. All rights reserved.
-            <meta name="copyright" content="Subhajit Gorai">
-        </div>
+      <div class="sp" id="table-end"></div>
+      <div class="cen cc">
+        © 2024 Subhajit Gorai. All rights reserved.
+        <meta name="copyright" content="Subhajit Gorai" />
+      </div>
     </footer>
 
     <!-- scripts -->
@@ -378,18 +413,17 @@
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/bigger_font.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/city_options_toggle.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
-    <!-- <script type="text/javascript" src="{{url_for('static', filename='js/functions/read.js')}}"></script> -->
     <script>
       const read = document.getElementById("read");
       const closeBtn = document.getElementById("close-preview");
       const openInNewTabBtn = document.getElementById("open-in-new-tab");
       closeBtn.addEventListener("click", () => {
-          read.style.display = "none";
+        read.style.display = "none";
       });
       openInNewTabBtn.addEventListener("click", () => {
-          setTimeout(() => {
-            read.style.display = "none";
-          }, 500);
+        setTimeout(() => {
+          read.style.display = "none";
+        }, 500);
       });
     </script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/search.js')}}"></script>
@@ -405,5 +439,5 @@
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/find_article.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/desktop_search.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/mobile_search.js')}}"></script>
-</body>
+  </body>
 </html>

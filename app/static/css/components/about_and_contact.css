@@ -13,8 +13,8 @@
   font-weight: 400;
   width: 65%;
   border-radius: calc(var(--pad) - 5px);
-  border: 1px solid var(--c3);
-  background-color: var(--c4);
+  border: 1px solid rgb(202, 202, 202);
+  background-color: rgb(244, 244, 244);
 }
 
 .about h2,
@@ -32,8 +32,8 @@
   font-style: bold;
   font-size: 1rem;
   border-radius: calc(var(--pad) - 5px);
-  border: 1px solid var(--c3);
-  background-color: var(--bg1-val);
+  border: 1px solid rgb(202, 202, 202);
+  background-color: rgb(251, 251, 251);
   padding: 10px;
 }
 
@@ -61,7 +61,6 @@
   height: 32px;
   color: black;
   padding-left: 40px;
-  /* border: 1px solid; */
 }
 
 .con_icons3 img {
@@ -69,33 +68,13 @@
   border-radius: 50%;
 }
 
-body.dark-mode .con_icons img {
-  filter: invert(1);
-}
-body.dark-mode .con_icons {
-  color: white;
-}
-
-be {
-  position: relative;
-  display: block;
-  height: 1rem;
-  width: 100%;
-}
-
 .contact p strong {
   color: var(--bgx);
 }
+
 .about p strong {
   font-weight: 800;
   color: var(--bgx);
-}
-
-body.dark-mode .about p strong {
-  color: var(--rbtn-clr);
-}
-body.dark-mode .contact p strong {
-  color: var(--rbtn-clr);
 }
 
 @media (min-width: 300px) and (max-width: 767px) {
@@ -161,4 +140,11 @@ body.dark-mode .contact p strong {
     height: 10rem;
     font-size: auto;
   }
+}
+
+be {
+  position: relative;
+  display: block;
+  height: 1rem;
+  width: 100%;
 }

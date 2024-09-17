@@ -2,7 +2,6 @@
   --nav-width: 280px;
 }
 
-/* nav */
 nav {
   position: relative;
   height: 100%;
@@ -19,50 +18,19 @@ nav {
   z-index: 102;
 }
 
-.li3 a,
-.li4 a,
-.li5 form button {
-  font-size: 1.15rem;
-  color: var(--clr2);
-  text-decoration: none;
-  font-family: poppins, Arial, Helvetica, sans-serif;
-}
-.li5 form button {
-  border: 1px solid var(--clr2);
-  border-radius: 5px;
-  transform: translateY(0px);
-  background-color: #dd2b4f31;
-  transition: all 0.3s;
-  padding: 3px;
-  font-size: smaller;
-}
-.li5 form button:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 0px 2px 0px rgba(221, 43, 79, 0.3),
-    0 0px 0px 4px rgba(221, 43, 79, 0.3);
-  transition: all 0.3s;
-}
-
 .li1,
 .li2 {
-  transition: all 0.3s;
   border-radius: 15px;
+  transition: all 0.3s;
 }
 
 .li1:hover,
 .li2:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0px 2px 0px rgba(221, 43, 79, 0.3),
-    0 0px 0px 4px rgba(221, 43, 79, 0.3);
+  box-shadow: 0 0px 2px 0px rgba(221, 43, 79, 0.3), 0 0px 0px 4px rgba(221, 43, 79, 0.3);
   transition: all 0.3s;
 }
 
-.mobile-nav,
-.mobile-nav img {
-  display: none;
-  width: 0;
-}
 nav .ul .li1,
 nav .ul .li2 {
   position: fixed;
@@ -76,7 +44,35 @@ nav .ul .li1 {
 nav .ul .li2 {
   right: 330px;
 }
-@media (max-width: 1240px) {
+
+.li3 a,
+.li4 a,
+.li5 form button {
+  font-size: 1.15rem;
+  color: var(--clr2);
+  text-decoration: none;
+  font-family: poppins, Arial, Helvetica, sans-serif;
+}
+
+.li5 form button {
+  border: 1px solid var(--clr2);
+  border-radius: 5px;
+  transform: translateY(0px);
+  background-color: #dd2b4f31;
+  transition: all 0.3s;
+  padding: 3px;
+  font-size: smaller;
+}
+
+.li5 form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0px 2px 0px rgba(221, 43, 79, 0.3), 0 0px 0px 4px rgba(221, 43, 79, 0.3);
+  transition: all 0.3s;
+}
+
+/* --- media queries ---
+------------------------------- */
+@media (max-width: 1024px) {
   nav,
   nav .ul .li3,
   nav .ul .li4 {
@@ -99,14 +95,4 @@ nav .ul .li2 {
   :root {
     --nav-width: 0px;
   }
-
-  .mobile-nav {
-    display: none;
-  }
-
-  .mobile-nav img {
-    display: none;
-  }
 }
-
-/* @media (min-width: 769px) and (max-width: 1024px) {} */

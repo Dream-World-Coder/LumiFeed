@@ -11,47 +11,41 @@ header {
   height: var(--header-height);
   width: 100%;
   padding: 5px;
-  background-color: rgba(31, 31, 31, 0.886) !important;
-  /* 886 --> 686 */
+  background-color: rgba(31, 31, 31, 0.9) !important;
   z-index: 100;
   border: none !important;
 }
 
-.header_wrapper {
+.header-wrapper {
   position: relative;
   width: calc(100% - var(--r) - 10px) !important;
   margin-left: 20px;
 }
 
-/*-----------------
- logo
+/*---- logo
 ----------------*/
 .logo {
   width: 40px;
   height: 40px;
   flex-grow: 1;
+
+  & img {
+    width: 40px;
+    height: 40px;
+    border-radius: 35%;
+    padding: 5px;
+    background-color: aliceblue;
+  }
+
+  #logo-text {
+    font-family: Dahlia;
+    margin-left: 10px;
+    font-size: 1.25rem;
+    color: aliceblue !important;
+  }
 }
 
-#logo-img {
-  background-color: aliceblue;
-}
-
-.logo img {
-  width: 40px;
-  height: 40px;
-  border-radius: 35%;
-  padding: 5px;
-}
-
-#logo-text {
-  font-family: Dahlia;
-  margin-left: 10px;
-  font-size: 1.25rem;
-  color: aliceblue !important;
-}
-
-/*-----------------
- buttons
+/*--- buttons
 ----------------*/
 .buttons {
   position: relative;
@@ -59,34 +53,36 @@ header {
   justify-content: flex-end;
   align-items: center;
   gap: 20px;
+
+  & .dark-mode-btn,
+  & .bigger-font-btn {
+    z-index: 150;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.3s;
+    }
+  }
+
+  & .dark-mode-btn span img {
+    --x1: 32px;
+    width: var(--x1);
+    height: var(--x1);
+  }
+
+  & .bigger-font-btn span img {
+    --x2: 26px;
+    width: var(--x2);
+    height: var(--x2);
+  }
 }
 
-.bigger-font,
-.dark_mode {
-  transition: all 0.3s;
-  z-index: 150;
-}
-
-.bigger-font:hover,
-.dark_mode:hover {
-  transform: scale(1.2);
-  transition: all 0.3s;
-}
-
-#big_f img {
-  --x1: 26px;
-  width: var(--x1);
-  height: var(--x1);
-}
-
-#dm img {
-  --x2: 32px;
-  width: var(--x2);
-  height: var(--x2);
-}
+/* -------- media queries
+------------------------------------------ */
 
 @media (min-width: 1025px) and (max-width: 2440px) {
-  .mobile_search {
+  .mobile-search-btn {
     display: none;
   }
 }
@@ -97,63 +93,62 @@ header {
     --fetch-news-height: 24rem;
     --fetch-news-m-top: calc(var(--header-height) + 20px);
     --r: 10px;
-    /* not working */
-    --icon-height: 30px;
-    --icon-width: 30px;
   }
 
-  .header_wrapper {
+  .header-wrapper {
     width: calc(100% - 10px) !important;
     margin-left: 5px;
   }
 
-  .logo,
-  .logo img {
+  .logo {
     width: 30px;
     height: 30px;
+
+    & img {
+      width: 30px;
+      height: 30px;
+    }
+
+    #logo-text {
+      margin-left: 5px;
+      font-size: 1.25rem;
+    }
   }
 
-  #logo-text {
-    margin-left: 5px;
-    font-size: 1.25rem;
+  .mobile-search-btn {
+    margin-right: 10px;
+    & img {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   .buttons {
     gap: 5px;
-  }
 
-  .dmbtn img {
-    width: 30px;
-    height: 30px;
-  }
+    & .dark-mode-btn,
+    & .bigger-font-btn {
+      &:hover {
+        transform: none;
+      }
+    }
 
-  #big_f img {
-    width: calc(30px - 5px);
-    height: calc(30px - 5px);
-  }
+    & .dark-mode-btn span img {
+      --x1: 28px;
+      width: var(--x1);
+      height: var(--x1);
+    }
 
-  .mobile_search {
-    margin-right: 10px;
+    & .bigger-font-btn span img {
+      --x2: 24px;
+      width: var(--x2);
+      height: var(--x2);
+    }
   }
-
-  .mobile_search img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .bigger-font:hover,
-  .dark_mode:hover {
-    transform: none;
-  }
-  /*
-      why not working ???????[in styles.css]
-      width: var(--icon-width);
-      height: var(--icon-height);
-    */
 }
 
 @media (max-width: 768px) {
-  #logo-text {
+  .logo #logo-text {
     font-size: 1rem;
   }
 }

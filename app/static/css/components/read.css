@@ -11,6 +11,7 @@
   background-color: var(--clr2);
   color: aliceblue;
   z-index: 70;
+  font-family: poppins, sans-serif;
 }
 
 #read {
@@ -28,17 +29,17 @@
 
 .read__container {
   position: relative;
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(251, 251, 251);
   border-radius: 25px;
-  border: 1px solid rgb(152, 152, 152);
+  border: 1px solid rgb(202, 202, 202);
 }
 
 .read__navigations {
   position: relative;
   height: 3.5rem;
-  background-color: rgb(102, 102, 102);
+  background-color: rgb(226, 226, 226);
   border-radius: 20px 20px 0 0;
-  border-bottom: 2px solid rgb(102, 102, 102);
+  border-bottom: 2px solid rgb(202, 202, 202);
   justify-content: flex-end;
   padding-right: 20px;
 }
@@ -74,7 +75,7 @@
   font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
 }
 .read__page img {
-  border: 1px solid rgb(102, 102, 102);
+  border: 1px solid rgb(202, 202, 202);
   width: min(100%, 500px);
   height: 300px;
   border-radius: 10px;

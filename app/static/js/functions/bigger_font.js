@@ -3,42 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // for phone and mac
   const applyFontSize = () => {
-    document.documentElement.style.setProperty(
-      "--th-font-size",
-      is_bigger === 1 ? "1.5rem" : "1rem"
-    );
-    document.documentElement.style.setProperty(
-      "--td-font-size",
-      is_bigger === 1 ? "1.25rem" : "1.0rem"
-    );
-    document.documentElement.style.setProperty(
-      "--p",
-      is_bigger === 1 ? "10px" : "10px"
-    );
-    document.documentElement.style.setProperty(
-      "--ajax-p-fs",
-      is_bigger === 1 ? "1.5rem" : "1rem"
-    );
+    document.documentElement.style.setProperty("--th-font-size", is_bigger === 1 ? "1.5rem" : "1rem");
+    document.documentElement.style.setProperty("--td-font-size", is_bigger === 1 ? "1.25rem" : "1.0rem");
+    document.documentElement.style.setProperty("--p", is_bigger === 1 ? "10px" : "10px");
+    document.documentElement.style.setProperty("--ajax-p-fs", is_bigger === 1 ? "1.5rem" : "1rem");
   };
 
   // for tablet
   const applyFontSize2 = () => {
-    document.documentElement.style.setProperty(
-      "--th-font-size",
-      is_bigger === 1 ? "1.5rem" : "1.25rem"
-    );
-    document.documentElement.style.setProperty(
-      "--td-font-size",
-      is_bigger === 1 ? "1.25rem" : "1.0rem"
-    );
+    document.documentElement.style.setProperty("--th-font-size", is_bigger === 1 ? "1.5rem" : "1.25rem");
+    document.documentElement.style.setProperty("--td-font-size", is_bigger === 1 ? "1.25rem" : "1.0rem");
     document.documentElement.style.setProperty("--p", "10px"); // Seems fixed for both states
-    document.documentElement.style.setProperty(
-      "--ajax-p-fs",
-      is_bigger === 1 ? "1.5rem" : "1rem"
-    );
+    document.documentElement.style.setProperty("--ajax-p-fs", is_bigger === 1 ? "1.5rem" : "1rem");
   };
 
-  const bigFont = document.querySelector(".bigger-font");
+  const bigFont = document.querySelector(".bigger-font-btn");
   if (bigFont) {
     bigFont.addEventListener("click", () => {
       is_bigger = is_bigger === 1 ? 0 : 1;

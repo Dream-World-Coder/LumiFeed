@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const mobile_search = document.querySelector(".mobile_search");
+  const mobile_search = document.querySelector(".mobile-search-btn");
   const findMobile = document.querySelector(".find-mobile");
   const bar = document.querySelector(".horizontal-bar");
   mobile_search.addEventListener("click", () => {

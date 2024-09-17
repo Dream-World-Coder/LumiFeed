@@ -5,18 +5,17 @@
 }
 
 :root {
-  /* --bg1: bisque; */
-  --bg1: white;
-  --bg1-val: rgb(221, 221, 221);
+  --bg1: rgb(221, 221, 221);
+  --bg1-val: var(--bg1);
   --bg2: black;
   --clr2: rgb(221, 43, 79);
   --c2: #dd2b4f;
 }
 
 body {
-  background-color: var(--bg1);
+  background-color: rgb(251, 251, 251);
   color: black;
-  font-family: poppins;
+  font-family: poppins, sans-serif;
 }
 
 a {
@@ -40,4 +39,30 @@ a {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+input {
+  width: calc(var(--w) - 60px) !important;
+  display: inline !important;
+  border-width: 1px !important;
+}
+#search {
+  background-color: transparent;
+  border-color: var(--v-th) !important;
+  border-radius: 20px !important;
+  border-width: 1px !important;
+}
+.btn {
+  font-family: poppins, "Times New Roman", Times, serif !important;
+  /* font-size: 1rem !important; */
+  background-color: var(--clr2) !important;
+  border: calc(1px) solid var(--clr2) !important;
+  color: white !important;
+
+  &:hover {
+    background-color: rgb(251, 251, 251) !important;
+    color: var(--clr2) !important;
+    transition: all 0.3s;
+    border: calc(1px) solid var(--clr2) !important;
+  }
 }
