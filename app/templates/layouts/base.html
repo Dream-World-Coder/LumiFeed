@@ -121,7 +121,7 @@
         <div class="header_wrapper full flex align-center">
             <!-- logo -->
             <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-                <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="Ad Free News Logo" itemprop="logo" />
+                <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="LumiFeed Logo" itemprop="logo" />
                 <span id="logo-text" itemprop="name">Ad Free News</span>
             </div>
 
@@ -139,6 +139,12 @@
                             <img id="uuu" src="{{url_for('static', filename='icons/dd2.svg')}}" alt="" />
                             Start of Table
                         </a>
+                    </div>
+                    <div class="li li5">
+                        <form id="login-form" action="/login" method="POST">
+                            {# <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /> #}
+                            <button type="submit" class="flexed" rel="noopener">Login</button>
+                        </form>
                     </div>
                     <div class="li li3 animated-underline-white">
                         <a href="#about" class="flexed" rel="noopener">About</a>
@@ -159,7 +165,7 @@
                 <!-- dark mode -->
                 <div class="dark_mode dmbtn">
                     <span id="dm">
-                        <img src="{{url_for('static', filename='icons/dm.svg')}}" alt="dark mode button" />
+                        <img src="{{url_for('static', filename='icons/dm2.svg')}}" alt="dark mode button" />
                     </span>
                 </div>
                 <div class="bigger-font">
@@ -178,6 +184,7 @@
     <!--find news type, fetch_news -->
     <div itemscope itemprop="inputOfData" class="fetch_news borderX" id="table-start">
         <form id="fetch-news-form" onsubmit="fetchNews(event)">
+            {# <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /> #}
             <h2>Select News Category</h2>
             <div class="options flex-col align-start">
                 <div class="op op1 flex align-center">
@@ -260,6 +267,7 @@
         <!-- search query -->
         <div class="search-bar borderX relative flex justify-between align-center">
             <form id="search-form" class="relative full flex justify-between align-center" action="/search_in_title" method="post" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+                {# <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" /> #}
                 <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title?search_part={search_term_string}">
                 <input type="text" name="search_part" id="search" placeholder="Search in News Titles" required itemprop="query-input">
                 <button class="search-icon bg-set" type="submit" name="submit" id="submit">

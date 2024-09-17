@@ -19,7 +19,7 @@ header {
 
 .header_wrapper {
   position: relative;
-  width: calc(100% - var(--r)) !important;
+  width: calc(100% - var(--r) - 10px) !important;
   margin-left: 20px;
 }
 
@@ -74,8 +74,15 @@ header {
 }
 
 #big_f img {
-  width: 30px;
-  height: 30px;
+  --x1: 26px;
+  width: var(--x1);
+  height: var(--x1);
+}
+
+#dm img {
+  --x2: 32px;
+  width: var(--x2);
+  height: var(--x2);
 }
 
 @media (min-width: 1025px) and (max-width: 2440px) {

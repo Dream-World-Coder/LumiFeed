@@ -99,4 +99,5 @@ templates/old-base.html
 .vscode/
 instance/
 app/templates/news/
+app/templates/designs/
 lumifeed.pdf

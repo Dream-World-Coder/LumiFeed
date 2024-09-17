@@ -1,67 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Title -->
     <title>LumiFeed - {% block title %}{% endblock %}</title>
-    <meta name="author" content="Subhajit Gorai">
+    <meta name="author" content="Subhajit Gorai" />
     <!-- Linking CSS -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename='css/components/fonts.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename='css/dark-mode.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename='css/components/header.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename='css/components/nav.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/auth.css')}}" />
     <!-- Linking Favicon -->
     <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}" type="image/x-icon" />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
-    <meta name="theme-color" content="#ffffff">
-</head>
+    <meta name="theme-color" content="#ffffff" />
+  </head>
 
-<body>
-    <header class="fixed dark-glass" itemscope itemtype="https://schema.org/WPHeader">
-        <div class="header_wrapper full flex align-center">
-            <!-- logo -->
-            <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-                <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="Ad Free News Logo" itemprop="logo" />
-                <span id="logo-text" itemprop="name">Ad Free News</span>
+  <body>
+    <div class="main">
+      <section class="sign-in">
+        <div class="container">
+          <div class="signin-content">
+            <div class="signin-image">
+              <!-- Image -->
+              {% block image %} {% endblock %}
+              <!-- Redirect Link -->
+              {% block redirect %} {% endblock %}
             </div>
 
-            <!-- nav -->
-            <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
-                <div class="ul relative flexed justify-evenly">
-                    <div class="li li1 animated-underline-white">
-                        <a href="#about" class="flexed" rel="noopener">About</a>
-                    </div>
-                    <div class="li li2 animated-underline-white">
-                        <a href="#contact" class="flexed" rel="noopener">Contact</a>
-                    </div>
+            <div class="signin-form">
+              <h2 class="form-title">{% block heading %}{% endblock %}</h2>
+              <form method="POST" class="register-form" id="login-form" action="{% block action %}{% endblock %}">
+                <div class="form-group">
+                  <label for="your_email">
+                    <i class="material-icons-name"></i>
+                      <svg width="64px" height="64px" viewBox="0 0 32 32" id="OBJECT" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #b2b2b2;
+                              }
+                            </style>
+                          </defs>
+                          <title></title>
+                          <rect class="cls-1" height="22" rx="3" ry="3" width="30" x="1" y="5"></rect>
+                          <path class="cls-1" d="M18.12,12.71a3,3,0,0,0-4.24,0L1.3,25.29A3,3,0,0,0,4,27H28a3,3,0,0,0,2.7-1.71Z"></path>
+                          <path d="M28,5H4A3,3,0,0,0,1.3,6.71L13.88,19.29a3,3,0,0,0,4.24,0L30.7,6.71A3,3,0,0,0,28,5Z"></path>
+                        </g>
+                      </svg>
+                    </i>
+                  </label>
+                  <input type="email" name="your_email" id="your_email" placeholder="Your email" />
                 </div>
-            </nav>
-
-            <!-- buttons -->
-            <div class="buttons">
-                <!-- dark mode -->
-                <div class="dark_mode dmbtn">
-                    <span id="dm">
-                        <img src="{{url_for('static', filename='icons/dm.svg')}}" alt="dark mode button" />
-                    </span>
+                <div class="form-group">
+                  <label for="your_pass">
+                    <i></i>
+                      <svg width="64px" height="64px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="invisible_box" data-name="invisible box">
+                              <rect width="48" height="48" fill="none"></rect>
+                            </g>
+                            <g id="Layer_7" data-name="Layer 7">
+                              <path
+                                d="M39,18H35V13A11,11,0,0,0,24,2H22A11,11,0,0,0,11,13v5H7a2,2,0,0,0-2,2V44a2,2,0,0,0,2,2H39a2,2,0,0,0,2-2V20A2,2,0,0,0,39,18ZM15,13a7,7,0,0,1,7-7h2a7,7,0,0,1,7,7v5H15ZM14,35a3,3,0,1,1,3-3A2.9,2.9,0,0,1,14,35Zm9,0a3,3,0,1,1,3-3A2.9,2.9,0,0,1,23,35Zm9,0a3,3,0,1,1,3-3A2.9,2.9,0,0,1,32,35Z"
+                              ></path>
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                    </i>
+                  </label>
+                  <input type="password" name="your_pass" id="your_pass" placeholder="Password" />
                 </div>
+                <div class="form-group">
+                  <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                  <label for="remember-me" class="label-agree-term"></label>
+                    <span><span></span></span>
+                    Remember me
+                  </label>
+                </div>
+                <div class="form-group form-button">
+                  <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                </div>
+              </form>
+              {% block auth_api %} {% endblock %}
             </div>
+          </div>
         </div>
-    </header>
-
-    <footer role="footer" itemscope itemtype="https://schema.org/WPFooter">
-        <div class="sp" id="table-end"></div>
-        <div class="cen cc">
-            © 2024 Subhajit Gorai. All rights reserved.
-            <meta name="copyright" content="Subhajit Gorai">
-        </div>
-    </footer>
-</body>
+      </section>
+    </div>
+  </body>
 </html>
