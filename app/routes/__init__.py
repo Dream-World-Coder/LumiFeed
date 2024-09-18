@@ -1,4 +1,4 @@
-from app import app, NewsForm, SearchForm
+from app import app  # NewsForm, SearchForm
 from app.models import User, Read_later, Saved_article
 
 # python functions for routes

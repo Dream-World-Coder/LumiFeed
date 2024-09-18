@@ -1,5 +1,5 @@
 from flask import request, session, url_for, jsonify
-from app.routes import app, obj, NewsForm, gen_table, gen_table_india_news
+from app.routes import app, obj, gen_table, gen_table_india_news  # NewsForm
 
 
 @app.route("/fetchnews", methods=["GET"])

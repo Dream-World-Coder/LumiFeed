@@ -9,8 +9,13 @@ function findArticle() {
       let target_elem = document.getElementById(href);
       let rect = target_elem.parentElement.getBoundingClientRect();
 
+      let val = 300;
+      if (window.innerWidth <= 768) {
+        val = 100;
+      }
+
       window.scrollTo({
-        top: window.scrollY + rect.top - 300,
+        top: window.scrollY + rect.top - val,
         behavior: "smooth",
       });
 

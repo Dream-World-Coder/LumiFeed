@@ -18,8 +18,10 @@ header {
 
 .header-wrapper {
   position: relative;
-  width: calc(100% - var(--r) - 10px) !important;
+  width: calc(100% - var(--r)) !important;
   margin-left: 20px;
+  display: flex;
+  align-items: center;
 }
 
 /*---- logo
@@ -52,7 +54,9 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  max-height: 30px;
   gap: 20px;
+  transform: translateY(2px);
 
   & .dark-mode-btn,
   & .bigger-font-btn {
@@ -117,14 +121,18 @@ header {
 
   .mobile-search-btn {
     margin-right: 10px;
+    display: flex;
+    align-items: center;
+    max-height: 30px;
+
     & img {
-      width: 30px;
-      height: 30px;
+      width: 26px;
+      height: 26px;
     }
   }
 
   .buttons {
-    gap: 5px;
+    gap: 10px;
 
     & .dark-mode-btn,
     & .bigger-font-btn {
@@ -150,5 +158,27 @@ header {
 @media (max-width: 768px) {
   .logo #logo-text {
     font-size: 1rem;
+  }
+  .buttons {
+    gap: 10px;
+
+    & .dark-mode-btn,
+    & .bigger-font-btn {
+      &:hover {
+        transform: none;
+      }
+    }
+
+    & .dark-mode-btn span img {
+      --x1: 24px;
+      width: var(--x1);
+      height: var(--x1);
+    }
+
+    & .bigger-font-btn span img {
+      --x2: 20px;
+      width: var(--x2);
+      height: var(--x2);
+    }
   }
 }

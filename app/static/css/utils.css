@@ -323,7 +323,7 @@ label {
 .animated-underline-white,
 .animated-underline {
   position: relative;
-  transform-origin: right;
+  display: inline-block;
 }
 
 .animated-underline::before,
@@ -334,9 +334,9 @@ label {
   left: 0;
   width: 0px;
   height: 100%;
-  transition: all 0.3s;
+  transition: width 0.5s ease-in-out;
   z-index: 200;
-  transform-origin: right;
+  transform-origin: left;
   mix-blend-mode: difference;
 }
 
@@ -345,13 +345,11 @@ label {
 }
 
 .animated-underline-white::before {
-  /* background-color: white; */
   background-color: var(--clr2);
 }
 
 .animated-underline:hover::before,
 .animated-underline-white:hover::before {
   width: 100%;
-  transition: all 0.5s;
-  transform-origin: left;
+  transform-origin: right;
 }

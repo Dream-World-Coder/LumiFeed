@@ -3,8 +3,8 @@
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg width="40px" height="40px" viewBox="0 -1 20 20" xmlns="http://www.w3.org/2000/svg">
   <g id="text-size" transform="translate(-2 -3)">
-    <path id="primary" d="M21,12V10H13v2" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    <path id="primary-2" data-name="primary" d="M3,6V4H13V6" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-    <path id="primary-3" data-name="primary" d="M17,10V20m-2,0h4M8,4V20M6,20h4" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="primary" d="M21,12V10H13v2" fill="none" stroke="#dd2b4f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="primary-2" data-name="primary" d="M3,6V4H13V6" fill="none" stroke="#dd2b4f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="primary-3" data-name="primary" d="M17,10V20m-2,0h4M8,4V20M6,20h4" fill="none" stroke="#dd2b4f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
   </g>
 </svg>

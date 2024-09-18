@@ -37,7 +37,7 @@
   /* -----------
         they all are just for show, bcz, js regulates the clr of them.
     -------------- */
-  --cx: var(--c4);
+  --cx: rgb(174, 174, 174);
 }
 
 .find {
@@ -162,7 +162,7 @@
 
   &:hover {
     background-color: var(--cx) !important;
-    color: rgb(255, 255, 255) !important;
+    color: rgb(78, 78, 78) !important;
     transition: all 0.3s;
   }
 }
@@ -175,7 +175,7 @@
 }
 
 .resa {
-  margin-left: 10px;
+  margin-left: 0px;
   overflow-x: hidden;
   overflow-y: scroll;
 }

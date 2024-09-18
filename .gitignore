@@ -101,3 +101,4 @@ instance/
 app/templates/news/
 app/templates/designs/
 lumifeed.pdf
+gunicorn_commands.md

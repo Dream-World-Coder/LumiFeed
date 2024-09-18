@@ -60,7 +60,7 @@ nav .ul .li2 {
   transform: translateY(0px);
   background-color: #dd2b4f31;
   transition: all 0.3s;
-  padding: 3px;
+  padding: 0px 3px 0px 3px;
   font-size: smaller;
 }
 
@@ -93,6 +93,23 @@ nav .ul .li2 {
   }
 
   :root {
-    --nav-width: 0px;
+    --nav-width: auto;
+  }
+  /* nav = login btn only */
+  nav {
+    margin-left: 12px;
+    margin-right: 5px;
+    max-height: 30px;
+  }
+  .li5 form button {
+    font-size: 0.85rem;
+    /* background-color: transparent; */
+    /* border: none; */
+    padding: 0px 1px 0px 1px;
+  }
+  .li5 form button:hover {
+    transform: translateY(0px);
+    box-shadow: none;
+    transition: all 0.3s;
   }
 }

@@ -120,41 +120,20 @@
         }
       }
     </style>
-    <style>
-      .flash-message { padding: 10px; margin: 10px 0; border: 1px solid; }
-      .flash-message.success { border-color: green; color: green; }
-      .flash-message.error { border-color: red; color: red; }
-    </style>
   </head>
 
   <body>
-    <!-- Flash Messages -->
-    {% block comment %}  
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="flash-message {{ category }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    {% endblock %}
-
-    <!-- Loader -->
     <div id="loader" class="loader-container" style="display: none">
       <div class="loader"></div>
     </div>
 
     <header class="fixed dark-glass" itemscope itemtype="https://schema.org/WPHeader">
       <div class="header-wrapper full flex align-center">
-        <!-- Logo -->
         <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
           <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="LumiFeed Logo" itemprop="logo" />
           <span id="logo-text" itemprop="name">LumiFeed</span>
         </div>
 
-        <!-- Navigation -->
         <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
           <div class="ul relative flexed justify-evenly">
             <div class="li li1">
@@ -186,12 +165,10 @@
           </div>
         </nav>
 
-        <!-- Search Button in Mobile -->
         <div class="mobile-search-btn">
           <img src="{{url_for('static', filename='icons/search3.svg')}}" alt="search button" />
         </div>
 
-        <!-- Buttons -->
         <div class="buttons">
           <div class="dark-mode-btn dmbtn">
             <span id="dm">
@@ -207,10 +184,12 @@
       </div>
     </header>
 
-    <!-- Find News Type, Count and Fetch_news -->
+    <!--find news type, fetch_news -->
     <div itemscope itemprop="inputOfData" class="fetch_news borderX" id="table-start">
       <form id="fetch-news-form" onsubmit="fetchNews(event)">
-        {#<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />#}
+        {#
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        #}
         <h2>Select News Category</h2>
         <div class="options flex-col align-start">
           <div class="op op1 flex align-center">
@@ -226,11 +205,14 @@
             {% set cities = ['Kolkata', 'Bangalore', 'Delhi', 'Mumbai', 'Lucknow'] %}
             <label for="city_news">City News {{ cities }}</label>
           </div>
+
           <br />
+
           <div class="opp">
             <label id="lb" for="news_count">Enter Num of News to Fetch:</label>
-            <input aria-valuemax="300" aria-valuemin="1" aria-valuenow="1" type="number" name="news_count" id="news_count" min="1" max="300" required />
+            <input aria-valuemax="256" aria-valuemin="1" aria-valuenow="1" type="number" name="news_count" id="news_count" min="1" max="256" required />
           </div>
+
           <div class="city-option flexed" id="c-o">
             <span id="sps" class="block op">Choose city:</span>
             <div id="cpc" class="op f-gap-2">
@@ -242,7 +224,9 @@
               {% endfor %}
             </div>
           </div>
+
           <br />
+
           <div class="btns flex f-gap-2">
             <button class="btn" type="submit">Fetch</button>
             <button class="btn" type="reset">Reset</button>
@@ -253,7 +237,7 @@
 
     <main role="main" itemscope itemtype="https://schema.org/WebPage" itemprop="mainContentOfPage">
       <div class="container">
-        <!-- Table -->
+        <!-- table -->
         <table id="news-table" itemscope itemtype="https://schema.org/Table" class="">
           <meta itemprop="tableOfNews" content="Table of News" />
           {% block table %} {% endblock %}
@@ -299,8 +283,10 @@
           itemscope
           itemtype="https://schema.org/SearchAction"
         >
-          {#<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />#}
-          <meta itemprop="target" content="https://lumifeed.com/search_in_title?search_part={search_term_string}" />
+          {#
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          #}
+          <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title?search_part={search_term_string}" />
           <input type="text" name="search_part" id="search" placeholder="Search in News Titles" required itemprop="query-input" />
           <button class="search-icon bg-set" type="submit" name="submit" id="submit">Search</button>
         </form>
@@ -424,6 +410,18 @@
     <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
 
     <!-- functions -->
+    <script>
+      const aboutDiv = document.querySelector(".li3");
+      const contactDiv = document.querySelector(".li4");
+
+      aboutDiv.addEventListener("click", () => {
+        aboutDiv.querySelector("a").click();
+      });
+
+      contactDiv.addEventListener("click", () => {
+        contactDiv.querySelector("a").click();
+      });
+    </script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/bigger_font.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/city_options_toggle.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
