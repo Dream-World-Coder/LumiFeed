@@ -106,13 +106,13 @@
     font-size: 1rem;
   }
   .con_icons {
-    width: 24px;
+    width: fit-content;
     height: 24px;
     padding-left: 40px;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1380px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .about,
   .contact {
     margin-top: 7rem;
