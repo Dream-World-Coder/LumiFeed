@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title -->
+    <title>LumiFeed - {% block title %}{% endblock %}</title>
+    <meta name="author" content="Subhajit Gorai" />
+    <!-- Linking CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/auth.css')}}" />
+    <!-- Linking Favicon -->
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}" type="image/x-icon" />
+
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+
+  <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash_ul">
+                {% for message in messages %}
+                    <li class="flash_li">{{message}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="main">
+      <section class="sign-in">
+        <div class="container">
+          <div class="signin-content">
+            <div class="signin-image">
+              <!-- Image -->
+              {% block image %} {% endblock %}
+              <!-- Redirect Link -->
+              {% block redirect %} {% endblock %}
+              <a href="{{url_for('index')}}" class="home-link">Go Back to Homepage</a>
+            </div>
+
+            <div class="signin-form">
+              <h2 class="form-title">{% block heading %}{% endblock %}</h2>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

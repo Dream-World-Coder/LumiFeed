@@ -123,6 +123,15 @@
   </head>
 
   <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash_ul">
+                {% for message in messages %}
+                    <li class="flash_li">{{message}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     <div id="loader" class="loader-container" style="display: none">
       <div class="loader"></div>
     </div>
@@ -187,9 +196,6 @@
     <!--find news type, fetch_news -->
     <div itemscope itemprop="inputOfData" class="fetch_news borderX" id="table-start">
       <form id="fetch-news-form" onsubmit="fetchNews(event)">
-        {#
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        #}
         <h2>Select News Category</h2>
         <div class="options flex-col align-start">
           <div class="op op1 flex align-center">
@@ -283,9 +289,6 @@
           itemscope
           itemtype="https://schema.org/SearchAction"
         >
-          {#
-          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-          #}
           <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title?search_part={search_term_string}" />
           <input type="text" name="search_part" id="search" placeholder="Search in News Titles" required itemprop="query-input" />
           <button class="search-icon bg-set" type="submit" name="submit" id="submit">Search</button>

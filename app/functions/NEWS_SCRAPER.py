@@ -18,6 +18,8 @@ class NewsScrape:
             "indianExpressMain": "https://indianexpress.com/",
             "indianExpressIndia": "https://indianexpress.com/section/india/",
             "indianExpressCities": "https://indianexpress.com/section/cities/",
+            "indianExpressTrendingPremium": "https://indianexpress.com/section/trending/page/1/",
+            "theHinduMain": "none",
         }
         self.cities = ["kolkata", "delhi", "mumbai", "bengaluru", "pune", "chennai"]
         self.max_pages = 15
