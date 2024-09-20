@@ -13,8 +13,9 @@ class User(db.Model, UserMixin):
         db.String(256),
         default="images/default-profile.svg",
     )
-    read_later_articles = db.relationship("Read_later", backref="author", lazy=True)
-    saved_articles = db.relationship("Saved_article", backref="author", lazy=True)
+    # now i am not restritcing the number of collections users can have
+    collections = db.Column(db.PickleType, default=[])
+    saved_articles = db.relationship("Article", backref="author", lazy=True)
 
     def get_id(self):
         return str(self.id)

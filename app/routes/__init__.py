@@ -1,5 +1,5 @@
 from app import app, db  # NewsForm, SearchForm
-from app.models import User, Read_later, Saved_article
+from app.models import User, Article
 
 # python functions for routes
 from app.functions.NEWS_SCRAPER import NewsScrape

@@ -36,7 +36,19 @@ def gen_table(data: list) -> str:
         html_table += f"""
                     <tr class="rows">
                         <td class="td1 data_box" id="serial_no_{row[0]}">{row[0]}</td>
-                        <td class="td2 data_box">{row[1]}</td>
+                        <td class="td2 data_box">{row[1]}
+                        <div class="saving_options f-gap-2">
+                            <div class="read_later_collection">
+                                <img src="static/icons/save1.svg" alt="" srcset="" />
+                            </div>
+                            <div class="other_collections">
+                                <img src="static/icons/save2.svg" alt="" srcset="" />
+                            </div>
+                            <div class="unsave_if_saved_already">
+                                <img src="static/icons/save3.svg" alt="" srcset="" />
+                            </div>
+                            </div>
+                        </td>
                         <td class="td3 data_box read"><span class="rbtn read_here" onclick="show_news_preview()">Read</span></td>
                         <td class="td4 data_box">
                             <a class="news_urls_a_tag" href="{row[2]}" target="_blank" rel="noopener">Link</a>
@@ -61,7 +73,19 @@ def gen_table_india_news(data: list) -> str:
                     <tr class="rows">
                         <td class="td1 data_box" id="serial_no_{row[0]}">{row[0]}</td>
                         <td class="td2 data_box">{row[1]}</td>
-                        <td class="td3 data_box">{row[2]}</td>
+                        <td class="td3 data_box">{row[2]}
+                        <div class="saving_options f-gap-2">
+                            <div class="read_later_collection">
+                                <img src="static/icons/save1.svg" alt="" srcset="" />
+                            </div>
+                            <div class="other_collections">
+                                <img src="static/icons/save2.svg" alt="" srcset="" />
+                            </div>
+                            <div class="unsave_if_saved_already">
+                                <img src="static/icons/save3.svg" alt="" srcset="" />
+                            </div>
+                            </div>
+                        </td>
                         <td class="td4 data_box read"><span class="rbtn read_here" onclick="show_news_preview()">Read</span></td>
                         <td class="td5 data_box">
                             <a class="news_urls_a_tag" href="{row[3]}" target="_blank" rel="noopener">Link</a>
@@ -387,3 +411,76 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
 
     html_doc = head + style + read__navigations + read__page + scripts_and_all
     return html_doc
+
+
+def make_profile_page():
+    pass
+
+
+def make_collections():
+    pass
+
+
+def make_collections_li():
+    pass
+
+
+"""
+<div class="collection_group flexed">
+          <div class="collection">
+            <div class="collection_name">
+              {{current_user.username}}'s Collections
+              <span class="delete_collection">
+                <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="delete this collection" srcset="" />
+              </span>
+            </div>
+            <div class="collection_content"></div>
+          </div>
+        </div>
+
+"""
+
+
+"""
+        <div class="collection_group flexed">
+          <div class="read_later collection permanent_collection">
+            <div class="collection_name">Read Later</div>
+            <div class="collection_content">
+              <ul>
+                <li data-url="">
+                  Crackdown on organised crime: NIA to launch national database of gangsters, jail networks, associates
+                  <span class="delete_article">
+                    <!-- flash message of deletion -->
+                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                  </span>
+                </li>
+                <li data-url="">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam repudiandae nemo perferendis quod itaque laborum fugit rem. Adipisci aliquid tempore delectus deserunt eum.
+                  <span class="delete_article">
+                    <!-- flash message of deletion -->
+                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+"""
+
+
+"""
+                <li data-url="">
+                  Crackdown on organised crime: NIA to launch national database of gangsters, jail networks, associates
+                  <span class="delete_article">
+                    <!-- flash message of deletion -->
+                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                  </span>
+                </li>
+                <li data-url="">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam repudiandae nemo perferendis quod itaque laborum fugit rem. Adipisci aliquid tempore delectus deserunt eum.
+                  <span class="delete_article">
+                    <!-- flash message of deletion -->
+                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                  </span>
+                </li>
+"""

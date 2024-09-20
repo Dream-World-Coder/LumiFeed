@@ -92,6 +92,24 @@ table tbody tr:last-child {
   font-family: poppins, sans-serif;
 }
 
+.saving_options {
+  width: 100px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+
+  & img {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.td2:hover .saving_options {
+  display: flex;
+}
+
 @media (min-width: 300px) and (max-width: 768px) {
   :root {
     --th-font-size: 1rem;
