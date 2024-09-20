@@ -106,6 +106,10 @@ table tbody tr:last-child {
   }
 }
 
+body.dark-mode .saving_options img {
+  filter: invert(1);
+}
+
 .td2:hover .saving_options {
   display: flex;
 }

@@ -1,3 +1,7 @@
+# from app import app
+from flask import url_for
+
+
 def generate_search_reasult(matches: list) -> str:
     no_of_matches = f"""
                     <div class="res__num border_res">
@@ -37,16 +41,16 @@ def gen_table(data: list) -> str:
                     <tr class="rows">
                         <td class="td1 data_box" id="serial_no_{row[0]}">{row[0]}</td>
                         <td class="td2 data_box">{row[1]}
-                        <div class="saving_options f-gap-2">
-                            <div class="read_later_collection">
-                                <img src="static/icons/save1.svg" alt="" srcset="" />
-                            </div>
-                            <div class="other_collections">
-                                <img src="static/icons/save2.svg" alt="" srcset="" />
-                            </div>
-                            <div class="unsave_if_saved_already">
-                                <img src="static/icons/save3.svg" alt="" srcset="" />
-                            </div>
+                            <div class="saving_options f-gap-2">
+                                <div class="read_later_collection">
+                                    <img src="{url_for('static', filename='icons/save1.svg')}" alt="" srcset="" />
+                                </div>
+                                <div class="other_collections">
+                                    <img src="{url_for('static', filename='icons/save2.svg')}" alt="" srcset="" />
+                                </div>
+                                <div class="unsave_if_saved_already">
+                                    <img src="{url_for('static', filename='icons/save3.svg')}" alt="" srcset="" />
+                                </div>
                             </div>
                         </td>
                         <td class="td3 data_box read"><span class="rbtn read_here" onclick="show_news_preview()">Read</span></td>
@@ -74,16 +78,16 @@ def gen_table_india_news(data: list) -> str:
                         <td class="td1 data_box" id="serial_no_{row[0]}">{row[0]}</td>
                         <td class="td2 data_box">{row[1]}</td>
                         <td class="td3 data_box">{row[2]}
-                        <div class="saving_options f-gap-2">
-                            <div class="read_later_collection">
-                                <img src="static/icons/save1.svg" alt="" srcset="" />
-                            </div>
-                            <div class="other_collections">
-                                <img src="static/icons/save2.svg" alt="" srcset="" />
-                            </div>
-                            <div class="unsave_if_saved_already">
-                                <img src="static/icons/save3.svg" alt="" srcset="" />
-                            </div>
+                            <div class="saving_options f-gap-2">
+                                <div class="read_later_collection">
+                                    <img src="{url_for('static', filename='icons/save1.svg')}" alt="" srcset="" />
+                                </div>
+                                <div class="other_collections">
+                                    <img src="{url_for('static', filename='icons/save2.svg')}" alt="" srcset="" />
+                                </div>
+                                <div class="unsave_if_saved_already">
+                                    <img src="{url_for('static', filename='icons/save3.svg')}" alt="" srcset="" />
+                                </div>
                             </div>
                         </td>
                         <td class="td4 data_box read"><span class="rbtn read_here" onclick="show_news_preview()">Read</span></td>
@@ -261,6 +265,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
     """
 
     dm_icon_url = "{{url_for('static', filename='icons/dm3.svg')}}"
+
     read__navigations = f"""
     <body>
     <div class="read__container">
@@ -431,7 +436,7 @@ def make_collections_li():
             <div class="collection_name">
               {{current_user.username}}'s Collections
               <span class="delete_collection">
-                <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="delete this collection" srcset="" />
+                <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="delete this collection" srcset="" />
               </span>
             </div>
             <div class="collection_content"></div>
@@ -451,14 +456,14 @@ def make_collections_li():
                   Crackdown on organised crime: NIA to launch national database of gangsters, jail networks, associates
                   <span class="delete_article">
                     <!-- flash message of deletion -->
-                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
                   </span>
                 </li>
                 <li data-url="">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam repudiandae nemo perferendis quod itaque laborum fugit rem. Adipisci aliquid tempore delectus deserunt eum.
                   <span class="delete_article">
                     <!-- flash message of deletion -->
-                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
                   </span>
                 </li>
               </ul>
@@ -473,14 +478,14 @@ def make_collections_li():
                   Crackdown on organised crime: NIA to launch national database of gangsters, jail networks, associates
                   <span class="delete_article">
                     <!-- flash message of deletion -->
-                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
                   </span>
                 </li>
                 <li data-url="">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam repudiandae nemo perferendis quod itaque laborum fugit rem. Adipisci aliquid tempore delectus deserunt eum.
                   <span class="delete_article">
                     <!-- flash message of deletion -->
-                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
                   </span>
                 </li>
 """
