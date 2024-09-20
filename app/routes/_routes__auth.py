@@ -6,28 +6,38 @@ from flask import (
     flash,
 )
 from app.routes import app, db, User
+from werkzeug.security import generate_password_hash, check_password_hash
+import bcrypt
+from flask_login import login_user, login_required, logout_user
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
         return render_template("auth/login.html")
-    elif request.methos == "POST":
+
+    elif request.method == "POST":
         user_email = request.form.get("user_email")
         user_password = request.form.get("user_pass")
 
-        usr = User.query.filter_by(email=user_email).first()
+        try:
+            usr = User.query.filter_by(email=user_email).first()
+        except Exception as e:
+            print(e)
 
         if not usr:
-            flash("User does not exist", "error")
+            flash("User does not found", "error")
             return redirect(url_for("login"))
         else:
-            database_passord = usr.password
-            if user_password != database_passord:
+            # if not check_password_hash(usr.password, user_password):
+            if not bcrypt.checkpw(
+                user_password.encode("utf-8"), usr.password.encode("utf-8")
+            ):
                 flash("password incorrect.", "error")
                 return redirect(url_for("login"))
             else:
-                flash("Login Successfull.", "success")
+                login_user(usr)
+                # flash("Login successful", "success")
                 return redirect(url_for("index"))
     else:
         return render_template("errors/unknown-method.html")
@@ -37,22 +47,38 @@ def login():
 def register():
     if request.method == "GET":
         return render_template("auth/register.html")
+
     elif request.method == "POST":
+        # data collected
         user_name = request.form.get("username")
         user_email = request.form.get("user_email")
         user_password = request.form.get("user_pass")
-        usr = User(username=user_name, email=user_email, password=user_password)
-        db.session.add(usr)
-        db.session.commit()
-        flash("Registered successfully", "success")
-        return redirect(url_for("index"))
+
+        hashed_password = bcrypt.hashpw(user_password.encode("utf-8"), bcrypt.gensalt())
+
+        # user model
+        usr = User(username=user_name, email=user_email, password=hashed_password)
+        try:
+            db.session.add(usr)
+            db.session.commit()
+            # now i can send users to login page or directly login them and send them in home
+            login_user(usr)
+            return redirect(url_for("index"))
+
+        except Exception as e:
+            print(e)
+            flash("Email is already taken, use another one", "error")
+            return redirect(url_for("register"))
     else:
         return render_template("errors/unknown-method.html")
 
 
-# @app.route("/logout", methods=["GET", "POST"])
-# def logout():
-#     pass
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()  # Clears the session
+    # flash("Logged out successfully", "success")
+    return redirect(url_for("index"))
 
 
 # @app.route("/forgot_password", methods=["GET", "POST"])

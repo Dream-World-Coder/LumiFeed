@@ -1,0 +1,51 @@
+<header class="fixed dark-glass" itemscope itemtype="https://schema.org/WPHeader">
+  <div class="header-wrapper full flex align-center">
+    <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="LumiFeed Logo" itemprop="logo" />
+      <span id="logo-text" itemprop="name">LumiFeed</span>
+    </div>
+
+    <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
+      <div class="ul relative flexed justify-evenly">
+        <div class="li li1">
+          <a class="f0 flexed" href="#table-end" rel="noopener">
+            <img id="eee" src="{{url_for('static', filename='icons/dd1.svg')}}" alt="" />
+            End of Table
+          </a>
+        </div>
+        <div class="li li2">
+          <a class="f0 flexed" href="#table-start" rel="noopener">
+            <img id="uuu" src="{{url_for('static', filename='icons/dd2.svg')}}" alt="" />
+            Start of Table
+          </a>
+        </div>
+        <div class="li li3 animated-underline-white">
+          <a href="{{url_for('index')}}" class="flexed" rel="noopener">Home</a>
+        </div>
+        <div class="li li4 animated-underline-white">
+          <a href="{{url_for('logout')}}" class="flexed" rel="noopener">logout</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="buttons">
+      <div class="dark-mode-btn dmbtn">
+        <span id="dm">
+          <img src="{{url_for('static', filename='icons/dm2.svg')}}" alt="dark mode button" />
+        </span>
+      </div>
+    </div>
+  </div>
+  <script>
+    const aboutDiv = document.querySelector(".li3");
+    const contactDiv = document.querySelector(".li4");
+
+    aboutDiv.addEventListener("click", () => {
+      aboutDiv.querySelector("a").click();
+    });
+
+    contactDiv.addEventListener("click", () => {
+      contactDiv.querySelector("a").click();
+    });
+  </script>
+</header>

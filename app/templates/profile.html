@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>LumiFeed - {{current_user.username}}</title>
+  {% include 'includes/head.html' %}
+  <body>
+    {% include 'includes/header.html' %}
+
+    <div class="container">
+      <div class="read_later"></div>
+      <div class="saved_articles"></div>
+    </div>
+    <div class="logout"></div>
+    <div class="delete_profile"></div>
+
+    <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
+  </body>
+</html>

@@ -123,15 +123,6 @@
   </head>
 
   <body>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="flash_ul">
-                {% for message in messages %}
-                    <li class="flash_li">{{message}}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
     <div id="loader" class="loader-container" style="display: none">
       <div class="loader"></div>
     </div>
@@ -158,12 +149,17 @@
               </a>
             </div>
             <div class="li li5">
-              <form id="login-form" action="/login" method="POST">
-                {#
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                #}
+              {% if current_user.is_authenticated %}
+              <form id="profile-form" action="/profile" method="GET">
+                <div class="profile" onclick="document.getElementById('profile-form').submit();">
+                  <img src="{{url_for('static', filename=current_user.profile_pic)}}" alt="profile pic">
+                </div>
+              </form>
+              {% else %}
+              <form id="login-form" action="/login" method="GET">
                 <button type="submit" class="flexed" rel="noopener">Login</button>
               </form>
+              {% endif %}
             </div>
             <div class="li li3 animated-underline-white">
               <a href="#about" class="flexed" rel="noopener">About</a>
