@@ -1,0 +1,62 @@
+:root {
+  --nav-width: 280px;
+}
+
+nav {
+  position: relative;
+  height: 100%;
+  width: var(--nav-width);
+}
+
+.ul {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.li a {
+  z-index: 102;
+}
+
+.li2 {
+  --len: 40px;
+  width: var(--len);
+  height: var(--len);
+  overflow: hidden;
+
+  & .iconImg {
+    position: relative;
+    width: calc(var(--len) - 10px);
+    height: calc(var(--len) - 10px);
+  }
+}
+
+.li3 a,
+.li4 a {
+  font-size: 1.15rem;
+  color: var(--clr2);
+  text-decoration: none;
+  font-family: poppins, Arial, Helvetica, sans-serif;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.86rem;
+  }
+}
+
+/* --- media queries ---
+  ------------------------------- */
+@media (max-width: 1024px) {
+  :root {
+    --nav-width: 168px;
+  }
+  /* nav = login btn only */
+  nav {
+    margin-left: 12px;
+    margin-right: 5px;
+    max-height: 30px;
+  }
+}

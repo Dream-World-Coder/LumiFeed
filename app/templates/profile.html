@@ -1,17 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
-  <title>LumiFeed - {{current_user.username}}</title>
-  {% include 'includes/head.html' %}
+  <head>
+    <title>LumiFeed - {{current_user.username}}</title>
+    {% include 'includes/head.html' %}
+  </head>
+
   <body>
     {% include 'includes/header.html' %}
 
-    <div class="container">
-      <div class="read_later"></div>
-      <div class="saved_articles"></div>
+    <!-- add new collection -->
+    <div class="add_new_collection_btn flexed">
+      <div class="img_container">
+        <img src="{{ url_for('static', filename='icons/plus-circle.svg') }}" alt="" />
+      </div>
     </div>
-    <div class="logout"></div>
-    <div class="delete_profile"></div>
 
+    <!-- collections  -->
+
+    <!-- currently there will be no new page for each playlist. so making them bigger instead -->
+    <!-- first i thought this will be just a preview page, so i used collection_group, to show multiple 
+      collections, but now they containonly one  -->
+      <div class="collections_container flex-col">
+        <div class="collection_group flexed permanent_collection">
+          <div class="read_later collection">
+            <div class="collection_name">Read Later</div>
+            <div class="collection_content">
+              <ul>
+                <li data-url="">
+                  Crackdown on organised crime: NIA to launch national database of gangsters, jail networks, associates
+                  <span class="delete_article">
+                    <!-- flash message of deletion -->
+                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                  </span>
+                </li>
+                <li data-url="">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam repudiandae nemo perferendis quod itaque laborum fugit rem. Adipisci aliquid tempore delectus deserunt eum.
+                  <span class="delete_article">
+                    <!-- flash message of deletion -->
+                    <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="" srcset="" />
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  
+        <div class="collection_group flexed">
+          <div class="saved_articles collection permanent_collection">
+            <div class="collection_name">Saved Articles</div>
+            <div class="collection_content"></div>
+          </div>
+        </div>
+  
+        <div class="collection_group flexed">
+          <div class="collection">
+            <div class="collection_name">
+              {{current_user.username}}'s Collections
+              <span class="delete_collection">
+                <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="delete this collection" srcset="" />
+              </span>
+            </div>
+            <div class="collection_content"></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- js  -->
+    <!-- profile toggle -->
+    <script>
+      profileIcon = document.getElementById("profile");
+      profileDetails = document.querySelector(".profile_settings");
+
+      profileIcon.addEventListener("click", () => {
+        if (profileDetails.style.display === "none") {
+          profileDetails.style.display = "flex";
+        } else {
+          profileDetails.style.display = "none";
+        }
+      });
+    </script>
+    <!-- add new collections -->
+    <script>
+      const newCollectionBtn = document.querySelector(".add_new_collection_btn");
+      const collectionContainer = document.querySelector(".collections_container");
+
+      newCollectionBtn.addEventListener("click", () => {
+        // Prompt the user for the collection name
+        const userInput = prompt("Enter the name for the new collection:");
+
+        // Check if the user entered a name or cancelled the prompt
+        if (userInput !== null && userInput.trim() !== "") {
+          // Create the outer div
+          const collectionGroup = document.createElement("div");
+          collectionGroup.className = "collection_group flexed";
+
+          // Create the inner div
+          const collection = document.createElement("div");
+          collection.className = "collection";
+
+          // Create the collection name div
+          const collectionName = document.createElement("div");
+          collectionName.className = "collection_name";
+          collectionName.textContent = userInput.trim(); // Use the user input here
+
+          // Create the collection content div
+          const collectionContent = document.createElement("div");
+          collectionContent.className = "collection_content";
+
+          // ul
+          const collectionContentUl = document.createElement("ul");
+
+          // span
+          const deleteCollectionSpan = document.createElement("span");
+          deleteCollectionSpan.className = "delete_collection";
+          const deleteIcon = document.createElement("img");
+          deleteIcon.src = "static/icons/delete.svg";
+          deleteIcon.alt = "delete this collection";
+          deleteIcon.setAttribute("srcset", ""); // This sets an empty srcset attribute
+
+          // Nest the elements
+          deleteCollectionSpan.appendChild(deleteIcon);
+          collectionName.appendChild(deleteCollectionSpan);
+          collectionContent.appendChild(collectionContentUl);
+          collection.appendChild(collectionName);
+          collection.appendChild(collectionContent);
+          collectionGroup.appendChild(collection);
+
+          // Append the entire structure to the collection container
+          collectionContainer.appendChild(collectionGroup);
+
+          // Alert the user that the collection has been added
+          alert("Collection added!");
+        } else {
+          // Alert the user if they didn't enter a name or cancelled the prompt
+          alert("Collection creation cancelled or no name entered.");
+        }
+      });
+    </script>
+
+    <!-- delete articles from playlists -->
+    <script>
+      const deleteBtns = document.querySelectorAll(".delete_article");
+      const articleLis = document.querySelectorAll(".collection_content ul li");
+      deleteBtns.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          articleLis[index].style.display = "none";
+          document.removeChild(articleLis[index]);
+          alert("article removed from collection.");
+        });
+      });
+    </script>
+
+    <!-- delete collections -->
+    <script>
+      const deleteCollectionBtns = document.querySelectorAll(".delete_collection");
+      const collectionGroups = document.querySelectorAll(".collection_group");
+
+      // Create a modal dialog
+      const modal = document.createElement("div");
+      modal.style.cssText = `
+                          position: fixed;
+                          top: 50%;
+                          left: 50%;
+                          transform: translate(-50%, -50%);
+                          background-color: white;
+                          color: black;
+                          padding: 20px;
+                          border-radius: 5px;
+                          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                          z-index: 1000;
+                          display: none;
+                        `;
+      const modalContent = document.createElement("p");
+      modalContent.textContent = "Do you want to delete the collection? It cannot be recovered again.";
+
+      const yesBtn = document.createElement("button");
+      yesBtn.textContent = "Yes";
+      yesBtn.style.marginRight = "10px";
+
+      const noBtn = document.createElement("button");
+      noBtn.textContent = "No";
+
+      modal.appendChild(modalContent);
+      modal.appendChild(yesBtn);
+      modal.appendChild(noBtn);
+      document.body.appendChild(modal);
+
+      deleteCollectionBtns.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          modal.style.display = "block";
+
+          const handleYes = () => {
+            collectionGroups[index + 2].remove();
+            modal.style.display = "none";
+            alert("Collection deleted.");
+            cleanup();
+          };
+
+          const handleNo = () => {
+            modal.style.display = "none";
+            cleanup();
+          };
+
+          const cleanup = () => {
+            yesBtn.removeEventListener("click", handleYes);
+            noBtn.removeEventListener("click", handleNo);
+          };
+
+          yesBtn.addEventListener("click", handleYes);
+          noBtn.addEventListener("click", handleNo);
+        });
+      });
+    </script>
+  
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
   </body>
 </html>

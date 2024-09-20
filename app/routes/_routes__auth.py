@@ -6,8 +6,8 @@ from flask import (
     flash,
 )
 from app.routes import app, db, User
-from werkzeug.security import generate_password_hash, check_password_hash
-import bcrypt
+
+# import bcrypt
 from flask_login import login_user, login_required, logout_user
 
 
@@ -22,23 +22,19 @@ def login():
 
         try:
             usr = User.query.filter_by(email=user_email).first()
-        except Exception as e:
-            print(e)
-
-        if not usr:
-            flash("User does not found", "error")
-            return redirect(url_for("login"))
-        else:
-            # if not check_password_hash(usr.password, user_password):
-            if not bcrypt.checkpw(
-                user_password.encode("utf-8"), usr.password.encode("utf-8")
-            ):
-                flash("password incorrect.", "error")
+            if not usr:
+                flash("User not found", "error")
+                return redirect(url_for("login"))
+            elif not usr.check_password(user_password):
+                flash("Incorrect password.", "error")
                 return redirect(url_for("login"))
             else:
                 login_user(usr)
-                # flash("Login successful", "success")
                 return redirect(url_for("index"))
+        except Exception as e:
+            print(e)
+            flash("An error occurred during login", "error")
+            return redirect(url_for("login"))
     else:
         return render_template("errors/unknown-method.html")
 
@@ -49,24 +45,23 @@ def register():
         return render_template("auth/register.html")
 
     elif request.method == "POST":
-        # data collected
         user_name = request.form.get("username")
         user_email = request.form.get("user_email")
         user_password = request.form.get("user_pass")
 
-        hashed_password = bcrypt.hashpw(user_password.encode("utf-8"), bcrypt.gensalt())
+        usr = User(username=user_name, email=user_email)
+        usr.set_password(user_password)
 
-        # user model
-        usr = User(username=user_name, email=user_email, password=hashed_password)
         try:
             db.session.add(usr)
             db.session.commit()
-            # now i can send users to login page or directly login them and send them in home
             login_user(usr)
+            # now i can send users to login page or directly login them and send them in home
             return redirect(url_for("index"))
 
         except Exception as e:
             print(e)
+            db.session.rollback()
             flash("Email is already taken, use another one", "error")
             return redirect(url_for("register"))
     else:
