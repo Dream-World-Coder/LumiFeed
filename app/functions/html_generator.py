@@ -48,9 +48,6 @@ def gen_table(data: list) -> str:
                                 <div class="other_collections">
                                     <img src="{url_for('static', filename='icons/save2.svg')}" alt="" srcset="" />
                                 </div>
-                                <div class="unsave_if_saved_already">
-                                    <img src="{url_for('static', filename='icons/save3.svg')}" alt="" srcset="" />
-                                </div>
                             </div>
                         </td>
                         <td class="td3 data_box read"><span class="rbtn read_here" onclick="show_news_preview()">Read</span></td>
@@ -84,9 +81,6 @@ def gen_table_india_news(data: list) -> str:
                                 </div>
                                 <div class="other_collections">
                                     <img src="{url_for('static', filename='icons/save2.svg')}" alt="" srcset="" />
-                                </div>
-                                <div class="unsave_if_saved_already">
-                                    <img src="{url_for('static', filename='icons/save3.svg')}" alt="" srcset="" />
                                 </div>
                             </div>
                         </td>
