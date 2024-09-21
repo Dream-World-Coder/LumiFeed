@@ -1,28 +1,36 @@
-function handleSuccess() {
-  alert("Article saved successfully!");
-}
-
-function handleFailure() {
-  alert("Failed to save the article.");
+function displayMessage(message) {
+  alert(message);
 }
 
 function sendArticleToServer(articleTitle, articleUrl) {
-  fetch("/add_to_read_later", {
+  const url = "/add_to_read_later";
+  const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ article_title: articleTitle, article_url: articleUrl }),
-  })
+  };
+
+  fetch(url, options)
     .then((response) => {
-      if (response.ok) {
-        handleSuccess();
+      if (response.status === 401) {
+        displayMessage("Please login to save articles");
+      } else if (!response.ok) {
+        throw new Error("Network response was not ok");
       } else {
-        handleFailure();
+        return response.json();
+      }
+    })
+    .then((responseData) => {
+      if (responseData.error) {
+        displayMessage(responseData.error);
+      } else {
+        displayMessage(responseData.message);
       }
     })
     .catch((error) => {
-      console.error("Error saving the article:", error);
+      console.log("Error:", error);
     });
 }
 
@@ -35,10 +43,10 @@ function saveArticleInReadLater() {
     btn.addEventListener("click", () => {
       var articleTitle = tdContainingTitle[index].textContent;
       var articleUrl = aContainingUrl[index].getAttribute("href");
+      //   console.log(articleTitle, articleUrl); // working
       sendArticleToServer(articleTitle, articleUrl);
     });
   });
 }
 
 saveArticleInReadLater();
-// need to call each time after fetchnews is called as td s are generated through ajax

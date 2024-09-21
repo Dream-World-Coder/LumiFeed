@@ -1,6 +1,6 @@
-{% extends "profile_layout.html" %}
+{% extends "layouts/profile_layout.html" %}
 
-
+<!-- trim, then print -->
 {% block read_later_li %}
     {% for article in read_later_articles %}
         <li class="collection_content_ul_li">
@@ -10,6 +10,7 @@
             class="collection_content_ul_li_a"
         >
             {{article.title}}
+    {% endfor %}
 {% endblock %}
 
 

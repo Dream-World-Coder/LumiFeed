@@ -73,8 +73,7 @@ def gen_table_india_news(data: list) -> str:
         html_table += f"""
                     <tr class="rows">
                         <td class="td1 data_box" id="serial_no_{row[0]}">{row[0]}</td>
-                        <td class="td2 data_box">{row[1]}</td>
-                        <td class="td3 data_box">{row[2]}
+                        <td class="td2 data_box">{row[1]}
                             <div class="saving_options f-gap-2">
                                 <div class="read_later_collection">
                                     <img src="{url_for('static', filename='icons/save1.svg')}" alt="" srcset="" />
@@ -84,6 +83,7 @@ def gen_table_india_news(data: list) -> str:
                                 </div>
                             </div>
                         </td>
+                        <td class="td3 data_box">{row[2]}</td>
                         <td class="td4 data_box read"><span class="rbtn read_here" onclick="show_news_preview()">Read</span></td>
                         <td class="td5 data_box">
                             <a class="news_urls_a_tag" href="{row[3]}" target="_blank" rel="noopener">Link</a>

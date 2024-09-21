@@ -23,3 +23,4 @@ from app.routes import _routes__home
 from app.routes import _routes__read
 from app.routes import _routes__search
 from app.routes import _routes__summary
+from app.routes import _routes__save_articles
