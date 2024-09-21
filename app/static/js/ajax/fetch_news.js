@@ -28,6 +28,7 @@ function fetchNews(event) {
       localStorage.setItem("news_list", JSON.stringify(data.news_list));
       document.getElementById("news-table").innerHTML = data.news_table;
       show_news_preview();
+      saveArticleInReadLater();
     })
     .catch((error) => {
       console.error("Error fetching news:", error);
@@ -39,6 +40,4 @@ function fetchNews(event) {
 }
 
 // Attach the event listener to the form
-document
-  .getElementById("fetch-news-form")
-  .addEventListener("submit", fetchNews);
+document.getElementById("fetch-news-form").addEventListener("submit", fetchNews);

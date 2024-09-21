@@ -40,4 +40,5 @@ function saveArticleInReadLater() {
   });
 }
 
+saveArticleInReadLater();
 // need to call each time after fetchnews is called as td s are generated through ajax
