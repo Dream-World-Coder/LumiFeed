@@ -412,74 +412,35 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
     return html_doc
 
 
-def make_profile_page():
-    pass
-
-
-def make_collections():
-    pass
-
-
-def make_collections_li():
-    pass
-
-
-"""
-<div class="collection_group flexed">
-          <div class="collection">
-            <div class="collection_name">
-              {{current_user.username}}'s Collections
-              <span class="delete_collection">
-                <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="delete this collection" srcset="" />
-              </span>
+def make_collection(collection_name) -> str:
+    string = f"""
+            <div class="collection_group flexed">
+              <div class="collection">
+                <div class="collection_name">
+                  {collection_name}
+                  <span class="delete_collection">
+                    <img src="{url_for('static', filename='icons/delete.svg')}" alt="delete this collection" srcset="" />
+                  </span>
+                </div>
+                <div class="collection_content">
+                  <ul></ul>
+                </div>
+              </div>
             </div>
-            <div class="collection_content"></div>
-          </div>
-        </div>
+    """
 
-"""
+    return string
 
 
-"""
-        <div class="collection_group flexed">
-          <div class="read_later collection permanent_collection">
-            <div class="collection_name">Read Later</div>
-            <div class="collection_content">
-              <ul>
-                <li data-url="">
-                  Crackdown on organised crime: NIA to launch national database of gangsters, jail networks, associates
-                  <span class="delete_article">
-                    <!-- flash message of deletion -->
-                    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
-                  </span>
-                </li>
-                <li data-url="">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam repudiandae nemo perferendis quod itaque laborum fugit rem. Adipisci aliquid tempore delectus deserunt eum.
-                  <span class="delete_article">
-                    <!-- flash message of deletion -->
-                    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-"""
+def make_collection_li():
+    pass
 
 
 """
-                <li data-url="">
-                  Crackdown on organised crime: NIA to launch national database of gangsters, jail networks, associates
-                  <span class="delete_article">
-                    <!-- flash message of deletion -->
-                    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
-                  </span>
-                </li>
-                <li data-url="">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam repudiandae nemo perferendis quod itaque laborum fugit rem. Adipisci aliquid tempore delectus deserunt eum.
-                  <span class="delete_article">
-                    <!-- flash message of deletion -->
-                    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
-                  </span>
-                </li>
+<li data-url="">
+  <span class="delete_article">
+    <!-- flash message of deletion -->
+    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
+  </span>
+</li>
 """

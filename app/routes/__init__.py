@@ -8,6 +8,8 @@ from app.functions.html_generator import (
     gen_table_india_news,
     make_another_page,
     generate_search_reasult,
+    make_collection,
+    make_collection_li,
 )
 from app.functions.file_management import makeAlternateFilePath, cleanup_files
 from app.functions.search_algorithms import s2x1

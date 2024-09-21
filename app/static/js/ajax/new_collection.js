@@ -1,55 +1,58 @@
-const newCollectionBtn = document.querySelector(".add_new_collection_btn");
-const collectionContainer = document.querySelector(".collections_container");
+function addCollectionToDOM(newCollection) {
+  const collectionContainer = document.querySelector(".collections_container");
 
-newCollectionBtn.addEventListener("click", () => {
-  // Prompt the user for the collection name
-  const userInput = prompt("Enter the name for the new collection:");
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(newCollection, "text/html");
+  // Extract the first element from the parsed HTML document
+  const newCollectionNode = doc.body.firstChild;
 
-  // Check if the user entered a name or cancelled the prompt
-  if (userInput !== null && userInput.trim() !== "") {
-    // Create the outer div
-    const collectionGroup = document.createElement("div");
-    collectionGroup.className = "collection_group flexed";
+  collectionContainer.appendChild(newCollectionNode);
+}
 
-    // Create the inner div
-    const collection = document.createElement("div");
-    collection.className = "collection";
+function addNewCollection() {
+  const newCollectionBtn = document.querySelector(".add_new_collection_btn");
+  newCollectionBtn.addEventListener("click", () => {
+    const userInput = prompt("Enter the name for the new collection:");
 
-    // Create the collection name div
-    const collectionName = document.createElement("div");
-    collectionName.className = "collection_name";
-    collectionName.textContent = userInput.trim(); // Use the user input here
+    if (userInput !== null && userInput.trim() !== "") {
+      const url = "/add_new_collection";
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: userInput,
+        }),
+      };
 
-    // Create the collection content div
-    const collectionContent = document.createElement("div");
-    collectionContent.className = "collection_content";
+      fetch(url, options)
+        .then((response) => {
+          if (response.status === 401) {
+            displayMessage("Please login to save articles");
+          } else if (!response.ok) {
+            throw new Error("Network response was not ok");
+          } else {
+            return response.json();
+          }
+        })
+        .then((responseData) => {
+          if (responseData.error) {
+            alert("some error occurred");
+          } else {
+            addCollectionToDOM(responseData.new_collection);
+          }
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+      alert("Collection added!");
+    } else if (userInput.length > 99) {
+      alert("Collection name is too long. Max length is 99 characters.");
+    } else {
+      alert("Collection creation cancelled or no name entered.");
+    }
+  });
+}
 
-    // ul
-    const collectionContentUl = document.createElement("ul");
-
-    // span
-    const deleteCollectionSpan = document.createElement("span");
-    deleteCollectionSpan.className = "delete_collection";
-    const deleteIcon = document.createElement("img");
-    deleteIcon.src = "static/icons/delete.svg";
-    deleteIcon.alt = "delete this collection";
-    deleteIcon.setAttribute("srcset", ""); // This sets an empty srcset attribute
-
-    // Nest the elements
-    deleteCollectionSpan.appendChild(deleteIcon);
-    collectionName.appendChild(deleteCollectionSpan);
-    collectionContent.appendChild(collectionContentUl);
-    collection.appendChild(collectionName);
-    collection.appendChild(collectionContent);
-    collectionGroup.appendChild(collection);
-
-    // Append the entire structure to the collection container
-    collectionContainer.appendChild(collectionGroup);
-
-    // Alert the user that the collection has been added
-    alert("Collection added!");
-  } else {
-    // Alert the user if they didn't enter a name or cancelled the prompt
-    alert("Collection creation cancelled or no name entered.");
-  }
-});
+addNewCollection();

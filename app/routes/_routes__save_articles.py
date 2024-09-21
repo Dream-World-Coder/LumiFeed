@@ -17,6 +17,7 @@ def add_to_read_later():
     data = request.json
     article_title = data.get("article_title")
     article_url = data.get("article_url")
+
     article = Article(
         article_title=article_title,
         article_url=article_url,

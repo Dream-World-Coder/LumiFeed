@@ -1,16 +1,27 @@
 {% extends "layouts/profile_layout.html" %}
 
 
-<!-- permanent collections -->
 <!-- trim, then print -->
-{% block read_later_li %}
-{% endblock %}
-
-{% block liked_collections_li %}
-{% endblock %}
-
-
-<!-- deletable collections -->
-{% block other_collections %}
-    {% block other_collections_li %}{% endblock %}
+{% block collections%}
+  {% for coll in current_user.collections %}
+    <div class="collection_group flexed">
+      <div class="collection">
+        <div class="collection_name">{{coll}}</div>
+        <div class="collection_content">
+          <ul>
+          {% for news_articles in current_user.saved_articles %} 
+            {% if news_articles.parent_collection == coll %}
+              <li data-url="{{news_articles.article_url}}">
+                {{news_articles.article_title}}
+                <span class="delete_article">
+                  <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
+                </span>
+              </li>
+            {% endif %}
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 {% endblock %}
