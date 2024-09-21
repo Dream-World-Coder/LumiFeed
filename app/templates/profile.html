@@ -1,20 +1,16 @@
 {% extends "layouts/profile_layout.html" %}
 
+
+<!-- permanent collections -->
 <!-- trim, then print -->
 {% block read_later_li %}
-    {% for article in read_later_articles %}
-        <li class="collection_content_ul_li">
-        <a
-            href="{{article.url}}"
-            target="_blank"
-            class="collection_content_ul_li_a"
-        >
-            {{article.title}}
-    {% endfor %}
+{% endblock %}
+
+{% block liked_collections_li %}
 {% endblock %}
 
 
-{% block other_collections %}{% endblock %}
-
-
-{% block other_collections_li %}{% endblock %}
+<!-- deletable collections -->
+{% block other_collections %}
+    {% block other_collections_li %}{% endblock %}
+{% endblock %}
