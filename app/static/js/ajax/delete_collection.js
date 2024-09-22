@@ -51,9 +51,6 @@ function sendDeleteRequestToServer(name) {
     .then((data) => {
       collectionGroups[index + 2].remove();
       alert(data.message);
-    })
-    .catch((error) => {
-      console.log("Error:", error);
     });
 }
 

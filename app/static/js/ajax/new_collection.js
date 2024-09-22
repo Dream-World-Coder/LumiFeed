@@ -43,9 +43,6 @@ function addNewCollection() {
         .then((responseData) => {
           addCollectionToDOM(responseData.new_collection);
           alert("Collection added!");
-        })
-        .catch((error) => {
-          // console.log("Error:", error);
         });
     } else if (userInput.length() > 99) {
       alert("Collection name is too long. Max length is 99 characters.");

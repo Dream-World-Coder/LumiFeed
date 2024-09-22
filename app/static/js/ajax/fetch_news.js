@@ -31,10 +31,6 @@ function fetchNews(event) {
       saveArticleInReadLater();
       saveArticleInOtherCollections();
     })
-    .catch((error) => {
-      console.error("Error fetching news:", error);
-      // You can show a user-friendly error message here if you want
-    })
     .finally(() => {
       hideLoader(); // Hide loader after the request is complete (success or error)
     });

@@ -24,11 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((data) => {
         document.getElementById("ajax_desktop").innerHTML = data.html;
-        findArticle(); // Assuming this function is defined elsewhere
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Some error occurred!");
+        findArticle();
       });
   });
 });

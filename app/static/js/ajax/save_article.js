@@ -28,9 +28,6 @@ function sendArticleToServer(req_url, articleTitle, articleUrl, parentCollection
       } else {
         displayMessage(responseData.message);
       }
-    })
-    .catch((error) => {
-      console.log("Error:", error);
     });
 }
 

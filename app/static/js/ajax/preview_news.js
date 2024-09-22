@@ -5,9 +5,7 @@ function show_news_preview() {
   read_here_btns.forEach((readbtn, index) => {
     readbtn.addEventListener("click", () => {
       read.style.display = "flex";
-      const newsUrl = document
-        .querySelectorAll(".news_urls_a_tag")
-        [index].getAttribute("href");
+      const newsUrl = document.querySelectorAll(".news_urls_a_tag")[index].getAttribute("href");
 
       fetch("/read_news_here", {
         method: "POST",
@@ -27,10 +25,6 @@ function show_news_preview() {
           document.getElementById("ajax_h3").textContent = data.subheading;
           document.getElementById("ajax_img").setAttribute("src", data.imgUrl);
           document.getElementById("ajax_p").innerHTML = data.news_data_string;
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          alert("Some error occurred!");
         });
     });
   });
