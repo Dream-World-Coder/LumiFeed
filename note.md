@@ -1,0 +1,1 @@
+## currently article_url is a unique key so, one article can be stored only once no matter if you change its parent collection

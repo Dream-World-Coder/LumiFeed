@@ -1,7 +1,7 @@
 from dotenv import get_key
 import os
 
-
+"""
 class Config:
     env_file = ".env"
 
@@ -11,13 +11,13 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = bool(
         int(get_key(env_file, "SQLALCHEMY_TRACK_MODIFICATIONS"))
     )
-
-
 """
+
+
 # for render
 class Config:
     # Fetch environment variables
-    FLASK_APP = os.environ.get("FLASK_APP", "run")  # Default to 'run' if not set
+    FLASK_APP = os.environ.get("FLASK_APP", "run")
     SECRET_KEY = os.environ.get("SECRET_KEY", "aeyb72odm@wo038n3os64db$56%")
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "SQLALCHEMY_DATABASE_URI",
@@ -26,4 +26,3 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = bool(
         int(os.environ.get("SQLALCHEMY_TRACK_MODIFICATIONS", 0))
     )
-"""

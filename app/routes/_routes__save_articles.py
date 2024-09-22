@@ -8,12 +8,6 @@ from flask_login import login_required, current_user
 @login_required
 @app.route("/add_to_read_later", methods=["POST"])
 def add_to_read_later():
-    if not current_user.is_authenticated:
-        return (
-            jsonify({"error": "Please log in to save articles."}),
-            401,
-        )  # 401 Unauthorized
-
     data = request.json
     article_title = data.get("article_title")
     article_url = data.get("article_url")
