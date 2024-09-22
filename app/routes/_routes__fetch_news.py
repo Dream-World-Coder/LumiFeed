@@ -17,19 +17,21 @@ def fetchnews():
         return jsonify({"error": "Invalid news count"}), 400
 
     # storing the current url in session to get back from the reading page
-    home_url = f"{url_for('index')}/fetchnews?news_type={news_type}news_count={news_count}&city_choice={city_choice}"
+    home_url = f"{url_for('index')}"
+    # now fetch news does not render template, so i have to submit the form on home btn click. Thats
+    # why, currenltly i am only returning home_url , later i will store the parameters of fetch news in a session and submit the form, oherwise i need to think og different approaches
     # session.clear()
     session["home_url"] = home_url
 
-    if news_type == "top_n":
+    if news_type == "top":
         news_list = obj.getTopNews(num=news_count)
         news_table = gen_table(news_list)
 
-    elif news_type == "india_n":
+    elif news_type == "india":
         news_list = obj.getIndiaNews(num=news_count)
         news_table = gen_table_india_news(news_list)
 
-    elif news_type == "city_n":
+    elif news_type == "city":
         if city_choice is None:
             return jsonify({"error": "Please select a city"}), 400
         else:
@@ -68,15 +70,15 @@ def fetchnews():
 #         home_url = f"{url_for('index')}"
 #         session["home_url"] = home_url
 
-#         if news_type == "top_n":
+#         if news_type == "top":
 #             news_list = obj.getTopNews(num=news_count)
 #             news_table = gen_table(news_list)
 
-#         elif news_type == "india_n":
+#         elif news_type == "india":
 #             news_list = obj.getIndiaNews(num=news_count)
 #             news_table = gen_table_india_news(news_list)
 
-#         elif news_type == "city_n":
+#         elif news_type == "city":
 #             if city_choice is None:
 #                 return jsonify({"error": "Please select a city"}), 400
 #             else:

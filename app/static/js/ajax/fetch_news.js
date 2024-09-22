@@ -8,7 +8,7 @@ function hideLoader() {
 
 function fetchNews(event) {
   event.preventDefault();
-  showLoader(); // Show loader before making the request
+  showLoader();
 
   const form = document.getElementById("fetch-news-form");
   const formData = new FormData(form);
@@ -32,7 +32,7 @@ function fetchNews(event) {
       saveArticleInOtherCollections();
     })
     .finally(() => {
-      hideLoader(); // Hide loader after the request is complete (success or error)
+      hideLoader();
     });
 }
 

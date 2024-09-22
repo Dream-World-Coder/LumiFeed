@@ -5,7 +5,7 @@ function show_news_preview() {
   read_here_btns.forEach((readbtn, index) => {
     readbtn.addEventListener("click", () => {
       read.style.display = "flex";
-      const newsUrl = document.querySelectorAll(".news_urls_a_tag")[index].getAttribute("href");
+      const newsUrl = readbtn.getAttribute("data-url");
 
       fetch("/read_news_here", {
         method: "POST",

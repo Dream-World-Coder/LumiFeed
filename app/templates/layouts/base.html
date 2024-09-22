@@ -195,15 +195,15 @@
         <h2>Select News Category</h2>
         <div class="options flex-col align-start">
           <div class="op op1 flex align-center">
-            <input class="border" type="radio" name="news_type" value="top_n" id="top_news" required />
+            <input class="border" type="radio" name="news_type" value="top" id="top_news" required />
             <label for="top_news">Top News</label>
           </div>
           <div class="op op2 flex align-center">
-            <input class="border" type="radio" name="news_type" value="india_n" id="india_news" required />
+            <input class="border" type="radio" name="news_type" value="india" id="india_news" required />
             <label for="india_news">India News</label>
           </div>
           <div id="cyt" class="op op3 flex align-center">
-            <input class="border" type="radio" name="news_type" value="city_n" id="city_news" required />
+            <input class="border" type="radio" name="news_type" value="city" id="city_news" required />
             {% set cities = ['Kolkata', 'Bangalore', 'Delhi', 'Mumbai', 'Lucknow'] %}
             <label for="city_news">City News {{ cities }}</label>
           </div>

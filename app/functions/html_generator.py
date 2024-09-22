@@ -50,7 +50,7 @@ def gen_table(data: list) -> str:
                                 </div>
                             </div>
                         </td>
-                        <td class="td3 data_box read"><span class="rbtn read_here" onclick="show_news_preview()">Read</span></td>
+                        <td class="td3 data_box read"><span class="rbtn read_here" data-url="{row[2]}" onclick="show_news_preview()">Read</span></td>
                         <td class="td4 data_box">
                             <a class="news_urls_a_tag" href="{row[2]}" target="_blank" rel="noopener">Link</a>
                         </td>
@@ -84,7 +84,9 @@ def gen_table_india_news(data: list) -> str:
                             </div>
                         </td>
                         <td class="td3 data_box">{row[2]}</td>
-                        <td class="td4 data_box read"><span class="rbtn read_here" onclick="show_news_preview()">Read</span></td>
+                        <td class="td4 data_box read">
+                            <span class="rbtn read_here" data-url="{row[3]}" onclick="show_news_preview()">Read</span>
+                        </td>
                         <td class="td5 data_box">
                             <a class="news_urls_a_tag" href="{row[3]}" target="_blank" rel="noopener">Link</a>
                         </td>
