@@ -7,7 +7,7 @@
       <div class="collection">
         <div class="collection_name">
           {{ coll }}
-          {% if coll != 'Saved Articles' or coll != 'Read Later' %}
+          {% if coll != 'Liked Articles' and coll != 'Read Later' %}
             <span class="delete_collection">
               <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="delete this collection" />
             </span>

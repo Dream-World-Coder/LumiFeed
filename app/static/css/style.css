@@ -139,6 +139,8 @@ input {
   display: none;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 10px;
   font-family: "Poppins", sans-serif;
   z-index: 1000;
 }
@@ -153,7 +155,6 @@ input {
 }
 
 .modal-buttons {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -169,13 +170,25 @@ input {
 }
 
 .yes-button {
-  background-color: #ff4d4d;
-  color: white;
+  background-color: #f9f7f7;
+  color: black;
 }
 
 .no-button {
-  background-color: #4caf50;
-  color: white;
+  background-color: #fbfcfb;
+  color: black;
+}
+
+body.dark-mode .delete-modal {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .modal-content,
+body.dark-mode .modal-button,
+body.dark-mode .no-button,
+body.dark-mode .yes-button {
+  background-color: rgb(35, 35, 35);
+  color: #f9f7f7;
 }
 
 .message {

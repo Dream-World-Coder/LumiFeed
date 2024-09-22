@@ -11,8 +11,7 @@ def add_new_collection():
         return (
             jsonify({"error": "Please log in to save articles."}),
             401,
-        )  # no need to check this cuz it will be only availbale if the user is logged in.
-        # still adding
+        )  # no need to check this cuz it will be only availbale if the user is logged in.still adding
 
     data = request.json
     collection_name = data.get("name")
@@ -49,29 +48,37 @@ def add_new_collection():
         return jsonify({"error": "Failed to save collection"}), 500
 
 
-@login_required
+# --------------------------------------
+# --------------------------------------
 @app.route("/delete_collection", methods=["POST"])
+@login_required
 def delete_collection():
-    # assert current_user.is_authenticated
     data = request.json
-    collection_name = data.get("collection_name")
+    if not data or "collection_name" not in data:
+        return jsonify({"error": "Missing collection name."}), 400
 
-    if collection_name not in current_user.collections:
-        return jsonify({"error": "Collection does not exist."}), 400
+    collection_name = data["collection_name"]
 
-    elif collection_name == "Saved Articles" or collection_name == "Read Later":
-        return jsonify({"error": "You cannot delete this collection."}), 400
+    if collection_name not in list(current_user.collections):
+        return jsonify({"error": "Collection does not exist."}), 404
+
+    if collection_name in ["Liked Articles", "Read Later"]:
+        return jsonify({"error": "You cannot delete this collection."}), 403
 
     try:
         current_user.collections.remove(collection_name)
-        for news_articles in current_user.saved_articles:
-            if news_articles.parent_collection == collection_name:
-                db.session.delete(news_articles)
+        articles_to_delete = [
+            article
+            for article in current_user.saved_articles
+            if article.parent_collection == collection_name
+        ]
+        for article in articles_to_delete:
+            db.session.delete(article)
+
         db.session.commit()
         return jsonify({"message": "Collection deleted successfully."}), 200
-
     except Exception as e:
-        print(e)
+        app.logger.error(f"Error deleting collection: {str(e)}")
         db.session.rollback()
         return jsonify({"error": "Failed to delete collection"}), 500
 
@@ -80,10 +87,4 @@ def delete_collection():
 # @app.route("/rename_collection", methods=["POST"])
 # def rename_collection():
 #     # assert current_user.is_authenticated
-#     if not current_user.is_authenticated:
-#         return (
-#             jsonify({"error": "Please log in to save articles."}),
-#             401,
-#         )  # no need to check this cuz it will be only availbale if the user is logged in.
-#         # still adding
 #     pass

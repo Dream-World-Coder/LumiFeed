@@ -64,7 +64,6 @@ function saveArticleInReadLater() {
     });
   });
 }
-saveArticleInReadLater();
 
 // ------------ for saving article in different playlists, add_to_different_collections -----
 
@@ -78,9 +77,12 @@ function saveArticleInOtherCollections() {
       var articleTitle = tdContainingTitle[index].textContent;
       var articleUrl = aContainingUrl[index].getAttribute("href");
       // input this later
+      // options : current_user.collections except "Read Later"
       var parentCollection = "Liked Articles";
       sendArticleToServer("/add_to_different_collections", articleTitle, articleUrl, parentCollection);
     });
   });
 }
+
+saveArticleInReadLater();
 saveArticleInOtherCollections();

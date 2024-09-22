@@ -26,6 +26,14 @@ modal.appendChild(modalContent);
 modal.appendChild(buttonContainer);
 document.body.appendChild(modal);
 
+function displayMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.classList.add("message");
+  messageElement.textContent = message;
+  document.body.appendChild(messageElement);
+  setTimeout(() => messageElement.remove(), 3000);
+}
+
 function sendDeleteRequestToServer(name, index) {
   const url = "/delete_collection";
   const options = {
@@ -44,20 +52,12 @@ function sendDeleteRequestToServer(name, index) {
       return response.json();
     })
     .then((data) => {
-      collectionGroups[index].remove();
+      collectionGroups[index + 2].remove();
       displayMessage(data.message);
     })
     .catch((error) => {
       displayMessage("Error: " + error.message);
     });
-}
-
-function displayMessage(message) {
-  const messageElement = document.createElement("div");
-  messageElement.classList.add("message");
-  messageElement.textContent = message;
-  document.body.appendChild(messageElement);
-  setTimeout(() => messageElement.remove(), 3000);
 }
 
 deleteCollectionBtns.forEach((btn, index) => {
@@ -66,8 +66,7 @@ deleteCollectionBtns.forEach((btn, index) => {
 
     const handleYes = () => {
       modal.style.display = "none";
-      const collName = collectionGroups[index].querySelector(".collection_name").textContent;
-      console.log(collName);
+      const collName = collectionGroups[index + 2].querySelector(".collection_name").textContent.trim();
       sendDeleteRequestToServer(collName, index);
     };
 
