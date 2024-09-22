@@ -258,7 +258,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
 </head> 
     """
 
-    dm_icon_url = "{{url_for('static', filename='icons/dm3.svg')}}"
+    dm_icon_url = f"{url_for('static', filename='icons/dm3.svg')}"
 
     read__navigations = f"""
     <body>
@@ -437,7 +437,7 @@ def make_collection_li():
 
 
 """
-<li data-url="">
+<li class="read_here" data-url="">
   <span class="delete_article">
     <!-- flash message of deletion -->
     <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />

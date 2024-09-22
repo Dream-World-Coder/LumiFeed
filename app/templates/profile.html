@@ -11,7 +11,7 @@
           <ul>
           {% for news_articles in current_user.saved_articles %} 
             {% if news_articles.parent_collection == coll %}
-              <li data-url="{{news_articles.article_url}}">
+              <li class="read_here" data-url="{{news_articles.article_url}}">
                 {{news_articles.article_title}}
                 <span class="delete_article">
                   <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />

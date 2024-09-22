@@ -9,7 +9,7 @@ from app.functions.html_generator import (
     make_another_page,
     generate_search_reasult,
     make_collection,
-    make_collection_li,
+    # make_collection_li,
 )
 from app.functions.file_management import makeAlternateFilePath, cleanup_files
 from app.functions.search_algorithms import s2x1
@@ -20,10 +20,11 @@ obj = NewsScrape()
 
 
 from app.routes import _routes__auth
+from app.routes import _routes__collections_related
 from app.routes import _routes__fetch_news
 from app.routes import _routes__home
 from app.routes import _routes__read
+from app.routes import _routes__remove_article
+from app.routes import _routes__save_articles
 from app.routes import _routes__search
 from app.routes import _routes__summary
-from app.routes import _routes__save_articles
-from app.routes import _routes__collections_related

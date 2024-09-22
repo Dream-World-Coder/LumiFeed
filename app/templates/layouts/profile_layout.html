@@ -3,6 +3,7 @@
   <head>
     <title>LumiFeed - {{current_user.username}}</title>
     {% include 'includes/head.html' %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/read.css')}}" />
   </head>
 
   <body>
@@ -21,6 +22,47 @@
       {% endblock %}
     </div>
 
+    <!-- read -->
+    <div class="read flexed" id="read">
+      <div class="read__container full flex-col">
+        <div class="read__navigations flex align-center f-gap-2">
+          <span id="read__preview">PREVIEW</span>
+          <div class="read__icons ri1" id="open-in-new-tab">
+            <img src="{{url_for('static', filename='icons/open1.svg')}}" alt="open preview in new tab" />
+          </div>
+          <div class="read__icons ri2" id="close-preview">
+            <img src="{{url_for('static', filename='icons/cross1.svg')}}" alt="close preview" />
+          </div>
+        </div>
+        <div class="read__page bg-set" itemscope itemtype="https://schema.org/NewsArticle">
+          <meta itemprop="NewsArticle" content="News Article" />
+          <br />
+          <h1 id="ajax_h1" itemprop="headline"></h1>
+          <br />
+          <h3 id="ajax_h3" itemprop="description"></h3>
+          <br />
+          <img id="ajax_img" src="" alt="news article image" itemprop="image" />
+          <br />
+          <br />
+          <p id="ajax_p" itemprop="articleBody"></p>
+        </div>
+      </div>
+    </div>
+    <!-- js for #read -->
+    <script>
+      const read = document.getElementById("read");
+      const closeBtn = document.getElementById("close-preview");
+      const openInNewTabBtn = document.getElementById("open-in-new-tab");
+      closeBtn.addEventListener("click", () => {
+        read.style.display = "none";
+      });
+      openInNewTabBtn.addEventListener("click", () => {
+        setTimeout(() => {
+          read.style.display = "none";
+        }, 500);
+      });
+    </script>
+
 
     <!-- js  -->
     <!-- profile toggle -->
@@ -37,14 +79,19 @@
       });
     </script>
 
-    <!-- add new collections -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/new_collection.js')}}"></script>
-
     <!-- delete articles from playlists -->
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_articles.js')}}"></script>
-
     <!-- delete collections -->
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_collection.js')}}"></script>
+    <!-- add new collections -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/new_collection.js')}}"></script>
+    <!-- preview news -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/preview_news.js')}}"></script>
+    <!-- read in new tab -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/read_news_new_tab.js')}}"></script>
+    <!-- save article -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/save_article.js')}}"></script>
+
   
     <!-- dark mode -->
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>

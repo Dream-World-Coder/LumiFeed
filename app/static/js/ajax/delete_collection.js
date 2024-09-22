@@ -31,14 +31,40 @@ modal.appendChild(yesBtn);
 modal.appendChild(noBtn);
 document.body.appendChild(modal);
 
+function sendDeleteRequestToServer(name) {
+  url = "/delete_collection";
+  options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ collection_name: name }),
+  };
+  fetch(url, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      collectionGroups[index + 2].remove();
+      alert(data.message);
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+}
+
 deleteCollectionBtns.forEach((btn, index) => {
   btn.addEventListener("click", () => {
     modal.style.display = "block";
 
     const handleYes = () => {
-      collectionGroups[index + 2].remove();
       modal.style.display = "none";
-      alert("Collection deleted.");
+      let collName = collectionGroups[index + 2].querySelector(".collection_name").textContent;
+      sendDeleteRequestToServer(collName);
       cleanup();
     };
 

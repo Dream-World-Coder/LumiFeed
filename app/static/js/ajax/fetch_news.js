@@ -29,6 +29,7 @@ function fetchNews(event) {
       document.getElementById("news-table").innerHTML = data.news_table;
       show_news_preview();
       saveArticleInReadLater();
+      saveArticleInOtherCollections();
     })
     .catch((error) => {
       console.error("Error fetching news:", error);

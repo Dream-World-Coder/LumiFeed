@@ -15,7 +15,7 @@ def add_new_collection():
         # still adding
 
     data = request.json
-    collection_name = data.get("userInput")
+    collection_name = data.get("name")
 
     # recheking if None
     if not collection_name or not collection_name.strip():
@@ -26,14 +26,11 @@ def add_new_collection():
         return jsonify({"error": "Collection name is too long."}), 400
 
     # XSS && CSRF check
-    if "script" in collection_name:
+    if "script" in collection_name.lower():
         return jsonify({"error": "Collection name cannot contain 'script'."}), 400
 
     try:
-        existing_collections = (
-            User.query.filter_by(id=current_user.id).first().collections
-        )
-
+        existing_collections = current_user.collections
         if collection_name in existing_collections:
             return (
                 jsonify({"error": "Collection already exists. choose another name."}),
@@ -56,10 +53,34 @@ def add_new_collection():
 @app.route("/delete_collection", methods=["POST"])
 def delete_collection():
     # assert current_user.is_authenticated
-    if not current_user.is_authenticated:
-        return (
-            jsonify({"error": "Please log in to save articles."}),
-            401,
-        )  # no need to check this cuz it will be only availbale if the user is logged in.
-        # still adding
-    pass
+    data = request.json
+    collection_name = data.get("collection_name")
+
+    if collection_name not in current_user.collections:
+        return jsonify({"error": "Collection does not exist."}), 400
+
+    try:
+        current_user.collections.remove(collection_name)
+        for news_articles in current_user.saved_articles:
+            if news_articles.parent_collection == collection_name:
+                db.session.delete(news_articles)
+        db.session.commit()
+        return jsonify({"message": "Collection deleted successfully."}), 200
+
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        return jsonify({"error": "Failed to delete collection"}), 500
+
+
+# @login_required
+# @app.route("/rename_collection", methods=["POST"])
+# def rename_collection():
+#     # assert current_user.is_authenticated
+#     if not current_user.is_authenticated:
+#         return (
+#             jsonify({"error": "Please log in to save articles."}),
+#             401,
+#         )  # no need to check this cuz it will be only availbale if the user is logged in.
+#         # still adding
+#     pass

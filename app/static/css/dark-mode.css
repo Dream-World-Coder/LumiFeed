@@ -8,6 +8,7 @@ body.dark-mode,
 body.dark-mode::-webkit-scrollbar {
   background-color: rgb(33, 33, 33);
   color: aliceblue;
+  width: 0 !important;
 }
 
 body.dark-mode input {

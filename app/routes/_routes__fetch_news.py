@@ -17,7 +17,7 @@ def fetchnews():
         return jsonify({"error": "Invalid news count"}), 400
 
     # storing the current url in session to get back from the reading page
-    home_url = f"{url_for('index')}"
+    home_url = f"{url_for('index')}/fetchnews?news_type={news_type}news_count={news_count}&city_choice={city_choice}"
     # session.clear()
     session["home_url"] = home_url
 

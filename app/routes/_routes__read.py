@@ -1,4 +1,4 @@
-from flask import request, jsonify, render_template, session, make_response
+from flask import request, jsonify, render_template, session, url_for
 from app.routes import app, obj, make_another_page
 import os
 import time
@@ -27,7 +27,7 @@ def read_news_here():
 
 @app.route("/read_news_in_new_tab", methods=["POST"])
 def read_news_in_new_tab():
-    home_url = session.get("home_url", "")
+    home_url = session.get("home_url", f"{url_for('index')}")
     heading = request.form.get("heading")
     subheading = request.form.get("subheading")
     news_content = request.form.get("news_content")
