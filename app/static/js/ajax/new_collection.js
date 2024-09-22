@@ -1,3 +1,13 @@
+function displayMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.classList.add("temporary-message");
+  messageElement.textContent = message;
+  document.body.appendChild(messageElement);
+  setTimeout(() => {
+    messageElement.remove();
+  }, 3000);
+}
+
 function addCollectionToDOM(newCollection) {
   const collectionContainer = document.querySelector(".collections_container");
 
@@ -33,7 +43,7 @@ function addNewCollection() {
       fetch(url, options)
         .then((response) => {
           if (response.status === 401 || response.status === 400) {
-            alert("Use different name");
+            displayMessage("Use different name"); // Use displayMessage instead of alert
           } else if (!response.ok) {
             throw new Error("Network response was not ok");
           } else {
@@ -42,12 +52,12 @@ function addNewCollection() {
         })
         .then((responseData) => {
           addCollectionToDOM(responseData.new_collection);
-          alert("Collection added!");
+          displayMessage("Collection added!"); // Use displayMessage instead of alert
         });
     } else if (userInput.length() > 99) {
-      alert("Collection name is too long. Max length is 99 characters.");
+      displayMessage("Collection name is too long. Max length is 99 characters."); // Use displayMessage
     } else {
-      alert("Collection creation cancelled or no name entered.");
+      displayMessage("Collection creation cancelled or no name entered."); // Use displayMessage
     }
   });
 }

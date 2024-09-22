@@ -1,20 +1,26 @@
 {% extends "layouts/profile_layout.html" %}
 
 
-<!-- trim, then print -->
-{% block collections%}
+{% block collections %}
   {% for coll in current_user.collections %}
     <div class="collection_group flexed">
       <div class="collection">
-        <div class="collection_name">{{coll}}</div>
+        <div class="collection_name">
+          {{ coll }}
+          {% if coll != 'Saved Articles' or coll != 'Read Later' %}
+            <span class="delete_collection">
+              <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="delete this collection" />
+            </span>
+          {% endif %}
+        </div>
         <div class="collection_content">
           <ul>
-          {% for news_articles in current_user.saved_articles %} 
-            {% if news_articles.parent_collection == coll %}
-              <li class="read_here" data-url="{{news_articles.article_url}}">
-                {{news_articles.article_title}}
+          {% for news_article in current_user.saved_articles %} 
+            {% if news_article.parent_collection == coll %}
+              <li class="read_here" data-url="{{ news_article.article_url | trim }}">
+                {{ news_article.article_title | trim }}
                 <span class="delete_article">
-                  <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
+                  <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="Delete article" />
                 </span>
               </li>
             {% endif %}

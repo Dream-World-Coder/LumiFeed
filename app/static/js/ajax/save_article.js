@@ -1,5 +1,20 @@
 function displayMessage(message) {
-  alert(message);
+  // Create a new div element
+  const messageElement = document.createElement("div");
+
+  // Add classes for styling
+  messageElement.classList.add("temporary-message");
+
+  // Set the message text
+  messageElement.textContent = message;
+
+  // Append the message to the body
+  document.body.appendChild(messageElement);
+
+  // Remove the message after 5 seconds
+  setTimeout(() => {
+    messageElement.remove();
+  }, 3000);
 }
 
 function sendArticleToServer(req_url, articleTitle, articleUrl, parentCollection) {
@@ -11,16 +26,18 @@ function sendArticleToServer(req_url, articleTitle, articleUrl, parentCollection
     },
     body: JSON.stringify({ article_title: articleTitle, article_url: articleUrl, parent_collection: parentCollection }),
   };
-
   fetch(url, options)
     .then((response) => {
       if (response.status === 401) {
-        displayMessage("Please login to save articles");
+        throw new Error("Please login to save articles");
+      } else if (response.status === 400) {
+        throw new Error("Bad request. Please check your input.");
+      } else if (response.status === 409) {
+        throw new Error("This article is already saved.");
       } else if (!response.ok) {
         throw new Error("Network response was not ok");
-      } else {
-        return response.json();
       }
+      return response.json();
     })
     .then((responseData) => {
       if (responseData.error) {
@@ -28,6 +45,9 @@ function sendArticleToServer(req_url, articleTitle, articleUrl, parentCollection
       } else {
         displayMessage(responseData.message);
       }
+    })
+    .catch((error) => {
+      displayMessage(error.message);
     });
 }
 

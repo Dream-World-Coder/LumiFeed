@@ -59,6 +59,9 @@ def delete_collection():
     if collection_name not in current_user.collections:
         return jsonify({"error": "Collection does not exist."}), 400
 
+    elif collection_name == "Saved Articles" or collection_name == "Read Later":
+        return jsonify({"error": "You cannot delete this collection."}), 400
+
     try:
         current_user.collections.remove(collection_name)
         for news_articles in current_user.saved_articles:
