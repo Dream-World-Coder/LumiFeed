@@ -98,7 +98,5 @@ templates/old-base.html
 .env
 .vscode/
 instance/
-app/templates/news/
-app/templates/designs/
 lumifeed.pdf
 gunicorn_commands.md
