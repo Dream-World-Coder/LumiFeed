@@ -21,8 +21,6 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", "aeyb72odm@wo038n3os64db$56%")
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "SQLALCHEMY_DATABASE_URI",
-        "sqlite:///database.sqlite",
+        "postgresql://postgres:jYqcLPCMfcSFwTwocmfMAVOBlSMHwGHO@postgres.railway.internal:5432/railway",
     )
-    SQLALCHEMY_TRACK_MODIFICATIONS = bool(
-        int(os.environ.get("SQLALCHEMY_TRACK_MODIFICATIONS", 0))
-    )
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
