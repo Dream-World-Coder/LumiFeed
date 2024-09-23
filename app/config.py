@@ -11,10 +11,11 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = bool(
         int(get_key(env_file, "SQLALCHEMY_TRACK_MODIFICATIONS"))
     )
+    
 """
 
 
-# for render
+# for railway
 class Config:
     # Fetch environment variables
     FLASK_APP = os.environ.get("FLASK_APP", "run")

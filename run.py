@@ -1,4 +1,4 @@
-from app import app, db
+from app import app, db, User, Article
 import os
 
 if __name__ == "__main__":
