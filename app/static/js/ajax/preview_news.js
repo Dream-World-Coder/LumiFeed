@@ -8,6 +8,14 @@ function displayMessage(message) {
   }, 3000);
 }
 
+function showLoader() {
+  document.getElementById("loader").style.display = "flex";
+}
+
+function hideLoader() {
+  document.getElementById("loader").style.display = "none";
+}
+
 function show_news_preview() {
   const read = document.getElementById("read");
   const read_here_btns = document.querySelectorAll(".read_here");
@@ -17,6 +25,7 @@ function show_news_preview() {
       read.style.display = "flex";
       const newsUrl = readbtn.getAttribute("data-url");
 
+      showLoader();
       fetch("/read_news_here", {
         method: "POST",
         headers: {
@@ -39,6 +48,9 @@ function show_news_preview() {
         })
         .catch((error) => {
           displayMessage(error.message);
+        })
+        .finally(() => {
+          hideLoader();
         });
     });
   });

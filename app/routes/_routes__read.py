@@ -10,7 +10,7 @@ import uuid
 def read_news_here():
     data = request.json
     url = data.get("url")
-    max_limit = 15000
+    max_limit = 150000
 
     if len(url) > max_limit:
         return "Too long url..."
@@ -38,7 +38,7 @@ def read_news_in_new_tab():
     news_content = request.form.get("news_content")
     newsImgUrl = request.form.get("newsImgUrl")
 
-    max_limit = 15000
+    max_limit = 150000
 
     if (
         len(home_url) > max_limit
@@ -59,6 +59,11 @@ def read_news_in_new_tab():
         (heading + subheading + news_content).encode()
     ).hexdigest()
     filename = f"news_{user_id}_{content_hash}.html"
+
+    dirname = os.path.join("app", "templates", "news")
+    if not os.path.exists(dirname) or not os.path.isdir(dirname):
+        os.mkdir(dirname)
+
     path = os.path.join("app", "templates", "news", filename)
 
     html_file_str = make_another_page(

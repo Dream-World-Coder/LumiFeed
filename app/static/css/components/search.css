@@ -25,8 +25,8 @@
   --search-res-bg-clr3: rgba(119, 46, 60, 0.8);
 
   /* used in search-result */
-  --dim-border: rgba(108, 108, 108, 0.9);
-  --dim-bg-clr: rgba(108, 108, 108, 0.5);
+  --dim-border: rgba(202, 202, 202, 1);
+  --dim-bg-clr: rgba(244, 244, 244, 1);
 
   /* only used in result */
   --dim-clr: rgba(171, 171, 171, 0.85);

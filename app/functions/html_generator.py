@@ -102,190 +102,210 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
         <head>
         <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Ad Free News</title>
+            <title>LumiFeed</title>
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
             """
 
     style = """
-            <style>
-                * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-            body {
-                background-color: rgb(255, 255, 255);
-                overflow-x: hidden;
-            }
-            html.invert body {
-                background-color: rgb(37, 37, 37);
-                color: aliceblue;
-            }
-            html.invert .read__page h3 {
-                color: rgb(180, 180, 180);
-            }
-            .read__container {
-                position: relative;
-                width: 100vw;
-                background-color: inherit;
-            }
-            .read__navigations {
-                position: fixed;
-                top: 0;
-                left: 0;
-                height: 5rem;
-                width: 100vw;
-                background-color: rgb(0, 0, 0);
-                border-bottom: 2px solid rgb(0, 0, 0);
-                z-index: 99;
-                padding-right: 70px;
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                gap: 0.5rem;
-            }
-            .icon {
-                width: 2rem;
-                height: 2rem;
-                z-index: 999;
-                border-radius: 10px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
-                font-size: 1.15rem;
-                color: rgb(0, 0, 0);
-                background-color: rgb(255, 255, 255);
-            }
-            .icon0 {
-                position: absolute;
-                width: 5rem;
-                top: calc(50% - 0.75rem);
-                left: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.5rem;
-                background-color: black;
-                color: azure;
-                font-size: 0.85rem;
+            * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      hr {
+        color: black !important;
+      }
+      body {
+        background-color: rgb(255, 255, 255);
+        overflow-x: hidden;
+      }
+      html.invert body {
+        background-color: rgb(37, 37, 37);
+        color: aliceblue;
+      }
+      html.invert .read__page h3 {
+        color: rgb(180, 180, 180);
+      }
+      .read__container {
+        position: relative;
+        width: 100vw;
+        background-color: inherit;
+      }
 
-                & div {
-                background-color: white;
-                border-radius: 10px;
-                }
-            }
-            /* summary */
-            .icon5 {
-                width: 4.25rem;
-                font-size: 0.8rem;
-            }
-            .read__page {
-                margin-top: 3rem;
-                position: relative;
-                width: 100vw;
-                padding: 70px;
-                font-family: Georgia, Times, "Times New Roman", serif;
-            }
-            .read__page h1 {
-                font-size: 2.5rem;
-            }
-            .read__page h3 {
-                font-size: 1.5rem;
-                color: rgb(107, 107, 107);
-            }
-            .read__page p {
-                font-size: 1rem;
-                font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
-            }
-            .read__page img {
-                border-radius: 5px;
-                width: 100%;
-            }
-            .ss {
-                width: 100vw;
-                height: 10vh;
-            }
-            .invert {
-                filter: invert(0);
-                /* colors are changed manually, thats better */
-            }
-            #ajax_p {
-                column-count: 3;
-                column-gap: 40px;
-                text-align: justify;
-                column-fill: auto;
-            }
+      .read__navigations {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 5rem;
+        width: 100vw;
+        background-color: rgb(0, 0, 0);
+        border-bottom: 2px solid rgb(0, 0, 0);
+        z-index: 99;
+        padding-right: 70px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem;
+      }
 
-            @media (min-width: 1440px) {
-                #ajax_p {
-                column-count: 3;
-                column-gap: 20px;
-                }
-            }
-            @media (max-width: 768px) {
-                .read__navigations {
-                gap: 0.25rem;
-                }
-                .icon {
-                width: 1.5rem;
-                height: 1.5rem;
-                font-size: 0.8rem;
-                }
-                .icon0 {
-                width: 3.5rem;
-                top: calc(50% - 0.75rem);
-                left: 20px;
-                font-size: 0.65rem;
-                }
-                .icon5 {
-                width: 3.5rem;
-                font-size: 0.65rem;
-                }
-                .read__navigations {
-                height: 4rem;
-                padding-right: 20px;
-                }
-                .read__page {
-                margin-top: 5rem;
-                }
-                .read__page h1 {
-                font-size: 1.25rem;
-                }
-                .read__page h3 {
-                font-size: 0.8rem;
-                }
-                .read__page p {
-                font-size: 0.65rem;
-                }
-                .read__page img {
-                width: min(100%, 350px);
-                height: 150px;
-                }
-                #ajax_p {
-                column-count: 3;
-                column-gap: 15px;
-                }
-                .read__page {
-                padding: 20px;
-                }
-            }
-            @media (max-width: 600px) {
-                #ajax_p {
-                column-count: 2;
-                column-gap: 10px;
-                }
-            }
-            @media (max-width: 600px) {
-                #ajax_p {
-                column-count: 1;
-                column-gap: 0px;
-                }
-            }
-            </style>
-        </head> 
+      .icon {
+        width: 2rem;
+        height: 2rem;
+        z-index: 999;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
+        font-size: 1.15rem;
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+      }
+
+      .icon0 {
+        position: absolute;
+        width: 5rem;
+        top: calc(50% - 0.75rem);
+        left: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background-color: black;
+        color: azure;
+        font-size: 0.85rem;
+
+        & div {
+          background-color: white;
+          border-radius: 10px;
+        }
+      }
+
+      .icon5 {
+        width: 4.25rem;
+        font-size: 0.8rem;
+      }
+
+      .read__page {
+        margin-top: 3rem;
+        position: relative;
+        width: 100vw;
+        padding: 20px;
+        font-family: Georgia, Times, "Times New Roman", serif;
+      }
+      .read__page h1 {
+        font-size: 2.5rem;
+        margin: 2rem 10px 1px 10px;
+        border-bottom: 1px solid black;
+        padding-bottom: 15px;
+      }
+      .read__page h3 {
+        font-size: 1.5rem;
+        color: rgb(107, 107, 107);
+        margin-left: 10px;
+        margin-right: 10px;
+        border-top: 1px solid black;
+        padding-top: 10px;
+        border-bottom: 1px solid black;
+        padding-bottom: 10px;
+      }
+      html.invert .read__page h1,
+      html.invert .read__page h3 {
+        border-color: rgb(122, 122, 122);
+      }
+      .read__page p {
+        font-size: 1rem;
+        font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
+        margin: 20px;
+      }
+      .read__page img {
+        border-radius: 5px;
+        width: 100%;
+      }
+      .ss {
+        width: 100vw;
+        height: 10vh;
+      }
+      .invert {
+        filter: invert(0);
+        /* colors are changed manually, thats better */
+      }
+      #ajax_p {
+        column-count: 3;
+        column-gap: 30px;
+        text-align: justify;
+        column-fill: auto;
+      }
+
+      @media (min-width: 1440px) {
+        #ajax_p {
+          column-count: 3;
+          column-gap: 20px;
+        }
+      }
+      @media (max-width: 768px) {
+        .read__navigations {
+          gap: 0.25rem;
+        }
+        .icon {
+          width: 1.5rem;
+          height: 1.5rem;
+          font-size: 0.8rem;
+        }
+        .icon0 {
+          width: 3.5rem;
+          top: calc(50% - 0.75rem);
+          left: 20px;
+          font-size: 0.65rem;
+        }
+        .icon5 {
+          width: 3.5rem;
+          font-size: 0.65rem;
+        }
+        .read__navigations {
+          height: 4rem;
+          padding-right: 20px;
+        }
+        .read__page {
+          margin-top: 5rem;
+        }
+        .read__page h1 {
+          font-size: 1.25rem;
+        }
+        .read__page h3 {
+          font-size: 0.8rem;
+        }
+        .read__page p {
+          font-size: 0.65rem;
+        }
+        .read__page img {
+          width: min(100%, 350px);
+          height: 150px;
+        }
+        #ajax_p {
+          column-count: 3;
+          column-gap: 15px;
+        }
+        .read__page {
+          padding: 20px;
+        }
+      }
+      @media (max-width: 600px) {
+        #ajax_p {
+          column-count: 2;
+          column-gap: 10px;
+        }
+      }
+      @media (max-width: 600px) {
+        #ajax_p {
+          column-count: 1;
+          column-gap: 0px;
+        }
+      }
+      </style>
+  </head>
     """
 
     read__navigations = f"""
@@ -315,19 +335,12 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                         <h1 id="ajax_h1">
                             {heading}
                         </h1>
-                        <br>
                         
                         <h3 id="ajax_h3">
                             {subheading}
                         </h3>
-                        <br>
-                        <br>
                         
                         <p id="ajax_p" class="">
-                            <img id="ajax_img" src="{newsImgUrl}"
-                            alt="img">
-                            <br>
-                            <br>
                             {news_content}
                         </p>
                     </div>
