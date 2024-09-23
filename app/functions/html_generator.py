@@ -109,6 +109,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
             """
 
     style = """
+    <style>
             * {
         margin: 0;
         padding: 0;
@@ -269,7 +270,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
           padding-right: 20px;
         }
         .read__page {
-          margin-top: 5rem;
+          margin-top: 2rem;
         }
         .read__page h1 {
           font-size: 1.25rem;
@@ -289,7 +290,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
           column-gap: 15px;
         }
         .read__page {
-          padding: 20px;
+          padding: 10px;
         }
       }
       @media (max-width: 600px) {

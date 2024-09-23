@@ -3,10 +3,10 @@
   <head>
     <title>LumiFeed - {{current_user.username}}</title>
     {% include 'includes/head.html' %}
-    <link rel="stylesheet" href="{{url_for('static', filename='css/components/read.css')}}" />
   </head>
 
   <body>
+    {% include 'includes/loader.html' %}
     {% include 'includes/header.html' %}
 
     <!-- add new collection -->
@@ -41,10 +41,11 @@
           <br />
           <h3 id="ajax_h3" itemprop="description"></h3>
           <br />
-          <img id="ajax_img" src="" alt="news article image" itemprop="image" />
           <br />
-          <br />
-          <p id="ajax_p" itemprop="articleBody"></p>
+          <p id="ajax_p" itemprop="articleBody">
+            <img id="ajax_img" src="" alt="news article image" itemprop="image" />
+            <br />
+          </p>
         </div>
       </div>
     </div>
@@ -85,10 +86,10 @@
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_collection.js')}}"></script>
     <!-- add new collections -->
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/new_collection.js')}}"></script>
-    <!-- preview news -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/preview_news.js')}}"></script>
     <!-- read in new tab -->
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/read_news_new_tab.js')}}"></script>
+    <!-- preview news -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/preview_news.js')}}"></script>
     <!-- save article -->
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/save_article.js')}}"></script>
 

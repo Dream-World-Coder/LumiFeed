@@ -227,6 +227,7 @@ body.dark-mode .collection_content ul li {
 body.dark-mode .collection_content ul li::before {
   background-color: rgb(255, 255, 255);
 }
+
 .collection_content ul li:hover::before {
   transform: scaleY(1);
   transition: all 0.2s;
@@ -259,6 +260,14 @@ body.dark-mode .collection_content ul li::before {
 
   &:hover {
     border: 1px solid rgb(255, 255, 255);
+  }
+}
+@media (max-width: 768px) {
+  .delete_article {
+    display: flex;
+  }
+  .collection_content ul li:hover::before {
+    transform: scaleY(0);
   }
 }
 

@@ -25,33 +25,38 @@ function show_news_preview() {
       read.style.display = "flex";
       const newsUrl = readbtn.getAttribute("data-url");
 
-      showLoader();
-      fetch("/read_news_here", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ url: newsUrl }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
+      let elem = document.querySelector(".collections_container");
+      if (window.innerWidth <= 768 && elem) {
+        read_in_new_tab();
+      } else {
+        showLoader();
+        fetch("/read_news_here", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ url: newsUrl }),
         })
-        .then((data) => {
-          document.getElementById("ajax_h1").textContent = data.heading;
-          document.getElementById("ajax_h3").textContent = data.subheading;
-          document.getElementById("ajax_img").setAttribute("src", data.imgUrl);
-          let old_content = document.getElementById("ajax_p").innerHTML;
-          document.getElementById("ajax_p").innerHTML = old_content + data.news_data_string;
-        })
-        .catch((error) => {
-          displayMessage(error.message);
-        })
-        .finally(() => {
-          hideLoader();
-        });
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            document.getElementById("ajax_h1").textContent = data.heading;
+            document.getElementById("ajax_h3").textContent = data.subheading;
+            document.getElementById("ajax_img").setAttribute("src", data.imgUrl);
+            let old_content = document.getElementById("ajax_p").innerHTML;
+            document.getElementById("ajax_p").innerHTML = old_content + data.news_data_string;
+          })
+          .catch((error) => {
+            displayMessage(error.message);
+          })
+          .finally(() => {
+            hideLoader();
+          });
+      }
     });
   });
 }
