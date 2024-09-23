@@ -1,3 +1,13 @@
+function displayMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.classList.add("temporary-message");
+  messageElement.textContent = message;
+  document.body.appendChild(messageElement);
+  setTimeout(() => {
+    messageElement.remove();
+  }, 3000);
+}
+
 function show_news_preview() {
   const read = document.getElementById("read");
   const read_here_btns = document.querySelectorAll(".read_here");
@@ -24,7 +34,11 @@ function show_news_preview() {
           document.getElementById("ajax_h1").textContent = data.heading;
           document.getElementById("ajax_h3").textContent = data.subheading;
           document.getElementById("ajax_img").setAttribute("src", data.imgUrl);
-          document.getElementById("ajax_p").innerHTML = data.news_data_string;
+          let old_content = document.getElementById("ajax_p").innerHTML;
+          document.getElementById("ajax_p").innerHTML = old_content + data.news_data_string;
+        })
+        .catch((error) => {
+          displayMessage(error.message);
         });
     });
   });

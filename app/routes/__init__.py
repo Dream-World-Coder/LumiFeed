@@ -12,7 +12,7 @@ from app.functions.html_generator import (
     # make_collection_li,
 )
 from app.functions.file_management import makeAlternateFilePath, cleanup_files
-from app.functions.search_algorithms import s2x1
+from app.functions.search_algorithms import s1, s2, s2x1, s3
 from app.functions.summariser import generate_summary
 
 

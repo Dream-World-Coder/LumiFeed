@@ -19,6 +19,11 @@ app.config.from_object(Config)
 # --------- db ----------
 db = SQLAlchemy(app)
 
+# -------- migrate ---------
+from flask_migrate import Migrate
+
+migrate = Migrate(app, db)
+
 # --------- models & routes ----------
 from app import models
 

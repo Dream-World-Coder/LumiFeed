@@ -40,11 +40,7 @@ function sendArticleToServer(req_url, articleTitle, articleUrl, parentCollection
       return response.json();
     })
     .then((responseData) => {
-      if (responseData.error) {
-        displayMessage(responseData.error);
-      } else {
-        displayMessage(responseData.message);
-      }
+      displayMessage(responseData.message);
     })
     .catch((error) => {
       displayMessage(error.message);

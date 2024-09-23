@@ -63,3 +63,4 @@ function addNewCollection() {
 }
 
 addNewCollection();
+// also add delete new collection after this, in html change the import sequence

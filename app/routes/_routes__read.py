@@ -10,6 +10,11 @@ import uuid
 def read_news_here():
     data = request.json
     url = data.get("url")
+    max_limit = 15000
+
+    if len(url) > max_limit:
+        return "Too long url..."
+
     if "indianexpress.com/section/india/" in url:
         heading, subheading, imgUrl, news_data_string = obj.extractNewsContentIndia(
             url=url
@@ -32,6 +37,17 @@ def read_news_in_new_tab():
     subheading = request.form.get("subheading")
     news_content = request.form.get("news_content")
     newsImgUrl = request.form.get("newsImgUrl")
+
+    max_limit = 15000
+
+    if (
+        len(home_url) > max_limit
+        or len(heading) > max_limit
+        or len(subheading) > max_limit
+        or len(news_content) > max_limit
+        or len(newsImgUrl) > max_limit
+    ):
+        return "Too long content..."
 
     # Generate a unique filename for this user and this news content
     user_id = session.get("user_id")

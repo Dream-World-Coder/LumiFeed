@@ -31,9 +31,9 @@ def gen_table(data: list) -> str:
     html_table = """
                     <tr class="tr1 rows">
                         <th class="th1">NO</th>
-                        <th class="th2">NEWS TITLE</th>
+                        <th class="th2">TITLE</th>
                         <th class="th3">READ HERE</th>
-                        <th class="th4">DIRECT LINK</th>
+                        <th class="th4">LINK</th>
                     </tr>
                 """
     for row in data:
@@ -98,319 +98,327 @@ def gen_table_india_news(data: list) -> str:
 def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -> str:
     head = """
         <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ad Free News</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    """
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Ad Free News</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+            """
 
     style = """
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body{
-            background-color: rgb(237, 237, 237);
-            overflow-x: hidden;
-        }
-        html.invert body{
-            background-color: rgb(37, 37, 37);
-            color: aliceblue;
-        }
-        html.invert .read__page h3{
-            color: rgb(180,180,180);
-        }
-        .read__container {
-            position: relative;
-            width: 100vw;
-            background-color: inherit;
-        }
-        .read__navigations {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 5rem;
-            width: 100vw;
-            background-color: rgb(102, 102, 102);
-            border-bottom: 2px solid rgb(102, 102, 102);
-            z-index: 99;
-            padding-right: 70px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .icon{
-            width: 2rem;
-            height: 2rem;
-            z-index: 999;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 1.15rem;
-            color: rgb(0, 0, 0);
-            background-color: rgb(195,195,195);
-        }
-
-        .iconH{
-            width: 4.25rem;
-            position: absolute;
-            top: 24px;
-            left: 70px;
-            font-size: 1rem;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        }
-        .iconH a{
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* summary */
-        .icon5{
-            width: 4.25rem;
-            font-size: 0.8rem;
-        }
-        .read__page {
-            margin-top: 3rem;
-            position: relative;
-            width: 100vw;
-            padding: 70px;
-            font-family: Georgia, Times, 'Times New Roman', serif;
-        }
-        .read__page h1 {
-            font-size: 2.5rem;
-        }
-        .read__page h3 {
-            font-size: 1.5rem;
-            color: rgb(107,107,107);
-        }
-        .read__page p {
-            font-size: 1rem;
-            font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
-        }
-        .read__page img{
-            border: 1px solid rgb(102, 102, 102);
-            width: min(100%, 500px);
-            height: 300px;
-            border-radius: 10px;
-        }
-        .ss{
-            width: 100vw;
-            height: 40vh;
-        }
-        .invert{
-            filter: invert(0);
-            /* colors are changed manually, thats better */
-        }
-        @media (max-width: 768px) {
-            .read__navigations{
-                gap: 0.25rem;
+            <style>
+                * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
-            .icon{
+            body {
+                background-color: rgb(255, 255, 255);
+                overflow-x: hidden;
+            }
+            html.invert body {
+                background-color: rgb(37, 37, 37);
+                color: aliceblue;
+            }
+            html.invert .read__page h3 {
+                color: rgb(180, 180, 180);
+            }
+            .read__container {
+                position: relative;
+                width: 100vw;
+                background-color: inherit;
+            }
+            .read__navigations {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 5rem;
+                width: 100vw;
+                background-color: rgb(0, 0, 0);
+                border-bottom: 2px solid rgb(0, 0, 0);
+                z-index: 99;
+                padding-right: 70px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .icon {
+                width: 2rem;
+                height: 2rem;
+                z-index: 999;
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
+                font-size: 1.15rem;
+                color: rgb(0, 0, 0);
+                background-color: rgb(255, 255, 255);
+            }
+            .icon0 {
+                position: absolute;
+                width: 5rem;
+                top: calc(50% - 0.75rem);
+                left: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                background-color: black;
+                color: azure;
+                font-size: 0.85rem;
+
+                & div {
+                background-color: white;
+                border-radius: 10px;
+                }
+            }
+            /* summary */
+            .icon5 {
+                width: 4.25rem;
+                font-size: 0.8rem;
+            }
+            .read__page {
+                margin-top: 3rem;
+                position: relative;
+                width: 100vw;
+                padding: 70px;
+                font-family: Georgia, Times, "Times New Roman", serif;
+            }
+            .read__page h1 {
+                font-size: 2.5rem;
+            }
+            .read__page h3 {
+                font-size: 1.5rem;
+                color: rgb(107, 107, 107);
+            }
+            .read__page p {
+                font-size: 1rem;
+                font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
+            }
+            .read__page img {
+                border-radius: 5px;
+                width: 100%;
+            }
+            .ss {
+                width: 100vw;
+                height: 10vh;
+            }
+            .invert {
+                filter: invert(0);
+                /* colors are changed manually, thats better */
+            }
+            #ajax_p {
+                column-count: 3;
+                column-gap: 40px;
+                text-align: justify;
+                column-fill: auto;
+            }
+
+            @media (min-width: 1440px) {
+                #ajax_p {
+                column-count: 3;
+                column-gap: 20px;
+                }
+            }
+            @media (max-width: 768px) {
+                .read__navigations {
+                gap: 0.25rem;
+                }
+                .icon {
                 width: 1.5rem;
                 height: 1.5rem;
                 font-size: 0.8rem;
-            }
-            .iconH{
+                }
+                .icon0 {
                 width: 3.5rem;
-                top: 16px;
+                top: calc(50% - 0.75rem);
                 left: 20px;
-            }
-            .icon5{
+                font-size: 0.65rem;
+                }
+                .icon5 {
                 width: 3.5rem;
                 font-size: 0.65rem;
-            }
-            .read__navigations{
+                }
+                .read__navigations {
                 height: 4rem;
                 padding-right: 20px;
-            }
-            .read__page{
+                }
+                .read__page {
                 margin-top: 5rem;
-            }
-            .read__page h1 {
+                }
+                .read__page h1 {
                 font-size: 1.25rem;
-            }
-            .read__page h3 {
+                }
+                .read__page h3 {
                 font-size: 0.8rem;
-            }
-            .read__page p {
+                }
+                .read__page p {
                 font-size: 0.65rem;
-            }
-            .read__page img{
+                }
+                .read__page img {
                 width: min(100%, 350px);
                 height: 150px;
-            }
-            .read__page{
+                }
+                #ajax_p {
+                column-count: 3;
+                column-gap: 15px;
+                }
+                .read__page {
                 padding: 20px;
+                }
             }
-        }
-    </style>
-</head> 
+            @media (max-width: 600px) {
+                #ajax_p {
+                column-count: 2;
+                column-gap: 10px;
+                }
+            }
+            @media (max-width: 600px) {
+                #ajax_p {
+                column-count: 1;
+                column-gap: 0px;
+                }
+            }
+            </style>
+        </head> 
     """
-
-    dm_icon_url = f"{url_for('static', filename='icons/dm3.svg')}"
 
     read__navigations = f"""
-    <body>
-    <div class="read__container">
-        <div class="read__navigations">
-            <div id="summary" class="icon icon5">
-                Summary
-            </div>
-            <div class="icon icon1">
-                <img src="static/icons/dm3.svg" alt="" srcset=""
-                width="24px" height="24px">
-            </div>
-            <div class="icon icon2">A+</div>
-            <div class="icon icon3">A-</div>
-            <div class="icon icon4">A</div>
-            <!-- Home button -->
-            <div class="icon iconH">
-                <a href="{home_url}">
-                    <svg 
-                        fill="#000000" 
-                        version="1.1" 
-                        id="Capa_1" 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        xmlns:xlink="http://www.w3.org/1999/xlink" 
-                        width="24px" 
-                        height="24px"
-                        viewBox="0 0 49.983 49.983" 
-                        xml:space="preserve">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier"> 
-                            <g> 
-                                <path d="M48.688,17.238L28.46,5.636c-1.916-1.099-5.022-1.099-6.938,0L1.295,17.238c-1.916,1.1-1.679,1.99,0.53,1.99h3.384 c-0.031,0.287-0.05,0.578-0.05,0.873v17.07c0,4.418,3.582,8,8,8h2.327v-6.569c0-2.209,1.791-4,4-4h11.012c2.209,0,4,1.791,3.999,4 v6.569h2.328c4.419,0,8-3.581,8-8v-17.07c0-0.295-0.019-0.586-0.05-0.873h3.383C50.367,19.229,50.604,18.338,48.688,17.238z M24.992,27.549c-1.995,0-3.613-1.618-3.613-3.613s1.618-3.612,3.613-3.612c1.995,0,3.613,1.617,3.613,3.612 S26.987,27.549,24.992,27.549z">
-                                </path>
-                            </g> 
-                        </g>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    """
+                        <body>
+                            <div class="read__container">
+                                <div class="read__navigations">
+                                    <div class="icon icon0">
+                                        <div>
+                                            <img src="{url_for('static', filename='images/favicon.png')}"
+                                            alt="" srcset="" width="24px" height="24px" />
+                                        </div>
+                                        Lumifeed
+                                    </div>
+                                    <div id="summary" class="icon icon5">Summary</div>
+                                    <div class="icon icon1">
+                                        <img src="{url_for('static', filename='icons/dm3.svg')}"
+                                        alt="" srcset="" width="24px" height="24px" />
+                                    </div>
+                                    <div class="icon icon2">A+</div>
+                                    <div class="icon icon3">A-</div>
+                                    <div class="icon icon4">A</div>
+                                </div>
+                        """
 
     read__page = f"""
-    <div class="read__page">
-            <h1 id="ajax_h1">
-                {heading}
-            </h1>
-            <br>
-            <h3 id="ajax_h3">
-                {subheading}
-            </h3>
-            <br>
-            <br>
-            <img id="ajax_img" src="{newsImgUrl}"
-            alt="img">
-            <br>
-            <br>
-            <br>
-            <br>
-            <p id="ajax_p" class="">
-                {news_content}
-            </p>
-        </div>
-    </div>
-    <div class="ss"></div>
+                <div class="read__page">
+                        <h1 id="ajax_h1">
+                            {heading}
+                        </h1>
+                        <br>
+                        
+                        <h3 id="ajax_h3">
+                            {subheading}
+                        </h3>
+                        <br>
+                        <br>
+                        
+                        <p id="ajax_p" class="">
+                            <img id="ajax_img" src="{newsImgUrl}"
+                            alt="img">
+                            <br>
+                            <br>
+                            {news_content}
+                        </p>
+                    </div>
+                </div>
+                <div class="ss"></div>
     """
 
     scripts_and_all = """    
-            <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Dark mode
-            const dm = document.querySelector('.icon1');
-            const img = document.getElementById('ajax_img');
-            dm.addEventListener('click', () => {
-                document.documentElement.classList.toggle('invert');
-                img.classList.toggle('invert');
-            });
-    
-            const p = document.getElementById('ajax_p');
-            
-            // Function to get the root font size
-            function getRootFontSize() {
-                const rootFontSize = window.getComputedStyle(document.documentElement).fontSize;
-                return parseFloat(rootFontSize);
-            }
-    
-            // Function to get the current font size in rem
-            function getFontSizeInRem(element) {
-                const fontSizePx = window.getComputedStyle(element).fontSize;
-                const fontSize = parseFloat(fontSizePx);
-                const rootFontSize = getRootFontSize();
-                return fontSize / rootFontSize;
-            }
-    
-            // Increase font size by 0.25rem
-            document.querySelector('.icon2').addEventListener('click', () => {
-                const currentSizeRem = getFontSizeInRem(p);
-                p.style.fontSize = `${currentSizeRem + 0.25}rem`;
-            });
-    
-            // Decrease font size by 0.25rem
-            document.querySelector('.icon3').addEventListener('click', () => {
-                const currentSizeRem = getFontSizeInRem(p);
-                p.style.fontSize = `${currentSizeRem - 0.25}rem`;
-            });
-    
-            // Restore default font size
-            document.querySelector('.icon4').addEventListener('click', () => {
-                // Assuming default font size is 1rem for desktop and 0.8rem for mobile
-                if (window.innerWidth >= 768) {
-                    p.style.fontSize = '1rem';
-                } else {
-                    p.style.fontSize = '0.65rem';
-                }
-            });
-        });
-    </script>
-    
-    <!-- ajax for summary -->
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const summaryButton = document.getElementById('summary');
-        const ajaxP = document.getElementById('ajax_p');
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            // Dark mode
+                            const dm = document.querySelector('.icon1');
+                            const img = document.getElementById('ajax_img');
+                            dm.addEventListener('click', () => {
+                                document.documentElement.classList.toggle('invert');
+                                img.classList.toggle('invert');
+                            });
+                    
+                            const p = document.getElementById('ajax_p');
+                            
+                            // Function to get the root font size
+                            function getRootFontSize() {
+                                const rootFontSize = window.getComputedStyle(document.documentElement).fontSize;
+                                return parseFloat(rootFontSize);
+                            }
+                    
+                            // Function to get the current font size in rem
+                            function getFontSizeInRem(element) {
+                                const fontSizePx = window.getComputedStyle(element).fontSize;
+                                const fontSize = parseFloat(fontSizePx);
+                                const rootFontSize = getRootFontSize();
+                                return fontSize / rootFontSize;
+                            }
+                    
+                            // Increase font size by 0.25rem
+                            document.querySelector('.icon2').addEventListener('click', () => {
+                                const currentSizeRem = getFontSizeInRem(p);
+                                p.style.fontSize = `${currentSizeRem + 0.25}rem`;
+                            });
+                    
+                            // Decrease font size by 0.25rem
+                            document.querySelector('.icon3').addEventListener('click', () => {
+                                const currentSizeRem = getFontSizeInRem(p);
+                                p.style.fontSize = `${currentSizeRem - 0.25}rem`;
+                            });
+                    
+                            // Restore default font size
+                            document.querySelector('.icon4').addEventListener('click', () => {
+                                // Assuming default font size is 1rem for desktop and 0.8rem for mobile
+                                if (window.innerWidth >= 768) {
+                                    p.style.fontSize = '1rem';
+                                } else {
+                                    p.style.fontSize = '0.65rem';
+                                }
+                            });
+                        });
+                    </script>
+                    
+                    <!-- ajax for summary -->
+                    <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const summaryButton = document.getElementById('summary');
+                        const ajaxP = document.getElementById('ajax_p');
 
-        summaryButton.addEventListener('click', () => {
-            var CurrentNewsArticleText = ajaxP.textContent;
+                        summaryButton.addEventListener('click', () => {
+                            var CurrentNewsArticleText = ajaxP.textContent;
 
-            fetch('/make_summary', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ textToSummarise: CurrentNewsArticleText })
-            })
-            .then(response => response.json())
-            .then(data => {
-                ajaxP.innerHTML = data.summary;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    });
-</script>
+                            fetch('/make_summary', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ textToSummarise: CurrentNewsArticleText })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                ajaxP.innerHTML = data.summary;
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                        });
+                    });
+                </script>
 
-</body>
-</html>
-    """
+            </body>
+            </html>
+            """
 
     html_doc = head + style + read__navigations + read__page + scripts_and_all
+
     return html_doc
 
 
@@ -429,7 +437,7 @@ def make_collection(collection_name) -> str:
                 </div>
               </div>
             </div>
-    """
+            """
 
     return string
 

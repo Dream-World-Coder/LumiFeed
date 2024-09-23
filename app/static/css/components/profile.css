@@ -77,12 +77,12 @@ body.dark-mode {
 ----------------------------------- */
 .collections_container {
   width: 100vw;
-  height: calc(100dvh - 5rem);
+  height: calc(100vh - 5rem);
   margin-top: 5rem;
   padding: 30px;
 
   @media (max-width: 1024px) {
-    height: calc(100dvh - 4rem);
+    height: calc(100vh - 4rem);
     margin-top: 4rem;
     padding: 15px;
   }
