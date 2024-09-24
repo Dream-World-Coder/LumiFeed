@@ -237,7 +237,8 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
         column-count: 3;
         column-gap: 30px;
         text-align: justify;
-        column-fill: auto;
+        column-fill: balance;
+        min-height: 1px;
       }
 
       @media (min-width: 1440px) {
@@ -318,7 +319,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                                             <img src="{url_for('static', filename='images/favicon.png')}"
                                             alt="" srcset="" width="24px" height="24px" />
                                         </div>
-                                        Lumifeed
+                                        LumiFeed
                                     </div>
                                     <div id="summary" class="icon icon5">Summary</div>
                                     <div class="icon icon1">
@@ -454,10 +455,6 @@ def make_collection(collection_name) -> str:
             """
 
     return string
-
-
-def make_collection_li():
-    pass
 
 
 """

@@ -6,6 +6,7 @@ from flask import (
     flash,
 )
 from app.routes import app, db, User
+from sqlalchemy.exc import IntegrityError, DataError, OperationalError
 
 # import bcrypt
 from flask_login import login_user, login_required, logout_user
@@ -31,6 +32,7 @@ def login():
             else:
                 login_user(usr)
                 return redirect(url_for("index"))
+
         except Exception as e:
             print(e)
             flash("An error occurred during login", "error")
@@ -59,10 +61,16 @@ def register():
             # now i can send users to login page or directly login them and send them in home
             return redirect(url_for("index"))
 
+        except IntegrityError:
+            print(IntegrityError)
+            db.session.rollback()
+            flash("Email is already taken, use another one", "error")
+            return redirect(url_for("register"))
+
         except Exception as e:
             print(e)
             db.session.rollback()
-            flash("Email is already taken, use another one", "error")
+            flash("Some error occurred", "error")
             return redirect(url_for("register"))
     else:
         return render_template("errors/unknown-method.html")

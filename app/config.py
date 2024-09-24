@@ -1,7 +1,7 @@
 from dotenv import get_key
 import os
 
-"""
+
 class Config:
     env_file = ".env"
 
@@ -25,3 +25,4 @@ class Config:
         "postgresql://postgres:jYqcLPCMfcSFwTwocmfMAVOBlSMHwGHO@postgres.railway.internal:5432/railway",
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+"""
