@@ -1,6 +1,6 @@
 from flask import render_template
 from flask_login import login_required
-from app.routes import app  # , db
+from app.routes import app, db
 
 # from app.forms import NewsForm
 
