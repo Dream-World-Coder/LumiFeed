@@ -100,3 +100,4 @@ templates/old-base.html
 instance/
 lumifeed.pdf
 gunicorn_commands.md
+.backup/

@@ -1,30 +1,39 @@
 from app import app, db  # NewsForm, SearchForm
-from app.models import User, Article
+from ..models import User, Article
 
-# python functions for routes
-from app.functions.NEWS_SCRAPER import NewsScrape
-from app.functions.html_generator import (
+
+# utility functions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+from ..functions.NEWS_SCRAPER import NewsScrape
+from ..functions.html_generator import (
     gen_table,
     gen_table_india_news,
     make_another_page,
     generate_search_reasult,
     make_collection,
-    # make_collection_li,
 )
-from app.functions.file_management import makeAlternateFilePath, cleanup_files
-from app.functions.search_algorithms import s1, s2, s2x1, s3
-from app.functions.summariser import generate_summary
-
+from ..functions.file_management import makeAlternateFilePath, cleanup_files
+from ..functions.search_algorithms import s1, s2, s2x1, s3
+from ..functions.summariser import generate_summary
 
 obj = NewsScrape()
 
 
-from app.routes import _routes__auth
-from app.routes import _routes__collections_related
-from app.routes import _routes__fetch_news
-from app.routes import _routes__home
-from app.routes import _routes__read
-from app.routes import _routes__remove_article
-from app.routes import _routes__save_articles
-from app.routes import _routes__search
-from app.routes import _routes__summary
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+from ..routes._routes__auth import login, register, logout
+from ..routes._routes__collections_related import add_new_collection, delete_collection
+from ..routes._routes__fetch_news import fetchnews
+from ..routes._routes__home import index, profile, create_tables
+from ..routes._routes__read import (
+    read_news_here,
+    read_news_in_new_tab,
+    # cleanup_news_files,
+    # check_session_expiration,
+)
+from ..routes._routes__remove_article import remove_article
+from ..routes._routes__save_articles import (
+    add_to_read_later,
+    add_to_different_collections,
+)
+from ..routes._routes__search import search_in_title
+from ..routes._routes__summary import make_summary

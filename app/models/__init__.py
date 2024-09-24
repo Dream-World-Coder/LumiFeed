@@ -1,4 +1,5 @@
 from app import db
 
-from app.models.user import User
-from app.models.article import Article
+from .user import User
+from .article import Article
+from .collections import Collections

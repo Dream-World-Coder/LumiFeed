@@ -6,10 +6,8 @@ from flask import (
     flash,
 )
 from app.routes import app, db, User
-from sqlalchemy.exc import IntegrityError, DataError, OperationalError
-
-# import bcrypt
 from flask_login import login_user, login_required, logout_user
+from sqlalchemy.exc import IntegrityError, DataError, OperationalError
 
 
 @app.route("/login", methods=["GET", "POST"])
