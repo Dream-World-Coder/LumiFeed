@@ -1,7 +1,7 @@
 from dotenv import get_key
 import os
 
-
+"""
 class Config:
     env_file = ".env"
 
@@ -21,8 +21,6 @@ class Config:
     FLASK_APP = os.environ.get("FLASK_APP", "run")
     SECRET_KEY = os.environ.get("SECRET_KEY", "aeyb72odm@wo038n3os64db$56%")
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "SQLALCHEMY_DATABASE_URI",
-        "postgresql://postgres:jYqcLPCMfcSFwTwocmfMAVOBlSMHwGHO@postgres.railway.internal:5432/railway",
-    )
+        "SQLALCHEMY_DATABASE_URI", "sqlite:///database.sqlite")
+       # "postgresql://postgres:jYqcLPCMfcSFwTwocmfMAVOBlSMHwGHO@postgres.railway.internal:5432/railway", )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-"""
