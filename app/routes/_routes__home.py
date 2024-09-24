@@ -18,7 +18,7 @@ def profile():
     return render_template("profile.html")
 
 
-# @app.route("/db_create_all_123_lorem")
-# def create_tables():
-#     db.create_all()
-#     return "Tables created successfully!"
+@app.route("/db_create_all_123_lorem")
+def create_tables():
+    db.create_all()
+    return "Tables created successfully!"
