@@ -20,17 +20,24 @@ class NewsScrape:
             "indianExpressIndia": "https://indianexpress.com/section/india/",
             "indianExpressCities": "https://indianexpress.com/section/cities/",
             "indianExpressTrendingPremium": "https://indianexpress.com/section/trending/",
-            "indianExpressScience": "https://indianexpress.com/section/technology/science/",
             "indianExpressTechnology": "https://indianexpress.com/section/technology/",
             "indianExpressSports": "https://indianexpress.com/section/sports/",
-            "indianExpressBusiness": "https://",
-            "indianExpressOpinion": "https://",
+            "indianExpressOpinion": "none",
             "theHinduMain": "none",
         }
         self.cities = ["kolkata", "delhi", "mumbai", "bengaluru", "pune", "chennai"]
         self.max_pages = 15
 
-    def validateNum(self, num):
+    def validateNum(self, num) -> int:
+        """
+        validates parameter 'news_count' and sets it to 10 if not given / None
+
+        Args:
+            num (any): _description_
+
+        Returns:
+            num:int : type converts and sets to 10 if None
+        """
         if not str(num).isdigit():
             num = 10
         elif num is None:
@@ -39,13 +46,11 @@ class NewsScrape:
             num = int(num)
         return num
 
-    # collecting news
-    # --------------------
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # top news -> change it to trending scraping and GLOBAL if needed
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def getTopNews(self, num=10) -> list:
-        # all the news are not in a fixed place so ther are multiplpe same news fetched.
-
         news_num = self.validateNum(num)
-
         url = self.urls["indianExpressMain"]
         fetched_news_data = []
         count = 0
@@ -117,6 +122,9 @@ class NewsScrape:
 
         return fetched_news_data
 
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # India news
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def getIndiaNews(self, num=10):
         pgNo = 1
         baseUrl = self.urls["indianExpressIndia"]
@@ -156,6 +164,9 @@ class NewsScrape:
 
         return fetched_news_data
 
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Indian cities news
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def getCitiesNews(self, cityname="kolkata", num=10):
         pgNo = 1
         baseUrl = self.urls["indianExpressCities"]
@@ -198,6 +209,9 @@ class NewsScrape:
 
         return fetched_news_data
 
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Others news
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def getOthersNews(self, section_name="sports", num=10):
         pgNo = 1
         baseUrl = f'{self.urls["indianExpressBase"]}{section_name}/'
@@ -238,8 +252,11 @@ class NewsScrape:
 
         return fetched_news_data
 
-    # Extract news content
-    # ---------------------
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Extract news pages
+    # first: for top news category and
+    # second: for india news category
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def extractNewsContent(self, url):
         soup = make_soup(url)
 
@@ -355,6 +372,9 @@ class NewsScrape:
 
         return heading, subheading, imgUrl, news_data_string
 
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # India News Scraper
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def extractNewsContentIndia(self, url):
         soup = make_soup(url)
 
@@ -420,6 +440,7 @@ class NewsScrape:
         return heading, subheading, imgUrl, news_data_string
 
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if __name__ == "__main__":
     news = NewsScrape()
     data = news.getTopNews(20)
