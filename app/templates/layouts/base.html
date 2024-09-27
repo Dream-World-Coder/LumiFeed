@@ -151,7 +151,7 @@
               {% if current_user.is_authenticated %}
               <form id="profile-form" action="/profile" method="GET">
                 <div class="profile" onclick="document.getElementById('profile-form').submit();">
-                  <img src="{{url_for('static', filename=current_user.profile_pic)}}" alt="profile pic">
+                  <img src="{{url_for('static', filename=current_user.profile_pic)}}" alt="profile pic" />
                 </div>
               </form>
               {% else %}
@@ -194,12 +194,12 @@
         <h2 class="category-title flexed justify-between">
           <span>Select News Category</span>
           <span class="dropdown">
-            <img class="d-img-1" style="display: inline" src="{{url_for('static', filename='icons/plus2.svg)}}" alt="Expand" srcset="" />
-            <img class="d-img-2" style="display: none" src="{{url_for('static', filename='icons/minus2.svg)}}" alt="Collapse" srcset="" />
+            <img class="d-img-1" style="display: inline" src="{{url_for('static', filename='icons/plus2.svg')}}" alt="Expand" srcset="" />
+            <img class="d-img-2" style="display: none" src="{{url_for('static', filename='icons/minus2.svg')}}" alt="Collapse" srcset="" />
           </span>
         </h2>
         <!-- options, etc -->
-        <div class="options flex-col align-start" style="display: none">
+        <div class="options flex-col align-start" style="display: flex">
           <div class="con flex-col align-center">
             <!-- options for news type -->
             <div class="options__container flexed f-gap-2">
@@ -224,32 +224,32 @@
                 <label class="custom-radio" for="tech_news">Technology</label>
               </div>
               <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_1" required />
-                <label class="custom-radio" for="other_news_1">classified</label>
+                <input class="border" type="radio" name="news_type" value="business" id="other_news_1" required />
+                <label class="custom-radio" for="other_news_1">Business</label>
               </div>
               <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_2" required />
-                <label class="custom-radio" for="other_news_2">Technology</label>
+                <input class="border" type="radio" name="news_type" value="health" id="other_news_2" required />
+                <label class="custom-radio" for="other_news_2">Health</label>
               </div>
               <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_3" required />
-                <label class="custom-radio" for="other_news_3">classified</label>
+                <input class="border" type="radio" name="news_type" value="cricket" id="other_news_3" required />
+                <label class="custom-radio" for="other_news_3">Cricket</label>
               </div>
               <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_4" required />
-                <label class="custom-radio" for="other_news_4">classified</label>
+                <input class="border" type="radio" name="news_type" value="sports" id="other_news_4" required />
+                <label class="custom-radio" for="other_news_4">Sports</label>
               </div>
               <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_5" required />
-                <label class="custom-radio" for="other_news_5">classified</label>
+                <input class="border" type="radio" name="news_type" value="political_pulse" id="other_news_5" required />
+                <label class="custom-radio" for="other_news_5">Political Pulse</label>
               </div>
               <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_6" required />
-                <label class="custom-radio" for="other_news_6">classified</label>
+                <input class="border" type="radio" name="news_type" value="lifestyle" id="other_news_6" required />
+                <label class="custom-radio" for="other_news_6">Lifestyle</label>
               </div>
               <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_7" required />
-                <label class="custom-radio" for="other_news_7">classified</label>
+                <input class="border" type="radio" name="news_type" value="entertainment" id="other_news_7" required />
+                <label class="custom-radio" for="other_news_7">Entertainment</label>
               </div>
             </div>
             <div class="options__contaioner_sibling flexed justify-between">
@@ -268,7 +268,7 @@
           <!-- cities to choose -->
           <div class="city-name-options flexed justify-start f-gap-2" style="display: none">
             <label for="name_of_city">Choose city:</label>
-            <select name="name_of_city">
+            <select id="name_of_city" name="name_of_city">
               <option value="kolkata">Kolkata</option>
               <option value="bangalore">Bangalore</option>
               <option value="delhi">Delhi</option>
@@ -340,7 +340,7 @@
       </div>
 
       <!-- search results -->
-      <div class="search-reasults relative flex-col f-gap-1">
+      <div class="search-reasults relative flex-col f-gap-1" style="display: none">
         <div id="ajax_desktop" class="res__container full" itemprop="mainContentOfPage"></div>
       </div>
     </div>
@@ -448,7 +448,7 @@
         <meta name="copyright" content="Subhajit Gorai" />
       </div>
     </footer>
-    
+
     <!-- script.js -->
     <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
 

@@ -18,9 +18,9 @@ def profile():
     return render_template("profile.html")
 
 
-@app.route("/<any>")
-@app.route("/home/<any>")
-def anything(any):
+@app.route("/<path:any_path>")
+@app.route("/home/<path:any_path>")
+def anything(any_path):
     return render_template("errors/404.html")
 
 

@@ -22,7 +22,7 @@ def remove_article():
 
         db.session.delete(article)
         db.session.commit()
-        return jsonify({"message": "Article removed successfully!"}), 200
+        return jsonify({"message": "Article removed"}), 200
 
     except Exception as e:
         # Use logging here in production, like logging.error(str(e))

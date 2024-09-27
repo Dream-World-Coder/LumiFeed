@@ -10,6 +10,7 @@ function displayMessage(message) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const searchForm = document.getElementById("search-form");
+  const searchReasults = document.querySelector(".search-reasults");
 
   searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return response.json();
       })
       .then((data) => {
+        searchReasults.style.display = "flex";
         document.getElementById("ajax_desktop").innerHTML = data.html;
         findArticle();
       })

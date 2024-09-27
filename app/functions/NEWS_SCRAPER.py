@@ -16,6 +16,7 @@ class NewsScrape:
     def __init__(self) -> None:
         self.urls = {
             "indianExpressMain": "https://indianexpress.com/",
+            "indianExpressBase": "https://indianexpress.com/section/",
             "indianExpressIndia": "https://indianexpress.com/section/india/",
             "indianExpressCities": "https://indianexpress.com/section/cities/",
             "indianExpressTrendingPremium": "https://indianexpress.com/section/trending/",
@@ -25,7 +26,6 @@ class NewsScrape:
             "indianExpressBusiness": "https://",
             "indianExpressOpinion": "https://",
             "theHinduMain": "none",
-            # india type news are same, so just change the section name, pass it as a paaram
         }
         self.cities = ["kolkata", "delhi", "mumbai", "bengaluru", "pune", "chennai"]
         self.max_pages = 15
@@ -198,9 +198,9 @@ class NewsScrape:
 
         return fetched_news_data
 
-    def getScienceNews(self, num=10):
+    def getOthersNews(self, section_name="sports", num=10):
         pgNo = 1
-        baseUrl = self.urls["indianExpressScience"]
+        baseUrl = f'{self.urls["indianExpressBase"]}{section_name}/'
         news_num = self.validateNum(num)
         fetched_news_data = []
         count = 0

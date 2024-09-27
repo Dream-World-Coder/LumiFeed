@@ -24,8 +24,8 @@ function fetchNews(event) {
   const formData = new FormData(form);
   const newsType = formData.get("news_type");
   const newsCount = formData.get("news_count");
-  const cityChoice = formData.get("city_choice") || "";
-  const url = `/fetchnews?news_type=${newsType}&news_count=${newsCount}&city_choice=${cityChoice}`;
+  const name_of_city = formData.get("name_of_city") || "";
+  const url = `/fetchnews?news_type=${newsType}&news_count=${newsCount}&name_of_city=${name_of_city}`;
 
   fetch(url)
     .then((response) => {
@@ -147,6 +147,3 @@ function populateNewsFromLocalStorage() {
 
 // Call populateNewsFromLocalStorage when the page loads
 window.addEventListener("load", populateNewsFromLocalStorage);
-
-// Attach the event listener to the form
-document.getElementById("fetch-news-form").addEventListener("submit", fetchNews);
