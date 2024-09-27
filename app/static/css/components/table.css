@@ -2,7 +2,7 @@
   --th-font-size: 1rem;
   --td-font-size: 1rem;
   --p: 10px;
-  --con-m-left: 6rem;
+  --con-m-left: 2rem;
 
   /* all colors are manually set, dont try to chnage without inspecting */
   /* odd & even are properly set */
@@ -20,7 +20,7 @@
 
 .container {
   position: relative;
-  width: 65%;
+  width: var(--width-val);
   height: auto;
   display: flex;
   justify-content: center;
@@ -110,7 +110,7 @@ body.dark-mode .saving_options img {
   filter: invert(1);
 }
 
-.td2:hover .saving_options {
+.rows:hover .saving_options {
   display: flex;
 }
 
@@ -130,6 +130,9 @@ body.dark-mode .saving_options img {
     font-size: 0.8rem;
     padding: 6px 3px 6px 3px;
   }
+  .saving_options {
+    display: flex;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -143,5 +146,8 @@ body.dark-mode .saving_options img {
   .data_box {
     font-size: 1rem;
     padding: 6px 3px 6px 3px;
+  }
+  .saving_options {
+    display: flex;
   }
 }

@@ -29,7 +29,7 @@ def generate_search_reasult(matches: list) -> str:
 
 def gen_table(data: list) -> str:
     html_table = """
-                    <tr class="tr1 rows">
+                    <tr class="tr1">
                         <th class="th1">NO</th>
                         <th class="th2">TITLE</th>
                         <th class="th3">READ HERE</th>
@@ -61,7 +61,7 @@ def gen_table(data: list) -> str:
 
 def gen_table_india_news(data: list) -> str:
     html_table = """
-                    <tr class="tr1 rows">
+                    <tr class="tr1">
                         <th class="th1">NO</th>
                         <th class="th2">TITLE</th>
                         <th class="th3">DATE</th>
@@ -337,11 +337,11 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                         <h1 id="ajax_h1">
                             {heading}
                         </h1>
-                        
+
                         <h3 id="ajax_h3">
                             {subheading}
                         </h3>
-                        
+
                         <p id="ajax_p" class="">
                             {news_content}
                         </p>
@@ -350,7 +350,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                 <div class="ss"></div>
     """
 
-    scripts_and_all = """    
+    scripts_and_all = """
                     <script>
                         document.addEventListener('DOMContentLoaded', () => {
                             // Dark mode
@@ -360,15 +360,15 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                                 document.documentElement.classList.toggle('invert');
                                 img.classList.toggle('invert');
                             });
-                    
+
                             const p = document.getElementById('ajax_p');
-                            
+
                             // Function to get the root font size
                             function getRootFontSize() {
                                 const rootFontSize = window.getComputedStyle(document.documentElement).fontSize;
                                 return parseFloat(rootFontSize);
                             }
-                    
+
                             // Function to get the current font size in rem
                             function getFontSizeInRem(element) {
                                 const fontSizePx = window.getComputedStyle(element).fontSize;
@@ -376,19 +376,19 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                                 const rootFontSize = getRootFontSize();
                                 return fontSize / rootFontSize;
                             }
-                    
+
                             // Increase font size by 0.25rem
                             document.querySelector('.icon2').addEventListener('click', () => {
                                 const currentSizeRem = getFontSizeInRem(p);
                                 p.style.fontSize = `${currentSizeRem + 0.25}rem`;
                             });
-                    
+
                             // Decrease font size by 0.25rem
                             document.querySelector('.icon3').addEventListener('click', () => {
                                 const currentSizeRem = getFontSizeInRem(p);
                                 p.style.fontSize = `${currentSizeRem - 0.25}rem`;
                             });
-                    
+
                             // Restore default font size
                             document.querySelector('.icon4').addEventListener('click', () => {
                                 // Assuming default font size is 1rem for desktop and 0.8rem for mobile
@@ -400,7 +400,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
                             });
                         });
                     </script>
-                    
+
                     <!-- ajax for summary -->
                     <script>
                     document.addEventListener('DOMContentLoaded', () => {

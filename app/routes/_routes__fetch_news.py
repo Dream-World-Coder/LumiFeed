@@ -10,6 +10,8 @@ def fetchnews():
     news_count = request.args.get("news_count")
     city_choice = request.args.get("city_choice")
 
+    if not news_count:
+        news_count = 25
     try:
         news_count = int(news_count)
         if news_count < 1 or news_count > 256:

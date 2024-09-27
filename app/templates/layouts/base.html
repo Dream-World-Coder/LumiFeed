@@ -127,7 +127,7 @@
     </div>
 
     <header class="fixed dark-glass" itemscope itemtype="https://schema.org/WPHeader">
-      <div class="header-wrapper full flex align-center">
+      <div class="header-wrapper full flex align-center section-element">
         <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
           <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="LumiFeed Logo" itemprop="logo" />
           <span id="logo-text" itemprop="name">LumiFeed</span>
@@ -189,55 +189,103 @@
     </header>
 
     <!--find news type, fetch_news -->
-    <div itemscope itemprop="inputOfData" class="fetch_news borderX" id="table-start">
+    <div itemscope itemprop="inputOfData" class="fetch_news section-element" id="table-start">
       <form id="fetch-news-form" onsubmit="fetchNews(event)">
-        <h2>Select News Category</h2>
-        <div class="options flex-col align-start">
-          <div class="op op1 flex align-center">
-            <input class="border" type="radio" name="news_type" value="top" id="top_news" required />
-            <label for="top_news">Top News</label>
-          </div>
-          <div class="op op2 flex align-center">
-            <input class="border" type="radio" name="news_type" value="india" id="india_news" required />
-            <label for="india_news">India News</label>
-          </div>
-          <div id="cyt" class="op op3 flex align-center">
-            <input class="border" type="radio" name="news_type" value="city" id="city_news" required />
-            {% set cities = ['Kolkata', 'Bangalore', 'Delhi', 'Mumbai', 'Lucknow'] %}
-            <label for="city_news">City News {{ cities }}</label>
-          </div>
-
-          <br />
-
-          <div class="opp">
-            <label id="lb" for="news_count">Enter Num of News to Fetch:</label>
-            <input aria-valuemax="256" aria-valuemin="1" aria-valuenow="1" type="number" name="news_count" id="news_count" min="1" max="256" required />
-          </div>
-
-          <div class="city-option flexed" id="c-o">
-            <span id="sps" class="block op">Choose city:</span>
-            <div id="cpc" class="op f-gap-2">
-              {% for city in cities %}
-              <div class="city_op flexed">
-                <input type="radio" name="city_choice" value="{{ city.lower() }}" id="{{ city }}" />
-                <label for="{{ city }}">{{ city }}</label>
+        <h2 class="category-title flexed justify-between">
+          <span>Select News Category</span>
+          <span class="dropdown">
+            <img class="d-img-1" style="display: inline" src="{{url_for('static', filename='icons/plus2.svg)}}" alt="Expand" srcset="" />
+            <img class="d-img-2" style="display: none" src="{{url_for('static', filename='icons/minus2.svg)}}" alt="Collapse" srcset="" />
+          </span>
+        </h2>
+        <!-- options, etc -->
+        <div class="options flex-col align-start" style="display: none">
+          <div class="con flex-col align-center">
+            <!-- options for news type -->
+            <div class="options__container flexed f-gap-2">
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="top" id="top_news" required />
+                <label class="custom-radio" for="top_news">Trending</label>
               </div>
-              {% endfor %}
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="india" id="india_news" required />
+                <label class="custom-radio" for="india_news">India</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="city" id="city_news" required />
+                <label class="custom-radio" for="city_news">City Wise</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="science" id="sci_news" required />
+                <label class="custom-radio" for="sci_news">Science</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="tech" id="tech_news" required />
+                <label class="custom-radio" for="tech_news">Technology</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="tech" id="other_news_1" required />
+                <label class="custom-radio" for="other_news_1">classified</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="tech" id="other_news_2" required />
+                <label class="custom-radio" for="other_news_2">Technology</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="tech" id="other_news_3" required />
+                <label class="custom-radio" for="other_news_3">classified</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="tech" id="other_news_4" required />
+                <label class="custom-radio" for="other_news_4">classified</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="tech" id="other_news_5" required />
+                <label class="custom-radio" for="other_news_5">classified</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="tech" id="other_news_6" required />
+                <label class="custom-radio" for="other_news_6">classified</label>
+              </div>
+              <div class="flex align-center">
+                <input class="border" type="radio" name="news_type" value="tech" id="other_news_7" required />
+                <label class="custom-radio" for="other_news_7">classified</label>
+              </div>
+            </div>
+            <div class="options__contaioner_sibling flexed justify-between">
+              <div class="opp">
+                <label id="lb" for="news_count">Enter Num of News to Fetch:</label>
+                <input aria-valuemax="256" aria-valuemin="1" aria-valuenow="1" type="number" name="news_count" id="news_count" min="1" max="256" placeholder="25" />
+              </div>
+
+              <div class="btns flex f-gap-2">
+                <button class="btn" type="submit">Fetch</button>
+                <button class="btn" type="reset">Reset</button>
+              </div>
             </div>
           </div>
 
-          <br />
-
-          <div class="btns flex f-gap-2">
-            <button class="btn" type="submit">Fetch</button>
-            <button class="btn" type="reset">Reset</button>
+          <!-- cities to choose -->
+          <div class="city-name-options flexed justify-start f-gap-2" style="display: none">
+            <label for="name_of_city">Choose city:</label>
+            <select name="name_of_city">
+              <option value="kolkata">Kolkata</option>
+              <option value="bangalore">Bangalore</option>
+              <option value="delhi">Delhi</option>
+              <option value="mumbai">Mumbai</option>
+              <option value="lucknow">Lucknow</option>
+              <option value="pune">Pune</option>
+              <option value="hyderabad">Hyderabad</option>
+              <option value="chennai">Chennai</option>
+              <option value="ahmedabad">Ahmedabad</option>
+            </select>
           </div>
         </div>
       </form>
     </div>
 
     <main role="main" itemscope itemtype="https://schema.org/WebPage" itemprop="mainContentOfPage">
-      <div class="container">
+      <div class="container section-element">
         <!-- table -->
         <table id="news-table" itemscope itemtype="https://schema.org/Table" class="">
           <meta itemprop="tableOfNews" content="Table of News" />
@@ -325,7 +373,7 @@
 
     <!-- about + contact -->
     <div class="about-hanger" id="about"></div>
-    <div role="aboutInformation" itemscope itemtype="https://schema.org/AboutPage" class="about">
+    <div role="aboutInformation" itemscope itemtype="https://schema.org/AboutPage" class="about section-element">
       <h2>About</h2>
       <p>
         Welcome to
@@ -349,7 +397,7 @@
       </p>
       <div class="contact-hanger" id="contact"></div>
     </div>
-    <div role="contactInformation" itemscope itemtype="https://schema.org/ContactPage" class="contact">
+    <div role="contactInformation" itemscope itemtype="https://schema.org/ContactPage" class="contact section-element">
       <h2>Contact</h2>
       <p>
         <em itemprop="Author" itemscope itemtype="https://schema.org/Author" name="Subhajit Gorai">Subhajit Gorai</em>
@@ -393,7 +441,7 @@
       </p>
     </div>
 
-    <footer role="footer" itemscope itemtype="https://schema.org/WPFooter">
+    <footer role="footer" itemscope itemtype="https://schema.org/WPFooter" class="section-element">
       <div class="sp" id="table-end"></div>
       <div class="cen cc">
         © 2024 Subhajit Gorai. All rights reserved.
@@ -434,6 +482,7 @@
       });
     </script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/search.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/functions/fetch_news.js')}}"></script>
 
     <!-- utils -->
     <script type="text/javascript" src="{{url_for('static', filename='js/utils/emailing.js')}}"></script>

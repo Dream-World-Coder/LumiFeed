@@ -64,7 +64,7 @@ function populateNewsFromLocalStorage() {
       if (isIndiaNews) {
         // If the rows have 4 elements, use the India news structure
         htmlTable = `
-          <tr class="tr1 rows">
+          <tr class="tr1">
             <th class="th1">NO</th>
             <th class="th2">TITLE</th>
             <th class="th3">DATE</th>
@@ -100,7 +100,7 @@ function populateNewsFromLocalStorage() {
       } else {
         // If the rows have 4 elements, use the other news structure
         htmlTable = `
-          <tr class="tr1 rows">
+          <tr class="tr1">
             <th class="th1">NO</th>
             <th class="th2">TITLE</th>
             <th class="th3">READ HERE</th>

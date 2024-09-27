@@ -46,11 +46,19 @@ input {
   display: inline !important;
   border-width: 1px !important;
 }
+
 #search {
   background-color: transparent;
   border-color: var(--v-th) !important;
-  border-radius: 20px !important;
-  border-width: 1px !important;
+  border-radius: 0px !important;
+  border-width: 2px !important;
+  display: block;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+body.dark-mode .find #search {
+  border-color: rgb(108, 108, 108, 0.9) !important;
 }
 .btn {
   font-family: poppins, "Times New Roman", Times, serif !important;
@@ -67,6 +75,8 @@ input {
   }
 }
 
+/* .section-element {} */
+
 /* use different class for different styling */
 .flash_ul {
   position: relative;
@@ -74,8 +84,8 @@ input {
   left: 0;
   width: 100%;
   height: 30px;
-  background-color: #dd2b4f4d;
-  color: black;
+  background-color: #dd2b4f;
+  color: rgb(255, 255, 255);
   font-family: poppins;
   list-style-type: none;
   font-size: 1rem;
@@ -108,8 +118,8 @@ input {
   top: 20px;
   right: 20px;
   padding: 10px 20px;
-  background-color: #ffe5e5; /* Very light pink */
-  color: #333;
+  background-color: var(--clr2); /* Very light pink */
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   border-radius: 4px;

@@ -1,7 +1,5 @@
 :root {
   --header-height: 5rem;
-  --fetch-news-height: 24rem;
-  --fetch-news-m-top: calc(var(--header-height) + 20px);
   --r: 70px;
 }
 

@@ -1,9 +1,6 @@
 :root {
   --b-rad: 10px;
-
-  --w: 310px;
   --t: calc(var(--fetch-news-height) + var(--fetch-news-m-top));
-  --r: 70px;
   --res-h: 70vh;
   --icon-width: 40px;
   --icon-height: 40px;
@@ -38,22 +35,33 @@
         they all are just for show, bcz, js regulates the clr of them.
     -------------- */
   --cx: rgb(174, 174, 174);
+
+  --r: 70px;
+  --w: 310px;
 }
 
 .find {
   position: fixed;
-  top: calc(var(--t) - 22rem);
-  right: var(--r);
+  top: calc(var(--header-height) + 20px);
+  right: var(--con-m-left);
   width: var(--w);
   display: flex;
+  /* border: 1px solid white; */
 }
 
-.find.shrink {
+@media (width > 1500px) {
+  :root {
+    --w: 400px;
+  }
+  .find {
+    width: var(--w);
+  }
+}
+
+/* .find.shrink {
   top: calc(var(--t) - 26rem);
-}
+} */
 
-#search-form,
-#search,
 #submit {
   display: block;
 }

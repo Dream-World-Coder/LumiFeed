@@ -1,44 +1,145 @@
+:root {
+  --fetch-news-height: auto;
+  --fetch-news-m-top: calc(var(--header-height) + 20px);
+  --width-val: 70%;
+}
+
+/* in desktop top-bottom btns not needed, and completely make .find invisible */
+
 .fetch_news {
   position: relative;
   margin-top: calc(var(--header-height) + 20px);
   height: var(--fetch-news-height);
-  width: 55%;
+  width: var(--width-val);
   margin-left: var(--con-m-left);
-  padding-top: 10px;
+  padding-top: 20px;
   padding-bottom: 10px;
+  padding-left: 20px;
   font-size: 1rem;
-  transition: 0.4s;
+  border: 1px solid rgba(202, 202, 202, 1);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  /* transition: all 0.3s; */
 
   & h2 {
     font-size: 2.5rem;
-    margin-top: 2rem;
+    margin-top: 0rem;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
+    & span {
+      display: block;
+    }
+
+    & span:nth-last-child(1) {
+      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+
+      & img {
+        position: relative;
+        width: 25px;
+        height: 25px;
+        border-radius: 5px;
+      }
+    }
   }
 
   & label {
     font-family: poppins, "Times New Roman", Times, serif !important;
-    font-size: 1rem !important;
+    font-size: 1rem;
   }
 }
+body.dark-mode .fetch_news {
+  border: 1px solid rgba(108, 108, 108, 0.9);
+}
+
 #news_count {
   border-color: var(--v-th) !important;
 }
-/* op-> option || .options -> op*3 + .opp + #c-o + .btns */
-.opp,
-.op {
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  overflow: hidden;
+}
+body.dark-mode .dropdown img {
+  filter: invert(1);
+}
+input:is([type="radio"], [type="checkbox"]) {
+  display: none;
+}
+input[type="radio"] {
+  display: none !important;
+}
+
+/* Style the label to look like a custom radio button */
+label.custom-radio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 80px;
+  border-radius: 10px;
+  position: relative;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: rgba(244, 244, 244, 1);
+  border: 1px solid rgba(202, 202, 202, 1);
+  color: black;
+}
+
+body.dark-mode label.custom-radio {
+  background-color: rgba(108, 108, 108, 0.5);
+  border: 1px solid rgba(108, 108, 108, 0.9);
+  color: #fff;
+}
+
+/* Placeholder text for the radio button */
+label.custom-radio::before {
+  content: attr(data-placeholder);
+  color: #888;
+  font-size: 18px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Style for the selected state */
+input[type="radio"]:checked + label.custom-radio {
+  background-color: var(--clr2);
+  color: #fff;
+  border-color: var(--clr2);
+}
+
+.options__container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* border: 1px solid white; */
+  height: 180px;
+  width: 100%;
+  flex-wrap: wrap;
+  padding-left: 0px;
+  padding-right: 20px;
+}
+.options__contaioner_sibling {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid white; */
+}
+
+.opp {
   padding-left: 60px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.op {
-  gap: 0px;
-}
-
-.op input {
-  width: 20px !important;
-}
 .opp input {
   width: 120px !important;
 }
@@ -48,7 +149,7 @@
 
 @media (width > 1024px) {
   .btns {
-    margin-left: 60px;
+    padding-right: 40px;
   }
 }
 
@@ -58,14 +159,12 @@
   opacity: 1;
 }
 
-#c-o {
-  display: none;
+.city-name-options {
+  margin-top: 1rem;
+  font-size: 1rem;
+  padding-left: 60px;
+  /* display: none; */
 }
-#c-o.visible {
-  display: flex;
-  font-size: 1rem !important;
-}
-
 /* ----------------------------------------------------------------- */
 
 #sps {
@@ -82,7 +181,7 @@
   font-size: 1rem !important;
 }
 
-@media (min-width: 300px) and (max-width: 767px) {
+@media (max-width: 1024px) {
   :root {
     --con-m-left: 20px;
     /* why not working? */
@@ -90,37 +189,7 @@
   .fetch_news {
     margin-left: 20px;
     width: 95%;
-    height: 18rem;
-
-    & h2 {
-      font-size: 1.5rem;
-      margin-top: 1.3rem;
-    }
-
-    & label {
-      font-size: 1rem;
-    }
-  }
-  .op,
-  .opp {
-    padding-left: 15px;
-    gap: 5px;
-  }
-  #cyt,
-  #cpc {
-    display: none;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  :root {
-    --con-m-left: 20px;
-    /* why not working? */
-  }
-  .fetch_news {
-    margin-left: 20px;
-    width: 95%;
-    height: 18rem;
+    height: auto;
 
     & h2 {
       font-size: 2rem;
@@ -136,8 +205,55 @@
     padding-left: 15px;
     gap: 5px;
   }
-  #cyt,
-  #cpc {
-    display: none;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --con-m-left: 20px;
+  }
+  .fetch_news {
+    margin-top: calc(var(--header-height) + 10px);
+    margin-right: 10px;
+    margin-left: 10px;
+    width: calc(100% - 20px);
+    height: auto;
+    padding: 5px;
+
+    & h2 {
+      font-size: 1.5rem;
+      margin-top: 0;
+    }
+
+    & label {
+      font-size: 0.7rem;
+    }
+  }
+  .opp {
+    width: 250px;
+
+    & input {
+      width: 10%;
+    }
+  }
+
+  .btns {
+    gap: 5px !important;
+    padding-right: 30px;
+  }
+
+  label.custom-radio {
+    width: 80px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 0.65rem;
+  }
+
+  .options__container {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: 105px;
+    gap: 5px !important;
+    padding-left: 0px;
+    padding-right: 10px;
   }
 }

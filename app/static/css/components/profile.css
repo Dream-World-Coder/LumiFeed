@@ -291,8 +291,12 @@ body.dark-mode .delete_article:hover {
   display: flex;
   flex-direction: column;
   background-color: var(--normal-bg-clr);
+  background-color: rgba(244, 244, 244, 0.5);
   border: 1px solid var(--normal-border-clr);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 1000 !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   /* display: none; 
   have to use style="display:'none';"*/
 
@@ -305,8 +309,9 @@ body.dark-mode .delete_article:hover {
 
 body.dark-mode .profile_settings {
   background-color: var(--dark-mode-bg-clr);
-  background-color: #373737;
+  background-color: #37373771;
   border: 1px solid var(--dark-mode-border-clr);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .user_details {

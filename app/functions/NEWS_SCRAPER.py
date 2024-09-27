@@ -18,8 +18,14 @@ class NewsScrape:
             "indianExpressMain": "https://indianexpress.com/",
             "indianExpressIndia": "https://indianexpress.com/section/india/",
             "indianExpressCities": "https://indianexpress.com/section/cities/",
-            "indianExpressTrendingPremium": "https://indianexpress.com/section/trending/page/1/",
+            "indianExpressTrendingPremium": "https://indianexpress.com/section/trending/",
+            "indianExpressScience": "https://indianexpress.com/section/technology/science/",
+            "indianExpressTechnology": "https://indianexpress.com/section/technology/",
+            "indianExpressSports": "https://indianexpress.com/section/sports/",
+            "indianExpressBusiness": "https://",
+            "indianExpressOpinion": "https://",
             "theHinduMain": "none",
+            # india type news are same, so just change the section name, pass it as a paaram
         }
         self.cities = ["kolkata", "delhi", "mumbai", "bengaluru", "pune", "chennai"]
         self.max_pages = 15
@@ -188,6 +194,46 @@ class NewsScrape:
                 logging.error(f"Error processing page {pgNo}: {e}")
                 return fetched_news_data
 
+            pgNo += 1
+
+        return fetched_news_data
+
+    def getScienceNews(self, num=10):
+        pgNo = 1
+        baseUrl = self.urls["indianExpressScience"]
+        news_num = self.validateNum(num)
+        fetched_news_data = []
+        count = 0
+        serial = 0
+
+        while count < news_num and pgNo <= self.max_pages:
+            url = baseUrl + f"page/{pgNo}/"
+            soup = make_soup(url)
+            content = (
+                soup.body.find("div", id="section")
+                .find("div", class_="container")
+                .find("div", class_="row")
+                .find("div", class_="leftpanel")
+                .find("div", class_="nation")
+            )
+            articles_list = content.find_all("div", class_="articles")
+
+            for article in articles_list:
+                if count >= news_num:
+                    break
+                serial += 1
+
+                snaps_div = article.find("div", class_="snaps")
+                news_link = quote(snaps_div.a.get("href", "#"), safe=":/")
+
+                other_part = article.find("div", class_="img-context")
+                news_title = other_part.h2.a.get("title")
+                news_date = other_part.find("div", class_="date").text
+                addtional_info = other_part.p.text
+
+                zip_list = [serial, news_title, news_date, news_link]
+                fetched_news_data.append(zip_list)
+                count += 1
             pgNo += 1
 
         return fetched_news_data

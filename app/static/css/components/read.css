@@ -1,6 +1,6 @@
 :root {
   --read-h: 85vh;
-  --read-w: 90vw;
+  --read-w: 70%;
   --ajax-p-fs: 1rem;
 }
 
@@ -65,10 +65,10 @@
   overflow-x: hidden;
 }
 .read__page h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 .read__page h3 {
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   color: rgb(107, 107, 107);
 }
 .read__page p {
@@ -110,42 +110,10 @@
   border-radius: 0;
 }
 
-@media (min-width: 150px) and (max-width: 768px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   #read {
     height: 75vh;
-  }
-  .read__navigations {
-    height: 2rem;
-  }
-  .read__page {
-    height: calc(100% - 2rem);
-  }
-  .read__page h1 {
-    font-size: 1.15rem;
-  }
-  .read__page h3 {
-    font-size: 0.75rem;
-  }
-  .read__page p {
-    font-size: 0.65rem;
-  }
-  .read__page img {
-    width: min(100%, 350px);
-    height: 150px;
-  }
-  .read__icons,
-  .read__icons img {
-    width: 20px;
-    height: 20px;
-  }
-  #read__preview {
-    top: 3px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1025px) {
-  #read {
-    height: 75vh;
+    width: 70%;
   }
   .read__navigations {
     height: 2rem;
@@ -161,6 +129,42 @@
   }
   .read__page p {
     font-size: 0.75rem;
+  }
+  .read__page img {
+    width: min(100%, 350px);
+    height: 150px;
+  }
+  .read__icons,
+  .read__icons img {
+    width: 20px;
+    height: 20px;
+  }
+  #read__preview {
+    top: 3px;
+  }
+}
+
+@media (max-width: 768px) {
+  #read {
+    height: 75vh;
+    width: 90%;
+    top: calc(var(--header-height) + 1rem);
+    left: calc(5%);
+  }
+  .read__navigations {
+    height: 2rem;
+  }
+  .read__page {
+    height: calc(100% - 2rem);
+  }
+  .read__page h1 {
+    font-size: 1.15rem;
+  }
+  .read__page h3 {
+    font-size: 0.75rem;
+  }
+  .read__page p {
+    font-size: 0.65rem;
   }
   .read__page img {
     width: min(100%, 350px);

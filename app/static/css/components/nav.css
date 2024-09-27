@@ -22,12 +22,13 @@ nav {
 .li2 {
   border-radius: 15px;
   transition: all 0.3s;
+  margin: 0;
+  padding: 0;
 }
 
 .li1:hover,
 .li2:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0px 2px 0px rgba(221, 43, 79, 0.3), 0 0px 0px 4px rgba(221, 43, 79, 0.3);
   transition: all 0.3s;
 }
 
@@ -35,14 +36,21 @@ nav .ul .li1,
 nav .ul .li2 {
   position: fixed;
   display: flex;
-  top: calc(100dvh - 50px);
+  top: calc(100dvh - 60px);
+}
+
+@media (min-width: 1500px) {
+  nav .ul .li1,
+  nav .ul .li2 {
+    top: calc(100dvh - 100px);
+  }
 }
 
 nav .ul .li1 {
-  right: 285px;
+  right: calc(var(--w) - 60px);
 }
 nav .ul .li2 {
-  right: 330px;
+  right: calc(var(--w) - 10px);
 }
 
 .li3 a,

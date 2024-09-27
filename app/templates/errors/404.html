@@ -1,0 +1,13 @@
+{% extends "layouts/error-base.html" %}
+
+{% block title %}Page Not Found - 404{% endblock %}
+
+{% block image %}
+<figure>
+    <img loading="lazy" src="{{url_for('static', filename='images/error-um.png')}}" alt="error image" />
+  </figure>
+{% endblock %}
+
+{% block redirect %} {% endblock %}
+
+{% block heading %} Page Not Found - 404{% endblock %}

@@ -18,6 +18,12 @@ def profile():
     return render_template("profile.html")
 
 
+@app.route("/<any>")
+@app.route("/home/<any>")
+def anything(any):
+    return render_template("errors/404.html")
+
+
 @app.route("/db_create_all_123_lorem")
 def create_tables():
     db.create_all()

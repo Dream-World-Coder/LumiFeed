@@ -74,8 +74,9 @@ function saveArticleInOtherCollections() {
     btn.addEventListener("click", () => {
       var articleTitle = tdContainingTitle[index].textContent;
       var articleUrl = aContainingUrl[index].getAttribute("href");
-      // input this later
       // options : current_user.collections except "Read Later"
+      // current.user.collections :- set them in localhost in /new_collection route
+      // now make the input options dropdown
       var parentCollection = "Liked Articles";
       sendArticleToServer("/add_to_different_collections", articleTitle, articleUrl, parentCollection);
     });
