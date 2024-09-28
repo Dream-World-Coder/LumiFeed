@@ -7,7 +7,32 @@ from flask import (
 )
 from app.routes import app, db, User
 from flask_login import login_user, login_required, logout_user
-from sqlalchemy.exc import IntegrityError, DataError, OperationalError
+from sqlalchemy.exc import IntegrityError
+import random, string, smtplib
+from email.mime.text import MIMEText
+
+
+def generate_verification_token():
+    return "".join(random.choices(string.ascii_uppercase + string.digits, k=64))
+
+
+def send_verification_email(user_email, token):
+    subject = "Verify your account"
+    verification_link = f"http://yourdomain.com/verify?token={token}"
+    body = f"Please click the link to verify your account: {verification_link}"
+
+    msg = MIMEText(body)
+    msg["Subject"] = subject
+    msg["From"] = "lumifeed101@gmail.com"
+    msg["To"] = user_email
+
+    try:
+        with smtplib.SMTP("smtp.yourmailserver.com", 587) as server:
+            server.starttls()
+            server.login("your_email@example.com", "your_password")
+            server.sendmail("your_email@example.com", user_email, msg.as_string())
+    except Exception as e:
+        print(f"Error sending email: {e}")
 
 
 @app.route("/login", methods=["GET", "POST"])
