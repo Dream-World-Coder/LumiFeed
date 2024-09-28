@@ -385,8 +385,8 @@ label i svg {
 }
 @media screen and (max-width: 768px) {
   .signin-image figure img {
-    width: 160px;
-    height: 160px;
+    width: 60px;
+    height: 60px;
   }
   .signup-content,
   .signin-content {
