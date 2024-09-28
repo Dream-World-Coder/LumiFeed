@@ -44,7 +44,7 @@ from .routes import (
     index,
     profile,
     anything,
-    create_tables,
+    # create_tables,
     read_news_here,
     read_news_in_new_tab,
     # cleanup_news_files,

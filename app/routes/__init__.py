@@ -23,7 +23,7 @@ obj = NewsScrape()
 from ..routes._routes__auth import login, register, logout
 from ..routes._routes__collections_related import add_new_collection, delete_collection
 from ..routes._routes__fetch_news import fetchnews
-from ..routes._routes__home import index, profile, anything, create_tables
+from ..routes._routes__home import index, profile, anything  # , create_tables
 from ..routes._routes__read import (
     read_news_here,
     read_news_in_new_tab,
