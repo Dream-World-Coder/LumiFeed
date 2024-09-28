@@ -1,13 +1,6 @@
 from flask import request, session, url_for, jsonify
 from app.routes import app, obj, gen_table, gen_table_india_news  # NewsForm
 
-"""
-    not working:
-    1. technology
-    2. sports
-    3. entertainment
-"""
-
 
 @app.route("/fetchnews", methods=["GET"])
 def fetchnews():
@@ -66,8 +59,8 @@ def fetchnews():
         news_table = gen_table_india_news(news_list)
 
     elif news_type == "tech":
-        news_list = obj.getOthersNews(section_name="technology", num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_list = obj.getOthersNews2(section_name="technology", num=news_count)
+        news_table = gen_table(news_list)
 
     elif news_type == "business":
         news_list = obj.getOthersNews(section_name="business", num=news_count)
@@ -94,7 +87,7 @@ def fetchnews():
         news_table = gen_table_india_news(news_list)
 
     elif news_type == "entertainment":
-        news_list = obj.getOthersNews(section_name="entertainment", num=news_count)
+        news_list = obj.getOthersNews3(section_name="entertainment", num=news_count)
         news_table = gen_table_india_news(news_list)
 
     else:

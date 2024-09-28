@@ -25,7 +25,17 @@ class NewsScrape:
             "indianExpressOpinion": "none",
             "theHinduMain": "none",
         }
-        self.cities = ["kolkata", "delhi", "mumbai", "bengaluru", "pune", "chennai"]
+        self.cities = [
+            "kolkata",
+            "delhi",
+            "mumbai",
+            "bengaluru",
+            "pune",
+            "chennai",
+            "ahmedabad",
+            "hyderabad",
+            "lucknow",
+        ]
         self.max_pages = 15
 
     def validateNum(self, num) -> int:
@@ -106,14 +116,14 @@ class NewsScrape:
                 # break if same news is encounered --end of list
                 if news_title == news_title_of_first:
                     serial -= 1
-                    print(f"no more news available, {count=}")
+                    print(f"No more news available. Breaking, {count=}")
                     return fetched_news_data
 
                 news_link = quote(context_part.get("href", "#"), safe=":/")
 
                 if count == len(news_list) - 1:
                     serial = serial
-                    news_title = "No more news available"
+                    news_title = "You have caught up to all headlines for now. visit other sections/categories"
                     news_link = "javascript:void(0);"
 
                 zip_list = [serial, news_title, news_link]
@@ -155,7 +165,7 @@ class NewsScrape:
                 context_part = news.find("div", class_="img-context")
                 news_title = context_part.h2.a.get("title")
                 news_date = context_part.find("div", class_="date").text
-                addtional_info = context_part.p.text
+                # addtional_info = context_part.p.text
 
                 zip_list = [serial, news_title, news_date, news_link]
                 fetched_news_data.append(zip_list)
@@ -230,6 +240,14 @@ class NewsScrape:
                 .find("div", class_="leftpanel")
                 .find("div", class_="nation")
             )
+            if not content:
+                content = (
+                    soup.body.find_all("div", id="section")[1]
+                    .find("div", class_="container")
+                    .find("div", class_="row")
+                    .find("div", class_="leftpanel")
+                    .find("div", class_="nation")
+                )
             articles_list = content.find_all("div", class_="articles")
 
             for article in articles_list:
@@ -243,7 +261,96 @@ class NewsScrape:
                 other_part = article.find("div", class_="img-context")
                 news_title = other_part.h2.a.get("title")
                 news_date = other_part.find("div", class_="date").text
-                addtional_info = other_part.p.text
+                # addtional_info = other_part.p.text
+
+                zip_list = [serial, news_title, news_date, news_link]
+                fetched_news_data.append(zip_list)
+                count += 1
+            pgNo += 1
+
+        return fetched_news_data
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Others news 2 for sports maybe
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    def getOthersNews2(self, section_name="sports", num=10):
+        pgNo = 1
+        baseUrl = f'{self.urls["indianExpressBase"]}{section_name}/'
+        news_num = self.validateNum(num)
+        fetched_news_data = []
+        count = 0
+        serial = 0
+
+        while count < news_num and pgNo <= self.max_pages:
+            url = baseUrl + f"page/{pgNo}/"
+            soup = make_soup(url)
+            # #wrapper > div.mainbox > div.leftsec.mt30 > div.top-article > ul
+            content = (
+                soup.body.find("main", id="wrapper")
+                .find("div", class_="mainbox")
+                .find("div", class_="leftsec")
+                .find("div", class_="top-article")
+                .ul
+            )
+            articles_list = content.find_all("li")
+
+            for article in articles_list:
+                if count >= news_num:
+                    break
+
+                serial += 1
+                news_link = quote(article.h3.a.get("href", "#"), safe=":/")
+                news_title = article.h3.a.text
+
+                zip_list = [serial, news_title, news_link]
+                fetched_news_data.append(zip_list)
+                count += 1
+            pgNo += 1
+
+        return fetched_news_data
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Others news 3 for entertainment
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    def getOthersNews3(self, section_name="sports", num=10):
+        pgNo = 1
+        baseUrl = f'{self.urls["indianExpressBase"]}{section_name}/'
+        news_num = self.validateNum(num)
+        fetched_news_data = []
+        count = 0
+        serial = 0
+
+        while count < news_num and pgNo <= self.max_pages:
+            url = baseUrl + f"page/{pgNo}/"
+            soup = make_soup(url)
+            content = (
+                soup.body.find("div", id="section")
+                .find("div", class_="container")
+                .find("div", class_="row")
+                .find("div", class_="leftpanel")
+                .find("div", class_="nation")
+            )
+            if not content:
+                content = (
+                    soup.body.find_all("div", id="section")[1]
+                    .find("div", class_="container")
+                    .find("div", class_="row")
+                    .find("div", class_="leftpanel")
+                    .find("div", class_="nation")
+                )
+            articles_list = content.find_all("div", class_="articles")
+
+            for article in articles_list:
+                if count >= news_num:
+                    break
+
+                imgContextDiv = article.find("div", class_="img-context")
+                titleDiv = imgContextDiv.find("div", class_="title")
+
+                serial += 1
+                news_title = titleDiv.a.text
+                news_link = quote(titleDiv.a.get("href", "#"), safe=":/")
+                news_date = imgContextDiv.find("div", class_="date").text
 
                 zip_list = [serial, news_title, news_date, news_link]
                 fetched_news_data.append(zip_list)
