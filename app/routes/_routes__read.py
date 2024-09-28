@@ -5,13 +5,6 @@ import time
 import hashlib
 import uuid
 
-"""
-    not working:
-    1. technology
-    2. sports
-    3. entertainment
-"""
-
 
 @app.route("/read_news_here", methods=["POST"])
 def read_news_here():

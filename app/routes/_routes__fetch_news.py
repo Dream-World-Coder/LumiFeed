@@ -1,6 +1,13 @@
 from flask import request, session, url_for, jsonify
 from app.routes import app, obj, gen_table, gen_table_india_news  # NewsForm
 
+"""
+    not working:
+    1. technology
+    2. sports
+    3. entertainment
+"""
+
 
 @app.route("/fetchnews", methods=["GET"])
 def fetchnews():

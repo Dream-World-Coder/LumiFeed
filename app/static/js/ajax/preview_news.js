@@ -46,9 +46,9 @@ function show_news_preview() {
         .then((data) => {
           document.getElementById("ajax_h1").textContent = data.heading;
           document.getElementById("ajax_h3").textContent = data.subheading;
-          document.getElementById("ajax_img").setAttribute("src", data.imgUrl);
-          let old_content = document.getElementById("ajax_p").innerHTML;
-          document.getElementById("ajax_p").innerHTML = old_content + data.news_data_string;
+          // document.getElementById("ajax_img").setAttribute("src", data.imgUrl);
+          let imgTag = `<img id="ajax_img" src="${data.imgUrl}" alt="news article image" itemprop="image"><br>`;
+          document.getElementById("ajax_p").innerHTML = imgTag + data.news_data_string;
         })
         .catch((error) => {
           displayMessage(error.message);
