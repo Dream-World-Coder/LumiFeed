@@ -1,6 +1,6 @@
 # LumiFeed
 
-### Ad-Free News Platform with Summaries & Key Points
+### Ad-Free News Platform with Summaries & Key Points, Delightful clutterless ui
 
 **LumiFeed** is an ad-free news platform that delivers the latest news with a clean, clutter-free user experience. It provides quick summaries of articles to help you stay informed without the noise. News is delivered from multiple sources, with a focus on user experience.
 

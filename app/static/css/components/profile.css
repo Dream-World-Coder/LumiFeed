@@ -1,9 +1,13 @@
 :root {
-  --rad: 20px;
+  --rad: 10px;
   --body-bg-clr: rgb(251, 251, 251);
   --dm-body-bg-clr: rgb(0, 0, 0);
   --normal-bg-clr: rgb(244, 244, 244);
+  --normal-bg-clr: var(--color-green-100);
+
   --dark-mode-bg-clr: rgba(108, 108, 108, 0.5);
+  /* --dark-mode-bg-clr: var(--color-green-100); */
+
   --normal-border-clr: rgb(202, 202, 202);
   --dark-mode-border-clr: rgba(108, 108, 108, 0.9);
 }
@@ -30,6 +34,7 @@ body.dark-mode {
   height: var(--w);
   border-radius: 50%;
   transition: all 0.3s;
+  z-index: 99999;
 
   @media (max-width: 1024px) {
     --w: 30px;
@@ -78,53 +83,124 @@ body.dark-mode {
 .collections_container {
   width: 100vw;
   height: calc(100vh - 5rem);
+  /* height: auto; */
   margin-top: 5rem;
   padding: 30px;
+  /* display: flex; */
+  /* flex-direction: row !important; */
 
   @media (max-width: 1024px) {
-    height: calc(100vh - 4rem);
-    margin-top: 4rem;
-    padding: 15px;
+    & {
+      height: calc(100vh - 4rem);
+      margin-top: 4rem;
+      padding: 15px;
+    }
   }
 
   @media (max-width: 768px) {
-    padding: 0px;
+    & {
+      padding: 0px;
+    }
   }
 }
 
 /* now collection group = collection */
 .collection_group {
-  height: 100%;
+  height: 40%;
+  width: 100%;
+  /* height: 40%; */
+  /* width: 40%; */
   padding: 20px;
-  /* border: 1px solid white; */
   display: flex;
   align-self: center;
-  justify-content: center;
-  gap: 40px;
+  justify-content: flex-start !important;
+  /* gap: 40px; */
+  /* border: 1px solid black; */
 
   @media (max-width: 1024px) {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    gap: 10px;
+    & {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      gap: 10px;
+    }
   }
 
   @media (max-width: 768px) {
-    padding: 5px;
+    & {
+      padding: 5px;
+    }
+  }
+}
+/* .collection_group:nth-last-child() {
+  padding-bottom: 10rem!important;
+} */
+
+.collection_display {
+  position: fixed;
+  top: calc(5rem + 50px);
+  right: 50px;
+  height: calc(100% - 100px - 5rem);
+  width: calc(50% + 100px);
+  /* padding: 3px; */
+  border-radius: var(--rad);
+  /* border: 1px solid var(--normal-border-clr); */
+  /* overflow-x: hidden; */
+  /* overflow-y: scroll; */
+  z-index: 99;
+
+  & .collection {
+    width: 100%;
+    z-index: 100;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  & .collection_content ul li {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    /* align-items: center; */
+    overflow: hidden;
+    padding: 10px;
+    padding-left: 15px;
+    border-bottom: 1px solid var(--normal-border-clr);
+    line-height: 1rem;
+    z-index: 10;
+    color: rgb(55, 55, 55);
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  & .collection_content ul li:hover::before {
+    transform: scaleY(1);
+    transition: all 0.2s;
+    transform-origin: top;
+    z-index: 20;
   }
 }
 
+/* body.dark-mode .collection_display {
+  border: 1px solid var(--dark-mode-border-clr);
+} */
+
 .collection {
   border: 1px solid var(--normal-border-clr);
-  width: 85%;
+  width: 100%;
+  width: 35%;
   height: 100%;
   border-radius: var(--rad);
   background-color: var(--body-bg-clr);
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
 
   @media (max-width: 1024px) {
-    width: 95%;
-    height: 90%;
+    & {
+      width: 95%;
+      height: 90%;
+    }
   }
 }
 .collection::-webkit-scrollbar {
@@ -155,7 +231,9 @@ body.dark-mode .collection {
   border-bottom: 1px solid var(--normal-border-clr);
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    & {
+      font-size: 1rem;
+    }
   }
 }
 
@@ -192,7 +270,7 @@ body.dark-mode .collection_name {
   color: rgb(55, 55, 55);
 
   &:hover {
-    color: white;
+    color: rgb(55, 55, 55);
   }
 }
 
@@ -219,17 +297,20 @@ body.dark-mode .collection_content ul li {
   transform: scaleY(0);
   transition-delay: 0.1s;
   transition: all 0.4s;
-  background-color: rgb(0, 0, 0);
   mix-blend-mode: difference;
   z-index: 10;
   transform-origin: top;
+  background-color: rgb(0, 0, 0);
+  /* background-color: var(--color-green-400); */
 }
+
 body.dark-mode .collection_content ul li::before {
   background-color: rgb(255, 255, 255);
+  /* background-color: var(--color-green-400); */
 }
 
 .collection_content ul li:hover::before {
-  transform: scaleY(1);
+  transform: scaleY(0);
   transition: all 0.2s;
   transform-origin: top;
   z-index: 20;
@@ -291,12 +372,10 @@ body.dark-mode .delete_article:hover {
   display: flex;
   flex-direction: column;
   background-color: var(--normal-bg-clr);
-  background-color: rgba(244, 244, 244, 0.5);
+  background-color: rgba(244, 244, 244, 1);
   border: 1px solid var(--normal-border-clr);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 1000 !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   /* display: none; 
   have to use style="display:'none';"*/
 
@@ -309,7 +388,6 @@ body.dark-mode .delete_article:hover {
 
 body.dark-mode .profile_settings {
   background-color: var(--dark-mode-bg-clr);
-  background-color: #37373771;
   border: 1px solid var(--dark-mode-border-clr);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }

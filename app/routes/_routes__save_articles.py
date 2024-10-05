@@ -4,14 +4,13 @@ from flask_login import login_required, current_user
 from sqlalchemy.exc import IntegrityError
 
 
-# if the current user is logged in then only they can save articles
-# else display them a message to log in first
+MAX_COLLECTIONS = 10
+MAX_ARTICLES_PER_COLLECTION = 250
+
+
 @login_required
 @app.route("/add_to_read_later", methods=["POST"])
 def add_to_read_later():
-    if not current_user.is_authenticated:
-        return jsonify({"error": "Please Login First to save articles."}), 401
-
     data = request.json
     article_title = data.get("article_title")
     article_url = data.get("article_url")
@@ -22,6 +21,12 @@ def add_to_read_later():
         parent_collection="Read Later",
         user_id=current_user.id,
     )
+
+    if article in current_user.saved_articles and (
+        article.parent_collection == "Read Later"
+    ):
+        return jsonify({"error": "This article is already saved."}), 409
+
     try:
         db.session.add(article)
         db.session.commit()
@@ -35,19 +40,13 @@ def add_to_read_later():
     except Exception as e:
         print(e)
         db.session.rollback()
-        return (
-            jsonify({"error": "Failed to save article. You Need to LOG IN first."}),
-            500,
-        )
+        return jsonify({"error": "Failed to save article."}), 500
 
 
-# save in different playlists
+# save in different collections
 @login_required
 @app.route("/add_to_different_collections", methods=["POST"])
 def add_to_different_collections():
-    if not current_user.is_authenticated:
-        return jsonify({"error": "Please Login First to save articles."}), 401
-
     data = request.json
     article_title = data.get("article_title")
     article_url = data.get("article_url")
@@ -59,6 +58,12 @@ def add_to_different_collections():
         parent_collection=parent_collection,
         user_id=current_user.id,
     )
+
+    if article in current_user.saved_articles and (
+        article.parent_collection == parent_collection
+    ):
+        return jsonify({"error": "This article is already saved."}), 409
+
     try:
         db.session.add(article)
         db.session.commit()

@@ -7,8 +7,7 @@
   </head>
 
   <body>
-    {% include 'includes/loader.html' %}
-    {% include 'includes/header.html' %}
+    {% include 'includes/loader.html' %} {% include 'includes/header.html' %}
 
     <!-- add new collection -->
     <div class="add_new_collection_btn flexed">
@@ -18,10 +17,9 @@
     </div>
 
     <!-- collections  -->
-    <div class="collections_container flex-col">
-      {% block collections%}
-      {% endblock %}
-    </div>
+    <div class="collections_container flex-col">{% block collections%} {% endblock %}</div>
+
+    <div class="collection_display"></div>
 
     <!-- read -->
     <div class="read flexed" id="read">
@@ -65,7 +63,6 @@
       });
     </script>
 
-
     <!-- js  -->
     <!-- profile toggle -->
     <script>
@@ -94,7 +91,22 @@
     <!-- save article -->
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/save_article.js')}}"></script>
 
-  
+    <script>
+      const collectionDisplay = document.querySelector(".collection_display");
+      const collectionGroup = document.querySelectorAll(".collection_group");
+
+      collectionGroup.forEach((group) => {
+        group.addEventListener("click", () => {
+          collectionDisplay.innerHTML = group.innerHTML;
+          show_news_preview();
+          read_in_new_tab();
+          deleteArticle();
+        });
+      });
+
+      collectionGroup[0].click();
+    </script>
+
     <!-- dark mode -->
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
   </body>

@@ -1,6 +1,8 @@
 # from app import app
 from flask import url_for
 
+# current_user.collections
+
 
 def generate_search_reasult(matches: list) -> str:
     no_of_matches = f"""
@@ -123,12 +125,12 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
         overflow-x: hidden;
       }
       html.invert body {
-        background-color: rgb(37, 37, 37);
-        color: aliceblue;
-      }
-      html.invert .read__page h3 {
-        color: rgb(180, 180, 180);
-      }
+          background-color: rgb(37, 37, 37);
+          color: rgb(128,128,128);
+        }
+    html.invert .read__page h3 {
+        color: rgb(128, 128, 128);
+    }
       .read__container {
         position: relative;
         width: 100vw;

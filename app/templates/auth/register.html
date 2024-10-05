@@ -11,7 +11,7 @@
 
 <!-- redirect -->
 {% block redirect %}
-<a href="{{url_for('login')}}" class="signup-image-link">Have an account? Log In</a>
+<a class="redirection_link" href="{{url_for('login')}}" class="signup-image-link">Have an account? Log In</a>
 {% endblock %}
 
 <!-- heading -->
@@ -46,3 +46,76 @@
 
 <!-- auth_api -->
 {% block auth_api %}register{% endblock %}
+
+<!-- scripts -->
+{% block scripts %}
+<script>
+  document.getElementById("login-form").addEventListener("submit", function (event) {
+    event.preventDefault();  // Prevent default form submission
+
+    // Collect form data
+    const username = document.getElementById("your_name").value;
+    const email = document.getElementById("your_email").value;
+    const password = document.getElementById("your_pass").value;
+
+    // Get device info
+    const deviceInfo = navigator.userAgent;  // Get device/browser info
+
+    // Get user's location using the Geolocation API
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(sendLoginData, locationError);
+    } else {
+        displayMessage("Geolocation is not supported by your browser.");
+        sendLoginData(null);  // Proceed without location if unavailable
+    }
+
+    // Send data to the server using Fetch API
+    function sendLoginData(position) {
+        let userLocation = null;
+
+        // If position is available, extract latitude and longitude
+        if (position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            userLocation = { latitude, longitude };
+        }
+
+        // Data to be sent
+        const data = {
+            username: username,
+            email: email,
+            password: password,
+            deviceInfo: deviceInfo,
+            ipAddress: null,  
+            location: userLocation,
+        };
+
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())  
+        .then(result => {
+            if (result.success) {
+                displayMessage("Login successful! You're awesome for staying secure.");
+            } else {
+                displayMessage("Login failed! Check your credentials and try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Error during login:", error);
+            displayMessage("An error occurred during login. Please try again later.");
+        });
+    }
+
+    // Handle location error (if geolocation fails)
+    function locationError(error) {
+        console.warn(`Geolocation error (${error.code}): ${error.message}`);
+        sendLoginData(null);  // Proceed without location data
+    }
+});
+</script>
+{% endblock %}

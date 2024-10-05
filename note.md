@@ -2,10 +2,11 @@
 
 
 ## to-do:
-- profile pic upload
-- same article in different collection
-- delete account btn activation
-- email verification before login
-- global news coverage + may be in profile settings add this options
-- different collections name input 
-- forms.py optimise
+
+needed | not needed
+:--: | :--:
+email verification before login  | global news coverage + may be in profile settings add this options 
+same article in different collection  | profile pic upload 
+different collections name input | delete account btn activation 
+forms .py optimise | --
+summary ** | --

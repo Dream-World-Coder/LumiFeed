@@ -1,18 +1,14 @@
-from app.routes import app, db, User, Article, make_collection
+from app.routes import app, db, make_collection
 from flask import request, jsonify
 from flask_login import login_required, current_user
+
+MAX_COLLECTIONS = 10
+MAX_ARTICLES_PER_COLLECTION = 250
 
 
 @login_required
 @app.route("/add_new_collection", methods=["POST"])
 def add_new_collection():
-    # assert current_user.is_authenticated
-    if not current_user.is_authenticated:
-        return (
-            jsonify({"error": "Please log in to save articles."}),
-            401,
-        )  # no need to check this cuz it will be only availbale if the user is logged in.still adding
-
     data = request.json
     collection_name = data.get("name")
 
@@ -30,9 +26,20 @@ def add_new_collection():
 
     try:
         existing_collections = current_user.collections
+
         if collection_name in existing_collections:
             return (
                 jsonify({"error": "Collection already exists. choose another name."}),
+                400,
+            )
+
+        if len(existing_collections) >= MAX_COLLECTIONS:
+            return (
+                jsonify(
+                    {
+                        "error": f"You have reached the maximum number of collections. {MAX_COLLECTIONS}"
+                    }
+                ),
                 400,
             )
 
@@ -49,6 +56,7 @@ def add_new_collection():
 
 
 # --------------------------------------
+# delete collection
 # --------------------------------------
 @app.route("/delete_collection", methods=["POST"])
 @login_required

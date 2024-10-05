@@ -6,7 +6,7 @@ from flask import (
     flash,
 )
 from app.routes import app, db, User
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError
 import random, string, smtplib
 from email.mime.text import MIMEText
@@ -35,14 +35,25 @@ def send_verification_email(user_email, token):
         print(f"Error sending email: {e}")
 
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Login
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
         return render_template("auth/login.html")
 
     elif request.method == "POST":
-        user_email = request.form.get("user_email")
-        user_password = request.form.get("user_pass")
+        # collecting data
+        data = request.json
+
+        user_email = data.get("email").strip().lower()
+        user_password = data.get("password").strip()
+        user_device_info = data.get("deviceInfo")
+        user_ip = data.get("ipAddress")
+        user_location = data.get("location")
 
         try:
             usr = User.query.filter_by(email=user_email).first()
@@ -64,15 +75,25 @@ def login():
         return render_template("errors/unknown-method.html")
 
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~`
+# Register
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
         return render_template("auth/register.html")
 
     elif request.method == "POST":
-        user_name = request.form.get("username")
-        user_email = request.form.get("user_email")
-        user_password = request.form.get("user_pass")
+        data = request.json
+
+        user_name = data.get("username")
+        user_email = data.get("email").strip().lower()
+        user_password = data.get("password").strip()
+        user_device_info = data.get("deviceInfo")
+        user_ip = data.get("ipAddress")
+        user_location = data.get("location")
 
         usr = User(username=user_name, email=user_email)
         usr.set_password(user_password)
@@ -99,19 +120,56 @@ def register():
         return render_template("errors/unknown-method.html")
 
 
-@app.route("/logout")
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Logout
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 @login_required
+@app.route("/logout")
 def logout():
     logout_user()  # Clears the session
     # flash("Logged out successfully", "success")
     return redirect(url_for("index"))
 
 
-# @app.route("/forgot_password", methods=["GET", "POST"])
-# def forgot_password():
-#     return render_template("auth/forgot_password.html")
+# ~~~~~~~~~~~~~~~~~~~~~~~~~`\
+# Delete Account
+# ~~~~~~~~~~~~~~~~~~~~~~~~~`/
 
 
-# @app.route("/reset_password", methods=["GET", "POST"])
-# def reset_password():
-#     return render_template("auth/reset_password.html")
+@login_required
+@app.route("/delete_account", methods=["POST"])
+def delete_account():
+    if request.method == "POST":
+        data = request.json
+        user_password = data.get("password").strip()
+
+        if current_user.check_password(user_password):
+            db.session.delete(current_user)
+            db.session.commit()
+            logout_user()
+            return redirect(url_for("index"))
+        else:
+            flash("Incorrect password.", "error")
+            return redirect(url_for("delete_account"))
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~`\
+# Forgot Password
+# ~~~~~~~~~~~~~~~~~~~~~~~~~`/
+@login_required
+@app.route("/forgot_password", methods=["GET", "POST"])
+def forgot_password():
+    return render_template("auth/login.html")
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~`\
+# Reset Password
+# ~~~~~~~~~~~~~~~~~~~~~~~~~`/
+
+
+@login_required
+@app.route("/reset_password", methods=["GET", "POST"])
+def reset_password():
+    return render_template("auth/login.html")

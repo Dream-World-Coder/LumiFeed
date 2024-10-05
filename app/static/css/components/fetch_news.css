@@ -8,23 +8,31 @@
 
 .fetch_news {
   position: relative;
-  margin-top: calc(var(--header-height) + 20px);
   height: var(--fetch-news-height);
   width: var(--width-val);
+
+  margin-top: calc(var(--header-height) + 20px);
+  /* margin-bottom: 1rem; */
   margin-left: var(--con-m-left);
+
   padding-top: 20px;
   padding-bottom: 10px;
   padding-left: 20px;
+
   font-size: 1rem;
+
   border: 1px solid rgba(202, 202, 202, 1);
   border-radius: 10px;
-  margin-bottom: 1rem;
   /* transition: all 0.3s; */
 
   & h2 {
     font-size: 2.5rem;
     margin-top: 0rem;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    /* font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; */
+    font-family: "Apercu Bold", sans-serif;
+    letter-spacing: -1.28px;
+    font-weight: 600;
+    color: rgb(77, 77, 77);
 
     & span {
       display: block;
@@ -49,7 +57,7 @@
 
   & label {
     font-family: poppins, "Times New Roman", Times, serif !important;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
 body.dark-mode .fetch_news {
@@ -83,18 +91,18 @@ label.custom-radio {
   justify-content: center;
   width: 120px;
   height: 80px;
-  border-radius: 10px;
+  border-radius: 5px;
   position: relative;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  background-color: rgba(244, 244, 244, 1);
-  border: 1px solid rgba(202, 202, 202, 1);
+  background-color: rgba(240, 240, 240, 1);
+  /* border: 1px solid rgba(202, 202, 202, 1); */
   color: black;
 }
 
 body.dark-mode label.custom-radio {
   background-color: rgba(108, 108, 108, 0.5);
-  border: 1px solid rgba(108, 108, 108, 0.9);
+  /* border: 1px solid rgba(108, 108, 108, 0.9); */
   color: #fff;
 }
 
@@ -204,6 +212,22 @@ input[type="radio"]:checked + label.custom-radio {
   .opp {
     padding-left: 15px;
     gap: 5px;
+  }
+
+  label.custom-radio {
+    width: 90px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+  }
+
+  .options__container {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: 135px;
+    gap: 5px !important;
+    padding-left: 0px;
+    padding-right: 10px;
   }
 }
 

@@ -296,6 +296,14 @@ label {
   font-size: 18px;
 }
 
+.redirection_link {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .signin-content {
   padding-top: 67px;
   padding-bottom: 87px;

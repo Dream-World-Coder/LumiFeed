@@ -8,6 +8,9 @@ def search_in_title():
     data = request.json
     news_list = data.get("news_list", [])
     part = data.get("searchPart")
+    
+    if not part or not news_list:
+        return jsonify({'error':'the data keys are: searchPart<string to search>, news_list<news_list>'})
 
     if len(news_list) > 2000 or len(part) > 200:
         return jsonify({"error": "too long content"})
@@ -17,6 +20,10 @@ def search_in_title():
 
     # Searching through the news_list
     matches = s1(database=news_list, part=part)
+
+    if not matches:
+        return jsonify({"error": "No matches found"})
+    
     search_results_html = generate_search_reasult(matches=matches)
 
     # Response with the search result HTML
