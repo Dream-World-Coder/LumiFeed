@@ -10,9 +10,6 @@
 after add of new collection make everything functional
 new collection --- delete coloction, will do it after git push
 
-night mode color scheme
-hover color in profile
-
 different collections names input
 collections table making sqlalchemy
 
@@ -20,3 +17,5 @@ location permission in geolocation api
 password 8-20 and powerful
 
 display message background and extra class -- no its just info so no need
+
+options style initially none maybe

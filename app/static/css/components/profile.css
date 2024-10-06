@@ -1,7 +1,7 @@
 :root {
   --rad: 10px;
   --body-bg-clr: rgb(251, 251, 251);
-  --dm-body-bg-clr: rgb(0, 0, 0);
+  --dm-body-bg-clr: rgb(28, 28, 28);
   --normal-bg-clr: rgb(244, 244, 244);
   --normal-bg-clr: var(--color-green-100);
 
@@ -85,7 +85,7 @@ body.dark-mode {
   height: calc(100vh - 5rem);
   /* height: auto; */
   margin-top: 5rem;
-  padding: 30px;
+  padding: 15px;
   /* display: flex; */
   /* flex-direction: row !important; */
 
@@ -93,7 +93,6 @@ body.dark-mode {
     & {
       height: calc(100vh - 4rem);
       margin-top: 4rem;
-      padding: 15px;
     }
   }
 
@@ -116,7 +115,7 @@ body.dark-mode {
   display: flex;
   align-self: center;
   justify-content: flex-start !important;
-  /* border: 1px solid rgb(0, 0, 0); */
+  /* border: 1px solid rgb(223, 17, 17); */
 
   @media (max-width: 1024px) {
     & {
@@ -138,7 +137,7 @@ body.dark-mode {
 
 .collection_display {
   position: fixed;
-  top: calc(5rem + 30px);
+  top: calc(5rem + 15px);
   right: 15px;
   height: calc(100% - 100px - 5rem);
 
@@ -396,6 +395,7 @@ body.dark-mode .delete_article:hover {
   border: 1px solid var(--normal-border-clr);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 1000 !important;
+  box-shadow: -1.5px 1.5px 0px var(--color-gray-300);
   /* display: none;
   have to use style="display:'none';"*/
 
@@ -409,7 +409,7 @@ body.dark-mode .delete_article:hover {
 body.dark-mode .profile_settings {
   background-color: rgb(68, 68, 68);
   border: 1px solid rgb(55, 55, 55);
-  box-shadow: -1.5px 1.5px 0px var(--clr2);
+  box-shadow: -1.5px 1.5px 0px var(--color-gray-600);
 }
 
 .user_details {

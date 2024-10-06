@@ -1,7 +1,13 @@
+:root {
+  --dmBgClr: rgb(28, 28, 28);
+}
 body.dark-mode,
 .dark-mode {
-  background-color: black;
-  color: aliceblue;
+  background-color: rgb(28, 28, 28);
+  color: white;
+}
+body.dark-mode a {
+  color: white;
 }
 /* -------  general
 ----------------------------------- */
@@ -21,7 +27,7 @@ body.dark-mode input::placeholder {
 }
 
 body.dark-mode .btn:hover {
-  background-color: black !important;
+  background-color: var(--dmBgClr) !important;
   color: whitesmoke !important;
 }
 
@@ -40,10 +46,6 @@ body.dark-mode table a {
   color: white;
 }
 
-body.dark-mode .fetch_news h2 {
-  color: rgb(196, 196, 196);
-}
-
 body.dark-mode th {
   background-color: rgba(92, 92, 92, 1);
 }
@@ -53,7 +55,7 @@ body.dark-mode tr:nth-child(2n - 1) {
 }
 
 body.dark-mode tr:nth-child(2n) {
-  background-color: rgb(0, 0, 0);
+  background-color: var(--dmBgClr);
 }
 
 body.dark-mode table tbody tr {
@@ -78,17 +80,16 @@ body.dark-mode .contact {
 }
 body.dark-mode .about p,
 body.dark-mode .contact p {
-  background-color: rgba(15, 15, 15, 1);
-  border: 1px solid rgba(68, 68, 68, 0.9);
+  background-color: var(--dmBgClr);
+  border: 1px solid rgba(108, 108, 108, 0.9);
 }
 
-body.dark-mode .about p strong {
-  color: var(--rbtn-clr);
-}
+body.dark-mode .about p strong,
 body.dark-mode .contact p strong {
-  color: var(--rbtn-clr);
+  color: rgb(159, 215, 233);
 }
 
+body.dark-mode .fetch_news h2,
 body.dark-mode .about h2,
 body.dark-mode .contact h2 {
   color: rgb(196, 196, 196);
@@ -97,6 +98,7 @@ body.dark-mode .contact h2 {
 body.dark-mode .con_icons img {
   filter: invert(1);
 }
+
 body.dark-mode .con_icons {
   color: white;
 }

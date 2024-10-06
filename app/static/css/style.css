@@ -134,7 +134,6 @@ body.dark-mode .find #search {
 }
 .btn {
   font-family: poppins, "Times New Roman", Times, serif !important;
-  /* font-size: 1rem !important; */
   background-color: var(--clr2) !important;
   border: calc(1px) solid var(--clr2) !important;
   color: white !important;
