@@ -15,3 +15,6 @@ dark mode colour may be 000 to 333
 
 
 new collection --- delete coloction, will do it after git push
+
+
+fetch news - height fix : same with js
