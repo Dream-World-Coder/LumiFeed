@@ -1,5 +1,4 @@
 const categoryTitle = document.querySelector(".category-title");
-// const dropdownBtn = document.querySelector(".dropdown");
 const options = document.querySelector(".options");
 const CityOption = document.querySelector(".city-name-options");
 const plus = document.querySelector(".d-img-1");
@@ -28,3 +27,11 @@ categoryTitle.addEventListener("click", () => {
     document.documentElement.style.setProperty("--fetch-news-height", "auto");
   }
 });
+
+if (options.style.display === "flex") {
+  if (window.innerWidth < 768) {
+    document.documentElement.style.setProperty("--fetch-news-height", "12rem");
+  } else {
+    document.documentElement.style.setProperty("--fetch-news-height", "22rem");
+  }
+}

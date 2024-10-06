@@ -7,28 +7,16 @@
 {% endif %} {% endwith %}
 
 
-password 8-20 and powerful
-
-
-
+after add of new collection make everything functional
 new collection --- delete coloction, will do it after git push
 
-
-fetch news - height fix : same with js
-
-after add of new collection make everything functional
-
 night mode color scheme
-
 hover color in profile
 
-display message background and extra class
-
 different collections names input
-
-
-responsive profile
-
 collections table making sqlalchemy
 
 location permission in geolocation api
+password 8-20 and powerful
+
+display message background and extra class -- no its just info so no need

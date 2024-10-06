@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (window.innerWidth < 768) {
           document.documentElement.style.setProperty("--fetch-news-height", "16rem");
         } else {
-          document.documentElement.style.setProperty("--fetch-news-height", "26rem");
+          document.documentElement.style.setProperty("--fetch-news-height", "24rem");
         }
       } else {
         CityOption.style.display = "none";
