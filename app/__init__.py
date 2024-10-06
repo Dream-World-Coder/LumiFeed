@@ -38,6 +38,9 @@ from .routes import (
     login,
     register,
     logout,
+    delete_account,
+    forgot_password,
+    reset_password,
     add_new_collection,
     delete_collection,
     fetchnews,
@@ -47,8 +50,6 @@ from .routes import (
     # create_tables,
     read_news_here,
     read_news_in_new_tab,
-    # cleanup_news_files,
-    # check_session_expiration,
     search_in_title,
     make_summary,
 )

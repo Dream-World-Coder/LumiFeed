@@ -400,9 +400,9 @@ body.dark-mode .delete_article:hover {
   have to use style="display:'none';"*/
 
   @media (max-width: 768px) {
-    top: 5rem;
-    left: auto;
-    right: auto;
+    top: 1rem;
+    left: calc(100% - (300px * 0.75) - 30px);
+    transform: scale(0.75);
   }
 }
 

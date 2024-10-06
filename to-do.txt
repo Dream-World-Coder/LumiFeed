@@ -16,6 +16,11 @@ collections table making sqlalchemy
 location permission in geolocation api
 password 8-20 and powerful
 
-display message background and extra class -- no its just info so no need
+readme.md update
 
-options style initially none maybe
+auth routes add,
+email verifications
+
+bengali add
+
+compiled add

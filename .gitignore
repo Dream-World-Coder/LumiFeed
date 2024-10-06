@@ -101,3 +101,5 @@ instance/
 lumifeed.pdf
 gunicorn_commands.md
 .backup/
+to-do.sy
+to-do.txt

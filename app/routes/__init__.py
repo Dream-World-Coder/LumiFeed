@@ -20,15 +20,20 @@ obj = NewsScrape()
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-from ..routes._routes__auth import login, register, logout
+from ..routes._routes__auth import (
+    login,
+    register,
+    logout,
+    delete_account,
+    forgot_password,
+    reset_password,
+)
 from ..routes._routes__collections_related import add_new_collection, delete_collection
 from ..routes._routes__fetch_news import fetchnews
 from ..routes._routes__home import index, profile, anything  # , create_tables
 from ..routes._routes__read import (
     read_news_here,
     read_news_in_new_tab,
-    # cleanup_news_files,
-    # check_session_expiration,
 )
 from ..routes._routes__remove_article import remove_article
 from ..routes._routes__save_articles import (
