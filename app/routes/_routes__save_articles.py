@@ -53,7 +53,7 @@ def add_to_read_later():
     try:
         db.session.add(article)
         db.session.commit()
-        return jsonify({"success": "Article saved successfully!"}), 200
+        return jsonify({"success": "Article saved in Read Later."}), 200
 
     except IntegrityError:
         print(IntegrityError)
@@ -99,7 +99,7 @@ def add_to_different_collections():
     try:
         db.session.add(article)
         db.session.commit()
-        return jsonify({"success": "Article saved successfully!"}), 200
+        return jsonify({"success": f"Article saved in {parent_collection}."}), 200
 
     except IntegrityError:
         print(IntegrityError)

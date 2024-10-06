@@ -27,16 +27,15 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
-        searchReasults.style.display = "flex";
-        document.getElementById("ajax_desktop").innerHTML = data.html;
-        findArticle();
+        if (data.html) {
+          searchReasults.style.display = "flex";
+          document.getElementById("ajax_desktop").innerHTML = data.html;
+          findArticle();
+        } else {
+          displayMessage(data.error);
+        }
       })
       .catch((error) => {
         displayMessage(error.message);

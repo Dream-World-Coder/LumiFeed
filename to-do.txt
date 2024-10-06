@@ -1,6 +1,3 @@
-dark mode colour may be 000 to 333 
-
-
 {% with messages = get_flashed_messages() %} {% if messages %}
 <ul class="flash_ul">
   {% for message in messages %}
@@ -10,7 +7,7 @@ dark mode colour may be 000 to 333
 {% endif %} {% endwith %}
 
 
- password 8-20 and powerful
+password 8-20 and powerful
 
 
 
@@ -18,3 +15,20 @@ new collection --- delete coloction, will do it after git push
 
 
 fetch news - height fix : same with js
+
+after add of new collection make everything functional
+
+night mode color scheme
+
+hover color in profile
+
+display message background and extra class
+
+different collections names input
+
+
+responsive profile
+
+collections table making sqlalchemy
+
+location permission in geolocation api

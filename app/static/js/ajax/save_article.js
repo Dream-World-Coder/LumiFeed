@@ -1,4 +1,4 @@
-function displayMessage(message) {
+function displayMessage(message, success = false, error = false) {
   const messageElement = document.createElement("div");
   messageElement.classList.add("temporary-message");
   messageElement.textContent = message;
