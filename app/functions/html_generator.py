@@ -1,5 +1,6 @@
 # from app import app
 from flask import url_for
+from flask_login import current_user
 
 # current_user.collections
 

@@ -22,11 +22,20 @@ def add_to_read_later():
         user_id=current_user.id,
     )
 
-    if article in current_user.saved_articles and (
-        article.parent_collection == "Read Later"
-    ):
+    if article in current_user.saved_articles and (article.parent_collection == "Read Later"):
         return jsonify({"error": "This article is already saved."}), 409
-
+    
+    # if MAX_ARTICLES_PER_COLLECTION is exceeded in "Read Later" collection
+    article_ctn = 0
+    for article in current_user.saved_articles:
+        if article.parent_collection == "Read Later":
+            article_ctn += 1
+    if article_ctn >= MAX_ARTICLES_PER_COLLECTION:
+        return jsonify({"error": f"You can only save up to {MAX_ARTICLES_PER_COLLECTION} articles in Read Later."}), 409
+    
+    # or
+    # if collections.query.by.name("Read Later").no_of_articles >= MAX_COLLECTIONS:
+    
     try:
         db.session.add(article)
         db.session.commit()
@@ -59,9 +68,7 @@ def add_to_different_collections():
         user_id=current_user.id,
     )
 
-    if article in current_user.saved_articles and (
-        article.parent_collection == parent_collection
-    ):
+    if article in current_user.saved_articles and (article.parent_collection == parent_collection):
         return jsonify({"error": "This article is already saved."}), 409
 
     try:

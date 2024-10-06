@@ -28,20 +28,10 @@ def add_new_collection():
         existing_collections = current_user.collections
 
         if collection_name in existing_collections:
-            return (
-                jsonify({"error": "Collection already exists. choose another name."}),
-                400,
-            )
+            return jsonify({"error": "Collection already exists. choose another name."}), 400
 
         if len(existing_collections) >= MAX_COLLECTIONS:
-            return (
-                jsonify(
-                    {
-                        "error": f"You have reached the maximum number of collections. {MAX_COLLECTIONS}"
-                    }
-                ),
-                400,
-            )
+            return jsonify({"error": f"You have reached the maximum number of collections. {MAX_COLLECTIONS}"}), 400
 
         existing_collections.append(collection_name)
         current_user.collections = existing_collections

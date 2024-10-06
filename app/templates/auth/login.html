@@ -35,7 +35,9 @@
 <!-- scripts -->
 {% block scripts %}
 <script>
-  document.getElementById("login-form").addEventListener("submit", function (event) {
+    const flash_li = document.querySelector(".flash_li");
+
+    document.getElementById("login-form").addEventListener("submit", function (event) {
     event.preventDefault(); 
 
     // Collect form data
@@ -61,7 +63,8 @@
         if (position) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
-            userLocation = { latitude, longitude };
+            const accuracy = position.coords.accuracy;
+            userLocation = { latitude, longitude, accuracy };
         }
 
         // Data to be sent
@@ -83,14 +86,18 @@
         .then(response => response.json())  
         .then(result => {
             if (result.success) {
-                alert("Login successful! You're awesome for staying secure.");
-            } else {
-                alert("Login failed! Check your credentials and try again.");
+                // displayMessage("Login successful! You're awesome for staying secure.");
+                window.location.href = "/";
+            } 
+            else {
+                flash_li.parentNode.style.bgColor = "#dd2b4f";
+                flash_li.textContent = result.message;
             }
         })
         .catch(error => {
             console.error("Error during login:", error);
-            displayMessage("An error occurred during login. Please try again later.");
+            flash_li.parentNode.style.bgColor = "#dd2b4f";
+            flash_li.textContent = error.message;
         });
     }
 

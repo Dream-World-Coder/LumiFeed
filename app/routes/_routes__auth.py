@@ -4,6 +4,7 @@ from flask import (
     redirect,
     url_for,
     flash,
+    jsonify,
 )
 from app.routes import app, db, User
 from flask_login import login_user, login_required, logout_user, current_user
@@ -51,26 +52,43 @@ def login():
 
         user_email = data.get("email").strip().lower()
         user_password = data.get("password").strip()
-        user_device_info = data.get("deviceInfo")
-        user_ip = data.get("ipAddress")
-        user_location = data.get("location")
+        
+        user_ip = request.remote_addr if request.remote_addr else "-1.-1.-1.-1"
+        user_device_info = data.get("deviceInfo") if data.get("deviceInfo") else "unknown"
+        
+        user_location = data.get("location") if data.get("location") else {}
+        latitude = user_location.get("latitude") if user_location.get("latitude") else -1000
+        longitude = user_location.get("longitude") if user_location.get("longitude") else -1000
+        accuracy = user_location.get("accuracy") if user_location.get("accuracy") else -1000
 
         try:
             usr = User.query.filter_by(email=user_email).first()
             if not usr:
-                flash("User not found", "error")
-                return redirect(url_for("login"))
+                return jsonify({'error': 'User not found'}), 404
+                # flash("User not found", "error")
+                # return redirect(url_for("login"))
+                
             elif not usr.check_password(user_password):
-                flash("Incorrect password.", "error")
-                return redirect(url_for("login"))
+                usr.increment_failed_logins()
+                return jsonify({'error': 'Incorrect password'}), 401
+                # flash("Incorrect password.", "error")
+                # return redirect(url_for("login"))
+                
             else:
+                # reset failed login attempts
+                usr.reset_failed_logins()
+                # update last login informations
+                usr.update_login_data(ip_address=user_ip, device_info=user_device_info, latitude=latitude, longitude=longitude, accuracy=accuracy)
+
                 login_user(usr)
-                return redirect(url_for("index"))
+                return jsonify({'success': 'Login successful'}), 200
+                # return redirect(url_for("index"))
 
         except Exception as e:
             print(e)
-            flash("An error occurred during login", "error")
-            return redirect(url_for("login"))
+            return jsonify({'error': 'An error occurred during login'}), 500
+            # flash("An error occurred during login", "error")
+            # return redirect(url_for("login"))
     else:
         return render_template("errors/unknown-method.html")
 
@@ -91,31 +109,47 @@ def register():
         user_name = data.get("username")
         user_email = data.get("email").strip().lower()
         user_password = data.get("password").strip()
-        user_device_info = data.get("deviceInfo")
-        user_ip = data.get("ipAddress")
-        user_location = data.get("location")
+        
+        user_ip = request.remote_addr if request.remote_addr else "-1.-1.-1.-1"
+        user_device_info = data.get("deviceInfo") if data.get("deviceInfo") else "unknown"
+        
+        user_location = data.get("location") if data.get("location") else {}
+        latitude = user_location.get("latitude") if user_location.get("latitude") else -1000
+        longitude = user_location.get("longitude") if user_location.get("longitude") else -1000
+        accuracy = user_location.get("accuracy") if user_location.get("accuracy") else -1000
 
-        usr = User(username=user_name, email=user_email)
+        usr = User(username=user_name, email=user_email, password=user_password, ip_address=user_ip, device_info=user_device_info, latitudes=[latitude], longitudes=[longitude], accuracies=[accuracy])
         usr.set_password(user_password)
 
         try:
+            # check for existing email
+            if User.query.filter_by(email=user_email).first():
+                return jsonify({'error':'Email is already taken, use another one'}), 409
+                # flash("Email is already taken, use another one", "error")
+                # return redirect(url_for("register"))
+            
+            # add user to database
             db.session.add(usr)
             db.session.commit()
             login_user(usr)
             # now i can send users to login page or directly login them and send them in home
-            return redirect(url_for("index"))
+            return jsonify({'success':'Registered successfully'}), 200
+            # return redirect(url_for("index"))
 
         except IntegrityError:
             print(IntegrityError)
             db.session.rollback()
-            flash("Email is already taken, use another one", "error")
-            return redirect(url_for("register"))
+            return jsonify({'error':'Email is already taken, use another one'}), 409
+            # flash("Email is already taken, use another one", "error")
+            # return redirect(url_for("register"))
 
         except Exception as e:
             print(e)
             db.session.rollback()
-            flash("Some error occurred", "error")
-            return redirect(url_for("register"))
+            return jsonify({'error':'some error occurred'}), 500
+            # flash("Some error occurred", "error")
+            # return redirect(url_for("register"))
+
     else:
         return render_template("errors/unknown-method.html")
 
@@ -129,7 +163,7 @@ def register():
 @app.route("/logout")
 def logout():
     logout_user()  # Clears the session
-    # flash("Logged out successfully", "success")
+    flash("logout successfull", "success")
     return redirect(url_for("index"))
 
 
@@ -139,8 +173,11 @@ def logout():
 
 
 @login_required
-@app.route("/delete_account", methods=["POST"])
+@app.route("/delete_account", methods=["GET","POST"])
 def delete_account():
+    if request.method == "GET":
+        return render_template("auth/delete-acc.html")
+    
     if request.method == "POST":
         data = request.json
         user_password = data.get("password").strip()
@@ -161,7 +198,7 @@ def delete_account():
 @login_required
 @app.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
-    return render_template("auth/login.html")
+    return render_template("auth/forgot-pass.html")
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~`\
@@ -172,4 +209,4 @@ def forgot_password():
 @login_required
 @app.route("/reset_password", methods=["GET", "POST"])
 def reset_password():
-    return render_template("auth/login.html")
+    return render_template("auth/reset-pass.html")

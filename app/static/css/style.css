@@ -156,7 +156,7 @@ body.dark-mode .find #search {
   left: 0;
   width: 100%;
   height: 30px;
-  background-color: #dd2b4f;
+  background-color: transparent;
   color: rgb(255, 255, 255);
   font-family: poppins;
   list-style-type: none;

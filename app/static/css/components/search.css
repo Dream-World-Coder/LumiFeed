@@ -106,7 +106,7 @@
 .res__container {
   color: var(--dim-font);
   font-family: MondiaThin, "Courier New", Courier, monospace;
-  line-height: 1rem;
+  line-height: 1.2rem;
 }
 
 .res__num {

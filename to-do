@@ -1,4 +1,7 @@
-search line height 1.2 rem
-
-dark mode colour may be 000 to 333
-grey is lesser contrast then black
+dark mode colour may be 000 to 333 {% with messages = get_flashed_messages() %} {% if messages %}
+<ul class="flash_ul">
+  {% for message in messages %}
+  <li class="flash_li">{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %} {% endwith %}

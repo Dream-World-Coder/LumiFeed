@@ -17,15 +17,9 @@
     <div class="main">
       <section class="sign-in">
         <div class="container">
-          {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                  <ul class="flash_ul">
-                      {% for message in messages %}
-                          <li class="flash_li">{{message}}</li>
-                      {% endfor %}
-                  </ul>
-              {% endif %}
-          {% endwith %}
+          <ul class="flash_ul">
+            <li class="flash_li"></li>
+          </ul>
           <div class="signin-content">
             <div class="signin-image">
               <!-- Image -->

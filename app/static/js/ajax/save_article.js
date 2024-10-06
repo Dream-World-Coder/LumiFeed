@@ -1,17 +1,8 @@
 function displayMessage(message) {
-  // Create a new div element
   const messageElement = document.createElement("div");
-
-  // Add classes for styling
   messageElement.classList.add("temporary-message");
-
-  // Set the message text
   messageElement.textContent = message;
-
-  // Append the message to the body
   document.body.appendChild(messageElement);
-
-  // Remove the message after 5 seconds
   setTimeout(() => {
     messageElement.remove();
   }, 3000);
