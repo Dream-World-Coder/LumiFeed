@@ -18,25 +18,16 @@ function sendArticleToServer(req_url, articleTitle, articleUrl, parentCollection
     body: JSON.stringify({ article_title: articleTitle, article_url: articleUrl, parent_collection: parentCollection }),
   };
   fetch(url, options)
-    .then((response) => {
-      if (response.status === 401) {
-        throw new Error("Please login first, to save articles");
-      } else if (response.status === 400) {
-        throw new Error("Bad request. Please check your input.");
-      } else if (response.status === 409) {
-        throw new Error("This article is already saved.");
-      } else if (response.status === 500) {
-        throw new Error("Failed to save article.");
-      } else if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((responseData) => {
-      displayMessage(responseData.message);
+      if (responseData.success) {
+        displayMessage(responseData.success);
+      } else {
+        displayMessage(responseData.error);
+      }
     })
     .catch((error) => {
-      displayMessage(error.message);
+      displayMessage(error);
     });
 }
 
@@ -54,7 +45,7 @@ function saveArticleInReadLater() {
   });
 }
 
-// ------------ for saving article in different playlists, add_to_different_collections -----
+// ------------ for saving article in different playlists, add_to_different_collections ----- //
 
 function saveArticleInOtherCollections() {
   const ReadLaterCollectionBtns = document.querySelectorAll(".other_collections");

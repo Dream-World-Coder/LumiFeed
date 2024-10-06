@@ -1,0 +1,17 @@
+dark mode colour may be 000 to 333 
+
+
+{% with messages = get_flashed_messages() %} {% if messages %}
+<ul class="flash_ul">
+  {% for message in messages %}
+  <li class="flash_li">{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %} {% endwith %}
+
+
+ password 8-20 and powerful
+
+
+
+new collection --- delete coloction, will do it after git push

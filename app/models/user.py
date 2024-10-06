@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from sqlalchemy.ext.mutable import MutableList
-from sqlalchemy import PickleType, Float, ARRAY
+from sqlalchemy import PickleType, Float, ARRAY, JSON
 from datetime import datetime
 
 
@@ -23,9 +23,9 @@ class User(db.Model, UserMixin):
     
     failed_logins = db.Column(db.Integer, nullable=False, default=0)
     
-    latitudes = db.Column(ARRAY(Float), nullable=False)
-    longitudes = db.Column(ARRAY(Float), nullable=False)
-    accuracies = db.Column(ARRAY(Float), nullable=True)
+    latitudes = db.Column(JSON(Float), nullable=False)
+    longitudes = db.Column(JSON(Float), nullable=False)
+    accuracies = db.Column(JSON(Float), nullable=True)
     
     saved_articles = db.relationship("Article", backref="author", lazy=True)
     collections = db.Column(
@@ -46,6 +46,14 @@ class User(db.Model, UserMixin):
         self.last_login = datetime.utcnow()
         self.ip_address = ip_address
         self.device_info = device_info
+        
+        if self.latitudes is None:
+            self.latitudes = []
+        if self.longitudes is None:
+            self.longitudes = []
+        if self.accuracies is None:
+            self.accuracies = []
+            
         self.latitudes.append(latitude)
         self.longitudes.append(longitude)
         self.accuracies.append(accuracy)

@@ -90,14 +90,14 @@
                 window.location.href = "/";
             } 
             else {
-                flash_li.parentNode.style.bgColor = "#dd2b4f";
-                flash_li.textContent = result.message;
+                flash_li.parentNode.style.backgroundColor = "#dd2b4f";
+                flash_li.textContent = result.error;
             }
         })
         .catch(error => {
             console.error("Error during login:", error);
-            flash_li.parentNode.style.bgColor = "#dd2b4f";
-            flash_li.textContent = error.message;
+            flash_li.parentNode.style.backgroundColor = "#dd2b4f";
+            flash_li.textContent = error.error;
         });
     }
 

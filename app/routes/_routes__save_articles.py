@@ -11,6 +11,9 @@ MAX_ARTICLES_PER_COLLECTION = 250
 @login_required
 @app.route("/add_to_read_later", methods=["POST"])
 def add_to_read_later():
+    if not current_user.is_authenticated:
+        return jsonify({"error": "Please log in first to save articles."}), 401
+    
     data = request.json
     article_title = data.get("article_title")
     article_url = data.get("article_url")
@@ -39,7 +42,7 @@ def add_to_read_later():
     try:
         db.session.add(article)
         db.session.commit()
-        return jsonify({"message": "Article saved successfully!"}), 200
+        return jsonify({"success": "Article saved successfully!"}), 200
 
     except IntegrityError:
         print(IntegrityError)
@@ -52,10 +55,16 @@ def add_to_read_later():
         return jsonify({"error": "Failed to save article."}), 500
 
 
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # save in different collections
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @login_required
 @app.route("/add_to_different_collections", methods=["POST"])
 def add_to_different_collections():
+    if not current_user.is_authenticated:
+        return jsonify({"error": "Please log in first to save articles."}), 401
+    
     data = request.json
     article_title = data.get("article_title")
     article_url = data.get("article_url")
@@ -74,7 +83,7 @@ def add_to_different_collections():
     try:
         db.session.add(article)
         db.session.commit()
-        return jsonify({"message": "Article saved successfully!"}), 200
+        return jsonify({"success": "Article saved successfully!"}), 200
 
     except IntegrityError:
         print(IntegrityError)

@@ -146,7 +146,7 @@ def register():
         except Exception as e:
             print(e)
             db.session.rollback()
-            return jsonify({'error':'some error occurred'}), 500
+            return jsonify({'error':'some error occurred during registration'}), 500
             # flash("Some error occurred", "error")
             # return redirect(url_for("register"))
 

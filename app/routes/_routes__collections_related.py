@@ -18,7 +18,7 @@ def add_new_collection():
 
     # max length 100, to be safe 99
     if len(collection_name) > 99:
-        return jsonify({"error": "Collection name is too long."}), 400
+        return jsonify({"error": "Collection name is too long. Max length 99"}), 400
 
     # XSS && CSRF check
     if "script" in collection_name.lower():
@@ -37,12 +37,12 @@ def add_new_collection():
         current_user.collections = existing_collections
         db.session.commit()
         new_collection_html_string = make_collection(collection_name)
-        return jsonify({"new_collection": new_collection_html_string}), 200
+        return jsonify({"success": new_collection_html_string}), 200
 
     except Exception as e:
         print(e)
         db.session.rollback()
-        return jsonify({"error": "Failed to save collection"}), 500
+        return jsonify({"error": "Failed to add collection"}), 500
 
 
 # --------------------------------------
@@ -75,6 +75,7 @@ def delete_collection():
 
         db.session.commit()
         return jsonify({"message": "Collection deleted successfully."}), 200
+    
     except Exception as e:
         app.logger.error(f"Error deleting collection: {str(e)}")
         db.session.rollback()

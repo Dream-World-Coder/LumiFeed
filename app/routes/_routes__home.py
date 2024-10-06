@@ -1,5 +1,5 @@
-from flask import render_template
-from flask_login import login_required
+from flask import render_template, redirect, url_for
+from flask_login import login_required, current_user
 from app.routes import app, db
 
 # from app.forms import NewsForm
@@ -15,8 +15,10 @@ def index():
 @login_required
 @app.route("/profile")
 def profile():
-    return render_template("profile.html")
-
+    if current_user.is_authenticated:
+        return render_template("profile.html")
+    else:
+        return redirect(url_for("index"))
 
 @app.route("/<path:any_path>")
 @app.route("/home/<path:any_path>")

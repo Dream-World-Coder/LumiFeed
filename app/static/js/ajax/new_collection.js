@@ -41,26 +41,24 @@ function addNewCollection() {
       };
 
       fetch(url, options)
-        .then((response) => {
-          if (response.status === 401 || response.status === 400) {
-            displayMessage("Use different name"); // Use displayMessage instead of alert
-          } else if (!response.ok) {
-            throw new Error("Network response was not ok");
+        .then((response) => response.json())
+        .then((res) => {
+          if (res.success) {
+            addCollectionToDOM(res.success);
+            displayMessage("Collection added!");
           } else {
-            return response.json();
+            displayMessage(res.error);
           }
         })
-        .then((responseData) => {
-          addCollectionToDOM(responseData.new_collection);
-          displayMessage("Collection added!"); // Use displayMessage instead of alert
+        .catch((error) => {
+          console.error("Error during login:", error);
         });
-    } else if (userInput.length() > 99) {
-      displayMessage("Collection name is too long. Max length is 99 characters."); // Use displayMessage
+    } else if (userInput.length > 99) {
+      displayMessage("Collection name is too long. Max length is 99 characters.");
     } else {
-      displayMessage("Collection creation cancelled or no name entered."); // Use displayMessage
+      displayMessage("Collection creation cancelled or no name entered.");
     }
   });
 }
 
 addNewCollection();
-// also add delete new collection after this, in html change the import sequence

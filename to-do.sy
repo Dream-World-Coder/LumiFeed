@@ -4,4 +4,4 @@ dark mode colour may be 000 to 333 {% with messages = get_flashed_messages() %} 
   <li class="flash_li">{{ message }}</li>
   {% endfor %}
 </ul>
-{% endif %} {% endwith %}
+{% endif %} {% endwith %} password 8-20 and powerful
