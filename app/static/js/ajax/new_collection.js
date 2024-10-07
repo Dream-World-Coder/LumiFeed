@@ -35,18 +35,19 @@ function addNewCollection() {
         .then((res) => {
           if (res.success) {
             addCollectionToDOM(res.success);
-            displayMessage("Collection added!");
+            displayMessage("Collection added!", "success");
           } else {
-            displayMessage(res.error);
+            displayMessage(res.error, "error");
           }
         })
         .catch((error) => {
           console.error("Error during login:", error);
+          displayMessage(error, "error");
         });
     } else if (userInput.length > 99) {
-      displayMessage("Collection name is too long. Max length is 99 characters.");
+      displayMessage("Collection name is too long. Max length is 99 characters.", "error");
     } else {
-      displayMessage("Collection creation cancelled or no name entered.");
+      displayMessage("Collection creation cancelled or no name entered.", "message");
     }
   });
 }

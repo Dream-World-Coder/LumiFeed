@@ -189,9 +189,8 @@ body.dark-mode .find #search {
   top: 20px;
   right: 20px;
   padding: 10px 20px;
-  /* background-color: var(--clr2); */
-  background-color: var(--color-green-400);
-  color: #000000;
+  background-color: var(--clr2);
+  color: #ffffff;
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   border-radius: 4px;
@@ -200,13 +199,20 @@ body.dark-mode .find #search {
   animation: fadeInOut 5s ease-in-out;
 }
 
-.temporary-message.error {
-  background-color: var(--color-red-500);
-}
 
 .error {
   background-color: var(--color-red-500);
+  color: black;
 }
+.success{
+    background-color: var(--color-green-400);
+    color: black;
+}
+.message{
+    background-color: white;
+    color: black;
+}
+
 
 @keyframes fadeInOut {
   0%,

@@ -17,9 +17,12 @@ function sendArticleToRemoveToServer(article_url, articleLi) {
       }
     })
     .then((data) => {
-      displayMessage(data.message);
+      displayMessage(data.message, "success");
       // Remove the article <li> element from the DOM
       articleLi.remove();
+    })
+    .catch((error) => {
+      displayMessage(error.message, "error");
     });
 }
 

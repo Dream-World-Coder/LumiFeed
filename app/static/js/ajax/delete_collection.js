@@ -45,10 +45,10 @@ function sendDeleteRequestToServer(name, index) {
     })
     .then((data) => {
       collectionGroups[index + 2].remove();
-      displayMessage(data.message);
+      displayMessage(data.message, "success");
     })
     .catch((error) => {
-      displayMessage("Error: " + error.message);
+      displayMessage(error.message, "error");
     });
 }
 

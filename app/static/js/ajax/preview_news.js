@@ -37,7 +37,7 @@ function show_news_preview() {
           document.getElementById("ajax_p").innerHTML = imgTag + data.news_data_string;
         })
         .catch((error) => {
-          displayMessage(error.message);
+          displayMessage(error.message, "error");
         })
         .finally(() => {
           hideLoader();

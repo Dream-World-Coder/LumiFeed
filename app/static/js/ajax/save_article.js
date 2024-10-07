@@ -11,13 +11,13 @@ function sendArticleToServer(req_url, articleTitle, articleUrl, parentCollection
     .then((response) => response.json())
     .then((responseData) => {
       if (responseData.success) {
-        displayMessage(responseData.success);
+        displayMessage(responseData.success, "success");
       } else {
-        displayMessage(responseData.error);
+        displayMessage(responseData.error, "error");
       }
     })
     .catch((error) => {
-      displayMessage(error);
+      displayMessage(error, "error");
     });
 }
 

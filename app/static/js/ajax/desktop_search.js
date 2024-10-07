@@ -24,11 +24,11 @@ document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("ajax_desktop").innerHTML = data.html;
           findArticle();
         } else {
-          displayMessage(data.error);
+          displayMessage(data.error, "error");
         }
       })
       .catch((error) => {
-        displayMessage(error.message);
+        displayMessage(error.message, "error");
       });
   });
 });

@@ -33,7 +33,7 @@ function fetchNews(event) {
       saveArticleInOtherCollections();
     })
     .catch((error) => {
-      displayMessage(error.message);
+      displayMessage(error.message, "error");
     })
     .finally(() => {
       hideLoader();
