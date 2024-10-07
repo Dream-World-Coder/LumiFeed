@@ -1,13 +1,3 @@
-function displayMessage(message) {
-  const messageElement = document.createElement("div");
-  messageElement.classList.add("temporary-message");
-  messageElement.textContent = message;
-  document.body.appendChild(messageElement);
-  setTimeout(() => {
-    messageElement.remove();
-  }, 3000);
-}
-
 function showLoader() {
   document.getElementById("loader").style.display = "flex";
 }
@@ -25,10 +15,6 @@ function show_news_preview() {
       read.style.display = "flex";
       const newsUrl = readbtn.getAttribute("data-url");
 
-      // let elem = document.querySelector(".collections_container");
-      // if (window.innerWidth <= 768 && elem) {
-      //   read_in_new_tab();
-      // } else {
       showLoader();
       fetch("/read_news_here", {
         method: "POST",

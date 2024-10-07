@@ -9,18 +9,16 @@
 
 after add of new collection make everything functional
 new collection --- delete coloction, will do it after git push
-
-different collections names input
 collections table making sqlalchemy
-
 location permission in geolocation api
 password 8-20 and powerful
-
 readme.md update
-
 auth routes add,
 email verifications
-
 bengali add
-
 compiled add
+
+different class add in displaymsg
+
+
+fetch news .js

@@ -1,13 +1,3 @@
-function displayMessage(message) {
-  const messageElement = document.createElement("div");
-  messageElement.classList.add("temporary-message");
-  messageElement.textContent = message;
-  document.body.appendChild(messageElement);
-  setTimeout(() => {
-    messageElement.remove();
-  }, 3000);
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   const searchForm = document.getElementById("search-form");
   const searchReasults = document.querySelector(".search-reasults");

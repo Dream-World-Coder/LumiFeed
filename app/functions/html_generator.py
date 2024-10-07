@@ -1,10 +1,8 @@
 # from app import app
 from flask import url_for
-from flask_login import current_user
-
-# current_user.collections
 
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def generate_search_reasult(matches: list) -> str:
     no_of_matches = f"""
                     <div class="res__num border_res">
@@ -12,6 +10,7 @@ def generate_search_reasult(matches: list) -> str:
                     </div>
                     """
     results = ""
+
     for index, row in enumerate(matches):
         results += f"""
                     <div class="res border_res">
@@ -30,7 +29,19 @@ def generate_search_reasult(matches: list) -> str:
     return no_of_matches + results
 
 
-def gen_table(data: list) -> str:
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def gen_table(data: list, user) -> str:
+    if user.is_authenticated:
+      user_collections = list(user.collections)
+      collections_input = '<option value="" disabled selected>Select a collection</option>'
+      for coll in user_collections:
+          if coll != 'Read Later':
+              collections_input += f'<option class="collections_input_option" value="{coll}">{coll}</option>'
+
+      collections_input_full = f'<select class="collections_name_input" name="collections_name_input">{collections_input}</select>'
+    else:
+      collections_input_full = ''
+
     html_table = """
                     <tr class="tr1">
                         <th class="th1">NO</th>
@@ -52,6 +63,7 @@ def gen_table(data: list) -> str:
                                     <img src="{url_for('static', filename='icons/save2.svg')}" alt="" srcset="" />
                                 </div>
                             </div>
+                            {collections_input_full}
                         </td>
                         <td class="td3 data_box read"><span class="rbtn read_here" data-url="{row[2]}" onclick="show_news_preview()">Read</span></td>
                         <td class="td4 data_box">
@@ -62,7 +74,19 @@ def gen_table(data: list) -> str:
     return html_table
 
 
-def gen_table_india_news(data: list) -> str:
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def gen_table_india_news(data: list, user) -> str:
+    if user.is_authenticated:
+      user_collections = list(user.collections)
+      collections_input = '<option value="" disabled selected>Select a collection</option>'
+      for coll in user_collections:
+          if coll != 'Read Later':
+              collections_input += f'<option class="collections_input_option" value="{coll}">{coll}</option>'
+
+      collections_input_full = f'<select class="collections_name_input" name="collections_name_input">{collections_input}</select>'
+    else:
+      collections_input_full = ''
+      
     html_table = """
                     <tr class="tr1">
                         <th class="th1">NO</th>
@@ -85,6 +109,7 @@ def gen_table_india_news(data: list) -> str:
                                     <img src="{url_for('static', filename='icons/save2.svg')}" alt="" srcset="" />
                                 </div>
                             </div>
+                            {collections_input_full}
                         </td>
                         <td class="td3 data_box">{row[2]}</td>
                         <td class="td4 data_box read">
@@ -97,7 +122,7 @@ def gen_table_india_news(data: list) -> str:
                 """
     return html_table
 
-
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -> str:
     head = """
         <!DOCTYPE html>
@@ -439,7 +464,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
 
     return html_doc
 
-
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def make_collection(collection_name) -> str:
     string = f"""
             <div class="collection_group flexed">
@@ -459,6 +484,7 @@ def make_collection(collection_name) -> str:
 
     return string
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 """
 <li class="read_here" data-url="">

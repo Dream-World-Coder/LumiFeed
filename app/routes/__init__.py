@@ -1,7 +1,6 @@
 from app import app, db  # NewsForm, SearchForm
 from ..models import User, Article
 
-
 # utility functions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 from ..functions.NEWS_SCRAPER import NewsScrape

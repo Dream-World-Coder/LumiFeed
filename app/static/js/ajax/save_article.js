@@ -1,13 +1,3 @@
-function displayMessage(message, success = false, error = false) {
-  const messageElement = document.createElement("div");
-  messageElement.classList.add("temporary-message");
-  messageElement.textContent = message;
-  document.body.appendChild(messageElement);
-  setTimeout(() => {
-    messageElement.remove();
-  }, 3000);
-}
-
 function sendArticleToServer(req_url, articleTitle, articleUrl, parentCollection) {
   const url = req_url;
   const options = {
@@ -49,6 +39,7 @@ function saveArticleInReadLater() {
 
 function saveArticleInOtherCollections() {
   const ReadLaterCollectionBtns = document.querySelectorAll(".other_collections");
+  const collectionsNameInputs = document.querySelectorAll(".collections_name_input");
   const tdContainingTitle = document.querySelectorAll(".td2");
   const aContainingUrl = document.querySelectorAll(".news_urls_a_tag");
 
@@ -56,11 +47,19 @@ function saveArticleInOtherCollections() {
     btn.addEventListener("click", () => {
       var articleTitle = tdContainingTitle[index].textContent;
       var articleUrl = aContainingUrl[index].getAttribute("href");
-      // options : current_user.collections except "Read Later"
-      // current.user.collections :- set them in localhost in /new_collection route
-      // now make the input options dropdown
-      var parentCollection = "Liked Articles";
-      sendArticleToServer("/add_to_different_collections", articleTitle, articleUrl, parentCollection);
+
+      if (collectionsNameInputs.length === 0) {
+        displayMessage("Please log in first to save articles", "error");
+        return;
+      }
+      var collectionsInput = collectionsNameInputs[index];
+      collectionsInput.style.display = "flex";
+      // now wait for the option to be selected
+      collectionsInput.addEventListener("change", () => {
+        var parentCollection = collectionsInput.value;
+        sendArticleToServer("/add_to_different_collections", articleTitle, articleUrl, parentCollection);
+        collectionsInput.style.display = "none";
+      });
     });
   });
 }

@@ -93,6 +93,18 @@ table tbody tr:last-child {
   font-family: poppins, sans-serif;
 }
 
+.collections_name_input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.collections_input_option {
+  display: none;
+}
+
 .saving_options {
   width: 100px;
   height: 35px;

@@ -26,14 +26,6 @@ modal.appendChild(modalContent);
 modal.appendChild(buttonContainer);
 document.body.appendChild(modal);
 
-function displayMessage(message) {
-  const messageElement = document.createElement("div");
-  messageElement.classList.add("message");
-  messageElement.textContent = message;
-  document.body.appendChild(messageElement);
-  setTimeout(() => messageElement.remove(), 3000);
-}
-
 function sendDeleteRequestToServer(name, index) {
   const url = "/delete_collection";
   const options = {

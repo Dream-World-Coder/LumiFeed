@@ -6,16 +6,6 @@ function hideLoader() {
   document.getElementById("loader").style.display = "none";
 }
 
-function displayMessage(message) {
-  const messageElement = document.createElement("div");
-  messageElement.classList.add("temporary-message");
-  messageElement.textContent = message;
-  document.body.appendChild(messageElement);
-  setTimeout(() => {
-    messageElement.remove();
-  }, 3000);
-}
-
 function fetchNews(event) {
   event.preventDefault();
   showLoader();

@@ -1,5 +1,6 @@
 from flask import request, session, url_for, jsonify
 from app.routes import app, obj, gen_table, gen_table_india_news  # NewsForm
+from flask_login import current_user
 
 
 @app.route("/fetchnews", methods=["GET"])
@@ -31,11 +32,11 @@ def fetchnews():
 
     if news_type == "top":
         news_list = obj.getTopNews(num=news_count)
-        news_table = gen_table(news_list)
+        news_table = gen_table(news_list, current_user)
 
     elif news_type == "india":
         news_list = obj.getIndiaNews(num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_table = gen_table_india_news(news_list, current_user)
 
     elif news_type == "city":
         if name_of_city is None or name_of_city not in [
@@ -52,43 +53,43 @@ def fetchnews():
             return jsonify({"error": "Select a city"}), 400
         else:
             news_list = obj.getCitiesNews(cityname=name_of_city, num=news_count)
-            news_table = gen_table(news_list)
+            news_table = gen_table(news_list, current_user)
 
     elif news_type == "science":
         news_list = obj.getOthersNews(section_name="technology/science", num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_table = gen_table_india_news(news_list, current_user)
 
     elif news_type == "tech":
         news_list = obj.getOthersNews2(section_name="technology", num=news_count)
-        news_table = gen_table(news_list)
+        news_table = gen_table(news_list, current_user)
 
     elif news_type == "business":
         news_list = obj.getOthersNews(section_name="business", num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_table = gen_table_india_news(news_list, current_user)
 
     elif news_type == "health":
         news_list = obj.getOthersNews(section_name="lifestyle/health", num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_table = gen_table_india_news(news_list, current_user)
 
     elif news_type == "cricket":
         news_list = obj.getOthersNews(section_name="sports/cricket", num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_table = gen_table_india_news(news_list, current_user)
 
     elif news_type == "sports":
         news_list = obj.getOthersNews(section_name="sports", num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_table = gen_table_india_news(news_list, current_user)
 
     elif news_type == "political_pulse":
         news_list = obj.getOthersNews(section_name="political-pulse", num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_table = gen_table_india_news(news_list, current_user)
 
     elif news_type == "lifestyle":
         news_list = obj.getOthersNews(section_name="lifestyle", num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_table = gen_table_india_news(news_list, current_user)
 
     elif news_type == "entertainment":
         news_list = obj.getOthersNews3(section_name="entertainment", num=news_count)
-        news_table = gen_table_india_news(news_list)
+        news_table = gen_table_india_news(news_list, current_user)
 
     else:
         return jsonify({"error": "Invalid news type"}), 400

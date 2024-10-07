@@ -54,6 +54,7 @@ from .routes import (
     make_summary,
 )
 
+from .functions import html_generator
 
 # loading user
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

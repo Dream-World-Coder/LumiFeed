@@ -83,7 +83,7 @@ cython_debug/
 # ----------------------
 # Custom
 # ----------------------
-
+t.py
 .venv/
 .web/
 static/icons

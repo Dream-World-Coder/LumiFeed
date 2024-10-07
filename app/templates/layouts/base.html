@@ -465,6 +465,21 @@
         contactDiv.querySelector("a").click();
       });
     </script>
+    <!-- displayMessage -->
+    <script>
+      function displayMessage(message, className) {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("temporary-message");
+        if (className) {
+          messageElement.classList.add(className);
+        }
+        messageElement.textContent = message;
+        document.body.appendChild(messageElement);
+        setTimeout(() => {
+          messageElement.remove();
+        }, 3000);
+      }
+    </script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/bigger_font.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/city_options_toggle.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
