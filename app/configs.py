@@ -29,7 +29,7 @@ class TestingConfig(Config):
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "DATABASE_URL",
-        "postgresql://postgres:jYqcLPCMfcSFwTwocmfMAVOBlSMHwGHO@junction.proxy.rlwy.net:45319/railway",
+        "postgresql://postgres:lzHMKvzMhedncOBjwwpBQeZVgyznNmdl@junction.proxy.rlwy.net:11220/railway",
     )
 
 
