@@ -34,3 +34,32 @@ because if i select all text from a larger div i will get evry thing about the n
  render index.html with jinja and ajax as it is
 
  instead of dufference mix blend mode , use a lighter bg in the ::before
+
+reverse order button in collections, simply reverse the array using browser's js, then easily sort oldesr -> newest || new -> oldest
+
+
+
+
+<script>
+      const collectionDisplay = document.querySelector(".collection_display");
+      const collectionGroup = document.querySelectorAll(".collection_group");
+
+      collectionGroup.forEach((group) => {
+        group.addEventListener("click", () => {
+          collectionDisplay.innerHTML = group.innerHTML;
+
+          show_news_preview();
+          read_in_new_tab();
+          deleteArticle();
+
+          // removing the dustbin from the collection_display,
+          // at the first loading there will be error as Read Later does not have delete_collection / dustbin
+          const collDisplay = document.querySelector('.collection_display');
+          const deleteCollection =  collDisplay.querySelector('.delete_collection');
+          deleteCollection.style.opacity = 0;
+          --> always error ??????????//////////////????????/
+        });
+      });
+
+      collectionGroup[0].click();
+    </script>

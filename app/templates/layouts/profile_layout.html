@@ -115,15 +115,15 @@
         group.addEventListener("click", () => {
           collectionDisplay.innerHTML = group.innerHTML;
 
+          show_news_preview();
+          read_in_new_tab();
+          deleteArticle();
+
           // removing the dustbin from the collection_display,
           // at the first loading there will be error as Read Later does not have delete_collection / dustbin
           const collDisplay = document.querySelector('.collection_display');
           const deleteCollection =  collDisplay.querySelector('.delete_collection');
           deleteCollection.style.opacity = 0;
-
-          show_news_preview();
-          read_in_new_tab();
-          deleteArticle();
         });
       });
 

@@ -39,7 +39,6 @@ function deleteArticle() {
       let article_url = articleLi.getAttribute("data-url");
       let article_parent_collection = articleLi.getAttribute("data-collection");
       let matchingLiElements = document.querySelectorAll(`li[data-url="${article_url}"][data-collection="${article_parent_collection}"]`);
-      console.log(matchingLiElements);
       // Send the request to remove the article from the server and DOM
       sendArticleToRemoveToServer(article_url, article_parent_collection, matchingLiElements);
     });

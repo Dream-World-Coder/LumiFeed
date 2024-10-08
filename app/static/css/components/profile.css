@@ -2,7 +2,7 @@
   --rad: 10px;
   --body-bg-clr: rgb(251, 251, 251);
   --dm-body-bg-clr: rgb(28, 28, 28);
-  --normal-bg-clr: rgb(244, 244, 244);
+  /* --normal-bg-clr: rgb(244, 244, 244); */
   --normal-bg-clr: var(--color-green-100);
 
   --dark-mode-bg-clr: rgba(108, 108, 108, 0.5);
@@ -135,63 +135,6 @@ body.dark-mode {
   padding-bottom: 10rem!important;
 } */
 
-.collection_display {
-  position: fixed;
-  top: calc(5rem + 15px);
-  right: 15px;
-  height: calc(100% - 100px - 5rem);
-
-  --collection-width-normal: 35%;
-  --collection-padding-left: 20px;
-  --collection_display-right: 15px;
-  --gap-between-collection_display-and-collection: 15px;
-  --something-xtra: 15px;
-  width: calc(100% - 35% - 20px - 15px - 20px + 15px);
-
-  border-radius: var(--rad);
-  /* border: 1px solid var(--normal-border-clr); */
-  z-index: 99;
-
-  & .collection {
-    width: 100%;
-    z-index: 100;
-    overflow-x: hidden;
-    overflow-y: scroll;
-  }
-
-  & .collection_content ul li {
-    position: relative;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    /* align-items: center; */
-    overflow: hidden;
-    padding: 10px;
-    padding-left: 15px;
-    border-bottom: 1px solid var(--normal-border-clr);
-    line-height: 1rem;
-    z-index: 10;
-    color: rgb(55, 55, 55);
-
-    &:hover {
-      color: white;
-    }
-  }
-
-  & .collection_content ul li:hover::before {
-    transform: scaleY(1);
-    transition: all 0.2s;
-    transform-origin: top;
-    z-index: 20;
-  }
-
-  @media (max-width: 1024px) {
-    & {
-      display: none;
-    }
-  }
-}
-
 /* body.dark-mode .collection_display {
   border: 1px solid var(--dark-mode-border-clr);
 } */
@@ -240,6 +183,7 @@ body.dark-mode .collection {
   width: 100%;
   height: 50px;
   background-color: var(--normal-bg-clr);
+  /* now --normal-bg-clr is green-100 */
   border-radius: var(--rad) var(--rad) 0px 0px;
   display: flex;
   align-items: center;
@@ -257,7 +201,9 @@ body.dark-mode .collection {
 }
 
 body.dark-mode .collection_name {
-  background-color: var(--dark-mode-bg-clr);
+  /* background-color: var(--dark-mode-bg-clr); */
+  background-color: var(--color-green-400);
+  color: black;
   border-bottom: 1px solid var(--dark-mode-border-clr);
 }
 
@@ -279,7 +225,6 @@ body.dark-mode .collection_name {
   width: 100%;
   height: 60px;
   display: flex;
-  /* align-items: center; */
   overflow: hidden;
   padding: 10px;
   padding-left: 15px;
@@ -305,7 +250,15 @@ body.dark-mode .collection_content ul li {
     height: 70px;
   }
 }
-
+.collection_display .collection_content ul li:hover {
+  background-color: var(--color-green-100);
+  color: black;
+}
+body.dark-mode .collection_display .collection_content ul li:hover {
+  background-color: var(--color-green-100);
+  color: black;
+}
+/*
 .collection_content ul li::before {
   content: "";
   position: absolute;
@@ -320,12 +273,10 @@ body.dark-mode .collection_content ul li {
   z-index: 10;
   transform-origin: top;
   background-color: rgb(0, 0, 0);
-  /* background-color: var(--color-green-400); */
 }
 
 body.dark-mode .collection_content ul li::before {
   background-color: rgb(255, 255, 255);
-  /* background-color: var(--color-green-400); */
 }
 
 .collection_content ul li:hover::before {
@@ -333,6 +284,64 @@ body.dark-mode .collection_content ul li::before {
   transition: all 0.2s;
   transform-origin: top;
   z-index: 20;
+}
+*/
+
+.collection_display {
+  position: fixed;
+  top: calc(5rem + 15px);
+  right: 15px;
+  height: calc(100% - 100px - 5rem);
+
+  --collection-width-normal: 35%;
+  --collection-padding-left: 20px;
+  --collection_display-right: 15px;
+  --gap-between-collection_display-and-collection: 15px;
+  --something-xtra: 15px;
+  width: calc(100% - 35% - 20px - 15px - 20px + 15px);
+
+  border-radius: var(--rad);
+  /* border: 1px solid var(--normal-border-clr); */
+  z-index: 99;
+
+  & .collection {
+    width: 100%;
+    z-index: 100;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  & .collection_content ul li {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    /* align-items: center; */
+    overflow: hidden;
+    padding: 10px;
+    padding-left: 15px;
+    border-bottom: 1px solid var(--normal-border-clr);
+    line-height: 1rem;
+    z-index: 10;
+    color: rgb(55, 55, 55);
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  /* & .collection_content ul li:hover::before {
+    transform: scaleY(1);
+    transition: all 0.2s;
+    transform-origin: top;
+    z-index: 20;
+  } */
+
+  @media (max-width: 1024px) {
+    & {
+      display: none;
+    }
+  }
 }
 
 .delete_collection,
@@ -359,9 +368,15 @@ body.dark-mode .collection_content ul li::before {
   }
 
   &:hover {
-    border: 1px solid rgb(255, 255, 255);
+    /* border: 1px solid rgb(255, 255, 255);  needed when i used the :hover::before one */
+    border: 1px solid black;
   }
 }
+
+body.dark-mode .delete_article:hover {
+  border: 1px solid rgb(0, 0, 0);
+}
+
 @media (max-width: 768px) {
   .delete_article {
     display: flex;
@@ -369,10 +384,6 @@ body.dark-mode .collection_content ul li::before {
   .collection_content ul li:hover::before {
     transform: scaleY(0);
   }
-}
-
-body.dark-mode .delete_article:hover {
-  border: 1px solid rgb(0, 0, 0);
 }
 
 .collection_content ul li:hover .delete_article {
