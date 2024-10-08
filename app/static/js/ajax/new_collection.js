@@ -36,6 +36,7 @@ function addNewCollection() {
           if (res.success) {
             addCollectionToDOM(res.success);
             displayMessage("Collection added!", "success");
+            deleteCollection();
           } else {
             displayMessage(res.error, "error");
           }

@@ -114,3 +114,9 @@ t.js
 .prettierrc
 logs/
 pipfile.lock
+
+instance/
+app/database.sqlite
+database.sqlite
+app/test.db
+app/test-database.sqlite
