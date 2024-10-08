@@ -74,7 +74,7 @@ def delete_collection():
             db.session.delete(article)
 
         db.session.commit()
-        return jsonify({"message": "Collection deleted successfully."}), 200
+        return jsonify({"message": "Collection deleted."}), 200
     
     except Exception as e:
         app.logger.error(f"Error deleting collection: {str(e)}")

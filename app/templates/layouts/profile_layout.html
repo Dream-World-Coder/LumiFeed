@@ -78,6 +78,22 @@
       });
     </script>
 
+    <!-- displayMessage -->
+    <script>
+      function displayMessage(message, className) {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("temporary-message");
+        if (className) {
+          messageElement.classList.add(className);
+        }
+        messageElement.textContent = message;
+        document.body.appendChild(messageElement);
+        setTimeout(() => {
+          messageElement.remove();
+        }, 3000);
+      }
+    </script>
+
     <!-- delete articles from playlists -->
     <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_articles.js')}}"></script>
     <!-- delete collections -->
@@ -98,6 +114,13 @@
       collectionGroup.forEach((group) => {
         group.addEventListener("click", () => {
           collectionDisplay.innerHTML = group.innerHTML;
+
+          // removing the dustbin from the collection_display,
+          // at the first loading there will be error as Read Later does not have delete_collection / dustbin
+          const collDisplay = document.querySelector('.collection_display');
+          const deleteCollection =  collDisplay.querySelector('.delete_collection');
+          deleteCollection.style.opacity = 0;
+
           show_news_preview();
           read_in_new_tab();
           deleteArticle();

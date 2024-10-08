@@ -45,7 +45,13 @@ function saveArticleInOtherCollections() {
 
   ReadLaterCollectionBtns.forEach((btn, index) => {
     btn.addEventListener("click", () => {
-      var articleTitle = tdContainingTitle[index].textContent;
+      var td = tdContainingTitle[index];
+      var articleTitle = Array.from(td.childNodes)
+        .filter((node) => node.nodeType === 3)
+        .map((node) => node.textContent.trim())
+        .filter((text) => text.length > 0)
+        .join(" ");
+
       var articleUrl = aContainingUrl[index].getAttribute("href");
 
       if (collectionsNameInputs.length === 0) {
@@ -59,6 +65,7 @@ function saveArticleInOtherCollections() {
         var parentCollection = collectionsInput.value;
         sendArticleToServer("/add_to_different_collections", articleTitle, articleUrl, parentCollection);
         collectionsInput.style.display = "none";
+        collectionsInput.selectedIndex = 0;
       });
     });
   });

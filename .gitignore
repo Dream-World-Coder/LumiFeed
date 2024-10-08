@@ -103,3 +103,14 @@ gunicorn_commands.md
 .backup/
 to-do.sy
 to-do.txt
+node_modules/
+package.json
+package-lock.json
+yarn.lock
+yarn-error.log
+yarn-debug.log
+t.js
+.prettierignore
+.prettierrc
+logs/
+pipfile.lock

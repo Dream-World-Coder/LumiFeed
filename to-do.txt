@@ -22,3 +22,13 @@ different class add in displaymsg
 
 
 fetch news .js
+
+
+sync when articles are deletes or hide one dustbin from the collection_display
+
+
+while scraping i think the .textContent will also work instead of merging all <p> tags, 
+because if i select all text from a larger div i will get evry thing about the news,
+ execpt the ads though, 
+
+ render index.html with jinja and ajax as it is
