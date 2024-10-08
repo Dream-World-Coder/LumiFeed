@@ -32,3 +32,5 @@ because if i select all text from a larger div i will get evry thing about the n
  execpt the ads though, 
 
  render index.html with jinja and ajax as it is
+
+ instead of dufference mix blend mode , use a lighter bg in the ::before

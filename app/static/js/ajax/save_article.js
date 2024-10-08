@@ -28,7 +28,13 @@ function saveArticleInReadLater() {
 
   ReadLaterCollectionBtns.forEach((btn, index) => {
     btn.addEventListener("click", () => {
-      var articleTitle = tdContainingTitle[index].textContent;
+      var td = tdContainingTitle[index];
+      var articleTitle = Array.from(td.childNodes)
+        .filter((node) => node.nodeType === 3)
+        .map((node) => node.textContent.trim())
+        .filter((text) => text.length > 0)
+        .join(" ");
+
       var articleUrl = aContainingUrl[index].getAttribute("href");
       sendArticleToServer("/add_to_read_later", articleTitle, articleUrl, "Read Later");
     });

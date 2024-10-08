@@ -7,6 +7,7 @@
       <div class="collection">
         <div class="collection_name">
           {{ coll }}
+          <!-- why and / why not or: cuz i want the condition to be false for these 2 collections, NOT TRUE -->
           {% if coll != 'Liked Articles' and coll != 'Read Later' %}
             <span class="delete_collection">
               <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="delete this collection" />
@@ -15,9 +16,9 @@
         </div>
         <div class="collection_content">
           <ul>
-          {% for news_article in current_user.saved_articles %} 
+          {% for news_article in current_user.saved_articles %}
             {% if news_article.parent_collection == coll %}
-              <li class="read_here" data-url="{{ news_article.article_url | trim }}">
+              <li class="read_here" data-url="{{ news_article.article_url | trim }}" data-collection="{{ coll | trim }}">
                 {{ news_article.article_title | trim }}
                 <span class="delete_article">
                   <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="Delete article" />

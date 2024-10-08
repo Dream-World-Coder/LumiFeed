@@ -463,14 +463,14 @@ label {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0;
   width: 100%;
   height: 100%;
   z-index: 200;
-  transform: translateX(-100%);
+  transform: scaleX(0);
   transition: transform 0.3s ease-in-out;
-  transform-origin: left;
+  transform-origin: right;
   mix-blend-mode: difference;
+  border-radius: 3px;
 }
 
 .animated-underline::before {
@@ -479,11 +479,11 @@ label {
 
 .animated-underline-white::before {
   background-color: var(--clr2);
+  background-color: aliceblue;
 }
 
 .animated-underline:hover::before,
 .animated-underline-white:hover::before {
-  /* width: 100%; */
-  transform-origin: right;
-  transform: translateX(0);
+  transform-origin: left;
+  transform: scaleX(1);
 }

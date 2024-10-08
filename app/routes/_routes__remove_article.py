@@ -8,13 +8,17 @@ from flask_login import login_required, current_user
 def remove_article():
     data = request.json
     article_url = data.get("article_url")
+    article_parent_collection = data.get("article_parent_collection")
 
     if not article_url:
-        return jsonify({"error": "No article URL provided"}), 400
+        return jsonify({"error": "cannot get article URL."}), 400
+    
+    if not article_parent_collection:
+        return jsonify({"error": "cannot get article's parent collection."}), 400
 
     try:
         article = Article.query.filter_by(
-            user_id=current_user.id, article_url=article_url
+            user_id=current_user.id, article_url=article_url, parent_collection=article_parent_collection
         ).first()
 
         if article is None:
