@@ -9,18 +9,16 @@ function sendArticleToRemoveToServer(article_url, article_parent_collection, mat
   };
 
   fetch(url, options)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      } else {
-        return response.json();
-      }
-    })
+    .then((response) => response.json())
     .then((data) => {
-      displayMessage(data.message, "success");
-      matchingLiElements.forEach((li) => {
-        li.remove();
-      });
+      if (data.message) {
+        displayMessage(data.message, "success");
+        matchingLiElements.forEach((li) => {
+          li.remove();
+        });
+      } else {
+        displayMessage(data.error, "error");
+      }
     })
     .catch((error) => {
       displayMessage(error.message, "error");

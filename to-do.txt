@@ -23,7 +23,11 @@ because if i select all text from a larger div i will get evry thing about the n
 reverse order button in collections, simply reverse the array using browser's js, then easily sort oldesr -> newest || new -> oldest
 
 
+add a 'i' btn next to lumifeed logo in profile.html, on click, it will show instructions on how to use
+      like : click to read preview, 
+              click name of collection to see it in the right side / collection_display
 
+ok and only one bug in delete article, when deleting from left side, it says both article removed and article not found
 
 <script>
       const collectionDisplay = document.querySelector(".collection_display");

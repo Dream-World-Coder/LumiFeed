@@ -10,16 +10,24 @@ function fetchNews(event) {
   if (event) event.preventDefault();
   showLoader();
 
-  const form = document.getElementById("fetch-news-form");
-  const formData = new FormData(form);
-  const newsType = formData.get("news_type");
-  const newsCount = formData.get("news_count");
-  const name_of_city = formData.get("name_of_city") || "";
-  let url = `/fetchnews?news_type=${newsType}&news_count=${newsCount}&name_of_city=${name_of_city}`;
+  var form = document.getElementById("fetch-news-form");
+  var formData = new FormData(form);
+  var newsType = formData.get("news_type");
+  var newsCount = formData.get("news_count");
+  var name_of_city = formData.get("name_of_city") || "";
+  var url = `/fetchnews?news_type=${newsType}&news_count=${newsCount}&name_of_city=${name_of_city}`;
 
   // Store the last fetched URL in localStorage
-  localStorage.setItem("last_url", url);
+  if (newsCount > 25) {
+    var tmp = 25;
+    url = `/fetchnews?news_type=${newsType}&news_count=${tmp}&name_of_city=${name_of_city}`;
+    localStorage.setItem("last_url", url);
+  } else {
+    url = `/fetchnews?news_type=${newsType}&news_count=${newsCount}&name_of_city=${name_of_city}`;
+    localStorage.setItem("last_url", url);
+  }
 
+  url = `/fetchnews?news_type=${newsType}&news_count=${newsCount}&name_of_city=${name_of_city}`;
   fetch(url)
     .then((response) => {
       if (!response.ok) {

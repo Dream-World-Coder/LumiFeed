@@ -120,3 +120,8 @@ app/database.sqlite
 database.sqlite
 app/test.db
 app/test-database.sqlite
+.backup/
+to-do.txt
+to-do.sy
+migrate
+migrations/
