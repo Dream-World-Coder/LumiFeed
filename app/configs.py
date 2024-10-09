@@ -32,7 +32,6 @@ class ProductionConfig(Config):
         "postgresql://postgres:lzHMKvzMhedncOBjwwpBQeZVgyznNmdl@junction.proxy.rlwy.net:11220/railway",
     )
 
-
 config = {
     "development": DevelopmentConfig,
     "testing": TestingConfig,
