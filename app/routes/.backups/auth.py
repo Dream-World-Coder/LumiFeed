@@ -46,6 +46,8 @@ def send_verification_email(user_email, token):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Login
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
@@ -70,10 +72,14 @@ def login():
             usr = User.query.filter_by(email=user_email).first()
             if not usr:
                 return jsonify({'error': 'User not found'}), 404
+                # flash("User not found", "error")
+                # return redirect(url_for("login"))
 
             elif not usr.check_password(user_password):
                 usr.increment_failed_logins()
                 return jsonify({'error': 'Incorrect password'}), 401
+                # flash("Incorrect password.", "error")
+                # return redirect(url_for("login"))
 
             else:
                 # reset failed login attempts
@@ -83,10 +89,13 @@ def login():
 
                 login_user(usr)
                 return jsonify({'success': 'Login successful'}), 200
+                # return redirect(url_for("index"))
 
         except Exception as e:
             print(e)
             return jsonify({'error': 'An error occurred during login'}), 500
+            # flash("An error occurred during login", "error")
+            # return redirect(url_for("login"))
     else:
         return render_template("errors/unknown-method.html")
 
@@ -94,6 +103,8 @@ def login():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~`
 # Register
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
@@ -121,6 +132,8 @@ def register():
             # check for existing email
             if User.query.filter_by(email=user_email).first():
                 return jsonify({'error':'Email is already taken, use another one'}), 409
+                # flash("Email is already taken, use another one", "error")
+                # return redirect(url_for("register"))
 
             # add user to database
             db.session.add(usr)
@@ -128,16 +141,22 @@ def register():
             login_user(usr)
             # now i can send users to login page or directly login them and send them in home
             return jsonify({'success':'Registered successfully'}), 200
+            # return redirect(url_for("index"))
 
         except IntegrityError:
             print(IntegrityError)
             db.session.rollback()
             return jsonify({'error':'Email is already taken, use another one'}), 409
+            # flash("Email is already taken, use another one", "error")
+            # return redirect(url_for("register"))
 
         except Exception as e:
             print(e)
             db.session.rollback()
             return jsonify({'error':'some error occurred during registration'}), 500
+            # flash("Some error occurred", "error")
+            # return redirect(url_for("register"))
+
     else:
         return render_template("errors/unknown-method.html")
 
@@ -145,6 +164,8 @@ def register():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Logout
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 @login_required
 @app.route("/logout")
 def logout():
@@ -156,6 +177,8 @@ def logout():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~`\
 # Delete Account
 # ~~~~~~~~~~~~~~~~~~~~~~~~~`/
+
+
 @login_required
 @app.route("/delete_account", methods=["GET","POST"])
 def delete_account():
@@ -188,6 +211,8 @@ def forgot_password():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~`\
 # Reset Password
 # ~~~~~~~~~~~~~~~~~~~~~~~~~`/
+
+
 @login_required
 @app.route("/reset_password", methods=["GET", "POST"])
 def reset_password():

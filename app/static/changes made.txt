@@ -1,0 +1,8 @@
+changes made:
+headers.css: 13, 
+nav.css :56
+dm2.svg
+bigger.svg
+read.css :7
+fetch_news.css :h2 & btns and custom-radio
+tables.css :45

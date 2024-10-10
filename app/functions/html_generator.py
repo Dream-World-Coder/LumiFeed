@@ -86,7 +86,7 @@ def gen_table_india_news(data: list, user) -> str:
       collections_input_full = f'<select class="collections_name_input" name="collections_name_input">{collections_input}</select>'
     else:
       collections_input_full = ''
-      
+
     html_table = """
                     <tr class="tr1">
                         <th class="th1">NO</th>
@@ -152,7 +152,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
       }
       html.invert body {
           background-color: rgb(37, 37, 37);
-          color: rgb(128,128,128);
+          color: rgb(190,190,190);
         }
     html.invert .read__page h3 {
         color: rgb(128, 128, 128);
@@ -267,6 +267,10 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
         text-align: justify;
         column-fill: balance;
         min-height: 1px;
+        line-height: 1.1;
+      }
+      ::-webkit-scrollbar {
+        width: 0;
       }
 
       @media (min-width: 1440px) {

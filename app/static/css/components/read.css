@@ -12,6 +12,7 @@
   color: aliceblue;
   z-index: 70;
   font-family: poppins, sans-serif;
+  font-size: 0.85rem !important;
 }
 
 #read {

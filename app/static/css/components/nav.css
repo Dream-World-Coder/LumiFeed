@@ -58,15 +58,18 @@ nav .ul .li2 {
 .li5 form button {
   font-size: 1.15rem;
   color: var(--clr2);
+  color: #eee6c8;
   text-decoration: none;
   font-family: poppins, Arial, Helvetica, sans-serif;
 }
 
 .li5 form button {
-  border: 1px solid var(--clr2);
+  /* border: 1px solid var(--clr2); */
+  border: 1px solid #eee6c8;
   border-radius: 5px;
   transform: translateY(0px);
-  background-color: #dd2b4f31;
+  /* background-color: #dd2b4f31; */
+  background-color: #eee6c82c;
   transition: all 0.3s;
   padding: 0px 3px 0px 3px;
   font-size: smaller;
@@ -74,7 +77,8 @@ nav .ul .li2 {
 
 .li5 form button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0px 2px 0px rgba(221, 43, 79, 0.3), 0 0px 0px 4px rgba(221, 43, 79, 0.3);
+  /* box-shadow: 0 0px 2px 0px rgba(221, 43, 79, 0.3), 0 0px 0px 4px rgba(221, 43, 79, 0.3); */
+  box-shadow: 0 0px 2px 0px rgba(238, 230, 200, 0.3), 0 0px 0px 4px rgba(238, 230, 200, 0.3);
   transition: all 0.3s;
 }
 

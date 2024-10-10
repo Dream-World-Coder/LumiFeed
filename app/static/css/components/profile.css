@@ -1,15 +1,16 @@
 :root {
   --rad: 10px;
   --body-bg-clr: rgb(251, 251, 251);
-  --dm-body-bg-clr: rgb(28, 28, 28);
-  /* --normal-bg-clr: rgb(244, 244, 244); */
-  --normal-bg-clr: var(--color-green-100);
+  --dm-body-bg-clr: rgb(48, 48, 48);
+  --normal-bg-clr: rgb(244, 244, 244);
+  /* --normal-bg-clr: var(--color-green-100); */
+  /* --normal-bg-clr: #eee6c8; */
 
   --dark-mode-bg-clr: rgba(108, 108, 108, 0.5);
-  /* --dark-mode-bg-clr: var(--color-green-100); */
+  /* --dark-mode-bg-clr: #14532d88; */
 
-  --normal-border-clr: rgb(202, 202, 202);
-  --dark-mode-border-clr: rgba(108, 108, 108, 0.9);
+  --normal-border-clr: rgb(218, 218, 218);
+  --dark-mode-border-clr: rgba(64, 64, 64, 0.9);
 }
 
 body {
@@ -201,9 +202,8 @@ body.dark-mode .collection {
 }
 
 body.dark-mode .collection_name {
-  /* background-color: var(--dark-mode-bg-clr); */
-  background-color: var(--color-green-400);
-  color: black;
+  background-color: var(--dark-mode-bg-clr);
+  color: rgb(217, 217, 217);
   border-bottom: 1px solid var(--dark-mode-border-clr);
 }
 
@@ -255,7 +255,7 @@ body.dark-mode .collection_content ul li {
   color: black;
 }
 body.dark-mode .collection_display .collection_content ul li:hover {
-  background-color: var(--color-green-100);
+  background-color: var(--color-gray-300);
   color: black;
 }
 /*
@@ -392,12 +392,18 @@ body.dark-mode .delete_article:hover {
 
 /* ------------     profile
 ----------------------------------- */
+:root {
+  --color-gray-300: #d1d5db;
+  --color-gray-600: #4b5563;
+}
 .profile_settings {
   position: absolute;
   top: 5rem;
   left: 50px;
   width: 300px;
   height: 400px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-radius: var(--rad);
   display: flex;
   flex-direction: column;
@@ -405,8 +411,9 @@ body.dark-mode .delete_article:hover {
   background-color: rgba(244, 244, 244, 1);
   border: 1px solid var(--normal-border-clr);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: rgb(68, 68, 68);
   z-index: 1000 !important;
-  box-shadow: -1.5px 1.5px 0px var(--color-gray-300);
+  box-shadow: -3px 3px 0px var(--color-gray-300);
   /* display: none;
   have to use style="display:'none';"*/
 
@@ -420,7 +427,8 @@ body.dark-mode .delete_article:hover {
 body.dark-mode .profile_settings {
   background-color: rgb(68, 68, 68);
   border: 1px solid rgb(55, 55, 55);
-  box-shadow: -1.5px 1.5px 0px var(--color-gray-600);
+  box-shadow: -3px 3px 0px rgb(55, 55, 55);
+  color: rgb(208, 208, 208);
 }
 
 .user_details {
@@ -430,6 +438,7 @@ body.dark-mode .profile_settings {
 
   & .profile_pic {
     margin-top: 15px;
+    margin-bottom: 15px;
     width: 80px;
     height: 80px;
 
@@ -441,22 +450,36 @@ body.dark-mode .profile_settings {
   }
 
   & .user_name {
-    margin-top: 15px;
     text-align: center;
-    font-size: 1.5rem;
+    padding-top: 5px;
+    border-top: 1px solid rgba(202,202,202, 1);
+    border-bottom: 1px solid rgba(202,202,202, 1);
+    font-size: 1.25rem;
 
     @media (max-width: 768px) {
       font-size: 1.15rem;
     }
   }
 
+  body.dark-mode & .user_name{
+    border-top: 1px solid rgba(88,88,88, 1);
+    border-bottom: 1px solid rgba(88,88,88, 1);
+  }
+
   & .user_email {
-    margin-top: 15px;
+    padding-top: 7px;
+    padding-bottom: 5px;
     text-align: center;
     font-size: 1rem;
-    @media (max-width: 768px) {
+    border-bottom: 1px solid rgba(202,202,202, 1);
+
+    @media (max-width: 769px) {
       font-size: 0.85rem;
     }
+  }
+
+  body.dark-mode & .user_email{
+    border-bottom: 1px solid rgba(88,88,88, 1);
   }
 }
 
@@ -465,14 +488,19 @@ body.dark-mode .profile_settings {
   width: 100%;
   height: 20%;
 
-  & button {
+  & form button {
     border: none;
-    font-size: 1rem;
+    font-size: 0.85rem;
     box-sizing: content-box;
-    padding: 5px;
+    padding: 2px 5px 2px 5px;
     border-radius: 5px;
-    background-color: var(--clr2);
+    background-color: rgba(49, 143, 96, 0.67);
     color: white;
+  }
+
+    & form:nth-last-of-type(1) button{
+        background-color: rgba(0, 0, 0, 0.67);
+    }
   }
 }
 

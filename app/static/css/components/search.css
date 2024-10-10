@@ -6,8 +6,6 @@
   --icon-height: 40px;
   --clr1: rgb(204, 112, 0);
   --clr201: rgba(159, 114, 59, 0.347);
-  --clr2: rgb(221, 43, 79);
-  --c2: #dd2b4f;
   /* search clrs */
   --c3: var(--v-th); /* border  */
   --c4: var(--v-tr-odd); /* bg  */
@@ -96,7 +94,9 @@
   overflow-x: hidden;
   overflow-y: scroll;
   border: 1px solid var(--dim-border);
+  /* border: 1px solid rgba(86, 86, 86, 0.9); */
   background-color: var(--dim-bg-clr);
+  /* background-color: rgba(86, 86, 86, 0.5); */
 }
 
 .search-reasults::-webkit-scrollbar {

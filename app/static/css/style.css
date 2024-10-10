@@ -9,30 +9,17 @@
   --bg1-val: var(--bg1);
   --bg2: black;
   --clr2: rgb(221, 43, 79);
+  /* --clr2: #318f60; */
+  /* --clr2: #d84f0f; */
+
+  /* ---------------- */
   --c2: #dd2b4f;
-  --color-beige-100: #fff0e5;
-  --color-blue-0: #f5fcff;
-  --color-blue-100: #d3f2ff;
-  --color-blue-300: #66c4ff;
-  --color-blue-400: #3388ff;
-  --color-blue-500: #1557ff;
-  --color-blue-800: #1d2340;
-  --color-navy-100: rgba(16, 22, 47, 0.04);
-  --color-navy-200: rgba(16, 22, 47, 0.12);
-  --color-navy-300: rgba(16, 22, 47, 0.28);
-  --color-navy-400: rgba(16, 22, 47, 0.45);
-  --color-navy-500: rgba(16, 22, 47, 0.63);
-  --color-navy-600: rgba(16, 22, 47, 0.75);
-  --color-navy-700: rgba(16, 22, 47, 0.86);
-  --color-navy-800: #10162f;
-  --color-navy-900: #0a0d1c;
-  --color-green-0: #f5ffe3;
+  /* --c2: #318f60; */
+  /* --c2: #d84f0f; */
+
   --color-green-100: #eafdc6;
   --color-green-400: #aee938;
   --color-green-700: #008a27;
-  --color-yellow-0: #fffae5;
-  --color-yellow-400: #cca900;
-  --color-yellow-500: #ffd300;
   --color-pink-0: #fff5ff;
   --color-pink-400: #f966ff;
   --color-red-0: #e85d7f;
@@ -40,43 +27,14 @@
   --color-red-500: #e91c11;
   --color-red-600: #be1809;
   --color-orange-500: #ff8c00;
-  --color-hyper-400: #5533ff;
-  --color-hyper-500: #3a10e5;
-  --color-gray-100: #f5f5f5;
-  --color-gray-200: #eeeeee;
-  --color-gray-300: #e0e0e0;
-  --color-gray-600: #9e9e9e;
-  --color-gray-800: #616161;
-  --color-gray-900: #424242;
-  --color-white-100: rgba(255, 255, 255, 0.04);
-  --color-white-200: rgba(255, 255, 255, 0.09);
-  --color-white-300: rgba(255, 255, 255, 0.2);
-  --color-white-400: rgba(255, 255, 255, 0.33);
-  --color-white-500: rgba(255, 255, 255, 0.5);
-  --color-white-600: rgba(255, 255, 255, 0.65);
-  --color-white-700: rgba(255, 255, 255, 0.8);
+
   --color-shadow-black-slight: rgba(0, 0, 0, 0.15);
   --color-shadow-black-heavy: rgba(0, 0, 0, 0.75);
   --color-shadow-white-slight: rgba(255, 255, 255, 0.15);
   --color-shadow-white-heavy: rgba(255, 255, 255, 0.95);
-  --color-beige: #fff0e5;
-  --color-blue: #1557ff;
-  --color-green: #008a27;
-  --color-hyper: #3a10e5;
+
   --color-lightBlue: #66c4ff;
   --color-lightGreen: #aee938;
-  --color-navy: #10162f;
-  --color-orange: #ff8c00;
-  --color-paleBlue: #f5fcff;
-  --color-paleGreen: #f5ffe3;
-  --color-palePink: #fff5ff;
-  --color-paleYellow: #fffae5;
-  --color-pink: #f966ff;
-  --color-paleRed: #dc5879;
-  --color-red: #e91c11;
-  --color-yellow: #ffd300;
-  --color-black: #000000;
-  --color-white: #ffffff;
 }
 
 body {
@@ -92,6 +50,27 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+/* width */
+::-webkit-scrollbar {
+  /* width: 10px; */
+  width: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: whitesmoke;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #318f60;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .f0 {
@@ -199,20 +178,18 @@ body.dark-mode .find #search {
   animation: fadeInOut 5s ease-in-out;
 }
 
-
 .error {
   background-color: var(--color-red-500);
   color: black;
 }
-.success{
-    background-color: var(--color-green-400);
-    color: black;
+.success {
+  background-color: var(--color-green-400);
+  color: black;
 }
-.message{
-    background-color: white;
-    color: black;
+.message {
+  background-color: white;
+  color: black;
 }
-
 
 @keyframes fadeInOut {
   0%,

@@ -26,7 +26,7 @@
               {% block image %} {% endblock %}
               <!-- Redirect Link -->
               {% block redirect %} {% endblock %}
-              <a href="{{url_for('index')}}" class="home-link">Go Back</a>
+              <a href="{% block origin %}{{url_for('index')}}{% endblock %}" class="home-link">Go Back</a>
             </div>
 
             <div class="signin-form">

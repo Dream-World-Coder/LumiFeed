@@ -65,7 +65,13 @@ function saveArticleInOtherCollections() {
         return;
       }
       var collectionsInput = collectionsNameInputs[index];
-      collectionsInput.style.display = "flex";
+      // Toggle the display style without using classes
+      if (collectionsInput.style.display === "none" || !collectionsInput.style.display) {
+        collectionsInput.style.display = "flex";  // Show input
+      } else {
+        collectionsInput.style.display = "none";  // Hide input
+      }
+
       // now wait for the option to be selected
       collectionsInput.addEventListener("change", () => {
         var parentCollection = collectionsInput.value;

@@ -1,10 +1,11 @@
 :root {
-  --dmBgClr: rgb(28, 28, 28);
+  --dmBgClr: rgb(50, 50, 50);
 }
+
 body.dark-mode,
 .dark-mode {
-  background-color: rgb(28, 28, 28);
-  color: white;
+  background-color: var(--dmBgClr);
+  color: rgb(220, 220, 220);
 }
 body.dark-mode a {
   color: white;
@@ -34,7 +35,7 @@ body.dark-mode .btn:hover {
 /* -------  table
 ----------------------------------- */
 :root {
-  --table-text-clr-dm: rgb(255, 255, 255);
+  --table-text-clr-dm: rgb(220, 220, 220);
   --rbtn-clr: var(--clr2);
 }
 
@@ -43,7 +44,7 @@ body.dark-mode table {
 }
 
 body.dark-mode table a {
-  color: white;
+  color: var(--table-text-clr-dm);
 }
 
 body.dark-mode th {
@@ -55,20 +56,21 @@ body.dark-mode tr:nth-child(2n - 1) {
 }
 
 body.dark-mode tr:nth-child(2n) {
-  background-color: var(--dmBgClr);
+  /* background-color: var(--dmBgClr); */
+  background-color: rgb(43, 43, 43);
 }
 
 body.dark-mode table tbody tr {
-  border-left: 1px solid rgba(108, 108, 108, 0.9) !important;
-  border-right: 1px solid rgba(108, 108, 108, 0.9) !important;
+  border-left: 1px solid rgba(64, 64, 64, 0.9) !important;
+  border-right: 1px solid rgba(64, 64, 64, 0.9) !important;
 }
 
 body.dark-mode table tbody tr:first-child {
-  border-top: 1px solid rgba(108, 108, 108, 0.9) !important;
+  border-top: 1px solid rgba(64, 64, 64, 0.9) !important;
 }
 
 body.dark-mode table tbody tr:last-child {
-  border-bottom: 1px solid rgba(108, 108, 108, 0.9) !important;
+  border-bottom: 1px solid rgba(64, 64, 64, 0.9) !important;
 }
 
 /* -------  about & contact
@@ -76,12 +78,12 @@ body.dark-mode table tbody tr:last-child {
 body.dark-mode .about,
 body.dark-mode .contact {
   background-color: rgba(108, 108, 108, 0.5);
-  border: 1px solid rgba(108, 108, 108, 0.9);
+  border: 1px solid rgba(86, 86, 86, 0.9);
 }
 body.dark-mode .about p,
 body.dark-mode .contact p {
   background-color: var(--dmBgClr);
-  border: 1px solid rgba(108, 108, 108, 0.9);
+  border: 1px solid rgba(86, 86, 86, 0.9);
 }
 
 body.dark-mode .about p strong,
@@ -92,7 +94,7 @@ body.dark-mode .contact p strong {
 body.dark-mode .fetch_news h2,
 body.dark-mode .about h2,
 body.dark-mode .contact h2 {
-  color: rgb(196, 196, 196);
+  color: rgb(210, 210, 210);
 }
 
 body.dark-mode .con_icons img {
@@ -136,7 +138,7 @@ body.dark-mode .find-mobile.active .res__num {
 /* -------  read
 ----------------------------------- */
 :root {
-  --rbtn-clr2: rgb(221, 43, 79);
+  --rbtn-clr2: var(--clr2);
 }
 
 body.dark-mode .rbtn {
