@@ -217,7 +217,8 @@ body.dark-mode .collection_name {
   height: 100%;
   list-style-type: none;
   overflow-y: scroll;
-  padding-left: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .collection_content ul li {

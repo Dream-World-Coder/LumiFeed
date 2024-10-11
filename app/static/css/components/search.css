@@ -32,7 +32,7 @@
   /* -----------
         they all are just for show, bcz, js regulates the clr of them.
     -------------- */
-  --cx: rgb(174, 174, 174);
+  --cx: rgb(208, 208, 208);
 
   --r: 70px;
   --w: 310px;
@@ -71,7 +71,7 @@
 .search-icon {
   width: var(--icon-width);
   height: var(--icon-height);
-  background-image: url(../../icons/search3.svg);
+  background-image: url(../../icons/search3-desktop.svg);
   object-fit: cover;
   transition: all 0.3s;
   background-color: transparent;

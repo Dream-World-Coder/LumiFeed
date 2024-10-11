@@ -125,9 +125,8 @@ input[type="radio"]:checked + label.custom-radio {
   color: #fff;
 }
 body.dark-mode input[type="radio"]:checked + label.custom-radio {
-  /* background-color: var(--clr2); */
-  background-color: hsl(189, 60%, 48%);
-  color: #fff;
+  background-color: rgba(202, 202, 202, 1);
+  color: #000;
 }
 
 .options__container {

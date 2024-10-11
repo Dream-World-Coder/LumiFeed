@@ -81,7 +81,7 @@ def login():
                 # update last login informations
                 usr.update_login_data(ip_address=user_ip, device_info=user_device_info, latitude=latitude, longitude=longitude, accuracy=accuracy)
 
-                login_user(usr)
+                login_user(usr, remember=True) # default 365 days
                 return jsonify({'success': 'Login successful'}), 200
 
         except Exception as e:

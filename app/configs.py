@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 basedir = os.path.abspath(os.path.dirname(__file__))  # app
 
@@ -17,6 +18,7 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
+    REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
 
 class TestingConfig(Config):
@@ -24,6 +26,8 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "TEST_DATABASE_URL", "sqlite:///test-database.sqlite"
     )
+    REMEMBER_COOKIE_DURATION = timedelta(days=30)
+
 
 
 class ProductionConfig(Config):
@@ -31,6 +35,8 @@ class ProductionConfig(Config):
         "DATABASE_URL",
         "postgresql://postgres:",
     )
+    REMEMBER_COOKIE_DURATION = timedelta(days=30)
+
 
 config = {
     "development": DevelopmentConfig,

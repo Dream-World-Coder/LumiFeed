@@ -320,6 +320,10 @@
       </div>
     </main>
 
+    <!-- table end may be changed or use the about hanger instead -->
+    <!-- <div class="sp-X" id="table-end"></div> -->
+
+
     <!-- search + result -->
     <div itemscope itemtype="https://schema.org/SearchResultsPage" id="queryy" class="find fixed borderX flex-col f-gap-2">
       <!-- search query -->
@@ -333,7 +337,7 @@
           itemscope
           itemtype="https://schema.org/SearchAction"
         >
-          <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title?search_part={search_term_string}" />
+          <meta itemprop="target" content="https://lumifeed.up.railway.app/search_in_title?search_part={search_term_string}" />
           <input type="text" name="search_part" id="search" placeholder="Search in News Titles" required itemprop="query-input" />
           <button class="search-icon bg-set" type="submit" name="submit" id="submit">Search</button>
         </form>
@@ -442,7 +446,7 @@
     </div>
 
     <footer role="footer" itemscope itemtype="https://schema.org/WPFooter" class="section-element">
-      <div class="sp" id="table-end"></div>
+        <div class="sp" id="table-end"></div>
       <div class="cen cc">
         © 2024 Subhajit Gorai. All rights reserved.
         <meta name="copyright" content="Subhajit Gorai" />
