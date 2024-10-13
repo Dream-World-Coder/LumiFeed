@@ -1,5 +1,5 @@
 :root {
-  --nav-width: 280px;
+  --nav-width: 420px;
 }
 
 nav {
@@ -12,10 +12,6 @@ nav {
   display: flex;
   justify-content: space-between;
   width: 100%;
-}
-
-.li a {
-  z-index: 102;
 }
 
 .li2 {
@@ -31,10 +27,9 @@ nav {
   }
 }
 
-.li3 a,
-.li4 a {
-  font-size: 1.15rem;
-  color: var(--clr2);
+.li a {
+  z-index: 102;
+  font-size: 1rem;
   color: #eee6c8;
   text-decoration: none;
   font-family: poppins, Arial, Helvetica, sans-serif;
@@ -47,7 +42,9 @@ nav {
     font-size: 0.86rem;
   }
 }
-
+body.dark-mode .li a {
+  color: #eee6c8;
+}
 /* --- media queries ---
   ------------------------------- */
 @media (max-width: 1024px) {

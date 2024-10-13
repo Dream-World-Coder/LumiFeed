@@ -1,5 +1,6 @@
 :root {
-  --nav-width: 280px;
+  --nav-width: 380px;
+  /* 4*80 + 60 */
 }
 
 nav {
@@ -55,10 +56,11 @@ nav .ul .li2 {
 
 .li3 a,
 .li4 a,
+.li6 a,
 .li5 form button {
-  font-size: 1.15rem;
-  color: var(--clr2);
-  color: #eee6c8;
+  font-size: 1rem;
+  /* color: var(--clr2); */
+  color: #eee6c8 !important;
   text-decoration: none;
   font-family: poppins, Arial, Helvetica, sans-serif;
 }
@@ -105,7 +107,7 @@ nav .ul .li2 {
   }
 
   :root {
-    --nav-width: auto;
+    --nav-width: 300;
   }
   /* nav = login btn only */
   nav {

@@ -46,6 +46,8 @@ from .routes import (
     fetchnews,
     index,
     profile,
+    about,
+    contact,
     anything,
     # create_tables,
     read_news_here,

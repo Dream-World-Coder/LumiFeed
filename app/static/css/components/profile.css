@@ -453,8 +453,8 @@ body.dark-mode .profile_settings {
   & .user_name {
     text-align: center;
     padding-top: 5px;
-    border-top: 1px solid rgba(202,202,202, 1);
-    border-bottom: 1px solid rgba(202,202,202, 1);
+    border-top: 1px solid rgba(222,222,222, 1);
+    border-bottom: 1px solid rgba(222,222,222, 1);
     font-size: 1.25rem;
 
     @media (max-width: 768px) {
@@ -472,7 +472,7 @@ body.dark-mode .profile_settings {
     padding-bottom: 5px;
     text-align: center;
     font-size: 1rem;
-    border-bottom: 1px solid rgba(202,202,202, 1);
+    border-bottom: 1px solid rgba(222,222,222, 1);
 
     @media (max-width: 769px) {
       font-size: 0.85rem;

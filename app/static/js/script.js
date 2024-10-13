@@ -27,3 +27,38 @@ window.addEventListener(
   },
   { passive: true }
 );
+
+
+/*
+function foo(){
+    if (window.innerWidth > 1024) {
+        const footer = document.getElementById('footer');
+
+        if (!footer) {
+            console.warn('Footer element not found');
+            return;
+        }
+
+        const root = document.documentElement;
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Get the visible height of the footer
+                    const visibleHeight = entry.boundingClientRect.height;
+                    root.style.setProperty('--res-h', `${visibleHeight}px`);
+                } else {
+                    window.requestAnimationFrame(() => {
+                        let currentHeight = parseFloat(getComputedStyle(root).getPropertyValue('--res-h')) || 70 * window.innerHeight / 100;
+                        let newHeight = currentHeight > (70 * window.innerHeight / 100) ? currentHeight - 1 : (70 * window.innerHeight / 100);
+                        root.style.setProperty('--res-h', `${newHeight}px`);
+                    });
+                }
+            });
+        }, {
+            threshold: 0
+        });
+        observer.observe(footer);
+    }
+}
+foo();
+*/

@@ -29,10 +29,17 @@
             </div>
           </div>
         </div>
-        <div class="li li3 animated-underline-white">
+
+        <div class="li li1 animated-underline-white">
           <a href="{{url_for('index')}}" class="flexed" rel="noopener">Home</a>
         </div>
+        <div class="li li3 animated-underline-white">
+          <a href="/about" class="flexed" rel="noopener">About</a>
+        </div>
         <div class="li li4 animated-underline-white">
+          <a href="/contact" class="flexed" rel="noopener">Contact</a>
+        </div>
+        <div class="li li5 animated-underline-white">
           <a href="{{url_for('logout')}}" class="flexed" rel="noopener">logout</a>
         </div>
       </div>
@@ -47,15 +54,16 @@
     </div>
   </div>
   <script>
+    const homeDiv = document.querySelector(".li1");
     const aboutDiv = document.querySelector(".li3");
     const contactDiv = document.querySelector(".li4");
+    const logoutDiv = document.querySelector(".li5");
 
-    aboutDiv.addEventListener("click", () => {
-      aboutDiv.querySelector("a").click();
-    });
-
-    contactDiv.addEventListener("click", () => {
-      contactDiv.querySelector("a").click();
-    });
+    const array = [homeDiv,aboutDiv, contactDiv, logoutDiv];
+    array.forEach((el) => {
+      el.addEventListener("click", () => {
+        el.querySelector("a").click();
+      });
+    })
   </script>
 </header>

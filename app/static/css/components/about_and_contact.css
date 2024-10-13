@@ -2,16 +2,24 @@
   --pad: 15px;
   --bgx: var(--v-th);
   --bgx: rgb(37, 37, 37);
+
+  /* xtra */
+  --con-m-left: 2rem;
 }
 
 .about,
 .contact {
-  margin-top: 28rem;
   margin-left: var(--con-m-left);
   padding: var(--pad) var(--pad) var(--pad) var(--pad);
   font-size: 1.8rem;
   font-weight: 400;
+
+  margin-top: 28rem;
   width: 70%;
+  /* xtra */
+  width: calc(100% - 2 * var(--con-m-left));
+  margin-top: 8rem;
+
   border-radius: calc(var(--pad) - 5px);
   border: 1px solid rgb(202, 202, 202);
   background-color: rgb(244, 244, 244);
@@ -45,22 +53,6 @@
   padding: 10px;
 }
 
-/* space */
-.sp {
-  height: 50vh;
-  width: 100%;
-  font-size: 0;
-}
-
-/* copyright */
-.cc {
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-size: 1.2rem;
-  font-family: poppins, "Times New Roman", Times, serif;
-}
 
 /* icons */
 .con_icons {
@@ -97,6 +89,80 @@
   font-weight: 800;
   color: var(--bgx);
 }
+
+/* space */
+.sp {
+  height: 50vh;
+  width: 100%;
+  font-size: 0;
+}
+/* ----------
+footer
+---------------------*/
+footer{
+    position: relative;
+    /* left: 0; */
+    /* bottom: 0; */
+    width: 100%;
+    height: 30vh;
+    background-color: #318f60;
+    color: var(--color-shadow-black-heavy);
+    padding: 15px;
+    z-index: 103;
+    margin-top: calc(100vh - 50vh);
+
+    & ul{
+        list-style-type: none;
+    }
+
+    & a{
+        color: #eee6c8;
+        font-size: 1rem;
+
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+
+body.dark-mode footer li a,
+body.dark-mode nav li a{
+    color: #eee6c8 !important;
+}
+
+.footer__logo{
+    width: 70%;
+    padding: 20px;
+    font-size: 3.75rem;
+    color: rgb(202, 202, 202);
+}
+
+.footer__socials,
+.footer__links{
+    width: 15%;
+    padding-left: 30px;
+}
+
+.footer__logo,
+.footer__socials,
+.footer__links{
+    height: calc(100% + 15px - 3rem);
+}
+
+/* copyright */
+.footer__cc {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3rem;
+  width: 100%;
+  font-size: 1rem;
+  font-family: poppins, "Times New Roman", Times, serif;
+}
+
+/* -------------------------
+    Media Queries
+-----------------*/
 
 @media (min-width: 300px) and (max-width: 768px) {
   .about,
@@ -151,11 +217,4 @@
     height: 10rem;
     font-size: auto;
   }
-}
-
-be {
-  position: relative;
-  display: block;
-  height: 1rem;
-  width: 100%;
 }
