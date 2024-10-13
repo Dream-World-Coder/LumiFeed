@@ -8,7 +8,8 @@
 }
 
 .about,
-.contact {
+.contact,
+.contact-form{
   margin-left: var(--con-m-left);
   padding: var(--pad) var(--pad) var(--pad) var(--pad);
   font-size: 1.8rem;
@@ -26,10 +27,12 @@
 }
 
 .about h2,
-.contact h2 {
+.contact h2,
+.contact-form h2{
   font-family: "Apercu Bold", poppins, "Courier New", Courier, monospace;
   font-size: 2rem;
   margin-left: 1.5rem;
+  padding-bottom: 10px;
 
   @media screen and (max-width: 768px) {
     & {
@@ -41,7 +44,8 @@
 }
 
 .about p,
-.contact p {
+.contact p,
+.contact-form p{
   position: relative;
   padding-left: 40px;
   font-family: poppins, sans-serif;
@@ -53,6 +57,40 @@
   padding: 10px;
 }
 
+.contact-form{
+    font-family: poppins, sans-serif;
+    width: 50%;
+
+    & h2{
+        font-size: 1.6rem !important;
+    }
+
+    & form p label{
+        font-family: poppins, sans-serif !important;
+        font-size: 1rem;
+    }
+
+    & form p input{
+        height: 2rem;
+        margin-left: 20px;
+        border-radius: 5px;
+        background-color: transparent;
+        border-color: rgb(202, 202, 202);
+    }
+
+    & form p textarea{
+        height: 100px;
+        width: 500px;
+        border-radius: 5px;
+        background-color: transparent;
+        border-color: rgb(202, 202, 202);
+    }
+
+    & button{
+        border-radius: 10px;
+        /* background-color: rgb(202, 202, 202) !important; */
+    }
+}
 
 /* icons */
 .con_icons {
@@ -134,7 +172,7 @@ body.dark-mode nav li a{
     width: 70%;
     padding: 20px;
     font-size: 3.75rem;
-    color: rgb(202, 202, 202);
+    color: rgb(222, 222, 222);
 }
 
 .footer__socials,

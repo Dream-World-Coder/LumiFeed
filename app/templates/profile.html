@@ -4,7 +4,7 @@
 {% block collections %}
   {% for coll in current_user.collections %}
     <div class="collection_group flexed">
-      <div class="collection">
+      <div id="{{'collection' + loop.index|string}}" class="collection">
         <div class="collection_name">
           {{ coll }}
           <!-- why and / why not or: cuz i want the condition to be false for these 2 collections, NOT TRUE -->

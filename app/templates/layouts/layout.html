@@ -137,46 +137,52 @@
     <footer id="footer" class="flex section-element" role="footer" itemscope itemtype="https://schema.org/WPFooter">
         <div class="footer__logo dahlia">LumiFeed</div>
         <div class="footer__socials flexed">
-            <ul class="full flexed flex-col f-gap-1 align-start">
-                <li class="animated-underline-white"><a href="#">Twitter</a></li>
-                <li class="animated-underline-white"><a href="#">Github</a></li>
-                <li class="animated-underline-white"><a href="#">Youtube</a></li>
+            <ul class="full flexed flex-col f-gap-1 align-start justify-start p-top-2">
+                <li class="animated-underline-white"><a href="mailto:lumifeed101@gmail.com">Email</a></li>
+                <li class="animated-underline-white"><a target="_blank" href="https://github.com/Dream-World-Coder/LumiFeed">Github</a></li>
             </ul>
         </div>
         <div class="footer__links flexed">
-            <ul class="full flexed flex-col f-gap-1 align-start">
-                <li class="animated-underline-white"><a href="#">About</a></li>
-                <li class="animated-underline-white"><a href="#">Contact</a></li>
-                <li class="animated-underline-white"><a href="#">Profile</a></li>
+            <ul class="full flexed flex-col f-gap-1 align-start justify-start p-top-2">
+                <li class="animated-underline-white"><a href="/">Home</a></li>
+                <li class="animated-underline-white"><a href="/profile">Profile</a></li>
+                <li class="animated-underline-white"><a href="/about">About</a></li>
+                <li class="animated-underline-white"><a href="/contact">Contact</a></li>
             </ul>
         </div>
         <div class="footer__cc flexed">
             © 2024 Subhajit Gorai. All rights reserved.
             <meta name="copyright" content="Subhajit Gorai" />
         </div>
+
+        <script>
+          const footerLis = document.querySelectorAll('footer li')
+
+          footerLis.forEach((li)=>{
+            li.addEventListener("click", () => {
+              li.querySelector("a").click();
+            });
+          })
+        </script>
     </footer>
 
     <!-- scripts -->
     <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
 
+    <!-- nav -->
     <script>
       const aboutDiv = document.querySelector(".li3");
       const contactDiv = document.querySelector(".li4");
       const homeDiv = document.querySelector(".li6");
 
-      aboutDiv.addEventListener("click", () => {
-        aboutDiv.querySelector("a").click();
-      });
-
-      contactDiv.addEventListener("click", () => {
-        contactDiv.querySelector("a").click();
-      });
-
-      homeDiv.addEventListener("click", () => {
-        homeDiv.querySelector("a").click();
-      });
+      [aboutDiv, contactDiv, homeDiv].forEach((div)=>{
+        div.addEventListener("click", () => {
+          div.querySelector("a").click();
+        });
+      })
     </script>
 
+    <!-- displaymessage -->
     <script>
       function displayMessage(message, className) {
         const messageElement = document.createElement("div");
