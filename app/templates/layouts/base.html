@@ -135,19 +135,23 @@
 
         <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
           <div class="ul relative flexed justify-evenly">
+              <!-- go to end button -->
             <div class="li li1">
               <a class="f0 flexed" href="#table-end" rel="noopener">
                 <img id="eee" src="{{url_for('static', filename='icons/dd1.svg')}}" alt="" />
                 End of Table
               </a>
             </div>
+            <!-- go to top button -->
             <div class="li li2">
               <a class="f0 flexed" href="#table-start" rel="noopener">
                 <img id="uuu" src="{{url_for('static', filename='icons/dd2.svg')}}" alt="" />
                 Start of Table
               </a>
             </div>
-            <div class="li li5">
+
+            <!-- profile/logout button -->
+            <div class="li li5 flexed">
               {% if current_user.is_authenticated %}
               <form id="profile-form" action="/profile" method="GET">
                 <div class="profile" onclick="document.getElementById('profile-form').submit();">
@@ -160,17 +164,36 @@
               </form>
               {% endif %}
             </div>
-            <div class="li li6 animated-underline-white">
-              <a href="/" class="flexed" rel="noopener">Home</a>
+
+            <!-- acctual nav -->
+            <div class="li li6 animated-underline-white og-li">
+                <a href="/" class="flexed" rel="noopener">Home</a>
             </div>
-            <div class="li li3 animated-underline-white">
-              <a href="/about" class="flexed" rel="noopener">About</a>
+            <div class="li li3 animated-underline-white og-li">
+                <a href="/about" class="flexed" rel="noopener">About</a>
             </div>
-            <div class="li li4 animated-underline-white">
-              <a href="/contact" class="flexed" rel="noopener">Contact</a>
+            <div class="li li4 animated-underline-white og-li">
+                <a href="/contact" class="flexed" rel="noopener">Contact</a>
+            </div>
+
+            <!-- for mobiles -->
+            <div class="nav-items-for-mobiles flexed flex-col f-gap-2" style="display: none;">
+                <div class="li li6 mobile-li animated-underline-white">
+                    <a href="/" class="flexed" rel="noopener">Home</a>
+                </div>
+                <div class="li li3 mobile-li animated-underline-white">
+                    <a href="/about" class="flexed" rel="noopener">About</a>
+                </div>
+                <div class="li li4 mobile-li animated-underline-white">
+                    <a href="/contact" class="flexed" rel="noopener">Contact</a>
+                </div>
             </div>
           </div>
         </nav>
+        <div class="ham">
+            <img height="20px" width="20px" src="/static/icons/ham.svg" style="display: flex;">
+            <img height="20px" width="20px" src="/static/icons/cross3.svg" style="display: none;">
+        </div>
 
         <div class="mobile-search-btn">
           <img src="{{url_for('static', filename='icons/search3.svg')}}" alt="search button" />
@@ -330,7 +353,7 @@
     <!-- search + result -->
     <div itemscope itemtype="https://schema.org/SearchResultsPage" id="queryy" class="find fixed borderX flex-col f-gap-2">
       <!-- search query -->
-      <div class="search-bar borderX relative flex justify-between align-center">
+      <div class="search-bar relative flex justify-between align-center">
         <form
           id="search-form"
           class="relative full flex justify-between align-center"
@@ -354,7 +377,9 @@
 
     <!--  for mobiles -->
     <div itemscope itemtype="https://schema.org/SearchResultsPage" class="find-mobile flex-col align-center">
-      <div class="horizontal-bar"></div>
+      <div class="horizontal-bar">
+          <img src="/static/icons/cross2.svg" />
+      </div>
 
       <div class="srch flexed justify-between">
         <!-- form -->

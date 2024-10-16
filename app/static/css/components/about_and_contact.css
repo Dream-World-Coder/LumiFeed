@@ -230,17 +230,17 @@ body.dark-mode nav li a{
   .about,
   .contact,
  .contact-form {
-    margin-top: 7rem;
+    margin-top: 5rem;
     width: 95%;
     margin-left: 10px;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     padding: 10px;
   }
 
   .about p,
   .contact p,
- .contact-form p {
-    font-size: 0.8rem;
+  .contact-form p {
+    font-size: var(--td-font-size);
     padding-left: 20px;
     padding: 8px;
   }
@@ -248,6 +248,7 @@ body.dark-mode nav li a{
   .contact-form h2 {
     font-size: 1.15rem;
   }
+
   .contact-form form p label{
       font-size: 0.85rem;
   }

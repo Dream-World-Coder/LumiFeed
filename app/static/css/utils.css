@@ -58,6 +58,22 @@
   position: absolute;
 }
 
+.t-0{
+    top: 0;
+}
+
+.b-0{
+    bottom: 0;
+}
+
+.l-0{
+    left: 0;
+}
+
+.r-0{
+    right: 0;
+}
+
 .relative {
   position: relative;
 }
@@ -453,7 +469,7 @@ label {
 .animated-underline-white,
 .animated-underline {
   position: relative;
-  display: inline-block;
+  /* display: inline-block; */
   overflow: hidden;
 }
 
