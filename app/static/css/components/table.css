@@ -29,7 +29,9 @@
   margin-left: var(--con-m-left);
   padding: 0;
 }
-
+main{
+    width: 100vw;
+}
 table {
   border-collapse: collapse;
   margin-top: 5rem;
@@ -131,13 +133,20 @@ body.dark-mode .saving_options img {
 }
 
 @media (min-width: 300px) and (max-width: 768px) {
+    ::-webkit-scrollbar{
+        width: 10px;
+    }
   :root {
     --th-font-size: 1rem;
     /* no one is working :( */
     --con-m-left: 10px;
   }
   .container {
-    width: 95%;
+    width: 94%;
+    margin-left: 3%;
+  }
+  table{
+      margin-top: 1rem;
   }
   th {
     font-size: 1rem;

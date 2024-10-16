@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".btn");
   const news_count_input = document.getElementById("news_count");
 
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= 168) {
     buttons.forEach((button, index) => {
       button.style.width = "35px";
       button.style.height = "25px";

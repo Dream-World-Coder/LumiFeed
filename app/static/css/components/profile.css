@@ -88,6 +88,7 @@ body.dark-mode {
     padding: 10px;
 
     width: 100%;
+    /* overflow-x: scroll; */
     /* height: auto;  auto = 52px */
     height: 52px;
     background-color: var(--normal-bg-clr);
@@ -142,8 +143,24 @@ body.dark-mode {
 }
 
 @media (max-width: 768px){
-    .collections_preview_cards::before{
+    .collections_preview_cards{
+        top: 4rem;
         display: none;
+        opacity: 0;
+
+        & .card{
+            width: 100px;
+            height: 2rem;
+            font-size: 0.85rem;
+        }
+
+        &::before{
+            display: none;
+        }
+
+        & svg{
+            display: none;
+        }
     }
 }
 

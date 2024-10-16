@@ -192,6 +192,10 @@
   width: 0;
 }
 
+@media(max-width: 768px){
+
+}
+
 @media (min-width: 300px) and (max-width: 1380px) {
   .find {
     display: none;

@@ -41,6 +41,9 @@ body {
   background-color: rgb(251, 251, 251);
   color: black;
   font-family: poppins, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  width: 100vw;
 }
 
 a {
@@ -93,7 +96,7 @@ a:hover {
 }
 
 input {
-  width: calc(var(--w) - 60px) !important;
+  /* width: calc(var(--w) - 60px) !important; */
   display: inline !important;
   border-width: 1px !important;
 }

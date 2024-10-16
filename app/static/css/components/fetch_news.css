@@ -160,7 +160,7 @@ body.dark-mode input[type="radio"]:checked + label.custom-radio {
 }
 
 .opp input {
-  width: 120px !important;
+  width: 120px;
 }
 .opp input::-webkit-inner-spin-button {
   display: none;
@@ -245,6 +245,20 @@ body.dark-mode input[type="radio"]:checked + label.custom-radio {
 @media (max-width: 768px) {
   :root {
     --con-m-left: 20px;
+  }
+  #news_count{
+      width: 50px;
+      height: 25px;
+  }
+  #news_count::placeholder{
+      font-size: 0.85rem;
+  }
+
+  .options__contaioner_sibling .btns button {
+    font-size: 0.75rem;
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 5px;
   }
   .fetch_news {
     margin-top: calc(var(--header-height) + 10px);

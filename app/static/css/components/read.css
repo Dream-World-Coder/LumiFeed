@@ -146,6 +146,9 @@
 }
 
 @media (max-width: 768px) {
+        .rbtn{
+            border-radius: 5px;
+        }
   #read {
     height: 75vh;
     width: 90%;
