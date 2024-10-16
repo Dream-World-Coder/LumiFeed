@@ -96,6 +96,9 @@ body.dark-mode {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--normal-border-clr);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     & .card{
         text-decoration: none;
@@ -108,6 +111,9 @@ body.dark-mode {
         box-shadow: 2px 2px 0 var(--normal-border-clr);
         transition: all 0.3s;
         color: rgb(48, 48, 48);
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:hover{
             box-shadow: none;
@@ -146,7 +152,6 @@ body.dark-mode {
     .collections_preview_cards{
         top: 4rem;
         display: none;
-        opacity: 0;
 
         & .card{
             width: 100px;

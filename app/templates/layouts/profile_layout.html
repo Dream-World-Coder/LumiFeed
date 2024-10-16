@@ -17,9 +17,9 @@
     </div>
 
     <!-- collections  -->
-    <div class="collections_preview_cards flexed flex-colX f-gap-2">
+    <div class="collections_preview_cards flex-colX f-gap-2">
         {% for coll in current_user.collections %}
-            <div href="#{{'collection' + loop.index | string}}" class="card flexed {{ 'card' + loop.index | string }}">
+            <div href="#{{'collection' + loop.index | string}}" class="card {{ 'card' + loop.index | string }}">
                 {{ coll }}
             </div>
         {% endfor%}
@@ -205,5 +205,6 @@
     <!-- dark mode -->
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/utils/scroll/smooth-scrolling.js')}}"></script>
+    <script type="text/javascript" src="/static/js/script.js"></script>
   </body>
 </html>
