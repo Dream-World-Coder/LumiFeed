@@ -410,7 +410,7 @@
         <div class="footer__socials flexed">
             <ul class="full flexed flex-col f-gap-1 align-start justify-start p-top-2">
                 <li class="animated-underline-white"><a href="mailto:lumifeed101@gmail.com">Email</a></li>
-                <li class="animated-underline-white"><a target="_blank" href="https://github.com/Dream-World-Coder/LumiFeed"></a>Github</a></li>
+                <li class="animated-underline-white"><a target="_blank" href="https://github.com/Dream-World-Coder/LumiFeed">Github</a></li>
             </ul>
         </div>
         <div class="footer__links flexed">
@@ -449,7 +449,13 @@
         div.addEventListener("click", () => {
           div.querySelector("a").click();
         });
-      })
+      });
+
+      document.querySelectorAll('.mobile-li').forEach((li)=>{
+        li.addEventListener("click", () => {
+          li.querySelector("a").click();
+        });
+      });
     </script>
     <!-- displayMessage -->
     <script>

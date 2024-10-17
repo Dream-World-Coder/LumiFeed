@@ -82,5 +82,11 @@
         el.querySelector("a").click();
       });
     })
+
+    document.querySelectorAll('.mobile-li').forEach((li)=>{
+      li.addEventListener("click", () => {
+        li.querySelector("a").click();
+      });
+    });
   </script>
 </header>
