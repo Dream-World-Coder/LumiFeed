@@ -1,5 +1,5 @@
 :root {
-  --nav-width: 280px;
+  --nav-width: 420px;
 }
 
 nav {
@@ -14,15 +14,13 @@ nav {
   width: 100%;
 }
 
-.li a {
-  z-index: 102;
-}
-
 .li2 {
   --len: 40px;
   width: var(--len);
   height: var(--len);
   overflow: hidden;
+  margin-top: 4px;
+
 
   & .iconImg {
     position: relative;
@@ -31,10 +29,15 @@ nav {
   }
 }
 
-.li3 a,
-.li4 a {
-  font-size: 1.15rem;
-  color: var(--clr2);
+@media (max-width:768px){
+    .li2 {
+      --len: 36px;
+    }
+}
+
+.li a {
+  z-index: 102;
+  font-size: 1rem;
   color: #eee6c8;
   text-decoration: none;
   font-family: poppins, Arial, Helvetica, sans-serif;
@@ -47,17 +50,53 @@ nav {
     font-size: 0.86rem;
   }
 }
+body.dark-mode .li a {
+  color: #eee6c8;
+}
+
+
+.mobile-li{
+    display: none;
+    display: block;
+}
+
+.ham{
+    position: absolute;
+    right: 0px;
+    top: calc(50% - 10px);
+}
+
+.nav-items-for-mobiles{
+    width: 134px;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: -40px;
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    transform-origin: top;
+    background-color: #2ba267;
+    border-radius: 10px;
+    z-index: 151;
+}
+
+.nav-items-for-mobiles.expand{
+    transform: scaleY(1);
+    transition: transform 0.3s;
+}
+.ham img:nth-last-child(1){
+    color: #eee6c8;
+    transform: scale(1.7);
+}
 
 /* --- media queries ---
   ------------------------------- */
 @media (max-width: 1024px) {
   :root {
-    --nav-width: 168px;
+    --nav-width: 108px;
   }
-  /* nav = login btn only */
-  nav {
-    margin-left: 12px;
-    margin-right: 5px;
-    max-height: 30px;
+
+  .og-li{
+      display: none;
   }
 }

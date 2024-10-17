@@ -1,6 +1,6 @@
 :root {
   --header-height: 5rem;
-  --r: 70px;
+  --r: 2rem;
 }
 
 header {
@@ -8,25 +8,20 @@ header {
   left: 0;
   height: var(--header-height);
   width: 100%;
-  padding: 5px;
-  background-color: rgb(28, 28, 28);
-
+  padding-left: 2rem;
+  padding-right: 2rem;
   background-color: #318f60;
   z-index: 100;
   border: none;
-  /* backdrop-filter: blur(15px); */
-  /* -webkit-backdrop-filter: blur(15px); */
 }
 
 body.dark-mode header {
-  /* background-color: rgb(28, 28, 28); */
-  background-color: #31adc3;
+  /* background-color: #414141; */
+  background-color: #318f60;
 }
 
 .header-wrapper {
   position: relative;
-  width: calc(100% - var(--r)) !important;
-  margin-left: 20px;
   display: flex;
   align-items: center;
 }
@@ -106,11 +101,6 @@ body.dark-mode header {
     --r: 10px;
   }
 
-  .header-wrapper {
-    width: calc(100% - 10px) !important;
-    margin-left: 5px;
-  }
-
   .logo {
     width: 30px;
     height: 30px;
@@ -130,7 +120,6 @@ body.dark-mode header {
     margin-right: 10px;
     display: flex;
     align-items: center;
-    max-height: 30px;
 
     & img {
       width: 26px;
@@ -163,10 +152,18 @@ body.dark-mode header {
 }
 
 @media (max-width: 768px) {
+
+    header{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
   .logo #logo-text {
     font-size: 1rem;
   }
+
   .buttons {
+      margin-right: 30px;
     gap: 10px;
 
     & .dark-mode-btn,

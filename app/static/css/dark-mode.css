@@ -76,12 +76,14 @@ body.dark-mode table tbody tr:last-child {
 /* -------  about & contact
 ----------------------------------- */
 body.dark-mode .about,
-body.dark-mode .contact {
+body.dark-mode .contact,
+body.dark-mode .contact-form {
   background-color: rgba(108, 108, 108, 0.5);
   border: 1px solid rgba(86, 86, 86, 0.9);
 }
 body.dark-mode .about p,
-body.dark-mode .contact p {
+body.dark-mode .contact p,
+body.dark-mode .contact-form p{
   background-color: var(--dmBgClr);
   border: 1px solid rgba(86, 86, 86, 0.9);
 }
@@ -93,7 +95,8 @@ body.dark-mode .contact p strong {
 
 body.dark-mode .fetch_news h2,
 body.dark-mode .about h2,
-body.dark-mode .contact h2 {
+body.dark-mode .contact h2,
+body.dark-mode .contact-form h2 {
   color: rgb(210, 210, 210);
 }
 

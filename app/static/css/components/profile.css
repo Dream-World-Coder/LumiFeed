@@ -79,16 +79,120 @@ body.dark-mode {
   transform: translateY(-50%) scaleX(1);
 }
 
+/* card
+=------------------*/
+.collections_preview_cards{
+    position: fixed;
+    top: 5rem;
+    left: 0rem;
+    padding: 10px;
+
+    width: 100%;
+    /* overflow-x: scroll; */
+    /* height: auto;  auto = 52px */
+    height: 52px;
+    background-color: var(--normal-bg-clr);
+    z-index: 103;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--normal-border-clr);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .card{
+        text-decoration: none;
+        font-size: 0.85rem;
+        width: 100px;
+        height: 2rem;
+        border-radius: 5px;
+        background-color: #fbfbfb;
+        border: 1px solid var(--normal-border-clr);
+        box-shadow: 2px 2px 0 var(--normal-border-clr);
+        transition: all 0.3s;
+        color: rgb(48, 48, 48);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover{
+            box-shadow: none;
+        }
+    }
+
+    &::before{
+        content: 'Click the name of the collections on left for viewing it in the display in the right side.';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: var(--clr2);
+        color: white;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 104;
+    }
+
+    & svg{
+        z-index: 105;
+        position: absolute;
+        right: 15%;
+        margin-left: 15px;
+    }
+}
+
+.collections_preview_cards.hide-before{
+    &::before{
+        display: none;
+    }
+}
+
+@media (max-width: 768px){
+    .collections_preview_cards{
+        top: 4rem;
+        display: none;
+
+        & .card{
+            width: 100px;
+            height: 2rem;
+            font-size: 0.85rem;
+        }
+
+        &::before{
+            display: none;
+        }
+
+        & svg{
+            display: none;
+        }
+    }
+}
+
+body.dark-mode .collections_preview_cards,
+body.dark-mode .collections_preview_cards .card{
+    background-color: var(--dark-mode-bg-clr);
+    border-color: var(--dark-mode-border-clr);
+    color: rgb(217, 217, 217);
+
+}
+body.dark-mode .collections_preview_cards .card{
+    box-shadow: 2px 2px 0 var(--dark-mode-border-clr);
+
+    &:hover{
+        box-shadow: none;
+    }
+}
+
+
 /* ------------     collection
 ----------------------------------- */
 .collections_container {
   width: 100vw;
   height: calc(100vh - 5rem);
   /* height: auto; */
-  margin-top: 5rem;
+  margin-top: calc(5rem + 52px);
   padding: 15px;
-  /* display: flex; */
-  /* flex-direction: row !important; */
 
   @media (max-width: 1024px) {
     & {
@@ -290,7 +394,7 @@ body.dark-mode .collection_content ul li::before {
 
 .collection_display {
   position: fixed;
-  top: calc(5rem + 15px);
+  top: calc(5rem + 52px + 15px);
   right: 15px;
   height: calc(100% - 100px - 5rem);
 
@@ -399,7 +503,7 @@ body.dark-mode .delete_article:hover {
 }
 .profile_settings {
   position: absolute;
-  top: 5rem;
+  top: calc(5rem + 52px);
   left: 50px;
   width: 300px;
   height: 400px;
@@ -453,8 +557,8 @@ body.dark-mode .profile_settings {
   & .user_name {
     text-align: center;
     padding-top: 5px;
-    border-top: 1px solid rgba(202,202,202, 1);
-    border-bottom: 1px solid rgba(202,202,202, 1);
+    border-top: 1px solid rgba(222,222,222, 1);
+    border-bottom: 1px solid rgba(222,222,222, 1);
     font-size: 1.25rem;
 
     @media (max-width: 768px) {
@@ -472,7 +576,7 @@ body.dark-mode .profile_settings {
     padding-bottom: 5px;
     text-align: center;
     font-size: 1rem;
-    border-bottom: 1px solid rgba(202,202,202, 1);
+    border-bottom: 1px solid rgba(222,222,222, 1);
 
     @media (max-width: 769px) {
       font-size: 0.85rem;

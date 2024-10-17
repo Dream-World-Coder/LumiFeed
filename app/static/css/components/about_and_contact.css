@@ -2,26 +2,37 @@
   --pad: 15px;
   --bgx: var(--v-th);
   --bgx: rgb(37, 37, 37);
+
+  /* xtra */
+  --con-m-left: 2rem;
 }
 
 .about,
-.contact {
-  margin-top: 28rem;
+.contact,
+.contact-form{
   margin-left: var(--con-m-left);
   padding: var(--pad) var(--pad) var(--pad) var(--pad);
   font-size: 1.8rem;
   font-weight: 400;
+
+  margin-top: 28rem;
   width: 70%;
+  /* xtra */
+  width: calc(100% - 2 * var(--con-m-left));
+  margin-top: 8rem;
+
   border-radius: calc(var(--pad) - 5px);
   border: 1px solid rgb(202, 202, 202);
   background-color: rgb(244, 244, 244);
 }
 
 .about h2,
-.contact h2 {
+.contact h2,
+.contact-form h2{
   font-family: "Apercu Bold", poppins, "Courier New", Courier, monospace;
   font-size: 2rem;
   margin-left: 1.5rem;
+  padding-bottom: 10px;
 
   @media screen and (max-width: 768px) {
     & {
@@ -33,7 +44,8 @@
 }
 
 .about p,
-.contact p {
+.contact p,
+.contact-form p{
   position: relative;
   padding-left: 40px;
   font-family: poppins, sans-serif;
@@ -45,21 +57,39 @@
   padding: 10px;
 }
 
-/* space */
-.sp {
-  height: 50vh;
-  width: 100%;
-  font-size: 0;
-}
+.contact-form{
+    font-family: poppins, sans-serif;
+    width: 50%;
 
-/* copyright */
-.cc {
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-size: 1.2rem;
-  font-family: poppins, "Times New Roman", Times, serif;
+    & h2{
+        font-size: 1.6rem;
+    }
+
+    & form p label{
+        font-family: poppins, sans-serif !important;
+        font-size: 1rem;
+    }
+
+    & form p input{
+        height: 2rem;
+        margin-left: 20px;
+        border-radius: 5px;
+        background-color: transparent;
+        border-color: rgb(202, 202, 202);
+    }
+
+    & form p textarea{
+        height: 100px;
+        width: min(70%, 500px);
+        border-radius: 5px;
+        background-color: transparent;
+        border-color: rgb(202, 202, 202);
+    }
+
+    & button{
+        border-radius: 10px;
+        /* background-color: rgb(202, 202, 202) !important; */
+    }
 }
 
 /* icons */
@@ -98,22 +128,145 @@
   color: var(--bgx);
 }
 
+/* space */
+.sp {
+  height: 50vh;
+  width: 100%;
+  font-size: 0;
+}
+/* ----------
+footer
+---------------------*/
+footer{
+    box-sizing: border-box;
+    position: relative;
+    width: 100vw;
+    height: 30vh;
+    background-color: #318f60;
+    color: var(--color-shadow-black-heavy);
+    padding: 15px;
+    z-index: 103;
+    margin-top: calc(100vh - 50vh);
+
+    & ul{
+        list-style-type: none;
+    }
+
+    & a{
+        color: #eee6c8;
+        font-size: 1rem;
+
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+
+body.dark-mode footer li a,
+body.dark-mode nav li a{
+    color: #eee6c8 !important;
+}
+
+.footer__logo{
+    width: 70%;
+    padding: 20px;
+    font-size: 3.75rem;
+    color: rgb(222, 222, 222);
+}
+
+.footer__socials,
+.footer__links{
+    width: 15%;
+    padding-left: 30px;
+}
+
+.footer__logo,
+.footer__socials,
+.footer__links{
+    height: calc(100% + 15px - 3rem);
+}
+
+/* copyright */
+.footer__cc {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3rem;
+  width: 100%;
+  font-size: 1rem;
+  font-family: poppins, "Times New Roman", Times, serif;
+}
+
+/* -------------------------
+    Media Queries
+-----------------*/
+@media (max-width: 768px){
+    footer{
+        padding: 10px;
+        margin-top: 56vh;
+
+        & a{
+            font-size: 0.85rem;
+        }
+    }
+
+    .footer__logo{
+        font-size: 2.5rem;
+        width: 50%;
+    }
+
+    .footer__socials,
+    .footer__links{
+        width: 25%;
+        padding-left: 15px;
+    }
+
+    .footer__cc{
+        font-size: 0.75rem;
+    }
+}
+
 @media (min-width: 300px) and (max-width: 768px) {
   .about,
-  .contact {
-    margin-top: 7rem;
+  .contact,
+ .contact-form {
+    margin-top: 5rem;
     width: 95%;
     margin-left: 10px;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     padding: 10px;
   }
 
   .about p,
-  .contact p {
-    font-size: 0.8rem;
+  .contact p,
+  .contact-form p {
+    font-size: var(--td-font-size);
     padding-left: 20px;
     padding: 8px;
   }
+
+  .contact-form h2 {
+    font-size: 1.15rem;
+  }
+
+  .contact-form form p label{
+      font-size: 0.85rem;
+  }
+
+  .contact-form form p input::placeholder{
+      font-size: 0.85rem;
+  }
+
+  .contact-form form p textarea{
+      height: 70px;
+  }
+
+  .contact-form form p button{
+      width: 70px;
+      height: 30px;
+      font-size: 0.85rem;
+  }
+
   .sp {
     height: 30vh;
   }
@@ -125,7 +278,8 @@
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .about,
-  .contact {
+  .contact,
+ .contact-form {
     margin-top: 7rem;
     width: 95%;
     margin-left: 10px;
@@ -134,12 +288,15 @@
   }
 
   .about h2,
-  .contact h2 {
+  .contact h2,
+  .contact-form h2 {
     font-size: auto;
   }
 
   .about p,
-  .contact p {
+  .contact p,
+  .contact-form
+  {
     font-size: auto;
     padding-left: 20px;
     padding: 8px;
@@ -151,11 +308,4 @@
     height: 10rem;
     font-size: auto;
   }
-}
-
-be {
-  position: relative;
-  display: block;
-  height: 1rem;
-  width: 100%;
 }

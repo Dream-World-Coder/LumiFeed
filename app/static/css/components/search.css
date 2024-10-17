@@ -149,15 +149,18 @@
 }
 
 .horizontal-bar {
-  min-height: 4px;
-  border-radius: 3px;
-  width: 40%;
-  background-color: #303030;
+  background-color: transparent;
+  /* transform: translateY(-40px); */
+
+  & img{
+      width: 34px;
+      height: 34px;
+  }
 }
 
 .srch {
-  margin-top: 20px;
-  margin-bottom: 40px;
+    /* margin-top: 20px; */
+  margin-bottom: 20px;
   width: 100%;
   height: fit-content;
 }
@@ -190,6 +193,10 @@
 
 .resa::-webkit-scrollbar {
   width: 0;
+}
+
+@media(max-width: 768px){
+
 }
 
 @media (min-width: 300px) and (max-width: 1380px) {

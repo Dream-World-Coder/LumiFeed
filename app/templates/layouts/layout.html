@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title -->
+    <title>{% block title %}LumiFeed - Ad Free News, Summaries, and Key Points{% endblock %}</title>
+    <!-- Meta Description -->
+    <meta
+      name="description"
+      content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+    />
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="LumiFeed, ad free news, news summary, key points, Kolkata news, Indian news, summaries" />
+    <!-- Author -->
+    <meta name="author" content="Subhajit Gorai" />
+    <!-- Linking CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/fonts.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/dark-mode.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/header.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/nav.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/about_and_contact.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/utils.css')}}" />
+    <!-- Linking Favicon -->
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}" type="image/x-icon" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="LumiFeed - Ad Free News, Summaries, and Key Points" />
+    <meta
+      property="og:description"
+      content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+    />
+    <meta property="og:image" content="{{url_for('static', filename='images/social-preview.png')}}" />
+    <meta property="og:url" content="https://lumifeed.up.railway.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LumiFeed" />
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LumiFeed - Ad Free News, Summaries, and Key Points" />
+    <meta
+      name="twitter:description"
+      content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+    />
+    <meta name="twitter:image" content="{{url_for('static', filename='images/social-preview.png')}}" />
+    <meta name="twitter:site" content="@yourtwitterhandle" />
+
+    <!-- Robots Metadata -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Scripts for SEO -->
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": "LumiFeed - Ad Free News, Summaries, and Key Points",
+        "image": ["https://lumifeed.up.railway.app/static/images/social-preview.png"],
+        "datePublished": "2024-07-15",
+        "dateModified": "2024-07-15",
+        "author": {
+          "@type": "Person",
+          "name": "Subhajit Gorai"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LumiFeed",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://lumifeed.up.railway.app/static/images/logo.png"
+          }
+        },
+        "description": "LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+      }
+    </script>
+  </head>
+
+  <body>
+    <header class="fixed" itemscope itemtype="https://schema.org/WPHeader">
+      <div class="header-wrapper full flex align-center section-element">
+        <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+          <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="LumiFeed Logo" itemprop="logo" />
+          <span id="logo-text" itemprop="name">LumiFeed</span>
+        </div>
+
+        <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
+          <div class="ul relative flexed justify-evenly">
+            <div class="li li5">
+              {% if current_user.is_authenticated %}
+              <form id="profile-form" action="/profile" method="GET">
+                <div class="profile" onclick="document.getElementById('profile-form').submit();">
+                  <img src="{{url_for('static', filename=current_user.profile_pic)}}" alt="profile pic" />
+                </div>
+              </form>
+              {% else %}
+              <form id="login-form" action="/login" method="GET">
+                <button type="submit" class="flexed" rel="noopener">Login</button>
+              </form>
+              {% endif %}
+            </div>
+
+            <div class="li li6 animated-underline-white og-li">
+              <a href="/" class="flexed" rel="noopener">Home</a>
+            </div>
+            <div class="li li3 animated-underline-white og-li">
+              <a href="/about" class="flexed" rel="noopener">About</a>
+            </div>
+            <div class="li li4 animated-underline-white og-li">
+              <a href="/contact" class="flexed" rel="noopener">Contact</a>
+            </div>
+
+            <!-- for mobiles -->
+            <div class="nav-items-for-mobiles flexed flex-col f-gap-2" style="display: none;">
+                <div class="li li6 mobile-li animated-underline-white">
+                    <a href="/" class="flexed" rel="noopener">Home</a>
+                </div>
+                <div class="li li3 mobile-li animated-underline-white">
+                    <a href="/about" class="flexed" rel="noopener">About</a>
+                </div>
+                <div class="li li4 mobile-li animated-underline-white">
+                    <a href="/contact" class="flexed" rel="noopener">Contact</a>
+                </div>
+            </div>
+          </div>
+        </nav>
+        <div class="ham">
+            <img height="20px" width="20px" src="/static/icons/ham.svg" style="display: flex;">
+            <img height="20px" width="20px" src="/static/icons/cross3.svg" style="display: none;">
+        </div>
+
+        <!-- <div class="mobile-search-btn">
+          <img src="{{url_for('static', filename='icons/search3.svg')}}" alt="search button" />
+        </div> -->
+
+
+        <div class="buttons">
+          <div class="dark-mode-btn dmbtn">
+            <span id="dm">
+              <img src="{{url_for('static', filename='icons/dm2.svg')}}" alt="dark mode button" />
+            </span>
+          </div>
+          <div class="bigger-font-btn">
+            <span id="big_f">
+              <img src="{{url_for('static', filename='icons/bigger.svg')}}" alt="bigger fonts button" />
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer id="footer" class="flex section-element" role="footer" itemscope itemtype="https://schema.org/WPFooter">
+        <div class="footer__logo dahlia">LumiFeed</div>
+        <div class="footer__socials flexed">
+            <ul class="full flexed flex-col f-gap-1 align-start justify-start p-top-2">
+                <li class="animated-underline-white"><a href="mailto:lumifeed101@gmail.com">Email</a></li>
+                <li class="animated-underline-white"><a target="_blank" href="https://github.com/Dream-World-Coder/LumiFeed">Github</a></li>
+            </ul>
+        </div>
+        <div class="footer__links flexed">
+            <ul class="full flexed flex-col f-gap-1 align-start justify-start p-top-2">
+                <li class="animated-underline-white"><a href="/">Home</a></li>
+                <li class="animated-underline-white"><a href="/profile">Profile</a></li>
+                <li class="animated-underline-white"><a href="/about">About</a></li>
+                <li class="animated-underline-white"><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer__cc flexed">
+            © 2024 Subhajit Gorai. All rights reserved.
+            <meta name="copyright" content="Subhajit Gorai" />
+        </div>
+
+        <script>
+          const footerLis = document.querySelectorAll('footer li')
+
+          footerLis.forEach((li)=>{
+            li.addEventListener("click", () => {
+              li.querySelector("a").click();
+            });
+          })
+        </script>
+    </footer>
+
+    <!-- scripts -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+
+    <!-- nav -->
+    <script>
+      const aboutDiv = document.querySelector(".li3");
+      const contactDiv = document.querySelector(".li4");
+      const homeDiv = document.querySelector(".li6");
+
+      [aboutDiv, contactDiv, homeDiv].forEach((div)=>{
+        div.addEventListener("click", () => {
+          div.querySelector("a").click();
+        });
+      })
+    </script>
+
+    <!-- displaymessage -->
+    <script>
+      function displayMessage(message, className) {
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("temporary-message");
+        if (className) {
+          messageElement.classList.add(className);
+        }
+        messageElement.textContent = message;
+        document.body.appendChild(messageElement);
+        setTimeout(() => {
+          messageElement.remove();
+        }, 3000);
+      }
+    </script>
+
+    <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/functions/bigger_font.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/utils/scroll/smooth-scrolling.js')}}"></script>
+
+    <!-- extra scripts -->
+    {% block scripts %}
+    {% endblock %}
+  </body>
+</html>

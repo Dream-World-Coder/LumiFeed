@@ -135,19 +135,23 @@
 
         <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
           <div class="ul relative flexed justify-evenly">
+              <!-- go to end button -->
             <div class="li li1">
               <a class="f0 flexed" href="#table-end" rel="noopener">
                 <img id="eee" src="{{url_for('static', filename='icons/dd1.svg')}}" alt="" />
                 End of Table
               </a>
             </div>
+            <!-- go to top button -->
             <div class="li li2">
               <a class="f0 flexed" href="#table-start" rel="noopener">
                 <img id="uuu" src="{{url_for('static', filename='icons/dd2.svg')}}" alt="" />
                 Start of Table
               </a>
             </div>
-            <div class="li li5">
+
+            <!-- profile/logout button -->
+            <div class="li li5 flexed">
               {% if current_user.is_authenticated %}
               <form id="profile-form" action="/profile" method="GET">
                 <div class="profile" onclick="document.getElementById('profile-form').submit();">
@@ -160,14 +164,36 @@
               </form>
               {% endif %}
             </div>
-            <div class="li li3 animated-underline-white">
-              <a href="#about" class="flexed" rel="noopener">About</a>
+
+            <!-- acctual nav -->
+            <div class="li li6 animated-underline-white og-li">
+                <a href="/" class="flexed" rel="noopener">Home</a>
             </div>
-            <div class="li li4 animated-underline-white">
-              <a href="#contact" class="flexed" rel="noopener">Contact</a>
+            <div class="li li3 animated-underline-white og-li">
+                <a href="/about" class="flexed" rel="noopener">About</a>
+            </div>
+            <div class="li li4 animated-underline-white og-li">
+                <a href="/contact" class="flexed" rel="noopener">Contact</a>
+            </div>
+
+            <!-- for mobiles -->
+            <div class="nav-items-for-mobiles flexed flex-col f-gap-2" style="display: none;">
+                <div class="li li6 mobile-li animated-underline-white">
+                    <a href="/" class="flexed" rel="noopener">Home</a>
+                </div>
+                <div class="li li3 mobile-li animated-underline-white">
+                    <a href="/about" class="flexed" rel="noopener">About</a>
+                </div>
+                <div class="li li4 mobile-li animated-underline-white">
+                    <a href="/contact" class="flexed" rel="noopener">Contact</a>
+                </div>
             </div>
           </div>
         </nav>
+        <div class="ham">
+            <img height="20px" width="20px" src="/static/icons/ham.svg" style="display: flex;">
+            <img height="20px" width="20px" src="/static/icons/cross3.svg" style="display: none;">
+        </div>
 
         <div class="mobile-search-btn">
           <img src="{{url_for('static', filename='icons/search3.svg')}}" alt="search button" />
@@ -188,7 +214,7 @@
       </div>
     </header>
 
-    <!--find news type, fetch_news -->
+    <!-- fetch_news -->
     <div itemscope itemprop="inputOfData" class="fetch_news section-element" id="table-start">
       <form id="fetch-news-form" onsubmit="fetchNews(event)">
         <h2 class="category-title flexed justify-between">
@@ -321,13 +347,13 @@
     </main>
 
     <!-- table end may be changed or use the about hanger instead -->
-    <!-- <div class="sp-X" id="table-end"></div> -->
+    <div class="sp-X" id="table-end"></div>
 
 
     <!-- search + result -->
     <div itemscope itemtype="https://schema.org/SearchResultsPage" id="queryy" class="find fixed borderX flex-col f-gap-2">
       <!-- search query -->
-      <div class="search-bar borderX relative flex justify-between align-center">
+      <div class="search-bar relative flex justify-between align-center">
         <form
           id="search-form"
           class="relative full flex justify-between align-center"
@@ -351,7 +377,9 @@
 
     <!--  for mobiles -->
     <div itemscope itemtype="https://schema.org/SearchResultsPage" class="find-mobile flex-col align-center">
-      <div class="horizontal-bar"></div>
+      <div class="horizontal-bar">
+          <img src="/static/icons/cross2.svg" />
+      </div>
 
       <div class="srch flexed justify-between">
         <!-- form -->
@@ -375,99 +403,53 @@
       </div>
     </div>
 
-    <!-- about + contact -->
-    <div class="about-hanger" id="about"></div>
-    <div role="aboutInformation" itemscope itemtype="https://schema.org/AboutPage" class="about section-element">
-      <h2>About</h2>
-      <p>
-        Welcome to
-        <strong>LumiFeed</strong>
-        , your go-to source for the latest news from India and all around the globe. This website curates news from the IndianExpress, without violating their terms and conditions, and provides a
-        <strong>seamless reading experience free from advertisements and mess.</strong>
-        Each news article includes a
-        <strong>high quality summary</strong>
-        generated using advanced AI, allowing you to
-        <strong>quickly grasp the key points.</strong>
-        For a deeper dive, links to the full articles on the Indian Express website are also provided.
-        <strong>Enjoy staying informed without the distractions.</strong>
-        <br />
-        favicon taken from:
-        <a target="_blank" href="https://icons8.com/icon/2CHAe9tWR9IY/news">News</a>
-        icon by
-        <a target="_blank" href="https://icons8.com">Icons8</a>
-        <br />
-        <br />
-        Thanks for visiting, stay safe!
-      </p>
-      <div class="contact-hanger" id="contact"></div>
-    </div>
-    <div role="contactInformation" itemscope itemtype="https://schema.org/ContactPage" class="contact section-element">
-      <h2>Contact</h2>
-      <p>
-        Developer: <em itemprop="Author" itemscope itemtype="https://schema.org/Author" name="Subhajit Gorai">Subhajit Gorai</em>
-        <br />
-        Age: 18 Years
-        <br>
-        Currently pursuing B.Tech in Information Technology, <a href="https://www.iiests.ac.in" rel="noopener" target="_blank" itemprop="url">IIEST Shibpur</a>
-        <br />
-        <br />
+    <footer id="footer" class="flex section-element" role="footer" itemscope itemtype="https://schema.org/WPFooter">
+        <div class="footer__logo dahlia">
+            LumiFeed
+        </div>
+        <div class="footer__socials flexed">
+            <ul class="full flexed flex-col f-gap-1 align-start justify-start p-top-2">
+                <li class="animated-underline-white"><a href="mailto:lumifeed101@gmail.com">Email</a></li>
+                <li class="animated-underline-white"><a target="_blank" href="https://github.com/Dream-World-Coder/LumiFeed">Github</a></li>
+            </ul>
+        </div>
+        <div class="footer__links flexed">
+            <ul class="full flexed flex-col f-gap-1 align-start justify-start p-top-2">
+                <li class="animated-underline-white"><a href="/">Home</a></li>
+                <li class="animated-underline-white"><a href="/profile">Profile</a></li>
+                <li class="animated-underline-white"><a href="/about">About</a></li>
+                <li class="animated-underline-white"><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer__cc flexed">
+            © 2024 Subhajit Gorai. All rights reserved.
+            <meta name="copyright" content="Subhajit Gorai" />
+        </div>
 
-        I'm always eager to connect with fellow tech enthusiasts and readers.<br> Feel free to reach out to me through any of the following platforms:
-        <br />
-        <br />
+        <script>
+          const footerLis = document.querySelectorAll('footer li')
 
-        <a rel="noopener" target="_blank" href="https://github.com/Dream-World-Coder/LumiFeed" class="con_icons con_icons1 bg-set flexed justify-start f-gap-2">
-          <img src="static/icons/g1.svg" alt="GitHub Profile" width="32px" height="32px" itemprop="url" />
-          <span itemprop="name">You can Contribute, It's open source.</span>
-        </a>
-        <br />
-        <a rel="noopener" target="_blank" href="https://www.linkedin.com/in/subhajit-gorai-376874283" class="con_icons con_icons2 bg-set flexed justify-start f-gap-2">
-          <img src="static/icons/ln1.svg" alt="LinkedIn Profile" width="32px" height="32px" itemprop="url" />
-          <span itemprop="name">LinkedIn</span>
-        </a>
-        <br />
-        <a rel="noopener" target="_blank" href="https://subhajit.pages.dev" class="con_icons con_icons3 bg-set flexed justify-start f-gap-2">
-          <img src="static/icons/w2.svg" alt="Portfolio" width="32px" height="32px" itemprop="url" />
-          <span itemprop="name">My Portfolio website</span>
-        </a>
-        <br />
-        <a id="e-mail" class="con_icons con_icons4 bg-set flexed justify-start f-gap-2" href="mailto:lumifeed101@gmail.com">
-          <img src="static/icons/e1.svg" alt="Email" width="32px" height="32px" />
-          <span itemprop="email">My Email</span>
-        </a>
-        <br />
-        <br />
-
-        Your
-        <strong>feedback and suggestions are always welcome</strong>
-        . Don't be shy to reach out!
-        <br />
-      </p>
-    </div>
-
-    <footer role="footer" itemscope itemtype="https://schema.org/WPFooter" class="section-element">
-        <div class="sp" id="table-end"></div>
-      <div class="cen cc">
-        © 2024 Subhajit Gorai. All rights reserved.
-        <meta name="copyright" content="Subhajit Gorai" />
-      </div>
+          footerLis.forEach((li)=>{
+            li.addEventListener("click", () => {
+              li.querySelector("a").click();
+            });
+          })
+        </script>
     </footer>
 
     <!-- script.js -->
     <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
 
-    <!-- functions -->
     <script>
       const aboutDiv = document.querySelector(".li3");
       const contactDiv = document.querySelector(".li4");
+      const homeDiv = document.querySelector(".li6");
 
-      aboutDiv.addEventListener("click", () => {
-        aboutDiv.querySelector("a").click();
-      });
-
-      contactDiv.addEventListener("click", () => {
-        contactDiv.querySelector("a").click();
-      });
+      [aboutDiv, contactDiv, homeDiv].forEach((div)=>{
+        div.addEventListener("click", () => {
+          div.querySelector("a").click();
+        });
+      })
     </script>
     <!-- displayMessage -->
     <script>
@@ -504,7 +486,6 @@
     <script type="text/javascript" src="{{url_for('static', filename='js/functions/fetch_news.js')}}"></script>
 
     <!-- utils -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/utils/emailing.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename='js/utils/scroll/smooth-scrolling.js')}}"></script>
 
     <!-- ajax -->
