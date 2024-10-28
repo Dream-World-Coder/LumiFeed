@@ -1,3 +1,4 @@
+from flask.templating import render_template
 from app.routes import app, db, make_collection
 from flask import request, jsonify
 from flask_login import login_required, current_user
@@ -75,15 +76,14 @@ def delete_collection():
 
         db.session.commit()
         return jsonify({"message": "Collection deleted."}), 200
-    
+
     except Exception as e:
         app.logger.error(f"Error deleting collection: {str(e)}")
         db.session.rollback()
         return jsonify({"error": "Failed to delete collection"}), 500
 
 
-# @login_required
-# @app.route("/rename_collection", methods=["POST"])
-# def rename_collection():
-#     # assert current_user.is_authenticated
-#     pass
+@login_required
+@app.route("/share-collection/<username>/<collection_name>", methods=["GET"])
+def share_collection(username, collection_name):
+    return render_template("share-collection.html", username=username, collection=collection_name)

@@ -23,8 +23,8 @@ def contact():
 
 
 @login_required
-@app.route("/profile")
-def profile():
+@app.route("/profile/<username>")
+def profile(username):
     if current_user.is_authenticated:
         return render_template("profile.html")
     else:

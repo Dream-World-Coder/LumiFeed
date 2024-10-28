@@ -153,7 +153,7 @@
             <!-- profile/logout button -->
             <div class="li li5 flexed">
               {% if current_user.is_authenticated %}
-              <form id="profile-form" action="/profile" method="GET">
+              <form id="profile-form" action="/profile/{{current_user.username}}" method="GET">
                 <div class="profile" onclick="document.getElementById('profile-form').submit();">
                   <img src="{{url_for('static', filename=current_user.profile_pic)}}" alt="profile pic" />
                 </div>
@@ -416,7 +416,7 @@
         <div class="footer__links flexed">
             <ul class="full flexed flex-col f-gap-1 align-start justify-start p-top-2">
                 <li class="animated-underline-white"><a href="/">Home</a></li>
-                <li class="animated-underline-white"><a href="/profile">Profile</a></li>
+                <li class="animated-underline-white"><a href="/profile/{{current_user.username}}">Profile</a></li>
                 <li class="animated-underline-white"><a href="/about">About</a></li>
                 <li class="animated-underline-white"><a href="/contact">Contact</a></li>
             </ul>

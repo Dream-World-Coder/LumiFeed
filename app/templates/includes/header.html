@@ -23,7 +23,7 @@
                 <form action="{{url_for('reset_password')}}" method="post">
                     <button type="submit" class="flexed">RESET PASSWORD</button>
                 </form>
-                <form action="/profile" method="get">
+                <form action="/profile/{{current_user.username}}" method="get">
                     <button type="submit" class="flexed">DELETE ACCOUNT</button>
                 </form>
             </div>

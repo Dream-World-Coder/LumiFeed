@@ -43,6 +43,7 @@ from .routes import (
     reset_password,
     add_new_collection,
     delete_collection,
+    share_collection,
     fetchnews,
     index,
     profile,

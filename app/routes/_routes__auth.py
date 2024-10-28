@@ -18,6 +18,7 @@ import google.auth.transport.requests
 from google.oauth2 import id_token
 import pathlib
 import requests
+import re
 
 
 def generate_verification_token():
@@ -114,13 +115,19 @@ def register():
         longitude = user_location.get("longitude") if user_location.get("longitude") else -1000
         accuracy = user_location.get("accuracy") if user_location.get("accuracy") else -1000
 
+        # use RE to know that username contains only A-z, 0-9 and and not and char except '-', max-len = 40
+        # display these conditions in the login page
+
         usr = User(username=user_name, email=user_email, password=user_password, ip_address=user_ip, device_info=user_device_info, latitudes=[latitude], longitudes=[longitude], accuracies=[accuracy])
         usr.set_password(user_password)
 
         try:
             # check for existing email
+            if User.query.filter_by(username=user_name).first():
+                return jsonify({'error':'Username already taken, use another one'}), 409
+
             if User.query.filter_by(email=user_email).first():
-                return jsonify({'error':'Email is already taken, use another one'}), 409
+                return jsonify({'error':'Email already taken, use another one'}), 409
 
             # add user to database
             db.session.add(usr)
