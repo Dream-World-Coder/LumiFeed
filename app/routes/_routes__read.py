@@ -30,8 +30,8 @@ def read_news_here():
     return jsonify(response)
 
 
-@app.route("/read_news_in_new_tab", methods=["POST"])
-def read_news_in_new_tab():
+@app.route("/article/<article_heading>", methods=["POST"])
+def read_news_in_new_tab(article_heading):
     home_url = session.get("home_url", f"{url_for('index')}")
     heading = request.form.get("heading")
     subheading = request.form.get("subheading")

@@ -14,7 +14,7 @@ function read_in_new_tab() {
 
     const form = document.createElement("form");
     form.method = "POST";
-    form.action = "/read_news_in_new_tab";
+    form.action = `/article/${heading}`;
     form.target = "_blank";
 
     const formData = {

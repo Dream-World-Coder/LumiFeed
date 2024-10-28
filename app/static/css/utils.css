@@ -294,6 +294,10 @@
   border-radius: 0.5rem;
 }
 
+.font-weight-600{
+    font-weight: 600;
+}
+
 /* text-decoration */
 .un {
   text-decoration: underline;

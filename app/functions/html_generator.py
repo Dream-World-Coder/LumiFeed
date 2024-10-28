@@ -172,7 +172,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
         background-color: rgb(0, 0, 0);
         border-bottom: 2px solid rgb(0, 0, 0);
         z-index: 99;
-        padding-right: 70px;
+        padding-right: 2rem;
         display: flex;
         justify-content: flex-end;
         align-items: center;
