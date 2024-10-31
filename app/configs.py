@@ -6,9 +6,15 @@ basedir = os.path.abspath(os.path.dirname(__file__))  # app
 
 class Config:
     FLASK_APP = os.environ.get("FLASK_APP", "run")
-    SECRET_KEY = os.environ.get("SECRET_KEY") or "aeyb72odm@wo038n3os64db$56%"
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    # print(f"{SECRET_KEY=}") if SECRET_KEY is not None else print("SECRET_KEY 404")
     # FLASKY_ADMIN = os.environ.get('ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_USE_TLS = True
+    MAIL_PORT = 587
+    MAIL_USERNAME = os.environ.get('EMAIL_USER')
+    MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
 
     @staticmethod
     def init_app(app):

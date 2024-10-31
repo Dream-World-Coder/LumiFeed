@@ -4,9 +4,10 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from sqlalchemy.ext.mutable import MutableList
-from sqlalchemy import PickleType, Float, ARRAY, JSON
+from sqlalchemy import PickleType, Float, ARRAY, JSON, Boolean
 from datetime import datetime
 
+# verification
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -14,21 +15,24 @@ class User(db.Model, UserMixin):
 
     username = db.Column(db.String(64), nullable=False, unique=True)
     email = db.Column(db.String(128), nullable=False, unique=True)
-    password = db.Column(db.String(256), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+    verified = db.Column(db.Boolean, nullable=False, default=False)
 
-    profile_pic = db.Column(db.String(512), nullable=False, default="images/default-profile.svg")
+    profile_pic = db.Column(db.String(256), nullable=False, default="images/default-profile.svg")
 
     last_login = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    ip_address = db.Column(db.String(45), nullable=False)  # IPv6-compatible
-    device_info = db.Column(db.String(256), nullable=False)
+    ip_address = db.Column(db.String(39), nullable=False)  # IPv6-compatible
+    device_info = db.Column(db.Text, nullable=False)
 
-    failed_logins = db.Column(db.Integer, nullable=False, default=0)
-
-    latitudes = db.Column(JSON(Float), nullable=False)
-    longitudes = db.Column(JSON(Float), nullable=False)
-    accuracies = db.Column(JSON(Float), nullable=True)
+    failed_logins = db.Column(db.SmallInteger, nullable=False, default=0)
 
     saved_articles = db.relationship("Article", backref="author", lazy=True)
+
+    # need to make Location and Collection tables
+    latitudes = db.Column(MutableList.as_mutable(JSON), nullable=False)
+    longitudes = db.Column(MutableList.as_mutable(JSON), nullable=False)
+    accuracies = db.Column(MutableList.as_mutable(JSON), nullable=True)
+
     collections = db.Column(
         MutableList.as_mutable(PickleType), default=["Read Later", "Liked Articles"]
     )

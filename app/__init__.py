@@ -2,14 +2,15 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_mail import Mail
 from flask_wtf import csrf
 from .configs import config
-
 
 # csrf = CSRFProtect()
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
+mail = Mail()
 # login_manager.login_view = "index"
 
 
@@ -22,6 +23,7 @@ app.config.from_object(config["development"])
 db.init_app(app)
 migrate.init_app(app, db)
 login_manager.init_app(app)
+mail.init_app(app)
 
 
 # models

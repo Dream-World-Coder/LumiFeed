@@ -1,4 +1,4 @@
-from app import app, db  # NewsForm, SearchForm
+from app import app, db, mail  # NewsForm, SearchForm
 from ..models import User, Article
 
 # utility functions

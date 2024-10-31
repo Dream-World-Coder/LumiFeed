@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title -->
+    <title>LumiFeed - Verify Email</title>
+    <meta name="author" content="Subhajit Gorai" />
+    <!-- Linking CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/components/auth.css')}}" />
+    <!-- Linking Favicon -->
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}" type="image/x-icon" />
+  </head>
+
+  <body>
+    <div class="main">
+      <section class="sign-in">
+        <div class="container">
+          <ul class="flash_ul">
+            <li class="flash_li"></li>
+          </ul>
+          <div class="signin-content">
+            <div class="signin-image">
+              
+              <a class="redirection_link" href="{{url_for('register')}}" class="signup-image-link">Resend Verification Email</a>
+              <a href="{% block origin %}{{url_for('index')}}{% endblock %}" class="home-link">Go Back</a>
+            </div>
+
+            <div class="signin-form">
+              <h1 class="form-title">Enter Verification Code Without any spaces in between</h1>
+
+              <form method="POST" class="register-form" id="login-form" action="/">
+                <div class="form-group">
+                  <label for="v_code">
+                  </label>
+                  <input type="text" name="verification_code" id="v_code" placeholder="6 digit verification code without any space" maxlength="10" required/>
+                </div>
+                <div class="form-group form-button">
+                    <input type="submit" name="signin" id="signin" class="form-submit" value="Enter" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+    </script>
+  </body>
+</html>

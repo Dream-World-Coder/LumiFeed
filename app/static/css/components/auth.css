@@ -80,8 +80,11 @@ h2 {
 
 .main {
   background: #f8f8f8;
-  padding: 150px 0;
   height: 100vh;
+  /* padding: 50% 0; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 }
 
