@@ -1,4 +1,5 @@
 from enum import unique
+from app import app
 from app.models import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy import PickleType, Float, ARRAY, JSON, Boolean
 from datetime import datetime
+from itsdangerous import URLSafeTimedSerializer
 
 # verification
 
@@ -16,7 +18,12 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(64), nullable=False, unique=True)
     email = db.Column(db.String(128), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False)
-    verified = db.Column(db.Boolean, nullable=False, default=False)
+    # email_verified = db.Column(db.SmallInteger, nullable=False, default=0)
+    email_verified = db.Column(db.Boolean, nullable=False, default=False)
+    # 0-1-2 , possible states, 0 -> 1, 1 -> 2, 0 -> 2 not possible
+    # 0-> just created the User
+    # 1-> email not verified
+    # 2-> email verified
 
     profile_pic = db.Column(db.String(256), nullable=False, default="images/default-profile.svg")
 
@@ -74,6 +81,20 @@ class User(db.Model, UserMixin):
         """Reset failed login attempts after a successful login."""
         self.failed_logins = 0
         db.session.commit()
+
+    def generate_verification_token(self, data):
+        serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
+        return serializer.dumps(data)
+
+    @staticmethod
+    def verify_token(token, expiration=900):
+        serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
+        try:
+            # Deserialize the token with expiration (in seconds)
+            data = serializer.loads(token, max_age=expiration)
+            return data
+        except Exception:
+            return None
 
     def __repr__(self):
         return f"<User {self.id}, {self.username}, {self.email}>"

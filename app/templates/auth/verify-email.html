@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -22,31 +22,22 @@
           </ul>
           <div class="signin-content">
             <div class="signin-image">
-              
-              <a class="redirection_link" href="{{url_for('register')}}" class="signup-image-link">Resend Verification Email</a>
-              <a href="{% block origin %}{{url_for('index')}}{% endblock %}" class="home-link">Go Back</a>
+              <a class="redirection_link" href="{{url_for('resend')}}" class="signup-image-link">Resend Verification Email</a>
+              <a href="{% block origin %}{{url_for('index')}}{% endblock %}" class="home-link">Home</a>
             </div>
 
             <div class="signin-form">
-              <h1 class="form-title">Enter Verification Code Without any spaces in between</h1>
-
-              <form method="POST" class="register-form" id="login-form" action="/">
-                <div class="form-group">
-                  <label for="v_code">
-                  </label>
-                  <input type="text" name="verification_code" id="v_code" placeholder="6 digit verification code without any space" maxlength="10" required/>
-                </div>
-                <div class="form-group form-button">
-                    <input type="submit" name="signin" id="signin" class="form-submit" value="Enter" />
-                </div>
-              </form>
+              <h1 class="form-title">
+                Check your Email and click on the verification link.
+                <!-- , after that go to -->
+                <!-- <a style="text-decoration: underline !important" href="{{url_for('index')}}">home page</a> -->
+              </h1>
             </div>
           </div>
         </div>
       </section>
     </div>
 
-    <script>
-    </script>
+    <script></script>
   </body>
 </html>

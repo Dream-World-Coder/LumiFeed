@@ -103,7 +103,7 @@
         .then(response => response.json())  
         .then(result => {
             if (result.success) {
-                window.location.href = "/";
+                window.location.href = "/verify-email";
             } else {
                 flash_li.parentNode.style.backgroundColor = "#dd2b4f";
                 flash_li.textContent = result.error;

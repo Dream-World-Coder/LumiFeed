@@ -7,63 +7,97 @@ from flask import (
     jsonify,
     session
 )
-from app.routes import app, db, User, mail
-from flask_login import login_user, login_required, logout_user, current_user
+from sqlalchemy.util.langhelpers import methods_equivalent
+from app.routes import (
+    app,
+    db,
+    User,
+    mail
+)
+from flask_login import (
+    login_user,
+    login_required,
+    logout_user,
+    current_user
+)
 from sqlalchemy.exc import IntegrityError
-import random, string, smtplib
+import requests, string, smtplib, pathlib, re
+
 # from email.mime.text import MIMEText
 # from google_auth_oauthlib.flow import Flow
 # from pip._vendor import cachecontrol
 # import google.auth.transport.requests
 # from google.oauth2 import id_token
-import pathlib
-import requests
-import re
+
 from random import randint
 from flask_mail import Message
 
-def generate_verification_token():
-    return "".join(random.choices(string.ascii_uppercase + string.digits, k=64))
+@app.route("/verify-email")
+def verify_email():
+    if current_user.is_authenticated:
+      return redirect(url_for("index"))
+    return render_template("auth/verify-email.html")
 
 
-def send_verification_email(user):
-    subject = "Verify Your Account"
+@app.route("/verify", methods=["GET"])
+def verify():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
 
-    # Generate a 6-digit numeric verification code for simplicity
-    verification_code = " ".join(str(randint(0, 9)) for _ in range(6))
+    token = request.args.get("token") if request.args.get("token") else None
+
+    try:
+        user_id = User.verify_token(token)
+        user = User.query.filter_by(id=user_id).first()
+        if user:
+            user.email_verified = True
+            db.session.commit()
+            login_user(user)
+            return redirect(url_for("index"))
+        else:
+            return render_template("auth/verify-email.html", token=token)
+
+    except Exception:
+        return render_template("auth/verify-email.html", token=token)
+
+
+def send_verification_email(user: User):
+    subject = "Verify Your Email Address"
+
+    verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.id)}"
 
     try:
         msg = Message(
             subject=subject,
-            sender="lumifeed101@gmail.com",
+            sender="noreply@lumifeed101.com",
             recipients=[user.email]
         )
 
-        # HTML content for the verification email
         msg.html = f"""
         <html>
             <body>
-                <h1 style="color: #333;">Welcome to Our Service!</h1>
+                <h1 style="color: #333;">Welcome to Lumifeed!</h1>
                 <p>Dear {user.username},</p>
-                <p>Thank you for registering with us! To complete your account setup, please use the following verification code:</p>
-                <h2 style="color: #2e6da4; font-size: 24px;">{verification_code}</h2>
+                <p>Thank you for registering with us! To complete your account setup, please click the following verification link:</p>
+                <h2 style="color: #2e6da4; font-size: 14px;">{verification_link}</h2>
                 <p>This code is valid for the next 15 minutes. Please do not share it with anyone.</p>
                 <p>If you did not request this verification, please ignore this email.</p>
                 <br>
-                <p>Best regards,<br>Our Service Team</p>
+                <p>Best regards,<br>Lumifeed Team</p>
             </body>
         </html>
         """
 
         mail.send(msg)
-        return verification_code
+        return "\n\nverification email sent\n"
 
     except Exception as e:
-        return f"\n\nFailed to send email: {e}"
-    
-@app.route("/verify-email")
-def verify_email():
-    return render_template("auth/verify-email.html")
+        return f"\n\nFailed to send email: {e}\n"
+
+
+@app.route("/resend-verification-email", methods=["POST"])
+def resend():
+  db.session.rollback()
 
 
 
@@ -72,12 +106,15 @@ def verify_email():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~`
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+
     if request.method == "GET":
         return render_template("auth/register.html")
 
     elif request.method == "POST":
         data = request.json or {}
-        
+
         user_name = data.get("username")
         user_email = data.get("email", "").strip().lower()
         user_password = data.get("password", "").strip()
@@ -92,7 +129,7 @@ def register():
         latitude = user_location.get("latitude") if user_location.get("latitude") else -1000
         longitude = user_location.get("longitude") if user_location.get("longitude") else -1000
         accuracy = user_location.get("accuracy") if user_location.get("accuracy") else -1000
-        
+
         # if i just pass a second default argument to the get function its still facing None errors
 
         usr = User(
@@ -116,22 +153,9 @@ def register():
 
             db.session.add(usr)
             db.session.commit()
-
-            # Generate and store verification code
-            verification_code = send_verification_email(usr)
-            session['verification_code'] = verification_code # ask: session mane current user er session e to?
-            
-            redirect("/verify-email")
-            verification_code_form_submission = request.form.get('verification_code')
-            
-            if verification_code_form_submission != verification_code:
-                session.pop('verification_code') 
-                return jsonify({'error':'Invalid verification code'}), 400
-            
-            else:
-                session.pop('verification_code') 
-                login_user(usr)
-                return jsonify({'success': 'Registered successfully'}), 200
+            send_verification_email(user=usr)
+            # login_user(usr)
+            return jsonify({'success': 'Registered successfully'}), 200
 
         except IntegrityError:
             db.session.rollback()
@@ -149,13 +173,16 @@ def register():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+
     if request.method == "GET":
         return render_template("auth/login.html")
 
     elif request.method == "POST":
         # collecting data
         data = request.json
-        
+
         assert data
 
         user_email = data.get("email").strip().lower()
@@ -212,23 +239,30 @@ def logout():
 @login_required
 def delete_account():
     if request.method == "GET":
-        return render_template("auth/delete-acc.html")
+      return render_template("auth/delete-acc.html")
 
     if request.method == "POST":
-        data = request.json
-        assert data
-        
-        user_password = data.get("password").strip()
+      try:
+        # email = request.form.get("user_email").strip()  # This line is not needed, remove if unused
+        password = request.form.get("user_pass").strip()
 
-        if current_user.check_password(user_password):
-            db.session.delete(current_user)
-            db.session.commit()
-            logout_user()
-            return redirect(url_for("index"))
+        if current_user.check_password(password):
+          db.session.delete(current_user)
+          db.session.commit()
+          logout_user()
+          return redirect(url_for("index"))
         else:
-            flash("Incorrect password.", "error")
-            return redirect(url_for("delete_account"))
+          flash("Incorrect password.", "error")
+          return redirect(url_for("delete_account"))
 
+      except Exception as e:
+        db.session.rollback()  # Roll back any changes if an error occurs
+        flash("An error occurred while deleting the account. Please try again later.", "error")
+        print(f"Error: {e}")  # Log the error for debugging
+        return redirect(url_for("delete_account"))
+
+# i will not delete the user from db :},
+# instead i will change the user name & pass, like -deleted-{username}, -deleted-{email}
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~`\
 # Forgot Password
