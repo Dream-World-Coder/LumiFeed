@@ -49,9 +49,11 @@ def verify():
     try:
         user_id = User.verify_token(token)
         user = User.query.filter_by(id=user_id).first()
+        # user = User.query.filter_by(id=user_email).first()
         if user:
             user.email_verified = True
             db.session.commit()
+            # or i can send them to login page with a message
             login_user(user)
             return redirect(url_for("index"))
         else:
@@ -65,34 +67,35 @@ def send_verification_email(user: User):
     subject = "Verify Your Email Address"
 
     verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.id)}"
+    # verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
 
     try:
-        msg = Message(
-            subject=subject,
-            sender="noreply@lumifeed101.com",
-            recipients=[user.email]
-        )
+      msg = Message(
+          subject=subject,
+          sender="noreply@lumifeed101.com",
+          recipients=[user.email]
+      )
 
-        msg.html = f"""
-        <html>
-            <body>
-                <h1 style="color: #333;">Welcome to Lumifeed!</h1>
-                <p>Dear {user.username},</p>
-                <p>Thank you for registering with us! To complete your account setup, please click the following verification link:</p>
-                <h2 style="color: #2e6da4; font-size: 14px;">{verification_link}</h2>
-                <p>This code is valid for the next 15 minutes. Please do not share it with anyone.</p>
-                <p>If you did not request this verification, please ignore this email.</p>
-                <br>
-                <p>Best regards,<br>Lumifeed Team</p>
-            </body>
-        </html>
-        """
+      msg.html = f"""
+                  <html>
+                      <body>
+                          <h1 style="color: #333;">Welcome to Lumifeed!</h1>
+                          <p>Dear {user.username},</p>
+                          <p>Thank you for registering with us! To complete your account setup, please click the following verification link:</p>
+                          <h2 style="color: #2e6da4; font-size: 14px;">{verification_link}</h2>
+                          <p>This code is valid for the next 15 minutes. Please do not share it with anyone.</p>
+                          <p>If you did not request this verification, please ignore this email.</p>
+                          <br>
+                          <p>Best regards,<br>Lumifeed Team</p>
+                      </body>
+                  </html>
+      """
 
-        mail.send(msg)
-        return "\n\nverification email sent\n"
+      mail.send(msg)
+      return "\n\nverification email sent\n"
 
     except Exception as e:
-        return f"\n\nFailed to send email: {e}\n"
+      return f"\n\nFailed to send email: {e}\n"
 
 
 @app.route("/resend-verification-email", methods=["POST"])

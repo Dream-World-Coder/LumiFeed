@@ -142,7 +142,7 @@ footer {
   position: relative;
   width: 100vw;
   height: 30vh;
-  background-color: #318f60;
+  background-color: var(--header-footer-bgclr);
   color: var(--color-shadow-black-heavy);
   padding: 15px;
   z-index: 103;
@@ -154,8 +154,11 @@ footer {
 
   & a {
     /* color: #eee6c8; */
-    color: #fff;
+    color: var(--header-footer-clr);
     font-size: 1rem;
+    font-family: AppleGothic, poppins, sans-serif;
+    font-weight: 300 !important;
+    font-size: large;
 
     &:hover {
       text-decoration: none;
@@ -166,7 +169,7 @@ footer {
 body.dark-mode footer li a,
 body.dark-mode nav li a {
   /* color: #eee6c8 !important; */
-  color: #fff !important;
+  color: var(--header-footer-clr) !important;
 }
 
 .footer__logo {

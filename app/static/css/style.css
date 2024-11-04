@@ -10,13 +10,10 @@
   --bg2: black;
   --clr2: rgb(221, 43, 79);
   /* --clr2: #318f60; */
-  /* --clr2: #d84f0f; */
+  /* --clr2: #eee6c8; */
 
   /* ---------------- */
   --c2: #dd2b4f;
-  /* --c2: #318f60; */
-  /* --c2: #d84f0f; */
-
   --color-green-100: #eafdc6;
   --color-green-400: #aee938;
   --color-green-700: #008a27;
@@ -35,6 +32,9 @@
 
   --color-lightBlue: #66c4ff;
   --color-lightGreen: #aee938;
+
+  --header-footer-bgclr: darkgreen;
+  --header-footer-clr: #fff;
 }
 
 body {
@@ -57,7 +57,7 @@ a:hover {
 /* width */
 ::-webkit-scrollbar {
   /* width: 10px; */
-  width: 0;
+  width: 0px;
 }
 
 /* Track */
@@ -68,7 +68,6 @@ a:hover {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #318f60;
-  border-radius: 10px;
 }
 
 /* Handle on hover */

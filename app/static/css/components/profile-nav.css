@@ -37,10 +37,11 @@ nav {
 .li a {
   z-index: 102;
   font-size: 1rem;
-  /* color: #eee6c8; */
-  color: #fff;
+  color: var(--header-footer-clr);
   text-decoration: none;
-  font-family: poppins, Arial, Helvetica, sans-serif;
+  font-family: AppleGothic, poppins, sans-serif;
+  font-weight: 300 !important;
+  font-size: large;
 
   @media screen and (max-width: 1024px) {
     font-size: 1rem;
@@ -51,8 +52,7 @@ nav {
   }
 }
 body.dark-mode .li a {
-  /* color: #eee6c8; */
-  color: #fff;
+  color: var(--header-footer-clr);
 }
 
 .mobile-li {

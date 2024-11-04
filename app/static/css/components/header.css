@@ -10,14 +10,13 @@ header {
   width: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
-  background-color: #318f60;
+  background-color: var(--header-footer-bgclr);
   z-index: 100;
   border: none;
 }
 
 body.dark-mode header {
-  /* background-color: #414141; */
-  background-color: #318f60;
+  background-color: var(--header-footer-bgclr);
 }
 
 .header-wrapper {
@@ -72,13 +71,13 @@ body.dark-mode header {
   }
 
   & .dark-mode-btn span img {
-    --x1: 32px;
+    --x1: 26px;
     width: var(--x1);
     height: var(--x1);
   }
 
   & .bigger-font-btn span img {
-    --x2: 26px;
+    --x2: 22px;
     width: var(--x2);
     height: var(--x2);
   }
@@ -152,18 +151,17 @@ body.dark-mode header {
 }
 
 @media (max-width: 768px) {
-
-    header{
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
+  header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 
   .logo #logo-text {
     font-size: 1rem;
   }
 
   .buttons {
-      margin-right: 30px;
+    margin-right: 30px;
     gap: 10px;
 
     & .dark-mode-btn,
