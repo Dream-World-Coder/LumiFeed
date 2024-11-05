@@ -21,14 +21,12 @@
 
   font-size: 1rem;
 
-  border: 1px solid rgba(202, 202, 202, 1);
+  border: 1px solid #d8d2c2;
   border-radius: 10px;
-  /* transition: all 0.3s; */
 
   & h2 {
     font-size: 2.5rem;
     margin-top: 0rem;
-    /* font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; */
     font-family: "Apercu Bold", poppins, sans-serif;
     letter-spacing: -1.28px;
     font-weight: 600;
@@ -96,7 +94,7 @@ label.custom-radio {
   position: relative;
   font-size: 0.9rem;
   cursor: pointer;
-  background-color: rgba(240, 240, 240, 1);
+  background-color: #d8d2c2;
   /* border: 1px solid rgba(202, 202, 202, 1); */
   color: black;
 }
@@ -121,7 +119,7 @@ label.custom-radio::before {
 /* Style for the selected state */
 input[type="radio"]:checked + label.custom-radio {
   /* background-color: var(--clr2); */
-  background-color: #0e1313;
+  background-color: #b17457;
   color: #fff;
 }
 body.dark-mode input[type="radio"]:checked + label.custom-radio {
@@ -246,12 +244,12 @@ body.dark-mode input[type="radio"]:checked + label.custom-radio {
   :root {
     --con-m-left: 20px;
   }
-  #news_count{
-      width: 50px;
-      height: 25px;
+  #news_count {
+    width: 50px;
+    height: 25px;
   }
-  #news_count::placeholder{
-      font-size: 0.85rem;
+  #news_count::placeholder {
+    font-size: 0.85rem;
   }
 
   .options__contaioner_sibling .btns button {

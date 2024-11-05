@@ -23,6 +23,7 @@ from ..routes._routes__auth import (
     login,
     register,
     logout,
+    resend,
     delete_account,
     forgot_password,
     reset_password,

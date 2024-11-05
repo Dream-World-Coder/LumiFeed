@@ -100,7 +100,7 @@ def send_verification_email(user: User):
 
 @app.route("/resend-verification-email", methods=["POST"])
 def resend():
-  db.session.rollback()
+  return "This feature will be available later."
 
 
 
@@ -204,6 +204,9 @@ def login():
             if not usr:
                 return jsonify({'error': 'User not found'}), 404
 
+            elif not usr.email_verified:
+              return jsonify({'error':'Email unverified User\'s data cannot be recollected. Try again after 24 hours.'})
+
             elif not usr.check_password(user_password):
                 usr.increment_failed_logins()
                 return jsonify({'error': 'Incorrect password'}), 401
@@ -230,9 +233,9 @@ def login():
 @app.route("/logout")
 @login_required
 def logout():
-    logout_user()  # Clears the session
-    flash("logout successfull", "success")
-    return redirect(url_for("index"))
+  logout_user()  # Clears the session
+  flash("logout successfull", "success")
+  return redirect(url_for("index"))
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~`\
@@ -259,7 +262,7 @@ def delete_account():
           return redirect(url_for("delete_account"))
 
       except Exception as e:
-        db.session.rollback()  # Roll back any changes if an error occurs
+        db.session.rollback()
         flash("An error occurred while deleting the account. Please try again later.", "error")
         print(f"Error: {e}")  # Log the error for debugging
         return redirect(url_for("delete_account"))
@@ -273,7 +276,8 @@ def delete_account():
 @login_required
 @app.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
-    return render_template("auth/forgot-pass.html")
+  return "This Freature will be added later"
+
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~`\
@@ -282,4 +286,4 @@ def forgot_password():
 @login_required
 @app.route("/reset_password", methods=["GET", "POST"])
 def reset_password():
-    return render_template("auth/reset-pass.html")
+    return "This Freature will be added later"

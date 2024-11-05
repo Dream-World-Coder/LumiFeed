@@ -4,9 +4,16 @@
 
 <!-- Image -->
 {% block image %}
-<figure>
+<!-- <figure>
   <img loading="lazy" src="{{url_for('static', filename='images/auth.png')}}" alt="log in image" />
-</figure>
+</figure> -->
+<div class="register-info" style="display: flex; font-size: 1.5rem; font-weight: 450; text-align: center; align-items: center; justify-content: center">
+  <br />
+  <br />
+  WELCOME
+  <br />
+  <br />
+</div>
 {% endblock %}
 
 <!-- redirect -->
@@ -31,81 +38,79 @@
 <!-- auth_api -->
 {% block auth_api %}login{% endblock %}
 
-
 <!-- scripts -->
 {% block scripts %}
 <script>
-    const flash_li = document.querySelector(".flash_li");
+  const flash_li = document.querySelector(".flash_li");
 
-    document.getElementById("login-form").addEventListener("submit", function (event) {
-    event.preventDefault(); 
+  document.getElementById("login-form").addEventListener("submit", function (event) {
+    event.preventDefault();
 
     // Collect form data
-    const email = document.getElementById("your_email").value;
-    const password = document.getElementById("your_pass").value;
+    const email = document.getElementById("your_email").value.trim();
+    const password = document.getElementById("your_pass").value.trim();
 
     // Get device info
-    const deviceInfo = navigator.userAgent;  // Get device/browser info
+    const deviceInfo = navigator.userAgent; // Get device/browser info
 
     // Get user's location using the Geolocation API
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(sendLoginData, locationError);
+      navigator.geolocation.getCurrentPosition(sendLoginData, locationError);
     } else {
-        alert("Geolocation is not supported by your browser.");
-        sendLoginData(null);  // Proceed without location if unavailable
+      alert("Geolocation is not supported by your browser.");
+      sendLoginData(null); // Proceed without location if unavailable
     }
 
     // Send data to the server using Fetch API
     function sendLoginData(position) {
-        let userLocation = null;
+      let userLocation = null;
 
-        // If position is available, extract latitude and longitude
-        if (position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            const accuracy = position.coords.accuracy;
-            userLocation = { latitude, longitude, accuracy };
-        }
+      // If position is available, extract latitude and longitude
+      if (position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+        userLocation = { latitude, longitude, accuracy };
+      }
 
-        // Data to be sent
-        const data = {
-            email: email,
-            password: password,
-            deviceInfo: deviceInfo,
-            ipAddress: null, 
-            location: userLocation,
-        };
+      // Data to be sent
+      const data = {
+        email: email,
+        password: password,
+        deviceInfo: deviceInfo,
+        ipAddress: null,
+        location: userLocation,
+      };
 
-        fetch("/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())  
-        .then(result => {
-            if (result.success) {
-                // displayMessage("Login successful! You're awesome for staying secure.");
-                window.location.href = "/";
-            } 
-            else {
-                flash_li.parentNode.style.backgroundColor = "#dd2b4f";
-                flash_li.textContent = result.error;
-            }
-        })
-        .catch(error => {
-            console.error("Error during login:", error);
+      fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.success) {
+            // displayMessage("Login successful! You're awesome for staying secure.");
+            window.location.href = "/";
+          } else {
             flash_li.parentNode.style.backgroundColor = "#dd2b4f";
-            flash_li.textContent = error.error;
+            flash_li.textContent = result.error;
+          }
+        })
+        .catch((error) => {
+          console.error("Error during login:", error);
+          flash_li.parentNode.style.backgroundColor = "#dd2b4f";
+          flash_li.textContent = error.error;
         });
     }
 
     // Handle location error (if geolocation fails)
     function locationError(error) {
-        console.warn(`Geolocation error (${error.code}): ${error.message}`);
-        sendLoginData(null);  // Proceed without location data
+      console.warn(`Geolocation error (${error.code}): ${error.message}`);
+      sendLoginData(null); // Proceed without location data
     }
-});
+  });
 </script>
 {% endblock %}

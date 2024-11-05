@@ -10,6 +10,20 @@ display-flex,
   display: -webkit-flex;
 }
 
+.register-info {
+  z-index: 99999999;
+  box-sizing: border-box;
+  width: 300px;
+  font-family: poppins, sans-serif;
+  font-weight: 250;
+  font-size: 1rem;
+  line-height: 1rem;
+  padding: 15px;
+  height: auto;
+  background-color: #b17457;
+  border-radius: 10px;
+}
+
 a:focus,
 a:active {
   text-decoration: none;
@@ -79,8 +93,7 @@ h2 {
 }
 
 .main {
-  background: #f8f8f8;
-  /* background: #484848; */
+  background: #d8d2c2;
   height: 100vh;
   /* padding: 50% 0; */
   display: flex;
@@ -97,15 +110,14 @@ body {
   font-size: 13px;
   line-height: 1.8;
   color: #222;
-  background: #f8f8f8;
+  background: #d8d2c2;
   font-weight: 400;
   font-family: Poppins, sans-serif;
 }
 
 .container {
   width: 900px;
-  background: #fff;
-  /* background: #b6b6b6; */
+  background: #faf7f0;
   margin: 0 auto;
   box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
@@ -249,8 +261,13 @@ input {
   border: none;
   border-bottom: 1px solid #999;
   padding: 6px 30px;
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   box-sizing: border-box;
+}
+#your_email,
+#your_pass,
+#your_name {
+  background: #faf7f0 !important;
 }
 input::-webkit-input-placeholder {
   color: #999;

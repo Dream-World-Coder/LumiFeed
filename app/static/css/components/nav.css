@@ -55,12 +55,15 @@ nav .ul .li2 {
 .li6 a,
 .li5 form button {
   font-size: 1rem;
-  /* color: #eee6c8 !important; */
   color: var(--header-footer-clr) !important;
   text-decoration: none;
   font-family: AppleGothic, poppins, sans-serif;
   font-weight: 300 !important;
   font-size: large;
+}
+
+body.dark-mode .li a {
+  color: #afafaf !important;
 }
 
 .li a {
@@ -87,18 +90,25 @@ nav .ul .li2 {
 
 /* profile */
 .profile {
-  margin-top: 4px;
-  --l: 28px;
+  margin-top: 0px;
+  --l: 24px;
   width: var(--l);
   height: var(--l);
   border-radius: 50%;
   overflow: hidden;
+  border: 1px solid #4a4947;
 
   & img {
     position: relative;
     width: 100%;
     height: 100%;
   }
+}
+
+body.dark-mode .profile,
+body.dark-mode #dm,
+body.dark-mode #big_f {
+  filter: invert(0.7);
 }
 
 .mobile-li {

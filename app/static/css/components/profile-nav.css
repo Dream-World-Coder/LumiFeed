@@ -19,13 +19,17 @@ nav {
   width: var(--len);
   height: var(--len);
   overflow: hidden;
-  margin-top: 4px;
 
   & .iconImg {
     position: relative;
     width: calc(var(--len) - 10px);
     height: calc(var(--len) - 10px);
   }
+}
+
+body.dark-mode .li2 .iconImg,
+body.dark-mode #dm {
+  filter: invert(0.7);
 }
 
 @media (max-width: 768px) {
@@ -52,7 +56,7 @@ nav {
   }
 }
 body.dark-mode .li a {
-  color: var(--header-footer-clr);
+  color: #afafaf;
 }
 
 .mobile-li {

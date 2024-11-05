@@ -58,20 +58,20 @@
   position: absolute;
 }
 
-.t-0{
-    top: 0;
+.t-0 {
+  top: 0;
 }
 
-.b-0{
-    bottom: 0;
+.b-0 {
+  bottom: 0;
 }
 
-.l-0{
-    left: 0;
+.l-0 {
+  left: 0;
 }
 
-.r-0{
-    right: 0;
+.r-0 {
+  right: 0;
 }
 
 .relative {
@@ -294,8 +294,8 @@
   border-radius: 0.5rem;
 }
 
-.font-weight-600{
-    font-weight: 600;
+.font-weight-600 {
+  font-weight: 600;
 }
 
 /* text-decoration */
@@ -473,7 +473,6 @@ label {
 .animated-underline-white,
 .animated-underline {
   position: relative;
-  /* display: inline-block; */
   overflow: hidden;
 }
 
@@ -484,13 +483,14 @@ label {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 1px;
   z-index: 200;
-  transform: scaleX(0);
-  transition: transform 0.3s ease-in-out;
-  transform-origin: right;
-  mix-blend-mode: difference;
   border-radius: 3px;
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  /* the 5th power cubic-bezier is good */
+  transform-origin: right;
+  /* mix-blend-mode: difference; */
 }
 
 .animated-underline::before {
@@ -498,8 +498,7 @@ label {
 }
 
 .animated-underline-white::before {
-  background-color: var(--clr2);
-  background-color: aliceblue;
+  background-color: #4a4947;
 }
 
 .animated-underline:hover::before,

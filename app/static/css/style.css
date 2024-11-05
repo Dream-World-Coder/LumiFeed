@@ -33,12 +33,12 @@
   --color-lightBlue: #66c4ff;
   --color-lightGreen: #aee938;
 
-  --header-footer-bgclr: darkgreen;
-  --header-footer-clr: #fff;
+  --header-footer-bgclr: #d8d2c2;
+  --header-footer-clr: #4a4947;
 }
 
 body {
-  background-color: rgb(255, 255, 255);
+  background-color: #faf7f0;
   color: black;
   font-family: poppins, sans-serif;
   overflow-x: hidden;

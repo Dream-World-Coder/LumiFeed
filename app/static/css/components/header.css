@@ -12,11 +12,12 @@ header {
   padding-right: 2rem;
   background-color: var(--header-footer-bgclr);
   z-index: 100;
-  border: none;
+  border-bottom: 1px solid #b17457;
 }
 
 body.dark-mode header {
-  background-color: var(--header-footer-bgclr);
+  background-color: #232323;
+  border-bottom: 1px solid #323232;
 }
 
 .header-wrapper {
@@ -44,8 +45,12 @@ body.dark-mode header {
     font-family: Dahlia;
     margin-left: 10px;
     font-size: 1.25rem;
-    color: aliceblue !important;
+    color: #4a4947 !important;
   }
+}
+
+body.dark-mode #logo-text {
+  color: #afafaf !important;
 }
 
 /*--- buttons

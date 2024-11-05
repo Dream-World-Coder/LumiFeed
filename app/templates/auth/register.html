@@ -3,10 +3,16 @@
 {% block title %}Register{% endblock %}
 
 <!-- Image -->
-{% block image %}
-<figure>
-  <img loading="lazy" src="{{url_for('static', filename='images/auth.png')}}" alt="register image" />
-</figure>
+{% block image %} {% include "includes/loader.html" %}
+<div class="register-info" style="display: block">
+  <br />
+  <ol>
+    <li>Username Must contain Albpabets[A-z], numbers and heyphen[-] only. Nothig Else.</li>
+    <br />
+    <li>Username is a unique parameter so your choice might be unavailable. Try new and super unique ones!</li>
+  </ol>
+  <br />
+</div>
 {% endblock %}
 
 <!-- redirect -->
@@ -15,7 +21,26 @@
 {% endblock %}
 
 <!-- heading -->
-{% block heading %}Register{% endblock %}
+{% block heading %} Register
+<svg id="info-svg" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+  />
+</svg>
+<script>
+  const info = document.getElementById("info-svg");
+  const data = document.querySelector(".register-info");
+  info.addEventListener("click", () => {
+    if (data.style.display === "none") {
+      data.style.display = "block";
+    } else {
+      data.style.display = "none";
+    }
+  });
+</script>
+{% endblock %}
 
 <!-- action -->
 {% block form_action %}/register{% endblock %}
@@ -50,10 +75,19 @@
 <!-- scripts -->
 {% block scripts %}
 <script>
-    const flash_li = document.querySelector(".flash_li");
+  function showLoader() {
+    document.getElementById("loader").style.display = "flex";
+  }
 
-    document.getElementById("login-form").addEventListener("submit", function (event) {
-    event.preventDefault();  // Prevent default form submission
+  function hideLoader() {
+    document.getElementById("loader").style.display = "none";
+  }
+
+  const flash_li = document.querySelector(".flash_li");
+
+  document.getElementById("login-form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+    showLoader();
 
     // Collect form data
     const username = document.getElementById("your_name").value;
@@ -61,66 +95,69 @@
     const password = document.getElementById("your_pass").value;
 
     // Get device info
-    const deviceInfo = navigator.userAgent;  // Get device/browser info
+    const deviceInfo = navigator.userAgent; // Get device/browser info
 
     // Get user's location using the Geolocation API
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(sendLoginData, locationError);
+      navigator.geolocation.getCurrentPosition(sendLoginData, locationError);
     } else {
-        displayMessage("Geolocation is not supported by your browser.");
-        sendLoginData(null);  // Proceed without location if unavailable
+      displayMessage("Geolocation is not supported by your browser.");
+      sendLoginData(null);
     }
 
     // Send data to the server using Fetch API
     function sendLoginData(position) {
-        let userLocation = null;
+      let userLocation = null;
 
-        // If position is available, extract latitude and longitude
-        if (position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            const accuracy = position.coords.accuracy;
-            userLocation = { latitude, longitude, accuracy };
-        }
+      // If position is available, extract latitude and longitude
+      if (position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+        userLocation = { latitude, longitude, accuracy };
+      }
 
-        // Data to be sent
-        const data = {
-            username: username,
-            email: email,
-            password: password,
-            deviceInfo: deviceInfo,
-            ipAddress: null,  
-            location: userLocation,
-        };
+      // Data to be sent
+      const data = {
+        username: username,
+        email: email,
+        password: password,
+        deviceInfo: deviceInfo,
+        ipAddress: null,
+        location: userLocation,
+      };
 
-        fetch("/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())  
-        .then(result => {
-            if (result.success) {
-                window.location.href = "/verify-email";
-            } else {
-                flash_li.parentNode.style.backgroundColor = "#dd2b4f";
-                flash_li.textContent = result.error;
-            }
-        })
-        .catch(error => {
-            console.error("Error during login:", error);
+      fetch("/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.success) {
+            window.location.href = "/verify-email";
+          } else {
             flash_li.parentNode.style.backgroundColor = "#dd2b4f";
-            flash_li.textContent = error.error;
+            flash_li.textContent = result.error;
+          }
+        })
+        .catch((error) => {
+          console.error("Error during login:", error);
+          flash_li.parentNode.style.backgroundColor = "#dd2b4f";
+          flash_li.textContent = error.error;
+        })
+        .finally(() => {
+          hideLoader();
         });
     }
 
     // Handle location error (if geolocation fails)
     function locationError(error) {
-        console.warn(`Geolocation error (${error.code}): ${error.message}`);
-        sendLoginData(null);  // Proceed without location data
+      console.warn(`Geolocation error (${error.code}): ${error.message}`);
+      sendLoginData(null); // Proceed without location data
     }
-});
+  });
 </script>
 {% endblock %}

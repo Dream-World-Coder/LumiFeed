@@ -40,6 +40,7 @@ from .routes import (
     login,
     register,
     logout,
+    resend,
     delete_account,
     forgot_password,
     reset_password,

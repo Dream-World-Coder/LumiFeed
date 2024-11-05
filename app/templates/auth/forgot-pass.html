@@ -1,1 +1,40 @@
 {% extends "layouts/auth-base.html" %}
+<!-- Title -->
+{% block title %}Delete Accout{% endblock %}
+
+<!-- Image -->
+{% block image %}
+<figure>
+  <img loading="lazy" src="{{url_for('static', filename='images/auth.png')}}" alt="register image" />
+</figure>
+{% endblock %}
+
+<!-- redirect -->
+{% block redirect %}
+<!-- <a class="redirection_link" href="{{url_for('login')}}" class="signup-image-link">Have an account? Log In</a> -->
+{% endblock %}
+
+<!-- heading -->
+{% block heading %}Enter your password to confirm{% endblock %}
+
+<!-- action -->
+{% block form_action %}/delete_account{% endblock %}
+
+<!-- user name input-->
+{% block userNameInput %} {% endblock %}
+
+<!-- input -->
+{% block input %}
+<input type="submit" name="signin" id="signin" class="form-submit" value="Delete Account" />
+{% endblock %}
+
+<!-- auth_api -->
+{% block auth_api %}{% endblock %}
+
+<!-- scripts -->
+{% block scripts %}
+<script>
+  const social = document.querySelector(".social-login");
+  social.style.display = "none";
+</script>
+{% endblock %}
