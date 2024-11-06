@@ -13,10 +13,10 @@ body.dark-mode a {
 /* -------  general
 ----------------------------------- */
 body.dark-mode::-webkit-scrollbar-track {
-  background-color: rgb(73, 73, 73);
+  background-color: rgb(35, 35, 35);
 }
 body.dark-mode::-webkit-scrollbar-thumb {
-  background-color: rgb(33, 33, 33);
+  background-color: rgb(74, 74, 74);
 }
 
 body.dark-mode input {
@@ -78,14 +78,13 @@ body.dark-mode table tbody tr:last-child {
 body.dark-mode .about,
 body.dark-mode .contact,
 body.dark-mode .contact-form {
-  background-color: rgba(108, 108, 108, 0.5);
-  border: 1px solid rgba(86, 86, 86, 0.9);
+  background-color: #424242;
+  border: 1px solid #525252;
 }
 body.dark-mode .about p,
 body.dark-mode .contact p,
 body.dark-mode .contact-form p {
-  background-color: var(--dmBgClr);
-  border: 1px solid rgba(86, 86, 86, 0.9);
+  background-color: #424242;
 }
 
 body.dark-mode .about p strong,
@@ -98,6 +97,7 @@ body.dark-mode .about h2,
 body.dark-mode .contact h2,
 body.dark-mode .contact-form h2 {
   color: rgb(210, 210, 210);
+  border-bottom: 1px solid #5f5f5f;
 }
 
 body.dark-mode .con_icons img {

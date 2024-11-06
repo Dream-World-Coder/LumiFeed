@@ -54,6 +54,7 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

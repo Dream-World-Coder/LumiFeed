@@ -10,20 +10,19 @@
 .about,
 .contact,
 .contact-form {
-  margin-left: var(--con-m-left);
+  /* margin-left: var(--con-m-left); */
+  margin-left: auto;
+  margin-right: auto;
   padding: var(--pad) var(--pad) var(--pad) var(--pad);
   font-size: 1.8rem;
   font-weight: 400;
 
-  margin-top: 28rem;
-  width: 70%;
-  /* xtra */
-  width: calc(100% - 2 * var(--con-m-left));
+  width: calc(70% - 2 * var(--con-m-left));
   margin-top: 8rem;
 
   border-radius: calc(var(--pad) - 5px);
-  border: 1px solid #b17457;
-  background-color: #d8d2c2;
+  border: 1px solid #d8d2c2;
+  background-color: rgb(255, 252, 245);
 }
 
 .about h2,
@@ -33,6 +32,7 @@
   font-size: 2rem;
   margin-left: 1.5rem;
   padding-bottom: 10px;
+  border-bottom: 1px solid #d8d2c2;
 
   @media screen and (max-width: 768px) {
     & {
@@ -52,14 +52,12 @@
   font-style: bold;
   font-size: 1rem;
   border-radius: calc(var(--pad) - 5px);
-  border: 1px solid #b17457;
-  background-color: #faf7f0;
+  background-color: rgb(255, 252, 245);
   padding: 10px;
 }
 
 .contact-form {
   font-family: poppins, sans-serif;
-  width: 50%;
 
   & h2 {
     font-size: 1.6rem;
@@ -108,8 +106,8 @@
     }
 
     & img {
-      width: 26px;
-      height: 26px;
+      width: 22px;
+      height: 22px;
     }
   }
 }
@@ -205,6 +203,9 @@ body.dark-mode footer {
   width: 100%;
   font-size: 1rem;
   font-family: poppins, "Times New Roman", Times, serif;
+}
+body.dark-mode .footer__cc {
+  color: #afafaf;
 }
 
 /* -------------------------
