@@ -12,10 +12,11 @@ body.dark-mode a {
 }
 /* -------  general
 ----------------------------------- */
-body.dark-mode::-webkit-scrollbar {
+body.dark-mode::-webkit-scrollbar-track {
+  background-color: rgb(73, 73, 73);
+}
+body.dark-mode::-webkit-scrollbar-thumb {
   background-color: rgb(33, 33, 33);
-  color: aliceblue;
-  width: 0 !important;
 }
 
 body.dark-mode input {
@@ -56,7 +57,6 @@ body.dark-mode tr:nth-child(2n - 1) {
 }
 
 body.dark-mode tr:nth-child(2n) {
-  /* background-color: var(--dmBgClr); */
   background-color: rgb(43, 43, 43);
 }
 
@@ -83,7 +83,7 @@ body.dark-mode .contact-form {
 }
 body.dark-mode .about p,
 body.dark-mode .contact p,
-body.dark-mode .contact-form p{
+body.dark-mode .contact-form p {
   background-color: var(--dmBgClr);
   border: 1px solid rgba(86, 86, 86, 0.9);
 }

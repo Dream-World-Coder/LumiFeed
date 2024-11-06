@@ -17,7 +17,7 @@ header {
 
 body.dark-mode header {
   background-color: #232323;
-  border-bottom: 1px solid #323232;
+  border-bottom: 1px solid #4b4b4b;
 }
 
 .header-wrapper {
@@ -86,6 +86,11 @@ body.dark-mode #logo-text {
     width: var(--x2);
     height: var(--x2);
   }
+}
+
+body.dark-mode #login-form > button {
+  background: #efefef2c;
+  color: #efefef;
 }
 
 /* -------- media queries

@@ -612,3 +612,9 @@ body.dark-mode .profile_settings {
 body.dark-mode .delete_account button {
   color: rgb(0, 0, 0);
 }
+
+#collection1 > div.collection_content::-webkit-scrollbar,
+#collection1 > div.collection_content > ul::-webkit-scrollbar{
+  width: 0;
+  display: none;
+}

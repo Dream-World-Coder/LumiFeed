@@ -4,8 +4,6 @@
   --p: 10px;
   --con-m-left: 2rem;
 
-  /* all colors are manually set, dont try to chnage without inspecting */
-  /* odd & even are properly set */
   --th-clr: rgb(202, 202, 202);
   --odd-row-clr: rgb(244, 244, 244);
   --even-row-clr: rgb(226, 226, 226);
@@ -54,16 +52,15 @@ th {
   font-family: poppins, sans-serif;
   font-weight: 700;
   padding: var(--p);
-  /* background-color: var(--th-clr); */
   background-color: #d8d2c2;
 }
 
 tr:nth-child(2n - 1) {
-  background-color: rgb(230, 227, 220);
+  background: rgb(241, 237, 224);
 }
 
 tr:nth-child(2n) {
-  background-color: #faf7f0;
+  background: #faf7f0;
 }
 
 table tbody tr {

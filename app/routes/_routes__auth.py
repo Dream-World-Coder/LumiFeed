@@ -205,7 +205,7 @@ def login():
                 return jsonify({'error': 'User not found'}), 404
 
             elif not usr.email_verified:
-              return jsonify({'error':'Email unverified User\'s data cannot be recollected. Try again after 24 hours.'})
+              return jsonify({'error':'Email unverified User\'s data cannot be retrived. Try again after 24 hours.'})
 
             elif not usr.check_password(user_password):
                 usr.increment_failed_logins()

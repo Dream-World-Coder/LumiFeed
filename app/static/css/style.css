@@ -56,23 +56,18 @@ a:hover {
 }
 /* width */
 ::-webkit-scrollbar {
-  /* width: 10px; */
-  width: 0px;
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: whitesmoke;
+  background: #d8d2c2;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #318f60;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #b17457;
+  border-radius: 10px;
 }
 
 .f0 {
@@ -95,7 +90,6 @@ a:hover {
 }
 
 input {
-  /* width: calc(var(--w) - 60px) !important; */
   display: inline !important;
   border-width: 1px !important;
 }
