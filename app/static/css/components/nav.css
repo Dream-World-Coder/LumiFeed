@@ -131,9 +131,20 @@ body.dark-mode #big_f {
   transform: scaleY(0);
   transition: transform 0.3s;
   transform-origin: top;
-  background-color: #2ba267;
+  background-color: #d8d2c2;
+  border: 1px solid #b17457;
   border-radius: 10px;
   z-index: 151;
+}
+
+body.dark-mode .nav-items-for-mobiles {
+  background-color: #4a4947;
+  color: #afafaf;
+}
+
+body.dark-mode .ham,
+body.dark-mode .mobile-search-btn {
+  filter: invert(0.7);
 }
 
 .nav-items-for-mobiles.expand {

@@ -181,7 +181,7 @@ body.dark-mode .res__num {
   margin-right: 10px;
 
   &:hover {
-    background-color: var(--cx) !important;
+    background-color: #faf7f0 !important;
     color: rgb(78, 78, 78) !important;
     transition: all 0.3s;
   }
@@ -190,8 +190,8 @@ body.dark-mode .res__num {
 .srch input {
   width: 75% !important;
   margin-left: 10px;
-  background-color: var(--cx) !important;
-  border: 1px solid rgb(255, 255, 255) !important;
+  background-color: #d8d2c2 !important;
+  border: 1px solid #b17457 !important;
 }
 
 .resa {

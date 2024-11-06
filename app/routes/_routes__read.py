@@ -8,10 +8,11 @@ import uuid
 
 @app.route("/read_news_here", methods=["POST"])
 def read_news_here():
-    data = request.json
-    url = data.get("url")
-    max_limit = 150000
+  data = request.json
+  url = data.get("url")
+  max_limit = 150000
 
+  try:
     if len(url) > max_limit:
         return "Too long url..."
 
@@ -29,17 +30,22 @@ def read_news_here():
     }
     return jsonify(response)
 
+  except Exception as e:
+    print(e)
+    return
+
 
 @app.route("/article/<article_heading>", methods=["POST"])
 def read_news_in_new_tab(article_heading):
-    home_url = session.get("home_url", f"{url_for('index')}")
-    heading = request.form.get("heading")
-    subheading = request.form.get("subheading")
-    news_content = request.form.get("news_content")
-    newsImgUrl = request.form.get("newsImgUrl")
+  home_url = session.get("home_url", f"{url_for('index')}")
+  heading = request.form.get("heading")
+  subheading = request.form.get("subheading")
+  news_content = request.form.get("news_content")
+  newsImgUrl = request.form.get("newsImgUrl")
 
-    max_limit = 150000
+  max_limit = 150000
 
+  try:
     if (
         len(home_url) > max_limit
         or len(heading) > max_limit
@@ -83,6 +89,10 @@ def read_news_in_new_tab(article_heading):
     session["user_files"].append(filename)
 
     return render_template(os.path.join("news", filename))
+
+  except Exception as e:
+    print(e)
+    return
 
 
 @app.teardown_request
