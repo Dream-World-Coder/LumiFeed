@@ -1,34 +1,30 @@
 {% extends "layouts/profile_layout.html" %}
 
-<!-- why and , not or ? -->
-{% block collections %}
-  {% for coll in current_user.collections %}
-    <div class="collection_group flexed">
-      <div id="{{'collection' + loop.index|string}}" class="collection">
-        <div class="collection_name">
-          {{ coll }}
-          <!-- why and / why not or: cuz i want the condition to be false for these 2 collections, NOT TRUE -->
-          {% if coll != 'Liked Articles' and coll != 'Read Later' %}
-            <span class="delete_collection">
-              <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="delete this collection" />
-            </span>
-          {% endif %}
-        </div>
-        <div class="collection_content">
-          <ul>
-          {% for news_article in current_user.saved_articles %}
-            {% if news_article.parent_collection == coll %}
-              <li class="read_here" data-url="{{ news_article.article_url | trim }}" data-collection="{{ coll | trim }}">
-                {{ news_article.article_title | trim }}
-                <span class="delete_article">
-                  <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="Delete article" />
-                </span>
-              </li>
-            {% endif %}
-          {% endfor %}
-          </ul>
-        </div>
-      </div>
+<!-- why and, why not or ? -->
+{% block collections %} {% for coll in current_user.collections %}
+<div class="collection_group flexed">
+  <div id="{{'collection' + loop.index|string}}" class="collection">
+    <div class="collection_name">
+      {{ coll }}
+      <!-- why and / why not or: cuz i want the condition to be false for these 2 collections, NOT TRUE -->
+      {% if coll != 'Liked Articles' and coll != 'Read Later' %}
+      <span class="delete_collection">
+        <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="delete this collection" />
+      </span>
+      {% endif %}
     </div>
-  {% endfor %}
-{% endblock %}
+    <div class="collection_content">
+      <ul>
+        {% for news_article in current_user.saved_articles %} {% if news_article.parent_collection == coll %}
+        <li class="read_here" data-url="{{ news_article.article_url | trim }}" data-collection="{{ coll | trim }}">
+          {{ news_article.article_title | trim }}
+          <span class="delete_article">
+            <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="Delete article" />
+          </span>
+        </li>
+        {% endif %} {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endfor %} {% endblock %}

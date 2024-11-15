@@ -38,76 +38,60 @@
 <!-- scripts -->
 {% block scripts %}
 <script>
-  const flash_li = document.querySelector(".flash_li");
+  const flashMessageElement = document.querySelector(".flash_li");
 
-  document.getElementById("login-form").addEventListener("submit", function (event) {
+  document.getElementById("login-form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
     // Collect form data
     const email = document.getElementById("your_email").value.trim();
     const password = document.getElementById("your_pass").value.trim();
 
-    // Get device info
-    const deviceInfo = navigator.userAgent; // Get device/browser info
-
-    // Get user's location using the Geolocation API
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(sendLoginData, locationError);
-    // } else {
-    //   alert("Geolocation is not supported by your browser.");
-    //   sendLoginData(null); // Proceed without location if unavailable
-    // }
-
-    // Send data to the server using Fetch API
-    function sendLoginData(position) {
-      // let userLocation = null;
-
-      // // If position is available, extract latitude and longitude
-      // if (position) {
-      //   const latitude = position.coords.latitude;
-      //   const longitude = position.coords.longitude;
-      //   const accuracy = position.coords.accuracy;
-      //   userLocation = { latitude, longitude, accuracy };
-      // }
-
-      // Data to be sent
-      const data = {
-        email: email,
-        password: password,
-        deviceInfo: deviceInfo,
-        ipAddress: null,
-        // location: userLocation,
-      };
-
-      fetch("/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.success) {
-            // displayMessage("Login successful! You're awesome for staying secure.");
-            window.location.href = "/";
-          } else {
-            flash_li.parentNode.style.backgroundColor = "#dd2b4f";
-            flash_li.textContent = result.error;
-          }
-        })
-        .catch((error) => {
-          console.error("Error during login:", error);
-          flash_li.parentNode.style.backgroundColor = "#dd2b4f";
-          flash_li.textContent = error.error;
-        });
+    if (!email || !password) {
+      displayFlashMessage("Please provide both email and password.", "#dd2b4f");
+      return;
     }
 
-    // Handle location error (if geolocation fails)
-    // function locationError(error) {
-    //   console.warn(`Geolocation error (${error.code}): ${error.message}`);
-    //   sendLoginData(null); // Proceed without location data
-    // }
+    // Device information
+    const deviceInfo = navigator.userAgent;
+
+    try {
+      // Data to send
+      const data = {
+        email,
+        password,
+        deviceInfo,
+        ipAddress: null, // Placeholder for future IP logic if needed
+      };
+
+      // Send login request
+      const response = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        window.location.href = "/";
+      } else {
+        displayFlashMessage(result.error || "Login failed. Please try again.", "#dd2b4f");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      displayFlashMessage("An error occurred during login. Please try again.", "#dd2b4f");
+    }
   });
+
+  /**
+   * Displays a flash message.
+   * @param {string} message - The message to display.
+   * @param {string} backgroundColor - Background color of the message.
+   */
+  function displayFlashMessage(message, backgroundColor) {
+    flashMessageElement.parentNode.style.backgroundColor = backgroundColor;
+    flashMessageElement.textContent = message;
+  }
 </script>
 {% endblock %}

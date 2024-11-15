@@ -75,89 +75,85 @@
 <!-- scripts -->
 {% block scripts %}
 <script>
+  /**
+   * Show the loader element.
+   */
   function showLoader() {
-    document.getElementById("loader").style.display = "flex";
+    const loader = document.getElementById("loader");
+    if (loader) loader.style.display = "flex";
   }
 
+  /**
+   * Hide the loader element.
+   */
   function hideLoader() {
-    document.getElementById("loader").style.display = "none";
+    const loader = document.getElementById("loader");
+    if (loader) loader.style.display = "none";
   }
 
-  const flash_li = document.querySelector(".flash_li");
+  const flashMessageElement = document.querySelector(".flash_li");
 
-  document.getElementById("login-form").addEventListener("submit", function (event) {
+  document.getElementById("login-form").addEventListener("submit", async function (event) {
     event.preventDefault(); // Prevent default form submission
     showLoader();
 
     // Collect form data
-    const username = document.getElementById("your_name").value;
-    const email = document.getElementById("your_email").value;
-    const password = document.getElementById("your_pass").value;
+    const username = document.getElementById("your_name").value.trim();
+    const email = document.getElementById("your_email").value.trim();
+    const password = document.getElementById("your_pass").value.trim();
 
-    // Get device info
-    const deviceInfo = navigator.userAgent; // Get device/browser info
-
-    // Get user's location using the Geolocation API
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(sendLoginData, locationError);
-    // } else {
-    //   displayMessage("Geolocation is not supported by your browser.");
-    //   sendLoginData(null);
-    // }
-
-    // Send data to the server using Fetch API
-    function sendLoginData(position) {
-      let userLocation = null;
-
-      // If position is available, extract latitude and longitude
-      // if (position) {
-      //   const latitude = position.coords.latitude;
-      //   const longitude = position.coords.longitude;
-      //   const accuracy = position.coords.accuracy;
-      //   userLocation = { latitude, longitude, accuracy };
-      //  }
-
-      // Data to be sent
-      const data = {
-        username: username,
-        email: email,
-        password: password,
-        deviceInfo: deviceInfo,
-        ipAddress: null,
-        // location: userLocation,
-      };
-
-      fetch("/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.success) {
-            window.location.href = "/verify-email";
-          } else {
-            flash_li.parentNode.style.backgroundColor = "#dd2b4f";
-            flash_li.textContent = result.error;
-          }
-        })
-        .catch((error) => {
-          console.error("Error during login:", error);
-          flash_li.parentNode.style.backgroundColor = "#dd2b4f";
-          flash_li.textContent = error.error;
-        })
-        .finally(() => {
-          hideLoader();
-        });
+    // Validate input fields
+    if (!username || !email || !password) {
+      displayFlashMessage("All fields are required.", "#dd2b4f");
+      hideLoader();
+      return;
     }
 
-    // Handle location error (if geolocation fails)
-    // function locationError(error) {
-    //   console.warn(`Geolocation error (${error.code}): ${error.message}`);
-    //   sendLoginData(null); // Proceed without location data
-    // }
+    // Device information
+    const deviceInfo = navigator.userAgent;
+
+    try {
+      // Data to send
+      const data = {
+        username,
+        email,
+        password,
+        deviceInfo,
+        ipAddress: null, // Placeholder for IP logic
+      };
+
+      // Send registration request
+      const response = await fetch("/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        window.location.href = "/verify-email";
+      } else {
+        displayFlashMessage(result.error || "Registration failed. Please try again.", "#dd2b4f");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+      displayFlashMessage("An error occurred during registration. Please try again.", "#dd2b4f");
+    } finally {
+      hideLoader();
+    }
   });
+
+  /**
+   * Displays a flash message.
+   * @param {string} message - The message to display.
+   * @param {string} backgroundColor - Background color of the message.
+   */
+  function displayFlashMessage(message, backgroundColor) {
+    if (flashMessageElement) {
+      flashMessageElement.parentNode.style.backgroundColor = backgroundColor;
+      flashMessageElement.textContent = message;
+    }
+  }
 </script>
 {% endblock %}

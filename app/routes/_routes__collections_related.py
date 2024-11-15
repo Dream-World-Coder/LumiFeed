@@ -1,5 +1,5 @@
 from flask.templating import render_template
-from app.routes import app, db, make_collection
+from app.routes import app, db, make_collection, Collection
 from flask import request, jsonify
 from flask_login import login_required, current_user
 
@@ -34,8 +34,7 @@ def add_new_collection():
         if len(existing_collections) >= MAX_COLLECTIONS:
             return jsonify({"error": f"You have reached the maximum number of collections. {MAX_COLLECTIONS}"}), 400
 
-        existing_collections.append(collection_name)
-        current_user.collections = existing_collections
+        new_collection = Collection(collection_name=collection_name, user_id=current_user.id)
         db.session.commit()
         new_collection_html_string = make_collection(collection_name)
         return jsonify({"success": new_collection_html_string}), 200
@@ -65,7 +64,8 @@ def delete_collection():
         return jsonify({"error": "You cannot delete this collection."}), 403
 
     try:
-        current_user.collections.remove(collection_name)
+        col = Collection.query.filter_by(user_id=current_user.id, collection_name=collection_name)
+        db.session.remove(col)
         articles_to_delete = [
             article
             for article in current_user.saved_articles
