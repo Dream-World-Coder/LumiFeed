@@ -3,12 +3,7 @@
   --body-bg-clr: rgb(251, 251, 251);
   --dm-body-bg-clr: rgb(48, 48, 48);
   --normal-bg-clr: rgb(244, 244, 244);
-  /* --normal-bg-clr: var(--color-green-100); */
-  /* --normal-bg-clr: #eee6c8; */
-
   --dark-mode-bg-clr: rgba(108, 108, 108, 0.5);
-  /* --dark-mode-bg-clr: #14532d88; */
-
   --normal-border-clr: rgb(218, 218, 218);
   --dark-mode-border-clr: rgba(64, 64, 64, 0.9);
 }
@@ -551,6 +546,8 @@ body.dark-mode .profile_settings {
       position: relative;
       width: 100%;
       height: 100%;
+      overflow: hidden;
+      border-radius: 15px;
     }
   }
 

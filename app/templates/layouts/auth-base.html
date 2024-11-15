@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -33,7 +33,7 @@
               <h2 class="form-title">{% block heading %}{% endblock %}</h2>
 
               <form method="POST" class="register-form" id="login-form" action="{% block form_action %}{% endblock %}">
-                {% block userNameInput %}{% endblock %}
+                {{ form.hidden_tag() }} {% block userNameInput %}{% endblock %}
                 <div class="form-group">
                   <label for="your_email">
                     <i class="material-icons-name">
@@ -56,7 +56,7 @@
                       </svg>
                     </i>
                   </label>
-                  <input type="email" name="user_email" id="your_email" placeholder="Your email" maxlength="120" required/>
+                  <input type="email" name="user_email" id="your_email" placeholder="Your email" maxlength="120" required />
                 </div>
                 <div class="form-group">
                   <label for="your_pass">
@@ -79,11 +79,9 @@
                       </svg>
                     </i>
                   </label>
-                  <input type="password" name="user_pass" id="your_pass" placeholder="Password" maxlength="128" required/>
+                  <input type="password" name="user_pass" id="your_pass" placeholder="Password" maxlength="128" required />
                 </div>
-                <div class="form-group form-button">
-                  {% block input %} {% endblock %}
-                </div>
+                <div class="form-group form-button">{% block input %} {% endblock %}</div>
               </form>
 
               <div class="social-login">
@@ -171,7 +169,7 @@
         el.addEventListener("click", () => {
           alert("Coming Soon, Not enabled now.");
         });
-      })
+      });
     </script>
     <script>
       function displayMessage(message) {

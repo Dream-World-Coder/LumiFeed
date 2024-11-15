@@ -38,7 +38,7 @@
 }
 
 body {
-  background-color: #faf7f0;
+  background-color: rgb(255, 252, 245);
   color: black;
   font-family: poppins, sans-serif;
   overflow-x: hidden;

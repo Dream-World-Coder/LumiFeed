@@ -31,7 +31,7 @@ mail.init_app(app)
 from .models import (
     User,
     Article,
-    Collections,
+    Collection,
 )
 
 # routes

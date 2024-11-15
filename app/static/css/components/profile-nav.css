@@ -24,6 +24,8 @@ nav {
     position: relative;
     width: calc(var(--len) - 10px);
     height: calc(var(--len) - 10px);
+    overflow: hidden;
+    border-radius: 50%;
   }
 }
 

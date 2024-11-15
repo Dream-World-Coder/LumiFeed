@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, flash, jsonify, session
 from sqlalchemy.util.langhelpers import methods_equivalent
-from app.routes import app, db, User, mail
+from app.routes import app, db, User, mail, RegistrationForm, LoginForm
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError
 from random import randint
@@ -14,6 +14,14 @@ import requests, string, smtplib, pathlib, re
 # from google.oauth2 import id_token
 
 
+"""
+*To-Do:
+  1. linking with forms.py --doing
+  2. learing sql first then proceed
+  3. Remove geolocation formm Register and Login script --done
+  4. Why coplex data type makes db slow
+
+"""
 
 
 
@@ -40,13 +48,11 @@ def verify():
   token = request.args.get("token") if request.args.get("token") else None
 
   try:
-    user_id = User.verify_token(token)
-    user = User.query.filter_by(id=user_id).first()
-    # user = User.query.filter_by(id=user_email).first()
+    user_email = User.verify_token(token)
+    user = User.query.filter_by(email=user_email).first()
     if user:
       user.email_verified = True
       db.session.commit()
-      # or i can send them to login page with a message
       login_user(user)
       return redirect(url_for("index"))
     else:
@@ -62,9 +68,7 @@ def verify():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def send_verification_email(user: User):
   subject = "Verify Your Email Address"
-
-  verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.id)}"
-  # verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
+  verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
 
   try:
     msg = Message(
@@ -101,6 +105,9 @@ def send_verification_email(user: User):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route("/resend-verification-email", methods=["POST"])
 def resend():
+  if current_user.is_authenticated:
+    return redirect(url_for("index"))
+
   return "This feature will be available later."
 
 
@@ -114,43 +121,44 @@ def register():
   if current_user.is_authenticated:
     return redirect(url_for("index"))
 
+  form = RegistrationForm()
+
   if request.method == "GET":
-    return render_template("auth/register.html")
+    return render_template("auth/register.html", form=form)
 
   elif request.method == "POST":
     data = request.json or {}
 
-    user_name = data.get("username")
+    user_name = data.get("username").strip()
     user_email = data.get("email", "").strip().lower()
     user_password = data.get("password", "").strip()
 
-    # Validate username format
+    # Validation of username format
     if not re.match(r"^[A-Za-z0-9-]{1,40}$", user_name):
       return jsonify({"error": "Username must contain only letters, numbers, and hyphens."}), 400
 
     user_ip = request.remote_addr if request.remote_addr else "-1.-1.-1.-1"
     user_device_info = data.get("deviceInfo") if data.get("deviceInfo") else "unknown"
-    user_location = data.get("location") if data.get("location") else {}
-    latitude = user_location.get("latitude") if user_location.get("latitude") else -1000
-    longitude = user_location.get("longitude") if user_location.get("longitude") else -1000
-    accuracy = user_location.get("accuracy") if user_location.get("accuracy") else -1000
+    # user_location = data.get("location") if data.get("location") else {}
+    # latitude = user_location.get("latitude") if user_location.get("latitude") else -1000
+    # longitude = user_location.get("longitude") if user_location.get("longitude") else -1000
+    # accuracy = user_location.get("accuracy") if user_location.get("accuracy") else -1000
 
-    # if i just pass a second default argument to the get function its still facing None errors
+    # if i just pass a second default argument to the `get()` function its still facing None errors
 
     usr = User(
       username=user_name,
       email=user_email,
       password=user_password,
       ip_address=user_ip,
-      device_info=user_device_info,
-      latitudes=[latitude],
-      longitudes=[longitude],
-      accuracies=[accuracy]
+      device_info=user_device_info
+      # latitudes=[latitude],
+      # longitudes=[longitude],
+      # accuracies=[accuracy]
     )
     usr.set_password(user_password)
 
     try:
-      # Ensure unique username/email
       if User.query.filter_by(username=user_name).first():
         return jsonify({'error':'Username already taken'}), 409
       if User.query.filter_by(email=user_email).first():
@@ -182,8 +190,9 @@ def login():
   if current_user.is_authenticated:
     return redirect(url_for("index"))
 
+  form = LoginForm()
   if request.method == "GET":
-    return render_template("auth/login.html")
+    return render_template("auth/login.html", form = form)
 
   elif request.method == "POST":
     data = request.json
@@ -191,14 +200,8 @@ def login():
 
     user_email = data.get("email").strip().lower()
     user_password = data.get("password").strip()
-
     user_ip = request.remote_addr if request.remote_addr else "-1.-1.-1.-1"
     user_device_info = data.get("deviceInfo") if data.get("deviceInfo") else "unknown"
-
-    user_location = data.get("location") if data.get("location") else {}
-    latitude = user_location.get("latitude") if user_location.get("latitude") else -1000
-    longitude = user_location.get("longitude") if user_location.get("longitude") else -1000
-    accuracy = user_location.get("accuracy") if user_location.get("accuracy") else -1000
 
     try:
       usr = User.query.filter_by(email=user_email).first()
@@ -214,14 +217,7 @@ def login():
 
       else:
         usr.reset_failed_logins()
-        usr.update_login_data(
-          ip_address=user_ip,
-          device_info=user_device_info,
-          latitude=latitude,
-          longitude=longitude,
-          accuracy=accuracy
-        )
-
+        usr.update_login_data(ip_address=user_ip,device_info=user_device_info)
         login_user(usr, remember=True) # default 365 days
         return jsonify({'success': 'Login successful'}), 200
 

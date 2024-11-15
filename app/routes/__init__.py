@@ -1,5 +1,6 @@
-from app import app, db, mail  # NewsForm, SearchForm
-from ..models import User, Article
+from app import app, db, mail
+from ..models import User, Article, Collection
+from ..forms import LoginForm, RegistrationForm
 
 # utility functions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

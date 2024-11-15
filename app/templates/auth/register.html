@@ -98,24 +98,24 @@
     const deviceInfo = navigator.userAgent; // Get device/browser info
 
     // Get user's location using the Geolocation API
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(sendLoginData, locationError);
-    } else {
-      displayMessage("Geolocation is not supported by your browser.");
-      sendLoginData(null);
-    }
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(sendLoginData, locationError);
+    // } else {
+    //   displayMessage("Geolocation is not supported by your browser.");
+    //   sendLoginData(null);
+    // }
 
     // Send data to the server using Fetch API
     function sendLoginData(position) {
       let userLocation = null;
 
       // If position is available, extract latitude and longitude
-      if (position) {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        const accuracy = position.coords.accuracy;
-        userLocation = { latitude, longitude, accuracy };
-      }
+      // if (position) {
+      //   const latitude = position.coords.latitude;
+      //   const longitude = position.coords.longitude;
+      //   const accuracy = position.coords.accuracy;
+      //   userLocation = { latitude, longitude, accuracy };
+      //  }
 
       // Data to be sent
       const data = {
@@ -124,7 +124,7 @@
         password: password,
         deviceInfo: deviceInfo,
         ipAddress: null,
-        location: userLocation,
+        // location: userLocation,
       };
 
       fetch("/register", {
@@ -154,10 +154,10 @@
     }
 
     // Handle location error (if geolocation fails)
-    function locationError(error) {
-      console.warn(`Geolocation error (${error.code}): ${error.message}`);
-      sendLoginData(null); // Proceed without location data
-    }
+    // function locationError(error) {
+    //   console.warn(`Geolocation error (${error.code}): ${error.message}`);
+    //   sendLoginData(null); // Proceed without location data
+    // }
   });
 </script>
 {% endblock %}

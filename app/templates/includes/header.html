@@ -8,13 +8,13 @@
     <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
       <div class="ul relative flexed justify-evenly">
         <div class="li li2 flexed" id="profile">
-          <img class="iconImg" src="{{ url_for('static', filename='images/default-profile.svg') }}" alt="" srcset="" />
+          <img class="iconImg" src="{{url_for('static', filename=current_user.profile_pic)}}" alt="" srcset="" />
 
           <!-- profile setttings  -->
           <div class="profile_settings" style="display: none">
             <div class="user_details">
               <div class="profile_pic cen flexed">
-                <img src="{{ url_for('static', filename='images/default-profile.svg') }}" alt="" srcset="" />
+                <img src="{{url_for('static', filename=current_user.profile_pic)}}" alt="" srcset="" />
               </div>
               <div class="user_name">{{current_user.username}}</div>
               <div class="user_email">{{current_user.email}}</div>

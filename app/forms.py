@@ -1,50 +1,69 @@
-# forms.py
 from flask_wtf import FlaskForm
-from wtforms import RadioField, IntegerField, StringField, SubmitField
-from wtforms.validators import InputRequired, NumberRange, DataRequired
+from flask_wtf.file import FileField, FileAllowed
+from flask_login import current_user
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from app.models import User
 
 
-class NewsForm(FlaskForm):
-    news_type = RadioField(
-        "News Type",
-        choices=[
-            ("top_n", "Top News"),
-            ("india_n", "India News"),
-            ("city_n", "City News"),
-        ],
-        validators=[InputRequired()],
-        render_kw={"class": "border"},
-    )
+class RegistrationForm(FlaskForm):
+  username = StringField('Username',validators=[DataRequired(), Length(min=2, max=64)])
+  email = StringField('Email',validators=[DataRequired(), Email()])
+  password = PasswordField('Password', validators=[DataRequired()])
+  confirm_password = PasswordField('Confirm Password',validators=[DataRequired(), EqualTo('password')])
+  submit = SubmitField('Register')
 
-    news_count = IntegerField(
-        "Num of News to Fetch",
-        validators=[InputRequired(), NumberRange(min=1, max=300)],
-        render_kw={
-            "aria-valuemax": "300",
-            "aria-valuemin": "1",
-            "aria-valuenow": "1",
-            "id": "news_count",
-            "min": "1",
-            "max": "300",
-        },
-    )
+  def validate_username(self, username):
+    user = User.query.filter_by(username=username.data).first()
+    if user:
+      raise ValidationError('That username is taken. Please choose a different one.')
 
-    city_choice = RadioField(
-        "City Choice",
-        choices=[
-            ("kolkata", "Kolkata"),
-            ("bangalore", "Bangalore"),
-            ("delhi", "Delhi"),
-            ("mumbai", "Mumbai"),
-            ("lucknow", "Lucknow"),
-        ],
-        render_kw={"class": "city_op flexed"},
-    )
+  def validate_email(self, email):
+    user = User.query.filter_by(email=email.data).first()
+    if user:
+      raise ValidationError('That email is taken. Please choose a different one.')
 
-    submit = SubmitField("Fetch", render_kw={"class": "btn"})
-    reset = SubmitField("Reset", render_kw={"class": "btn", "type": "reset"})
+  # meet the passwords standards, 8-16 char long, A-Z + a-z + 0-9 + !-*, 16 char max, 8 char min
+  # def validate_password(self, extra_validators: Mapping[str, Sequence[Any]] | None ) -> bool:
+    # return super().validate(extra_validators)
 
 
-class SearchForm(FlaskForm):
-    search_part = StringField("Search in News Titles", validators=[DataRequired()])
-    submit = SubmitField("Search")
+class LoginForm(FlaskForm):
+  email = StringField('Email',validators=[DataRequired(), Email()])
+  password = PasswordField('Password', validators=[DataRequired()])
+  submit = SubmitField('Login')
+
+
+class UpdateAccountForm(FlaskForm):
+  username = StringField('Username',validators=[DataRequired(), Length(min=2, max=20)])
+  email = StringField('Email',validators=[DataRequired(), Email()])
+  picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+  submit = SubmitField('Update')
+
+  def validate_username(self, username):
+    if username.data != current_user.username:
+      user = User.query.filter_by(username=username.data).first()
+      if user:
+        raise ValidationError('That username is taken. Please choose a different one.')
+
+  def validate_email(self, email):
+    if email.data != current_user.email:
+      user = User.query.filter_by(email=email.data).first()
+      if user:
+        raise ValidationError('That email is taken. Please choose a different one.')
+
+
+class RequestResetForm(FlaskForm):
+  email = StringField('Email',validators=[DataRequired(), Email()])
+  submit = SubmitField('Request Password Reset')
+
+  def validate_email(self, email):
+    user = User.query.filter_by(email=email.data).first()
+    if user is None:
+      raise ValidationError('There is no account with that email. You must register first.')
+
+
+class ResetPasswordForm(FlaskForm):
+  password = PasswordField('Password', validators=[DataRequired()])
+  confirm_password = PasswordField('Confirm Password',validators=[DataRequired(), EqualTo('password')])
+  submit = SubmitField('Reset Password')
