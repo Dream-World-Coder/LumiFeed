@@ -41,6 +41,7 @@ class ProductionConfig(Config):
         "DATABASE_URL",
         "postgresql://postgres:",
     )
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
 
