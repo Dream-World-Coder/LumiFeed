@@ -8,19 +8,21 @@ class Collection(db.Model):
 
     # Link the collection to the user who owns it
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    user = relationship("User", backref="collections", lazy=True)
 
     # Relationship with Article
     articles = relationship("Article", backref="collection", lazy=True, cascade="all, delete-orphan")
+    articles = db.relationship("Article", backref="parent_collection", lazy=True)
 
+    def __repr__(self):
+        return f"<Collection {self.collection_name}, User {self.user_id}>"
+
+'''
     # Custom constraint for default collections
     __table_args__ = (
         db.UniqueConstraint('user_id', 'collection_name', name='unique_user_collection'),
     )
-
+    
     def __init__(self, collection_name, user_id):
         self.collection_name = collection_name
         self.user_id = user_id
-
-    def __repr__(self):
-        return f"<Collection {self.collection_name}, User {self.user_id}>"
+'''

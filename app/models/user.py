@@ -22,8 +22,8 @@ class User(db.Model, UserMixin):
   ip_address = db.Column(db.String(40), nullable=False)  # IPv6-compatible
   device_info = db.Column(db.Text, nullable=False)
   failed_logins = db.Column(db.SmallInteger, nullable=False, default=0)
-  saved_articles = db.relationship("Article", backref="author", lazy=True)
-  collections = db.relationship("Collection", backref="author", lazy=True)
+  saved_articles = db.relationship("Article", backref="person_who_saved_this", lazy=True)
+  collections = db.relationship("Collection", backref="creator_of_the_collection", lazy=True)
 
   def get_id(self):
     return str(self.id)
