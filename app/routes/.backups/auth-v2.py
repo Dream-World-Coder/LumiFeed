@@ -7,6 +7,23 @@ from random import randint
 from flask_mail import Message
 import requests, string, smtplib, pathlib, re
 
+# from email.mime.text import MIMEText
+# from google_auth_oauthlib.flow import Flow
+# from pip._vendor import cachecontrol
+# import google.auth.transport.requests
+# from google.oauth2 import id_token
+
+
+"""
+*To-Do:
+  1. linking with forms.py --doing
+  2. learing sql first then proceed
+  3. Remove geolocation formm Register and Login script --done
+  4. Why coplex data type makes db slow
+
+"""
+
+
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -122,6 +139,12 @@ def register():
 
     user_ip = request.remote_addr if request.remote_addr else "-1.-1.-1.-1"
     user_device_info = data.get("deviceInfo") if data.get("deviceInfo") else "unknown"
+    # user_location = data.get("location") if data.get("location") else {}
+    # latitude = user_location.get("latitude") if user_location.get("latitude") else -1000
+    # longitude = user_location.get("longitude") if user_location.get("longitude") else -1000
+    # accuracy = user_location.get("accuracy") if user_location.get("accuracy") else -1000
+
+    # if i just pass a second default argument to the `get()` function its still facing None errors
 
     usr = User(
       username=user_name,
@@ -129,6 +152,9 @@ def register():
       password=user_password,
       ip_address=user_ip,
       device_info=user_device_info
+      # latitudes=[latitude],
+      # longitudes=[longitude],
+      # accuracies=[accuracy]
     )
     usr.set_password(user_password)
 
@@ -141,6 +167,7 @@ def register():
       db.session.add(usr)
       db.session.commit()
       send_verification_email(user=usr)
+      # login_user(usr)
       return jsonify({'success': 'Registered successfully'}), 200
 
     except IntegrityError:
@@ -226,6 +253,7 @@ def delete_account():
 
   if request.method == "POST":
     try:
+      # email = request.form.get("user_email").strip()  # This line is not needed, remove if unused
       password = request.form.get("user_pass").strip()
 
       if current_user.check_password(password):
@@ -242,6 +270,11 @@ def delete_account():
       flash("An error occurred while deleting the account. Please try again later.", "error")
       print(f"Error: {e}")  # Log the error for debugging
       return redirect(url_for("delete_account"))
+
+# i will not delete the user from db :},
+# instead i will change the user name & pass, like -deleted-{username}, -deleted-{email}
+
+
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ Forgot Password
