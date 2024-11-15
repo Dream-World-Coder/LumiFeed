@@ -1,147 +1,113 @@
+from flask.templating import render_template
+from app.routes import app, db, make_collection, Collection
 from flask import request, jsonify
 from flask_login import login_required, current_user
-from flask.templating import render_template
-from app import app, db
-from app.models import Collection, CollectionType
-
 
 MAX_COLLECTIONS = 10
 MAX_ARTICLES_PER_COLLECTION = 250
 
 
-
-
-def make_collection(collection_name):
-    """Helper function to generate HTML for a new collection"""
-    return render_template(
-        "partials/collection.html",
-        collection_name=collection_name,
-        article_count=0
-    )
-
-
-
-
-@app.route("/collection/create", methods=["POST"])
 @login_required
+@app.route("/add_new_collection", methods=["POST"])
 def add_new_collection():
-    """Create a new collection for the current user"""
     data = request.json
-    collection_name = data.get("name", "").strip()
+    collection_name = data.get("name")
 
-    # Validation checks
-    if not collection_name:
+    # recheking if None
+    if not collection_name or not collection_name.strip():
         return jsonify({"error": "Please enter a collection name."}), 400
-        
+
+    # max length 100, to be safe 99
     if len(collection_name) > 99:
-        return jsonify({"error": "Collection name is too long. Max length 99 characters."}), 400
-        
-    # Security checks
-    if "<" in collection_name or ">" in collection_name:
-        return jsonify({"error": "Invalid characters in collection name."}), 400
+        return jsonify({"error": "Collection name is too long. Max length 99"}), 400
+
+    # XSS && CSRF check
+    if "<" in collection_name or ">" in collection_name or "script" in collection_name.lower():
+        return jsonify({"error": "Collection name contains invalid characters."}), 400
 
     try:
+        existing = Collection.query.filter_by(
+            user_id=current_user.id,
+            collection_name=collection_name
+        ).first()
+        
+        if existing:
+            return jsonify({"error": "Collection already exists. Choose another name."}), 400
+
+
         # Check collection limit
-        existing_count = Collection.query.filter_by(user_id=current_user.id).count()
-        if existing_count >= MAX_COLLECTIONS:
+        collection_count = Collection.query.filter_by(user_id=current_user.id).count()
+        if collection_count >= MAX_COLLECTIONS:
             return jsonify({
-                "error": f"You have reached the maximum number of collections ({MAX_COLLECTIONS})."
+                "error": f"You have reached the maximum number of collections ({MAX_COLLECTIONS})"
             }), 400
 
-        # Create new collection using the user model method
-        new_collection = current_user.create_collection(collection_name)
+        new_collection = Collection(
+            collection_name=collection_name,
+            collection_type=CollectionType.CUSTOM,
+            user_id=current_user.id
+        )
         
-        # Generate HTML for the new collection
-        collection_html = make_collection(collection_name)
+        db.session.add(new_collection)
+        db.session.commit()
         
-        return jsonify({
-            "success": True,
-            "html": collection_html,
-            "collection": {
-                "id": new_collection.id,
-                "name": new_collection.collection_name
-            }
-        }), 200
+        new_collection_html_string = make_collection(collection_name)
+        return jsonify({"success": new_collection_html_string}), 200
 
-    except ValueError as e:
-        # Handle expected errors (like duplicate names)
-        return jsonify({"error": str(e)}), 400
     except Exception as e:
-        # Handle unexpected errors
         app.logger.error(f"Error creating collection: {str(e)}")
         db.session.rollback()
-        return jsonify({"error": "Failed to create collection"}), 500
+        return jsonify({"error": "Failed to add collection"}), 500
 
 
 
 
-@app.route("/collection/delete", methods=["POST"])
+# --------------------------------------
+# delete collection
+# --------------------------------------
+@app.route("/delete_collection", methods=["POST"])
 @login_required
 def delete_collection():
-    """Delete a user's collection"""
     data = request.json
-    collection_name = data.get("collection_name", "").strip()
-
-    if not collection_name:
+    
+    if not data or "collection_name" not in data:
         return jsonify({"error": "Missing collection name."}), 400
 
-    try:
-        # Use the user model method to delete collection
-        current_user.delete_collection(collection_name)
-        
-        return jsonify({
-            "success": True,
-            "message": "Collection deleted successfully"
-        }), 200
+    collection_name = data["collection_name"].strip()
 
-    except ValueError as e:
-        # Handle expected errors (like trying to delete default collections)
-        return jsonify({"error": str(e)}), 400
-    except Exception as e:
-        # Handle unexpected errors
+    collection = Collection.query.filter_by(
+        user_id=current_user.id,
+        collection_name=collection_name
+    ).first()
+    
+    if not collection:
+        return jsonify({"error": "Collection does not exist."}), 404
+
+    # Prevent deletion of default collections
+    if collection.collection_type in [CollectionType.READ_LATER, CollectionType.LIKED]:
+        return jsonify({"error": "You cannot delete this collection."}), 403
+
+
+    try:
+         stmt = user_articles.delete().where(
+            user_articles.c.collection_id == collection.id,
+            user_articles.c.user_id == current_user.id
+        )
+        db.session.execute(stmt)
+        
+        # Delete the collection
+        db.session.delete(collection)
+        db.session.commit()
+
+        return jsonify({"message": "Collection deleted."}), 200
+
+     except Exception as e:
         app.logger.error(f"Error deleting collection: {str(e)}")
         db.session.rollback()
         return jsonify({"error": "Failed to delete collection"}), 500
 
 
-
-
-
-@app.route("/collection/rename", methods=["POST"])
 @login_required
-def rename_collection():
-    """Rename a user's collection"""
-    data = request.json
-    old_name = data.get("old_name", "").strip()
-    new_name = data.get("new_name", "").strip()
-
-    if not old_name or not new_name:
-        return jsonify({"error": "Missing collection name(s)."}), 400
-
-    if len(new_name) > 99:
-        return jsonify({"error": "New name is too long. Max length 99 characters."}), 400
-
-    if "<" in new_name or ">" in new_name:
-        return jsonify({"error": "Invalid characters in new name."}), 400
-
-    try:
-        # Use the user model method to rename collection
-        collection = current_user.rename_collection(old_name, new_name)
-        
-        return jsonify({
-            "success": True,
-            "collection": {
-                "id": collection.id,
-                "name": collection.collection_name
-            }
-        }), 200
-
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
-    except Exception as e:
-        app.logger.error(f"Error renaming collection: {str(e)}")
-        db.session.rollback()
-        return jsonify({"error": "Failed to rename collection"}), 500
-    
-    
-    
+@app.route("/share-collection/<username>/<collection_name>", methods=["GET"])
+def share_collection(username, collection_name):
+    return render_template("share-collection.html", username=username, collection=collection_name)
