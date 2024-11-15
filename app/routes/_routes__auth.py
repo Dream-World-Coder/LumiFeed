@@ -123,35 +123,47 @@ def register():
     user_ip = request.remote_addr if request.remote_addr else "-1.-1.-1.-1"
     user_device_info = data.get("deviceInfo") if data.get("deviceInfo") else "unknown"
 
-    usr = User(
-      username=user_name,
-      email=user_email,
-      password=user_password,
-      ip_address=user_ip,
-      device_info=user_device_info
-    )
-    usr.set_password(user_password)
-
     try:
-      if User.query.filter_by(username=user_name).first():
-        return jsonify({'error':'Username already taken'}), 409
-      if User.query.filter_by(email=user_email).first():
-        return jsonify({'error':'Email already taken'}), 409
+        # Check for existing username/email
+        if User.query.filter_by(username=user_name).first():
+            return jsonify({'error': 'Username already taken'}), 409
 
-      db.session.add(usr)
-      db.session.commit()
-      send_verification_email(user=usr)
-      return jsonify({'success': 'Registered successfully'}), 200
+        if User.query.filter_by(email=user_email).first():
+            return jsonify({'error': 'Email already taken'}), 409
+
+        # Create new user
+        usr = User(
+            username=user_name,
+            email=user_email,
+            ip_address=user_ip,
+            device_info=user_device_info
+        )
+        usr.set_password(user_password)
+
+        # Save user and send verification email
+        db.session.add(usr)
+        db.session.commit()
+
+        # Create default collections (happens in User.__init__)
+
+        # Send verification email
+        send_verification_email(user=usr)
+
+        return jsonify({'success': 'Registered successfully'}), 200
 
     except IntegrityError:
-      db.session.rollback()
-      return jsonify({'error':'Email or username is already taken'}), 409
+        db.session.rollback()
+        return jsonify({
+            'error': 'Email or username is already taken'
+        }), 409
 
     except Exception as e:
-      db.session.rollback()
-      return jsonify({'error': 'An error occurred during registration', 'details': str(e)}), 500
+        db.session.rollback()
+        return jsonify({
+            'error': 'An error occurred during registration',
+            'details': str(e)
+        }), 500
 
-  else:
     return render_template("errors/unknown-method.html")
 
 
@@ -160,48 +172,61 @@ def register():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route("/login", methods=["GET", "POST"])
 def login():
-  if current_user.is_authenticated:
-    return redirect(url_for("index"))
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
 
-  form = LoginForm()
-  if request.method == "GET":
-    return render_template("auth/login.html", form = form)
+    form = LoginForm()
 
-  elif request.method == "POST":
-    data = request.json
-    assert data
+    if request.method == "GET":
+        return render_template("auth/login.html", form=form)
 
-    user_email = data.get("email").strip().lower()
-    user_password = data.get("password").strip()
-    user_ip = request.remote_addr if request.remote_addr else "-1.-1.-1.-1"
-    user_device_info = data.get("deviceInfo") if data.get("deviceInfo") else "unknown"
+    elif request.method == "POST":
+        data = request.json
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
 
-    try:
-      usr = User.query.filter_by(email=user_email).first()
-      if not usr:
-        return jsonify({'error': 'User not found'}), 404
+        # Extract and clean user input
+        user_email = data.get("email", "").strip().lower()
+        user_password = data.get("password", "").strip()
 
-      elif not usr.email_verified:
-        return jsonify({'error':'Email unverified User\'s data cannot be retrived. Try again after 24 hours.'})
+        # Get user's IP and device info
+        user_ip = request.remote_addr or "-1.-1.-1.-1"
+        user_device_info = data.get("deviceInfo", "unknown")
 
-      elif not usr.check_password(user_password):
-        usr.increment_failed_logins()
-        return jsonify({'error': 'Incorrect password'}), 401
+        try:
+            usr = User.query.filter_by(email=user_email).first()
 
-      else:
-        usr.reset_failed_logins()
-        usr.update_login_data(ip_address=user_ip,device_info=user_device_info)
-        login_user(usr, remember=True) # default 365 days
-        return jsonify({'success': 'Login successful'}), 200
+            if not usr:
+                return jsonify({'error': 'User not found'}), 404
 
-    except Exception as e:
-      print(e)
-      return jsonify({'error': 'An error occurred during login'}), 500
+            if not usr.email_verified:
+                return jsonify({
+                    'error': 'Email unverified. User\'s data cannot be retrieved. Try again after 24 hours.'
+                }), 401
 
-  else:
+            if usr.failed_logins >= 5:  # Optional: Add max attempts
+                return jsonify({
+                    'error': 'Account temporarily locked due to too many failed attempts'
+                }), 429
+
+            if not usr.check_password(user_password):
+                usr.increment_failed_logins()
+                return jsonify({'error': 'Incorrect password'}), 401
+
+            # Successful login
+            usr.reset_failed_logins()
+            usr.update_login_data(ip_address=user_ip, device_info=user_device_info)
+            login_user(usr, remember=True)  # 365 days default
+
+            return jsonify({'success': 'Login successful'}), 200
+
+        except Exception as e:
+            app.logger.error(f"Login error: {str(e)}")
+            return jsonify({
+                'error': 'An error occurred during login'
+            }), 500
+
     return render_template("errors/unknown-method.html")
-
-
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ Logout
