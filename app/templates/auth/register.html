@@ -48,7 +48,7 @@
 <!-- user name input-->
 {% block userNameInput %}
 <div class="form-group">
-  <label for="your_name">
+  <label for="your_username">
     <i class="material-icons-name">
       <svg width="64px" height="64px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -60,7 +60,10 @@
       </svg>
     </i>
   </label>
-  <input type="text" name="username" id="your_name" placeholder="Your Name" maxlength="64" required />
+  {{ form.username(class="form-control", id="your_username", placeholder="Username", maxlength=64, required=true) }}
+    {% for error in form.username.errors %}
+    <div class="invalid-feedback">{{ error }}</div>
+    {% endfor %}
 </div>
 {% endblock %}
 

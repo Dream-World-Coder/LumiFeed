@@ -33,7 +33,10 @@
               <h2 class="form-title">{% block heading %}{% endblock %}</h2>
 
               <form method="POST" class="register-form" id="login-form" action="{% block form_action %}{% endblock %}">
-                {{ form.hidden_tag() }} {% block userNameInput %}{% endblock %}
+                {{ form.hidden_tag() }} 
+
+                {% block userNameInput %}{% endblock %}
+
                 <div class="form-group">
                   <label for="your_email">
                     <i class="material-icons-name">
@@ -56,8 +59,12 @@
                       </svg>
                     </i>
                   </label>
-                  <input type="email" name="user_email" id="your_email" placeholder="Your email" maxlength="120" required />
+                  {{ form.email(class="form-control", id="your_email", placeholder="Your email", maxlength=120, required=true) }}
+                  {% for error in form.email.errors %}
+                  <div class="invalid-feedback">{{ error }}</div>
+                  {% endfor %}                
                 </div>
+
                 <div class="form-group">
                   <label for="your_pass">
                     <i>
@@ -79,8 +86,11 @@
                       </svg>
                     </i>
                   </label>
-                  <input type="password" name="user_pass" id="your_pass" placeholder="Password" maxlength="128" required />
+                  {{ form.password(class="form-control", id="your_pass", placeholder="Password", maxlength=128, required=true) }}
+                  {% for error in form.password.errors %}
+                  <div class="invalid-feedback">{{ error }}</div>
                 </div>
+
                 <div class="form-group form-button">{% block input %} {% endblock %}</div>
               </form>
 
