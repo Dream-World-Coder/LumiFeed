@@ -1,14 +1,9 @@
 from app import app
 from app.models import db
 from datetime import datetime
-from app.models import Collection
+from .collection import Collection
+from .utils import user_articles
 
-user_articles = db.Table('user_articles',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('article_id', db.Integer, db.ForeignKey('articles.id'), primary_key=True),
-    db.Column('collection_id', db.Integer, db.ForeignKey('collections.id'), primary_key=True),
-    db.Column('saved_at', db.DateTime, default=datetime.utcnow)
-)
 
 class Article(db.Model):
     __tablename__ = "articles"

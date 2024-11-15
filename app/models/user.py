@@ -1,25 +1,13 @@
-from enum import Enum
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from itsdangerous import URLSafeTimedSerializer
 from app import app
 from app.models import db
-from app.models import Article, Collection
+from .article import Article
+from .collection import Collection
+from .utils import user_articles, CollectionType
 
-# Association table for users and articles (saved articles)
-user_articles = db.Table('user_articles',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('article_id', db.Integer, db.ForeignKey('articles.id'), primary_key=True),
-    db.Column('collection_id', db.Integer, db.ForeignKey('collections.id'), primary_key=True),
-    db.Column('saved_at', db.DateTime, default=datetime.utcnow)
-)
-
-
-class CollectionType(Enum):
-    READ_LATER = "read_later"
-    LIKED = "liked"
-    CUSTOM = "custom"
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"

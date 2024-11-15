@@ -30,7 +30,7 @@ def add_new_collection():
             user_id=current_user.id,
             collection_name=collection_name
         ).first()
-        
+
         if existing:
             return jsonify({"error": "Collection already exists. Choose another name."}), 400
 
@@ -47,10 +47,10 @@ def add_new_collection():
             collection_type=CollectionType.CUSTOM,
             user_id=current_user.id
         )
-        
+
         db.session.add(new_collection)
         db.session.commit()
-        
+
         new_collection_html_string = make_collection(collection_name)
         return jsonify({"success": new_collection_html_string}), 200
 
@@ -69,7 +69,7 @@ def add_new_collection():
 @login_required
 def delete_collection():
     data = request.json
-    
+
     if not data or "collection_name" not in data:
         return jsonify({"error": "Missing collection name."}), 400
 
@@ -79,7 +79,7 @@ def delete_collection():
         user_id=current_user.id,
         collection_name=collection_name
     ).first()
-    
+
     if not collection:
         return jsonify({"error": "Collection does not exist."}), 404
 
@@ -89,19 +89,19 @@ def delete_collection():
 
 
     try:
-         stmt = user_articles.delete().where(
+        stmt = user_articles.delete().where(
             user_articles.c.collection_id == collection.id,
             user_articles.c.user_id == current_user.id
         )
         db.session.execute(stmt)
-        
+
         # Delete the collection
         db.session.delete(collection)
         db.session.commit()
 
         return jsonify({"message": "Collection deleted."}), 200
 
-     except Exception as e:
+    except Exception as e:
         app.logger.error(f"Error deleting collection: {str(e)}")
         db.session.rollback()
         return jsonify({"error": "Failed to delete collection"}), 500

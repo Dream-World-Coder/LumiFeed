@@ -1,19 +1,8 @@
 from app import app
 from app.models import db
 from datetime import datetime
-from enum import Enum
+from .utils import user_articles, CollectionType
 
-user_articles = db.Table('user_articles',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('article_id', db.Integer, db.ForeignKey('articles.id'), primary_key=True),
-    db.Column('collection_id', db.Integer, db.ForeignKey('collections.id'), primary_key=True),
-    db.Column('saved_at', db.DateTime, default=datetime.utcnow)
-)
-
-class CollectionType(Enum):
-    READ_LATER = "read_later"
-    LIKED = "liked"
-    CUSTOM = "custom"
 
 class Collection(db.Model):
     __tablename__ = "collections"
