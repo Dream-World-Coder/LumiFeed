@@ -86,7 +86,7 @@ def send_verification_email(user: User):
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ resend verification email
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@app.route("/resend-verification-email", methods=["POST"])
+@app.route("/resend-verification-email", methods=["GET", "POST"])
 def resend():
   if current_user.is_authenticated:
     return redirect(url_for("index"))
