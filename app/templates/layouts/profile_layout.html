@@ -1,210 +1,211 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <title>LumiFeed - {{current_user.username}}</title>
-    {% include 'includes/head.html' %}
-    <link rel="stylesheet" href="{{url_for('static', filename='css/components/read.css')}}" />
-  </head>
+    <head>
+        <title>LumiFeed - {{current_user.username}}</title>
+        {% include 'includes/head.html' %}
+        <link rel="stylesheet" href="{{url_for('static', filename='css/components/read.css')}}" />
+    </head>
 
-  <body>
-    {% include 'includes/loader.html' %} {% include 'includes/header.html' %}
+    <body>
+        {% include 'includes/loader.html' %} {% include 'includes/header.html' %}
 
-    <!-- add new collection button -->
-    <div class="add_new_collection_btn flexed">
-      <div class="img_container">
-        <img src="{{ url_for('static', filename='icons/plus-circle.svg') }}" alt="" />
-      </div>
-    </div>
-
-    <!-- collections  -->
-    <div class="collections_preview_cards flex-colX f-gap-2">
-        {% for coll in current_user.collections %}
-            <div href="#{{'collection' + loop.index | string}}" class="card {{ 'card' + loop.index | string }}">
-                {{ coll }}
+        <!-- add new collection button -->
+        <div class="add_new_collection_btn flexed">
+            <div class="img_container">
+                <img src="{{ url_for('static', filename='icons/plus-circle.svg') }}" alt="" />
             </div>
-        {% endfor%}
-        <svg class="collections_preview_cards_svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-                <path d="M8.00191 9.41621C7.61138 9.02569 7.61138 8.39252 8.00191 8.002C8.39243 7.61147 9.0256 7.61147 9.41612 8.002L12.0057 10.5916L14.5896 8.00771C14.9801 7.61719 15.6133 7.61719 16.0038 8.00771C16.3943 8.39824 16.3943 9.0314 16.0038 9.42193L13.4199 12.0058L16.0039 14.5897C16.3944 14.9803 16.3944 15.6134 16.0039 16.004C15.6133 16.3945 14.9802 16.3945 14.5896 16.004L12.0057 13.42L9.42192 16.0038C9.03139 16.3943 8.39823 16.3943 8.00771 16.0038C7.61718 15.6133 7.61718 14.9801 8.00771 14.5896L10.5915 12.0058L8.00191 9.41621Z" fill="#fff"></path>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M23 4C23 2.34315 21.6569 1 20 1H4C2.34315 1 1 2.34315 1 4V20C1 21.6569 2.34315 23 4 23H20C21.6569 23 23 21.6569 23 20V4ZM21 4C21 3.44772 20.5523 3 20 3H4C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V4Z" fill="#fff"></path>
-            </g>
-        </svg>
-    </div>
-    <script>
-        function showInstructions(){
-          const infoCloseBtn = document.querySelector('.collections_preview_cards_svg');
-
-          if(localStorage.getItem('instructions_needed') === 'false'){
-            infoCloseBtn.parentElement.classList.add('hide-before');
-            infoCloseBtn.style.display = 'none';
-            return;
-          }
-
-          else if(localStorage.getItem('instructions_needed') === 'true'){
-            infoCloseBtn.addEventListener('click', function(){
-              this.parentElement.classList.add('hide-before');
-              infoCloseBtn.style.display = 'none';
-              localStorage.setItem('instructions_needed', 'false')
-              return;
-            });
-          }
-
-          else{
-            localStorage.setItem('instructions_needed', 'true');
-
-            infoCloseBtn.addEventListener('click', function(){
-              this.parentElement.classList.add('hide-before');
-              infoCloseBtn.style.display = 'none';
-              localStorage.setItem('instructions_needed', 'false')
-            });
-          }
-        }
-        showInstructions();
-    </script>
-
-    <!-- all collections -->
-    <div class="collections_container flex-col">{% block collections%} {% endblock %}</div>
-
-    <!-- the bigger collection display -->
-    <div class="collection_display"></div>
-
-    <!-- read -->
-    <div class="read flexed" id="read">
-      <div class="read__container full flex-col">
-        <div class="read__navigations flex align-center f-gap-2">
-          <span id="read__preview">PREVIEW</span>
-          <div class="read__icons ri1" id="open-in-new-tab">
-            <img src="{{url_for('static', filename='icons/open1.svg')}}" alt="open preview in new tab" />
-          </div>
-          <div class="read__icons ri2" id="close-preview">
-            <img src="{{url_for('static', filename='icons/cross1.svg')}}" alt="close preview" />
-          </div>
         </div>
-        <div class="read__page bg-set" itemscope itemtype="https://schema.org/NewsArticle">
-          <meta itemprop="NewsArticle" content="News Article" />
-          <br />
-          <h1 id="ajax_h1" itemprop="headline"></h1>
-          <br />
-          <h3 id="ajax_h3" itemprop="description"></h3>
-          <br />
-          <br />
-          <p id="ajax_p" itemprop="articleBody">
-            <img id="ajax_img" src="" alt="news article image" itemprop="image" />
-            <br />
-          </p>
+
+        <!-- collections  -->
+        <div class="collections_preview_cards flex-colX f-gap-2">
+            {% for coll in current_user.collections %}
+            <div href="#{{'collection' + loop.index | string}}" class="card {{ 'card' + loop.index | string }}">{{ coll.collection_name }}</div>
+            {% endfor%}
+            <svg class="collections_preview_cards_svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M8.00191 9.41621C7.61138 9.02569 7.61138 8.39252 8.00191 8.002C8.39243 7.61147 9.0256 7.61147 9.41612 8.002L12.0057 10.5916L14.5896 8.00771C14.9801 7.61719 15.6133 7.61719 16.0038 8.00771C16.3943 8.39824 16.3943 9.0314 16.0038 9.42193L13.4199 12.0058L16.0039 14.5897C16.3944 14.9803 16.3944 15.6134 16.0039 16.004C15.6133 16.3945 14.9802 16.3945 14.5896 16.004L12.0057 13.42L9.42192 16.0038C9.03139 16.3943 8.39823 16.3943 8.00771 16.0038C7.61718 15.6133 7.61718 14.9801 8.00771 14.5896L10.5915 12.0058L8.00191 9.41621Z"
+                        fill="#fff"
+                    ></path>
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M23 4C23 2.34315 21.6569 1 20 1H4C2.34315 1 1 2.34315 1 4V20C1 21.6569 2.34315 23 4 23H20C21.6569 23 23 21.6569 23 20V4ZM21 4C21 3.44772 20.5523 3 20 3H4C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V4Z"
+                        fill="#fff"
+                    ></path>
+                </g>
+            </svg>
         </div>
-      </div>
-    </div>
-    <!-- js for #read -->
-    <script>
-      const read = document.getElementById("read");
-      const closeBtn = document.getElementById("close-preview");
-      const openInNewTabBtn = document.getElementById("open-in-new-tab");
-      closeBtn.addEventListener("click", () => {
-        read.style.display = "none";
-      });
-      openInNewTabBtn.addEventListener("click", () => {
-        setTimeout(() => {
-          read.style.display = "none";
-        }, 500);
-      });
-    </script>
+        <script>
+            function showInstructions() {
+                const infoCloseBtn = document.querySelector(".collections_preview_cards_svg");
 
-    <!-- js  -->
-    <!-- profile toggle -->
-    <script>
-      profileIcon = document.getElementById("profile");
-      profileDetails = document.querySelector(".profile_settings");
+                if (localStorage.getItem("instructions_needed") === "false") {
+                    infoCloseBtn.parentElement.classList.add("hide-before");
+                    infoCloseBtn.style.display = "none";
+                    return;
+                } else if (localStorage.getItem("instructions_needed") === "true") {
+                    infoCloseBtn.addEventListener("click", function () {
+                        this.parentElement.classList.add("hide-before");
+                        infoCloseBtn.style.display = "none";
+                        localStorage.setItem("instructions_needed", "false");
+                        return;
+                    });
+                } else {
+                    localStorage.setItem("instructions_needed", "true");
 
-      profileIcon.addEventListener("click", () => {
-        if (profileDetails.style.display === "none") {
-          profileDetails.style.display = "flex";
-        } else {
-          profileDetails.style.display = "none";
-        }
-      });
-    </script>
-
-    <!-- displayMessage -->
-    <script>
-      function displayMessage(message, className) {
-        const messageElement = document.createElement("div");
-        messageElement.classList.add("temporary-message");
-        if (className) {
-          messageElement.classList.add(className);
-        }
-        messageElement.textContent = message;
-        document.body.appendChild(messageElement);
-        setTimeout(() => {
-          messageElement.remove();
-        }, 3000);
-      }
-    </script>
-
-    <!-- nav for collections -->
-    <script>
-    document.querySelectorAll('div[href^="#"]').forEach(span => {
-        span.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            const targetID = this.getAttribute('href').substring(1); // Get the ID of the target element
-            const targetElement = document.getElementById(targetID);
-
-            if (targetElement) {
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - 168; // 6rem = 96px
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                    infoCloseBtn.addEventListener("click", function () {
+                        this.parentElement.classList.add("hide-before");
+                        infoCloseBtn.style.display = "none";
+                        localStorage.setItem("instructions_needed", "false");
+                    });
+                }
             }
-        });
-    });
+            showInstructions();
+        </script>
 
-    </script>
+        <!-- all collections -->
+        <div class="collections_container flex-col">{% block collections%} {% endblock %}</div>
 
-    <!-- delete articles from playlists -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_articles.js')}}"></script>
-    <!-- delete collections -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_collection.js')}}"></script>
-    <!-- add new collections -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/new_collection.js')}}"></script>
-    <!-- read in new tab -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/read_news_new_tab.js')}}"></script>
-    <!-- preview news -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/preview_news.js')}}"></script>
-    <!-- save article -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/ajax/save_article.js')}}"></script>
+        <!-- the bigger collection display -->
+        <div class="collection_display"></div>
 
-    <script>
-      const collectionDisplay = document.querySelector(".collection_display");
-      const collectionGroup = document.querySelectorAll(".collection_group");
+        <!-- read -->
+        <div class="read flexed" id="read">
+            <div class="read__container full flex-col">
+                <div class="read__navigations flex align-center f-gap-2">
+                    <span id="read__preview">PREVIEW</span>
+                    <div class="read__icons ri1" id="open-in-new-tab">
+                        <img src="{{url_for('static', filename='icons/open1.svg')}}" alt="open preview in new tab" />
+                    </div>
+                    <div class="read__icons ri2" id="close-preview">
+                        <img src="{{url_for('static', filename='icons/cross1.svg')}}" alt="close preview" />
+                    </div>
+                </div>
+                <div class="read__page bg-set" itemscope itemtype="https://schema.org/NewsArticle">
+                    <meta itemprop="NewsArticle" content="News Article" />
+                    <br />
+                    <h1 id="ajax_h1" itemprop="headline"></h1>
+                    <br />
+                    <h3 id="ajax_h3" itemprop="description"></h3>
+                    <br />
+                    <br />
+                    <p id="ajax_p" itemprop="articleBody">
+                        <img id="ajax_img" src="" alt="news article image" itemprop="image" />
+                        <br />
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- js for #read -->
+        <script>
+            const read = document.getElementById("read");
+            const closeBtn = document.getElementById("close-preview");
+            const openInNewTabBtn = document.getElementById("open-in-new-tab");
+            closeBtn.addEventListener("click", () => {
+                read.style.display = "none";
+            });
+            openInNewTabBtn.addEventListener("click", () => {
+                setTimeout(() => {
+                    read.style.display = "none";
+                }, 500);
+            });
+        </script>
 
-      collectionGroup.forEach((group) => {
-        group.addEventListener("click", () => {
-          collectionDisplay.innerHTML = group.innerHTML;
+        <!-- js  -->
+        <!-- profile toggle -->
+        <script>
+            profileIcon = document.getElementById("profile");
+            profileDetails = document.querySelector(".profile_settings");
 
-          show_news_preview();
-          read_in_new_tab();
-          deleteArticle();
+            profileIcon.addEventListener("click", () => {
+                if (profileDetails.style.display === "none") {
+                    profileDetails.style.display = "flex";
+                } else {
+                    profileDetails.style.display = "none";
+                }
+            });
+        </script>
 
-          // removing the dustbin from the collection_display,
-          // at the first loading there will be error as Read Later does not have delete_collection / dustbin
-          const collDisplay = document.querySelector('.collection_display');
-          const deleteCollection =  collDisplay.querySelector('.delete_collection');
-          if(deleteCollection){
-            deleteCollection.style.opacity = 0;
-          }
-        });
-      });
+        <!-- displayMessage -->
+        <script>
+            function displayMessage(message, className) {
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("temporary-message");
+                if (className) {
+                    messageElement.classList.add(className);
+                }
+                messageElement.textContent = message;
+                document.body.appendChild(messageElement);
+                setTimeout(() => {
+                    messageElement.remove();
+                }, 3000);
+            }
+        </script>
 
-      collectionGroup[0].click();
-    </script>
+        <!-- nav for collections -->
+        <script>
+            document.querySelectorAll('div[href^="#"]').forEach((span) => {
+                span.addEventListener("click", function (event) {
+                    event.preventDefault();
 
-    <!-- dark mode -->
-    <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename='js/utils/scroll/smooth-scrolling.js')}}"></script>
-    <script type="text/javascript" src="/static/js/script.js"></script>
-  </body>
+                    const targetID = this.getAttribute("href").substring(1); // Get the ID of the target element
+                    const targetElement = document.getElementById(targetID);
+
+                    if (targetElement) {
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - 168; // 6rem = 96px
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: "smooth",
+                        });
+                    }
+                });
+            });
+        </script>
+
+        <!-- delete articles from playlists -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_articles.js')}}"></script>
+        <!-- delete collections -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_collection.js')}}"></script>
+        <!-- add new collections -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/new_collection.js')}}"></script>
+        <!-- read in new tab -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/read_news_new_tab.js')}}"></script>
+        <!-- preview news -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/preview_news.js')}}"></script>
+        <!-- save article -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/save_article.js')}}"></script>
+
+        <script>
+            const collectionDisplay = document.querySelector(".collection_display");
+            const collectionGroup = document.querySelectorAll(".collection_group");
+
+            collectionGroup.forEach((group) => {
+                group.addEventListener("click", () => {
+                    collectionDisplay.innerHTML = group.innerHTML;
+
+                    show_news_preview();
+                    read_in_new_tab();
+                    deleteArticle();
+
+                    // removing the dustbin from the collection_display,
+                    // at the first loading there will be error as Read Later does not have delete_collection / dustbin
+                    const collDisplay = document.querySelector(".collection_display");
+                    const deleteCollection = collDisplay.querySelector(".delete_collection");
+                    if (deleteCollection) {
+                        deleteCollection.style.opacity = 0;
+                    }
+                });
+            });
+
+            collectionGroup[0].click();
+        </script>
+
+        <!-- dark mode -->
+        <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/utils/scroll/smooth-scrolling.js')}}"></script>
+        <script type="text/javascript" src="/static/js/script.js"></script>
+    </body>
 </html>

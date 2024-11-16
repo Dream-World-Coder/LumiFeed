@@ -32,11 +32,11 @@ def generate_search_reasult(matches: list) -> str:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def gen_table(data: list, user) -> str:
     if user.is_authenticated:
-      user_collections = list(user.collections)
+      user_collections = user.collections.all()
       collections_input = '<option value="" disabled selected>Select a collection</option>'
       for coll in user_collections:
-          if coll != 'Read Later':
-              collections_input += f'<option class="collections_input_option" value="{coll}">{coll}</option>'
+          if coll.collection_name != 'Read Later':
+              collections_input += f'<option class="collections_input_option" value="{coll.collection_name}">{coll.collection_name}</option>'
 
       collections_input_full = f'<select class="collections_name_input" name="collections_name_input">{collections_input}</select>'
     else:
@@ -77,11 +77,11 @@ def gen_table(data: list, user) -> str:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def gen_table_india_news(data: list, user) -> str:
     if user.is_authenticated:
-      user_collections = list(user.collections)
+      user_collections = user.collections.all()
       collections_input = '<option value="" disabled selected>Select a collection</option>'
       for coll in user_collections:
-          if coll != 'Read Later':
-              collections_input += f'<option class="collections_input_option" value="{coll}">{coll}</option>'
+          if coll.collection_name != 'Read Later':
+              collections_input += f'<option class="collections_input_option" value="{coll.collection_name}">{coll.collection_name}</option>'
 
       collections_input_full = f'<select class="collections_name_input" name="collections_name_input">{collections_input}</select>'
     else:

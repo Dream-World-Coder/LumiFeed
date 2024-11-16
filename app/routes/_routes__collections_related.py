@@ -34,6 +34,7 @@ def add_new_collection():
         if not collection:
             new_collection = Collection(collection_name=collection_name, collection_type=CollectionType.CUSTOM)
             db.session.add(new_collection)
+            print("\n\n\n\n\n99090909090990\n\n\n\n")
             db.session.flush()
 
         else:

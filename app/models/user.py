@@ -38,12 +38,12 @@ class User(db.Model, UserMixin):
         lazy='dynamic'
     )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Create default collections after user creation
-        if 'username' in kwargs:  # Only create if it's a new user being created
-            db.session.flush()  # This gets us the ID
-            self.create_default_collections()
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     # Create default collections after user creation
+    #     if 'username' in kwargs:  # Only create if it's a new user being created
+    #         db.session.flush()  # This gets us the ID
+    #         self.create_default_collections()
 
     def create_default_collections(self):
         """Create default Read Later and Liked Articles collections for new user"""
@@ -68,7 +68,7 @@ class User(db.Model, UserMixin):
         if not collection:
             raise ValueError("Error, collection doesnot exist.")
 
-        if collection_name not in self.collections.all():
+        if collection not in self.collections.all():
             raise Error("This collection does not exist.")
 
         # Find existing article or create new one
@@ -78,8 +78,9 @@ class User(db.Model, UserMixin):
             db.session.add(article)
             db.session.flush()
 
+        # article alredy saved check? -- done in route
         self.saved_articles.append(article)
-        article.collections_where_it_is_saved.append(collection_name)
+        article.collections_where_it_is_saved.append(collection)
         db.session.commit()
 
         return article
@@ -183,3 +184,44 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<User id: {self.id}, username: {self.username}, email: {self.email}>"
+
+
+
+"""
+from sqlalchemy import event
+from app.models import db, User, Collection, CollectionType, user_collections
+
+@event.listens_for(User, 'after_insert')
+def create_default_collections(mapper, connection, user):
+    default_collections = [
+        Collection(
+            collection_name=f"{user.username}'s Read Later",
+            collection_type=CollectionType.READ_LATER.value
+        ),
+        Collection(
+            collection_name=f"{user.username}'s Liked Articles",
+            collection_type=CollectionType.LIKED.value
+        )
+    ]
+
+    # Add collections to database
+    for collection in default_collections:
+        db.session.add(collection)
+
+    # Flush to get collection IDs
+    db.session.flush()
+
+    # Create links in user_collections table
+    for collection in default_collections:
+        stmt = user_collections.insert().values(
+            user_id=user.id,
+            collection_id=collection.id
+        )
+        db.session.execute(stmt)
+
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        raise e
+"""

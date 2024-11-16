@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, flash, jsonify, session
 from sqlalchemy.util.langhelpers import methods_equivalent
-from app.routes import app, db, User, mail, RegistrationForm, LoginForm
+from app.routes import app, db, User, mail, RegistrationForm, LoginForm, CollectionType, Collection
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError
 from random import randint
@@ -101,71 +101,74 @@ def resend():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route("/register", methods=["GET", "POST"])
 def register():
-  if current_user.is_authenticated:
-    return redirect(url_for("index"))
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
 
-  form = RegistrationForm()
+    form = RegistrationForm()
 
-  if request.method == "GET":
-    return render_template("auth/register.html", form=form)
+    if request.method == "GET":
+        return render_template("auth/register.html", form=form)
 
-  elif request.method == "POST":
-    data = request.json or {}
+    if request.method == "POST":
+        data = request.json or {}
 
-    user_name = data.get("username").strip()
-    user_email = data.get("email", "").strip().lower()
-    user_password = data.get("password", "").strip()
+        user_name = data.get("username", "").strip().lower()
+        user_email = data.get("email", "").strip().lower()
+        user_password = data.get("password", "").strip()
 
-    # Validation of username format
-    if not re.match(r"^[A-Za-z0-9-]{1,40}$", user_name):
-      return jsonify({"error": "Username must contain only letters, numbers, and hyphens."}), 400
+        if not re.match(r"^[A-Za-z0-9-]{1,40}$", user_name):
+            return jsonify({"error": "Username must contain only letters, numbers, and hyphens."}), 400
 
-    user_ip = request.remote_addr if request.remote_addr else "-1.-1.-1.-1"
-    user_device_info = data.get("deviceInfo") if data.get("deviceInfo") else "unknown"
+        user_ip = request.remote_addr if request.remote_addr else "-1.-1.-1.-1"
+        user_device_info = data.get("deviceInfo") if data.get("deviceInfo") else "unknown"
 
-    try:
-        # Check for existing username/email
-        if User.query.filter_by(username=user_name).first():
-            return jsonify({'error': 'Username already taken'}), 409
+        try:
+            # Check for existing username/email
+            if User.query.filter_by(username=user_name).first():
+                return jsonify({'error': 'Username already taken'}), 409
 
-        if User.query.filter_by(email=user_email).first():
-            return jsonify({'error': 'Email already taken'}), 409
+            if User.query.filter_by(email=user_email).first():
+                return jsonify({'error': 'Email already taken'}), 409
 
-        # Create new user
-        usr = User(
-            username=user_name,
-            email=user_email,
-            ip_address=user_ip,
-            device_info=user_device_info
-        )
-        usr.set_password(user_password)
+            # Create new user
+            usr = User(
+                username=user_name,
+                email=user_email,
+                ip_address=user_ip,
+                device_info=user_device_info
+            )
+            usr.set_password(user_password)
+            db.session.add(usr)
+            db.session.commit()
 
-        # Save user and send verification email
-        db.session.add(usr)
-        db.session.commit()
+            # now create default collections
+            read_later = Collection.query.filter_by(collection_name="Read Later").first()
+            liked_articles = Collection.query.filter_by(collection_name="Liked Articles").first()
+            if not read_later or not liked_articles:
+                read_later = Collection(collection_name="Read Later", collection_type=CollectionType.READ_LATER)
+                liked_articles = Collection(collection_name="Liked Articles", collection_type=CollectionType.LIKED)
+                db.session.add(read_later)
+                db.session.add(liked_articles)
+                db.session.commit()
 
-        # Create default collections (happens in User.__init__)
+            usr.collections.append(read_later)
+            usr.collections.append(liked_articles)
+            db.session.commit()
 
-        # Send verification email
-        send_verification_email(user=usr)
+            # Send verification email
+            send_verification_email(user=usr)
 
-        return jsonify({'success': 'Registered successfully'}), 200
+            return jsonify({'success': 'Registered successfully'}), 200
 
-    except IntegrityError:
-        db.session.rollback()
-        return jsonify({
-            'error': 'Email or username is already taken'
-        }), 409
+        except IntegrityError as e:
+            db.session.rollback()
+            return jsonify({'error': f'IntegrityError: {str(e)}'}), 409
 
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({
-            'error': 'An error occurred during registration',
-            'details': str(e)
-        }), 500
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'error': 'An error occurred during registration', 'details': str(e)}), 500
 
     return render_template("errors/unknown-method.html")
-
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ Login
@@ -246,27 +249,28 @@ def logout():
 @app.route("/delete_account", methods=["GET", "POST"])
 @login_required
 def delete_account():
-  if request.method == "GET":
-    return render_template("auth/delete-acc.html")
+    form = LoginForm()
+    if request.method == "GET":
+        return render_template("auth/delete-acc.html", form=form)
 
-  if request.method == "POST":
-    try:
-      password = request.form.get("user_pass").strip()
+    if request.method == "POST":
+        try:
+            password = request.form.get("user_pass").strip()
 
-      if current_user.check_password(password):
-        db.session.delete(current_user)
-        db.session.commit()
-        logout_user()
-        return redirect(url_for("index"))
-      else:
-        flash("Incorrect password.", "error")
-        return redirect(url_for("delete_account"))
+            if current_user.check_password(password):
+                db.session.delete(current_user)
+                db.session.commit()
+                logout_user()
+                return redirect(url_for("index"))
+            else:
+                flash("Incorrect password.", "error")
+                return redirect(url_for("delete_account"))
 
-    except Exception as e:
-      db.session.rollback()
-      flash("An error occurred while deleting the account. Please try again later.", "error")
-      print(f"Error: {e}")  # Log the error for debugging
-      return redirect(url_for("delete_account"))
+        except Exception as e:
+            db.session.rollback()
+            flash("An error occurred while deleting the account. Please try again later.", "error")
+            print(f"Error: {e}")
+            return redirect(url_for("delete_account"))
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ Forgot Password

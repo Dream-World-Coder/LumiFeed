@@ -19,7 +19,7 @@ class RegistrationForm(FlaskForm):
     ])
     password = PasswordField('Password', validators=[
         DataRequired(),
-        Length(min=8, message="Password must be at least 8 characters long.")
+        Length(min=8, max=16, message="Password must be 8-16 characters long.")
     ])
 
 class LoginForm(FlaskForm):

@@ -83,7 +83,7 @@
                                             </svg>
                                         </i>
                                     </label>
-                                    {{ form.password(class="form-control", id="your_pass", placeholder="Password", maxlength=128, required=true) }} {% for error in form.password.errors %}
+                                    {{ form.password(class="form-control", id="your_pass", placeholder="Password", maxlength=16, required=true) }} {% for error in form.password.errors %}
                                     <div class="invalid-feedback">{{ error }}</div>
                                     {% endfor %}
                                 </div>
