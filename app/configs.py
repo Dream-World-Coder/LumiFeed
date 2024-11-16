@@ -7,7 +7,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))  # app
 class Config:
     FLASK_APP = os.environ.get("FLASK_APP", "run")
     SECRET_KEY = os.environ.get("SECRET_KEY")
-    # print(f"{SECRET_KEY=}") if SECRET_KEY is not None else print("SECRET_KEY 404")
     # FLASKY_ADMIN = os.environ.get('ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -35,8 +34,8 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    # SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
-    SQLALCHEMY_DATABASE_URI = os.environ.get("MYSQL_DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
+    SQLALCHEMY_DATABASE_URI = os.getenv("MYSQL_DATABASE_URL")
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
 
