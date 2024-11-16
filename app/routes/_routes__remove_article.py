@@ -11,7 +11,7 @@ def remove_article():
     article_url = data.get("article_url")
     article_parent_collection = data.get("article_parent_collection")
 
-    if not article_url or article_parent_collection:
+    if not article_url or not article_parent_collection:
         return jsonify({"error": "cannot get article URL or article's parent collection."}), 400
 
     try:
