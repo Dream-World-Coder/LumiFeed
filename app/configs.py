@@ -34,8 +34,8 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
+    # SQLALCHEMY_DATABASE_URI = os.getenv("MYSQL_DATABASE_URL")
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
-    SQLALCHEMY_DATABASE_URI = os.getenv("MYSQL_DATABASE_URL")
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
 
