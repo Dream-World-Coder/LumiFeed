@@ -1,5 +1,5 @@
 from flask.templating import render_template
-from app.routes import app, db, make_collection, Collection
+from app.routes import app, db, make_collection, Collection, CollectionType
 from flask import request, jsonify
 from flask_login import login_required, current_user
 
@@ -10,7 +10,7 @@ MAX_ARTICLES_PER_COLLECTION = 250
 @login_required
 @app.route("/add_new_collection", methods=["POST"])
 def add_new_collection():
-    data = request.json
+    data = request.json or {}
     collection_name = data.get("name")
 
     # recheking if None
@@ -22,33 +22,25 @@ def add_new_collection():
         return jsonify({"error": "Collection name is too long. Max length 99"}), 400
 
     # XSS && CSRF check
-    if "<" in collection_name or ">" in collection_name or "script" in collection_name.lower():
+    if "<" in collection_name or ">" in collection_name or "script" in collection_name.lower() or "+" in collection_name or "-" in collection_name:
         return jsonify({"error": "Collection name contains invalid characters."}), 400
 
+    # Check collection limit
+    if len(current_user.collections.all()) >= MAX_COLLECTIONS:
+        return jsonify({"error": f"You have reached the maximum number of collections ({MAX_COLLECTIONS})"}), 400
+
     try:
-        existing = Collection.query.filter_by(
-            user_id=current_user.id,
-            collection_name=collection_name
-        ).first()
+        collection = Collection.query.filter_by(collection_name=collection_name).first()
+        if not collection:
+            new_collection = Collection(collection_name=collection_name, collection_type=CollectionType.CUSTOM)
+            db.session.add(new_collection)
+            db.session.flush()
 
-        if existing:
-            return jsonify({"error": "Collection already exists. Choose another name."}), 400
+        else:
+            if collection in current_user.collections.all():
+                return jsonify({"error": "Collection already exists. Choose another name."}), 400
 
-
-        # Check collection limit
-        collection_count = Collection.query.filter_by(user_id=current_user.id).count()
-        if collection_count >= MAX_COLLECTIONS:
-            return jsonify({
-                "error": f"You have reached the maximum number of collections ({MAX_COLLECTIONS})"
-            }), 400
-
-        new_collection = Collection(
-            collection_name=collection_name,
-            collection_type=CollectionType.CUSTOM,
-            user_id=current_user.id
-        )
-
-        db.session.add(new_collection)
+        current_user.collections.append(new_collection)
         db.session.commit()
 
         new_collection_html_string = make_collection(collection_name)
@@ -68,37 +60,27 @@ def add_new_collection():
 @app.route("/delete_collection", methods=["POST"])
 @login_required
 def delete_collection():
-    data = request.json
+    data = request.json or {}
 
     if not data or "collection_name" not in data:
         return jsonify({"error": "Missing collection name."}), 400
 
     collection_name = data["collection_name"].strip()
 
-    collection = Collection.query.filter_by(
-        user_id=current_user.id,
-        collection_name=collection_name
-    ).first()
-
+    collection = Collection.query.filter_by(collection_name=collection_name).first()
     if not collection:
         return jsonify({"error": "Collection does not exist."}), 404
+
+    if collection not in current_user.collections.all():
+        return jsonify({"error": "Collection doesn't exists."}), 404
 
     # Prevent deletion of default collections
     if collection.collection_type in [CollectionType.READ_LATER, CollectionType.LIKED]:
         return jsonify({"error": "You cannot delete this collection."}), 403
 
-
     try:
-        stmt = user_articles.delete().where(
-            user_articles.c.collection_id == collection.id,
-            user_articles.c.user_id == current_user.id
-        )
-        db.session.execute(stmt)
-
-        # Delete the collection
-        db.session.delete(collection)
+        current_user.collections.remove(collection)
         db.session.commit()
-
         return jsonify({"message": "Collection deleted."}), 200
 
     except Exception as e:

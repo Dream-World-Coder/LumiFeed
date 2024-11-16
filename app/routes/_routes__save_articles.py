@@ -1,58 +1,31 @@
-from app.routes import app, db, Article
+from app.routes import app, db, Article, User, Collection, CollectionType
 from flask import request, jsonify
 from flask_login import login_required, current_user
 from sqlalchemy.exc import IntegrityError
 
-
 MAX_COLLECTIONS = 10
 MAX_ARTICLES_PER_COLLECTION = 250
 
+# if article in list(current_user.saved_articles)
+#     # it will not work because the memory address of the two articles object are different even if they are same
 
-@login_required
 @app.route("/add_to_read_later", methods=["POST"])
+@login_required
 def add_to_read_later():
     if not current_user.is_authenticated:
         return jsonify({"error": "Please log in first to save articles."}), 401
-    
-    data = request.json
+
+    data = request.json or {}
     article_title = data.get("article_title")
     article_url = data.get("article_url")
-    
-    # if article in list(current_user.saved_articles) and (article.parent_collection == parent_collection):
-    #     return jsonify({"error": "This article is already saved."}), 409
-    # it will not work because the memory address of the two articles object are different even if they are same
-    
-    # so here is a different approach where i am not querying all articles, 
-    # the urls will be unique for a collection, so lets use that.
-    existing_urls = []
-    for art in current_user.saved_articles:
-        if art.parent_collection == "Read Later":
-            existing_urls.append(art.article_url.strip())
-            
-    if article_url.strip() in existing_urls:
-        return jsonify({"error": "This article is already saved."}), 409
 
-    article = Article(
-        article_title=article_title,
-        article_url=article_url,
-        parent_collection="Read Later",
-        user_id=current_user.id,
-    )
+    # no duplicate article in a collection
+    for article in current_user.all_articles_in_collection("Read Later"):
+        if article.article_url == article_url:
+            return jsonify({'error': 'This article is already saved in Read Later'}), 409
 
-    # if MAX_ARTICLES_PER_COLLECTION is exceeded in "Read Later" collection
-    # article_ctn = 0
-    # for article in current_user.saved_articles:
-    #     if article.parent_collection == "Read Later":
-    #         article_ctn += 1
-    # if article_ctn >= MAX_ARTICLES_PER_COLLECTION:
-    #     return jsonify({"error": f"You can only save up to {MAX_ARTICLES_PER_COLLECTION} articles in Read Later."}), 409
-    
-    # or
-    # if collections.query.by.name("Read Later").no_of_articles >= MAX_COLLECTIONS:
-    
     try:
-        db.session.add(article)
-        db.session.commit()
+        current_user.save_article(article_title, article_url, "Read Later")
         return jsonify({"success": "Article saved in Read Later."}), 200
 
     except IntegrityError:
@@ -75,31 +48,19 @@ def add_to_read_later():
 def add_to_different_collections():
     if not current_user.is_authenticated:
         return jsonify({"error": "Please log in first to save articles."}), 401
-    
-    data = request.json
+
+    data = request.json or {}
     article_title = data.get("article_title")
     article_url = data.get("article_url")
     parent_collection = data.get("parent_collection")
 
-    existing_urls = []
-    for art in current_user.saved_articles:
-        if art.parent_collection == parent_collection:
-            existing_urls.append(art.article_url.strip())
-            
-    if article_url.strip() in existing_urls:
-        return jsonify({"error": "This article is already saved."}), 409
-    
-    article = Article(
-        article_title=article_title,
-        article_url=article_url,
-        parent_collection=parent_collection,
-        user_id=current_user.id,
-    )
+    for article in current_user.all_articles_in_collection("Read Later"):
+        if article.article_url == article_url:
+            return jsonify({'error': 'This article is already saved in Read Later'}), 409
 
     try:
-        db.session.add(article)
-        db.session.commit()
-        return jsonify({"success": f"Article saved in {parent_collection}."}), 200
+        current_user.save_article(article_title, article_url, parent_collection)
+        return jsonify({"success": "Article saved in Read Later."}), 200
 
     except IntegrityError:
         print(IntegrityError)

@@ -1,4 +1,6 @@
+from copy import Error
 from flask_login import UserMixin
+from sqlalchemy.orm import backref
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from itsdangerous import URLSafeTimedSerializer
@@ -6,7 +8,7 @@ from app import app
 from app.models import db
 from .article import Article
 from .collection import Collection
-from .utils import user_articles, CollectionType
+from .utils import user_articles, user_collections, CollectionType
 
 
 class User(db.Model, UserMixin):
@@ -23,11 +25,8 @@ class User(db.Model, UserMixin):
     failed_logins = db.Column(db.SmallInteger, nullable=False, default=0)
 
     # Relationships
-    collections = db.relationship("Collection", backref="owner", lazy=True)
-    saved_articles = db.relationship('Article',
-                                   secondary=user_articles,
-                                   backref=db.backref('saved_by', lazy='dynamic'),
-                                   lazy='dynamic')
+    saved_articles = db.relationship('Article', secondary=user_articles, back_populates='users', lazy='dynamic')
+    collections = db.relationship('Collection', secondary=user_collections, back_populates='users', lazy='dynamic')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -46,66 +45,41 @@ class User(db.Model, UserMixin):
         for name, col_type in defaults:
             collection = Collection(
                 collection_name=name,
-                collection_type=col_type,
-                user_id=self.id
+                collection_type=col_type
             )
-            db.session.add(collection)
+            self.collections.append(collection)
+            db.session.commit()
 
     def save_article(self, article_title, article_url, collection_name):
         """Save an article to a specified collection"""
-        # Find or create the collection
-        collection = Collection.query.filter_by(
-            user_id=self.id,
-            collection_name=collection_name
-        ).first()
+        # Find collection
+        collection = Collection.query.filter_by(collection_name=collection_name).first()
 
         if not collection:
-            if collection_name not in ["Read Later", "Liked Articles"]:
-                collection = Collection(
-                    collection_name=collection_name,
-                    collection_type=CollectionType.CUSTOM,
-                    user_id=self.id
-                )
-                db.session.add(collection)
-                db.session.flush()
-            else:
-                raise ValueError(f"Collection {collection_name} not found")
+            raise ValueError("Error, collection doesnot exist.")
+
+        if collection_name not in self.collections.all():
+            raise Error("This collection does not exist.")
 
         # Find existing article or create new one
         article = Article.query.filter_by(article_url=article_url).first()
         if not article:
-            article = Article(
-                article_title=article_title,
-                article_url=article_url
-            )
+            article = Article(article_title=article_title, article_url=article_url)
             db.session.add(article)
             db.session.flush()
 
-        # Create the association
-        stmt = user_articles.insert().values(
-            user_id=self.id,
-            article_id=article.id,
-            collection_id=collection.id
-        )
-        db.session.execute(stmt)
+        self.saved_articles.append(article)
+        article.collections_where_it_is_saved.append(collection_name)
         db.session.commit()
 
         return article
 
-    def get_collection_articles(self, collection_name):
+    def all_articles_in_collection(self, collection_name):
         """Get all articles in a specific collection"""
-        return (Article.query
-                .join(user_articles)
-                .join(Collection)
-                .filter(
-                    Collection.user_id == self.id,
-                    Collection.collection_name == collection_name
-                )
-                .all())
-
-    def get_all_saved_articles(self):
-        """Get all articles saved by the user across all collections"""
-        return self.saved_articles.all()
+        return [
+            article for article in self.saved_articles.all()
+            if article.collections_where_it_is_saved.filter_by(collection_name=collection_name).first() # it shall exist
+        ]
 
     def create_collection(self, collection_name):
         """
@@ -113,10 +87,7 @@ class User(db.Model, UserMixin):
         Returns the created collection or raises an error if name already exists.
         """
         # Check if collection name already exists for this user
-        existing = Collection.query.filter_by(
-            user_id=self.id,
-            collection_name=collection_name
-        ).first()
+        existing = Collection.query.filter_by(collection_name=collection_name).first()
 
         if existing:
             raise ValueError(f"Collection '{collection_name}' already exists")
@@ -126,13 +97,11 @@ class User(db.Model, UserMixin):
             raise ValueError(f"'{collection_name}' is a reserved collection name")
 
         # Create new collection
-        collection = Collection(
-            collection_name=collection_name,
-            collection_type=CollectionType.CUSTOM,
-            user_id=self.id
-        )
-
+        collection = Collection(collection_name=collection_name, collection_type=CollectionType.CUSTOM,)
         db.session.add(collection)
+        db.session.flush()
+
+        self.collections.append(collection)
         db.session.commit()
 
         return collection
@@ -142,10 +111,7 @@ class User(db.Model, UserMixin):
         Delete a user's collection and remove all article associations.
         Returns True if successful, raises error if collection doesn't exist or is default.
         """
-        collection = Collection.query.filter_by(
-            user_id=self.id,
-            collection_name=collection_name
-        ).first()
+        collection = Collection.query.filter_by(collection_name=collection_name).first()
 
         if not collection:
             raise ValueError(f"Collection '{collection_name}' not found")
@@ -155,50 +121,15 @@ class User(db.Model, UserMixin):
             raise ValueError("Cannot delete default collections")
 
         # Delete all article associations for this collection
-        stmt = user_articles.delete().where(
-            user_articles.c.collection_id == collection.id,
-            user_articles.c.user_id == self.id
-        )
-        db.session.execute(stmt)
+        for article in self.saved_articles.all():
+            if article.collections_where_it_is_saved.filter_by(collection_name=collection).first():
+                self.saved_articles.remove(article)
 
         # Delete the collection
-        db.session.delete(collection)
+        self.collections.remove(collection)
         db.session.commit()
 
         return True
-
-    def rename_collection(self, old_name, new_name):
-        """
-        Rename a collection.
-        Returns the updated collection or raises an error if names are invalid.
-        """
-        if old_name in ["Read Later", "Liked Articles"]:
-            raise ValueError("Cannot rename default collections")
-
-        if new_name in ["Read Later", "Liked Articles"]:
-            raise ValueError("Cannot use reserved collection names")
-
-        collection = Collection.query.filter_by(
-            user_id=self.id,
-            collection_name=old_name
-        ).first()
-
-        if not collection:
-            raise ValueError(f"Collection '{old_name}' not found")
-
-        # Check if new name already exists
-        existing = Collection.query.filter_by(
-            user_id=self.id,
-            collection_name=new_name
-        ).first()
-
-        if existing:
-            raise ValueError(f"Collection '{new_name}' already exists")
-
-        collection.collection_name = new_name
-        db.session.commit()
-
-        return collection
 
     # Authentication methods
     def get_id(self):
@@ -241,4 +172,4 @@ class User(db.Model, UserMixin):
             return None
 
     def __repr__(self):
-        return f"<User {self.id}, {self.username}, {self.email}>"
+        return f"<User id: {self.id}, username: {self.username}, email: {self.email}>"

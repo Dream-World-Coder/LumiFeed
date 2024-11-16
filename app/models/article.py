@@ -1,8 +1,9 @@
+from sqlalchemy.orm import dynamic
 from app import app
 from app.models import db
 from datetime import datetime
 from .collection import Collection
-from .utils import user_articles
+from .utils import user_articles, article_collections
 
 
 class Article(db.Model):
@@ -11,6 +12,10 @@ class Article(db.Model):
     article_title = db.Column(db.String(300), nullable=False)
     article_url = db.Column(db.String(500), nullable=False, unique=True)
     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    # relations
+    users_who_saved_it = db.relationship('User', secondary=user_articles, back_populates='articles', lazy='dynamic')
+    collections_where_it_is_saved = db.relationship('Collection', secondary=article_collections, back_populates='articles', lazy='dynamic')
 
     def get_collections_for_user(self, user_id):
         """Get all collections this article is in for a specific user"""

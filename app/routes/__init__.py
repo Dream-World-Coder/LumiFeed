@@ -1,5 +1,5 @@
 from app import app, db, mail
-from ..models import User, Article, Collection
+from ..models import User, Article, Collection, CollectionType
 from ..forms import LoginForm, RegistrationForm
 
 # utility functions
