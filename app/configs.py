@@ -29,19 +29,14 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "TEST_DATABASE_URL", "sqlite:///test-database.sqlite"
-    )
+    SQLALCHEMY_DATABASE_URI = os.environ.get("TEST_DATABASE_URL", "sqlite:///test-database.sqlite")
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "DATABASE_URL",
-        "postgresql://postgres:",
-    )
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
+    # SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
+    SQLALCHEMY_DATABASE_URI = os.environ.get("MYSQL_DATABASE_URL")
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
 
