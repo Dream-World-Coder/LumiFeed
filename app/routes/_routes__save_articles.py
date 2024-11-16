@@ -31,12 +31,12 @@ def add_to_read_later():
     except IntegrityError:
         print(IntegrityError)
         db.session.rollback()
-        return jsonify({"error": "This article is already saved."}), 409
+        return jsonify({"error": "This article is already saved. IntegrityError"}), 409
 
     except Exception as e:
         print(e)
         db.session.rollback()
-        return jsonify({"error": "Failed to save article."}), 500
+        return jsonify({"error": "Failed to save article. Exception"}), 500
 
 
 
@@ -54,20 +54,20 @@ def add_to_different_collections():
     article_url = data.get("article_url")
     parent_collection = data.get("parent_collection")
 
-    for article in current_user.all_articles_in_collection("Read Later"):
+    for article in current_user.all_articles_in_collection(parent_collection):
         if article.article_url == article_url:
-            return jsonify({'error': 'This article is already saved in Read Later'}), 409
+            return jsonify({'error': f'This article is already saved in {parent_collection}'}), 409
 
     try:
         current_user.save_article(article_title, article_url, parent_collection)
-        return jsonify({"success": "Article saved in Read Later."}), 200
+        return jsonify({"success": f"Article saved in {parent_collection}."}), 200
 
     except IntegrityError:
         print(IntegrityError)
         db.session.rollback()
-        return jsonify({"error": "This article is already saved."}), 409
+        return jsonify({"error": "This article is already saved. IntegrityError"}), 409
 
     except Exception as e:
         print(e)
         db.session.rollback()
-        return jsonify({"error": "Failed to save article"}), 500
+        return jsonify({"error": "Failed to save article. Exception"}), 500

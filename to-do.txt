@@ -7,12 +7,7 @@
 {% endif %} {% endwith %}
 
 
-collections table making sqlalchemy
-location permission in geolocation api no popup
-password 8-20 and powerful
 readme.md update
-auth routes add,
-email verifications
 bengali add
 compiled add
 
