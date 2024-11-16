@@ -25,8 +25,18 @@ class User(db.Model, UserMixin):
     failed_logins = db.Column(db.SmallInteger, nullable=False, default=0)
 
     # Relationships
-    saved_articles = db.relationship('Article', secondary=user_articles, back_populates='users', lazy='dynamic')
-    collections = db.relationship('Collection', secondary=user_collections, back_populates='users', lazy='dynamic')
+    saved_articles = db.relationship(
+        'Article',
+        secondary=user_articles,
+        back_populates='users_who_saved_it',
+        lazy='dynamic'
+    )
+    collections = db.relationship(
+        'Collection',
+        secondary=user_collections,
+        back_populates='users_who_own_it',
+        lazy='dynamic'
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

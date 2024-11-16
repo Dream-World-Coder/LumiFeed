@@ -12,9 +12,18 @@ class Collection(db.Model):
     collection_type = db.Column(db.Enum(CollectionType), nullable=False, default=CollectionType.CUSTOM)
 
     # Relationship
-    users_who_own_it = db.relationship('User', secondary=user_collections, back_populates='collections', lazy='dynamic')
-    # or i can store it in an array users_id[]
-    articles = db.relationship('Article', secondary=article_collections, back_populates='collections', lazy='dynamic')
+    users_who_own_it = db.relationship(
+        'User',
+        secondary=user_collections,
+        back_populates='collections',
+        lazy='dynamic'
+    )
+    articles = db.relationship(
+        'Article',
+        secondary=article_collections,
+        back_populates='collections_where_it_is_saved',
+        lazy='dynamic'
+    )
 
     def __repr__(self):
         return f"<Collection {self.collection_name}>"
