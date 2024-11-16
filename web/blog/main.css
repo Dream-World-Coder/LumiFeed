@@ -1,0 +1,68 @@
+:root {
+  --clr-black: #000000;
+  --clr-white: #ffffff;
+  --clr-gray-100: #f9f9f9;
+  --clr-gray-200: #f2f2f2;
+  --clr-gray-300: #e6e6e6;
+  --clr-gray-400: #cccccc;
+  --clr-gray-500: #b3b3b3;
+  --clr-gray-600: #999999;
+  --clr-gray-700: #808080;
+  --clr-gray-800: #666666;
+  --clr-gray-900: #4d4d4d;
+
+  --clr-thin-yellow: rgb(250, 248, 240);
+
+  /* --clr1: var(--clr-gray-200); */
+  --clr1: var(--clr-thin-yellow);
+}
+
+/* for now lets keep it only for my blogs. later signin and for everyone to write
+add topics div in articles
+*/
+
+
+body > header > nav > div.hidden.lg\:flex.items-center.space-x-8.ml-4.text-lg > a{
+    background-color: #6e6e6e;
+}
+
+/* about & contact */
+.about,
+.contact,
+.contact-form{
+    box-sizing: border-box;
+    padding-bottom: 2rem;
+    margin-bottom: 3rem;
+
+    & ul li{
+        margin-bottom: 1rem;
+
+        & a{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        & svg{
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+}
+
+.contact-form form{
+    & input{
+        height: 1.5rem;
+        border-radius: 10px;
+        font-size: 0.85rem;
+    }
+    & textarea{
+        height: 1.5rem;
+        border-radius: 10px;
+    }
+    & button{
+        border-radius: 15px;
+        padding: 1px 12px 1px 12px;
+        background-color: rgb(229, 231, 235);
+        margin: 1rem auto 2rem auto;
+    }
+}

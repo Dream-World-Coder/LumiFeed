@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="h-full overflow-y-scroll">
+    <head>
+        <title>Blog · Subhajit Gorai</title>
+
+        <meta charset="utf-8"/>
+        <meta name="description" content="Get up and running with large language models."/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <!-- other meta data -->
+        <meta property="og:title" content="Blog · subhajitgorai"/>
+        <meta property="og:description" content="Get upx and running with large language models."/>
+        <meta property="og:url" content="https://subhajitgorai.com/blog"/>
+        <meta property="og:image" content="https://subhajitgorai.com/og-img-path"/>
+        <meta property="og:image:type" content="image/png"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="628"/>
+        <meta property="og:type" content="website"/>
+
+        <!-- css -->
+        <link href="../tailwind.css" rel="stylesheet"/>
+        <link href="../main.css" rel="stylesheet"/>
+        <link href="../header.css" rel="stylesheet"/>
+        <link href="../footer.css" rel="stylesheet"/>
+
+        <!-- favicon -->
+        <link type="image/x-icon" rel="icon" href="favicon.png"/>
+
+        <script type="application/ld+json">
+            {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "subhajitgorai",
+            "url": "https://blog.subhajitgorai.com"
+            }
+        </script>
+
+        <!-- copy to clipboard function was here but not needed now -->
+    </head>
+
+    <body class="antialiased min-h-screen w-full m-0 flex flex-col">
+        <header class="sticky top-0 z-40 bg-white underline-offset-4 lg:static">
+            <nav class="flex w-full items-center justify-between px-6 py-3.5 gap-x-2">
+                <a href="#" class="z-50">
+                    <img height="28" width="28" src="../logo.svg" class="" alt="subhajitgorai"/>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-8 ml-8 mr-4 text-lg">
+                <a class="hover:underline" href="../index.html">Blog</a>
+                <a class="hover:underline" href="../contacts.html">Contact</a>
+                </div>
+
+                <div class="flex-grow justify-center hidden lg:flex">
+                <div class="relative w-full max-w-xs lg:max-w-[32rem]"></div>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-8 ml-4 text-lg">
+                <div class="flex-none">
+                    <div class="relative">
+                    <!-- <a href="/signin" class="block whitespace-nowrap hover:underline">Sign in</a> -->
+                    </div>
+                </div>
+                <a class="flex cursor-pointer items-center rounded-lg bg-neutral-800 px-4 py-1 text-white hover:bg-black" href="#">
+                    <img height="28" width="28" src="../bmc.svg" class="" alt="subhajitgorai"/>
+                    Buy Me a Coffee
+                </a>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                <input type="checkbox" id="menu" class="peer hidden"/>
+
+                <!-- phone nav -->
+                <label for="menu" class="z-50 cursor-pointer peer-checked:hidden block">
+                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                    </svg>
+                </label>
+                <!-- phone nav clicked -->
+                <label for="menu" class="z-50 cursor-pointer hidden peer-checked:block fixed top-4 right-6">
+                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </label>
+
+                <!-- phone nav items -->
+                <div class="fixed inset-0 bg-white z-40 hidden peer-checked:block overflow-y-auto">
+                    <div class="flex flex-col space-y-6 px-6 py-4 pt-24 text-3xl tracking-tight">
+                    <a href="../index.html">Blog</a>
+                    <a href="../contacts.html">Contact</a>
+                    <a href="#">Buy Me a Coffee</a>
+                    </div>
+                </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="flex-grow">
+            <article class="mx-auto flex flex-1 max-w-2xl w-full flex-col space-y-3 px-6 py-16 md:px-0">
+                <h1 class="text-4xl font-semibold tracking-tight">Heading of the article</h1>
+                <h2 class="text-neutral-500">September 18, 2024</h2>
+                <section
+                    class="prose prose-p:mb-4 prose-p:mt-0 prose-p:leading-relaxed prose-p:before:hidden prose-p:after:hidden prose-ul:mt-1 prose-ul:mb-4 prose-ul:pl-8 marker:prose-ul:text-black prose-ol:pl-8 prose-ol:mt-1 prose-ol:mb-4 marker:prose-ol:text-black prose-li:mt-0.5 prose-li:mb-0 prose-li:text-black first:prose-li:mt-0 prose-headings:font-semibold prose-headings:tracking-tight prose-headings:mt-[1.25em] prose-headings:mb-[0.7em] prose-headings:py-0 prose-h1:text-[32px] prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-h5:text-base prose-img:mx-auto prose-img:mt-6 prose-video:mt-6 prose-video:mb-2 prose-code:bg-neutral-100 prose-code:rounded-md prose-code:px-2 prose-code:inline-block prose-code:font-normal prose-code:text-[85%] prose-code:leading-relaxed prose-code:text-black prose-code:before:hidden prose-code:after:hidden prose-code:my-0 prose-pre:bg-neutral-100 prose-pre:text-black prose-pre:mb-4 prose-pre:mt-0 prose-pre:whitespace-pre-wrap prose-pre:rounded-lg prose-pre:px-3 prose-pre:py-3 prose-pre:text-base prose-blockquote:before:hidden prose-blockquote:after:hidden prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-neutral-500 prose-a:font-normal prose-a:underline-offset-2 prose-th:text-left mb-20 max-w-none break-words py-5 text-black"
+                >
+                    <!-- now p + { h2 + p } + { h2 + p } + ..., basically a html blog
+                    <code></code> for inline code, && <pre><code></code></pre> for block code blocks
+                    -->
+                    <!-- introduction p -->
+                    <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores labore esse, deleniti vitae dolorum enim? Molestiae at distinctio maxime perspiciatis, est quis assumenda nihil quidem
+                    magni porro ad ipsam voluptatem.
+                    </p>
+
+                    <h2>Getting started</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores labore esse, deleniti vitae dolorum enim? Molestiae at distinctio maxime perspiciatis, est quis assumenda nihil quidem</p>
+                </section>
+            </article>
+        </main>
+
+        <footer class="mt-auto">
+            <!-- desktop -->
+            <div class="bg-white underline-offset-4 hidden md:block">
+                <div class="flex items-center justify-between px-6 py-3.5">
+                <div class="text-xs text-neutral-500">© 2024 subhajitgorai</div>
+                <div class="flex space-x-6 text-xs text-neutral-500">
+                    <a href="../index.html" class="hover:underline">Blog</a>
+                    <a href="../contacts.html" class="hover:underline">Contact</a>
+                    <a href="#" class="hover:underline">Buy Me a Coffee</a>
+                </div>
+                </div>
+            </div>
+
+            <!-- mobile -->
+            <div class="bg-white py-4 md:hidden">
+                <div class="flex flex-col items-center justify-center">
+                <ul class="flex flex-wrap items-center justify-center text-sm text-neutral-500">
+                    <li class="mx-2 my-1">
+                    <a href="../index.html" class="hover:underline">Blog</a>
+                    </li>
+                    <li class="mx-2 my-1">
+                    <a href="../contacts.html" class="hover:underline">Contact</a>
+                    </li>
+                    <li class="mx-2 my-1">
+                    <a href="#" class="hover:underline">Buy Me a Coffee</a>
+                    </li>
+                </ul>
+                <ul class="flex flex-wrap items-center justify-center text-sm text-neutral-500">
+                    <!--
+                    <li class="mx-2 my-1">
+                    <a href="https://twitter.com/subhajitgorai" class="hover:underline">X (Twitter)</a>
+                    </li> -->
+                </ul>
+                <div class="mt-2 flex items-center justify-center text-sm text-neutral-500">© 2024 subhajitgorai Inc.</div>
+                </div>
+            </div>
+        </footer>
+
+        <span class="hidden" id="end_of_template"></span>
+
+        <script type="text/javascript" src="../copy2clipboard.js"></script>
+    </body>
+</html>

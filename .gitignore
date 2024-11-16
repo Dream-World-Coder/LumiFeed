@@ -104,7 +104,6 @@ gunicorn_commands.md
 to-do.sy
 to-do.txt
 node_modules/
-package.json
 package-lock.json
 yarn.lock
 yarn-error.log
@@ -120,8 +119,9 @@ app/database.sqlite
 database.sqlite
 app/test.db
 app/test-database.sqlite
-.backup/
 to-do.txt
 to-do.sy
 migrate
 #migrations/
+readme-pdfs/
+.backup/LumiFeed

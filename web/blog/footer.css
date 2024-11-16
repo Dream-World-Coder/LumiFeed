@@ -1,0 +1,14 @@
+footer {
+  background-color: var(--clr1);
+
+  & div,
+  & div div {
+    background-color: var(--clr1);
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  footer {
+    height: 10vh;
+  }
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="h-full overflow-y-scroll">
+  <head>
+      <title>Blog · Subhajit Gorai</title>
+
+      <meta charset="utf-8" />
+      <meta name="description" content="Get up and running with large language models." />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <!-- other meta data -->
+      <meta property="og:title" content="Blog · subhajitgorai" />
+      <meta property="og:description" content="Get upx and running with large language models." />
+      <meta property="og:url" content="https://subhajitgorai.com/blog" />
+      <meta property="og:image" content="https://subhajitgorai.com/og-img-path" />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="628" />
+      <meta property="og:type" content="website" />
+
+      <!-- css -->
+      <link href="tailwind.css" rel="stylesheet" />
+      <link href="main.css" rel="stylesheet" />
+      <link href="header.css" rel="stylesheet" />
+      <link href="footer.css" rel="stylesheet" />
+
+      <!-- favicon -->
+      <link type="image/x-icon" rel="icon" href="favicon.png" />
+
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "subhajitgorai",
+          "url": "https://blog.subhajitgorai.com"
+        }
+      </script>
+  </head>
+
+  <body class="antialiased min-h-screen w-full m-0 flex flex-col">
+    <header class="sticky top-0 z-40 bg-white underline-offset-4 lg:static">
+      <nav class="flex w-full items-center justify-between px-6 py-3.5 gap-x-2">
+        <a href="#" class="z-50">
+          <img height="28" width="28" src="logo.svg" class="" alt="subhajitgorai" />
+        </a>
+
+        <div class="hidden lg:flex items-center space-x-8 ml-8 mr-4 text-lg">
+          <a class="hover:underline" href="/">Blog</a>
+          <!-- its for comming to the blog/page/1 -->
+          <a class="hover:underline" href="./contacts.html">Contact</a>
+          <!-- <a class="hover:underline" target="_blank" href="https://github.com/subhajitgorai/subhajitgorai">GitHub</a> -->
+        </div>
+
+        <div class="flex-grow justify-center hidden lg:flex">
+          <div class="relative w-full max-w-xs lg:max-w-[32rem]">
+          </div>
+        </div>
+
+        <div class="hidden lg:flex items-center space-x-8 ml-4 text-lg">
+          <!-- <a class="hover:underline" href="/library">Models</a> -->
+          <div class="flex-none">
+            <div class="relative">
+              <!-- <a href="/signin" class="block whitespace-nowrap hover:underline">Sign in</a> -->
+            </div>
+          </div>
+          <!-- <a class="flex cursor-pointer items-center rounded-lg bg-neutral-800 px-4 py-1 text-white hover:bg-black" href="/new_blog_post">New Blog</a> -->
+          <a class="flex cursor-pointer items-center rounded-lg bg-neutral-800 px-4 py-1 text-white hover:bg-black" href="#">
+              <img height="28" width="28" src="bmc.svg" class="" alt="subhajitgorai" />
+              Buy Me a Coffee
+          </a>
+        </div>
+
+        <div class="lg:hidden flex items-center">
+          <input type="checkbox" id="menu" class="peer hidden" />
+
+          <!-- phone nav -->
+          <label for="menu" class="z-50 cursor-pointer peer-checked:hidden block">
+            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </label>
+          <!-- phone nav clicked -->
+          <label for="menu" class="z-50 cursor-pointer hidden peer-checked:block fixed top-4 right-6">
+            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </label>
+
+          <!-- phone nav items -->
+          <div class="fixed inset-0 bg-white z-40 hidden peer-checked:block overflow-y-auto">
+            <div class="flex flex-col space-y-6 px-6 py-4 pt-24 text-3xl tracking-tight">
+              <!-- <a href="/search">Search</a> -->
+              <a href="/">Blog</a>
+              <a href="./contacts.html">Contact</a>
+              <a href="#">
+                  Buy Me a Coffee
+              </a>
+              <!-- <a href="/signin" class="block">Sign in</a> -->
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex-grow">
+      <section class="mx-auto flex w-full max-w-2xl flex-1 flex-col px-6 py-8 md:px-0 lg:px-8">
+        <a data-href="./articles/python-issues.html" class="group article-link border-b py-10">
+          <h2 class="mb-1 text-xl font-semibold tracking-tight group-hover:underline md:text-2xl">Python Issues and Solutions</h2>
+          <h3 datetime="2024-10-27 00:00:00 &#43;0000 UTC" class="text-sm text-neutral-500">October 27, 2024</h3>
+          <p class="mt-4 text-lg">Some useful methods for troubleshooting and fixing python issues.</p>
+        </a>
+
+        <a data-href="./articles/flask-directory-organisation-for-large-projects.html" class="group article-link border-b py-10">
+          <h2 class="mb-1 text-xl font-semibold tracking-tight group-hover:underline md:text-2xl">Flask directory structure for large applications</h2>
+          <h3 datetime="2024-10-27 00:00:00 &#43;0000 UTC" class="text-sm text-neutral-500">October 27, 2024</h3>
+          <p class="mt-4 text-lg">For a large flask project, how a directory is organised and special tactics are used to avoid import errors. A test.py is given here for checks.</p>
+        </a>
+      </section>
+    </main>
+
+    <footer class="mt-auto">
+      <!-- desktop -->
+      <div class="bg-white underline-offset-4 hidden md:block">
+        <div class="flex items-center justify-between px-6 py-3.5">
+          <div class="text-xs text-neutral-500">© 2024 subhajitgorai</div>
+          <div class="flex space-x-6 text-xs text-neutral-500">
+            <a href="/" class="hover:underline">Blog</a>
+            <!-- <a href="https://github.com/subhajitgorai/subhajitgorai" class="hover:underline">GitHub</a> -->
+            <a href="./contacts.html" class="hover:underline">Contact</a>
+            <a href="#" class="hover:underline">Buy Me a Coffee</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- mobile -->
+      <div class="bg-white py-4 md:hidden">
+        <div class="flex flex-col items-center justify-center">
+          <ul class="flex flex-wrap items-center justify-center text-sm text-neutral-500">
+            <li class="mx-2 my-1">
+              <a href="/" class="hover:underline">Blog</a>
+            </li>
+            <li class="mx-2 my-1">
+              <a href="./contacts.html" class="hover:underline">Contact</a>
+            </li>
+            <li class="mx-2 my-1">
+              <a href="#" class="hover:underline">Buy Me a Coffee</a>
+            </li>
+          </ul>
+          <ul class="flex flex-wrap items-center justify-center text-sm text-neutral-500">
+            <!-- <li class="mx-2 my-1">
+              <a href="https://discord.com/invite/subhajitgorai" class="hover:underline">Discord</a>
+            </li>
+            <li class="mx-2 my-1">
+              <a href="https://twitter.com/subhajitgorai" class="hover:underline">X (Twitter)</a>
+            </li> -->
+          </ul>
+          <div class="mt-2 flex items-center justify-center text-sm text-neutral-500">© 2024 subhajitgorai Inc.</div>
+        </div>
+      </div>
+    </footer>
+
+    <span class="hidden" id="end_of_template"></span>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const articleLinks = document.querySelectorAll(".article-link");
+
+        articleLinks.forEach(link => {
+          link.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            const articleUrl = link.getAttribute("data-href");
+            link.setAttribute("href", articleUrl);
+
+            window.location.href = articleUrl;
+          });
+        });
+      });
+    </script>
+
+    <!-- copy2clipboard -->
+    <script type="text/javascript" src="./copy2clipboard.js"></script>
+  </body>
+</html>

@@ -18,16 +18,16 @@ def remove_article():
         article = Article.query.filter_by(article_url=article_url).first()
 
         if article is None:
-            return jsonify({"error": "Article not found"}), 404
+            return jsonify({"error": "Article not found in database. None"}), 404
 
         # now check if the user has it saved
         if article not in current_user.saved_articles.all():
-            return jsonify({"error": "Article not found"}), 404
+            return jsonify({"error": "Article not found in all of user's saved articles"}), 404
 
         # now check the collection
         collection = Collection.query.filter_by(collection_name=article_parent_collection)
         if collection not in article.collections_where_it_is_saved.all():
-            return jsonify({"error": "Article not found"}), 404
+            return jsonify({"error": f"Article not found in {article_parent_collection} of user."}), 404
 
 
         current_user.saved_articles.remove(article)

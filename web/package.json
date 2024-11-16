@@ -1,0 +1,16 @@
+{
+  "name": "web",
+  "version": "3.12.5",
+  "description": "web mockup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-sass": "sass --watch index.scss : index.css",
+    "start": "node index.js"
+  },
+  "author": "SG",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.79.3"
+  }
+}

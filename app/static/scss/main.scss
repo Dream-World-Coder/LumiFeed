@@ -1,0 +1,192 @@
+.play-next-options {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+
+  div {
+    opacity: 1;
+    cursor: pointer;
+    overflow: hidden;
+    width: 24px;
+    height: 24px;
+    border: 1px solid black;
+    border-radius: 3px;
+
+    &.active {
+      // border: 1px solid #859f3d;
+      background-color: #859f3d;
+      border-radius: 10px;
+    }
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+ul.musics {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  li.music {
+    font-size: 3rem;
+    font-weight: 500;
+
+    @media (max-width: 440px) {
+      font-size: 2rem;
+    }
+
+    background: #f6fcdf;
+    padding: 1rem 0;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    margin-top: -1px;
+    display: flex;
+    align-items: center;
+
+    &:visited {
+      &:after {
+        color: black;
+      }
+    }
+
+    img {
+      // this regulates the li height
+      width: 32px;
+      height: 32px;
+      transform: scale(0.7);
+      object-fit: cover;
+    }
+
+    .audio-player {
+      padding-right: 6vw;
+      width: 100%;
+
+      figure {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width: 440px) {
+          transform: translateX(4px) !important;
+        }
+
+        figcaption {
+          font-size: 2.15rem;
+
+          @media screen and (max-width: 640px) {
+            font-size: 1.5rem;
+          }
+        }
+
+        .audio-controls {
+          // $thumbColor: lightgreen;
+          $thumbColor: #859f3d;
+          $audioBackgroundClr: rgba($thumbColor, 1);
+          // $thumbColor2: green;
+          $thumbColor2: #31511e;
+          $gap: 15px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: $gap;
+          padding: 5px $gap;
+          border-radius: $gap * 2;
+          border: 1px solid black;
+          background-color: $audioBackgroundClr;
+
+          @media screen and (max-width: 640px) {
+            gap: 7px;
+            height: 3.5rem;
+          }
+
+          .playPauseBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          input.progressBar {
+            $height: 6px;
+            $width: 100px;
+
+            // remove default styles
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            outline: none;
+            width: $width;
+            height: $height;
+            border-radius: 2 * $height;
+            background-color: rgba($thumbColor2, 0.4);
+            display: none;
+
+            &.player-is-active {
+              display: flex;
+            }
+
+            @media screen and (max-width: 640px) {
+              width: 50px;
+            }
+
+            &::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              appearance: none;
+              width: 2 * $height;
+              height: 2 * $height;
+              border-radius: 50%;
+              background-color: $thumbColor2;
+            }
+            &::-moz-range-thumb {
+              width: 2 * $height;
+              height: 2 * $height;
+              border-radius: 50%;
+              background-color: $thumbColor2;
+              border: none;
+            }
+          }
+
+          .timeDisplay {
+            font-size: medium;
+            color: #353535;
+            display: none;
+
+            &.player-is-active {
+              display: flex;
+            }
+          }
+        }
+      }
+    }
+
+    span {
+      display: inline-block;
+      pointer-events: none;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  mix-blend-mode: difference;
+  transform: scaleY(0);
+  pointer-events: none;
+}

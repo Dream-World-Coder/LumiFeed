@@ -1,11 +1,7 @@
-{% with messages = get_flashed_messages() %} {% if messages %}
-<ul class="flash_ul">
-  {% for message in messages %}
-  <li class="flash_li">{{ message }}</li>
-  {% endfor %}
-</ul>
-{% endif %} {% endwith %}
-
+SO:
+  problems: Json/format Error - minor errot
+  cannot delete article - major
+  cannot store same articles even in different playlists agian: Integrity error
 
 readme.md update
 bengali add

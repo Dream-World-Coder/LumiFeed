@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="h-full overflow-y-scroll">
+  <head>
+      <title>Blog · Subhajit Gorai</title>
+
+      <meta charset="utf-8" />
+      <meta name="description" content="Get up and running with large language models." />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <!-- other meta data -->
+      <meta property="og:title" content="Blog · subhajitgorai" />
+      <meta property="og:description" content="Get upx and running with large language models." />
+      <meta property="og:url" content="https://subhajitgorai.com/blog" />
+      <meta property="og:image" content="https://subhajitgorai.com/og-img-path" />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="628" />
+      <meta property="og:type" content="website" />
+
+      <!-- css -->
+      <link href="tailwind.css" rel="stylesheet" />
+      <link href="main.css" rel="stylesheet" />
+      <link href="header.css" rel="stylesheet" />
+      <link href="footer.css" rel="stylesheet" />
+
+      <!-- favicon -->
+      <link type="image/x-icon" rel="icon" href="favicon.png" />
+
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "subhajitgorai",
+          "url": "https://blog.subhajitgorai.com"
+        }
+      </script>
+  </head>
+
+  <body class="antialiased min-h-screen w-full m-0 flex flex-col">
+    <header class="sticky top-0 z-40 bg-white underline-offset-4 lg:static">
+      <nav class="flex w-full items-center justify-between px-6 py-3.5 gap-x-2">
+        <a href="#" class="z-50">
+          <img height="28" width="28" src="logo.svg" class="" alt="subhajitgorai" />
+        </a>
+
+        <div class="hidden lg:flex items-center space-x-8 ml-8 mr-4 text-lg">
+          <a class="hover:underline" href="./index.html">Blog</a>
+          <a class="hover:underline" href="./contacts.html">Contact</a>
+        </div>
+
+        <div class="flex-grow justify-center hidden lg:flex">
+          <div class="relative w-full max-w-xs lg:max-w-[32rem]"></div>
+        </div>
+
+        <div class="hidden lg:flex items-center space-x-8 ml-4 text-lg">
+          <div class="flex-none">
+            <div class="relative">
+              <!-- <a href="/signin" class="block whitespace-nowrap hover:underline">Sign in</a> -->
+            </div>
+          </div>
+          <a class="flex cursor-pointer items-center rounded-lg bg-neutral-800 px-4 py-1 text-white hover:bg-black" href="#">
+              <img height="28" width="28" src="bmc.svg" class="" alt="subhajitgorai" />
+              Buy Me a Coffee
+          </a>
+        </div>
+
+        <div class="lg:hidden flex items-center">
+          <input type="checkbox" id="menu" class="peer hidden" />
+
+          <!-- phone nav -->
+          <label for="menu" class="z-50 cursor-pointer peer-checked:hidden block">
+            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </label>
+          <!-- phone nav clicked -->
+          <label for="menu" class="z-50 cursor-pointer hidden peer-checked:block fixed top-4 right-6">
+            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </label>
+
+          <!-- phone nav items -->
+          <div class="fixed inset-0 bg-white z-40 hidden peer-checked:block overflow-y-auto">
+            <div class="flex flex-col space-y-6 px-6 py-4 pt-24 text-3xl tracking-tight">
+              <a href="./index.html">Blog</a>
+              <a href="./contacts.html">Contact</a>
+              <a href="#">Buy Me a Coffee</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex-grow">
+      <section class="mx-auto flex w-full max-w-2xl flex-1 flex-col px-6 py-8 md:px-0 lg:px-8">
+            <div class="about border-b">
+                <h2 class="text-2xl font-semibold">About Me</h2>
+                <br />
+                <p>
+                    Welcome to my blog!<br/>
+                    I'm Subhajit, a computer science enthusiast and a budding developer
+                    with a strong interest in deep learning, web development, and blockchain technologies.
+                    Here, I share my journey in tech, coding tips, insights into various programming languages,
+                    and explorations in physics and number theory.
+                    My goal through this website is to make complex topics accessible and interesting for everyone,
+                    especially those diving into coding and science. Besides, this is a place for me to express
+                    my views and understandings about various aspects.
+                </p>
+                <br />
+                <p>
+                    Whether you're here to gain new insights, find inspiration, or explore cutting-edge topics in technology,
+                    I’m glad to have you here. Together, we can delve into the exciting world of tech, science, and development.
+                </p>
+            </div>
+
+            <div class="contact border-b">
+                <h2 class="text-2xl font-semibold">Contact</h2>
+                <br/>
+                <p>
+                    Feel free to reach out with any questions, feedback, or collaboration ideas.
+                    I’d love to connect with fellow tech enthusiasts, students, and everyone interested in the topics I cover.
+                </p>
+
+                <br/>
+                <ul>
+                    <li class="font-semibold text-sm"><a class="font-semibold text-sm" href="mailto:lumifeed101@gmail.com">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                        </svg>
+                        My Email
+                    </a></li>
+                    <!-- <li><a class="font-semibold text-sm" href="#">X (twitter)</a></li> -->
+                    <li><a class="font-semibold text-sm" target="_blank" href="https://www.linkedin.com/in/subhajitgorai">
+                        <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-143 145 512 512" xml:space="preserve" width="64px" height="64px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M329,145h-432c-22.1,0-40,17.9-40,40v432c0,22.1,17.9,40,40,40h432c22.1,0,40-17.9,40-40V185C369,162.9,351.1,145,329,145z M339,617c0,5.5-4.5,10-10,10h-432c-5.5,0-10-4.5-10-10V185c0-5.5,4.5-10,10-10h432c5.5,0,10,4.5,10,10V617z"></path> <rect x="-8.5" y="348.4" width="49.9" height="159.7"></rect> <path d="M177.7,346.9c-28.6,0-46.5,15.6-49.8,26.6v-25.1H71.8c0.7,13.3,0,159.7,0,159.7h56.1v-86.3c0-4.9-0.2-9.7,1.2-13.1 c3.8-9.6,12.1-19.6,27-19.6c19.5,0,28.3,14.8,28.3,36.4v82.6H241v-88.8C241,369.9,213.2,346.9,177.7,346.9z"></path> <path d="M15.4,273c-18.4,0-30.5,11.9-30.5,27.7c0,15.5,11.7,27.7,29.8,27.7h0.4c18.8,0,30.5-12.3,30.4-27.7 C45.1,284.9,33.8,273,15.4,273z"></path> </g> </g></svg>
+                        LinkedIn
+                    </a></li>
+                    <li><a class="font-semibold text-sm" target="_blank" href="https://github.com/Dream-World-Coder">
+                        <svg width="64px" height="64px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>github [#142]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399" id="github-[#142]"> </path> </g> </g> </g> </g></svg>
+                        Github
+                    </a></li>
+                    <li><a class="font-semibold text-sm" target="_blank" href="https://subhajit.pages.dev">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+                        </svg>
+                        My Portfolio Website
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="contact-form mt-2">
+                <h2 class="text-2xl font-semibold">Got anything in mind? Don't Hesitate to share!</h2>
+                <br/>
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="67104936-b712-4f86-abec-8dddf48deff3">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required><br/>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required><br/>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea><br/>
+
+                    <button class="border border-b" type="submit">Send</button>
+                </form>
+            </div>
+      </section>
+    </main>
+
+    <footer class="mt-auto">
+      <!-- desktop -->
+      <div class="bg-white underline-offset-4 hidden md:block">
+        <div class="flex items-center justify-between px-6 py-3.5">
+          <div class="text-xs text-neutral-500">© 2024 subhajitgorai</div>
+          <div class="flex space-x-6 text-xs text-neutral-500">
+            <a href="./index.html" class="hover:underline">Blog</a>
+            <a href="./contacts.html" class="hover:underline">Contact</a>
+            <a href="#" class="hover:underline">Buy Me a Coffee</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- mobile -->
+      <div class="bg-white py-4 md:hidden">
+        <div class="flex flex-col items-center justify-center">
+          <ul class="flex flex-wrap items-center justify-center text-sm text-neutral-500">
+            <li class="mx-2 my-1">
+              <a href="./index.html" class="hover:underline">Blog</a>
+            </li>
+            <li class="mx-2 my-1">
+              <a href="./contacts.html" class="hover:underline">Contact</a>
+            </li>
+            <li class="mx-2 my-1">
+              <a href="#" class="hover:underline">Buy Me a Coffee</a>
+            </li>
+          </ul>
+          <ul class="flex flex-wrap items-center justify-center text-sm text-neutral-500">
+            <!--
+            <li class="mx-2 my-1">
+              <a href="https://twitter.com/subhajitgorai" class="hover:underline">X (Twitter)</a>
+            </li> -->
+          </ul>
+          <div class="mt-2 flex items-center justify-center text-sm text-neutral-500">© 2024 subhajitgorai Inc.</div>
+        </div>
+      </div>
+    </footer>
+
+    <span class="hidden" id="end_of_template"></span>
+
+    <script type="text/javascript" src="copy2clipboard.js"></script>
+  </body>
+</html>

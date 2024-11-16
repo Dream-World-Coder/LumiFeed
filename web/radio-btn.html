@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Radio Button</title>
+  <style>
+    /* Hide the default radio button */
+    input[type="radio"] {
+      display: none;
+    }
+
+    /* Style the label to look like a custom radio button */
+    label.custom-radio {
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      position: relative;
+      text-align: center;
+      line-height: 200px; /* Center the text vertically */
+      font-size: 20px;
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+
+    /* Placeholder text for the radio button */
+    label.custom-radio::before {
+      content: attr(data-placeholder);
+      color: #888;
+      font-size: 18px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Style for the selected state */
+    input[type="radio"]:checked + label.custom-radio {
+      background-color: #4caf50;
+      color: #fff;
+      border-color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+
+  <form>
+    <input type="radio" id="radio1" name="custom-radio" />
+    <label for="radio1" class="custom-radio" data-placeholder="Option 1"></label>
+
+    <input type="radio" id="radio2" name="custom-radio" />
+    <label for="radio2" class="custom-radio" data-placeholder="Option 2"></label>
+  </form>
+
+</body>
+</html>

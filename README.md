@@ -4,10 +4,19 @@
 
 **LumiFeed** is an ad-free news platform that delivers the latest news with a clean, clutter-free user experience. It provides quick summaries of articles to help you stay informed without the noise. News is delivered from multiple sources, with a focus on user experience.
 
+all development up until now done by [Dream World Coder](https://github.com/Dream-World-Coder), 20000+ Lines of code.
+
+![LumiFeed Profile](preview-images/lines-of-code.png)
+
+____Interested peeps are heartily welcome to contribute____
+
+## Why LumiFeed?
+
 ## Features
 
-- **Ad-Free Browsing**: Enjoy news articles without the interruption of advertisements.
+- **Ad-Free Browsing**: Enjoy news articles without the interruption of advertisements. Stay focused while reading
 - **Clean UI/UX**: A simple and intuitive interface designed to prioritize user comfort.
+- **Collections to Store Articles**: Collections like `Read Later` and `Liked Articles` for easy organization, also you can create custom collections of your own.
 - **Quick Summaries**: Each news article is summarized into key points for quick consumption.
 - **City-Specific News**: Get personalized news updates by selecting your city of interest.
 - **Kolkata & Indian News**: Special coverage for Kolkata and other Indian cities.
@@ -18,17 +27,22 @@
 ## In Progress
 
 - **News Summary**: Short summary for each news article Using Google Pegasus and BERT
-- **Reading playLists**: Read later and liked lists
 
 ## Tech Stack
 
-- **Backend**: Flask (Python)
-- **Frontend**: HTML, CSS (with Tailwind), JavaScript, jQuery
-- **Database**: SQLite
+- **Backend**: Flask (Python) + Gunicorn
+- **Frontend**: HTML, CSS (with Scss), JavaScript, jQuery
+- **Database**: SQLite + PostgreSQL
 - **Other Tools**:
   - Flask-SQLAlchemy
   - Ajax for dynamic content loading
   - LocalStorage for client-side caching
+
+## Tech Concepts Used
+
+- Backend development in Python using Flask and Gunicorn, Login, Registration, Email Verification etc
+- RDBMS, M:N Relationships, Joining tables, Application of ORMs like flask-sqlalchemy
+- Frontend:  javascript optimisation and fetch api for ajax, choosing fitting color pallates, layouting
 
 ## Installation
 
@@ -45,47 +59,67 @@ source venv/bin/activate  # For Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Run the app
-flask run
+flask run or python run.py
 ```
 
-## How It Works
-
-1. **Fetch News**: Users can select a news category (top news, India news, city news) and specify the number of articles. The platform uses Flask's backend to fetch news and generate summaries.
-2. **Display**: The news articles are displayed dynamically in a neatly formatted table, with the option to read more or open articles in a new tab.
-3. **Single Page Application**: LumiFeed is built using multiple Ajax calls to load data without refreshing the page, enhancing the user experience.
-4. **City-Specific News**: Select a city to get targeted news for that location.
-5. **Summary Display**: News is summarized to ensure users can quickly understand the key points.
-6. **Completely Responsive**: The UI adapts perfectly across devices of all sizes and resolutions.
 
 ## API Routes
 
 ```bash
-# Fetches news based on user-selected options (news type, count, city)
-/fetchnews
---topNews
---indiaNews
---cityWiseNews ['kolkata', 'pune', 'delhi','mumbai','bangalore','lucknow']
+Map([<Rule '/static/<filename>' (GET, HEAD, OPTIONS) -> static>,
+ <Rule '/verify-email' (GET, HEAD, OPTIONS) -> verify_email>,
+ <Rule '/verify' (GET, HEAD, OPTIONS) -> verify>,
+ <Rule '/resend-verification-email' (OPTIONS, POST) -> resend>,
+ <Rule '/register' (GET, HEAD, POST, OPTIONS) -> register>,
+ <Rule '/login' (GET, HEAD, POST, OPTIONS) -> login>,
+ <Rule '/logout' (GET, HEAD, OPTIONS) -> logout>,
+ <Rule '/delete_account' (GET, HEAD, POST, OPTIONS) -> delete_account>,
+ <Rule '/forgot_password' (GET, HEAD, POST, OPTIONS) -> forgot_password>,
+ <Rule '/reset_password' (GET, HEAD, POST, OPTIONS) -> reset_password>,
+ <Rule '/add_new_collection' (OPTIONS, POST) -> add_new_collection>,
+ <Rule '/delete_collection' (OPTIONS, POST) -> delete_collection>,
+ <Rule '/share-collection/<username>/<collection_name>' (GET, HEAD, OPTIONS) -> share_collection>,
+ <Rule '/fetchnews' (GET, HEAD, OPTIONS) -> fetchnews>,
+ <Rule '/home' (GET, HEAD, OPTIONS) -> index>,
+ <Rule '/' (GET, HEAD, OPTIONS) -> index>,
+ <Rule '/about' (GET, HEAD, OPTIONS) -> about>,
+ <Rule '/contact' (GET, HEAD, OPTIONS) -> contact>,
+ <Rule '/profile/<username>' (GET, HEAD, OPTIONS) -> profile>,
+ <Rule '/home/<any_path>' (GET, HEAD, OPTIONS) -> anything>,
+ <Rule '/<any_path>' (GET, HEAD, OPTIONS) -> anything>,
+ <Rule '/db_create_all_123_lorem' (GET, HEAD, OPTIONS) -> create_tables>,
+ <Rule '/read_news_here' (OPTIONS, POST) -> read_news_here>,
+ <Rule '/article/<article_heading>' (OPTIONS, POST) -> read_news_in_new_tab>,
+ <Rule '/remove_article' (OPTIONS, POST) -> remove_article>,
+ <Rule '/add_to_read_later' (OPTIONS, POST) -> add_to_read_later>,
+ <Rule '/add_to_different_collections' (OPTIONS, POST) -> add_to_different_collections>,
+ <Rule '/search_in_title' (OPTIONS, POST) -> search_in_title>,
+ <Rule '/make_summary' (OPTIONS, POST) -> make_summary>])
 
-# search news titles
-/search_in_title
-
-# Reads a news article within the app [preview]
-/read_news_here
-
-# Opens a news article in a new tab
-/read_news_in_new_tab
---summary : /summary
 ```
 
 ## Screenshots
 
-![LumiFeed Homepage](path/to/screenshot1.png)
-_Homepage displaying top news and summary features._
+**HOME PAGE** 
+![LumiFeed Homepage](preview-images/home.png)
+---
+**PROFILE PAGE**
+![LumiFeed Profile](preview-images/profile.png)
+---
+**PREVIEW NEWS ARTICLES**
+![LumiFeed Preview](preview-images/preview.png)
+---
+**READ NEWS ARTICLES**
+![LumiFeed Read](preview-images/articles.png)
+---
+
+**DARK MODE**
+![LumiFeed Dark Mode](preview-images/dark-mode-home.png)
+![LumiFeed Dark Mode](preview-images/dark-mode.png)
+
 
 ## Future Features
 
-- **Push Notifications**: Real-time notifications for breaking news.
-- **Read later and Saved articles features**: Allow users to save news articles in various playlists
 - **User Customization**: Allow users to customize the type of news they want to see on their feed.
 
 ## Contributing
@@ -94,10 +128,10 @@ Feel free to open an issue or submit a pull request if you'd like to contribute 
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the GNU_GPLv3.
 
 ---
 
-### Author
+### Developer
 
 - **Subhajit Gorai** - All development, UI/UX design, and backend logic were done by me!

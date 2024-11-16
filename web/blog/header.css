@@ -1,0 +1,18 @@
+header {
+  background-color: var(--clr1);
+
+  & nav,
+  & nav div,
+  & nav div input {
+    background-color: var(--clr1);
+  }
+}
+
+/* 
+nav urls:
+
+-logo: main url
+-blog: blog home url
+-sign in 
+-write a post
+*/

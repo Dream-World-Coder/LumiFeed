@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LumiFeed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      hr {
+        color: black !important;
+      }
+      body {
+        background-color: rgb(255, 255, 255);
+        overflow-x: hidden;
+      }
+      html.invert body {
+        background-color: rgb(37, 37, 37);
+        color: rgb(190, 190, 190);
+      }
+      html.invert .read__page h3 {
+        color: rgb(128, 128, 128);
+      }
+      .read__container {
+        position: relative;
+        width: 100vw;
+        background-color: inherit;
+      }
+
+      .read__navigations {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 5rem;
+        width: 100vw;
+        background-color: rgb(0, 0, 0);
+        border-bottom: 2px solid rgb(0, 0, 0);
+        z-index: 99;
+        padding-right: 70px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .icon {
+        width: 2rem;
+        height: 2rem;
+        z-index: 999;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
+        font-size: 1.15rem;
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+      }
+
+      .icon0 {
+        position: absolute;
+        width: 5rem;
+        top: calc(50% - 0.75rem);
+        left: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background-color: black;
+        color: azure;
+        font-size: 0.85rem;
+
+        & div {
+          background-color: white;
+          border-radius: 10px;
+        }
+      }
+
+      .icon5 {
+        width: 4.25rem;
+        font-size: 0.8rem;
+      }
+
+      .read__page {
+        margin-top: 3rem;
+        position: relative;
+        width: 100vw;
+        padding: 20px;
+        font-family: Georgia, Times, "Times New Roman", serif;
+      }
+      .read__page h1 {
+        font-size: 2.5rem;
+        margin: 2rem 10px 1px 10px;
+        border-bottom: 1px solid black;
+        padding-bottom: 15px;
+      }
+      .read__page h3 {
+        font-size: 1.5rem;
+        color: rgb(107, 107, 107);
+        margin-left: 10px;
+        margin-right: 10px;
+        border-top: 1px solid black;
+        padding-top: 10px;
+        border-bottom: 1px solid black;
+        padding-bottom: 10px;
+      }
+      html.invert .read__page h1,
+      html.invert .read__page h3 {
+        border-color: rgb(122, 122, 122);
+      }
+      .read__page p {
+        font-size: 1rem;
+        font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
+        margin: 20px;
+      }
+      .read__page img {
+        border-radius: 5px;
+        width: 100%;
+      }
+      .ss {
+        width: 100vw;
+        height: 10vh;
+      }
+      .invert {
+        filter: invert(0);
+        /* colors are changed manually, thats better */
+      }
+      #ajax_p {
+        column-count: 3;
+        column-gap: 30px;
+        text-align: justify;
+        column-fill: balance;
+        min-height: 1px;
+        line-height: 1.1;
+      }
+      ::-webkit-scrollbar {
+        width: 0;
+      }
+
+      @media (min-width: 1440px) {
+        #ajax_p {
+          column-count: 3;
+          column-gap: 20px;
+        }
+      }
+      @media (max-width: 768px) {
+        .read__navigations {
+          gap: 0.25rem;
+        }
+        .icon {
+          width: 1.5rem;
+          height: 1.5rem;
+          font-size: 0.8rem;
+        }
+        .icon0 {
+          width: 3.5rem;
+          top: calc(50% - 0.75rem);
+          left: 20px;
+          font-size: 0.65rem;
+        }
+        .icon5 {
+          width: 3.5rem;
+          font-size: 0.65rem;
+        }
+        .read__navigations {
+          height: 4rem;
+          padding-right: 20px;
+        }
+        .read__page {
+          margin-top: 2rem;
+        }
+        .read__page h1 {
+          font-size: 1.25rem;
+        }
+        .read__page h3 {
+          font-size: 0.8rem;
+        }
+        .read__page p {
+          font-size: 0.65rem;
+        }
+        .read__page img {
+          width: min(100%, 350px);
+          height: 150px;
+        }
+        #ajax_p {
+          column-count: 3;
+          column-gap: 15px;
+        }
+        .read__page {
+          padding: 10px;
+        }
+      }
+      @media (max-width: 600px) {
+        #ajax_p {
+          column-count: 2;
+          column-gap: 10px;
+        }
+      }
+      @media (max-width: 600px) {
+        #ajax_p {
+          column-count: 1;
+          column-gap: 0px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="read__container">
+      <div class="read__navigations">
+        <div class="icon icon0">
+          <div>
+            <img src="static/images/favicon.png" alt="" srcset="" width="24px" height="24px" />
+          </div>
+          LumiFeed
+        </div>
+        <div id="summary" class="icon icon5">Summary</div>
+        <div class="icon icon1">
+          <img src="static/icons/dm3.svg" alt="" srcset="" width="24px" height="24px" />
+        </div>
+        <div class="icon icon2">A+</div>
+        <div class="icon icon3">A-</div>
+        <div class="icon icon4">A</div>
+      </div>
+
+      <div class="read__page">
+        <h1 id="ajax_h1">Jury chairman Jahnu Barua on choosing Laapataa Ladies as India’s entry for the Oscars: ‘It best represents India’s ethos, social system’</h1>
+
+        <h3 id="ajax_h3">
+          Veteran filmmaker Jahnu Barua, who headed the jury that decided on India's official entry to the 97th Oscars, talks about choosing Laapataa Ladies, the process of finalising a film, and more
+        </h3>
+
+        <p id="ajax_p" class="">
+          <img
+            id="ajax_img"
+            src="https://images.indianexpress.com/2024/09/Jahnu-Barua-on-Laapataa-Ladies-being-Indias-official-submission-to-the-Oscars-2.jpg?w=640"
+            alt="news article image"
+            itemprop="image"
+          />
+          <br />
+          Kiran Rao’s Laapataa Ladies was announced as India’s official entry to the 97th Academy Awards for the Best Foreign Film category. While the jury on social media is still divided about the
+          choice, with many believing India’s best chance at the Oscars was robbed by not sending Payal Kapadia’s All We Imagine as Light, the actual jury that decided on Laapataa Ladies was headed by
+          a legend of Indian cinema, director Jahnu Barua. The Assamese filmmaker lead the jury, which consisted of 12 other members. “All of us, who were part of the jury, were in it for the love of
+          cinema,” says Jahnu Barua, in this exclusive conversation with us.&nbsp;
+          <br />
+          <br />
+          ALSO READ: Laapataa Ladies is India’s official entry to Oscars 2025; trumps Animal, Aattam and All We Imagine As Light
+          <br />
+          <br />
+          Excerpts&nbsp;
+          <br />
+          <br />
+          How long did the deliberation take to arrive at a consensus?&nbsp;
+          <br />
+          <br />
+          We were in Chennai for 7-8 days, and we were watching the 29 films that were sent to us. Throughout this period, we used to have in-depth discussions about the films. Each and every jury
+          member had strong opinions, and we kept the conversation going. We were in constant discussion about the films, studying it, shortlisting it, and finally coming up with one name. The final
+          discussion to reach a consensus only took half a day or so because we were constantly in conversation about the films.&nbsp;
+          <br />
+          <br />
+          What was the deciding factor that tilted the scales in favour of Laapataa Ladies?
+          <br />
+          <br />
+          The jury has to look at the right film that represents India on all fronts. Particularly, the film has to represent India’s social systems and ethos. The Indianness is very important, and
+          Laapataa Ladies scored on that front.&nbsp;
+          <br />
+          <br />
+          But does Indianness trump everything else? What if there was a better film that wasn’t that ‘Indian’?
+          <br />
+          <br />
+          It is important that the best suited film, which represents India, is sent as the official entry to the Oscars. There could be a better film outside the 29 films that were nominated too. But
+          the jury can only choose from what they have been given, right?&nbsp;
+          <br />
+          <br />
+          29 is such a small number. Why are films not being pushed?&nbsp;
+          <br />
+          <br />
+          That is what we need to find a way out. We need to have a system in place to do justice to the kind of films coming from Indian cinema. Shouldn’t we be sending the best possible film?&nbsp;
+          <br />
+          <br />
+          Do you see a probability of Indian cinema constituting its own Oscars, and having a Best Foreign Film category?&nbsp;
+          <br />
+          <br />
+          It can happen, and efforts should be made. Being the country that makes the largerst number of films, it is only appropriate that India has a system like that in place.&nbsp;
+          <br />
+          <br />
+          How was the process of watching so many films for the Oscar nomination?&nbsp;
+          <br />
+          <br />
+          It was an exciting and passionate experience. It is something that doesn’t happen to everyone, and it made me very happy. Everyone who were part of jury were in it for the love of Indian
+          cinema.&nbsp;
+          <br />
+          <br />
+          ALSO READ:&nbsp;How to win an Oscar: Guneet Monga details networking, money, extensive PR that goes into mounting an Academy Award campaign
+          <br />
+          <br />
+          At any point, did you feel the pressure of having this huge responsibility?
+          <br />
+          <br />
+          Not at all. Actually, everything depends on the jury members. We have to follow a strict kind of approach, and ensure no influence seeps in the selection process. Each of us has to apply our
+          own mind and select the best. It also depends on the kind of leadership in a jury, and I never allowed any interference and influence in my jury.
+          <br />
+          <br />
+        </p>
+      </div>
+    </div>
+    <div class="ss"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Dark mode
+        const dm = document.querySelector(".icon1");
+        const img = document.getElementById("ajax_img");
+        dm.addEventListener("click", () => {
+          document.documentElement.classList.toggle("invert");
+          img.classList.toggle("invert");
+        });
+
+        const p = document.getElementById("ajax_p");
+
+        // Function to get the root font size
+        function getRootFontSize() {
+          const rootFontSize = window.getComputedStyle(document.documentElement).fontSize;
+          return parseFloat(rootFontSize);
+        }
+
+        // Function to get the current font size in rem
+        function getFontSizeInRem(element) {
+          const fontSizePx = window.getComputedStyle(element).fontSize;
+          const fontSize = parseFloat(fontSizePx);
+          const rootFontSize = getRootFontSize();
+          return fontSize / rootFontSize;
+        }
+
+        // Increase font size by 0.25rem
+        document.querySelector(".icon2").addEventListener("click", () => {
+          const currentSizeRem = getFontSizeInRem(p);
+          p.style.fontSize = `${currentSizeRem + 0.25}rem`;
+        });
+
+        // Decrease font size by 0.25rem
+        document.querySelector(".icon3").addEventListener("click", () => {
+          const currentSizeRem = getFontSizeInRem(p);
+          p.style.fontSize = `${currentSizeRem - 0.25}rem`;
+        });
+
+        // Restore default font size
+        document.querySelector(".icon4").addEventListener("click", () => {
+          // Assuming default font size is 1rem for desktop and 0.8rem for mobile
+          if (window.innerWidth >= 768) {
+            p.style.fontSize = "1rem";
+          } else {
+            p.style.fontSize = "0.65rem";
+          }
+        });
+      });
+    </script>
+
+    <!-- ajax for summary -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const summaryButton = document.getElementById("summary");
+        const ajaxP = document.getElementById("ajax_p");
+
+        summaryButton.addEventListener("click", () => {
+          var CurrentNewsArticleText = ajaxP.textContent;
+
+          fetch("/make_summary", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ textToSummarise: CurrentNewsArticleText }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              ajaxP.innerHTML = data.summary;
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
