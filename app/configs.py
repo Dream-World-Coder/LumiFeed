@@ -9,6 +9,9 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", os.urandom(24))
     # FLASKY_ADMIN = os.environ.get('ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_POOL_SIZE = 10
+    SQLALCHEMY_MAX_OVERFLOW = 20
+    SQLALCHEMY_POOL_TIMEOUT = 30
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_USE_TLS = True
     MAIL_PORT = 587

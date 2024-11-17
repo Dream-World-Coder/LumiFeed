@@ -5,6 +5,10 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_wtf import csrf
 from .configs import config
+from werkzeug.serving import WSGIRequestHandler
+
+WSGIRequestHandler.protocol_version = "HTTP/1.1"
+
 
 # csrf = CSRFProtect()
 db = SQLAlchemy()
@@ -59,6 +63,12 @@ from .routes import (
     search_in_title,
     make_summary,
 )
+
+# Add proper error handling
+@app.errorhandler(Exception)
+def handle_exception(e):
+    return {"error": str(e)}, 500
+
 
 # loading user
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
