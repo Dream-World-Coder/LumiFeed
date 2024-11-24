@@ -1,272 +1,272 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
-  --bg1: rgb(221, 221, 221);
-  --bg1-val: var(--bg1);
-  --bg2: black;
-  --clr2: rgb(221, 43, 79);
-  /* --clr2: #318f60; */
-  /* --clr2: #eee6c8; */
+    --bg1: rgb(221, 221, 221);
+    --bg1-val: var(--bg1);
+    --bg2: black;
+    --clr2: rgb(221, 43, 79);
+    /* --clr2: #318f60; */
+    /* --clr2: #eee6c8; */
 
-  /* ---------------- */
-  --c2: #dd2b4f;
-  --color-green-100: #eafdc6;
-  --color-green-400: #aee938;
-  --color-green-700: #008a27;
-  --color-pink-0: #fff5ff;
-  --color-pink-400: #f966ff;
-  --color-red-0: #e85d7f;
-  --color-red-100: #dc5879;
-  --color-red-500: #e91c11;
-  --color-red-600: #be1809;
-  --color-orange-500: #ff8c00;
+    /* ---------------- */
+    --c2: #dd2b4f;
+    --color-green-100: #eafdc6;
+    --color-green-400: #aee938;
+    --color-green-700: #008a27;
+    --color-pink-0: #fff5ff;
+    --color-pink-400: #f966ff;
+    --color-red-0: #e85d7f;
+    --color-red-100: #dc5879;
+    --color-red-500: #e91c11;
+    --color-red-600: #be1809;
+    --color-orange-500: #ff8c00;
 
-  --color-shadow-black-slight: rgba(0, 0, 0, 0.15);
-  --color-shadow-black-heavy: rgba(0, 0, 0, 0.75);
-  --color-shadow-white-slight: rgba(255, 255, 255, 0.15);
-  --color-shadow-white-heavy: rgba(255, 255, 255, 0.95);
+    --color-shadow-black-slight: rgba(0, 0, 0, 0.15);
+    --color-shadow-black-heavy: rgba(0, 0, 0, 0.75);
+    --color-shadow-white-slight: rgba(255, 255, 255, 0.15);
+    --color-shadow-white-heavy: rgba(255, 255, 255, 0.95);
 
-  --color-lightBlue: #66c4ff;
-  --color-lightGreen: #aee938;
+    --color-lightBlue: #66c4ff;
+    --color-lightGreen: #aee938;
 
-  --header-footer-bgclr: #d8d2c2;
-  --header-footer-clr: #4a4947;
+    --header-footer-bgclr: #d8d2c2;
+    --header-footer-clr: #4a4947;
 }
 
 body {
-  background-color: rgb(255, 252, 245);
-  color: black;
-  font-family: poppins, sans-serif;
-  overflow-x: hidden;
-  position: relative;
-  width: 100%;
+    background-color: rgb(255, 252, 245);
+    color: black;
+    font-family: poppins, sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
 }
 
 a {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #d8d2c2;
+    background: #d8d2c2;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #b17457;
-  border-radius: 10px;
+    background: #b17457;
+    border-radius: 10px;
 }
 
 .f0 {
-  font-size: 0rem;
+    font-size: 0rem;
 }
 
 .active_highlight {
-  border: 2px solid rgb(255, 38, 0);
+    border: 2px solid rgb(255, 38, 0);
 }
 
 .active_highlight_dark {
-  border: 2px solid rgb(255, 234, 0);
+    border: 2px solid rgb(255, 234, 0);
 }
 
 .red-hat-display-400 {
-  font-family: "Red Hat Display", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Red Hat Display", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 input {
-  display: inline !important;
-  border-width: 1px !important;
+    display: inline !important;
+    border-width: 1px !important;
 }
 
 #search {
-  background-color: transparent;
-  border-color: var(--v-th) !important;
-  border-radius: 0px !important;
-  border-width: 2px !important;
-  display: block;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+    background-color: transparent;
+    border-color: var(--v-th) !important;
+    border-radius: 0px !important;
+    border-width: 2px !important;
+    display: block;
+    border-top: none;
+    border-left: none;
+    border-right: none;
 }
 body.dark-mode .find #search {
-  border-color: rgb(108, 108, 108, 0.9) !important;
+    border-color: rgb(108, 108, 108, 0.9) !important;
 }
 .btn {
-  font-family: poppins, "Times New Roman", Times, serif !important;
-  background-color: var(--clr2) !important;
-  border: calc(1px) solid var(--clr2) !important;
-  color: white !important;
-
-  &:hover {
-    background-color: rgb(251, 251, 251) !important;
-    color: var(--clr2) !important;
-    transition: all 0.3s;
+    font-family: poppins, "Times New Roman", Times, serif !important;
+    background-color: var(--clr2) !important;
     border: calc(1px) solid var(--clr2) !important;
-  }
+    color: white !important;
+
+    &:hover {
+        background-color: rgb(251, 251, 251) !important;
+        color: var(--clr2) !important;
+        transition: all 0.3s;
+        border: calc(1px) solid var(--clr2) !important;
+    }
 }
 
 /* .section-element {} */
 
 /* use different class for different styling */
 .flash_ul {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 30px;
-  background-color: transparent;
-  color: rgb(255, 255, 255);
-  font-family: poppins;
-  list-style-type: none;
-  font-size: 1rem;
-  box-sizing: border-box;
-  border-radius: 20px 20px 0 0;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    font-family: poppins;
+    list-style-type: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+    border-radius: 20px 20px 0 0;
 }
 
 .flash_li {
-  text-align: center;
+    text-align: center;
 }
 
 .temporary-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: var(--clr2);
-  color: #ffffff;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  animation: fadeInOut 5s ease-in-out;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: var(--clr2);
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeInOut 5s ease-in-out;
 }
 
 .error {
-  background-color: var(--color-red-500);
-  color: black;
+    background-color: var(--color-red-500);
+    color: black;
 }
 .success {
-  background-color: var(--color-green-400);
-  color: black;
+    background-color: var(--color-green-400);
+    color: black;
 }
 .message {
-  background-color: white;
-  color: black;
+    background-color: white;
+    color: black;
 }
 
 @keyframes fadeInOut {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  10%,
-  90% {
-    opacity: 1;
-  }
+    0%,
+    100% {
+        opacity: 0;
+    }
+    10%,
+    90% {
+        opacity: 1;
+    }
 }
 
 .delete-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-  font-family: "Poppins", sans-serif;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    font-family: "Poppins", sans-serif;
+    z-index: 1000;
 }
 
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 80%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 80%;
 }
 
 .modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .modal-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
 }
 
 .yes-button {
-  background-color: #f9f7f7;
-  color: black;
+    background-color: #f9f7f7;
+    color: black;
 }
 
 .no-button {
-  background-color: #fbfcfb;
-  color: black;
+    background-color: #fbfcfb;
+    color: black;
 }
 
 body.dark-mode .delete-modal {
-  background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode .modal-content,
 body.dark-mode .modal-button,
 body.dark-mode .no-button,
 body.dark-mode .yes-button {
-  background-color: rgb(35, 35, 35);
-  color: #f9f7f7;
+    background-color: rgb(35, 35, 35);
+    color: #f9f7f7;
 }
 
 .message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #ffe5e5;
-  color: #333;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 1001;
-  animation: fadeInOut 3s ease-in-out;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #ffe5e5;
+    color: #333;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    animation: fadeInOut 3s ease-in-out;
 }
 
 @keyframes fadeInOut {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  10%,
-  90% {
-    opacity: 1;
-  }
+    0%,
+    100% {
+        opacity: 0;
+    }
+    10%,
+    90% {
+        opacity: 1;
+    }
 }

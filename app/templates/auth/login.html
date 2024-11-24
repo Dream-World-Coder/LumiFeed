@@ -2,20 +2,42 @@
 <!-- Title -->
 {% block title %}Login{% endblock %}
 
+<!-- msg -->
+{% block flashMsg %}
+<ul class="flash_ul">
+    <li class="flash_li"></li>
+</ul>
+{% endblock %}
+
 <!-- Image -->
 {% block image %}
-<div class="register-info" style="display: flex; font-size: 1.5rem; font-weight: 450; text-align: center; align-items: center; justify-content: center">
-  <br />
-  <br />
-  WELCOME
-  <br />
-  <br />
+<div
+    class="register-info"
+    style="
+        display: flex;
+        font-size: 1.5rem;
+        font-weight: 450;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    "
+>
+    <br />
+    <br />
+    WELCOME
+    <br />
+    <br />
 </div>
 {% endblock %}
 
 <!-- redirect -->
 {% block redirect %}
-<a class="redirection_link" href="{{url_for('register')}}" class="signup-image-link">New here? Create an account</a>
+<a
+    class="redirection_link"
+    href="{{url_for('register')}}"
+    class="signup-image-link"
+    >New here? Create an account</a
+>
 {% endblock %}
 
 <!-- heading -->
@@ -29,7 +51,13 @@
 
 <!-- input -->
 {% block input %}
-<input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+<input
+    type="submit"
+    name="signin"
+    id="signin"
+    class="form-submit"
+    value="Log in"
+/>
 {% endblock %}
 
 <!-- auth_api -->
@@ -38,60 +66,71 @@
 <!-- scripts -->
 {% block scripts %}
 <script>
-  const flashMessageElement = document.querySelector(".flash_li");
+    const flashMessageElement = document.querySelector(".flash_li");
 
-  document.getElementById("login-form").addEventListener("submit", async function (event) {
-    event.preventDefault();
+    document
+        .getElementById("login-form")
+        .addEventListener("submit", async function (event) {
+            event.preventDefault();
 
-    // Collect form data
-    const email = document.getElementById("your_email").value.trim();
-    const password = document.getElementById("your_pass").value.trim();
+            // Collect form data
+            const email = document.getElementById("your_email").value.trim();
+            const password = document.getElementById("your_pass").value.trim();
 
-    if (!email || !password) {
-      displayFlashMessage("Please provide both email and password.", "#dd2b4f");
-      return;
+            if (!email || !password) {
+                displayFlashMessage(
+                    "Please provide both email and password.",
+                    "#dd2b4f",
+                );
+                return;
+            }
+
+            // Device information
+            const deviceInfo = navigator.userAgent;
+
+            try {
+                // Data to send
+                const data = {
+                    email,
+                    password,
+                    deviceInfo,
+                    ipAddress: null, // Placeholder for future IP logic if needed
+                };
+
+                // Send login request
+                const response = await fetch("/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    window.location.href = "/";
+                } else {
+                    displayFlashMessage(
+                        result.error || "Login failed. Please try again.",
+                        "#dd2b4f",
+                    );
+                }
+            } catch (error) {
+                console.error("Error during login:", error);
+                displayFlashMessage(
+                    "An error occurred during login. Please try again.",
+                    "#dd2b4f",
+                );
+            }
+        });
+
+    /**
+     * Displays a flash message.
+     * @param {string} message - The message to display.
+     * @param {string} backgroundColor - Background color of the message.
+     */
+    function displayFlashMessage(message, backgroundColor) {
+        flashMessageElement.parentNode.style.backgroundColor = backgroundColor;
+        flashMessageElement.textContent = message;
     }
-
-    // Device information
-    const deviceInfo = navigator.userAgent;
-
-    try {
-      // Data to send
-      const data = {
-        email,
-        password,
-        deviceInfo,
-        ipAddress: null, // Placeholder for future IP logic if needed
-      };
-
-      // Send login request
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (response.ok && result.success) {
-        window.location.href = "/";
-      } else {
-        displayFlashMessage(result.error || "Login failed. Please try again.", "#dd2b4f");
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      displayFlashMessage("An error occurred during login. Please try again.", "#dd2b4f");
-    }
-  });
-
-  /**
-   * Displays a flash message.
-   * @param {string} message - The message to display.
-   * @param {string} backgroundColor - Background color of the message.
-   */
-  function displayFlashMessage(message, backgroundColor) {
-    flashMessageElement.parentNode.style.backgroundColor = backgroundColor;
-    flashMessageElement.textContent = message;
-  }
 </script>
 {% endblock %}

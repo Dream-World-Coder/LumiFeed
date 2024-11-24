@@ -96,10 +96,12 @@ body.dark-mode {
     justify-content: center;
 
     & .card{
+        box-sizing: content-box;
         text-decoration: none;
         font-size: 0.85rem;
-        width: 100px;
-        height: 2rem;
+        width: auto;
+        padding: 2px 5px;
+        height: 1.6rem;
         border-radius: 5px;
         background-color: #fbfbfb;
         border: 1px solid var(--normal-border-clr);

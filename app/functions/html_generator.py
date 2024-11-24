@@ -221,7 +221,7 @@ def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -
         margin-top: 3rem;
         position: relative;
         width: 100vw;
-        padding: 20px;
+        padding: 10px;
         font-family: Georgia, Times, "Times New Roman", serif;
       }
       .read__page h1 {

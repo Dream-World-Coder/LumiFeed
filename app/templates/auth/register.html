@@ -2,14 +2,27 @@
 <!-- Title -->
 {% block title %}Register{% endblock %}
 
+<!-- msg -->
+{% block flashMsg %}
+<ul class="flash_ul">
+    <li class="flash_li"></li>
+</ul>
+{% endblock %}
+
 <!-- Image -->
 {% block image %} {% include "includes/loader.html" %}
 <div class="register-info" style="display: block">
     <br />
     <ol>
-        <li>Username Must contain Albpabets[A-z], numbers and heyphen[-] only. Nothig Else.</li>
+        <li>
+            Username Must contain Albpabets[A-z], numbers and heyphen[-] only.
+            Nothig Else.
+        </li>
         <br />
-        <li>Username is a unique parameter so your choice might be unavailable. Try new and super unique ones!</li>
+        <li>
+            Username is a unique parameter so your choice might be unavailable.
+            Try new and super unique ones!
+        </li>
     </ol>
     <br />
 </div>
@@ -17,12 +30,27 @@
 
 <!-- redirect -->
 {% block redirect %}
-<a class="redirection_link" href="{{url_for('login')}}" class="signup-image-link">Have an account? Log In</a>
+<a
+    class="redirection_link"
+    href="{{url_for('login')}}"
+    class="signup-image-link"
+    >Have an account? Log In</a
+>
 {% endblock %}
 
 <!-- heading -->
 {% block heading %} Register
-<svg id="info-svg" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+<svg
+    id="info-svg"
+    width="24"
+    height="24"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="size-6"
+>
     <path
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -50,17 +78,35 @@
 <div class="form-group">
     <label for="your_name">
         <i class="material-icons-name">
-            <svg width="64px" height="64px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+                width="64px"
+                height="64px"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                ></g>
                 <g id="SVGRepo_iconCarrier">
-                    <path d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z" fill="#000000"></path>
-                    <path d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z" fill="#000000"></path>
+                    <path
+                        d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z"
+                        fill="#000000"
+                    ></path>
+                    <path
+                        d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z"
+                        fill="#000000"
+                    ></path>
                 </g>
             </svg>
         </i>
     </label>
-    {{ form.username(class="form-control", id="your_name", placeholder="Username", maxlength=64, required=true) }} {% for error in form.username.errors %}
+    {{ form.username(class="form-control", id="your_name",
+    placeholder="Username", maxlength=64, required=true) }} {% for error in
+    form.username.errors %}
     <div class="invalid-feedback">{{ error }}</div>
     {% endfor %}
 </div>
@@ -68,7 +114,13 @@
 
 <!-- input -->
 {% block input %}
-<input type="submit" name="signin" id="signin" class="form-submit" value="Register" />
+<input
+    type="submit"
+    name="signin"
+    id="signin"
+    class="form-submit"
+    value="Register"
+/>
 {% endblock %}
 
 <!-- auth_api -->
@@ -100,62 +152,75 @@
      */
     function displayFlashMessage(message, backgroundColor) {
         if (flashMessageElement) {
-            flashMessageElement.parentNode.style.backgroundColor = backgroundColor;
+            flashMessageElement.parentNode.style.backgroundColor =
+                backgroundColor;
             flashMessageElement.textContent = message;
         }
     }
 
     const flashMessageElement = document.querySelector(".flash_li");
 
-    document.getElementById("login-form").addEventListener("submit", async function (event) {
-        event.preventDefault(); // Prevent default form submission
-        showLoader();
+    document
+        .getElementById("login-form")
+        .addEventListener("submit", async function (event) {
+            event.preventDefault(); // Prevent default form submission
+            showLoader();
 
-        // Collect form data
-        const username = document.getElementById("your_name").value.trim();
-        const email = document.getElementById("your_email").value.trim();
-        const password = document.getElementById("your_pass").value.trim();
+            // Collect form data
+            const username = document.getElementById("your_name").value.trim();
+            const email = document.getElementById("your_email").value.trim();
+            const password = document.getElementById("your_pass").value.trim();
 
-        // Validate input fields
-        if (!username || !email || !password) {
-            displayFlashMessage("All fields are required.", "#dd2b4f");
-            hideLoader();
-            return;
-        }
-
-        // Device information
-        const deviceInfo = navigator.userAgent;
-
-        try {
-            // Data to send
-            const data = {
-                username: username,
-                email: email,
-                password: password,
-                deviceInfo: deviceInfo,
-                ipAddress: null, // Placeholder for IP logic
-            };
-
-            // Send registration request
-            const response = await fetch("/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
-
-            const result = await response.json();
-
-            if (response.ok && result.success) {
-                window.location.href = "/verify-email";
-            } else {
-                displayFlashMessage(result.error || "Registration failed. Please try again.", "#dd2b4f");
+            // Validate input fields
+            if (!username || !email || !password) {
+                displayFlashMessage("All fields are required.", "#dd2b4f");
+                hideLoader();
+                return;
             }
-        } catch (error) {
-            console.error("Error during registration:", error);
-            displayFlashMessage("An error occurred during registration. Please try again.", "#dd2b4f");
-        } finally {
-            hideLoader();
-        }
-    });
+
+            // Device information
+            const deviceInfo = navigator.userAgent;
+
+            try {
+                // Data to send
+                const data = {
+                    username: username,
+                    email: email,
+                    password: password,
+                    deviceInfo: deviceInfo,
+                    ipAddress: null, // Placeholder for IP logic
+                };
+
+                // Send registration request
+                const response = await fetch("/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    window.location.assign(
+                        "https://lumifeed.up.railway.app/verify-email",
+                        // "http://127.0.0.1:8000/verify-email"
+                    );
+                } else {
+                    displayFlashMessage(
+                        result.error ||
+                            "Registration failed. Please try again.",
+                        "#dd2b4f",
+                    );
+                }
+            } catch (error) {
+                console.error("Error during registration:", error);
+                displayFlashMessage(
+                    "An error occurred during registration. Please try again.",
+                    "#dd2b4f",
+                );
+            } finally {
+                hideLoader();
+            }
+        });
 </script>
 {% endblock %}

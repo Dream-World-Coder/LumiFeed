@@ -11,6 +11,7 @@ import requests, string, smtplib, pathlib, re
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ Render Verify email page
+# Just an intermediate page, no such functionality up until now
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route("/verify-email")
 def verify_email():
@@ -52,6 +53,7 @@ def verify():
 def send_verification_email(user: User):
   subject = "Verify Your Email Address"
   verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
+  # verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
 
   try:
     msg = Message(
@@ -255,7 +257,7 @@ def delete_account():
 
     if request.method == "POST":
         try:
-            password = request.form.get("user_pass").strip()
+            password = request.form.get("password").strip()
 
             if current_user.check_password(password):
                 db.session.delete(current_user)
