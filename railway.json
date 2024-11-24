@@ -9,7 +9,7 @@
     "deploy": {
         "runtime": "V2",
         "numReplicas": 1,
-        "startCommand": "gunicorn run:app",
+        "startCommand": "gunicorn run:app --workers 4 --threads 2",
         "sleepApplication": false,
         "restartPolicyType": "ON_FAILURE",
         "restartPolicyMaxRetries": 6
