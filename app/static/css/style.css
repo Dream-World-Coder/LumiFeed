@@ -161,15 +161,15 @@ body.dark-mode .find #search {
 
 .error {
     background-color: var(--color-red-500);
-    color: black;
+    color: white;
 }
 .success {
     background-color: var(--color-green-400);
-    color: black;
+    color: white;
 }
 .message {
     background-color: white;
-    color: black;
+    color: white;
 }
 
 @keyframes fadeInOut {

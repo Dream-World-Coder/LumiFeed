@@ -125,346 +125,57 @@ def gen_table_india_news(data: list, user) -> str:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def make_another_page(heading, subheading, news_content, newsImgUrl, home_url) -> str:
     head = """
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-        <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>LumiFeed</title>
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-            """
-
-    style = """
-    <style>
-            * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      hr {
-        color: black !important;
-      }
-      body {
-        background-color: rgb(255, 255, 255);
-        overflow-x: hidden;
-      }
-      html.invert body {
-          background-color: rgb(37, 37, 37);
-          color: rgb(190,190,190);
-        }
-    html.invert .read__page h3 {
-        color: rgb(128, 128, 128);
-    }
-      .read__container {
-        position: relative;
-        width: 100vw;
-        background-color: inherit;
-      }
-
-      .read__navigations {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 5rem;
-        width: 100vw;
-        background-color: rgb(0, 0, 0);
-        border-bottom: 2px solid rgb(0, 0, 0);
-        z-index: 99;
-        padding-right: 2rem;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .icon {
-        width: 2rem;
-        height: 2rem;
-        z-index: 999;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
-        font-size: 1.15rem;
-        color: rgb(0, 0, 0);
-        background-color: rgb(255, 255, 255);
-      }
-
-      .icon0 {
-        position: absolute;
-        width: 5rem;
-        top: calc(50% - 0.75rem);
-        left: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        background-color: black;
-        color: azure;
-        font-size: 0.85rem;
-
-        & div {
-          background-color: white;
-          border-radius: 10px;
-        }
-      }
-
-      .icon5 {
-        width: 4.25rem;
-        font-size: 0.8rem;
-      }
-
-      .read__page {
-        margin-top: 3rem;
-        position: relative;
-        width: 100vw;
-        padding: 10px;
-        font-family: Georgia, Times, "Times New Roman", serif;
-      }
-      .read__page h1 {
-        font-size: 2.5rem;
-        margin: 2rem 10px 1px 10px;
-        border-bottom: 1px solid black;
-        padding-bottom: 15px;
-      }
-      .read__page h3 {
-        font-size: 1.5rem;
-        color: rgb(107, 107, 107);
-        margin-left: 10px;
-        margin-right: 10px;
-        border-top: 1px solid black;
-        padding-top: 10px;
-        border-bottom: 1px solid black;
-        padding-bottom: 10px;
-      }
-      html.invert .read__page h1,
-      html.invert .read__page h3 {
-        border-color: rgb(122, 122, 122);
-      }
-      .read__page p {
-        font-size: 1rem;
-        font-family: "Red Hat Display", sans-serif, Arial, Helvetica;
-        margin: 20px;
-      }
-      .read__page img {
-        border-radius: 5px;
-        width: 100%;
-      }
-      .ss {
-        width: 100vw;
-        height: 10vh;
-      }
-      .invert {
-        filter: invert(0);
-        /* colors are changed manually, thats better */
-      }
-      #ajax_p {
-        column-count: 3;
-        column-gap: 30px;
-        text-align: justify;
-        column-fill: balance;
-        min-height: 1px;
-        line-height: 1.1;
-      }
-      ::-webkit-scrollbar {
-        width: 0;
-      }
-
-      @media (min-width: 1440px) {
-        #ajax_p {
-          column-count: 3;
-          column-gap: 20px;
-        }
-      }
-      @media (max-width: 768px) {
-        .read__navigations {
-          gap: 0.25rem;
-        }
-        .icon {
-          width: 1.5rem;
-          height: 1.5rem;
-          font-size: 0.8rem;
-        }
-        .icon0 {
-          width: 3.5rem;
-          top: calc(50% - 0.75rem);
-          left: 20px;
-          font-size: 0.65rem;
-        }
-        .icon5 {
-          width: 3.5rem;
-          font-size: 0.65rem;
-        }
-        .read__navigations {
-          height: 4rem;
-          padding-right: 20px;
-        }
-        .read__page {
-          margin-top: 2rem;
-        }
-        .read__page h1 {
-          font-size: 1.25rem;
-        }
-        .read__page h3 {
-          font-size: 0.8rem;
-        }
-        .read__page p {
-          font-size: 0.65rem;
-        }
-        .read__page img {
-          width: min(100%, 350px);
-          height: 150px;
-        }
-        #ajax_p {
-          column-count: 3;
-          column-gap: 15px;
-        }
-        .read__page {
-          padding: 10px;
-        }
-      }
-      @media (max-width: 600px) {
-        #ajax_p {
-          column-count: 2;
-          column-gap: 10px;
-        }
-      }
-      @media (max-width: 600px) {
-        #ajax_p {
-          column-count: 1;
-          column-gap: 0px;
-        }
-      }
-      </style>
-  </head>
-    """
+            <!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <meta charset="UTF-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <title>LumiFeed</title>
+                        <link rel="stylesheet" href="/static/css/read-page.css" />
+                    </head>
+        """
 
     read__navigations = f"""
-                        <body>
-                            <div class="read__container">
-                                <div class="read__navigations">
-                                    <div class="icon icon0">
-                                        <div>
-                                            <img src="{url_for('static', filename='images/favicon.png')}"
-                                            alt="" srcset="" width="24px" height="24px" />
-                                        </div>
-                                        LumiFeed
-                                    </div>
-                                    <div id="summary" class="icon icon5">Summary</div>
-                                    <div class="icon icon1">
-                                        <img src="{url_for('static', filename='icons/dm3.svg')}"
-                                        alt="" srcset="" width="24px" height="24px" />
-                                    </div>
-                                    <div class="icon icon2">A+</div>
-                                    <div class="icon icon3">A-</div>
-                                    <div class="icon icon4">A</div>
+                    <body>
+                        <div class="read__container">
+                            <div class="read__navigations">
+                                <div class="icon icon0">
+                                    <img src="{url_for('static', filename='images/favicon.png')}" alt="" srcset="" />
+                                    LumiFeed
                                 </div>
+                                <div id="summary" class="icon icon5">Summary</div>
+                                <div class="icon icon1">
+                                    <img src="{url_for('static', filename='icons/dm3.svg')}"
+                                    alt="" srcset="" width="24px" height="24px" />
+                                </div>
+                                <div class="icon icon2">A+</div>
+                                <div class="icon icon3">A-</div>
+                                <div class="icon icon4">A</div>
+                            </div>
                         """
 
     read__page = f"""
-                <div class="read__page">
-                        <h1 id="ajax_h1">
-                            {heading}
-                        </h1>
-
-                        <h3 id="ajax_h3">
-                            {subheading}
-                        </h3>
-
-                        <p id="ajax_p" class="">
-                            {news_content}
-                        </p>
-                    </div>
-                </div>
-                <div class="ss"></div>
+                            <div class="read__page">
+                                <h1 id="ajax_h1">{heading}</h1>
+                                <h3 id="ajax_h3">{subheading}</h3>
+                                <p id="ajax_p" class="">{news_content}</p>
+                            </div>
+                        </div>
     """
 
     scripts_and_all = """
-                    <script>
-                        document.addEventListener('DOMContentLoaded', () => {
-                            // Dark mode
-                            const dm = document.querySelector('.icon1');
-                            const img = document.getElementById('ajax_img');
-                            dm.addEventListener('click', () => {
-                                document.documentElement.classList.toggle('invert');
-                                img.classList.toggle('invert');
-                            });
+                        <script>
+                            function _0x20e8(_0x5bf8ac,_0x161e11){const _0x2cf710=_0x2cf7();return _0x20e8=function(_0x20e8ee,_0x29bb51){_0x20e8ee=_0x20e8ee-0xeb;let _0x4caef2=_0x2cf710[_0x20e8ee];return _0x4caef2;},_0x20e8(_0x5bf8ac,_0x161e11);}const _0x1fee07=_0x20e8;function _0x2cf7(){const _0x4dd7ec=['invert','querySelector','classList','fontSize','109110gDCzRu','documentElement','2352LcuJax','getComputedStyle','toggle','115yATrxg','click','addEventListener','4487672laQyvq','.icon1','24242669yZDPYL','9RweQDo','1.15rem','439511TjefQX','rem','style','DOMContentLoaded','.icon3','innerWidth','486jVKJke','3914580erFVRi','.icon4','14256aHGoBC','ajax_p','1rem','getElementById','7732nsEFdA'];_0x2cf7=function(){return _0x4dd7ec;};return _0x2cf7();}(function(_0x490839,_0x5ae507){const _0xfa99c5=_0x20e8,_0x27e4ca=_0x490839();while(!![]){try{const _0x36460b=-parseInt(_0xfa99c5(0x104))/0x1+parseInt(_0xfa99c5(0xf2))/0x2*(-parseInt(_0xfa99c5(0xeb))/0x3)+-parseInt(_0xfa99c5(0xff))/0x4+parseInt(_0xfa99c5(0xfc))/0x5*(-parseInt(_0xfa99c5(0xf7))/0x6)+parseInt(_0xfa99c5(0xf9))/0x7*(parseInt(_0xfa99c5(0xee))/0x8)+parseInt(_0xfa99c5(0x102))/0x9*(parseInt(_0xfa99c5(0xec))/0xa)+parseInt(_0xfa99c5(0x101))/0xb;if(_0x36460b===_0x5ae507)break;else _0x27e4ca['push'](_0x27e4ca['shift']());}catch(_0x31ad69){_0x27e4ca['push'](_0x27e4ca['shift']());}}}(_0x2cf7,0x8f951),document[_0x1fee07(0xfe)](_0x1fee07(0x107),()=>{const _0x1e1dbd=_0x1fee07,_0x247cd3=document[_0x1e1dbd(0xf4)](_0x1e1dbd(0x100)),_0x359a39=document[_0x1e1dbd(0xf1)]('ajax_img');_0x247cd3[_0x1e1dbd(0xfe)](_0x1e1dbd(0xfd),()=>{const _0x4b6902=_0x1e1dbd;document[_0x4b6902(0xf8)][_0x4b6902(0xf5)]['toggle'](_0x4b6902(0xf3)),_0x359a39[_0x4b6902(0xf5)][_0x4b6902(0xfb)](_0x4b6902(0xf3));});const _0x237406=document[_0x1e1dbd(0xf1)](_0x1e1dbd(0xef));function _0x1df753(){const _0x5ef9e1=_0x1e1dbd,_0xedea90=window[_0x5ef9e1(0xfa)](document[_0x5ef9e1(0xf8)])[_0x5ef9e1(0xf6)];return parseFloat(_0xedea90);}function _0x10deeb(_0x2b539d){const _0xa804b2=_0x1e1dbd,_0x2d6ae3=window[_0xa804b2(0xfa)](_0x2b539d)[_0xa804b2(0xf6)],_0x450b0a=parseFloat(_0x2d6ae3),_0x5d5c13=_0x1df753();return _0x450b0a/_0x5d5c13;}const _0x2645db=0.15;document[_0x1e1dbd(0xf4)]('.icon2')[_0x1e1dbd(0xfe)](_0x1e1dbd(0xfd),()=>{const _0x312565=_0x1e1dbd,_0x3c5cff=_0x10deeb(_0x237406);_0x237406[_0x312565(0x106)]['fontSize']=_0x3c5cff+_0x2645db+_0x312565(0x105);}),document['querySelector'](_0x1e1dbd(0x108))['addEventListener'](_0x1e1dbd(0xfd),()=>{const _0x357ff2=_0x10deeb(_0x237406);_0x237406['style']['fontSize']=_0x357ff2-_0x2645db+'rem';}),document['querySelector'](_0x1e1dbd(0xed))[_0x1e1dbd(0xfe)](_0x1e1dbd(0xfd),()=>{const _0x23aaa1=_0x1e1dbd;window[_0x23aaa1(0x109)]>=0x300?_0x237406['style'][_0x23aaa1(0xf6)]=_0x23aaa1(0x103):_0x237406[_0x23aaa1(0x106)][_0x23aaa1(0xf6)]=_0x23aaa1(0xf0);});}));
+                        </script>
 
-                            const p = document.getElementById('ajax_p');
-
-                            // Function to get the root font size
-                            function getRootFontSize() {
-                                const rootFontSize = window.getComputedStyle(document.documentElement).fontSize;
-                                return parseFloat(rootFontSize);
-                            }
-
-                            // Function to get the current font size in rem
-                            function getFontSizeInRem(element) {
-                                const fontSizePx = window.getComputedStyle(element).fontSize;
-                                const fontSize = parseFloat(fontSizePx);
-                                const rootFontSize = getRootFontSize();
-                                return fontSize / rootFontSize;
-                            }
-
-                            // Increase font size by 0.25rem
-                            document.querySelector('.icon2').addEventListener('click', () => {
-                                const currentSizeRem = getFontSizeInRem(p);
-                                p.style.fontSize = `${currentSizeRem + 0.25}rem`;
-                            });
-
-                            // Decrease font size by 0.25rem
-                            document.querySelector('.icon3').addEventListener('click', () => {
-                                const currentSizeRem = getFontSizeInRem(p);
-                                p.style.fontSize = `${currentSizeRem - 0.25}rem`;
-                            });
-
-                            // Restore default font size
-                            document.querySelector('.icon4').addEventListener('click', () => {
-                                // Assuming default font size is 1rem for desktop and 0.8rem for mobile
-                                if (window.innerWidth >= 768) {
-                                    p.style.fontSize = '1rem';
-                                } else {
-                                    p.style.fontSize = '0.65rem';
-                                }
-                            });
-                        });
-                    </script>
-
-                    <!-- ajax for summary -->
-                    <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const summaryButton = document.getElementById('summary');
-                        const ajaxP = document.getElementById('ajax_p');
-
-                        summaryButton.addEventListener('click', () => {
-                            var CurrentNewsArticleText = ajaxP.textContent;
-
-                            fetch('/make_summary', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ textToSummarise: CurrentNewsArticleText })
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                ajaxP.innerHTML = data.summary;
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                            });
-                        });
-                    });
-                </script>
-
-            </body>
-            </html>
+                        <script>
+                            function _0x143d(_0x5b04c9,_0x44649d){const _0x595106=_0x5951();return _0x143d=function(_0x143dac,_0x2c1dc4){_0x143dac=_0x143dac-0x10f;let _0x59bee9=_0x595106[_0x143dac];return _0x59bee9;},_0x143d(_0x5b04c9,_0x44649d);}const _0x280dee=_0x143d;function _0x5951(){const _0x53bb12=['81850hDjyrw','/make_summary','2892UMjpgf','ajax_p','2778BPgiDo','textContent','83504qgUKEl','889UzeIUf','stringify','45RmdeoS','application/json','724265qcfSqv','then','4477gczfmS','summary','json','POST','67428tFUygZ','getElementById','catch','4XiRjOL','addEventListener','315042Xnixeq','1OTvtze'];_0x5951=function(){return _0x53bb12;};return _0x5951();}(function(_0x190b67,_0x4edb28){const _0x4183fb=_0x143d,_0x5b7184=_0x190b67();while(!![]){try{const _0x23ada7=-parseInt(_0x4183fb(0x125))/0x1*(parseInt(_0x4183fb(0x11f))/0x2)+parseInt(_0x4183fb(0x124))/0x3+-parseInt(_0x4183fb(0x122))/0x4*(parseInt(_0x4183fb(0x119))/0x5)+parseInt(_0x4183fb(0x112))/0x6*(parseInt(_0x4183fb(0x115))/0x7)+-parseInt(_0x4183fb(0x114))/0x8*(-parseInt(_0x4183fb(0x117))/0x9)+-parseInt(_0x4183fb(0x126))/0xa+-parseInt(_0x4183fb(0x11b))/0xb*(-parseInt(_0x4183fb(0x110))/0xc);if(_0x23ada7===_0x4edb28)break;else _0x5b7184['push'](_0x5b7184['shift']());}catch(_0x4ae47f){_0x5b7184['push'](_0x5b7184['shift']());}}}(_0x5951,0x1f16c),document[_0x280dee(0x123)]('DOMContentLoaded',()=>{const _0x138db7=_0x280dee,_0x222409=document[_0x138db7(0x120)](_0x138db7(0x11c)),_0x3456fe=document[_0x138db7(0x120)](_0x138db7(0x111));_0x222409[_0x138db7(0x123)]('click',()=>{const _0x1111b6=_0x138db7;var _0x585ae8=_0x3456fe[_0x1111b6(0x113)];fetch(_0x1111b6(0x10f),{'method':_0x1111b6(0x11e),'headers':{'Content-Type':_0x1111b6(0x118)},'body':JSON[_0x1111b6(0x116)]({'textToSummarise':_0x585ae8})})[_0x1111b6(0x11a)](_0x55d92f=>_0x55d92f[_0x1111b6(0x11d)]())[_0x1111b6(0x11a)](_0x665e8c=>{const _0x14327f=_0x1111b6;_0x3456fe['innerHTML']=_0x665e8c[_0x14327f(0x11c)];})[_0x1111b6(0x121)](_0x523516=>{console['error']('Error:',_0x523516);});});}));
+                        </script>
+                    </body>
+                </html>
             """
 
-    html_doc = head + style + read__navigations + read__page + scripts_and_all
+    html_doc = head + read__navigations + read__page + scripts_and_all
 
     return html_doc
 

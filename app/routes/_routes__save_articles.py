@@ -10,7 +10,6 @@ MAX_ARTICLES_PER_COLLECTION = 250
 #     # it will not work because the memory address of the two articles object are different even if they are same
 
 @app.route("/add_to_read_later", methods=["POST"])
-@login_required
 def add_to_read_later():
     if not current_user.is_authenticated:
         return jsonify({"error": "Please log in first to save articles."}), 401
@@ -43,7 +42,6 @@ def add_to_read_later():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # save in different collections
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@login_required
 @app.route("/add_to_different_collections", methods=["POST"])
 def add_to_different_collections():
     if not current_user.is_authenticated:
