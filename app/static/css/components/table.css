@@ -1,46 +1,46 @@
 :root {
-  --th-font-size: 1rem;
-  --td-font-size: 1rem;
-  --p: 10px;
-  --con-m-left: 2rem;
+    --th-font-size: 1rem;
+    --td-font-size: 1rem;
+    --p: 10px;
+    --con-m-left: 2rem;
 
-  --th-clr: rgb(202, 202, 202);
-  --odd-row-clr: rgb(244, 244, 244);
-  --even-row-clr: rgb(226, 226, 226);
+    --th-clr: rgb(202, 202, 202);
+    --odd-row-clr: rgb(244, 244, 244);
+    --even-row-clr: rgb(226, 226, 226);
 
-  /* table light mode clr */
-  --v-th: var(--th-clr);
-  --v-tr-even: var(--even-row-clr);
-  --v-tr-odd: var(--odd-row-clr);
+    /* table light mode clr */
+    --v-th: var(--th-clr);
+    --v-tr-even: var(--even-row-clr);
+    --v-tr-odd: var(--odd-row-clr);
 
-  --th-text-clr: rgba(255, 255, 255, 1);
+    --th-text-clr: rgba(255, 255, 255, 1);
 }
 
 .container {
-  position: relative;
-  width: var(--width-val);
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: calc(0px);
-  margin-left: var(--con-m-left);
-  padding: 0;
+    position: relative;
+    width: var(--width-val);
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: calc(0px);
+    margin-left: var(--con-m-left);
+    padding: 0;
 }
 main {
-  width: 100vw;
+    width: 100vw;
 }
 table {
-  border-collapse: collapse;
-  margin-top: 5rem;
-  /* margin-bottom: 5rem; */
+    border-collapse: collapse;
+    margin-top: 5rem;
+    /* margin-bottom: 5rem; */
 }
 
 table,
 tbody {
-  box-sizing: border-box;
-  overflow: hidden;
-  border-radius: 10px !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px !important;
 }
 
 /* ---------------
@@ -48,122 +48,120 @@ tbody {
 table colours ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -----------------------*/
 th {
-  font-size: var(--th-font-size);
-  font-family: poppins, sans-serif;
-  font-weight: 700;
-  padding: var(--p);
-  background-color: #d8d2c2;
+    font-size: var(--th-font-size);
+    font-family: poppins, sans-serif;
+    font-weight: 700;
+    padding: var(--p);
+    background-color: #d8d2c2;
 }
 
 tr:nth-child(2n - 1) {
-  background: rgb(241, 237, 224);
+    background: rgb(241, 237, 224);
 }
 
 tr:nth-child(2n) {
-  background: #faf7f0;
+    background: #faf7f0;
 }
 
 table tbody tr {
-  border-left: 1px solid #d8d2c2 !important;
-  border-right: 1px solid #d8d2c2 !important;
+    border-left: 1px solid #d8d2c2 !important;
+    border-right: 1px solid #d8d2c2 !important;
 }
 table tbody tr:first-child {
-  border-top: 1px solid #d8d2c2 !important;
+    border-top: 1px solid #d8d2c2 !important;
 }
 table tbody tr:last-child {
-  border-bottom: 1px solid #d8d2c2 !important;
+    border-bottom: 1px solid #d8d2c2 !important;
 }
 
 /* ----------------------------------------------------------- */
 
 .data_box {
-  padding: var(--p) calc(var(--p) / 2) var(--p) calc(var(--p) / 2);
-  font-size: var(--td-font-size);
-  font-family: poppins, sans-serif;
+    padding: var(--p) calc(var(--p) / 2) var(--p) calc(var(--p) / 2);
+    font-size: var(--td-font-size);
+    font-family: poppins, sans-serif;
 }
 /*  */
 .td1,
 .td3,
 .td4 {
-  text-align: center;
+    text-align: center;
 }
 
 .td2 {
-  width: 85%;
+    width: 85%;
 }
 
 .td3 {
-  font-family: poppins, sans-serif;
+    font-family: poppins, sans-serif;
 }
 
 .collections_name_input {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
 }
 
-.collections_input_option {
-  display: none;
-}
+/* .collections_input_option {display: none;} */
 
 .saving_options {
-  width: 100px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 100px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  & img {
-    width: 26px;
-    height: 26px;
-  }
+    & img {
+        width: 26px;
+        height: 26px;
+    }
 }
 
 body.dark-mode .saving_options img {
-  filter: invert(1);
+    filter: invert(1);
 }
 
 .rows:hover .saving_options {
-  display: flex;
+    display: flex;
 }
 
 @media (min-width: 300px) and (max-width: 768px) {
-  :root {
-    --th-font-size: 1rem;
-    /* no one is working :( */
-    --con-m-left: 10px;
-  }
-  .container {
-    width: 94%;
-    margin-left: 3%;
-  }
-  table {
-    margin-top: 1rem;
-  }
+    :root {
+        --th-font-size: 1rem;
+        /* no one is working :( */
+        --con-m-left: 10px;
+    }
+    .container {
+        width: 94%;
+        margin-left: 3%;
+    }
+    table {
+        margin-top: 1rem;
+    }
 
-  .data_box {
-    padding: 6px 3px 6px 3px;
-  }
-  .saving_options {
-    display: flex;
-  }
+    .data_box {
+        padding: 6px 3px 6px 3px;
+    }
+    .saving_options {
+        display: flex;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  :root {
-    --th-font-size: 1rem;
-    --con-m-left: 10px;
-  }
-  .container {
-    width: 95%;
-  }
-  .data_box {
-    font-size: 1rem;
-    padding: 6px 3px 6px 3px;
-  }
-  .saving_options {
-    display: flex;
-  }
+    :root {
+        --th-font-size: 1rem;
+        --con-m-left: 10px;
+    }
+    .container {
+        width: 95%;
+    }
+    .data_box {
+        font-size: 1rem;
+        padding: 6px 3px 6px 3px;
+    }
+    .saving_options {
+        display: flex;
+    }
 }

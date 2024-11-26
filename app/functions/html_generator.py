@@ -32,15 +32,15 @@ def generate_search_reasult(matches: list) -> str:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def gen_table(data: list, user) -> str:
     if user.is_authenticated:
-      user_collections = user.collections.all()
-      collections_input = '<option value="" disabled selected>Select a collection</option>'
-      for coll in user_collections:
-          if coll.collection_name != 'Read Later':
-              collections_input += f'<option class="collections_input_option" value="{coll.collection_name}">{coll.collection_name}</option>'
+        user_collections = user.collections.all()
+        collections_input = '<option value="" disabled selected>Select a collection</option>'
+        for coll in user_collections:
+            if coll.collection_name != 'Read Later':
+                collections_input += f'<option class="collections_input_option" value="{coll.collection_name}">{coll.collection_name}</option>'
 
-      collections_input_full = f'<select class="collections_name_input" name="collections_name_input">{collections_input}</select>'
+        collections_input_full = f'<select class="collections_name_input" name="collections_name_input">{collections_input}</select>'
     else:
-      collections_input_full = ''
+        collections_input_full = ''
 
     html_table = """
                     <tr class="tr1">
@@ -77,15 +77,15 @@ def gen_table(data: list, user) -> str:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def gen_table_india_news(data: list, user) -> str:
     if user.is_authenticated:
-      user_collections = user.collections.all()
-      collections_input = '<option value="" disabled selected>Select a collection</option>'
-      for coll in user_collections:
-          if coll.collection_name != 'Read Later':
-              collections_input += f'<option class="collections_input_option" value="{coll.collection_name}">{coll.collection_name}</option>'
+        user_collections = user.collections.all()
+        collections_input = '<option value="" disabled selected>Select a collection</option>'
+        for coll in user_collections:
+            if coll.collection_name != 'Read Later':
+                collections_input += f'<option class="collections_input_option" value="{coll.collection_name}">{coll.collection_name}</option>'
 
-      collections_input_full = f'<select class="collections_name_input" name="collections_name_input">{collections_input}</select>'
+        collections_input_full = f'<select class="collections_name_input" name="collections_name_input">{collections_input}</select>'
     else:
-      collections_input_full = ''
+        collections_input_full = ''
 
     html_table = """
                     <tr class="tr1">
@@ -200,12 +200,3 @@ def make_collection(collection_name) -> str:
     return string
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-"""
-<li class="read_here" data-url="">
-  <span class="delete_article">
-    <!-- flash message of deletion -->
-    <img src="{{url_for('static', filename='icons/delete.svg')}}" alt="" srcset="" />
-  </span>
-</li>
-"""
