@@ -23,7 +23,7 @@ def add_new_collection():
 
     # XSS && CSRF check
     if "<" in collection_name or ">" in collection_name or "script" in collection_name.lower() or "+" in collection_name or "-" in collection_name:
-        return jsonify({"error": "Collection name contains invalid characters."}), 400
+        return jsonify({"error": "Collection name contains invalid characters or `script`."}), 400
 
     # Check collection limit
     if len(current_user.collections.all()) >= MAX_COLLECTIONS:
@@ -32,16 +32,16 @@ def add_new_collection():
     try:
         collection = Collection.query.filter_by(collection_name=collection_name).first()
         if not collection:
-            new_collection = Collection(collection_name=collection_name, collection_type=CollectionType.CUSTOM)
-            db.session.add(new_collection)
-            print("\n\n\n\n\n99090909090990\n\n\n\n")
+            # then i am making the collection and adding it in db
+            collection = Collection(collection_name=collection_name, collection_type=CollectionType.CUSTOM)
+            db.session.add(collection)
             db.session.flush()
 
         else:
             if collection in current_user.collections.all():
                 return jsonify({"error": "Collection already exists. Choose another name."}), 400
 
-        current_user.collections.append(new_collection)
+        current_user.collections.append(collection)
         db.session.commit()
 
         new_collection_html_string = make_collection(collection_name)
@@ -81,11 +81,20 @@ def delete_collection():
 
     try:
         current_user.collections.remove(collection)
+        # db.session.delete(collection)
+        # i am not using it, cuz maybe some other user uses the same collection.
+        # so i have to add a check that the Collection does not have any users linked to it.
+        # so check:
+        if len(collection.users_who_own_it) == 0:
+            # its giving error if i use collection.users_who_own_it.all()
+            db.session.delete(collection)
+            db.session.flush()
+
         db.session.commit()
         return jsonify({"message": "Collection deleted."}), 200
 
     except Exception as e:
-        app.logger.error(f"Error deleting collection: {str(e)}")
+        print(f"Error deleting collection: {str(e)}")
         db.session.rollback()
         return jsonify({"error": "Failed to delete collection"}), 500
 

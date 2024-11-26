@@ -16,7 +16,6 @@ class Collection(db.Model):
         'User',
         secondary=user_collections,
         back_populates='collections',
-        lazy='dynamic'
     )
     articles = db.relationship(
         'Article',

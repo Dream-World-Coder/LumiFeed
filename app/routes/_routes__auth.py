@@ -9,15 +9,27 @@ import requests, string, smtplib, pathlib, re
 
 
 
+
+"""
+
+    when i am registering, then i am going back to lumifeed insted of /verify-eamil as
+    i have used window.location.assign('lumifeed url') inn the auth/register.html
+    so i have to switch it to window.location.href = '/verify-email'
+    else just keep it that way.
+
+"""
+
+
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ Render Verify email page
 # Just an intermediate page, no such functionality up until now
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route("/verify-email")
 def verify_email():
-  if current_user.is_authenticated:
-    return redirect(url_for("index"))
-  return render_template("auth/verify-email.html")
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+    return render_template("auth/verify-email.html")
 
 
 
@@ -52,8 +64,8 @@ def verify():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def send_verification_email(user: User):
   subject = "Verify Your Email Address"
-  # verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
-  verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
+  verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
+  # verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
 
   try:
     msg = Message(

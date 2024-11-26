@@ -21,8 +21,8 @@ mail = Mail()
 # app making
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 app = Flask(__name__, template_folder="templates", static_folder="static")
-# app.config.from_object(config["development"])
-app.config.from_object(config["production"])
+app.config.from_object(config["development"])
+# app.config.from_object(config["production"])
 
 db.init_app(app)
 migrate.init_app(app, db)
