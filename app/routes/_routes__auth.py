@@ -52,8 +52,8 @@ def verify():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def send_verification_email(user: User):
   subject = "Verify Your Email Address"
-  verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
   # verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
+  verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
 
   try:
     msg = Message(

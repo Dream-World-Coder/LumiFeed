@@ -35,8 +35,8 @@ def read_news_here():
     return
 
 
-@app.route("/article/<article_heading>", methods=["POST"])
-def read_news_in_new_tab(article_heading):
+@app.route("/article", methods=["POST"])
+def read_news_in_new_tab():
   home_url = session.get("home_url", f"{url_for('index')}")
   heading = request.form.get("heading")
   subheading = request.form.get("subheading")

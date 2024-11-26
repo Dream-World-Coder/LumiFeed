@@ -105,6 +105,7 @@ table tbody tr:last-child {
 }
 
 /* .collections_input_option {display: none;} */
+/* had to disable this, else the options were not appearing in mobile phones and other browsers like mozilla */
 
 .saving_options {
     width: 100px;
