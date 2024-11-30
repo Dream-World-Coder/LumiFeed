@@ -1,6 +1,6 @@
 from copy import Error
 from flask_login import UserMixin
-from sqlalchemy.orm import backref
+# from sqlalchemy.orm import backref
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from itsdangerous import URLSafeTimedSerializer
@@ -19,10 +19,13 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200), nullable=False)
     email_verified = db.Column(db.Boolean, nullable=False, default=False)
     profile_pic = db.Column(db.String(256), nullable=False, default="images/default-profile.webp")
-    last_login = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     ip_address = db.Column(db.String(40), nullable=False)  # IPv6-compatible
     device_info = db.Column(db.Text, nullable=False)
+    last_login = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     failed_logins = db.Column(db.SmallInteger, nullable=False, default=0)
+    total_credits = 10
+    used_credits = db.Column(db.SmallInteger, nullable=False, default=0)
+
 
     # Relationships
     saved_articles = db.relationship(
@@ -62,26 +65,38 @@ class User(db.Model, UserMixin):
 
     def save_article(self, article_title, article_url, collection_name):
         """Save an article to a specified collection"""
+        print(f"inside  user class,,, \n {article_title=}\n{article_url=}\n{collection_name=}\n\n\n")
         # Find collection
         collection = Collection.query.filter_by(collection_name=collection_name).first()
+        print(f"inside  user class,,, \n {collection=}\n")
 
         if not collection:
             raise ValueError("Error, collection doesnot exist.")
+        print("collection exists")
 
         if collection not in self.collections.all():
-            raise Error("This collection does not exist.")
+            raise Error(f"collection {collection} does not exist.")
+        print("collection exists for user")
 
         # Find existing article or create new one
         article = Article.query.filter_by(article_url=article_url).first()
+        print(article)
         if not article:
             article = Article(article_title=article_title, article_url=article_url)
             db.session.add(article)
             db.session.flush()
+            print("article didnot exist, so created now.")
+        print("article exists")
 
         # article alredy saved check? -- done in route
         self.saved_articles.append(article)
+        print("appened article to saved articles")
         article.collections_where_it_is_saved.append(collection)
+        print("appened collection to article.collections_where_it_is_saved")
+        collection.articles.append(article)
+        print("appened article to collection.articles")
         db.session.commit()
+        print("committed")
 
         return article
 

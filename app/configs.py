@@ -10,7 +10,7 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", os.urandom(512))
     # FLASKY_ADMIN = os.environ.get('ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_POOL_SIZE = 20
+    SQLALCHEMY_POOL_SIZE = 40
     SQLALCHEMY_POOL_TIMEOUT = 35
     SQLALCHEMY_MAX_OVERFLOW = 20
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -25,7 +25,7 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    DEBUG = True
+    DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DEV_DATABASE_URL',
         f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
@@ -34,7 +34,7 @@ class DevelopmentConfig(Config):
 
 
 class TestingConfig(Config):
-    TESTING = True
+    TESTING = False
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "TEST_DATABASE_URL",
         "sqlite:///test-database.sqlite"

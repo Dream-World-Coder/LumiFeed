@@ -48,15 +48,20 @@ def add_to_different_collections():
         return jsonify({"error": "Please log in first to save articles."}), 401
 
     data = request.json or {}
-    article_title = data.get("article_title")
-    article_url = data.get("article_url")
-    parent_collection = data.get("parent_collection")
+    article_title = data.get("article_title") or ''
+    article_url = data.get("article_url") or ''
+    parent_collection = data.get("parent_collection") or ''
+
+    if len(parent_collection) == 0:
+        print("length of parent_collection is 0")
+        return jsonify({'error':'collection name is blank'}), 400
 
     for article in current_user.all_articles_in_collection(parent_collection):
         if article.article_url == article_url:
             return jsonify({'error': f'This article is already saved in {parent_collection}'}), 409
 
     try:
+        print(f"{article_title=}\n{article_url=}\n{parent_collection=}\n\n")
         current_user.save_article(article_title, article_url, parent_collection)
         return jsonify({"success": f"Article saved in {parent_collection}."}), 200
 

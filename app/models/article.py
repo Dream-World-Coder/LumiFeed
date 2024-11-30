@@ -28,4 +28,4 @@ class Article(db.Model):
     )
 
     def __repr__(self):
-        return f"<Article title: {self.article_title}, date added: {self.date_added}>"
+        return f"<Article title: {self.article_title[:50]}..., date added: {self.date_added}>"

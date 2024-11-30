@@ -3,11 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
-from flask_wtf import csrf
+# from flask_wtf import csrf
+from flask_apscheduler import APScheduler
 from .configs import config
 from werkzeug.serving import WSGIRequestHandler
 
 WSGIRequestHandler.protocol_version = "HTTP/1.1"
+
 
 
 # csrf = CSRFProtect()
@@ -15,19 +17,21 @@ db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
 mail = Mail()
+scheduler = APScheduler()
 # login_manager.login_view = "index"
 
 
 # app making
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 app = Flask(__name__, template_folder="templates", static_folder="static")
-app.config.from_object(config["development"])
-# app.config.from_object(config["production"])
+# app.config.from_object(config["development"])
+app.config.from_object(config["production"])
 
 db.init_app(app)
 migrate.init_app(app, db)
 login_manager.init_app(app)
 mail.init_app(app)
+scheduler.init_app(app)
 
 
 # models
@@ -62,9 +66,25 @@ from .routes import (
     read_news_in_new_tab,
     search_in_title,
     make_summary,
+    reset_user_credits
 )
 
-# Add proper error handling
+def delete_unverified_users():
+    with app.app_context():
+        try:
+            deleted_count = User.query.filter_by(email_verified=False).delete()
+            db.session.commit()
+            if deleted_count > 0:
+                print(f"\n\n{deleted_count} unverified users deleted.\n")
+        except Exception as e:
+            print(e)
+
+scheduler.add_job(func=reset_user_credits, trigger='interval', seconds=86400, id='reset_credits')
+scheduler.add_job(func=delete_unverified_users, trigger='interval', seconds=86400, id='delete_unverified_users')
+
+
+# error handlers
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.errorhandler(Exception)
 def handle_exception(e):
     return {"error": str(e)}, 500

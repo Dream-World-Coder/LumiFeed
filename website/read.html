@@ -136,7 +136,7 @@
                         p.style.fontSize = `${currentSizeRem + dx}rem`;
                     });
 
-                // Decrease font size by 0.25rem
+                // Decrease font size by 0.15rem
                 document
                     .querySelector(".icon3")
                     .addEventListener("click", () => {
@@ -160,9 +160,22 @@
 
         <!-- ajax for summary -->
         <script>
+            function displayMessage(message, className) {
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("temporary-message");
+                if (className) {
+                    messageElement.classList.add(className);
+                }
+                messageElement.textContent = message;
+                document.body.appendChild(messageElement);
+                setTimeout(() => {
+                    messageElement.remove();
+                }, 3000);
+            }
             document.addEventListener("DOMContentLoaded", () => {
                 const summaryButton = document.getElementById("summary");
                 const ajaxP = document.getElementById("ajax_p");
+                const ajax_img = document.getElementById("ajax_img");
 
                 summaryButton.addEventListener("click", () => {
                     var CurrentNewsArticleText = ajaxP.textContent;
@@ -173,14 +186,22 @@
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
+                            imgUrl: ajax_img.src,
                             textToSummarise: CurrentNewsArticleText,
                         }),
                     })
                         .then((response) => response.json())
                         .then((data) => {
-                            ajaxP.innerHTML = data.summary;
+                            if (data.error) {
+                                displayMessage(data.error, "error");
+                            } else if (data.message) {
+                                displayMessage(data.message, "message");
+                            } else {
+                                ajaxP.innerHTML = data.summary;
+                            }
                         })
                         .catch((error) => {
+                            displayMessage(error, "error");
                             console.error("Error:", error);
                         });
                 });

@@ -156,6 +156,9 @@ def register():
             db.session.commit()
 
             # now create default collections
+            # ------------------------------------------------------------------
+            # current_user.create_default_collections() will also work.
+            # ------------------------------------------------------------------
             read_later = Collection.query.filter_by(collection_name="Read Later").first()
             liked_articles = Collection.query.filter_by(collection_name="Liked Articles").first()
             if not read_later or not liked_articles:

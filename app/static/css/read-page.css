@@ -24,6 +24,47 @@
     --nav-clr-light: rgba(37, 113, 128, 0.8);
 }
 
+.temporary-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: var(--clr2);
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    border-radius: 4px;
+    z-index: 1000;
+    animation: fadeInOut 5s ease-in-out;
+    border: 1px solid;
+}
+
+.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.message {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+@keyframes fadeInOut {
+    0%,
+    100% {
+        opacity: 0;
+    }
+    10%,
+    90% {
+        opacity: 1;
+    }
+}
 body {
     background-color: rgb(255, 255, 255);
     overflow-x: hidden;
