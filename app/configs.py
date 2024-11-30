@@ -3,7 +3,6 @@ from datetime import timedelta
 
 basedir = os.path.abspath(os.path.dirname(__file__))  # app
 
-
 class Config:
     FLASK_APP = os.environ.get("FLASK_APP", "run")
     PORT=8000
@@ -27,8 +26,8 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        'DEV_DATABASE_URL',
-        f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
+        'DEV_DATABASE_URL'
+        # f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
     )
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
@@ -40,7 +39,6 @@ class TestingConfig(Config):
         "sqlite:///test-database.sqlite"
     )
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
-
 
 
 class ProductionConfig(Config):

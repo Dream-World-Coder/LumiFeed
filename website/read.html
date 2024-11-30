@@ -203,6 +203,10 @@
                         .catch((error) => {
                             displayMessage(error, "error");
                             console.error("Error:", error);
+                        }).finally(() => {
+                            summaryButton.style.pointerEvents = "none";
+                            summaryButton.style.opacity = 0.5;
+                            summaryButton.style.fileter = "grayscale(100%)";
                         });
                 });
             });
