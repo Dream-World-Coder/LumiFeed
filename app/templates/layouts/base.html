@@ -151,7 +151,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(0, 0, 0, 0.25);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -159,20 +159,31 @@
             }
 
             .loader {
-                border: 5px solid #f3f3f3;
-                border-top: 5px solid #3498db;
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                animation: spin 1s linear infinite;
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 8px;
+                width: 100%;
+                --c: no-repeat linear-gradient(#543310 0 0);
+                background: var(--c), var(--c), #f8f4e1;
+                background-size: 60% 100%;
+                animation: l16 3s infinite;
             }
-
-            @keyframes spin {
+            @keyframes l16 {
                 0% {
-                    transform: rotate(0deg);
+                    background-position:
+                        -150% 0,
+                        -150% 0;
+                }
+                66% {
+                    background-position:
+                        250% 0,
+                        -150% 0;
                 }
                 100% {
-                    transform: rotate(360deg);
+                    background-position:
+                        250% 0,
+                        250% 0;
                 }
             }
         </style>

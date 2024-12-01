@@ -1,11 +1,9 @@
-from flask import render_template, request, redirect, url_for, flash, jsonify, session
-from sqlalchemy.util.langhelpers import methods_equivalent
+from flask import render_template, request, redirect, url_for, flash, jsonify
 from app.routes import app, db, User, mail, RegistrationForm, LoginForm, CollectionType, Collection
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError
-from random import randint
 from flask_mail import Message
-import requests, string, smtplib, pathlib, re
+import re
 
 
 
@@ -64,8 +62,8 @@ def verify():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def send_verification_email(user: User):
   subject = "Verify Your Email Address"
-  verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
-  # verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
+  # verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
+  verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
 
   try:
     msg = Message(
