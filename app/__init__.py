@@ -61,7 +61,7 @@ from .routes import (
     about,
     contact,
     anything,
-    # create_tables,
+    create_tables,
     read_news_here,
     read_news_in_new_tab,
     search_in_title,

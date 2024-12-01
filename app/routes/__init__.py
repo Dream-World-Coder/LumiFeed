@@ -37,7 +37,7 @@ from ..routes._routes__home import (
     contact,
     profile,
     anything,
-    # create_tables,
+    create_tables,
 )
 from ..routes._routes__read import (
     read_news_here,
