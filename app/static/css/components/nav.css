@@ -51,10 +51,10 @@ nav .ul .li2 {
 }
 
 nav .ul .li1 {
-    right: calc(var(--w) - 60px);
+    right: calc(var(--con-m-left) + 50px);
 }
 nav .ul .li2 {
-    right: calc(var(--w) - 10px);
+    right: calc(var(--con-m-left) - 0px);
 }
 
 .li3 a,
