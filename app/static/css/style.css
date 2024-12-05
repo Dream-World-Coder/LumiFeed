@@ -44,6 +44,8 @@ body {
     overflow-x: hidden;
     position: relative;
     width: 100%;
+    display: grid;
+    place-items: center;
 }
 
 a {
@@ -55,9 +57,16 @@ a:hover {
     text-decoration: underline;
 }
 
+section {
+    width: 100%;
+    max-width: 1800px;
+    display: grid;
+    place-items: center;
+}
+
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 /* Track */
@@ -95,19 +104,6 @@ input {
     border-width: 1px !important;
 }
 
-#search {
-    background-color: transparent;
-    border-color: var(--v-th) !important;
-    border-radius: 0px !important;
-    border-width: 2px !important;
-    display: block;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-}
-body.dark-mode .find #search {
-    border-color: rgb(108, 108, 108, 0.9) !important;
-}
 .btn {
     font-family: poppins, "Times New Roman", Times, serif !important;
     background-color: var(--clr2) !important;
@@ -122,9 +118,6 @@ body.dark-mode .find #search {
     }
 }
 
-/* .section-element {} */
-
-/* use different class for different styling */
 .flash_ul {
     position: relative;
     top: 0;

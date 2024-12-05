@@ -1,196 +1,212 @@
 :root {
-  --header-height: 5rem;
-  --r: 2rem;
+    --header-height: 5rem;
+    --r: 2rem;
 }
 
 header {
-  top: 0px;
-  left: 0;
-  height: var(--header-height);
-  width: 100%;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  background-color: var(--header-footer-bgclr);
-  z-index: 100;
-  border-bottom: 1px solid #b17457;
+    top: 0px;
+    left: 0;
+    height: var(--header-height);
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: var(--header-footer-bgclr);
+    z-index: 100;
+    /* transition: all 0.3s ease-in-out; */
+    /* border-bottom: 1px solid #b17457; */
+    box-shadow:
+        0 0 2px #808080,
+        0 0 5px #808080,
+        0 0 10px #808080;
+}
+header.is-scroll-down {
+    opacity: 1;
+    box-shadow:
+        0 0 2px #808080,
+        0 0 5px #808080,
+        0 0 10px #808080;
 }
 
 body.dark-mode header {
-  background-color: #232323;
-  border-bottom: 1px solid #4b4b4b;
+    background-color: #232323;
+    border-bottom: 1px solid #4b4b4b;
+    box-shadow:
+        0 0 2px #333,
+        0 0 5px #333,
+        0 0 10px #333;
 }
 
 .header-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 /*---- logo
 ----------------*/
 .logo {
-  width: 40px;
-  height: 40px;
-  flex-grow: 1;
-
-  & img {
     width: 40px;
     height: 40px;
-    border-radius: 35%;
-    padding: 5px;
-    background-color: aliceblue;
-  }
+    flex-grow: 1;
 
-  #logo-text {
-    font-family: Dahlia;
-    margin-left: 10px;
-    font-size: 1.25rem;
-    color: #4a4947 !important;
-  }
+    & img {
+        width: 40px;
+        height: 40px;
+        border-radius: 35%;
+        padding: 5px;
+        background-color: aliceblue;
+    }
+
+    #logo-text {
+        font-family: Dahlia;
+        margin-left: 10px;
+        font-size: 1.25rem;
+        color: #4a4947 !important;
+    }
 }
 
 body.dark-mode #logo-text {
-  color: #afafaf !important;
+    color: #afafaf !important;
 }
 
 /*--- buttons
 ----------------*/
 .buttons {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  max-height: 30px;
-  gap: 20px;
-  transform: translateY(2px);
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    max-height: 30px;
+    gap: 20px;
+    transform: translateY(2px);
 
-  & .dark-mode-btn,
-  & .bigger-font-btn {
-    z-index: 150;
-    transition: all 0.3s;
+    & .dark-mode-btn,
+    & .bigger-font-btn {
+        z-index: 150;
+        transition: all 0.3s;
 
-    &:hover {
-      transform: scale(1.2);
-      transition: all 0.3s;
+        &:hover {
+            transform: scale(1.2);
+            transition: all 0.3s;
+        }
     }
-  }
 
-  & .dark-mode-btn span img {
-    --x1: 26px;
-    width: var(--x1);
-    height: var(--x1);
-  }
+    & .dark-mode-btn span img {
+        --x1: 24px;
+        width: var(--x1);
+        height: var(--x1);
+    }
 
-  & .bigger-font-btn span img {
-    --x2: 22px;
-    width: var(--x2);
-    height: var(--x2);
-  }
+    & .bigger-font-btn span img {
+        --x2: 20px;
+        width: var(--x2);
+        height: var(--x2);
+    }
 }
 
 body.dark-mode #login-form > button {
-  background: #efefef2c;
-  color: #efefef;
+    background: #efefef2c;
+    color: #efefef;
 }
 
 /* -------- media queries
 ------------------------------------------ */
 
 @media (min-width: 1025px) and (max-width: 2440px) {
-  .mobile-search-btn {
-    display: none;
-  }
+    .mobile-search-btn {
+        display: none;
+    }
 }
 
 @media (max-width: 1024px) {
-  :root {
-    --header-height: 4rem;
-    --fetch-news-height: 24rem;
-    --fetch-news-m-top: calc(var(--header-height) + 20px);
-    --r: 10px;
-  }
-
-  .logo {
-    width: 30px;
-    height: 30px;
-
-    & img {
-      width: 30px;
-      height: 30px;
+    :root {
+        --header-height: 4rem;
+        --fetch-news-height: 24rem;
+        --fetch-news-m-top: calc(var(--header-height) + 20px);
+        --r: 10px;
     }
 
-    #logo-text {
-      margin-left: 5px;
-      font-size: 1.25rem;
-    }
-  }
+    .logo {
+        width: 30px;
+        height: 30px;
 
-  .mobile-search-btn {
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
+        & img {
+            width: 30px;
+            height: 30px;
+        }
 
-    & img {
-      width: 26px;
-      height: 26px;
-    }
-  }
-
-  .buttons {
-    gap: 10px;
-
-    & .dark-mode-btn,
-    & .bigger-font-btn {
-      &:hover {
-        transform: none;
-      }
+        #logo-text {
+            margin-left: 5px;
+            font-size: 1.25rem;
+        }
     }
 
-    & .dark-mode-btn span img {
-      --x1: 28px;
-      width: var(--x1);
-      height: var(--x1);
+    .mobile-search-btn {
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+
+        & img {
+            width: 26px;
+            height: 26px;
+        }
     }
 
-    & .bigger-font-btn span img {
-      --x2: 24px;
-      width: var(--x2);
-      height: var(--x2);
+    .buttons {
+        gap: 10px;
+
+        & .dark-mode-btn,
+        & .bigger-font-btn {
+            &:hover {
+                transform: none;
+            }
+        }
+
+        & .dark-mode-btn span img {
+            --x1: 28px;
+            width: var(--x1);
+            height: var(--x1);
+        }
+
+        & .bigger-font-btn span img {
+            --x2: 24px;
+            width: var(--x2);
+            height: var(--x2);
+        }
     }
-  }
 }
 
 @media (max-width: 768px) {
-  header {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .logo #logo-text {
-    font-size: 1rem;
-  }
-
-  .buttons {
-    margin-right: 30px;
-    gap: 10px;
-
-    & .dark-mode-btn,
-    & .bigger-font-btn {
-      &:hover {
-        transform: none;
-      }
+    header {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
-    & .dark-mode-btn span img {
-      --x1: 24px;
-      width: var(--x1);
-      height: var(--x1);
+    .logo #logo-text {
+        font-size: 1rem;
     }
 
-    & .bigger-font-btn span img {
-      --x2: 20px;
-      width: var(--x2);
-      height: var(--x2);
+    .buttons {
+        margin-right: 30px;
+        gap: 10px;
+
+        & .dark-mode-btn,
+        & .bigger-font-btn {
+            &:hover {
+                transform: none;
+            }
+        }
+
+        & .dark-mode-btn span img {
+            --x1: 24px;
+            width: var(--x1);
+            height: var(--x1);
+        }
+
+        & .bigger-font-btn span img {
+            --x2: 20px;
+            width: var(--x2);
+            height: var(--x2);
+        }
     }
-  }
 }

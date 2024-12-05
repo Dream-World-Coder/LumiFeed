@@ -1,201 +1,219 @@
 :root {
-  --nav-width: 380px;
-  /* 4*80 + 60 */
+    --nav-width: 380px;
+    /* unused */
 }
 
 nav {
-  position: relative;
-  height: 100%;
-  width: var(--nav-width);
+    position: relative;
+    height: 100%;
+    width: auto;
+    padding-right: 20px;
+
+    @media screen and (max-width: 768px) {
+        padding-right: 0px;
+    }
 }
 
 .ul {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
 }
 
 .li1,
 .li2 {
-  border-radius: 15px;
-  transition: all 0.3s;
-  margin: 0;
-  padding: 0;
+    border-radius: 15px;
+    transition: all 0.3s;
+    margin: 0;
+    padding: 0;
 }
 
 .li1:hover,
 .li2:hover {
-  transform: translateY(-2px);
-  transition: all 0.3s;
+    transform: translateY(-2px);
+    transition: all 0.3s;
 }
 
 nav .ul .li1,
 nav .ul .li2 {
-  position: fixed;
-  display: flex;
-  top: calc(100dvh - 60px);
+    position: fixed;
+    display: flex;
+    top: calc(100dvh - 60px);
 }
 
 @media (min-width: 1500px) {
-  nav .ul .li1,
-  nav .ul .li2 {
-    top: calc(100dvh - 100px);
-  }
+    nav .ul .li1,
+    nav .ul .li2 {
+        top: calc(100dvh - 100px);
+    }
 }
 
 nav .ul .li1 {
-  right: calc(var(--w) - 60px);
+    right: calc(var(--w) - 60px);
 }
 nav .ul .li2 {
-  right: calc(var(--w) - 10px);
+    right: calc(var(--w) - 10px);
 }
 
 .li3 a,
 .li4 a,
 .li6 a,
 .li5 form button {
-  font-size: 1rem;
-  color: var(--header-footer-clr) !important;
-  text-decoration: none;
-  font-family: AppleGothic, poppins, sans-serif;
-  font-weight: 300 !important;
-  font-size: large;
+    font-size: 1rem;
+    color: var(--header-footer-clr) !important;
+    text-decoration: none;
+    font-family: AppleGothic, poppins, sans-serif;
+    font-weight: 300 !important;
+    font-size: large;
 }
 
 body.dark-mode .li a {
-  color: #afafaf !important;
+    color: #afafaf !important;
 }
 
 .li a {
-  z-index: 102;
+    z-index: 102;
 }
 
 .li5 form button {
-  border: 1px solid #fff;
-  border-radius: 5px;
-  transform: translateY(0px);
-  background-color: #f8f8f82c;
-  transition: all 0.3s;
-  padding: 0px 3px 0px 3px;
-  font-size: smaller;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    transform: translateY(0px);
+    background-color: #f8f8f82c;
+    transition: all 0.3s;
+    padding: 0px 3px 0px 3px;
+    font-size: smaller;
 }
 
 .li5 form button:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 0px 2px 0px rgba(238, 230, 200, 0.3),
-    0 0px 0px 4px rgba(238, 230, 200, 0.3);
-  transition: all 0.3s;
+    transform: translateY(-2px);
+    box-shadow:
+        0 0px 2px 0px rgba(238, 230, 200, 0.3),
+        0 0px 0px 4px rgba(238, 230, 200, 0.3);
+    transition: all 0.3s;
+}
+
+.newspaper-key-summary {
+    border: 1px dotted;
+    border-radius: 5px;
+    padding: 0 5px;
 }
 
 /* profile */
 .profile {
-  margin-top: 0px;
-  --l: 24px;
-  width: var(--l);
-  height: var(--l);
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid #4a4947;
+    margin-top: 0px;
+    --l: 24px;
+    width: var(--l);
+    height: var(--l);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #4a4947;
 
-  & img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
+    & img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 body.dark-mode .profile,
 body.dark-mode #dm,
 body.dark-mode #big_f {
-  filter: invert(0.7);
+    filter: invert(0.7);
 }
 
 .mobile-li {
-  display: none;
-  display: block;
+    display: none;
+    display: block;
 }
 
 .ham {
-  position: absolute;
-  right: 0px;
-  top: calc(50% - 10px);
+    position: absolute;
+    right: 0px;
+    top: calc(50% - 10px);
 }
 
 .nav-items-for-mobiles {
-  width: 134px;
-  height: 200px;
-  position: absolute;
-  top: 0;
-  left: -40px;
-  transform: scaleY(0);
-  transition: transform 0.3s;
-  transform-origin: top;
-  background-color: #d8d2c2;
-  border: 1px solid #b17457;
-  border-radius: 10px;
-  z-index: 151;
+    width: 134px;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: -40px;
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    transform-origin: top;
+    background-color: #d8d2c2;
+    border: 1px solid #b17457;
+    border-radius: 10px;
+    z-index: 151;
 }
 
 body.dark-mode .nav-items-for-mobiles {
-  background-color: #4a4947;
-  color: #afafaf;
+    background-color: #4a4947;
+    color: #afafaf;
 }
 
 body.dark-mode .ham,
 body.dark-mode .mobile-search-btn {
-  filter: invert(0.7);
+    filter: invert(0.7);
 }
 
 .nav-items-for-mobiles.expand {
-  transform: scaleY(1);
-  transition: transform 0.3s;
+    transform: scaleY(1);
+    transition: transform 0.3s;
 }
 
 .ham img:nth-last-child(1) {
-  color: #fff;
-  transform: scale(1.7);
+    color: #fff;
+    transform: scale(1.7);
 }
 
 /* --- media queries ---
   ------------------------------- */
+@media (min-width: 1025px) {
+    .mobile-search-btn {
+        display: none;
+    }
+}
 @media (max-width: 1024px) {
-  nav .ul .li1 {
-    right: 10px;
-  }
-  nav .ul .li2 {
-    right: 55px;
-  }
+    nav .ul .li1 {
+        right: 10px;
+    }
+    nav .ul .li2 {
+        right: 55px;
+    }
 
-  .li1:hover,
-  .li2:hover {
-    transform: none;
-    box-shadow: none;
-  }
+    .li1:hover,
+    .li2:hover {
+        transform: none;
+        box-shadow: none;
+    }
 
-  :root {
-    --nav-width: 300;
-  }
+    :root {
+        --nav-width: 300;
+    }
 
-  nav {
-    max-height: 30px;
-  }
+    nav {
+        max-height: 30px;
+    }
 
-  .li5 {
-    margin-right: 10px;
-  }
-  .li5 form button {
-    font-size: 0.85rem;
-    padding: 0px 1px 0px 1px;
-  }
+    .li5 {
+        margin-right: 10px;
+    }
+    .li5 form button {
+        font-size: 0.85rem;
+        padding: 0px 1px 0px 1px;
+    }
 
-  .li5 form button:hover {
-    transform: translateY(0px);
-    box-shadow: none;
-    transition: all 0.3s;
-  }
+    .li5 form button:hover {
+        transform: translateY(0px);
+        box-shadow: none;
+        transition: all 0.3s;
+    }
 
-  .og-li {
-    display: none;
-  }
+    .og-li {
+        display: none;
+    }
 }

@@ -1,76 +1,76 @@
 :root {
-  --dmBgClr: rgb(50, 50, 50);
+    --dmBgClr: rgb(50, 50, 50);
 }
 
 body.dark-mode,
 .dark-mode {
-  background-color: var(--dmBgClr);
-  color: rgb(220, 220, 220);
+    background-color: var(--dmBgClr);
+    color: rgb(220, 220, 220);
 }
 body.dark-mode a {
-  color: white;
+    color: white;
 }
 /* -------  general
 ----------------------------------- */
 body.dark-mode::-webkit-scrollbar-track {
-  background-color: rgb(35, 35, 35);
+    background-color: rgb(35, 35, 35);
 }
 body.dark-mode::-webkit-scrollbar-thumb {
-  background-color: rgb(74, 74, 74);
+    background-color: rgb(74, 74, 74);
 }
 
 body.dark-mode input {
-  border: 1px solid rgb(198, 204, 210);
-  color: var(--bg1);
+    border: 1px solid rgb(198, 204, 210);
+    color: var(--bg1);
 }
 
 body.dark-mode input::placeholder {
-  color: var(--dim-border);
+    color: var(--dim-border);
 }
 
 body.dark-mode .btn:hover {
-  background-color: var(--dmBgClr) !important;
-  color: whitesmoke !important;
+    background-color: var(--dmBgClr) !important;
+    color: whitesmoke !important;
 }
 
 /* -------  table
 ----------------------------------- */
 :root {
-  --table-text-clr-dm: rgb(220, 220, 220);
-  --rbtn-clr: var(--clr2);
+    --table-text-clr-dm: rgb(220, 220, 220);
+    --rbtn-clr: var(--clr2);
 }
 
 body.dark-mode table {
-  color: var(--table-text-clr-dm);
+    color: var(--table-text-clr-dm);
 }
 
 body.dark-mode table a {
-  color: var(--table-text-clr-dm);
+    color: var(--table-text-clr-dm);
 }
 
 body.dark-mode th {
-  background-color: rgba(92, 92, 92, 1);
+    background-color: rgba(92, 92, 92, 1);
 }
 
 body.dark-mode tr:nth-child(2n - 1) {
-  background-color: rgba(54, 54, 54, 0.89);
+    background-color: rgba(54, 54, 54, 0.89);
 }
 
 body.dark-mode tr:nth-child(2n) {
-  background-color: rgb(43, 43, 43);
+    background-color: rgb(43, 43, 43);
 }
 
 body.dark-mode table tbody tr {
-  border-left: 1px solid rgba(64, 64, 64, 0.9) !important;
-  border-right: 1px solid rgba(64, 64, 64, 0.9) !important;
+    border-left: 1px solid rgba(64, 64, 64, 0.9) !important;
+    border-right: 1px solid rgba(64, 64, 64, 0.9) !important;
 }
 
 body.dark-mode table tbody tr:first-child {
-  border-top: 1px solid rgba(64, 64, 64, 0.9) !important;
+    border-top: 1px solid rgba(64, 64, 64, 0.9) !important;
 }
 
 body.dark-mode table tbody tr:last-child {
-  border-bottom: 1px solid rgba(64, 64, 64, 0.9) !important;
+    border-bottom: 1px solid rgba(64, 64, 64, 0.9) !important;
 }
 
 /* -------  about & contact
@@ -78,90 +78,89 @@ body.dark-mode table tbody tr:last-child {
 body.dark-mode .about,
 body.dark-mode .contact,
 body.dark-mode .contact-form {
-  background-color: #424242;
-  border: 1px solid #525252;
+    background-color: #424242;
+    border: 1px solid #525252;
 }
 body.dark-mode .about p,
 body.dark-mode .contact p,
 body.dark-mode .contact-form p {
-  background-color: #424242;
+    background-color: #424242;
 }
 
 body.dark-mode .about p strong,
 body.dark-mode .contact p strong {
-  color: rgb(159, 215, 233);
+    color: rgb(159, 215, 233);
 }
 
-body.dark-mode .fetch_news h2,
 body.dark-mode .about h2,
 body.dark-mode .contact h2,
 body.dark-mode .contact-form h2 {
-  color: rgb(210, 210, 210);
-  border-bottom: 1px solid #5f5f5f;
+    color: rgb(210, 210, 210);
+    border-bottom: 1px solid #5f5f5f;
 }
 
 body.dark-mode .con_icons img {
-  filter: invert(1);
+    filter: invert(1);
 }
 
 body.dark-mode .con_icons {
-  color: white;
+    color: white;
 }
 
 /* -------  search
 ----------------------------------- */
 body.dark-mode .find-mobile {
-  background-color: rgba(108, 108, 108, 0.5);
-  border: 1px solid rgba(108, 108, 108, 0.9);
+    background-color: rgba(108, 108, 108, 0.5);
+    border: 1px solid rgba(108, 108, 108, 0.9);
 }
 body.dark-mode .find-mobile {
-  color: white;
-  background-color: rgba(108, 108, 108, 1);
+    color: white;
+    background-color: rgba(108, 108, 108, 1);
 }
 
 body.dark-mode #sub-srch:hover {
-  background-color: #dfdfdf !important;
-  color: rgb(0, 0, 0) !important;
-  transition: all 0.3s;
+    background-color: #dfdfdf !important;
+    color: rgb(0, 0, 0) !important;
+    transition: all 0.3s;
 }
 
 body.dark-mode .srch input {
-  background-color: rgba(255, 255, 255, 0.605) !important;
-  border: 1px solid black !important;
-  color: rgb(0, 0, 0) !important;
+    background-color: rgba(255, 255, 255, 0.605) !important;
+    border: 1px solid black !important;
+    color: rgb(0, 0, 0) !important;
 }
 
 body.dark-mode .find-mobile.active .res {
-  background-color: rgba(171, 171, 171, 0.85);
+    background-color: rgba(171, 171, 171, 0.85);
 }
 body.dark-mode .find-mobile.active .res__num {
-  background-color: rgba(171, 171, 171, 0.85);
+    background-color: rgba(171, 171, 171, 0.85);
 }
 
 /* -------  read
 ----------------------------------- */
 :root {
-  --rbtn-clr2: var(--clr2);
+    --rbtn-clr2: var(--clr2);
 }
 
 body.dark-mode .rbtn {
-  background-color: var(--rbtn-clr);
+    background-color: var(--rbtn-clr);
 }
 
 body.dark-mode .read__container {
-  border: 1px solid rgba(108, 108, 108, 0.9);
-  background-color: rgb(35, 35, 35);
+    border: 1px solid rgba(108, 108, 108, 0.9);
+    background-color: rgb(35, 35, 35);
 }
 
 body.dark-mode .read__navigations {
-  background-color: rgba(108, 108, 108, 0.5);
-  border-bottom: 2px solid rgba(108, 108, 108, 0.9);
+    background-color: rgba(108, 108, 108, 0.5);
+    border-bottom: 2px solid rgba(108, 108, 108, 0.9);
 }
 
 body.dark-mode .read__page::-webkit-scrollbar {
-  background-color: rgb(102, 102, 102);
+    background-color: rgb(102, 102, 102);
 }
 
 body.dark-mode .read__page img {
-  border: 1px solid rgba(108, 108, 108, 0.9);
+    border: 1px solid rgba(108, 108, 108, 0.9);
 }

@@ -1,9 +1,8 @@
 SO:
-  problems: Json/format Error - minor errot
-  cannot delete article - major
   cannot store same articles even in different playlists agian: Integrity error
 
-readme.md update
+## the news categories shall be updated dynamically based on the newspaper.
+
 bengali add
 compiled add
 

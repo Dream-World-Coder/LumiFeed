@@ -18,55 +18,32 @@
         <!-- Author -->
         <meta name="author" content="Subhajit Gorai" />
         <!-- Linking CSS -->
+        <link rel="stylesheet" href="/static/css/style.css" />
+        <link rel="stylesheet" href="/static/css/components/fonts.css" />
+        <link rel="stylesheet" href="/static/css/dark-mode.css" />
+        <link rel="stylesheet" href="/static/css/components/header.css" />
+        <link rel="stylesheet" href="/static/css/components/nav.css" />
+        <link rel="stylesheet" href="/static/css/components/fetch_news.css" />
+        <link rel="stylesheet" href="/static/css/components/table.css" />
+        <link rel="stylesheet" href="/static/css/components/read.css" />
+        <link rel="stylesheet" href="/static/css/components/search.css" />
         <link
             rel="stylesheet"
-            href="{{url_for('static', filename='css/style.css')}}"
+            href="/static/css/components/about_and_contact.css"
         />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/components/fonts.css')}}"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/dark-mode.css')}}"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/components/header.css')}}"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/components/nav.css')}}"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/components/fetch_news.css')}}"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/components/table.css')}}"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/components/read.css')}}"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/components/search.css')}}"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/components/about_and_contact.css')}}"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static', filename='css/utils.css')}}"
-        />
+        <link rel="stylesheet" href="/static/css/utils.css" />
         <!-- Linking Favicon -->
         <link
             rel="shortcut icon"
-            href="{{url_for('static', filename='images/favicon.png')}}"
+            href="/static/images/favicon.png"
             type="image/x-icon"
+        />
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+            rel="stylesheet"
         />
 
         <!-- Open Graph Metadata -->
@@ -78,10 +55,7 @@
             property="og:description"
             content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
         />
-        <meta
-            property="og:image"
-            content="{{url_for('static', filename='images/social-preview.png')}}"
-        />
+        <meta property="og:image" content="/static/images/social-preview.png" />
         <meta property="og:url" content="https://lumifeed.up.railway.app" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="LumiFeed" />
@@ -98,7 +72,7 @@
         />
         <meta
             name="twitter:image"
-            content="{{url_for('static', filename='images/social-preview.png')}}"
+            content="/static/images/social-preview.png"
         />
         <meta name="twitter:site" content="@yourtwitterhandle" />
 
@@ -197,7 +171,7 @@
                 >
                     <img
                         id="logo-img"
-                        src="{{url_for('static', filename='images/favicon.png')}}"
+                        src="/static/images/favicon.png"
                         alt="LumiFeed Logo"
                         itemprop="logo"
                     />
@@ -220,7 +194,7 @@
                             >
                                 <img
                                     id="eee"
-                                    src="{{url_for('static', filename='icons/dd1.svg')}}"
+                                    src="/static/icons/dd1.svg"
                                     alt=""
                                 />
                                 End of Table
@@ -235,7 +209,7 @@
                             >
                                 <img
                                     id="uuu"
-                                    src="{{url_for('static', filename='icons/dd2.svg')}}"
+                                    src="/static/icons/dd2.svg"
                                     alt=""
                                 />
                                 Start of Table
@@ -244,23 +218,6 @@
 
                         <!-- profile/logout button -->
                         <div class="li li5 flexed">
-                            {% if current_user.is_authenticated %}
-                            <form
-                                id="profile-form"
-                                action="/profile/{{current_user.username}}"
-                                method="GET"
-                            >
-                                <div
-                                    class="profile"
-                                    onclick="document.getElementById('profile-form').submit();"
-                                >
-                                    <img
-                                        src="{{url_for('static', filename=current_user.profile_pic)}}"
-                                        alt="profile pic"
-                                    />
-                                </div>
-                            </form>
-                            {% else %}
                             <form id="login-form" action="/login" method="GET">
                                 <button
                                     type="submit"
@@ -270,7 +227,6 @@
                                     Login
                                 </button>
                             </form>
-                            {% endif %}
                         </div>
 
                         <!-- acctual nav -->
@@ -285,14 +241,6 @@
                         <div class="li li4 animated-underline-white og-li">
                             <a href="/contact" class="flexed" rel="noopener"
                                 >Contact</a
-                            >
-                        </div>
-                        <div class="li li4 animated-underline-full og-li">
-                            <a
-                                href="#"
-                                class="flexed newspaper-key-summary"
-                                rel="noopener"
-                                >newspaper-key-summary</a
                             >
                         </div>
 
@@ -389,17 +337,14 @@
                 </div>
 
                 <div class="mobile-search-btn">
-                    <img
-                        src="{{url_for('static', filename='icons/search3.svg')}}"
-                        alt="search button"
-                    />
+                    <img src="/static/icons/search3.svg" alt="search button" />
                 </div>
 
                 <div class="buttons">
                     <div class="dark-mode-btn dmbtn">
                         <span id="dm">
                             <img
-                                src="{{url_for('static', filename='icons/dm2.svg')}}"
+                                src="/static/icons/dm2.svg"
                                 alt="dark mode button"
                             />
                         </span>
@@ -407,7 +352,7 @@
                     <div class="bigger-font-btn">
                         <span id="big_f">
                             <img
-                                src="{{url_for('static', filename='icons/bigger.svg')}}"
+                                src="/static/icons/bigger.svg"
                                 alt="bigger fonts button"
                             />
                         </span>
@@ -432,14 +377,14 @@
                                 <img
                                     class="d-img-1"
                                     style="display: inline"
-                                    src="{{url_for('static', filename='icons/plus2.svg')}}"
+                                    src="/static/icons/plus2.svg"
                                     alt="Expand"
                                     srcset=""
                                 />
                                 <img
                                     class="d-img-2"
                                     style="display: none"
-                                    src="{{url_for('static', filename='icons/minus2.svg')}}"
+                                    src="/static/icons/minus2.svg"
                                     alt="Collapse"
                                     srcset=""
                                 />
@@ -686,8 +631,7 @@
                         </div>
                     </form>
                 </div>
-
-                <select name="news_company" class="newspaper-companies">
+                <select class="newspaper-companies">
                     <option disabled value="">--select--</option>
                     <option value="ie">The Indian Express</option>
                     <option value="bbc">BBC News</option>
@@ -714,14 +658,9 @@
                         id="news-table"
                         itemscope
                         itemtype="https://schema.org/Table"
+                        class=""
                     >
                         <meta itemprop="tableOfNews" content="Table of News" />
-                        <img src="/static/images/google-crane.svg" />
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Sunt quo non laboriosam porro omnis, eius sed,
-                        temporibus expedita magni blanditiis quas ducimus beatae
-                        ipsa necessitatibus modi dolorem excepturi, doloremque
-                        tempore!
                     </table>
                     <div class="read flexed" id="read">
                         <div class="read__container full flex-col">
@@ -734,20 +673,20 @@
                                     id="open-in-new-tab"
                                 >
                                     <img
-                                        src="{{url_for('static', filename='icons/open1.svg')}}"
+                                        src="/static/icons/open1.svg"
                                         alt="open preview in new tab"
                                     />
                                 </div>
                                 <div class="read__icons ri2" id="close-preview">
                                     <img
-                                        src="{{url_for('static', filename='icons/cross1.svg')}}"
+                                        src="/static/icons/cross1.svg"
                                         alt="close preview"
                                     />
                                 </div>
                             </div>
                             <div
                                 class="read__page bg-set"
-                                itemscope
+                                itemscope=""
                                 itemtype="https://schema.org/NewsArticle"
                             >
                                 <meta
@@ -766,24 +705,117 @@
                                         src=""
                                         alt="news article image"
                                         itemprop="image"
-                                    />
-                                    <br />
+                                    /><br />
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- search results -->
                 <div
                     class="search-reasults relative flex-col f-gap-1"
-                    style="display: flex"
+                    style="display: none"
                 >
                     <div
                         id="ajax_desktop"
                         class="res__container full"
                         itemprop="mainContentOfPage"
-                    ></div>
+                    >
+                        <div class="res__num border_res">25 Matches found</div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Central Govt has underpriced DAP: Fertiliser
+                                industry,
+                                <br />
+                                <span
+                                    data-href="serial_no_16"
+                                    data-url=" December 4, 2024  04:54 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 16
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Banking Bill debate turns unruly as Opposition
+                                and Treasury spar over a businessman, two former
+                                PMs,
+                                <br />
+                                <span
+                                    data-href="serial_no_17"
+                                    data-url=" December 4, 2024  04:54 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 17
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Odisha man arrested for killing and eating pig
+                                during play did it to outdo rival performer,
+                                police say,
+                                <br />
+                                <span
+                                    data-href="serial_no_23"
+                                    data-url=" December 4, 2024  04:55 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 23
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Highest&nbsp;after Bengal, pending criminal
+                                cases in Delhi jump by 2.66 lakh in a year,
+                                <br />
+                                <span
+                                    data-href="serial_no_24"
+                                    data-url="December 3, 2024 19:52 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 24
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Bangladesh Assistant High Commission shuts down
+                                visa, consular services at Agartala after mob
+                                breach,
+                                <br />
+                                <span
+                                    data-href="serial_no_25"
+                                    data-url="December 3, 2024 19:44 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 25
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
 
@@ -872,11 +904,7 @@
                     <li class="animated-underline-white">
                         <a href="/">Home</a>
                     </li>
-                    {% if current_user.is_authenticated %}
-                    <li class="animated-underline-white">
-                        <a href="/profile/{{current_user.username}}">Profile</a>
-                    </li>
-                    {% endif %}
+
                     <li class="animated-underline-white">
                         <a href="/about">About</a>
                     </li>
@@ -902,10 +930,7 @@
         </footer>
 
         <!-- script.js -->
-        <script
-            type="text/javascript"
-            src="{{url_for('static', filename='js/script.js')}}"
-        ></script>
+        <script type="text/javascript" src="/static/js/script.js"></script>
 
         <script>
             const aboutDiv = document.querySelector(".li3");
@@ -941,15 +966,15 @@
         </script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/functions/bigger_font.js')}}"
+            src="/static/js/functions/bigger_font.js"
         ></script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/functions/city_options_toggle.js')}}"
+            src="/static/js/functions/city_options_toggle.js"
         ></script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/functions/dark_mode.js')}}"
+            src="/static/js/functions/dark_mode.js"
         ></script>
         <script>
             const read = document.getElementById("read");
@@ -966,47 +991,47 @@
         </script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/functions/search.js')}}"
+            src="/static/js/functions/search.js"
         ></script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/functions/fetch_news.js')}}"
+            src="/static/js/functions/fetch_news.js"
         ></script>
 
         <!-- utils -->
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/utils/scroll/smooth-scrolling.js')}}"
+            src="/static/js/utils/scroll/smooth-scrolling.js"
         ></script>
 
         <!-- ajax -->
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/ajax/preview_news.js')}}"
+            src="/static/js/ajax/preview_news.js"
         ></script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/ajax/read_news_new_tab.js')}}"
+            src="/static/js/ajax/read_news_new_tab.js"
         ></script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/ajax/save_article.js')}}"
+            src="/static/js/ajax/save_article.js"
         ></script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/ajax/fetch_news.js')}}"
+            src="/static/js/ajax/fetch_news.js"
         ></script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/ajax/find_article.js')}}"
+            src="/static/js/ajax/find_article.js"
         ></script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/ajax/desktop_search.js')}}"
+            src="/static/js/ajax/desktop_search.js"
         ></script>
         <script
             type="text/javascript"
-            src="{{url_for('static', filename='js/ajax/mobile_search.js')}}"
+            src="/static/js/ajax/mobile_search.js"
         ></script>
     </body>
 </html>

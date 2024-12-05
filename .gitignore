@@ -125,3 +125,4 @@ migrate
 #migrations/
 readme-pdfs/
 .backup/LumiFeed
+.ropeproject

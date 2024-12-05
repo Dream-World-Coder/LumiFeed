@@ -1,229 +1,235 @@
 :root {
-  --b-rad: 10px;
-  --t: calc(var(--fetch-news-height) + var(--fetch-news-m-top));
-  --res-h: 70vh;
-  --icon-width: 40px;
-  --icon-height: 40px;
-  --clr1: rgb(204, 112, 0);
-  --clr201: rgba(159, 114, 59, 0.347);
-  /* search clrs */
-  --c3: var(--v-th); /* border  */
-  --c4: var(--v-tr-odd); /* bg  */
-  --c5: var(--v-tr-even); /* r-div  */
-  --c6: var(--v-tr-odd); /* link  */
+    --b-rad: 10px;
+    --t: calc(var(--fetch-news-height) + var(--fetch-news-m-top));
+    --res-h: 70vh;
+    --icon-width: 40px;
+    --icon-height: 40px;
+    --clr1: rgb(204, 112, 0);
+    --clr201: rgba(159, 114, 59, 0.347);
+    /* search clrs */
+    --c3: var(--v-th); /* border  */
+    --c4: var(--v-tr-odd); /* bg  */
+    --c5: var(--v-tr-even); /* r-div  */
+    --c6: var(--v-tr-odd); /* link  */
 
-  --c6: var(--bg1-val); /* link  */
+    --c6: var(--bg1-val); /* link  */
 
-  --search-res-bg-clr: rgba(221, 43, 79, 0.2);
-  /* dimmer  */
-  --search-res-bg-clr2: rgba(119, 46, 60, 0.2);
-  --search-res-bg-clr3: rgba(119, 46, 60, 0.8);
+    --search-res-bg-clr: rgba(221, 43, 79, 0.2);
+    /* dimmer  */
+    --search-res-bg-clr2: rgba(119, 46, 60, 0.2);
+    --search-res-bg-clr3: rgba(119, 46, 60, 0.8);
 
-  /* used in search-result */
-  --dim-border: rgba(202, 202, 202, 1);
-  --dim-bg-clr: #e7e4dd;
+    /* used in search-result */
+    --dim-border: rgba(202, 202, 202, 1);
+    --dim-bg-clr: #e7e4dd;
 
-  /* only used in result */
-  --dim-clr: rgba(171, 171, 171, 0.85);
-  --dim-font: rgb(40, 38, 38);
-  --res-bg-clr: var(--dim-clr);
-  --res-link-bg-clr: var(--bg1);
+    /* only used in result */
+    --dim-clr: rgba(171, 171, 171, 0.85);
+    --dim-font: rgb(40, 38, 38);
+    --res-bg-clr: var(--dim-clr);
+    --res-link-bg-clr: var(--bg1);
 
-  /* -----------
+    /* -----------
         they all are just for show, bcz, js regulates the clr of them.
     -------------- */
-  --cx: rgb(208, 208, 208);
+    --cx: rgb(208, 208, 208);
 
-  --r: 70px;
-  --w: 310px;
+    --r: 70px;
+    --w: 310px;
 }
 
 .find {
-  position: fixed;
-  top: calc(var(--header-height) + 20px);
-  right: var(--con-m-left);
-  width: var(--w);
-  display: flex;
-  /* border: 1px solid white; */
+    width: auto;
+    display: flex;
+    padding-right: 20px;
 }
 
-@media (width > 1500px) {
-  :root {
-    --w: 400px;
-  }
-  .find {
-    width: var(--w);
-  }
+#search {
+    background-color: transparent;
+    border-color: #999 !important;
+    border-radius: 0px !important;
+    border-width: 1px !important;
+    padding-left: 0 !important;
+    width: 0 !important;
+    display: block;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    transition: all 0.3s ease-in-out;
+}
+#search.clicked {
+    width: 250px !important;
+    transition: all 0.3s ease-in-out;
 }
 
-/* .find.shrink {
-  top: calc(var(--t) - 26rem);
-} */
+body.dark-mode .find #search {
+    border-color: rgb(108, 108, 108, 0.9) !important;
+}
 
 #submit {
-  display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../icons/search3-desktop.svg");
+    object-fit: cover;
+    transition: all 0.3s;
+    background-color: transparent;
+    border: none;
+    font-size: 0;
+}
+#submit.clicked {
+    background-image: url("../../icons/cross1.svg");
+}
+#submit:hover {
+    transform: scale(1.2);
+    transition: all 0.3s;
+}
+body.dark-mode #submit {
+    filter: invert(0.7);
 }
 
-#search-form {
-  display: flex;
-}
-
-.search-icon {
-  width: var(--icon-width);
-  height: var(--icon-height);
-  background-image: url(../../icons/search3-desktop.svg);
-  object-fit: cover;
-  transition: all 0.3s;
-  background-color: transparent;
-  border: none;
-  font-size: 0;
-}
-.search-icon:hover {
-  transform: scale(1.2);
-  transition: all 0.3s;
-}
-
+/* -----------search-result---------- */
 .search-reasults {
-  display: flex;
-  border-radius: var(--b-rad);
-  width: var(--w);
-  height: var(--res-h);
-  padding: 15px;
-  font-size: 1.2rem;
-  z-index: 10;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  border: 1px solid #d8d2c2;
-  background-color: #faf7f0;
+    display: flex;
+    border-radius: var(--b-rad);
+    /* width: var(--w); */
+    width: 26vw;
+    height: var(--res-h);
+    padding: 15px;
+    font-size: 1.2rem;
+    z-index: 10;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border: 1px solid #d8d2c2;
+    background-color: #faf7f0;
+    opacity: 0;
+
+    @media screen and (min-width: 2000px) {
+        width: 21vw;
+    }
 }
 
 body.dark-mode .search-reasults {
-  background-color: #323232;
-  border: 1px solid #434343;
+    background-color: #323232;
+    border: 1px solid #434343;
 }
 
 .search-reasults::-webkit-scrollbar {
-  width: 0;
+    width: 0;
 }
 
 .res__container {
-  color: var(--dim-font);
-  font-family: MondiaThin, "Courier New", Courier, monospace;
-  line-height: 1.2rem;
+    color: var(--dim-font);
+    font-family: MondiaThin, "Courier New", Courier, monospace;
+    line-height: 1.2rem;
 }
 
 .res__num {
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  background-color: #d8d2c2;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #d8d2c2;
 }
 
 .res {
-  background-color: #d8d2c2;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
+    background-color: #d8d2c2;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 body.dark-mode .res,
 body.dark-mode .res__num {
-  background-color: gray;
+    background-color: gray;
 }
 
 .res__link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--res-link-bg-clr);
-  border-radius: 20px;
-  margin-top: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--res-link-bg-clr);
+    border-radius: 20px;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .find-mobile {
-  position: fixed;
-  bottom: 0;
-  left: 4vw;
-  width: 92vw;
-  height: 68vh;
-  z-index: 999999;
-  border-radius: 50px 50px 0 0;
-  background-color: #faf7f0;
-  border: 1px solid #b17457;
-  display: flex;
-  transition: all 0.3s;
-  padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 4vw;
+    width: 92vw;
+    height: 68vh;
+    z-index: 999999;
+    border-radius: 50px 50px 0 0;
+    background-color: #faf7f0;
+    border: 1px solid #b17457;
+    display: flex;
+    transition: all 0.3s;
+    padding: 10px;
 }
 
 .horizontal-bar {
-  background-color: transparent;
-  /* transform: translateY(-40px); */
+    background-color: transparent;
 
-  & img {
-    width: 34px;
-    height: 34px;
-  }
+    & img {
+        width: 34px;
+        height: 34px;
+    }
 }
 
 .srch {
-  /* margin-top: 20px; */
-  margin-bottom: 20px;
-  width: 100%;
-  height: fit-content;
+    margin-bottom: 20px;
+    width: 100%;
+    height: fit-content;
 }
 
 #sub-srch {
-  width: 70px !important;
-  height: 35px !important;
-  font-size: 0.8rem !important;
-  margin-right: 10px;
+    width: 70px !important;
+    height: 35px !important;
+    font-size: 0.8rem !important;
+    margin-right: 10px;
 
-  &:hover {
-    background-color: #faf7f0 !important;
-    color: rgb(78, 78, 78) !important;
-    transition: all 0.3s;
-  }
+    &:hover {
+        background-color: #faf7f0 !important;
+        color: rgb(78, 78, 78) !important;
+        transition: all 0.3s;
+    }
 }
 
 .srch input {
-  width: 75% !important;
-  margin-left: 10px;
-  background-color: #d8d2c2 !important;
-  border: 1px solid #b17457 !important;
+    width: 75% !important;
+    margin-left: 10px;
+    background-color: #d8d2c2 !important;
+    border: 1px solid #b17457 !important;
 }
 
 .resa {
-  margin-left: 0px;
-  overflow-x: hidden;
-  overflow-y: scroll;
+    margin-left: 0px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .resa::-webkit-scrollbar {
-  width: 0;
-}
-
-@media (max-width: 768px) {
+    width: 0;
 }
 
 @media (min-width: 300px) and (max-width: 1380px) {
-  .find {
-    display: none;
-  }
-  .find-mobile {
-    height: 0%;
-    opacity: 0;
-  }
-  .find-mobile.active {
-    opacity: 1;
-    height: 68vh;
-    transition: all 0.3s;
-  }
+    .find {
+        display: none;
+    }
+    .find-mobile {
+        height: 0%;
+        opacity: 0;
+    }
+    .find-mobile.active {
+        opacity: 1;
+        height: 68vh;
+        transition: all 0.3s;
+    }
 }
 
 @media (min-width: 1381px) and (max-width: 5440px) {
-  .find-mobile {
-    display: none;
-  }
+    .find-mobile {
+        display: none;
+    }
 }

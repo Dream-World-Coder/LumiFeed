@@ -2,91 +2,108 @@ const buttons = document.querySelectorAll(".btn");
 const news_count_input = document.getElementById("news_count");
 
 if (window.innerWidth <= 168) {
-  buttons.forEach((button, index) => {
-    button.style.width = "35px";
-    button.style.height = "25px";
-    button.style.fontSize = "0.65rem";
-    button.style.borderRadius = "10px";
-  });
-  news_count_input.style.fontSize = "0.8rem";
-  news_count_input.style.height = "20px";
-  news_count_input.style.width = "25px";
+    buttons.forEach((button, index) => {
+        button.style.width = "35px";
+        button.style.height = "25px";
+        button.style.fontSize = "0.65rem";
+        button.style.borderRadius = "10px";
+    });
+    news_count_input.style.fontSize = "0.8rem";
+    news_count_input.style.height = "20px";
+    news_count_input.style.width = "25px";
 }
 
-// Disable infinite scroll
+// // Disable infinite scroll
+// window.addEventListener(
+//   "scroll",
+//   function () {
+//     // Prevent loading more content when scrolling to the bottom
+//     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+//       // Stop any loading action here
+//       // You can clear any loading indicators if needed
+//     }
+//   },
+//   { passive: true }
+// );
+
+var lastScrollTop = 0;
+const header = document.querySelector("header");
+// element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
 window.addEventListener(
-  "scroll",
-  function () {
-    // Prevent loading more content when scrolling to the bottom
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      // Stop any loading action here
-      // You can clear any loading indicators if needed
-    }
-  },
-  { passive: true }
+    "scroll",
+    function () {
+        var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+        if (st > lastScrollTop) {
+            header.style.opacity = 1;
+            header.classList.add("is-scroll-down");
+        } else if (st < lastScrollTop) {
+            // header.style.opacity = 0;
+            header.classList.remove("is-scroll-down");
+        } else {
+            header.style.opacity = 1;
+        }
+        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+    },
+    false,
 );
 
-
-
-const mobileNav = document.querySelector('.nav-items-for-mobiles');
-const originalLis = document.querySelectorAll('.og-li');
-const mobileNavMenu = document.querySelector('.ham img:nth-child(1)');
-const mobileNavCross = document.querySelector('.ham img:nth-child(2)');
-const ham = document.querySelector('.ham');
+const mobileNav = document.querySelector(".nav-items-for-mobiles");
+const originalLis = document.querySelectorAll(".og-li");
+const mobileNavMenu = document.querySelector(".ham img:nth-child(1)");
+const mobileNavCross = document.querySelector(".ham img:nth-child(2)");
+const ham = document.querySelector(".ham");
 
 // Hide all original nav items
 function hideOgLi() {
-  originalLis.forEach(originalLi => {
-    originalLi.style.display = 'none';
-  });
+    originalLis.forEach((originalLi) => {
+        originalLi.style.display = "none";
+    });
 }
 
 // Show all original nav items
 function showOgLi() {
-  originalLis.forEach(originalLi => {
-    originalLi.style.display = 'block';
-  });
+    originalLis.forEach((originalLi) => {
+        originalLi.style.display = "block";
+    });
 }
 
 // Handle mobile nav functionality (expand/collapse)
 function mobileNavFunctionality() {
-  ham.addEventListener('click', () => {
-    if (mobileNav.classList.contains('expand')) {
-      mobileNav.classList.remove('expand');
-      mobileNavMenu.style.display = 'block';
-      mobileNavCross.style.display = 'none';
-    } else {
-      mobileNav.classList.add('expand');
-      mobileNavMenu.style.display = 'none';
-      mobileNavCross.style.display = 'block';
-    }
-  });
+    ham.addEventListener("click", () => {
+        if (mobileNav.classList.contains("expand")) {
+            mobileNav.classList.remove("expand");
+            mobileNavMenu.style.display = "block";
+            mobileNavCross.style.display = "none";
+        } else {
+            mobileNav.classList.add("expand");
+            mobileNavMenu.style.display = "none";
+            mobileNavCross.style.display = "block";
+        }
+    });
 }
 
 // Initial responsive behavior
 function initResponsiveBehavior() {
-  if (window.innerWidth >= 768) {
-    mobileNav.style.display = 'none';
-    showOgLi();
-    [mobileNavMenu, mobileNavCross].forEach(item => {
-      item.style.display = 'none';
-    });
-  } else {
-    mobileNav.style.display = 'flex';
-    hideOgLi();
-    mobileNavFunctionality();
-  }
+    if (window.innerWidth >= 768) {
+        mobileNav.style.display = "none";
+        showOgLi();
+        [mobileNavMenu, mobileNavCross].forEach((item) => {
+            item.style.display = "none";
+        });
+    } else {
+        mobileNav.style.display = "flex";
+        hideOgLi();
+        mobileNavFunctionality();
+    }
 }
 
 // Use computed style to check visibility of mobile nav
 function isMobileNavVisible() {
-  return window.getComputedStyle(mobileNav).display !== 'none';
+    return window.getComputedStyle(mobileNav).display !== "none";
 }
 
 // Initialize the responsive behavior when the page loads
 initResponsiveBehavior();
-
-
 
 /*
 function foo(){

@@ -1,1484 +1,2212 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Title -->
-    <title>LumiFeed - Ad Free News, Summaries, and Key Points</title>
-    <!-- Meta Description -->
-    <meta
-      name="description"
-      content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
-    />
-    <!-- Meta Keywords -->
-    <meta name="keywords" content="LumiFeed, ad free news, news summary, key points, Kolkata news, Indian news, summaries" />
-    <!-- Author -->
-    <meta name="author" content="Subhajit Gorai" />
-    <!-- Linking CSS -->
-    <link rel="stylesheet" href="static/css/style.css" />
-    <link rel="stylesheet" href="static/css/components/fonts.css" />
-    <link rel="stylesheet" href="static/css/dark-mode.css" />
-    <link rel="stylesheet" href="static/css/components/header.css" />
-    <link rel="stylesheet" href="static/css/components/nav.css" />
-    <link rel="stylesheet" href="static/css/components/fetch_news.css" />
-    <link rel="stylesheet" href="static/css/components/table.css" />
-    <link rel="stylesheet" href="static/css/components/read.css" />
-    <link rel="stylesheet" href="static/css/components/search.css" />
-    <link rel="stylesheet" href="static/css/components/about_and_contact.css" />
-    <link rel="stylesheet" href="static/css/utils.css" />
-    <!-- Linking Favicon -->
-    <link rel="shortcut icon" href="static/images/favicon.png" type="image/x-icon" />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Title -->
+        <title>LumiFeed - Ad Free News, Summaries, and Key Points</title>
+        <!-- Meta Description -->
+        <meta
+            name="description"
+            content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+        />
+        <!-- Meta Keywords -->
+        <meta
+            name="keywords"
+            content="LumiFeed, ad free news, news summary, key points, Kolkata news, Indian news, summaries"
+        />
+        <!-- Author -->
+        <meta name="author" content="Subhajit Gorai" />
+        <!-- Linking CSS -->
+        <link rel="stylesheet" href="static/css/style.css" />
+        <link rel="stylesheet" href="static/css/components/fonts.css" />
+        <link rel="stylesheet" href="static/css/dark-mode.css" />
+        <link rel="stylesheet" href="static/css/components/header.css" />
+        <link rel="stylesheet" href="static/css/components/nav.css" />
+        <link rel="stylesheet" href="static/css/components/fetch_news.css" />
+        <link rel="stylesheet" href="static/css/components/table.css" />
+        <link rel="stylesheet" href="static/css/components/read.css" />
+        <link rel="stylesheet" href="static/css/components/search.css" />
+        <link
+            rel="stylesheet"
+            href="static/css/components/about_and_contact.css"
+        />
+        <link rel="stylesheet" href="static/css/utils.css" />
+        <!-- Linking Favicon -->
+        <link
+            rel="shortcut icon"
+            href="static/images/favicon.png"
+            type="image/x-icon"
+        />
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- Open Graph Metadata -->
-    <meta property="og:title" content="LumiFeed - Ad Free News, Summaries, and Key Points" />
-    <meta
-      property="og:description"
-      content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
-    />
-    <meta property="og:image" content="static/images/social-preview.png" />
-    <meta property="og:url" content="https://lumifeed.up.railway.app" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="LumiFeed" />
+        <!-- Open Graph Metadata -->
+        <meta
+            property="og:title"
+            content="LumiFeed - Ad Free News, Summaries, and Key Points"
+        />
+        <meta
+            property="og:description"
+            content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+        />
+        <meta property="og:image" content="static/images/social-preview.png" />
+        <meta property="og:url" content="https://lumifeed.up.railway.app" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="LumiFeed" />
 
-    <!-- Twitter Card Metadata -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="LumiFeed - Ad Free News, Summaries, and Key Points" />
-    <meta
-      name="twitter:description"
-      content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
-    />
-    <meta name="twitter:image" content="static/images/social-preview.png" />
-    <meta name="twitter:site" content="@yourtwitterhandle" />
+        <!-- Twitter Card Metadata -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="LumiFeed - Ad Free News, Summaries, and Key Points"
+        />
+        <meta
+            name="twitter:description"
+            content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+        />
+        <meta name="twitter:image" content="static/images/social-preview.png" />
+        <meta name="twitter:site" content="@yourtwitterhandle" />
 
-    <!-- Robots Metadata -->
-    <meta name="robots" content="index, follow" />
+        <!-- Robots Metadata -->
+        <meta name="robots" content="index, follow" />
 
-    <!-- Theme Color for Mobile Browsers -->
-    <meta name="theme-color" content="#ffffff" />
+        <!-- Theme Color for Mobile Browsers -->
+        <meta name="theme-color" content="#ffffff" />
 
-    <!-- Scripts for SEO -->
-    <!-- Schema.org markup for Google -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "NewsArticle",
-        "headline": "LumiFeed - Ad Free News, Summaries, and Key Points",
-        "image": ["https://lumifeed.up.railway.app/static/images/social-preview.png"],
-        "datePublished": "2024-07-15",
-        "dateModified": "2024-07-15",
-        "author": {
-          "@type": "Person",
-          "name": "Subhajit Gorai"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LumiFeed",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://lumifeed.up.railway.app/static/images/logo.png"
-          }
-        },
-        "description": "LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
-      }
-    </script>
+        <!-- Scripts for SEO -->
+        <!-- Schema.org markup for Google -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "NewsArticle",
+                "headline": "LumiFeed - Ad Free News, Summaries, and Key Points",
+                "image": [
+                    "https://lumifeed.up.railway.app/static/images/social-preview.png"
+                ],
+                "datePublished": "2024-07-15",
+                "dateModified": "2024-07-15",
+                "author": {
+                    "@type": "Person",
+                    "name": "Subhajit Gorai"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "LumiFeed",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://lumifeed.up.railway.app/static/images/logo.png"
+                    }
+                },
+                "description": "LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
+            }
+        </script>
 
-    <!-- css for loader -->
-    <style>
-      .loader-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 99999999999999;
-      }
+        <!-- css for loader -->
+        <style>
+            .loader-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.25);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 99999999999999;
+            }
 
-      .loader {
-        border: 5px solid #f3f3f3;
-        border-top: 5px solid #3498db;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        animation: spin 1s linear infinite;
-      }
+            .loader {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 8px;
+                width: 100%;
+                --c: no-repeat linear-gradient(#543310 0 0);
+                background: var(--c), var(--c), #f8f4e1;
+                background-size: 60% 100%;
+                animation: l16 3s infinite;
+            }
+            @keyframes l16 {
+                0% {
+                    background-position:
+                        -150% 0,
+                        -150% 0;
+                }
+                66% {
+                    background-position:
+                        250% 0,
+                        -150% 0;
+                }
+                100% {
+                    background-position:
+                        250% 0,
+                        250% 0;
+                }
+            }
+        </style>
+    </head>
 
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div id="loader" class="loader-container" style="display: none">
-      <div class="loader"></div>
-    </div>
-
-    <header class="fixed" itemscope itemtype="https://schema.org/WPHeader">
-      <div class="header-wrapper full flex align-center section-element">
-        <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-          <img id="logo-img" src="static/images/favicon.png" alt="LumiFeed Logo" itemprop="logo" />
-          <span id="logo-text" itemprop="name">LumiFeed</span>
+    <body>
+        <div id="loader" class="loader-container" style="display: none">
+            <div class="loader"></div>
         </div>
 
-        <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
-          <div class="ul relative flexed justify-evenly">
-            <div class="li li1">
-              <a class="f0 flexed" href="#table-end" rel="noopener">
-                <img id="eee" src="static/icons/dd1.svg" alt="" />
-                End of Table
-              </a>
+        <header class="fixed" itemscope itemtype="https://schema.org/WPHeader">
+            <div class="header-wrapper full flex align-center section-element">
+                <div
+                    class="logo flex align-center justify-start"
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
+                >
+                    <img
+                        id="logo-img"
+                        src="static/images/favicon.png"
+                        alt="LumiFeed Logo"
+                        itemprop="logo"
+                    />
+                    <span id="logo-text" itemprop="name">LumiFeed</span>
+                </div>
+
+                <nav
+                    role="navigation"
+                    class="relative flexed"
+                    itemscope
+                    itemtype="https://schema.org/SiteNavigationElement"
+                >
+                    <div class="ul relative flexed justify-evenly">
+                        <!-- go to end button -->
+                        <div class="li li1">
+                            <a
+                                class="f0 flexed"
+                                href="#table-end"
+                                rel="noopener"
+                            >
+                                <img
+                                    id="eee"
+                                    src="static/icons/dd1.svg"
+                                    alt=""
+                                />
+                                End of Table
+                            </a>
+                        </div>
+                        <!-- go to top button -->
+                        <div class="li li2">
+                            <a
+                                class="f0 flexed"
+                                href="#table-start"
+                                rel="noopener"
+                            >
+                                <img
+                                    id="uuu"
+                                    src="static/icons/dd2.svg"
+                                    alt=""
+                                />
+                                Start of Table
+                            </a>
+                        </div>
+
+                        <!-- profile/logout button -->
+                        <div class="li li5 flexed">
+                            <form id="login-form" action="/login" method="GET">
+                                <button
+                                    type="submit"
+                                    class="flexed"
+                                    rel="noopener"
+                                >
+                                    Login
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- acctual nav -->
+                        <div class="li li6 animated-underline-white og-li">
+                            <a href="/" class="flexed" rel="noopener">Home</a>
+                        </div>
+                        <div class="li li3 animated-underline-white og-li">
+                            <a href="about.html" class="flexed" rel="noopener"
+                                >About</a
+                            >
+                        </div>
+                        <div class="li li4 animated-underline-white og-li">
+                            <a href="contact.html" class="flexed" rel="noopener"
+                                >Contact</a
+                            >
+                        </div>
+
+                        <!-- for mobiles -->
+                        <div
+                            class="nav-items-for-mobiles flexed flex-col f-gap-2"
+                            style="display: none"
+                        >
+                            <div
+                                class="li li6 mobile-li animated-underline-white"
+                            >
+                                <a href="/" class="flexed" rel="noopener"
+                                    >Home</a
+                                >
+                            </div>
+                            <div
+                                class="li li3 mobile-li animated-underline-white"
+                            >
+                                <a
+                                    href="about.html"
+                                    class="flexed"
+                                    rel="noopener"
+                                    >About</a
+                                >
+                            </div>
+                            <div
+                                class="li li4 mobile-li animated-underline-white"
+                            >
+                                <a
+                                    href="contact.html"
+                                    class="flexed"
+                                    rel="noopener"
+                                    >Contact</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <!-- search -->
+                <div
+                    itemscope
+                    itemtype="https://schema.org/SearchResultsPage"
+                    id="queryy"
+                    class="find flex-col f-gap-2"
+                >
+                    <!-- search query -->
+                    <div
+                        class="search-bar relative flex justify-between align-center"
+                    >
+                        <form
+                            id="search-form"
+                            class="relative full flex justify-between align-center"
+                            action="/search_in_title"
+                            method="post"
+                            itemprop="potentialAction"
+                            itemscope
+                            itemtype="https://schema.org/SearchAction"
+                        >
+                            <input
+                                type="text"
+                                name="search_part"
+                                id="search"
+                                placeholder="press enter/return key to search"
+                                required
+                                itemprop="query-input"
+                            />
+                            <button class="search-icon bg-set" id="submit">
+                                Search
+                            </button>
+                            <script>
+                                document
+                                    .getElementById("submit")
+                                    .addEventListener("click", () => {
+                                        document
+                                            .getElementById("search")
+                                            .classList.toggle("clicked");
+                                        document
+                                            .getElementById("submit")
+                                            .classList.toggle("clicked");
+                                    });
+                            </script>
+                        </form>
+                    </div>
+                </div>
+                <div class="ham">
+                    <img
+                        height="20px"
+                        width="20px"
+                        src="static/icons/ham.svg"
+                        style="display: flex"
+                    />
+                    <img
+                        height="20px"
+                        width="20px"
+                        src="static/icons/cross3.svg"
+                        style="display: none"
+                    />
+                </div>
+
+                <div class="mobile-search-btn">
+                    <img src="static/icons/search3.svg" alt="search button" />
+                </div>
+
+                <div class="buttons">
+                    <div class="dark-mode-btn dmbtn">
+                        <span id="dm">
+                            <img
+                                src="static/icons/dm2.svg"
+                                alt="dark mode button"
+                            />
+                        </span>
+                    </div>
+                    <div class="bigger-font-btn">
+                        <span id="big_f">
+                            <img
+                                src="static/icons/bigger.svg"
+                                alt="bigger fonts button"
+                            />
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="li li2">
-              <a class="f0 flexed" href="#table-start" rel="noopener">
-                <img id="uuu" src="static/icons/dd2.svg" alt="" />
-                Start of Table
-              </a>
+        </header>
+
+        <section>
+            <div class="params-input">
+                <!-- fetch_news -->
+                <div
+                    itemscope
+                    itemprop="inputOfData"
+                    class="fetch_news section-element"
+                    id="table-start"
+                >
+                    <form id="fetch-news-form" onsubmit="fetchNews(event)">
+                        <h2 class="category-title flexed justify-between">
+                            <span>Select News Category</span>
+                            <span class="dropdown">
+                                <img
+                                    class="d-img-1"
+                                    style="display: inline"
+                                    src="static/icons/plus2.svg"
+                                    alt="Expand"
+                                    srcset=""
+                                />
+                                <img
+                                    class="d-img-2"
+                                    style="display: none"
+                                    src="static/icons/minus2.svg"
+                                    alt="Collapse"
+                                    srcset=""
+                                />
+                            </span>
+                        </h2>
+                        <!-- options, etc -->
+                        <div
+                            class="options flex-col align-start"
+                            style="display: none"
+                        >
+                            <div class="con flex-col align-center">
+                                <!-- options for news type -->
+                                <div class="options__container flexed f-gap-2">
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="top"
+                                            id="top_news"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="top_news"
+                                            >Trending</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="india"
+                                            id="india_news"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="india_news"
+                                            >India</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="city"
+                                            id="city_news"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="city_news"
+                                            >City Wise</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="science"
+                                            id="sci_news"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="sci_news"
+                                            >Science</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="tech"
+                                            id="tech_news"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="tech_news"
+                                            >Technology</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="business"
+                                            id="other_news_1"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="other_news_1"
+                                            >Business</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="health"
+                                            id="other_news_2"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="other_news_2"
+                                            >Health</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="cricket"
+                                            id="other_news_3"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="other_news_3"
+                                            >Cricket</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="sports"
+                                            id="other_news_4"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="other_news_4"
+                                            >Sports</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="political_pulse"
+                                            id="other_news_5"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="other_news_5"
+                                            >Politics</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="lifestyle"
+                                            id="other_news_6"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="other_news_6"
+                                            >Lifestyle</label
+                                        >
+                                    </div>
+                                    <div class="flex align-center">
+                                        <input
+                                            class="border"
+                                            type="radio"
+                                            name="news_type"
+                                            value="entertainment"
+                                            id="other_news_7"
+                                            required
+                                        />
+                                        <label
+                                            class="custom-radio"
+                                            for="other_news_7"
+                                            >Entertainment</label
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                    class="options__contaioner_sibling flexed justify-between"
+                                >
+                                    <div class="opp">
+                                        <label id="lb" for="news_count"
+                                            >Enter Num of News to Fetch:</label
+                                        >
+                                        <input
+                                            aria-valuemax="256"
+                                            aria-valuemin="1"
+                                            aria-valuenow="1"
+                                            type="number"
+                                            name="news_count"
+                                            id="news_count"
+                                            min="1"
+                                            max="256"
+                                            placeholder="25"
+                                        />
+                                    </div>
+
+                                    <div class="btns flex f-gap-2">
+                                        <button class="btn" type="submit">
+                                            Fetch
+                                        </button>
+                                        <button class="btn" type="reset">
+                                            Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- cities to choose -->
+                            <div
+                                class="city-name-options flexed justify-start f-gap-2"
+                                style="display: none"
+                            >
+                                <label for="name_of_city">Choose city:</label>
+                                <select id="name_of_city" name="name_of_city">
+                                    <option value="kolkata">Kolkata</option>
+                                    <option value="bangalore">Bangalore</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="mumbai">Mumbai</option>
+                                    <option value="lucknow">Lucknow</option>
+                                    <option value="pune">Pune</option>
+                                    <option value="hyderabad">Hyderabad</option>
+                                    <option value="chennai">Chennai</option>
+                                    <option value="ahmedabad">Ahmedabad</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <select class="newspaper-companies">
+                    <option disabled value="">--select--</option>
+                    <option value="ie">The Indian Express</option>
+                    <option value="bbc">BBC News</option>
+                    <option value="cnn">CNN</option>
+                    <option value="nyt">The New York Times</option>
+                    <option value="tg">The Guardian</option>
+                    <option value="wp">The Washington Post</option>
+                    <option value="aj">Al Jazeera</option>
+                    <option value="toi">The Times of India</option>
+                    <option value="ndtv">NDTV</option>
+                    <option value="ht">Hindustan Times</option>
+                </select>
             </div>
-            <div class="li li5">
-              <form id="profile-form" action="/profile" method="GET">
-                <div class="profile" onclick="document.getElementById('profile-form').submit();">
-                  <img src="static/images/default-profile.svg" alt="profile pic" />
+
+            <main
+                role="main"
+                itemscope
+                itemtype="https://schema.org/WebPage"
+                itemprop="mainContentOfPage"
+            >
+                <div class="container section-element">
+                    <!-- table -->
+                    <table
+                        id="news-table"
+                        itemscope
+                        itemtype="https://schema.org/Table"
+                        class=""
+                    >
+                        <tbody>
+                            <tr class="tr1">
+                                <th class="th1">NO</th>
+                                <th class="th2">TITLE</th>
+                                <th class="th3">DATE</th>
+                                <th class="th4">READ HERE</th>
+                                <th class="th5">LINK</th>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_1">1</td>
+                                <td class="td2 data_box">
+                                    DMK MP Kanimozhi flags concern over quick
+                                    commerce companies delivering medicines
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 16:57 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/dmk-mp-kanimozhi-flags-concern-quick-commerce-companies-delivering-medicines-9706218/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/dmk-mp-kanimozhi-flags-concern-quick-commerce-companies-delivering-medicines-9706218/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_2">2</td>
+                                <td class="td2 data_box">
+                                    European Space Agency’s Proba-3 launch
+                                    rescheduled for tomorrow afternoon: ISRO
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 16:59 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/european-space-agency-proba-3-launch-rescheduled-tomorrow-afternoon-isro-9706241/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/european-space-agency-proba-3-launch-rescheduled-tomorrow-afternoon-isro-9706241/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_3">3</td>
+                                <td class="td2 data_box">
+                                    Monkey hugs Tharoor, dozes off on his lap in
+                                    heartwarming encounter
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 16:55 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/monkey-hugs-tharoor-heartwarming-encounter-9706211/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/monkey-hugs-tharoor-heartwarming-encounter-9706211/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_4">4</td>
+                                <td class="td2 data_box">
+                                    IPS officer who probed case against CM
+                                    Chandrababu Naidu and oversaw his arrest
+                                    suspended
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 14:08 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/ips-officer-probe-chandrababu-naidu-suspended-9705925/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/ips-officer-probe-chandrababu-naidu-suspended-9705925/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_5">5</td>
+                                <td class="td2 data_box">
+                                    ‘If they fulfil compliances, we will
+                                    definitely give it’: Union minister Shivraj
+                                    Singh Chouhan on releasing funds to West
+                                    Bengal
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 13:55 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/shivraj-singh-chouhan-west-bengal-pm-awaas-yojana-compliances-9705844/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/shivraj-singh-chouhan-west-bengal-pm-awaas-yojana-compliances-9705844/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_6">6</td>
+                                <td class="td2 data_box">
+                                    Supreme Court transfers probe against BJP
+                                    leader Kabir Shankar Bose to CBI
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 13:46 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/kabir-shankar-bose-bjp-trasfer-probe-suprem-court-cbi-9705835/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/kabir-shankar-bose-bjp-trasfer-probe-suprem-court-cbi-9705835/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_7">7</td>
+                                <td class="td2 data_box">
+                                    SC to consider modifying orders that barred
+                                    HCs from hearing coal block allocation cases
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 13:31 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/sc-to-consider-modifying-orders-that-barred-hcs-from-hearing-coal-block-allocation-cases-9705727/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/sc-to-consider-modifying-orders-that-barred-hcs-from-hearing-coal-block-allocation-cases-9705727/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_8">8</td>
+                                <td class="td2 data_box">
+                                    ‘Farmers’ interest wouldn’t be served by
+                                    crocodile tears’: Rajya Sabha Chairperson
+                                    Jagdeep Dhankhar tells Opposition
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 12:56 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/rajya-sabha-jagdeep-dhankhar-opposition-farmers-interest-9705767/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/rajya-sabha-jagdeep-dhankhar-opposition-farmers-interest-9705767/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_9">9</td>
+                                <td class="td2 data_box">
+                                    Jharkhand Cabinet to be sworn in tomorrow;
+                                    10 ministers, including 2 women, likely to
+                                    take oath
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 12:22 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/jharkhand-cabinet-expansion-oath-ceremony-jmm-9705702/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/jharkhand-cabinet-expansion-oath-ceremony-jmm-9705702/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_10">
+                                    10
+                                </td>
+                                <td class="td2 data_box">
+                                    No farmer burns stubble out of choice, says
+                                    Raghav Chadha in Rajya Sabha; demands for Rs
+                                    2,500 per acre dole
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 13:00 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/aap-raghav-chadha-farmers-stubble-burning-9705680/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/aap-raghav-chadha-farmers-stubble-burning-9705680/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_11">
+                                    11
+                                </td>
+                                <td class="td2 data_box">
+                                    Telangana Earthquake Today: 5.3 magnitude
+                                    earthquake jolts state
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 10:18 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/telangana-hyderabad-earthquake-today-5-3-magnitude-on-richter-scale-9705358/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/telangana-hyderabad-earthquake-today-5-3-magnitude-on-richter-scale-9705358/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_12">
+                                    12
+                                </td>
+                                <td class="td2 data_box">
+                                    Parliament Winter Session Day 8 Live
+                                    Updates: Discussion on Railway (Amendment)
+                                    Bill underway in Lok Sabha
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 14:52 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/parliament-winter-session-day-8-lok-sabha-rajya-sabha-amit-shah-9705352/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/parliament-winter-session-day-8-lok-sabha-rajya-sabha-amit-shah-9705352/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_13">
+                                    13
+                                </td>
+                                <td class="td2 data_box">
+                                    ‘95% quota for locals in govt recruitment’:
+                                    Ladakh leaders say Centre has agreed to
+                                    demand
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 09:20 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/95-quota-for-locals-in-govt-recruitment-ladakh-leaders-say-centre-has-agreed-to-demand-9705064/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/95-quota-for-locals-in-govt-recruitment-ladakh-leaders-say-centre-has-agreed-to-demand-9705064/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_14">
+                                    14
+                                </td>
+                                <td class="td2 data_box">
+                                    ‘Implicated in false case because of my
+                                    religion, my name’: Bangle seller who faced
+                                    mob attack, then 107 days in jail, acquitted
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 08:04 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/implicated-in-false-case-because-of-my-religion-my-name-bangle-seller-who-faced-mob-attack-then-107-days-in-jail-acquitted-9705035/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/implicated-in-false-case-because-of-my-religion-my-name-bangle-seller-who-faced-mob-attack-then-107-days-in-jail-acquitted-9705035/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_15">
+                                    15
+                                </td>
+                                <td class="td2 data_box">
+                                    ‘I want my husband back’: Week after Meitei
+                                    man ‘went missing’ from Manipur military
+                                    station, wife joins protest, court steps in
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 07:50 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/i-want-my-husband-back-week-after-meitei-man-went-missing-from-manipur-military-station-wife-joins-protest-court-steps-in-9705054/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/i-want-my-husband-back-week-after-meitei-man-went-missing-from-manipur-military-station-wife-joins-protest-court-steps-in-9705054/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_16">
+                                    16
+                                </td>
+                                <td class="td2 data_box">
+                                    Central Govt has underpriced DAP: Fertiliser
+                                    industry
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 04:54 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/central-govt-has-underpriced-dap-fertiliser-industry-9705134/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/central-govt-has-underpriced-dap-fertiliser-industry-9705134/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_17">
+                                    17
+                                </td>
+                                <td class="td2 data_box">
+                                    Banking Bill debate turns unruly as
+                                    Opposition and Treasury spar over a
+                                    businessman, two former PMs
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 04:54 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/banking-bill-debate-turns-unruly-as-opposition-and-treasury-spar-over-a-businessman-two-former-pms-9705110/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/banking-bill-debate-turns-unruly-as-opposition-and-treasury-spar-over-a-businessman-two-former-pms-9705110/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_18">
+                                    18
+                                </td>
+                                <td class="td2 data_box">
+                                    V-P Jagdeep Dhankhar to Shivraj Chouhan: Was
+                                    there any promise to farmers, why wasn’t it
+                                    met?
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 08:19 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/v-p-jagdeep-dhankhar-to-shivraj-chouhan-was-there-any-promise-to-farmers-why-wasnt-it-met-9705045/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/v-p-jagdeep-dhankhar-to-shivraj-chouhan-was-there-any-promise-to-farmers-why-wasnt-it-met-9705045/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_19">
+                                    19
+                                </td>
+                                <td class="td2 data_box">
+                                    Congress blames Centre for ‘economic ruin’
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 02:36 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/congress-blames-centre-for-economic-ruin-9705115/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/congress-blames-centre-for-economic-ruin-9705115/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_20">
+                                    20
+                                </td>
+                                <td class="td2 data_box">
+                                    Banks being run professionally, clocked
+                                    record profits: Nirmala Sitharaman
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 02:17 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/banks-being-run-professionally-clocked-record-profits-nirmala-sitharaman-9705119/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/banks-being-run-professionally-clocked-record-profits-nirmala-sitharaman-9705119/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_21">
+                                    21
+                                </td>
+                                <td class="td2 data_box">
+                                    Cong raises 13% increase in voters in
+                                    Maharashtra since LS polls with EC
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 02:33 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/congress-delegation-concerns-maharashtra-poll-raw-data-ec-9704774/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/congress-delegation-concerns-maharashtra-poll-raw-data-ec-9704774/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_22">
+                                    22
+                                </td>
+                                <td class="td2 data_box">
+                                    Odisha Police rescue 334 missing children
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 3, 2024 21:41 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/odisha-police-rescue-missing-children-bhubaneswar-9704862/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/odisha-police-rescue-missing-children-bhubaneswar-9704862/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_23">
+                                    23
+                                </td>
+                                <td class="td2 data_box">
+                                    Odisha man arrested for killing and eating
+                                    pig during play did it to outdo rival
+                                    performer, police say
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 4, 2024 04:55 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/odisha-man-arrested-killing-eat-pig-play-police-9704753/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/odisha-man-arrested-killing-eat-pig-play-police-9704753/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_24">
+                                    24
+                                </td>
+                                <td class="td2 data_box">
+                                    Highest&nbsp;after Bengal, pending criminal
+                                    cases in Delhi jump by 2.66 lakh in a year
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 3, 2024 19:52 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/bengal-pending-criminal-cases-delhi-9704634/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/bengal-pending-criminal-cases-delhi-9704634/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+
+                            <tr class="rows">
+                                <td class="td1 data_box" id="serial_no_25">
+                                    25
+                                </td>
+                                <td class="td2 data_box">
+                                    Bangladesh Assistant High Commission shuts
+                                    down visa, consular services at Agartala
+                                    after mob breach
+                                    <div class="saving_options f-gap-2">
+                                        <div class="read_later_collection">
+                                            <img
+                                                src="/static/icons/save1.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                        <div class="other_collections">
+                                            <img
+                                                src="/static/icons/save2.svg"
+                                                alt=""
+                                                srcset=""
+                                            />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="td3 data_box">
+                                    December 3, 2024 19:44 IST
+                                </td>
+                                <td class="td4 data_box read">
+                                    <span
+                                        class="rbtn read_here"
+                                        data-url="https://indianexpress.com/article/india/bangladesh-assistant-high-commission-shuts-down-agartala-tripura-9704675/"
+                                        onclick="show_news_preview()"
+                                        >Read</span
+                                    >
+                                </td>
+                                <td class="td5 data_box">
+                                    <a
+                                        class="news_urls_a_tag"
+                                        href="https://indianexpress.com/article/india/bangladesh-assistant-high-commission-shuts-down-agartala-tripura-9704675/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >Link</a
+                                    >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="read flexed" id="read">
+                        <div class="read__container full flex-col">
+                            <div
+                                class="read__navigations flex align-center f-gap-2"
+                            >
+                                <span id="read__preview">PREVIEW</span>
+                                <div
+                                    class="read__icons ri1"
+                                    id="open-in-new-tab"
+                                >
+                                    <img
+                                        src="static/icons/open1.svg"
+                                        alt="open preview in new tab"
+                                    />
+                                </div>
+                                <div class="read__icons ri2" id="close-preview">
+                                    <img
+                                        src="static/icons/cross1.svg"
+                                        alt="close preview"
+                                    />
+                                </div>
+                            </div>
+                            <div
+                                class="read__page bg-set"
+                                itemscope=""
+                                itemtype="https://schema.org/NewsArticle"
+                            >
+                                <meta
+                                    itemprop="NewsArticle"
+                                    content="News Article"
+                                />
+                                <br />
+                                <h1 id="ajax_h1" itemprop="headline">
+                                    Odisha Police rescue 334 missing children
+                                </h1>
+                                <br />
+                                <h3 id="ajax_h3" itemprop="description">
+                                    306 are girls, Crime Against Women &amp;
+                                    Children wing IGP Shyni S said in a
+                                    statement.
+                                </h3>
+                                <br />
+                                <br />
+                                <p id="ajax_p" itemprop="articleBody">
+                                    <img
+                                        id="ajax_img"
+                                        src="https://images.indianexpress.com/2024/12/children-2.jpg?w=640"
+                                        alt="news article image"
+                                        itemprop="image"
+                                    /><br />The Odisha Police have rescued 334
+                                    children, including 306 girls, who were
+                                    reported missing from the state, during a
+                                    special drive, a senior officer said.<br /><br />The
+                                    special drive was conducted under the
+                                    supervision of the Crime Against Women &amp;
+                                    Children wing, Bhubaneswar from November 18
+                                    to November 23 throughout the state to
+                                    rescue the missing children of Odisha, he
+                                    said.<br /><br />Within six days, 334
+                                    children have been rescued from various
+                                    parts of Odisha and outside the state. Of
+                                    them, 306 are girls, Crime Against Women
+                                    &amp; Children wing IGP Shyni S said in a
+                                    statement.<br /><br />After the rescue, all
+                                    the children were reunited with their
+                                    families.<br /><br />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </form>
+                <!-- search results -->
+                <div
+                    class="search-reasults relative flex-col f-gap-1"
+                    style="display: none"
+                >
+                    <div
+                        id="ajax_desktop"
+                        class="res__container full"
+                        itemprop="mainContentOfPage"
+                    >
+                        <div class="res__num border_res">25 Matches found</div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Central Govt has underpriced DAP: Fertiliser
+                                industry,
+                                <br />
+                                <span
+                                    data-href="serial_no_16"
+                                    data-url=" December 4, 2024  04:54 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 16
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Banking Bill debate turns unruly as Opposition
+                                and Treasury spar over a businessman, two former
+                                PMs,
+                                <br />
+                                <span
+                                    data-href="serial_no_17"
+                                    data-url=" December 4, 2024  04:54 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 17
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Odisha man arrested for killing and eating pig
+                                during play did it to outdo rival performer,
+                                police say,
+                                <br />
+                                <span
+                                    data-href="serial_no_23"
+                                    data-url=" December 4, 2024  04:55 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 23
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Highest&nbsp;after Bengal, pending criminal
+                                cases in Delhi jump by 2.66 lakh in a year,
+                                <br />
+                                <span
+                                    data-href="serial_no_24"
+                                    data-url="December 3, 2024 19:52 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 24
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+
+                        <div class="res border_res">
+                            <div class="res__title">
+                                Bangladesh Assistant High Commission shuts down
+                                visa, consular services at Agartala after mob
+                                breach,
+                                <br />
+                                <span
+                                    data-href="serial_no_25"
+                                    data-url="December 3, 2024 19:44 IST"
+                                    class="res__serial"
+                                >
+                                    serial no: 25
+                                </span>
+                            </div>
+                            <div class="res__link">
+                                <span class="find_article">Find Article</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!--  for mobiles -->
+            <div
+                itemscope
+                itemtype="https://schema.org/SearchResultsPage"
+                class="find-mobile flex-col align-center"
+            >
+                <div class="horizontal-bar">
+                    <img src="static/icons/cross2.svg" />
+                </div>
+
+                <div class="srch flexed justify-between">
+                    <!-- form -->
+                    <form
+                        id="phone-search-form"
+                        class="relative full flex justify-between align-center"
+                        action="/search_in_title"
+                        method="post"
+                        itemprop="potentialAction"
+                        itemscope
+                        itemtype="https://schema.org/SearchAction"
+                    >
+                        <meta
+                            itemprop="target"
+                            content="https://adfreenews.pythonanywhere.com/search_in_title_phone?search_part={search_term_string}"
+                        />
+                        <input
+                            type="text"
+                            name="search_part"
+                            id="phone-search-input"
+                            placeholder="Search in News Titles"
+                            required
+                            itemprop="query-input"
+                        />
+                        <button
+                            class="btn"
+                            type="submit"
+                            name="submit"
+                            id="sub-srch"
+                        >
+                            Search
+                        </button>
+                    </form>
+                </div>
+
+                <div class="resa relative flex-col f-gap-1">
+                    <div
+                        id="ajax"
+                        class="res__container full"
+                        itemprop="mainContentOfPage"
+                    ></div>
+                </div>
             </div>
-            <div class="li li3 animated-underline-white">
-              <a href="#about" class="flexed" rel="noopener">About</a>
-            </div>
-            <div class="li li4 animated-underline-white">
-              <a href="#contact" class="flexed" rel="noopener">Contact</a>
-            </div>
-          </div>
-        </nav>
+        </section>
 
-        <div class="mobile-search-btn">
-          <img src="static/icons/search3.svg" alt="search button" />
-        </div>
-
-        <div class="buttons">
-          <div class="dark-mode-btn dmbtn">
-            <span id="dm">
-              <img src="static/icons/dm2.svg" alt="dark mode button" />
-            </span>
-          </div>
-          <div class="bigger-font-btn">
-            <span id="big_f">
-              <img src="static/icons/bigger.svg" alt="bigger fonts button" />
-            </span>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- fetch_news section -->
-    <div itemscope itemprop="inputOfData" class="fetch_news section-element" id="table-start">
-      <form id="fetch-news-form" onsubmit="fetchNews(event)">
-        <h2 class="category-title flexed justify-between">
-          <span>Select News Category</span>
-          <span class="dropdown">
-            <img class="d-img-1" style="display: inline" src="static/icons/plus2.svg" alt="" srcset="" />
-            <img class="d-img-2" style="display: none" src="static/icons/minus2.svg" alt="" srcset="" />
-          </span>
-        </h2>
-
-        <div class="options flex-col align-start" style="display: none">
-          <div class="con flex-col align-center">
-            <!-- options for news type -->
-            <div class="options__container flexed f-gap-2">
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="top" id="top_news" required />
-                <label class="custom-radio" for="top_news">Trending</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="india" id="india_news" required />
-                <label class="custom-radio" for="india_news">India</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="city" id="city_news" required />
-                <label class="custom-radio" for="city_news">City Wise</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="science" id="sci_news" required />
-                <label class="custom-radio" for="sci_news">Science</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="tech_news" required />
-                <label class="custom-radio" for="tech_news">Technology</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_1" required />
-                <label class="custom-radio" for="other_news_1">classified</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_2" required />
-                <label class="custom-radio" for="other_news_2">Technology</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_3" required />
-                <label class="custom-radio" for="other_news_3">classified</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_4" required />
-                <label class="custom-radio" for="other_news_4">classified</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_5" required />
-                <label class="custom-radio" for="other_news_5">classified</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_6" required />
-                <label class="custom-radio" for="other_news_6">classified</label>
-              </div>
-              <div class="flex align-center">
-                <input class="border" type="radio" name="news_type" value="tech" id="other_news_7" required />
-                <label class="custom-radio" for="other_news_7">classified</label>
-              </div>
-            </div>
-            <div class="options__contaioner_sibling flexed justify-between">
-              <div class="opp">
-                <label id="lb" for="news_count">Enter Num of News to Fetch:</label>
-                <input aria-valuemax="256" aria-valuemin="1" aria-valuenow="1" type="number" name="news_count" id="news_count" min="1" max="256" placeholder="25" />
-              </div>
-
-              <div class="btns flex f-gap-2">
-                <button class="btn" type="submit">Fetch</button>
-                <button class="btn" type="reset">Reset</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- cities to choose -->
-          <div class="city-name-options flexed justify-start f-gap-2" style="display: none">
-            <label for="name_of_city">Choose city:</label>
-            <select name="name_of_city">
-              <option value="kolkata">Kolkata</option>
-              <option value="bangalore">Bangalore</option>
-              <option value="delhi">Delhi</option>
-              <option value="mumbai">Mumbai</option>
-              <option value="lucknow">Lucknow</option>
-              <option value="pune">Pune</option>
-              <option value="hyderabad">Hyderabad</option>
-              <option value="chennai">Chennai</option>
-              <option value="ahmedabad">Ahmedabad</option>
-            </select>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <main role="main" itemscope itemtype="https://schema.org/WebPage" itemprop="mainContentOfPage">
-      <div class="container section-element">
-        <!-- table -->
-        <table id="news-table" itemscope itemtype="https://schema.org/Table" class="">
-          <meta itemprop="tableOfNews" content="Table of News" />
-          <tbody>
-            <tr class="tr1 rows">
-              <th class="th1">NO</th>
-              <th class="th2">TITLE</th>
-              <th class="th3">DATE</th>
-              <th class="th4">READ HERE</th>
-              <th class="th5">LINK</th>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_1">1</td>
-              <td class="td2 data_box">
-                Fisheries secy reviews research on drones in Kolkata
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 22:50 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/fisheries-secy-reviews-research-on-drones-in-kolkata-9586282/" onclick="show_news_preview()">Read</span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/fisheries-secy-reviews-research-on-drones-in-kolkata-9586282/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_2">2</td>
-              <td class="td2 data_box">
-                Agri Ministry holds national conference on implementing DPI
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 22:17 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/agri-ministry-holds-national-conference-on-implementing-dpi-9586209/" onclick="show_news_preview()">
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/agri-ministry-holds-national-conference-on-implementing-dpi-9586209/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_3">3</td>
-              <td class="td2 data_box">
-                Working with state govts, NIA to take action against train sabotage bids: Railway Minister Vaishnaw
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 21:52 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/nia-train-sabotage-bids-railway-minister-vaishnaw-9586144/" onclick="show_news_preview()">Read</span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/nia-train-sabotage-bids-railway-minister-vaishnaw-9586144/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_4">4</td>
-              <td class="td2 data_box">
-                Brahmin youth’s father alleges miscreants cut his sacred thread, Tamil Nadu police say ‘no basis to claim’
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 19:07 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/brahmin-youths-father-alleges-miscreants-cut-his-sacred-thread-tamil-nadu-9585955/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a
-                  class="news_urls_a_tag"
-                  href="https://indianexpress.com/article/india/brahmin-youths-father-alleges-miscreants-cut-his-sacred-thread-tamil-nadu-9585955/"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_5">5</td>
-              <td class="td2 data_box">
-                ‘Won’t allow India-Bangladesh match’: Hindu Mahasabha calls for Gwalior bandh on day of T20
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 18:45 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/wont-allow-india-bangladesh-match-hindu-mahasabha-gwalior-bandh-t20-9585878/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/wont-allow-india-bangladesh-match-hindu-mahasabha-gwalior-bandh-t20-9585878/" target="_blank" rel="noopener">
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_6">6</td>
-              <td class="td2 data_box">
-                At Tirupati temple, footfall dipped after laddu allegations, but bounced back soon
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 19:58 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/tirupati-temple-footfall-dipped-laddu-allegations-bounced-back-soon-9585835/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/tirupati-temple-footfall-dipped-laddu-allegations-bounced-back-soon-9585835/" target="_blank" rel="noopener">
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_7">7</td>
-              <td class="td2 data_box">
-                SC seeks response of 11 states on plea seeking setting up of RTI portals
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 17:11 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/sc-seeks-response-11-states-plea-seeking-setting-up-of-rti-portals-9585769/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/sc-seeks-response-11-states-plea-seeking-setting-up-of-rti-portals-9585769/" target="_blank" rel="noopener">
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_8">8</td>
-              <td class="td2 data_box">
-                Two SP leaders among 10 held in UP’s Kushinagar for smuggling fake currency, arms
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 20:22 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/samajwadi-party-leaders-arrested-for-land-grabbing-illegal-arms-smuggling-9585607/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a
-                  class="news_urls_a_tag"
-                  href="https://indianexpress.com/article/india/samajwadi-party-leaders-arrested-for-land-grabbing-illegal-arms-smuggling-9585607/"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_9">9</td>
-              <td class="td2 data_box">
-                Temple chariot burnt in Andhra Pradesh, 5 held
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 15:40 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/temple-chariot-burnt-andhra-pradesh-5-held-9585641/" onclick="show_news_preview()">Read</span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/temple-chariot-burnt-andhra-pradesh-5-held-9585641/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_10">10</td>
-              <td class="td2 data_box">
-                ‘Complete fraud, we must stop this’: Supreme Court junks Punjab’s NRI quota appeal
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 19:58 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/complete-fraud-supreme-court-punjabs-nri-quota-appeal-9585616/" onclick="show_news_preview()">Read</span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/complete-fraud-supreme-court-punjabs-nri-quota-appeal-9585616/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_11">11</td>
-              <td class="td2 data_box">
-                Malayalam actor Mukesh arrested, released on bail on rape charges
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 16:17 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/malayalam-actor-mukesh-arrested-released-on-bail-on-rape-charges-9585536/" onclick="show_news_preview()">
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/malayalam-actor-mukesh-arrested-released-on-bail-on-rape-charges-9585536/" target="_blank" rel="noopener">
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_12">12</td>
-              <td class="td2 data_box">
-                PM Modi’s US visit: from attending Quad Summit to diaspora event, key takeaways from his 3-day tour
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 13:34 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/pm-modi-us-visit-highlights-9585263/" onclick="show_news_preview()">Read</span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/pm-modi-us-visit-highlights-9585263/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_13">13</td>
-              <td class="td2 data_box">
-                Union Agriculture Minister Shivraj Chouhan holds first meeting with farmers
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 13:22 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/agriculture-minister-shivraj-chouhan-first-meeting-farmers-9585375/" onclick="show_news_preview()">
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/agriculture-minister-shivraj-chouhan-first-meeting-farmers-9585375/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_14">14</td>
-              <td class="td2 data_box">
-                PM Modi meets President Volodymyr Zelenskyy, reiterates support for ‘peaceful resolution’ of Russia-Ukraine conflict
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 12:37 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/modi-zelenskyy-ukraine-russia-war-resolution-support-9585208/" onclick="show_news_preview()">Read</span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/modi-zelenskyy-ukraine-russia-war-resolution-support-9585208/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_15">15</td>
-              <td class="td2 data_box">
-                RSS’ new headquarters spread over two 12-storey towers finally gets Delhi Urban Arts Panel approval
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 16:18 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/rss-new-headquarters-spread-over-two-12-storey-towers-finally-gets-delhi-urban-arts-panel-approval-9584897/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a
-                  class="news_urls_a_tag"
-                  href="https://indianexpress.com/article/india/rss-new-headquarters-spread-over-two-12-storey-towers-finally-gets-delhi-urban-arts-panel-approval-9584897/"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_16">16</td>
-              <td class="td2 data_box">
-                Dhaka strongly protests against Amit Shah’s remarks on ‘Bangladeshi infiltrators’
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 11:41 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/dhaka-protest-amit-shah-bangladeshi-infiltrator-remark-9585143/" onclick="show_news_preview()">
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/dhaka-protest-amit-shah-bangladeshi-infiltrator-remark-9585143/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_17">17</td>
-              <td class="td2 data_box">
-                Hindu Mahasabha calls for ‘Gwalior Bandh’ during India-Bangladesh cricket match
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 11:14 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/hindu-mahasabha-calls-for-gwalior-bandh-during-india-bangladesh-cricket-match-9585090/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a
-                  class="news_urls_a_tag"
-                  href="https://indianexpress.com/article/india/hindu-mahasabha-calls-for-gwalior-bandh-during-india-bangladesh-cricket-match-9585090/"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_18">18</td>
-              <td class="td2 data_box">
-                Kerala HC rejects Malayalam actor Siddique’s anticipatory bail application in rape case
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 11:17 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/kerala-hc-actor-sidhique-anticipatory-bail-plea-rape-case-9585075/" onclick="show_news_preview()">
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/kerala-hc-actor-sidhique-anticipatory-bail-plea-rape-case-9585075/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_19">19</td>
-              <td class="td2 data_box">
-                After teachers held for ‘assaulting’ student, Goa tells schools: zero tolerance for corporal punishment
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="/static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="/static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 08:06 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/teachers-held-assault-students-goa-schools-zero-tolerance-corporal-punishment-9584805/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a
-                  class="news_urls_a_tag"
-                  href="https://indianexpress.com/article/india/teachers-held-assault-students-goa-schools-zero-tolerance-corporal-punishment-9584805/"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_20">20</td>
-              <td class="td2 data_box">
-                After meeting with PM Modi, Ukraine’s Zelenskyy says ‘grateful for clear support of our sovereignty’
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="/static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="/static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 08:34 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/modi-zelenskyy-russia-ukraine-conflict-9584799/" onclick="show_news_preview()">Read</span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/modi-zelenskyy-russia-ukraine-conflict-9584799/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_21">21</td>
-              <td class="td2 data_box">
-                Notorious gangster ‘Seizing’ Raja, key figure in Chennai underworld, shot dead in police custody
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="/static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="/static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 08:48 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/chennai-underworld-seizing-raja-9584782/" onclick="show_news_preview()">Read</span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/chennai-underworld-seizing-raja-9584782/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_22">22</td>
-              <td class="td2 data_box">
-                Drama unfolds during Marxist leader M M Lawrence’s funeral in Kerala, daughter opposes move to hand over body to medical college
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="/static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="/static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 10:41 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/marxist-leader-lawrence-funeral-kerala-daughter-body-medical-college-9584778/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/marxist-leader-lawrence-funeral-kerala-daughter-body-medical-college-9584778/" target="_blank" rel="noopener">
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_23">23</td>
-              <td class="td2 data_box">
-                NRC promise comes to Jharkhand, Shivraj says will implement if BJP comes to power
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="/static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="/static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 10:35 IST</td>
-              <td class="td4 data_box read">
-                <span class="rbtn read_here" data-url="https://indianexpress.com/article/india/nrc-jharkhand-shivraj-chouhan-bjp-bangladeshi-immigrants-9584752/" onclick="show_news_preview()">
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a class="news_urls_a_tag" href="https://indianexpress.com/article/india/nrc-jharkhand-shivraj-chouhan-bjp-bangladeshi-immigrants-9584752/" target="_blank" rel="noopener">Link</a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_24">24</td>
-              <td class="td2 data_box">
-                Guwahati grapples with a heat wave like never before
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="/static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="/static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 07:44 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/monday-brings-record-heat-to-assam-at-least-7-degrees-higher-than-normal-9584761/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a
-                  class="news_urls_a_tag"
-                  href="https://indianexpress.com/article/india/monday-brings-record-heat-to-assam-at-least-7-degrees-higher-than-normal-9584761/"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Link
-                </a>
-              </td>
-            </tr>
-
-            <tr class="rows">
-              <td class="td1 data_box" id="serial_no_25">25</td>
-              <td class="td2 data_box">
-                HC judge’s home loan dispute: Consumers panel rejects bank’s plea for more time
-                <div class="saving_options f-gap-2">
-                  <div class="read_later_collection">
-                    <img src="/static/icons/save1.svg" alt="save1" />
-                  </div>
-                  <div class="other_collections">
-                    <img src="/static/icons/save2.svg" alt="save2" />
-                  </div>
-                </div>
-              </td>
-              <td class="td3 data_box">September 24, 2024 09:12 IST</td>
-              <td class="td4 data_box read">
-                <span
-                  class="rbtn read_here"
-                  data-url="https://indianexpress.com/article/india/hc-judges-home-loan-dispute-consumers-panel-rejects-banks-plea-for-more-time-9584648/"
-                  onclick="show_news_preview()"
-                >
-                  Read
-                </span>
-              </td>
-              <td class="td5 data_box">
-                <a
-                  class="news_urls_a_tag"
-                  href="https://indianexpress.com/article/india/hc-judges-home-loan-dispute-consumers-panel-rejects-banks-plea-for-more-time-9584648/"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Link
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="read flexed" id="read">
-          <div class="read__container full flex-col">
-            <div class="read__navigations flex align-center f-gap-2">
-              <span id="read__preview">PREVIEW</span>
-              <div class="read__icons ri1" id="open-in-new-tab">
-                <img src="static/icons/open1.svg" alt="open preview in new tab" />
-              </div>
-              <div class="read__icons ri2" id="close-preview">
-                <img src="static/icons/cross1.svg" alt="close preview" />
-              </div>
-            </div>
-            <div class="read__page bg-set" itemscope="" itemtype="https://schema.org/NewsArticle">
-              <meta itemprop="NewsArticle" content="News Article" />
-              <br />
-              <h1 id="ajax_h1" itemprop="headline">Fisheries secy reviews research on drones in Kolkata</h1>
-              <br />
-              <h3 id="ajax_h3" itemprop="description">
-                The review is significant as the Fisheries Department has assigned a pilot project on “Developing drone technology for live fish transport” to ICAR-CIFRI, aiming to design and develop
-                a 100-kg payload drone carrying live fish up to 10 km, said a statement by the Ministry of Fisheries.
-              </h3>
-              <br />
-              <br />
-              <p id="ajax_p" itemprop="articleBody">
-                <img id="ajax_img" src="https://images.indianexpress.com/2024/09/fishermen-m.jpg?w=640" alt="news article image" itemprop="image" />
-                <br />
-                Fisheries Secretary Dr Abhilaksh Likhi visited the Kolkata-based ICAR- Central lnland Fisheries Research Institute (CIFRI) Tuesday and reviewed the research and development activities
-                of the institute regarding drone application for fisheries management.
-                <br />
-                <br />
-                The review is significant as the Fisheries Department has assigned a pilot project on “Developing drone technology for live fish transport” to ICAR-CIFRI, aiming to design and develop
-                a 100-kg payload drone carrying live fish up to 10 km, said a statement by the Ministry of Fisheries.
-                <br />
-                <br />
-                “Different drone-based technologies viz. sprayer drone, feed broadcast drone and cargo delivery drone were demonstrated by ICAR-CIFRI and start-up companies among more than 100
-                fishermen and fisherwomen. The pilot project undertaken by ICAR-CIFRI will open a new horizon in the fisheries section by providing an effective and promising alternative for
-                transporting fresh fish with less time and minimum human involvement while minimising stress to the fish,” it said.
-                <br />
-                <br />
-                According to the statement, Dr Likhi urged the ICAR-CIFRI and other stakeholders to take steps for making these drone-based applications reach fish farmers. He also asked the fisheries
-                department to document the demonstrations and send them to the ministry so that they can be utilised to create awareness among fish farmers.
-                <br />
-                <br />
-                ———-
-                <br />
-                <br />
-                ICAR-CIFRI Director Dr B K Das presented the institute’s achievements and progress made in drone-based technologies, it said.
-                <br />
-                <br />
-                The research and development on fish transportation using drone technology with private partnership would also enable consumers and farmers to have better hygienic fresh fish in the
-                supply chain system, it said.
-                <br />
-                <br />
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- search + result -->
-    <div itemscope itemtype="https://schema.org/SearchResultsPage" id="queryy" class="find fixed borderX flex-col f-gap-2">
-      <!-- search query -->
-      <div class="search-bar borderX relative flex justify-between align-center">
-        <form
-          id="search-form"
-          class="relative full flex justify-between align-center"
-          action="/search_in_title"
-          method="post"
-          itemprop="potentialAction"
-          itemscope
-          itemtype="https://schema.org/SearchAction"
+        <footer
+            id="footer"
+            class="flex section-element"
+            role="footer"
+            itemscope
+            itemtype="https://schema.org/WPFooter"
         >
-          <input type="text" name="search_part" id="search" placeholder="Search in News Titles" required itemprop="query-input" />
-          <button class="search-icon bg-set" type="submit" name="submit" id="submit">Search</button>
-        </form>
-      </div>
+            <div id="table-end" class="footer__logo dahlia">LumiFeed</div>
+            <div class="footer__socials flexed">
+                <ul
+                    class="full flexed flex-col f-gap-1 align-start justify-start p-top-2"
+                >
+                    <li class="animated-underline-white">
+                        <a href="mailto:lumifeed101@gmail.com">Email</a>
+                    </li>
+                    <li class="animated-underline-white">
+                        <a
+                            target="_blank"
+                            href="https://github.com/Dream-World-Coder/LumiFeed"
+                            >Github</a
+                        >
+                    </li>
+                </ul>
+            </div>
+            <div class="footer__links flexed">
+                <ul
+                    class="full flexed flex-col f-gap-1 align-start justify-start p-top-2"
+                >
+                    <li class="animated-underline-white">
+                        <a href="/">Home</a>
+                    </li>
 
-      <!-- search results -->
-      <div class="search-reasults relative flex-col f-gap-1">
-        <div id="ajax_desktop" class="res__container full" itemprop="mainContentOfPage">
-          <div class="res__num border_res">24 Matches found</div>
+                    <li class="animated-underline-white">
+                        <a href="/about">About</a>
+                    </li>
+                    <li class="animated-underline-white">
+                        <a href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer__cc flexed">
+                © 2024 Subhajit Gorai. All rights reserved.
+                <meta name="copyright" content="Subhajit Gorai" />
+            </div>
 
-          <div class="res border_res">
-            <div class="res__title">
-              Fisheries secy reviews research on drones in Kolkata,
-              <br />
-              <span data-href="serial_no_1" data-url="September 24, 2024 22:50 IST" class="res__serial">serial no: 1</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
+            <script>
+                const footerLis = document.querySelectorAll("footer li");
 
-          <div class="res border_res">
-            <div class="res__title">
-              Agri Ministry holds national conference on implementing DPI,
-              <br />
-              <span data-href="serial_no_2" data-url="September 24, 2024 22:17 IST" class="res__serial">serial no: 2</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
+                footerLis.forEach((li) => {
+                    li.addEventListener("click", () => {
+                        li.querySelector("a").click();
+                    });
+                });
+            </script>
+        </footer>
 
-          <div class="res border_res">
-            <div class="res__title">
-              Working with state govts, NIA to take action against train sabotage bids: Railway Minister Vaishnaw,
-              <br />
-              <span data-href="serial_no_3" data-url=" September 24, 2024  21:52 IST" class="res__serial">serial no: 3</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
+        <!-- script.js -->
+        <script type="text/javascript" src="static/js/script.js"></script>
 
-          <div class="res border_res">
-            <div class="res__title">
-              Brahmin youth’s father alleges miscreants cut his sacred thread, Tamil Nadu police say ‘no basis to claim’,
-              <br />
-              <span data-href="serial_no_4" data-url=" September 24, 2024  19:07 IST" class="res__serial">serial no: 4</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
+        <script>
+            const aboutDiv = document.querySelector(".li3");
+            const contactDiv = document.querySelector(".li4");
+            const homeDiv = document.querySelector(".li6");
 
-          <div class="res border_res">
-            <div class="res__title">
-              ‘Won’t allow India-Bangladesh match’: Hindu Mahasabha calls for Gwalior bandh on day of T20,
-              <br />
-              <span data-href="serial_no_5" data-url=" September 24, 2024  18:45 IST" class="res__serial">serial no: 5</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
+            [aboutDiv, contactDiv, homeDiv].forEach((div) => {
+                div.addEventListener("click", () => {
+                    div.querySelector("a").click();
+                });
+            });
 
-          <div class="res border_res">
-            <div class="res__title">
-              At Tirupati temple, footfall dipped after laddu allegations, but bounced back soon,
-              <br />
-              <span data-href="serial_no_6" data-url=" September 24, 2024  19:58 IST" class="res__serial">serial no: 6</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
+            document.querySelectorAll(".mobile-li").forEach((li) => {
+                li.addEventListener("click", () => {
+                    li.querySelector("a").click();
+                });
+            });
+        </script>
+        <!-- displayMessage -->
+        <script>
+            function displayMessage(message, className) {
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("temporary-message");
+                if (className) {
+                    messageElement.classList.add(className);
+                }
+                messageElement.textContent = message;
+                document.body.appendChild(messageElement);
+                setTimeout(() => {
+                    messageElement.remove();
+                }, 3000);
+            }
+        </script>
+        <script
+            type="text/javascript"
+            src="static/js/functions/bigger_font.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="static/js/functions/city_options_toggle.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="static/js/functions/dark_mode.js"
+        ></script>
+        <script>
+            const read = document.getElementById("read");
+            const closeBtn = document.getElementById("close-preview");
+            const openInNewTabBtn = document.getElementById("open-in-new-tab");
+            closeBtn.addEventListener("click", () => {
+                read.style.display = "none";
+            });
+            openInNewTabBtn.addEventListener("click", () => {
+                setTimeout(() => {
+                    read.style.display = "none";
+                }, 500);
+            });
+        </script>
+        <script
+            type="text/javascript"
+            src="static/js/functions/search.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="static/js/functions/fetch_news.js"
+        ></script>
 
-          <div class="res border_res">
-            <div class="res__title">
-              SC seeks response of 11 states on plea seeking setting up of RTI portals,
-              <br />
-              <span data-href="serial_no_7" data-url=" September 24, 2024  17:11 IST" class="res__serial">serial no: 7</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
+        <!-- utils -->
+        <script
+            type="text/javascript"
+            src="static/js/utils/scroll/smooth-scrolling.js"
+        ></script>
 
-          <div class="res border_res">
-            <div class="res__title">
-              Two SP leaders among 10 held in UP’s Kushinagar for smuggling fake currency, arms,
-              <br />
-              <span data-href="serial_no_8" data-url=" September 24, 2024  20:22 IST" class="res__serial">serial no: 8</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              Temple chariot burnt in Andhra Pradesh, 5 held,
-              <br />
-              <span data-href="serial_no_9" data-url=" September 24, 2024  15:40 IST" class="res__serial">serial no: 9</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              ‘Complete fraud, we must stop this’: Supreme Court junks Punjab’s NRI quota appeal,
-              <br />
-              <span data-href="serial_no_10" data-url=" September 24, 2024  19:58 IST" class="res__serial">serial no: 10</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              Malayalam actor Mukesh arrested, released on bail on rape charges,
-              <br />
-              <span data-href="serial_no_11" data-url=" September 24, 2024  16:17 IST" class="res__serial">serial no: 11</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              Union Agriculture Minister Shivraj Chouhan holds first meeting with farmers,
-              <br />
-              <span data-href="serial_no_13" data-url="September 24, 2024 13:22 IST" class="res__serial">serial no: 13</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              PM Modi meets President Volodymyr Zelenskyy, reiterates support for ‘peaceful resolution’ of Russia-Ukraine conflict,
-              <br />
-              <span data-href="serial_no_14" data-url=" September 24, 2024  12:37 IST" class="res__serial">serial no: 14</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              RSS’ new headquarters spread over two 12-storey towers finally gets Delhi Urban Arts Panel approval,
-              <br />
-              <span data-href="serial_no_15" data-url=" September 24, 2024  16:18 IST" class="res__serial">serial no: 15</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              Dhaka strongly protests against Amit Shah’s remarks on ‘Bangladeshi infiltrators’,
-              <br />
-              <span data-href="serial_no_16" data-url="September 24, 2024 11:41 IST" class="res__serial">serial no: 16</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              Hindu Mahasabha calls for ‘Gwalior Bandh’ during India-Bangladesh cricket match,
-              <br />
-              <span data-href="serial_no_17" data-url="September 24, 2024 11:14 IST" class="res__serial">serial no: 17</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              Kerala HC rejects Malayalam actor Siddique’s anticipatory bail application in rape case,
-              <br />
-              <span data-href="serial_no_18" data-url=" September 24, 2024  11:17 IST" class="res__serial">serial no: 18</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              After teachers held for ‘assaulting’ student, Goa tells schools: zero tolerance for corporal punishment,
-              <br />
-              <span data-href="serial_no_19" data-url="September 24, 2024 08:06 IST" class="res__serial">serial no: 19</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              After meeting with PM Modi, Ukraine’s Zelenskyy says ‘grateful for clear support of our sovereignty’,
-              <br />
-              <span data-href="serial_no_20" data-url=" September 24, 2024  08:34 IST" class="res__serial">serial no: 20</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              Notorious gangster ‘Seizing’ Raja, key figure in Chennai underworld, shot dead in police custody,
-              <br />
-              <span data-href="serial_no_21" data-url=" September 24, 2024  08:48 IST" class="res__serial">serial no: 21</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              Drama unfolds during Marxist leader M M Lawrence’s funeral in Kerala, daughter opposes move to hand over body to medical college,
-              <br />
-              <span data-href="serial_no_22" data-url=" September 24, 2024  10:41 IST" class="res__serial">serial no: 22</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              NRC promise comes to Jharkhand, Shivraj says will implement if BJP comes to power,
-              <br />
-              <span data-href="serial_no_23" data-url=" September 24, 2024  10:35 IST" class="res__serial">serial no: 23</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              Guwahati grapples with a heat wave like never before,
-              <br />
-              <span data-href="serial_no_24" data-url=" September 24, 2024  07:44 IST" class="res__serial">serial no: 24</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-
-          <div class="res border_res">
-            <div class="res__title">
-              HC judge’s home loan dispute: Consumers panel rejects bank’s plea for more time,
-              <br />
-              <span data-href="serial_no_25" data-url=" September 24, 2024  09:12 IST" class="res__serial">serial no: 25</span>
-            </div>
-            <div class="res__link">
-              <span class="find_article">Find Article</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--  for mobiles -->
-    <div itemscope itemtype="https://schema.org/SearchResultsPage" class="find-mobile flex-col align-center">
-      <div class="horizontal-bar"></div>
-
-      <div class="srch flexed justify-between">
-        <!-- form -->
-        <form
-          id="phone-search-form"
-          class="relative full flex justify-between align-center"
-          action="/search_in_title"
-          method="post"
-          itemprop="potentialAction"
-          itemscope
-          itemtype="https://schema.org/SearchAction"
-        >
-          <meta itemprop="target" content="https://adfreenews.pythonanywhere.com/search_in_title_phone?search_part={search_term_string}" />
-          <input type="text" name="search_part" id="phone-search-input" placeholder="Search in News Titles" required itemprop="query-input" />
-          <button class="btn" type="submit" name="submit" id="sub-srch">Search</button>
-        </form>
-      </div>
-
-      <div class="resa relative flex-col f-gap-1">
-        <div id="ajax" class="res__container full" itemprop="mainContentOfPage"></div>
-      </div>
-    </div>
-
-    <!-- about + contact -->
-    <div class="about-hanger" id="about"></div>
-    <div role="aboutInformation" itemscope itemtype="https://schema.org/AboutPage" class="about section-element">
-      <h2>About</h2>
-      <p>
-        Welcome to
-        <strong>LumiFeed</strong>
-        , your go-to source for the latest news from India and all around the globe. This website curates news from the IndianExpress, without violating their terms and conditions, and provides a
-        <strong>seamless reading experience free from advertisements and mess.</strong>
-        Each news article includes a
-        <strong>high quality summary</strong>
-        generated using advanced AI, allowing you to
-        <strong>quickly grasp the key points.</strong>
-        For a deeper dive, links to the full articles on the Indian Express website are also provided.
-        <strong>Enjoy staying informed without the distractions.</strong>
-        <br />
-        favicon taken from:
-        <a target="_blank" href="https://icons8.com/icon/2CHAe9tWR9IY/news">News</a>
-        icon by
-        <a target="_blank" href="https://icons8.com">Icons8</a>
-        <br />
-        <br />
-        Thanks for visiting, stay safe!
-      </p>
-      <div class="contact-hanger" id="contact"></div>
-    </div>
-    <div role="contactInformation" itemscope itemtype="https://schema.org/ContactPage" class="contact section-element">
-      <h2>Contact</h2>
-      <p>
-        <em itemprop="Author" itemscope itemtype="https://schema.org/Author" name="Subhajit Gorai">Subhajit Gorai</em>
-        <br />
-        Information Technology Student, Sophomore, IIEST Shibpur
-        <br />
-        Age: 18 Years
-        <br />
-        <br />
-
-        I'm always excited to connect with fellow tech enthusiasts and news readers. Feel free to reach out to me through any of the following platforms:
-        <br />
-        <br />
-
-        <a rel="noopener" target="_blank" href="https://github.com/Dream-World-Coder/LumiFeed" class="con_icons con_icons1 bg-set flexed justify-start f-gap-2">
-          <img src=static/icons/g1.svg" alt="GitHub Profile" width="32px" height="32px" itemprop="url" />
-          <span itemprop="name">You can Contribute, It's open source.</span>
-        </a>
-        <br />
-        <a rel="noopener" target="_blank" href="https://www.linkedin.com/in/subhajit-gorai-376874283" class="con_icons con_icons2 bg-set flexed justify-start f-gap-2">
-          <img src=static/icons/ln1.svg" alt="LinkedIn Profile" width="32px" height="32px" itemprop="url" />
-          <span itemprop="name">LinkedIn</span>
-        </a>
-        <br />
-        <a rel="noopener" target="_blank" href="https://subhajit.pages.dev" class="con_icons con_icons3 bg-set flexed justify-start f-gap-2">
-          <img src=static/icons/w2.svg" alt="Portfolio" width="32px" height="32px" itemprop="url" />
-          <span itemprop="name">My Portfolio website</span>
-        </a>
-        <br />
-        <a id="e-mail" class="con_icons con_icons4 bg-set flexed justify-start f-gap-2" href="mailto:goraisubhajit53@gmail.com">
-          <img src=static/icons/e1.svg" alt="Email" width="32px" height="32px" />
-          <span itemprop="email">My Email</span>
-        </a>
-        <br />
-        <br />
-
-        Your
-        <strong>feedback and suggestions are always welcome</strong>
-        . Don't be shy to reach out!
-        <br />
-      </p>
-    </div>
-
-    <footer role="footer" itemscope itemtype="https://schema.org/WPFooter" class="section-element">
-      <div class="sp" id="table-end"></div>
-      <div class="cen cc">
-        © 2024 Subhajit Gorai. All rights reserved.
-        <meta name="copyright" content="Subhajit Gorai" />
-      </div>
-    </footer>
-
-    <!-- script.js -->
-    <script type="text/javascript" src="static/js/script.js"></script>
-
-    <!-- functions -->
-    <script>
-      const aboutDiv = document.querySelector(".li3");
-      const contactDiv = document.querySelector(".li4");
-
-      aboutDiv.addEventListener("click", () => {
-        aboutDiv.querySelector("a").click();
-      });
-
-      contactDiv.addEventListener("click", () => {
-        contactDiv.querySelector("a").click();
-      });
-    </script>
-    <script type="text/javascript" src="static/js/functions/bigger_font.js"></script>
-    <script type="text/javascript" src="static/js/functions/city_options_toggle.js"></script>
-    <script type="text/javascript" src="static/js/functions/dark_mode.js"></script>
-    <script>
-      const read = document.getElementById("read");
-      const closeBtn = document.getElementById("close-preview");
-      const openInNewTabBtn = document.getElementById("open-in-new-tab");
-      closeBtn.addEventListener("click", () => {
-        read.style.display = "none";
-      });
-      openInNewTabBtn.addEventListener("click", () => {
-        setTimeout(() => {
-          read.style.display = "none";
-        }, 500);
-      });
-    </script>
-    <script type="text/javascript" src="static/js/functions/search.js"></script>
-    <script type="text/javascript" src="static/js/functions/fetch_news.js"></script>
-
-    <!-- utils -->
-    <script type="text/javascript" src="static/js/utils/emailing.js"></script>
-    <script type="text/javascript" src="static/js/utils/scroll/smooth-scrolling.js"></script>
-
-    <!-- ajax -->
-    <script type="text/javascript" src="static/js/ajax/preview_news.js"></script>
-    <script type="text/javascript" src="static/js/ajax/read_news_new_tab.js"></script>
-    <script type="text/javascript" src="static/js/ajax/save_article.js"></script>
-    <script type="text/javascript" src="static/js/ajax/fetch_news.js"></script>
-    <script type="text/javascript" src="static/js/ajax/find_article.js"></script>
-    <script type="text/javascript" src="static/js/ajax/desktop_search.js"></script>
-    <script type="text/javascript" src="static/js/ajax/mobile_search.js"></script>
-  </body>
+        <!-- ajax -->
+        <script
+            type="text/javascript"
+            src="static/js/ajax/preview_news.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="static/js/ajax/read_news_new_tab.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="static/js/ajax/save_article.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="static/js/ajax/fetch_news.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="static/js/ajax/find_article.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="static/js/ajax/desktop_search.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="static/js/ajax/mobile_search.js"
+        ></script>
+    </body>
 </html>

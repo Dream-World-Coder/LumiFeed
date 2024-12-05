@@ -1,306 +1,360 @@
 :root {
-  --fetch-news-height: auto;
-  --fetch-news-m-top: calc(var(--header-height) + 20px);
-  --width-val: 70%;
+    --fetch-news-height: auto;
+    --fetch-news-m-top: calc(var(--header-height) + 20px);
+    --width-val: 70%;
 }
 
-/* in desktop top-bottom btns not needed, and completely make .find invisible */
+.params-input {
+    display: flex;
+    justify-content: space-between;
+    margin-top: calc(var(--header-height) * 1.45);
+    margin-bottom: calc(var(--header-height) * 0.5);
+    padding: 0 var(--con-m-left);
+    position: relative;
+    width: 100%;
+
+    @media screen and (max-width: 768px) {
+        padding: 10px;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: calc(var(--header-height) * 0);
+    }
+
+    & select.newspaper-companies {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 0;
+        outline: none;
+        width: 26vw;
+        height: 72px;
+        font-size: 1.25rem;
+        border: 1px solid #d8d2c2;
+        border-radius: 10px;
+        text-align: center;
+        display: grid;
+        place-items: center;
+        padding-left: 40px;
+
+        @media screen and (max-width: 768px) {
+            padding: 10px;
+            font-size: 1rem;
+            width: calc(100% - 0px);
+            height: 42px;
+        }
+
+        @media screen and (min-width: 2000px) {
+            width: 24.25vw;
+        }
+        @media screen and (min-width: 2050px) {
+            width: 19.25vw;
+        }
+
+        & option {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+body.dark-mode .params-input select {
+    border: 1px solid rgba(86, 86, 86, 0.9);
+    background-color: rgba(86, 86, 86, 0.5);
+    color: #fcfcfc;
+}
 
 .fetch_news {
-  position: relative;
-  height: var(--fetch-news-height);
-  width: var(--width-val);
+    position: relative;
+    height: var(--fetch-news-height);
+    width: var(--width-val);
 
-  margin-top: calc(var(--header-height) + 20px);
-  /* margin-bottom: 1rem; */
-  margin-left: var(--con-m-left);
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
 
-  padding-top: 20px;
-  padding-bottom: 10px;
-  padding-left: 20px;
+    font-size: 1rem;
 
-  font-size: 1rem;
+    border: 1px solid #d8d2c2;
+    border-radius: 10px;
 
-  border: 1px solid #d8d2c2;
-  border-radius: 10px;
+    & h2 {
+        font-size: 2.5rem;
+        margin-top: 0rem;
+        font-family: "Apercu Bold", poppins, sans-serif;
+        letter-spacing: -1.28px;
+        font-weight: 600;
+        color: #0e1313;
 
-  & h2 {
-    font-size: 2.5rem;
-    margin-top: 0rem;
-    font-family: "Apercu Bold", poppins, sans-serif;
-    letter-spacing: -1.28px;
-    font-weight: 600;
-    /* color: rgb(77, 77, 77); */
-    color: #0e1313;
+        & span {
+            display: block;
+        }
 
-    & span {
-      display: block;
+        & span:nth-last-child(1) {
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+
+            & img {
+                position: relative;
+                width: 25px;
+                height: 25px;
+                border-radius: 5px;
+            }
+        }
     }
 
-    & span:nth-last-child(1) {
-      margin-right: 10px;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-items: center;
-
-      & img {
-        position: relative;
-        width: 25px;
-        height: 25px;
-        border-radius: 5px;
-      }
+    & label {
+        font-family: poppins, "Times New Roman", Times, serif !important;
+        font-size: 0.9rem;
     }
-  }
-
-  & label {
-    font-family: poppins, "Times New Roman", Times, serif !important;
-    font-size: 0.9rem;
-  }
 }
 body.dark-mode .fetch_news {
-  border: 1px solid rgba(86, 86, 86, 0.9);
+    border: 1px solid rgba(86, 86, 86, 0.9);
+}
+body.dark-mode .fetch_news h2 {
+    color: #fcfcfc;
 }
 
 #news_count {
-  border-color: var(--v-th) !important;
+    border-color: var(--v-th) !important;
 }
 .dropdown {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    overflow: hidden;
 }
 body.dark-mode .dropdown img {
-  filter: invert(1);
+    filter: invert(1);
 }
 input:is([type="radio"], [type="checkbox"]) {
-  display: none;
+    display: none;
 }
 input[type="radio"] {
-  display: none !important;
+    display: none !important;
 }
 
 /* Style the label to look like a custom radio button */
 label.custom-radio {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 80px;
-  border-radius: 5px;
-  position: relative;
-  font-size: 0.9rem;
-  cursor: pointer;
-  background-color: #d8d2c2;
-  /* border: 1px solid rgba(202, 202, 202, 1); */
-  color: black;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 80px;
+    border-radius: 5px;
+    position: relative;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background-color: #d8d2c2;
+    /* border: 1px solid rgba(202, 202, 202, 1); */
+    color: black;
 }
 
 body.dark-mode label.custom-radio {
-  background-color: rgba(108, 108, 108, 0.5);
-  /* border: 1px solid rgba(108, 108, 108, 0.9); */
-  color: #fff;
+    background-color: rgba(108, 108, 108, 0.5);
+    /* border: 1px solid rgba(108, 108, 108, 0.9); */
+    color: #fff;
 }
 
 /* Placeholder text for the radio button */
 label.custom-radio::before {
-  content: attr(data-placeholder);
-  color: #888;
-  font-size: 18px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    content: attr(data-placeholder);
+    color: #888;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Style for the selected state */
 input[type="radio"]:checked + label.custom-radio {
-  /* background-color: var(--clr2); */
-  background-color: #b17457;
-  color: #fff;
+    /* background-color: var(--clr2); */
+    background-color: #b17457;
+    color: #fff;
 }
 body.dark-mode input[type="radio"]:checked + label.custom-radio {
-  background-color: rgba(202, 202, 202, 1);
-  color: #000;
+    background-color: rgba(202, 202, 202, 1);
+    color: #000;
 }
 
 .options__container {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  /* border: 1px solid white; */
-  height: 180px;
-  width: 100%;
-  flex-wrap: wrap;
-  padding-left: 0px;
-  padding-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* border: 1px solid white; */
+    height: 180px;
+    width: 100%;
+    flex-wrap: wrap;
+    padding-left: 0px;
+    padding-right: 20px;
 }
 .options__contaioner_sibling {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  /* border: 1px solid white; */
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid white; */
 }
 .options__contaioner_sibling .btns button {
-  font-size: 0.85rem;
-  width: 3.5rem;
-  height: 2rem;
-  border-radius: 10px;
+    font-size: 0.85rem;
+    width: 3.5rem;
+    height: 2rem;
+    border-radius: 10px;
 }
 
 .opp {
-  padding-left: 60px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    padding-left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .opp input {
-  width: 120px;
+    width: 120px;
 }
 .opp input::-webkit-inner-spin-button {
-  display: none;
+    display: none;
 }
 
 @media (width > 1024px) {
-  .btns {
-    padding-right: 40px;
-  }
+    .btns {
+        padding-right: 40px;
+    }
 }
 
 /* ----------------------------------------------------------------- */
 #sc {
-  width: 130px !important;
-  opacity: 1;
+    width: 130px !important;
+    opacity: 1;
 }
 
 .city-name-options {
-  margin-top: 1rem;
-  font-size: 1rem;
-  padding-left: 60px;
-  /* display: none; */
+    margin-top: 1rem;
+    font-size: 1rem;
+    padding-left: 60px;
+    /* display: none; */
 }
 /* ----------------------------------------------------------------- */
 
 #sps {
-  font-size: 1rem;
-  font-family: poppins, "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-weight: 700;
+    font-size: 1rem;
+    font-family: poppins, "Franklin Gothic Medium", "Arial Narrow", Arial,
+        sans-serif;
+    font-weight: 700;
 }
 #cpc {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #cpc label {
-  font-size: 1rem !important;
+    font-size: 1rem !important;
 }
 
 @media (max-width: 1024px) {
-  :root {
-    --con-m-left: 20px;
-    /* why not working? */
-  }
-  .fetch_news {
-    margin-left: 20px;
-    width: 95%;
-    height: auto;
-
-    & h2 {
-      font-size: 2rem;
-      margin-top: 1.3rem;
+    :root {
+        --con-m-left: 20px;
+        /* why not working? */
     }
-    & label {
-      font-size: 1.5rem;
+    .fetch_news {
+        height: auto;
+
+        & h2 {
+            font-size: 2rem;
+            margin-top: 1.3rem;
+        }
+        & label {
+            font-size: 1.5rem;
+        }
     }
-  }
 
-  .op,
-  .opp {
-    padding-left: 15px;
-    gap: 5px;
-  }
+    .op,
+    .opp {
+        padding-left: 15px;
+        gap: 5px;
+    }
 
-  label.custom-radio {
-    width: 90px;
-    height: 40px;
-    border-radius: 10px;
-    font-size: 0.85rem;
-  }
+    label.custom-radio {
+        width: 90px;
+        height: 40px;
+        border-radius: 10px;
+        font-size: 0.85rem;
+    }
 
-  .options__container {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    height: 135px;
-    gap: 5px !important;
-    padding-left: 0px;
-    padding-right: 10px;
-  }
+    .options__container {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        height: 135px;
+        gap: 5px !important;
+        padding-left: 0px;
+        padding-right: 10px;
+    }
 }
 
 @media (max-width: 768px) {
-  :root {
-    --con-m-left: 20px;
-  }
-  #news_count {
-    width: 50px;
-    height: 25px;
-  }
-  #news_count::placeholder {
-    font-size: 0.85rem;
-  }
-
-  .options__contaioner_sibling .btns button {
-    font-size: 0.75rem;
-    width: 3rem;
-    height: 1.5rem;
-    border-radius: 5px;
-  }
-  .fetch_news {
-    margin-top: calc(var(--header-height) + 10px);
-    margin-right: 10px;
-    margin-left: 10px;
-    width: calc(100% - 20px);
-    height: auto;
-    padding: 5px;
-
-    & h2 {
-      font-size: 1.5rem;
-      margin-top: 0;
+    :root {
+        --con-m-left: 20px;
+    }
+    #news_count {
+        width: 50px;
+        height: 25px;
+    }
+    #news_count::placeholder {
+        font-size: 0.85rem;
     }
 
-    & label {
-      font-size: 0.7rem;
+    .options__contaioner_sibling .btns button {
+        font-size: 0.75rem;
+        width: 3rem;
+        height: 1.5rem;
+        border-radius: 5px;
     }
-  }
-  .opp {
-    width: 250px;
+    .fetch_news {
+        /* margin-top: calc(var(--header-height) + 10px); */
+        /* margin-right: 10px; */
+        /* margin-left: 10px; */
+        width: calc(100% - 0px);
+        height: auto;
+        padding: 5px;
 
-    & input {
-      width: 10%;
+        & h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        & label {
+            font-size: 0.7rem;
+        }
     }
-  }
+    .opp {
+        width: 250px;
 
-  .btns {
-    gap: 5px !important;
-    padding-right: 30px;
-  }
+        & input {
+            width: 10%;
+        }
+    }
 
-  label.custom-radio {
-    width: 80px;
-    height: 30px;
-    border-radius: 10px;
-    font-size: 0.65rem;
-  }
+    .btns {
+        gap: 5px !important;
+        padding-right: 30px;
+    }
 
-  .options__container {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    height: 105px;
-    gap: 5px !important;
-    padding-left: 0px;
-    padding-right: 10px;
-  }
+    label.custom-radio {
+        width: 80px;
+        height: 30px;
+        border-radius: 10px;
+        font-size: 0.65rem;
+    }
+
+    .options__container {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        height: 105px;
+        gap: 5px !important;
+        padding-left: 0px;
+        padding-right: 10px;
+    }
 }
