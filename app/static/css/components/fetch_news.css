@@ -60,7 +60,7 @@
 body.dark-mode .params-input select {
     border: 1px solid rgba(86, 86, 86, 0.9);
     background-color: rgba(86, 86, 86, 0.5);
-    color: #fcfcfc;
+    color: #c6c6c6;
 }
 
 .fetch_news {
@@ -113,9 +113,10 @@ body.dark-mode .params-input select {
 }
 body.dark-mode .fetch_news {
     border: 1px solid rgba(86, 86, 86, 0.9);
+    background-color: rgba(86, 86, 86, 0.5);
 }
 body.dark-mode .fetch_news h2 {
-    color: #fcfcfc;
+    color: #c6c6c6;
 }
 
 #news_count {

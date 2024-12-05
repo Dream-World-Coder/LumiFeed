@@ -112,6 +112,10 @@ tr.info-container {
     }
 }
 
+body.dark-mode tr.info-container {
+    color: #c6c6c6;
+}
+
 .data_box {
     padding: var(--p) calc(var(--p) / 2) var(--p) calc(var(--p) / 2);
     font-size: var(--td-font-size);
