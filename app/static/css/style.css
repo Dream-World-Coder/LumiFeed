@@ -36,7 +36,9 @@
     --header-footer-bgclr: #d8d2c2;
     --header-footer-clr: #4a4947;
 }
-
+html {
+    height: 100%;
+}
 body {
     background-color: rgb(255, 252, 245);
     color: black;
@@ -46,6 +48,8 @@ body {
     width: 100%;
     display: grid;
     place-items: center;
+    min-height: 100vh;
+    height: auto;
 }
 
 a {

@@ -138,17 +138,21 @@ footer
 footer {
     box-sizing: border-box;
     position: relative;
+    /* position: absolute; */
+    /* bottom: 0; */
+    /* left: 0; */
+    /* right: 0; */
     width: 100vw;
     height: 30vh;
     background-color: var(--header-footer-bgclr);
     color: var(--color-shadow-black-heavy);
     padding: 15px;
     z-index: 103;
-    margin-top: calc(100vh - 50vh);
+    margin-top: 50vh;
     border-top: 1px solid #b17457;
 
     @media screen and (min-width: 1224px) {
-        margin-top: 0;
+        margin-top: 15vh;
     }
 
     & ul {
