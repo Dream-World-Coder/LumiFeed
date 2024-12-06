@@ -1,6 +1,8 @@
+# type: ignore
+
 from copy import Error
 from flask_login import UserMixin
-# from sqlalchemy.orm import backref
+from sqlalchemy.orm import aliased
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from itsdangerous import URLSafeTimedSerializer
@@ -8,7 +10,7 @@ from app import app
 from app.models import db
 from .article import Article
 from .collection import Collection
-from .utils import user_articles, user_collections, CollectionType
+from .utils import user_article_collections, user_collections, CollectionType
 
 
 class User(db.Model, UserMixin):
@@ -30,9 +32,10 @@ class User(db.Model, UserMixin):
     # Relationships
     saved_articles = db.relationship(
         'Article',
-        secondary=user_articles,
+        secondary=user_article_collections,
         back_populates='users_who_saved_it',
-        lazy='dynamic'
+        lazy='dynamic',
+        # overlaps="articles,collections_where_it_is_saved"
     )
     collections = db.relationship(
         'Collection',
@@ -63,49 +66,79 @@ class User(db.Model, UserMixin):
             self.collections.append(collection)
             db.session.commit()
 
+
+    def all_articles_in_collection(self, collection_id):
+        """
+        Get all articles of the user in a specific collection.
+        """
+        # Aliases for tables
+        user_alias = aliased(self.__class__)
+        article_alias = aliased(Article)
+        collection_alias = aliased(Collection)
+
+        # Query
+        result = (
+            db.session.query(
+                # user_alias.username,
+                article_alias.article_title.label('article_title'),
+                article_alias.article_url.label('article_url'),
+                collection_alias.collection_name.label('collection_name')
+            )
+            .select_from(user_alias)
+            .join(user_article_collections, user_article_collections.c.user_id == user_alias.id)
+            .join(article_alias, user_article_collections.c.article_id == article_alias.id)
+            .join(collection_alias, user_article_collections.c.collection_id == collection_id)
+            .filter(user_alias.id == self.id)
+            .filter(collection_alias.id == collection_id)
+            .distinct()
+        )
+        
+        return result.all()
+        
+
     def save_article(self, article_title, article_url, collection_name):
-        """Save an article to a specified collection"""
-        print(f"inside  user class,,, \n {article_title=}\n{article_url=}\n{collection_name=}\n\n\n")
-        # Find collection
+        # check collection
         collection = Collection.query.filter_by(collection_name=collection_name).first()
-        print(f"inside  user class,,, \n {collection=}\n")
+        # print(f'collection found, {collection}')
 
         if not collection:
-            raise ValueError("Error, collection doesnot exist.")
-        print("collection exists")
+            raise ValueError("Error, this collection doesnot exist.")
 
         if collection not in self.collections.all():
-            raise Error(f"collection {collection} does not exist.")
-        print("collection exists for user")
+            raise Error(f"collection {collection} does not exist, create one.")
 
         # Find existing article or create new one
         article = Article.query.filter_by(article_url=article_url).first()
-        print(article)
+        # print(f'article = {article}')
         if not article:
+            # print('article not found')
             article = Article(article_title=article_title, article_url=article_url)
             db.session.add(article)
             db.session.flush()
-            print("article didnot exist, so created now.")
-        print("article exists")
+            # print('article added')
 
-        # article alredy saved check? -- done in route
-        self.saved_articles.append(article)
-        print("appened article to saved articles")
-        article.collections_where_it_is_saved.append(collection)
-        print("appened collection to article.collections_where_it_is_saved")
-        collection.articles.append(article)
-        print("appened article to collection.articles")
+        # article alredy saved check
+        existing = db.session.query(user_article_collections)\
+            .filter_by(user_id=self.id, article_id=article.id, collection_id=collection.id)\
+            .first()
+        
+        if existing:
+            return -1
+        
+        # print("Article is addable")
+
+        # Add article to collection
+        db.session.execute(
+            user_article_collections.insert().values(
+                user_id=self.id,
+                article_id=article.id,
+                collection_id=collection.id
+            )
+        )
         db.session.commit()
-        print("committed")
+        # print('article saved')
 
         return article
-
-    def all_articles_in_collection(self, collection_name):
-        """Get all articles in a specific collection"""
-        return [
-            article for article in self.saved_articles.all()
-            if article.collections_where_it_is_saved.filter_by(collection_name=collection_name).first() # it shall exist
-        ]
 
     def create_collection(self, collection_name):
         """
@@ -199,6 +232,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<User id: {self.id}, username: {self.username}, email: {self.email}>"
+    
 
 
 

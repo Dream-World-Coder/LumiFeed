@@ -9,19 +9,31 @@
         <div class="collection_name">
             {{ coll.collection_name }}
             <!-- why and / why not or: cuz i want the condition to be false for these 2 collections, NOT TRUE -->
-            {% if coll.collection_name != 'Liked Articles' and coll.collection_name != 'Read Later' %}
+            {% if coll.collection_name != 'Liked Articles' and
+            coll.collection_name != 'Read Later' %}
             <span class="delete_collection">
-                <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="delete this collection" />
+                <img
+                    src="{{ url_for('static', filename='icons/delete.svg') }}"
+                    alt="delete this collection"
+                />
             </span>
             {% endif %}
         </div>
         <div class="collection_content">
             <ul>
-                {% for news_article in current_user.all_articles_in_collection(coll.collection_name) %}
-                <li class="read_here" data-url="{{ news_article.article_url | trim }}" data-collection="{{ coll | trim }}">
+                {% for news_article in
+                current_user.all_articles_in_collection(coll.id) %}
+                <li
+                    class="read_here"
+                    data-url="{{ news_article.article_url | trim }}"
+                    data-collection="{{ coll.collection_name | trim }}"
+                >
                     {{ news_article.article_title | trim }}
                     <span class="delete_article">
-                        <img src="{{ url_for('static', filename='icons/delete.svg') }}" alt="Delete article" />
+                        <img
+                            src="{{ url_for('static', filename='icons/delete.svg') }}"
+                            alt="Delete article"
+                        />
                     </span>
                 </li>
                 {% endfor %}

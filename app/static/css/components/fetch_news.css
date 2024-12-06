@@ -30,6 +30,7 @@
         height: 72px;
         font-size: 1.25rem;
         border: 1px solid #d8d2c2;
+        background-color: #f8f2e2;
         border-radius: 10px;
         text-align: center;
         display: grid;
@@ -40,6 +41,7 @@
             padding: 10px;
             font-size: 1rem;
             width: calc(100% - 0px);
+            background-color: #f8f2e2;
             height: 42px;
         }
 

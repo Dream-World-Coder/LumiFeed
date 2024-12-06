@@ -8,7 +8,7 @@ from flask_apscheduler import APScheduler
 from .configs import config
 from werkzeug.serving import WSGIRequestHandler
 
-WSGIRequestHandler.protocol_version = "HTTP/1.1"
+# WSGIRequestHandler.protocol_version = "HTTP/1.1"
 
 
 

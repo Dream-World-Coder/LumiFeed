@@ -18,13 +18,10 @@ def add_to_read_later():
     article_title = data.get("article_title")
     article_url = data.get("article_url")
 
-    # no duplicate article in a collection
-    for article in current_user.all_articles_in_collection("Read Later"):
-        if article.article_url == article_url:
-            return jsonify({'error': 'This article is already saved in Read Later'}), 409
-
     try:
-        current_user.save_article(article_title, article_url, "Read Later")
+        res = current_user.save_article(article_title, article_url, "Read Later")
+        if res == -1:
+            return jsonify({"error": "Article already saved in Read Later."}), 409
         return jsonify({"success": "Article saved in Read Later."}), 200
 
     except IntegrityError:
@@ -53,16 +50,12 @@ def add_to_different_collections():
     parent_collection = data.get("parent_collection") or ''
 
     if len(parent_collection) == 0:
-        print("length of parent_collection is 0")
         return jsonify({'error':'collection name is blank'}), 400
 
-    for article in current_user.all_articles_in_collection(parent_collection):
-        if article.article_url == article_url:
-            return jsonify({'error': f'This article is already saved in {parent_collection}'}), 409
-
     try:
-        print(f"{article_title=}\n{article_url=}\n{parent_collection=}\n\n")
-        current_user.save_article(article_title, article_url, parent_collection)
+        res = current_user.save_article(article_title, article_url, parent_collection)
+        if res == -1:
+            return jsonify({"error": f"Article already saved in {parent_collection}."}), 409
         return jsonify({"success": f"Article saved in {parent_collection}."}), 200
 
     except IntegrityError:

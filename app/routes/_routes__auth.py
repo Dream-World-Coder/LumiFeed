@@ -1,3 +1,4 @@
+# type: ignore
 from flask import render_template, request, redirect, url_for, flash, jsonify
 from app.routes import app, db, User, mail, RegistrationForm, LoginForm, CollectionType, Collection
 from flask_login import login_user, login_required, logout_user, current_user
@@ -62,8 +63,8 @@ def verify():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def send_verification_email(user: User):
   subject = "Verify Your Email Address"
-  # verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
-  verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
+  verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
+#   verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
 
   try:
     msg = Message(
@@ -86,7 +87,7 @@ def send_verification_email(user: User):
                     </body>
                 </html>
                 """
-
+                
     mail.send(msg)
     return "\n\nverification email sent\n"
 
@@ -181,6 +182,7 @@ def register():
 
         except Exception as e:
             db.session.rollback()
+            print(e)
             return jsonify({'error': 'An error occurred during registration', 'details': str(e)}), 500
 
     return render_template("errors/unknown-method.html")

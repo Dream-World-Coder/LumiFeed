@@ -2,7 +2,7 @@ from enum import unique
 from app import app
 from app.models import db
 from datetime import datetime
-from .utils import user_collections, article_collections, CollectionType
+from .utils import user_collections, article_collections, CollectionType, user_article_collections
 
 
 class Collection(db.Model):

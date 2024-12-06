@@ -3,7 +3,7 @@ from app import app
 from app.models import db
 from datetime import datetime
 from .collection import Collection
-from .utils import user_articles, article_collections
+from .utils import user_article_collections, article_collections
 
 
 class Article(db.Model):
@@ -16,7 +16,7 @@ class Article(db.Model):
     # relations
     users_who_saved_it = db.relationship(
         'User',
-        secondary=user_articles,
+        secondary=user_article_collections,
         back_populates='saved_articles',
         lazy='dynamic'
     )

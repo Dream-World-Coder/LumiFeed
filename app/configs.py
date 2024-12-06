@@ -1,8 +1,10 @@
 import os
+from dotenv import load_dotenv
 from datetime import timedelta
 
 basedir = os.path.abspath(os.path.dirname(__file__))  # app
-
+# important
+load_dotenv()
 class Config:
     FLASK_APP = os.environ.get("FLASK_APP", "run")
     PORT=8000
@@ -10,13 +12,13 @@ class Config:
     # FLASKY_ADMIN = os.environ.get('ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_POOL_SIZE = 40
-    SQLALCHEMY_POOL_TIMEOUT = 35
-    SQLALCHEMY_MAX_OVERFLOW = 20
+    # SQLALCHEMY_POOL_TIMEOUT = 35
+    # SQLALCHEMY_MAX_OVERFLOW = 20
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_USE_TLS = True
     MAIL_PORT = 587
-    MAIL_USERNAME = os.environ.get('EMAIL_USER')
-    MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+    MAIL_USERNAME = os.getenv('EMAIL_USER')
+    MAIL_PASSWORD = os.getenv('EMAIL_PASS')
 
     @staticmethod
     def init_app(app):
@@ -24,7 +26,7 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    DEBUG = False
+    DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DEV_DATABASE_URL'
         # f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
@@ -33,7 +35,7 @@ class DevelopmentConfig(Config):
 
 
 class TestingConfig(Config):
-    TESTING = False
+    TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         "TEST_DATABASE_URL",
         "sqlite:///test-database.sqlite"
@@ -42,18 +44,18 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    DEBUG = False
+    DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        'PROD_DATABASE_URL',
-        os.environ.get(
-            'MYSQL_DATABASE_URL',
-            f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
-        )
+        'PROD_DATABASE_URL', 'sqlite:///prod-database.sqlite'
+        # os.environ.get(
+        #     'MYSQL_DATABASE_URL',
+        #     f"sqlite:///{os.path.join(basedir, 'database.sqlite')}"
+        # )
     )
-    SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_recycle': 280,
-        'pool_pre_ping': True
-    }
+    # SQLALCHEMY_ENGINE_OPTIONS = {
+    #     'pool_recycle': 280,
+    #     'pool_pre_ping': True
+    # }
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
 
