@@ -1,6 +1,17 @@
 # type: ignore
 from flask import render_template, request, redirect, url_for, flash, jsonify
-from app.routes import app, db, User, mail, RegistrationForm, LoginForm, CollectionType, Collection
+from app.routes import(
+    app, 
+    db, 
+    User, 
+    mail, 
+    RegistrationForm, 
+    LoginForm, 
+    CollectionType, 
+    Collection, 
+    user_article_collections,
+    user_collections
+)
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError
 from flask_mail import Message
@@ -62,37 +73,37 @@ def verify():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~ send email
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def send_verification_email(user: User):
-  subject = "Verify Your Email Address"
-  verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
-#   verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
+    subject = "Verify Your Email Address"
+    # verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
+    verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
 
-  try:
-    msg = Message(
-        subject=subject,
-        sender="noreply@lumifeed101.com",
-        recipients=[user.email]
-    )
+    try:
+        msg = Message(
+            subject=subject,
+            sender="noreply@lumifeed101.com",
+            recipients=[user.email]
+        )
 
-    msg.html = f"""
-                <html>
-                    <body>
-                        <h1 style="color: #333;">Welcome to Lumifeed!</h1>
-                        <p>Dear {user.username},</p>
-                        <p>Thank you for registering with us! To complete your account setup, please click the following verification link:</p>
-                        <h2 style="color: #2e6da4; font-size: 14px;">{verification_link}</h2>
-                        <p>This code is valid for the next 15 minutes. Please do not share it with anyone.</p>
-                        <p>If you did not request this verification, please ignore this email.</p>
-                        <br>
-                        <p>Best regards,<br>Lumifeed Team</p>
-                    </body>
-                </html>
-                """
-                
-    mail.send(msg)
-    return "\n\nverification email sent\n"
+        msg.html = f"""
+                    <html>
+                        <body>
+                            <h1 style="color: #333;">Welcome to Lumifeed!</h1>
+                            <p>Dear {user.username},</p>
+                            <p>Thank you for registering with us! To complete your account setup, please click the following verification link:</p>
+                            <h2 style="color: #2e6da4; font-size: 14px;">{verification_link}</h2>
+                            <p>This code is valid for the next 15 minutes. Please do not share it with anyone.</p>
+                            <p>If you did not request this verification, please ignore this email.</p>
+                            <br>
+                            <p>Best regards,<br>Lumifeed Team</p>
+                        </body>
+                    </html>
+                    """
+                    
+        mail.send(msg)
+        return "\n\nverification email sent\n"
 
-  except Exception as e:
-    return f"\n\nFailed to send email: {e}\n"
+    except Exception as e:
+        return f"\n\nFailed to send email: {e}\n"
 
 
 
@@ -101,10 +112,10 @@ def send_verification_email(user: User):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.route("/resend-verification-email", methods=["GET", "POST"])
 def resend():
-  if current_user.is_authenticated:
-    return redirect(url_for("index"))
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
 
-  return "This feature will be available later."
+    return "This feature will be available later."
 
 
 
@@ -266,15 +277,40 @@ def logout():
 @app.route("/delete_account", methods=["GET", "POST"])
 @login_required
 def delete_account():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+    
     form = LoginForm()
     if request.method == "GET":
         return render_template("auth/delete-acc.html", form=form)
 
     if request.method == "POST":
         try:
-            password = request.form.get("password").strip()
+            password = request.form.get("password")
+            
+            if password:
+                password.strip()
+            else:
+                flash("password Not Found.", "error")
+                return redirect(url_for("delete_account"))
 
             if current_user.check_password(password):
+                # delete all user data
+                # user_article_collections
+                user1_data = db.session.query(user_article_collections).filter(
+                    user_article_collections.c.user_id == current_user.id
+                )
+                print(f'deleteing {current_user}\nData:')
+                print(user1_data.all())
+                user1_data.delete(synchronize_session=False)
+                
+                # user_collections
+                user1_collections = db.session.query(user_collections).filter(
+                    user_collections.c.user_id == current_user.id
+                )
+                print(user1_collections.all())
+                user1_collections.delete(synchronize_session=False)
+                
                 db.session.delete(current_user)
                 db.session.commit()
                 logout_user()
@@ -295,7 +331,8 @@ def delete_account():
 @login_required
 @app.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
-  return "This Freature will be added later"
+    # input username and email and then send a reset password email
+    return "This Freature will be added later"
 
 
 
@@ -305,4 +342,4 @@ def forgot_password():
 @login_required
 @app.route("/reset_password", methods=["GET", "POST"])
 def reset_password():
-  return "This Feature will be added later"
+    return "This Feature will be added later"

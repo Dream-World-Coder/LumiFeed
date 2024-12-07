@@ -1,5 +1,5 @@
 from app import app, db, mail
-from ..models import User, Article, Collection, CollectionType
+from ..models import User, Article, Collection, CollectionType, user_article_collections, user_collections
 from ..forms import LoginForm, RegistrationForm
 
 # utility functions
@@ -43,7 +43,7 @@ from ..routes._routes__read import (
     read_news_here,
     read_news_in_new_tab,
 )
-from ..routes._routes__remove_article import remove_article
+from ..routes._routes__remove_article import remove_article, delete_unsaved_articles
 from ..routes._routes__save_articles import (
     add_to_read_later,
     add_to_different_collections,

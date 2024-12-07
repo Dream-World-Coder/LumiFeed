@@ -1,7 +1,7 @@
 from app import db
 
 
-from .utils import CollectionType
+from .utils import CollectionType, user_article_collections, user_collections
 from .user import User
 from .article import Article
 from .collection import Collection

@@ -20,12 +20,12 @@ class Article(db.Model):
         back_populates='saved_articles',
         lazy='dynamic'
     )
-    collections_where_it_is_saved = db.relationship(
-        'Collection',
-        secondary=article_collections,
-        back_populates='articles',
-        lazy='dynamic'
-    )
+    # collections_where_it_is_saved = db.relationship(
+    #     'Collection',
+    #     secondary=article_collections,
+    #     back_populates='articles',
+    #     lazy='dynamic'
+    # )
 
     def __repr__(self):
         return f"<Article title: {self.article_title[:50]}..., date added: {self.date_added}>"

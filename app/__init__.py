@@ -40,6 +40,7 @@ from .models import (
     User,
     Article,
     Collection,
+    user_article_collections
 )
 
 # routes
@@ -52,6 +53,8 @@ from .routes import (
     delete_account,
     forgot_password,
     reset_password,
+    add_to_different_collections,
+    add_to_read_later,
     add_new_collection,
     delete_collection,
     share_collection,
@@ -66,7 +69,9 @@ from .routes import (
     read_news_in_new_tab,
     search_in_title,
     make_summary,
-    reset_user_credits
+    reset_user_credits,
+    remove_article,
+    delete_unsaved_articles,
 )
 
 def delete_unverified_users():
@@ -81,6 +86,7 @@ def delete_unverified_users():
 
 scheduler.add_job(func=reset_user_credits, trigger='interval', seconds=86400, id='reset_credits')
 scheduler.add_job(func=delete_unverified_users, trigger='interval', seconds=86400, id='delete_unverified_users')
+scheduler.add_job(func=delete_unsaved_articles, trigger='interval', seconds=86400, id='delete_unsaved_articles')
 
 
 # error handlers

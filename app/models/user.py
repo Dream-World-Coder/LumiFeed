@@ -140,6 +140,51 @@ class User(db.Model, UserMixin):
 
         return article
 
+
+    # unchecked, made by codeium -- do not use now
+    def remove_article(self, article_url, collection_name):
+        # check collection
+        collection = Collection.query.filter_by(collection_name=collection_name).first()
+        # print(f'collection found, {collection}')
+
+        if not collection:
+            raise ValueError("Error, this collection doesnot exist.")
+
+        if collection not in self.collections.all():
+            raise Error(f"collection {collection} does not exist, create one.")
+
+        # Find existing article or create new one
+        article = Article.query.filter_by(article_url=article_url).first()
+        # print(f'article = {article}')
+        if not article:
+            # print('article not found')
+            return -1
+
+        # article alredy saved check
+        existing = db.session.query(user_article_collections)\
+            .filter_by(user_id=self.id, article_id=article.id, collection_id=collection.id)\
+            .first()
+        
+        if not existing:
+            return -1
+
+        # print("Article is addable")
+
+        # Add article to collection
+        db.session.execute(
+            user_article_collections.delete().where(
+                user_article_collections.c.user_id == self.id,
+                user_article_collections.c.article_id == article.id,
+                user_article_collections.c.collection_id == collection.id
+            )
+        )
+        db.session.commit()
+        # print('article removed')
+
+        return article
+
+
+    # old methods, do not use
     def create_collection(self, collection_name):
         """
         Create a new custom collection for the user.
@@ -165,6 +210,8 @@ class User(db.Model, UserMixin):
 
         return collection
 
+
+    # old methods, do not use
     def delete_collection(self, collection_name):
         """
         Delete a user's collection and remove all article associations.
@@ -189,6 +236,7 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
         return True
+
 
     # Authentication methods
     def get_id(self):

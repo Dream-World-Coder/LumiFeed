@@ -17,12 +17,12 @@ class Collection(db.Model):
         secondary=user_collections,
         back_populates='collections',
     )
-    articles = db.relationship(
-        'Article',
-        secondary=article_collections,
-        back_populates='collections_where_it_is_saved',
-        lazy='dynamic'
-    )
+    # articles = db.relationship(
+    #     'Article',
+    #     secondary=article_collections,
+    #     back_populates='collections_where_it_is_saved',
+    #     lazy='dynamic'
+    # )
 
     def __repr__(self):
         return f"<Collection {self.collection_name}>"

@@ -1,5 +1,6 @@
+# type: ignore
 from flask.templating import render_template
-from app.routes import app, db, make_collection, Collection, CollectionType
+from app.routes import app, db, make_collection, Collection, CollectionType, user_article_collections
 from flask import request, jsonify
 from flask_login import login_required, current_user
 
@@ -22,10 +23,10 @@ def add_new_collection():
         return jsonify({"error": "Collection name is too long. Max length 99"}), 400
 
     # XSS && CSRF check
-    if "<" in collection_name or ">" in collection_name or "script" in collection_name.lower() or "+" in collection_name or "-" in collection_name:
+    if "<" in collection_name or ">" in collection_name or "script" in collection_name.lower():
         return jsonify({"error": "Collection name contains invalid characters or `script`."}), 400
 
-    # Check collection limit
+    # collection limit Check
     if len(current_user.collections.all()) >= MAX_COLLECTIONS:
         return jsonify({"error": f"You have reached the maximum number of collections ({MAX_COLLECTIONS})"}), 400
 
@@ -39,6 +40,7 @@ def add_new_collection():
 
         else:
             if collection in current_user.collections.all():
+                # may not work, memory address different maybe
                 return jsonify({"error": "Collection already exists. Choose another name."}), 400
 
         current_user.collections.append(collection)
@@ -72,8 +74,8 @@ def delete_collection():
     if not collection:
         return jsonify({"error": "Collection does not exist."}), 404
 
-    if collection not in current_user.collections.all():
-        return jsonify({"error": "Collection doesn't exists."}), 404
+    if collection not in current_user.collections.all(): # not needed as i have the 3 col join table
+        return jsonify({"error": "You donot have this collection."}), 404
 
     # Prevent deletion of default collections
     if collection.collection_type in [CollectionType.READ_LATER, CollectionType.LIKED]:
@@ -89,6 +91,32 @@ def delete_collection():
             # its giving error if i use collection.users_who_own_it.all()
             db.session.delete(collection)
             db.session.flush()
+            
+        # now delete the articles in the collection for the user
+        
+        # SELECT * 
+        # FROM user_article_collections
+        # WHERE user_id = current_user.id AND collection_id = collection.id
+        all_rows_to_delete = db.session.query(user_article_collections).filter(
+            user_article_collections.c.user_id == current_user.id,
+            user_article_collections.c.collection_id == collection.id
+        ).all()
+        print(all_rows_to_delete)
+        # now deleting
+        # DELETE FROM table_name
+        # WHERE condition;
+        # db.session.execute(
+            # user_article_collections.delete().where(
+                # user_article_collections.c.user_id == current_user.id, 
+                # user_article_collections.c.collection_id == collection.id
+            # )
+        # )
+        # or
+        db.session.query(user_article_collections)\
+            .filter(
+                user_article_collections.c.user_id == current_user.id,
+                user_article_collections.c.collection_id == collection.id
+            ).delete(synchronize_session=False) # faster
 
         db.session.commit()
         return jsonify({"message": "Collection deleted."}), 200
