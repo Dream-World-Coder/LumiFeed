@@ -11,13 +11,13 @@ header {
     padding-left: 2rem;
     padding-right: 2rem;
     background-color: var(--header-footer-bgclr);
-    z-index: 100;
+    z-index: 1000;
     /* transition: all 0.3s ease-in-out; */
     /* border-bottom: 1px solid #b17457; */
-    box-shadow:
+    /* box-shadow:
         0 0 2px #808080,
         0 0 5px #808080,
-        0 0 10px #808080;
+        0 0 10px #808080; */
 }
 header.is-scroll-down {
     opacity: 1;

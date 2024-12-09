@@ -36,9 +36,7 @@
     --header-footer-bgclr: #d8d2c2;
     --header-footer-clr: #4a4947;
 }
-html {
-    height: 100%;
-}
+
 body {
     background-color: rgb(255, 252, 245);
     color: black;
@@ -46,10 +44,8 @@ body {
     overflow-x: hidden;
     position: relative;
     width: 100%;
-    display: grid;
-    place-items: center;
     min-height: 100vh;
-    height: auto;
+    height: fit-content;
 }
 
 a {
@@ -61,11 +57,20 @@ a:hover {
     text-decoration: underline;
 }
 
+/* use a class like .wrapper section etc else all section s will be targetd, though i have only 1 section element */
 section {
     width: 100%;
     max-width: 1800px;
     display: grid;
     place-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100vh;
+    margin-bottom: 30vh;
+}
+
+section.sign-in {
+    margin-bottom: 0;
 }
 
 /* width */
@@ -183,6 +188,8 @@ input {
     }
 }
 
+/* -------------------- */
+
 .delete-modal {
     position: fixed;
     top: 0;
@@ -197,6 +204,7 @@ input {
     gap: 10px;
     font-family: "Poppins", sans-serif;
     z-index: 1000;
+    backdrop-filter: blur(5px); /* Add a subtle blur effect */
 }
 
 .modal-content {
@@ -244,6 +252,8 @@ body.dark-mode .yes-button {
     background-color: rgb(35, 35, 35);
     color: #f9f7f7;
 }
+
+/* ----------- */
 
 .message {
     position: fixed;

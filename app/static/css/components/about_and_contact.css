@@ -3,7 +3,7 @@
     --bgx: var(--v-th);
     --bgx: rgb(37, 37, 37);
 
-    /* xtra */
+    /* extra */
     --con-m-left: 2rem;
 }
 
@@ -23,6 +23,10 @@
     border-radius: calc(var(--pad) - 5px);
     border: 1px solid #d8d2c2;
     background-color: rgb(255, 252, 245);
+}
+
+body > div.contact-form {
+    margin-bottom: 40vh;
 }
 
 .about h2,
@@ -138,21 +142,21 @@ footer
 footer {
     box-sizing: border-box;
     position: relative;
-    /* position: absolute; */
-    /* bottom: 0; */
-    /* left: 0; */
-    /* right: 0; */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100vw;
     height: 30vh;
     background-color: var(--header-footer-bgclr);
     color: var(--color-shadow-black-heavy);
     padding: 15px;
     z-index: 103;
-    margin-top: 50vh;
+    /* margin-top: 50vh; */
     border-top: 1px solid #b17457;
 
     @media screen and (min-width: 1224px) {
-        margin-top: 15vh;
+        /* margin-top: 15vh; */
     }
 
     & ul {
@@ -222,7 +226,7 @@ body.dark-mode .footer__cc {
 @media (max-width: 768px) {
     footer {
         padding: 10px;
-        margin-top: 56vh;
+        /* margin-top: 56vh; */
 
         & a {
             font-size: 0.85rem;

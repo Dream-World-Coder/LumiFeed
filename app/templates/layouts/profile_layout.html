@@ -3,27 +3,50 @@
     <head>
         <title>LumiFeed - {{current_user.username}}</title>
         {% include 'includes/head.html' %}
-        <link rel="stylesheet" href="{{url_for('static', filename='css/components/read.css')}}" />
+        <link
+            rel="stylesheet"
+            href="{{url_for('static', filename='css/components/read.css')}}"
+        />
     </head>
 
     <body>
-        {% include 'includes/loader.html' %} {% include 'includes/header.html' %}
+        {% include 'includes/loader.html' %} {% include 'includes/header.html'
+        %}
 
         <!-- add new collection button -->
         <div class="add_new_collection_btn flexed">
             <div class="img_container">
-                <img src="{{ url_for('static', filename='icons/plus-circle.svg') }}" alt="" />
+                <img
+                    src="{{ url_for('static', filename='icons/plus-circle.svg') }}"
+                    alt=""
+                />
             </div>
         </div>
 
         <!-- collections  -->
         <div class="collections_preview_cards flex-colX f-gap-2">
             {% for coll in current_user.collections %}
-            <div href="#{{'collection' + loop.index | string}}" class="card {{ 'card' + loop.index | string }}">{{ coll.collection_name }}</div>
+            <div
+                href="#{{'collection' + loop.index | string}}"
+                class="card {{ 'card' + loop.index | string }}"
+            >
+                {{ coll.collection_name }}
+            </div>
             {% endfor%}
-            <svg class="collections_preview_cards_svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+                class="collections_preview_cards_svg"
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                ></g>
                 <g id="SVGRepo_iconCarrier">
                     <path
                         d="M8.00191 9.41621C7.61138 9.02569 7.61138 8.39252 8.00191 8.002C8.39243 7.61147 9.0256 7.61147 9.41612 8.002L12.0057 10.5916L14.5896 8.00771C14.9801 7.61719 15.6133 7.61719 16.0038 8.00771C16.3943 8.39824 16.3943 9.0314 16.0038 9.42193L13.4199 12.0058L16.0039 14.5897C16.3944 14.9803 16.3944 15.6134 16.0039 16.004C15.6133 16.3945 14.9802 16.3945 14.5896 16.004L12.0057 13.42L9.42192 16.0038C9.03139 16.3943 8.39823 16.3943 8.00771 16.0038C7.61718 15.6133 7.61718 14.9801 8.00771 14.5896L10.5915 12.0058L8.00191 9.41621Z"
@@ -40,13 +63,17 @@
         </div>
         <script>
             function showInstructions() {
-                const infoCloseBtn = document.querySelector(".collections_preview_cards_svg");
+                const infoCloseBtn = document.querySelector(
+                    ".collections_preview_cards_svg",
+                );
 
                 if (localStorage.getItem("instructions_needed") === "false") {
                     infoCloseBtn.parentElement.classList.add("hide-before");
                     infoCloseBtn.style.display = "none";
                     return;
-                } else if (localStorage.getItem("instructions_needed") === "true") {
+                } else if (
+                    localStorage.getItem("instructions_needed") === "true"
+                ) {
                     infoCloseBtn.addEventListener("click", function () {
                         this.parentElement.classList.add("hide-before");
                         infoCloseBtn.style.display = "none";
@@ -67,7 +94,9 @@
         </script>
 
         <!-- all collections -->
-        <div class="collections_container flex-col">{% block collections%} {% endblock %}</div>
+        <div class="collections_container flex-col">
+            {% block collections%} {% endblock %}
+        </div>
 
         <!-- the bigger collection display -->
         <div class="collection_display"></div>
@@ -78,13 +107,23 @@
                 <div class="read__navigations flex align-center f-gap-2">
                     <span id="read__preview">PREVIEW</span>
                     <div class="read__icons ri1" id="open-in-new-tab">
-                        <img src="{{url_for('static', filename='icons/open1.svg')}}" alt="open preview in new tab" />
+                        <img
+                            src="{{url_for('static', filename='icons/open1.svg')}}"
+                            alt="open preview in new tab"
+                        />
                     </div>
                     <div class="read__icons ri2" id="close-preview">
-                        <img src="{{url_for('static', filename='icons/cross1.svg')}}" alt="close preview" />
+                        <img
+                            src="{{url_for('static', filename='icons/cross1.svg')}}"
+                            alt="close preview"
+                        />
                     </div>
                 </div>
-                <div class="read__page bg-set" itemscope itemtype="https://schema.org/NewsArticle">
+                <div
+                    class="read__page bg-set"
+                    itemscope
+                    itemtype="https://schema.org/NewsArticle"
+                >
                     <meta itemprop="NewsArticle" content="News Article" />
                     <br />
                     <h1 id="ajax_h1" itemprop="headline"></h1>
@@ -93,7 +132,12 @@
                     <br />
                     <br />
                     <p id="ajax_p" itemprop="articleBody">
-                        <img id="ajax_img" src="" alt="news article image" itemprop="image" />
+                        <img
+                            id="ajax_img"
+                            src=""
+                            alt="news article image"
+                            itemprop="image"
+                        />
                         <br />
                     </p>
                 </div>
@@ -121,11 +165,11 @@
             profileDetails = document.querySelector(".profile_settings");
 
             profileIcon.addEventListener("click", () => {
-                if (profileDetails.style.display === "none") {
-                    profileDetails.style.display = "flex";
-                } else {
-                    profileDetails.style.display = "none";
-                }
+                profileDetails.classList.toggle("show-profile");
+            });
+
+            profileDetails.addEventListener("click", (event) => {
+                event.stopPropagation();
             });
         </script>
 
@@ -155,7 +199,10 @@
                     const targetElement = document.getElementById(targetID);
 
                     if (targetElement) {
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - 168; // 6rem = 96px
+                        const targetPosition =
+                            targetElement.getBoundingClientRect().top +
+                            window.scrollY -
+                            168; // 6rem = 96px
                         window.scrollTo({
                             top: targetPosition,
                             behavior: "smooth",
@@ -166,21 +213,42 @@
         </script>
 
         <!-- delete articles from playlists -->
-        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_articles.js')}}"></script>
+        <script
+            type="text/javascript"
+            src="{{url_for('static', filename='js/ajax/delete_articles.js')}}"
+        ></script>
         <!-- delete collections -->
-        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/delete_collection.js')}}"></script>
+        <script
+            type="text/javascript"
+            src="{{url_for('static', filename='js/ajax/delete_collection.js')}}"
+        ></script>
         <!-- add new collections -->
-        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/new_collection.js')}}"></script>
+        <script
+            type="text/javascript"
+            src="{{url_for('static', filename='js/ajax/new_collection.js')}}"
+        ></script>
         <!-- read in new tab -->
-        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/read_news_new_tab.js')}}"></script>
+        <script
+            type="text/javascript"
+            src="{{url_for('static', filename='js/ajax/read_news_new_tab.js')}}"
+        ></script>
         <!-- preview news -->
-        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/preview_news.js')}}"></script>
+        <script
+            type="text/javascript"
+            src="{{url_for('static', filename='js/ajax/preview_news.js')}}"
+        ></script>
         <!-- save article -->
-        <script type="text/javascript" src="{{url_for('static', filename='js/ajax/save_article.js')}}"></script>
+        <script
+            type="text/javascript"
+            src="{{url_for('static', filename='js/ajax/save_article.js')}}"
+        ></script>
 
         <script>
-            const collectionDisplay = document.querySelector(".collection_display");
-            const collectionGroup = document.querySelectorAll(".collection_group");
+            const collectionDisplay = document.querySelector(
+                ".collection_display",
+            );
+            const collectionGroup =
+                document.querySelectorAll(".collection_group");
 
             collectionGroup.forEach((group) => {
                 group.addEventListener("click", () => {
@@ -192,8 +260,11 @@
 
                     // removing the dustbin from the collection_display,
                     // at the first loading there will be error as Read Later does not have delete_collection / dustbin
-                    const collDisplay = document.querySelector(".collection_display");
-                    const deleteCollection = collDisplay.querySelector(".delete_collection");
+                    const collDisplay = document.querySelector(
+                        ".collection_display",
+                    );
+                    const deleteCollection =
+                        collDisplay.querySelector(".delete_collection");
                     if (deleteCollection) {
                         deleteCollection.style.opacity = 0;
                     }
@@ -204,8 +275,14 @@
         </script>
 
         <!-- dark mode -->
-        <script type="text/javascript" src="{{url_for('static', filename='js/functions/dark_mode.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/utils/scroll/smooth-scrolling.js')}}"></script>
+        <script
+            type="text/javascript"
+            src="{{url_for('static', filename='js/functions/dark_mode.js')}}"
+        ></script>
+        <script
+            type="text/javascript"
+            src="{{url_for('static', filename='js/utils/scroll/smooth-scrolling.js')}}"
+        ></script>
         <script type="text/javascript" src="/static/js/script.js"></script>
     </body>
 </html>

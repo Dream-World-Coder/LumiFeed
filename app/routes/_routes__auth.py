@@ -1,14 +1,14 @@
 # type: ignore
 from flask import render_template, request, redirect, url_for, flash, jsonify
 from app.routes import(
-    app, 
-    db, 
-    User, 
-    mail, 
-    RegistrationForm, 
-    LoginForm, 
-    CollectionType, 
-    Collection, 
+    app,
+    db,
+    User,
+    mail,
+    RegistrationForm,
+    LoginForm,
+    CollectionType,
+    Collection,
     user_article_collections,
     user_collections
 )
@@ -98,7 +98,7 @@ def send_verification_email(user: User):
                         </body>
                     </html>
                     """
-                    
+
         mail.send(msg)
         return "\n\nverification email sent\n"
 
@@ -277,9 +277,9 @@ def logout():
 @app.route("/delete_account", methods=["GET", "POST"])
 @login_required
 def delete_account():
-    if current_user.is_authenticated:
+    if not current_user.is_authenticated:
         return redirect(url_for("index"))
-    
+
     form = LoginForm()
     if request.method == "GET":
         return render_template("auth/delete-acc.html", form=form)
@@ -287,7 +287,7 @@ def delete_account():
     if request.method == "POST":
         try:
             password = request.form.get("password")
-            
+
             if password:
                 password.strip()
             else:
@@ -303,14 +303,14 @@ def delete_account():
                 print(f'deleteing {current_user}\nData:')
                 print(user1_data.all())
                 user1_data.delete(synchronize_session=False)
-                
+
                 # user_collections
                 user1_collections = db.session.query(user_collections).filter(
                     user_collections.c.user_id == current_user.id
                 )
                 print(user1_collections.all())
                 user1_collections.delete(synchronize_session=False)
-                
+
                 db.session.delete(current_user)
                 db.session.commit()
                 logout_user()

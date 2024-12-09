@@ -18,7 +18,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
     width: 100%;
 }
 
@@ -104,12 +104,12 @@ body.dark-mode .li a {
 /* profile */
 .profile {
     margin-top: 0px;
-    --l: 24px;
+    --l: 30px;
     width: var(--l);
     height: var(--l);
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid #4a4947;
+    /* border: 1px solid #4a4947; */
 
     & img {
         position: relative;

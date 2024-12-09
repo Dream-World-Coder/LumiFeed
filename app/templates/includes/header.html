@@ -1,92 +1,150 @@
 <header class="fixed" itemscope itemtype="https://schema.org/WPHeader">
-  <div class="header-wrapper full flex align-center">
-    <div class="logo flex align-center justify-start" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-      <img id="logo-img" src="{{url_for('static', filename='images/favicon.png')}}" alt="LumiFeed Logo" itemprop="logo" />
-      <span id="logo-text" itemprop="name">LumiFeed</span>
-    </div>
+    <div class="header-wrapper full flex align-center">
+        <div
+            class="logo flex align-center justify-start"
+            itemprop="publisher"
+            itemscope
+            itemtype="https://schema.org/Organization"
+        >
+            <img
+                id="logo-img"
+                src="{{url_for('static', filename='images/favicon.png')}}"
+                alt="LumiFeed Logo"
+                itemprop="logo"
+            />
+            <span id="logo-text" itemprop="name">LumiFeed</span>
+        </div>
 
-    <nav role="navigation" class="relative flexed" itemscope itemtype="https://schema.org/SiteNavigationElement">
-      <div class="ul relative flexed justify-evenly">
-        <div class="li li2 flexed" id="profile">
-          <img class="iconImg" src="{{url_for('static', filename=current_user.profile_pic)}}" alt="" srcset="" />
+        <nav
+            role="navigation"
+            class="relative flexed"
+            itemscope
+            itemtype="https://schema.org/SiteNavigationElement"
+        >
+            <div class="ul relative flexed justify-evenly">
+                <div class="li li2 flexed" id="profile">
+                    <img
+                        class="iconImg"
+                        src="{{url_for('static', filename=current_user.profile_pic)}}"
+                        alt=""
+                        srcset=""
+                    />
 
-          <!-- profile setttings  -->
-          <div class="profile_settings" style="display: none">
-            <div class="user_details">
-              <div class="profile_pic cen flexed">
-                <img src="{{url_for('static', filename=current_user.profile_pic)}}" alt="" srcset="" />
-              </div>
-              <div class="user_name">{{current_user.username}}</div>
-              <div class="user_email">{{current_user.email}}</div>
+                    <!-- profile setttings  -->
+                    <div class="profile_settings">
+                        <div class="user_details">
+                            <div class="profile_pic cen flexed">
+                                <img
+                                    src="{{url_for('static', filename=current_user.profile_pic)}}"
+                                    alt=""
+                                    srcset=""
+                                />
+                            </div>
+                            <div class="user_name">
+                                {{current_user.username}}
+                            </div>
+                            <div class="user_email">{{current_user.email}}</div>
+                        </div>
+                        <div class="delete_account flexed flex-col f-gap-1">
+                            <form
+                                action="{{url_for('reset_password')}}"
+                                method="post"
+                            >
+                                <button type="submit" class="flexed">
+                                    RESET PASSWORD
+                                </button>
+                            </form>
+                            <form action="/delete_account" method="get">
+                                <button type="submit" class="flexed">
+                                    DELETE ACCOUNT
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="li li1 animated-underline-white og-li">
+                    <a href="{{url_for('index')}}" class="flexed" rel="noopener"
+                        >Home</a
+                    >
+                </div>
+                <div class="li li3 animated-underline-white og-li">
+                    <a href="/about" class="flexed" rel="noopener">About</a>
+                </div>
+                <div class="li li4 animated-underline-white og-li">
+                    <a href="/contact" class="flexed" rel="noopener">Contact</a>
+                </div>
+
+                <div class="li li5 animated-underline-white">
+                    <a
+                        href="{{url_for('logout')}}"
+                        class="flexed"
+                        rel="noopener"
+                        >logout</a
+                    >
+                </div>
+
+                <div
+                    class="nav-items-for-mobiles flexed flex-col f-gap-2"
+                    style="display: none"
+                >
+                    <div class="li li6 mobile-li animated-underline-white">
+                        <a href="/" class="flexed" rel="noopener">Home</a>
+                    </div>
+                    <div class="li li3 mobile-li animated-underline-white">
+                        <a href="/about" class="flexed" rel="noopener">About</a>
+                    </div>
+                    <div class="li li4 mobile-li animated-underline-white">
+                        <a href="/contact" class="flexed" rel="noopener"
+                            >Contact</a
+                        >
+                    </div>
+                </div>
             </div>
-            <div class="delete_account flexed flex-col f-gap-1">
-              <form action="{{url_for('reset_password')}}" method="post">
-                <button type="submit" class="flexed">RESET PASSWORD</button>
-              </form>
-              <form action="/delete_account" method="get">
-                <button type="submit" class="flexed">DELETE ACCOUNT</button>
-              </form>
+        </nav>
+        <div class="ham">
+            <img
+                height="20px"
+                width="20px"
+                src="/static/icons/ham.svg"
+                style="display: flex"
+            />
+            <img
+                height="20px"
+                width="20px"
+                src="/static/icons/cross3.svg"
+                style="display: none"
+            />
+        </div>
+
+        <div class="buttons">
+            <div class="dark-mode-btn dmbtn">
+                <span id="dm">
+                    <img
+                        src="{{url_for('static', filename='icons/dm2.svg')}}"
+                        alt="dark mode button"
+                    />
+                </span>
             </div>
-          </div>
         </div>
-
-        <div class="li li1 animated-underline-white og-li">
-          <a href="{{url_for('index')}}" class="flexed" rel="noopener">Home</a>
-        </div>
-        <div class="li li3 animated-underline-white og-li">
-          <a href="/about" class="flexed" rel="noopener">About</a>
-        </div>
-        <div class="li li4 animated-underline-white og-li">
-          <a href="/contact" class="flexed" rel="noopener">Contact</a>
-        </div>
-
-        <div class="li li5 animated-underline-white">
-          <a href="{{url_for('logout')}}" class="flexed" rel="noopener">logout</a>
-        </div>
-
-        <div class="nav-items-for-mobiles flexed flex-col f-gap-2" style="display: none">
-          <div class="li li6 mobile-li animated-underline-white">
-            <a href="/" class="flexed" rel="noopener">Home</a>
-          </div>
-          <div class="li li3 mobile-li animated-underline-white">
-            <a href="/about" class="flexed" rel="noopener">About</a>
-          </div>
-          <div class="li li4 mobile-li animated-underline-white">
-            <a href="/contact" class="flexed" rel="noopener">Contact</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <div class="ham">
-      <img height="20px" width="20px" src="/static/icons/ham.svg" style="display: flex" />
-      <img height="20px" width="20px" src="/static/icons/cross3.svg" style="display: none" />
     </div>
+    <script>
+        const homeDiv = document.querySelector(".li1");
+        const aboutDiv = document.querySelector(".li3");
+        const contactDiv = document.querySelector(".li4");
+        const logoutDiv = document.querySelector(".li5");
 
-    <div class="buttons">
-      <div class="dark-mode-btn dmbtn">
-        <span id="dm">
-          <img src="{{url_for('static', filename='icons/dm2.svg')}}" alt="dark mode button" />
-        </span>
-      </div>
-    </div>
-  </div>
-  <script>
-    const homeDiv = document.querySelector(".li1");
-    const aboutDiv = document.querySelector(".li3");
-    const contactDiv = document.querySelector(".li4");
-    const logoutDiv = document.querySelector(".li5");
+        const array = [homeDiv, aboutDiv, contactDiv, logoutDiv];
+        array.forEach((el) => {
+            el.addEventListener("click", () => {
+                el.querySelector("a").click();
+            });
+        });
 
-    const array = [homeDiv, aboutDiv, contactDiv, logoutDiv];
-    array.forEach((el) => {
-      el.addEventListener("click", () => {
-        el.querySelector("a").click();
-      });
-    });
-
-    document.querySelectorAll(".mobile-li").forEach((li) => {
-      li.addEventListener("click", () => {
-        li.querySelector("a").click();
-      });
-    });
-  </script>
+        document.querySelectorAll(".mobile-li").forEach((li) => {
+            li.addEventListener("click", () => {
+                li.querySelector("a").click();
+            });
+        });
+    </script>
 </header>

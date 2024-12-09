@@ -1,82 +1,82 @@
 :root {
-  --rad: 10px;
-  --body-bg-clr: rgb(251, 251, 251);
-  --dm-body-bg-clr: rgb(48, 48, 48);
-  --normal-bg-clr: rgb(244, 244, 244);
-  --dark-mode-bg-clr: rgba(108, 108, 108, 0.5);
-  --normal-border-clr: rgb(218, 218, 218);
-  --dark-mode-border-clr: rgba(64, 64, 64, 0.9);
+    --rad: 10px;
+    --body-bg-clr: rgb(251, 251, 251);
+    --dm-body-bg-clr: rgb(48, 48, 48);
+    --normal-bg-clr: rgb(244, 244, 244);
+    --dark-mode-bg-clr: rgba(108, 108, 108, 0.5);
+    --normal-border-clr: rgb(218, 218, 218);
+    --dark-mode-border-clr: rgba(64, 64, 64, 0.9);
 }
 
 body {
-  background-color: var(--body-bg-clr);
-  color: black;
-  overflow-x: hidden;
+    background-color: var(--body-bg-clr);
+    color: black;
+    overflow-x: hidden;
 }
 
 body.dark-mode {
-  background-color: var(--dm-body-bg-clr);
-  color: whitesmoke;
+    background-color: var(--dm-body-bg-clr);
+    color: whitesmoke;
 }
 
 /* ------------     add new collection
 ----------------------------------- */
 .add_new_collection_btn {
-  position: fixed;
-  bottom: 25px;
-  left: calc(100% - 70px - 25px);
-  --w: 50px;
-  width: var(--w);
-  height: var(--w);
-  border-radius: 50%;
-  transition: all 0.3s;
-  z-index: 99999;
+    position: fixed;
+    bottom: 25px;
+    left: calc(100% - 70px - 25px);
+    --w: 50px;
+    width: var(--w);
+    height: var(--w);
+    border-radius: 50%;
+    transition: all 0.3s;
+    z-index: 999;
 
-  @media (max-width: 1024px) {
-    --w: 30px;
-    left: calc(100% - 30px - 15px);
-    bottom: 20px;
-  }
+    @media (max-width: 1024px) {
+        --w: 30px;
+        left: calc(100% - 30px - 15px);
+        bottom: 20px;
+    }
 }
 
 .add_new_collection_btn .img_container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: all 0.3s;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
 }
 
 .add_new_collection_btn .img_container img {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .add_new_collection_btn::before {
-  content: "Add a new collection";
-  width: 175px;
-  height: 1rem;
-  font-family: Poppins, sans-serif;
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  padding-right: 10px;
-  transform: translateY(-50%) scaleX(0);
-  transition: all 0.3s;
-  transform-origin: right;
-  white-space: nowrap;
+    content: "Add a new collection";
+    width: 175px;
+    height: 1rem;
+    font-family: Poppins, sans-serif;
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    padding-right: 10px;
+    transform: translateY(-50%) scaleX(0);
+    transition: all 0.3s;
+    transform-origin: right;
+    white-space: nowrap;
 }
 
 .add_new_collection_btn:hover .img_container {
-  transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 .add_new_collection_btn:hover::before {
-  transform: translateY(-50%) scaleX(1);
+    transform: translateY(-50%) scaleX(1);
 }
 
 /* card
 =------------------*/
-.collections_preview_cards{
+.collections_preview_cards {
     position: fixed;
     top: 5rem;
     left: 0rem;
@@ -87,15 +87,15 @@ body.dark-mode {
     /* height: auto;  auto = 52px */
     height: 52px;
     background-color: var(--normal-bg-clr);
-    z-index: 103;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--normal-border-clr);
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 103;
 
-    & .card{
+    & .card {
         box-sizing: content-box;
         text-decoration: none;
         font-size: 0.85rem;
@@ -112,13 +112,13 @@ body.dark-mode {
         align-items: center;
         justify-content: center;
 
-        &:hover{
+        &:hover {
             box-shadow: none;
         }
     }
 
-    &::before{
-        content: 'Click the name of the collections on left for viewing it in the display in the right side.';
+    &::before {
+        content: "Click the name of the collections on left for viewing it in the display in the right side.";
         position: absolute;
         width: 100%;
         height: 100%;
@@ -131,7 +131,7 @@ body.dark-mode {
         z-index: 104;
     }
 
-    & svg{
+    & svg {
         z-index: 105;
         position: absolute;
         right: 15%;
@@ -139,99 +139,97 @@ body.dark-mode {
     }
 }
 
-.collections_preview_cards.hide-before{
-    &::before{
+.collections_preview_cards.hide-before {
+    &::before {
         display: none;
     }
 }
 
-@media (max-width: 768px){
-    .collections_preview_cards{
+@media (max-width: 768px) {
+    .collections_preview_cards {
         top: 4rem;
         display: none;
 
-        & .card{
+        & .card {
             width: 100px;
             height: 2rem;
             font-size: 0.85rem;
         }
 
-        &::before{
+        &::before {
             display: none;
         }
 
-        & svg{
+        & svg {
             display: none;
         }
     }
 }
 
 body.dark-mode .collections_preview_cards,
-body.dark-mode .collections_preview_cards .card{
+body.dark-mode .collections_preview_cards .card {
     background-color: var(--dark-mode-bg-clr);
     border-color: var(--dark-mode-border-clr);
     color: rgb(217, 217, 217);
-
 }
-body.dark-mode .collections_preview_cards .card{
+body.dark-mode .collections_preview_cards .card {
     box-shadow: 2px 2px 0 var(--dark-mode-border-clr);
 
-    &:hover{
+    &:hover {
         box-shadow: none;
     }
 }
 
-
 /* ------------     collection
 ----------------------------------- */
 .collections_container {
-  width: 100vw;
-  height: calc(100vh - 5rem);
-  /* height: auto; */
-  margin-top: calc(5rem + 52px);
-  padding: 15px;
+    width: 100vw;
+    height: calc(100vh - 5rem);
+    /* height: auto; */
+    margin-top: calc(5rem + 52px);
+    padding: 15px;
 
-  @media (max-width: 1024px) {
-    & {
-      height: calc(100vh - 4rem);
-      margin-top: 4rem;
+    @media (max-width: 1024px) {
+        & {
+            height: calc(100vh - 4rem);
+            margin-top: 4rem;
+        }
     }
-  }
 
-  @media (max-width: 768px) {
-    & {
-      padding: 0px;
+    @media (max-width: 768px) {
+        & {
+            padding: 0px;
+        }
     }
-  }
 }
 
 /* now collection group = collection */
 .collection_group {
-  height: 40%;
-  width: 100%;
-  /* height: 40%; */
-  /* width: 40%; */
-  padding: 20px;
-  padding-left: 0;
-  padding-top: 0;
-  display: flex;
-  align-self: center;
-  justify-content: flex-start !important;
-  /* border: 1px solid rgb(223, 17, 17); */
+    height: 40%;
+    width: 100%;
+    /* height: 40%; */
+    /* width: 40%; */
+    padding: 20px;
+    padding-left: 0;
+    padding-top: 0;
+    display: flex;
+    align-self: center;
+    justify-content: flex-start !important;
+    /* border: 1px solid rgb(223, 17, 17); */
 
-  @media (max-width: 1024px) {
-    & {
-      height: 80%;
-      padding: 10px 30px 10px 30px;
+    @media (max-width: 1024px) {
+        & {
+            height: 80%;
+            padding: 10px 30px 10px 30px;
+        }
     }
-  }
 
-  @media (max-width: 768px) {
-    & {
-      height: 90%;
-      padding: 5px 15px 5px 15px;
+    @media (max-width: 768px) {
+        & {
+            height: 90%;
+            padding: 5px 15px 5px 15px;
+        }
     }
-  }
 }
 /* .collection_group:nth-last-child() {
   padding-bottom: 10rem!important;
@@ -242,123 +240,123 @@ body.dark-mode .collections_preview_cards .card{
 } */
 
 .collection {
-  border: 1px solid var(--normal-border-clr);
-  width: 35%;
-  height: 100%;
-  border-radius: var(--rad);
-  background-color: var(--body-bg-clr);
-  overflow: hidden;
+    border: 1px solid var(--normal-border-clr);
+    width: 35%;
+    height: 100%;
+    border-radius: var(--rad);
+    background-color: var(--body-bg-clr);
+    overflow: hidden;
 
-  @media (max-width: 1024px) {
-    & {
-      width: 100%;
-      height: 90%;
-      overflow-x: hidden;
-      overflow-y: scroll;
+    @media (max-width: 1024px) {
+        & {
+            width: 100%;
+            height: 90%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
     }
-  }
 }
 
 @media (width > 1500px) {
-  .collection {
-    width: 40%;
-  }
-  .collection_display {
-    width: calc(100% - 40% - 20px - 15px - 20px + 15px);
-  }
+    .collection {
+        width: 40%;
+    }
+    .collection_display {
+        width: calc(100% - 40% - 20px - 15px - 20px + 15px);
+    }
 }
 .collection::-webkit-scrollbar {
-  width: 0;
+    width: 0;
 }
 
 .collection:hover .delete_collection {
-  display: flex;
+    display: flex;
 }
 
 body.dark-mode .collection {
-  background-color: var(--dm-body-bg-clr);
-  border: 1px solid var(--dark-mode-border-clr);
+    background-color: var(--dm-body-bg-clr);
+    border: 1px solid var(--dark-mode-border-clr);
 }
 
 .collection_name {
-  position: relative;
-  width: 100%;
-  height: 50px;
-  background-color: var(--normal-bg-clr);
-  /* now --normal-bg-clr is green-100 */
-  border-radius: var(--rad) var(--rad) 0px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: larger;
-  font-family: poppins, sans-serif;
-  font-weight: 500;
-  border-bottom: 1px solid var(--normal-border-clr);
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background-color: var(--normal-bg-clr);
+    /* now --normal-bg-clr is green-100 */
+    border-radius: var(--rad) var(--rad) 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+    font-family: poppins, sans-serif;
+    font-weight: 500;
+    border-bottom: 1px solid var(--normal-border-clr);
 
-  @media (max-width: 768px) {
-    & {
-      font-size: 1rem;
+    @media (max-width: 768px) {
+        & {
+            font-size: 1rem;
+        }
     }
-  }
 }
 
 body.dark-mode .collection_name {
-  background-color: var(--dark-mode-bg-clr);
-  color: rgb(217, 217, 217);
-  border-bottom: 1px solid var(--dark-mode-border-clr);
+    background-color: var(--dark-mode-bg-clr);
+    color: rgb(217, 217, 217);
+    border-bottom: 1px solid var(--dark-mode-border-clr);
 }
 
 .collection_content {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 .collection_content ul {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  list-style-type: none;
-  overflow-y: scroll;
-  padding-left: 5px;
-  padding-right: 5px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    list-style-type: none;
+    overflow-y: scroll;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .collection_content ul li {
-  position: relative;
-  width: 100%;
-  height: 60px;
-  display: flex;
-  overflow: hidden;
-  padding: 10px;
-  padding-left: 15px;
-  border-bottom: 1px solid var(--normal-border-clr);
-  line-height: 1rem;
-  z-index: 10;
-  color: rgb(55, 55, 55);
-
-  &:hover {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    overflow: hidden;
+    padding: 10px;
+    padding-left: 15px;
+    border-bottom: 1px solid var(--normal-border-clr);
+    line-height: 1rem;
+    z-index: 10;
     color: rgb(55, 55, 55);
-  }
+
+    &:hover {
+        color: rgb(55, 55, 55);
+    }
 }
 
 body.dark-mode .collection_content ul li {
-  color: rgb(207, 207, 207);
-  border-bottom: 1px solid var(--dark-mode-border-clr);
+    color: rgb(207, 207, 207);
+    border-bottom: 1px solid var(--dark-mode-border-clr);
 }
 
 @media (max-width: 768px) {
-  .collection_content ul li {
-    line-height: 0.85rem;
-    font-size: 0.85rem;
-    height: 70px;
-  }
+    .collection_content ul li {
+        line-height: 0.85rem;
+        font-size: 0.85rem;
+        height: 70px;
+    }
 }
 .collection_display .collection_content ul li:hover {
-  background-color: var(--color-green-100);
-  color: black;
+    background-color: var(--color-green-100);
+    color: black;
 }
 body.dark-mode .collection_display .collection_content ul li:hover {
-  background-color: var(--color-gray-300);
-  color: black;
+    background-color: var(--color-gray-300);
+    color: black;
 }
 /*
 .collection_content ul li::before {
@@ -390,230 +388,231 @@ body.dark-mode .collection_content ul li::before {
 */
 
 .collection_display {
-  position: fixed;
-  top: calc(5rem + 52px + 15px);
-  right: 15px;
-  height: calc(100% - 100px - 5rem);
+    position: fixed;
+    top: calc(5rem + 52px + 15px);
+    right: 15px;
+    height: calc(100% - 100px - 5rem);
 
-  --collection-width-normal: 35%;
-  --collection-padding-left: 20px;
-  --collection_display-right: 15px;
-  --gap-between-collection_display-and-collection: 15px;
-  --something-xtra: 15px;
-  width: calc(100% - 35% - 20px - 15px - 20px + 15px);
+    --collection-width-normal: 35%;
+    --collection-padding-left: 20px;
+    --collection_display-right: 15px;
+    --gap-between-collection_display-and-collection: 15px;
+    --something-xtra: 15px;
+    width: calc(100% - 35% - 20px - 15px - 20px + 15px);
 
-  border-radius: var(--rad);
-  /* border: 1px solid var(--normal-border-clr); */
-  z-index: 99;
+    border-radius: var(--rad);
+    /* border: 1px solid var(--normal-border-clr); */
+    z-index: 99;
 
-  & .collection {
-    width: 100%;
-    z-index: 100;
-    overflow-x: hidden;
-    overflow-y: scroll;
-  }
-
-  & .collection_content ul li {
-    position: relative;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    /* align-items: center; */
-    overflow: hidden;
-    padding: 10px;
-    padding-left: 15px;
-    border-bottom: 1px solid var(--normal-border-clr);
-    line-height: 1rem;
-    z-index: 10;
-    color: rgb(55, 55, 55);
-
-    &:hover {
-      color: black;
+    & .collection {
+        width: 100%;
+        z-index: 100;
+        overflow-x: hidden;
+        overflow-y: scroll;
     }
-  }
 
-  /* & .collection_content ul li:hover::before {
+    & .collection_content ul li {
+        position: relative;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        /* align-items: center; */
+        overflow: hidden;
+        padding: 10px;
+        padding-left: 15px;
+        border-bottom: 1px solid var(--normal-border-clr);
+        line-height: 1rem;
+        z-index: 10;
+        color: rgb(55, 55, 55);
+
+        &:hover {
+            color: black;
+        }
+    }
+
+    /* & .collection_content ul li:hover::before {
     transform: scaleY(1);
     transition: all 0.2s;
     transform-origin: top;
     z-index: 20;
   } */
 
-  @media (max-width: 1024px) {
-    & {
-      display: none;
+    @media (max-width: 1024px) {
+        & {
+            display: none;
+        }
     }
-  }
 }
 
 .delete_collection,
 .delete_article {
-  z-index: 60;
-  --w2: 25px;
-  width: var(--w2);
-  height: var(--w2);
-  border-radius: 50%;
-
-  position: absolute;
-  top: calc(50% - 10px);
-  right: 15px;
-  /* background-color: aliceblue; */
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: none;
-
-  & img {
+    z-index: 60;
+    --w2: 25px;
     width: var(--w2);
     height: var(--w2);
-  }
+    border-radius: 50%;
 
-  &:hover {
-    /* border: 1px solid rgb(255, 255, 255);  needed when i used the :hover::before one */
-    border: 1px solid black;
-  }
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 15px;
+    /* background-color: aliceblue; */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+
+    & img {
+        width: var(--w2);
+        height: var(--w2);
+    }
+
+    &:hover {
+        /* border: 1px solid rgb(255, 255, 255);  needed when i used the :hover::before one */
+        border: 1px solid black;
+    }
 }
 
 body.dark-mode .delete_article:hover {
-  border: 1px solid rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
 }
 
 @media (max-width: 768px) {
-  .delete_article {
-    display: flex;
-  }
-  .collection_content ul li:hover::before {
-    transform: scaleY(0);
-  }
+    .delete_article {
+        display: flex;
+    }
+    .collection_content ul li:hover::before {
+        transform: scaleY(0);
+    }
 }
 
 .collection_content ul li:hover .delete_article {
-  display: flex;
+    display: flex;
 }
 
 /* ------------    profile
 ----------------------------------- */
 :root {
-  --color-gray-300: #d1d5db;
-  --color-gray-600: #4b5563;
+    --color-gray-300: #d1d5db;
+    --color-gray-600: #4b5563;
 }
 .profile_settings {
-  position: absolute;
-  top: calc(5rem + 52px);
-  left: 50px;
-  width: 300px;
-  height: 400px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: var(--rad);
-  display: flex;
-  flex-direction: column;
-  background-color: var(--normal-bg-clr);
-  background-color: rgba(244, 244, 244, 1);
-  border: 1px solid var(--normal-border-clr);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  color: rgb(68, 68, 68);
-  z-index: 1000 !important;
-  box-shadow: -3px 3px 0px var(--color-gray-300);
-  /* display: none;
-  have to use style="display:'none';"*/
+    position: absolute;
+    top: calc(5rem + 0px);
+    right: 0px;
+    width: 300px;
+    height: 400px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: var(--rad);
+    flex-direction: column;
+    /* background-color: var(--normal-bg-clr); */
+    background-color: rgba(244, 244, 244, 1);
+    color: rgb(68, 68, 68);
+    border: 1px solid var(--normal-border-clr);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    box-shadow: -3px 3px 0px var(--color-gray-300);
+    display: flex;
+    display: none;
 
-  @media (max-width: 768px) {
-    top: 1rem;
-    left: calc(100% - (300px * 0.75) - 30px);
-    transform: scale(0.75);
-  }
+    @media (max-width: 768px) {
+        top: 1rem;
+        left: calc(100% - (300px * 0.75) - 30px);
+        transform: scale(0.75);
+    }
+}
+
+.profile_settings.show-profile {
+    display: flex;
 }
 
 body.dark-mode .profile_settings {
-  background-color: rgb(68, 68, 68);
-  border: 1px solid rgb(55, 55, 55);
-  box-shadow: -3px 3px 0px rgb(55, 55, 55);
-  color: rgb(208, 208, 208);
+    background-color: rgb(68, 68, 68);
+    border: 1px solid rgb(55, 55, 55);
+    box-shadow: -3px 3px 0px rgb(55, 55, 55);
+    color: rgb(208, 208, 208);
 }
 
 .user_details {
-  position: relative;
-  width: 100%;
-  height: 80%;
+    position: relative;
+    width: 100%;
+    height: 80%;
 
-  & .profile_pic {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 80px;
-    height: 80px;
+    & .profile_pic {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 80px;
+        height: 80px;
 
-    & img {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border-radius: 15px;
+        & img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+        }
     }
-  }
 
-  & .user_name {
-    text-align: center;
-    padding-top: 5px;
-    border-top: 1px solid rgba(222,222,222, 1);
-    border-bottom: 1px solid rgba(222,222,222, 1);
-    font-size: 1.25rem;
+    & .user_name {
+        text-align: center;
+        padding-top: 5px;
+        border-top: 1px solid rgba(222, 222, 222, 1);
+        border-bottom: 1px solid rgba(222, 222, 222, 1);
+        font-size: 1.25rem;
 
-    @media (max-width: 768px) {
-      font-size: 1.15rem;
+        @media (max-width: 768px) {
+            font-size: 1.15rem;
+        }
     }
-  }
 
-  body.dark-mode & .user_name{
-    border-top: 1px solid rgba(88,88,88, 1);
-    border-bottom: 1px solid rgba(88,88,88, 1);
-  }
-
-  & .user_email {
-    padding-top: 7px;
-    padding-bottom: 5px;
-    text-align: center;
-    font-size: 1rem;
-    border-bottom: 1px solid rgba(222,222,222, 1);
-
-    @media (max-width: 769px) {
-      font-size: 0.85rem;
+    body.dark-mode & .user_name {
+        border-top: 1px solid rgba(88, 88, 88, 1);
+        border-bottom: 1px solid rgba(88, 88, 88, 1);
     }
-  }
 
-  body.dark-mode & .user_email{
-    border-bottom: 1px solid rgba(88,88,88, 1);
-  }
+    & .user_email {
+        padding-top: 7px;
+        padding-bottom: 5px;
+        text-align: center;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(222, 222, 222, 1);
+
+        @media (max-width: 769px) {
+            font-size: 0.85rem;
+        }
+    }
+
+    body.dark-mode & .user_email {
+        border-bottom: 1px solid rgba(88, 88, 88, 1);
+    }
 }
 
 .delete_account {
-  position: relative;
-  width: 100%;
-  height: 20%;
+    position: relative;
+    width: 100%;
+    height: 20%;
 
-  & form button {
-    border: none;
-    font-size: 0.85rem;
-    box-sizing: content-box;
-    padding: 2px 5px 2px 5px;
-    border-radius: 5px;
-    background-color: rgba(49, 143, 96, 0.67);
-    color: white;
-  }
+    & form button {
+        border: none;
+        font-size: 0.85rem;
+        box-sizing: content-box;
+        padding: 2px 5px 2px 5px;
+        border-radius: 5px;
+        background-color: rgba(49, 143, 96, 0.67);
+        color: white;
+    }
 
-    & form:nth-last-of-type(1) button{
+    & form:nth-last-of-type(1) button {
         background-color: rgba(0, 0, 0, 0.67);
     }
-  }
 }
 
 body.dark-mode .delete_account button {
-  color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
 }
 
 #collection1 > div.collection_content::-webkit-scrollbar,
-#collection1 > div.collection_content > ul::-webkit-scrollbar{
-  width: 0;
-  display: none;
+#collection1 > div.collection_content > ul::-webkit-scrollbar {
+    width: 0;
+    display: none;
 }
