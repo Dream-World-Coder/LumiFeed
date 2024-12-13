@@ -1,4 +1,5 @@
 from flask import Flask
+from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -6,10 +7,9 @@ from flask_mail import Mail
 # from flask_wtf import csrf
 from flask_apscheduler import APScheduler
 from .configs import config
-from werkzeug.serving import WSGIRequestHandler
 
+# from werkzeug.serving import WSGIRequestHandler
 # WSGIRequestHandler.protocol_version = "HTTP/1.1"
-
 
 
 # csrf = CSRFProtect()
@@ -23,7 +23,7 @@ scheduler = APScheduler()
 
 # app making
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-app = Flask(__name__, template_folder="templates", static_folder="static")
+app:Flask = Flask(__name__, template_folder="templates", static_folder="static")
 # app.config.from_object(config["development"])
 app.config.from_object(config["production"])
 
@@ -88,12 +88,25 @@ scheduler.add_job(func=reset_user_credits, trigger='interval', seconds=86400, id
 scheduler.add_job(func=delete_unverified_users, trigger='interval', seconds=86400, id='delete_unverified_users')
 scheduler.add_job(func=delete_unsaved_articles, trigger='interval', seconds=86400, id='delete_unsaved_articles')
 
+# @app.cli.command("init-db")
+# def init_db_command():
+#     """Clear the existing data and create new tables."""
+#     db.drop_all()
+#     print("deleted all tables")
+#     db.create_all()
+#     print("created new tables")
 
-# error handlers
+@app.cli.command("create-db")
+def safe_db_init():
+    create_tables()
+
+# error handler
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 @app.errorhandler(Exception)
 def handle_exception(e):
+    print(e)
     return {"error": str(e)}, 500
+
 
 
 # loading user
