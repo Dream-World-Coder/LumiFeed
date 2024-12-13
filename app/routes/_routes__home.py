@@ -42,9 +42,8 @@ def anything(any_path):
   return render_template("errors/404.html")
 
 
-# @app.route("/db_create_all_123_lorem")
+@app.route("/db_create_all_123_lorem")
 def create_tables():
-    # db.drop_all()
     db.create_all()
     st:str = "Tables created successfully!"
     print(st)

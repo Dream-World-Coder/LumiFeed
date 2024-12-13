@@ -1,5 +1,5 @@
 from flask import Flask
-from flask.templating import render_template
+# from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -98,7 +98,10 @@ scheduler.add_job(func=delete_unsaved_articles, trigger='interval', seconds=8640
 
 @app.cli.command("create-db")
 def safe_db_init():
-    create_tables()
+    db.create_all()
+    st:str = "Tables created successfully!"
+    print(st)
+    return st
 
 # error handler
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
