@@ -18,6 +18,7 @@
 
 main {
     padding: var(--con-m-left);
+    padding-top: 0;
     padding-left: calc(1 * var(--con-m-left));
     display: flex;
     justify-content: center;
@@ -191,6 +192,11 @@ body.dark-mode .saving_options img {
     }
     .saving_options {
         display: flex;
+    }
+    tr.info-container {
+        & td.first-td-info {
+            width: auto;
+        }
     }
 }
 
