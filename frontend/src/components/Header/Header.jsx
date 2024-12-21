@@ -29,7 +29,7 @@ const Header = () => {
                         {/* Desktop Navigation */}
                         <nav className="hidden md:flex items-center space-x-8">
                             <a
-                                href="/"
+                                href="/home"
                                 className={`${isDark ? "text-gray-200 hover:text-gray-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-[Cormorant]`}
                             >
                                 Home
@@ -66,7 +66,7 @@ const Header = () => {
                                 <Search className="h-5 w-5" />
                             </button>
                             <a
-                                href="/login"
+                                href="/auth/login"
                                 className={`flex items-center px-4 py-2 ${isDark ? "bg-gray-700 text-gray-200 hover:bg-gray-600" : "bg-[#8B4513] text-white hover:bg-[#8B4513]/90"} rounded-md font-[Cinzel]`}
                             >
                                 <LogIn className="h-4 w-4 mr-2" />
@@ -132,7 +132,7 @@ const Header = () => {
                 >
                     <div className="px-4 py-2 space-y-4 pr-10">
                         <a
-                            href="/"
+                            href="/home"
                             className={`block ${isDark ? "text-gray-200 hover:text-gray-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-[Cormorant]`}
                         >
                             Home
@@ -150,7 +150,7 @@ const Header = () => {
                             Contact
                         </a>
                         <a
-                            href="/login"
+                            href="/auth/login"
                             className={`flex items-center px-4 py-2 ${isDark ? "bg-gray-700 text-gray-200 hover:bg-gray-600" : "bg-[#8B4513] text-white hover:bg-[#8B4513]/90"} rounded-md font-[Cinzel] w-full justify-center`}
                         >
                             <LogIn className="h-4 w-4 mr-2" />

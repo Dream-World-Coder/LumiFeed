@@ -116,9 +116,9 @@ const LandingPage = () => {
                     <div className="text-center mb-16 relative">
                         <div className="relative inline-block">
                             <Feather className="w-24 h-24 mx-auto text-[#8B4513] mb-6 transform hover:scale-110 transition-transform duration-300" />
-                            <div className="absolute inset-0 animate-pulse opacity-[-50]">
+                            {/* <div className="absolute inset-0 animate-pulse opacity-[-50]">
                                 <Sparkles className="w-24 h-24 mx-auto text-[#8B4513]" />
-                            </div>
+                            </div> */}
                         </div>
                         <h1 className="text-6xl md:text-8xl font-[Cinzel] text-[#8B4513] tracking-wider mb-6 relative">
                             <span className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300">
@@ -205,7 +205,7 @@ const LandingPage = () => {
                     {/* CTA Section */}
                     <div className="text-center mb-32">
                         <a
-                            href="/login"
+                            href="/home"
                             className="group relative inline-flex items-center gap-3 bg-[#8B4513] text-[#F2E8CF] px-10 py-4 rounded-md
                         font-[Cinzel] text-xl overflow-hidden"
                         >
