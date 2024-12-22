@@ -51,10 +51,10 @@ const Header = () => {
                                 onClick={() => setIsDark(!isDark)}
                             >
                                 {isDark ? (
-                                    <Sun size={24} className="text-gray-200" />
+                                    <Sun size={20} className="text-gray-200" />
                                 ) : (
                                     <Moon
-                                        size={24}
+                                        size={20}
                                         className="text-[#8B4513]"
                                     />
                                 )}
@@ -83,10 +83,10 @@ const Header = () => {
                                 onClick={() => setIsDark(!isDark)}
                             >
                                 {isDark ? (
-                                    <Sun size={24} className="text-gray-200" />
+                                    <Sun size={20} className="text-gray-200" />
                                 ) : (
                                     <Moon
-                                        size={24}
+                                        size={20}
                                         className="text-[#8B4513]"
                                     />
                                 )}

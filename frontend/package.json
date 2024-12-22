@@ -1,19 +1,22 @@
 {
     "name": "front-end",
+    "description": "front-end part",
     "private": true,
-    "version": "0.0.0",
+    "version": "2.0.0",
     "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint .",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "deploy": "gh-pages -d dist"
     },
     "dependencies": {
         "lucide-react": "^0.469.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "react-router-dom": "^7.1.0"
+        "react-router-dom": "^7.1.0",
+        "vite-plugin-image-optimizer": "^1.1.8"
     },
     "devDependencies": {
         "@eslint/js": "^9.15.0",
@@ -26,8 +29,19 @@
         "eslint-plugin-react-hooks": "^5.0.0",
         "eslint-plugin-react-refresh": "^0.4.14",
         "globals": "^15.12.0",
+        "gh-pages": "^6.2.0",
+        "rollup-plugin-visualizer": "^5.12.0",
         "postcss": "^8.4.49",
         "tailwindcss": "^3.4.16",
-        "vite": "^6.0.1"
-    }
+        "vite": "^6.0.1",
+        "vite-plugin-compression": "^0.5.1"
+    },
+    "keywords": [
+        "Subhajit",
+        "Gorai",
+        "IIEST",
+        "portfolio"
+    ],
+    "author": "Subhajit Gorai",
+    "license": "MIT"
 }

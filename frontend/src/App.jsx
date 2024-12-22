@@ -10,6 +10,7 @@ import { DarkModeProvider } from "./contexts/DarkModeContext";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
+import ContactForm from "./pages/Contact/ContactForm";
 // import ContactForm from "./pages/Contact/ContactForm";
 import ArtGallery from "./pages/ArtGallery/ArtGallery";
 import LandingPage from "./pages/LandingPage/LandingPage";
@@ -21,6 +22,8 @@ import Register from "./pages/Auth/Register";
 import DeleteAccount from "./pages/Auth/DeleteAccount";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
 
+import "./App.css";
+
 const App = () => {
     return (
         <DarkModeProvider>
@@ -30,6 +33,7 @@ const App = () => {
                     <Route path="/home" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/contact-form" element={<ContactForm />} />
                     <Route path="/gallery" element={<ArtGallery />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/article" element={<Article />} />

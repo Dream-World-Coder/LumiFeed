@@ -12,8 +12,9 @@ const Footer = () => {
                     isDark
                         ? "bg-gray-900 border-gray-700"
                         : "bg-[#F2E8CF] border-[#8B4513]/20"
-                } border-t mt-16 transition-colors duration-300`}
+                } border-t mt-0 transition-colors duration-300 isolate z-50`}
             >
+                {/* mt-16 -> mt-0 */}
                 <div className="max-w-7xl mx-auto px-4 py-12">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {/* Brand */}
@@ -49,7 +50,7 @@ const Footer = () => {
                             </h3>
                             <div className="space-y-2">
                                 <a
-                                    href="/"
+                                    href="/home"
                                     className={`block ${
                                         isDark
                                             ? "text-gray-400 hover:text-gray-200"

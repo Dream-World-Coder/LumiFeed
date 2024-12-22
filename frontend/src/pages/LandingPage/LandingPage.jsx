@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     Feather,
-    Newspaper,
     BookMarked,
-    FileText,
     ArrowRight,
-    Search,
+    Layout,
+    Filter,
+    Brain,
+    Star,
     Sparkles,
-    BookOpen,
 } from "lucide-react";
+import { VisitLandingPageBtn } from "./components";
+import Footer from "../../components/Footer/Footer";
 
 const LandingPage = () => {
-    const [activeFeature, setActiveFeature] = useState(0);
+    // const [activeFeature, setActiveFeature] = useState(0);
     const [scrollY, setScrollY] = useState(0);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const decorRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => setScrollY(window.scrollY);
@@ -29,34 +32,45 @@ const LandingPage = () => {
         };
     }, []);
 
+    // for feature cards
     const features = [
         {
-            icon: <Newspaper className="w-8 h-8" />,
-            title: "Curated News Sources",
+            icon: <Layout className="w-8 h-8" />,
+            title: "Enlightened Interface",
             description:
-                "Select from premium news agencies like BBC, CNN, and Indian Express. Access quality journalism without the clutter.",
+                "A canvas free from the chaos of modern media, allowing pure engagement with knowledge.",
         },
         {
-            icon: <FileText className="w-8 h-8" />,
-            title: "Smart Summaries",
+            icon: <Filter className="w-8 h-8" />,
+            title: "Curated Excellence",
             description:
-                "Get concise, high-quality summaries of every article. Understand key points quickly without reading lengthy content.",
+                "Choose from the finest news sources, like a curator selecting masterpieces for a gallery.",
+        },
+        {
+            icon: <Brain className="w-8 h-8" />,
+            title: "Scholarly Summaries",
+            description:
+                "Experience the essence of articles through our masterfully crafted summaries.",
         },
         {
             icon: <BookMarked className="w-8 h-8" />,
-            title: "Personal Collections",
+            title: "Personal Library",
             description:
-                "Save and organize your favorite articles into custom collections. Build your personal knowledge library.",
+                "Build your own collection of knowledge, akin to the great libraries of the Renaissance.",
         },
     ];
 
     const sources = [
         "BBC News",
+        "The Indian Express",
         "CNN",
-        "Indian Express",
-        "Reuters",
+        "The New York Times",
         "The Guardian",
-        "Associated Press",
+        "The Washington Post",
+        "Al Jazeera",
+        "The Times of India",
+        "NDTV",
+        "Hindustan Times",
     ];
 
     return (
@@ -70,6 +84,64 @@ const LandingPage = () => {
                     transition: "all 0.3s ease",
                 }}
             />
+            {/* Decorative Background */}
+            <div
+                ref={decorRef}
+                className="fixed inset-0 pointer-events-none overflow-hidden"
+            >
+                <div className="absolute top-0 left-0 w-64 h-64 decor-element">
+                    <svg
+                        viewBox="0 0 100 100"
+                        className="w-full h-full opacity-10"
+                    >
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="40"
+                            fill="none"
+                            stroke="#8B4513"
+                            strokeWidth="0.5"
+                        />
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="35"
+                            fill="none"
+                            stroke="#8B4513"
+                            strokeWidth="0.5"
+                        />
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="30"
+                            fill="none"
+                            stroke="#8B4513"
+                            strokeWidth="0.5"
+                        />
+                    </svg>
+                </div>
+                <div className="absolute bottom-0 right-0 w-96 h-96 decor-element">
+                    <svg
+                        viewBox="0 0 100 100"
+                        className="w-full h-full opacity-10"
+                    >
+                        <pattern
+                            id="grid"
+                            width="10"
+                            height="10"
+                            patternUnits="userSpaceOnUse"
+                        >
+                            <path
+                                d="M 10 0 L 0 0 0 10"
+                                fill="none"
+                                stroke="#8B4513"
+                                strokeWidth="0.5"
+                            />
+                        </pattern>
+                        <rect width="100" height="100" fill="url(#grid)" />
+                    </svg>
+                </div>
+            </div>
 
             {/* Hero Section */}
             <div className="relative min-h-screen">
@@ -116,6 +188,7 @@ const LandingPage = () => {
                     <div className="text-center mb-16 relative">
                         <div className="relative inline-block">
                             <Feather className="w-24 h-24 mx-auto text-[#8B4513] mb-6 transform hover:scale-110 transition-transform duration-300" />
+                            {/* sparkling background */}
                             {/* <div className="absolute inset-0 animate-pulse opacity-[-50]">
                                 <Sparkles className="w-24 h-24 mx-auto text-[#8B4513]" />
                             </div> */}
@@ -149,15 +222,21 @@ const LandingPage = () => {
                         <p className="text-2xl md:text-3xl text-[#8B4513]/80 italic max-w-2xl mx-auto">
                             Welcome to the renaissance of reading
                         </p>
+                        {/* CTA Section 1 */}
+                        <VisitLandingPageBtn
+                            myClass="mt-10 mb-10"
+                            href="home"
+                            buttonText="Begin Your Journey"
+                        />
                     </div>
 
                     {/* Feature Cards */}
-                    <div className="grid md:grid-cols-3 gap-8 mb-16">
+                    <div className="grid md:grid-cols-4 gap-8 mb-16">
                         {features.map((feature, index) => (
                             <div key={index} className="group relative">
                                 <div className="absolute inset-0 bg-[#8B4513] rounded-lg transform transition-all duration-300 group-hover:rotate-6 opacity-20" />
                                 <div
-                                    className="relative bg-white/40 backdrop-blur-md rounded-lg p-8 border border-[#8B4513]/20
+                                    className="relative bg-white/40 backdrop-blur-md rounded-lg p-8 border border-[#8B4513]/20 size-full
                               transform transition-all duration-300 group-hover:-translate-y-2 group-hover:translate-x-1
                               hover:shadow-2xl overflow-hidden"
                                 >
@@ -194,6 +273,7 @@ const LandingPage = () => {
                                     >
                                         <div className="absolute inset-0 bg-[#8B4513] rounded-full transform group-hover:scale-110 transition-transform duration-300 opacity-0 group-hover:opacity-100" />
                                         <span className="relative text-lg text-[#8B4513] group-hover:text-[#F2E8CF] transition-colors duration-300">
+                                            {/* why sudden animation when mouseleave? */}
                                             {source}
                                         </span>
                                     </div>
@@ -202,23 +282,17 @@ const LandingPage = () => {
                         </div>
                     </div>
 
-                    {/* CTA Section */}
-                    <div className="text-center mb-32">
-                        <a
-                            href="/home"
-                            className="group relative inline-flex items-center gap-3 bg-[#8B4513] text-[#F2E8CF] px-10 py-4 rounded-md
-                        font-[Cinzel] text-xl overflow-hidden"
-                        >
-                            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
-                                Begin Your Journey
-                            </span>
-                            <ArrowRight className="w-6 h-6 relative z-10 transition-transform duration-300 group-hover:translate-x-2" />
-                            <div className="absolute inset-0 bg-[#8B4513] transform transition-transform duration-300 group-hover:scale-x-110" />
-                            <div className="absolute inset-0 bg-[#724939] transform origin-left transition-transform duration-300 scale-x-0 group-hover:scale-x-100" />
-                        </a>
-                    </div>
+                    {/* CTA Section 2 */}
+                    <VisitLandingPageBtn
+                        myClass="mb-32"
+                        href="home"
+                        buttonText="Set Forth"
+                    />
                 </div>
             </div>
+
+            {/* footer */}
+            <Footer />
 
             <style jsx global>{`
                 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
