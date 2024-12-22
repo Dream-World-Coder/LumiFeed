@@ -3,7 +3,8 @@ import { Feather, Search, Menu, X, LogIn, Moon, Sun } from "lucide-react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 const Header = () => {
-    const { isDark, setIsDark } = useDarkMode();
+    // const { isDark, setIsDark } = useDarkMode();
+    const { isDark, toggleDarkMode } = useDarkMode();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -48,7 +49,7 @@ const Header = () => {
                             </a>
                             <button
                                 className="block cursor-pointer hover:rotate-[0deg] transition-all duration-500"
-                                onClick={() => setIsDark(!isDark)}
+                                onClick={toggleDarkMode}
                             >
                                 {isDark ? (
                                     <Sun size={20} className="text-gray-200" />
@@ -80,7 +81,8 @@ const Header = () => {
                         >
                             <button
                                 className="block cursor-pointer hover:rotate-[0deg] transition-all duration-500"
-                                onClick={() => setIsDark(!isDark)}
+                                // onClick={() => setIsDark(!isDark)}
+                                onClick={toggleDarkMode}
                             >
                                 {isDark ? (
                                     <Sun size={20} className="text-gray-200" />

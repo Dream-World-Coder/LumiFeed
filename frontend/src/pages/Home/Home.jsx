@@ -79,7 +79,7 @@ const HomePage = () => {
             {/* Header */}
             <Header />
 
-            <main className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 mt-[4rem]">
+            <main className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 mt-[4rem] mb-[4rem]">
                 {/* Left Panel */}
                 <div className="w-full md:w-96">
                     {/* Category Selection */}

@@ -25,6 +25,8 @@ import VerifyEmail from "./pages/Auth/VerifyEmail";
 import "./App.css";
 
 const App = () => {
+    // will add a loading state in the app later
+
     return (
         <DarkModeProvider>
             <Router>
