@@ -17,14 +17,16 @@ const Header = () => {
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <div className="flex items-center">
-                            <Feather
-                                className={`h-8 w-8 ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
-                            />
-                            <span
-                                className={`ml-2 text-xl font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
-                            >
-                                LumiFeed
-                            </span>
+                            <a className="flex items-center" href="/">
+                                <Feather
+                                    className={`h-8 w-8 ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                                />
+                                <span
+                                    className={`ml-2 text-xl font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                                >
+                                    LumiFeed
+                                </span>
+                            </a>
                         </div>
 
                         {/* Desktop Navigation */}

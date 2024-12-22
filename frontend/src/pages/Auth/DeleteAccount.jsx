@@ -123,7 +123,7 @@ const DeleteAccount = () => {
 
                             <div className="flex gap-4">
                                 <a
-                                    href="/dashboard"
+                                    href="/profile"
                                     className="flex-1 bg-[#8B4513]/10 text-[#8B4513] py-3 rounded-md font-[Cinzel]
                      hover:bg-[#8B4513]/20 transition-all duration-300 text-center"
                                 >
