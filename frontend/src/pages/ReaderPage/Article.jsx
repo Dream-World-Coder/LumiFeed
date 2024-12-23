@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Feather, Moon, Sun, FileText, ChevronLeft, Type } from "lucide-react";
+import { Moon, Sun, FileText, ChevronLeft, Type } from "lucide-react";
+import AppLogo from "../../assets/Logo";
 
 const NewsArticle = () => {
     const [fontSize, setFontSize] = useState("base");
@@ -77,7 +78,13 @@ const NewsArticle = () => {
                             >
                                 <ChevronLeft className="w-6 h-6" />
                             </button>
-                            <Feather className="h-8 w-8" />
+                            <AppLogo
+                                width={26}
+                                height={26}
+                                backgroundColor="#8B4513"
+                                letterColor="#FFFFFF"
+                                className={`${isDarkMode ? "invert" : "invert-0"}`}
+                            />
                             <span className="ml-2 text-xl font-[Cinzel]">
                                 LumiFeed
                             </span>

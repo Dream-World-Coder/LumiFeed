@@ -11,7 +11,6 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import ContactForm from "./pages/Contact/ContactForm";
-// import ContactForm from "./pages/Contact/ContactForm";
 import ArtGallery from "./pages/ArtGallery/ArtGallery";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Profile from "./pages/Profile/Profile";
@@ -23,6 +22,9 @@ import DeleteAccount from "./pages/Auth/DeleteAccount";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
 
 import "./App.css";
+
+// I should not use open in new tab for reading articles specially in phones;
+// Its more convenient though
 
 const App = () => {
     // will add a loading state in the app later
@@ -51,10 +53,6 @@ const App = () => {
                         path="/auth/verify-email"
                         element={<VerifyEmail />}
                     />
-                    {/* Nested routes */}
-                    {/* <Route path="/landing-page/modern1" element={<modern1 />} />
-                <Route path="/landing-page/modern2" element={<modern2 />} />
-                <Route path="/landing-page/retro1" element={<retro1 />} /> */}
                 </Routes>
             </Router>
         </DarkModeProvider>
