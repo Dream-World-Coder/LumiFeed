@@ -1,1 +1,6 @@
-
+.DS_Store
+newspapers-th-it/
+.env/
+.venv/
+node_modules/
+package-lock.json
