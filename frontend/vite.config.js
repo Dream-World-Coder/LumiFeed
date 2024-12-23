@@ -12,6 +12,7 @@ export default defineConfig({
             open: true,
         }),
     ],
+    base: "/LumiFeed/",
     build: {
         outDir: "dist",
         sourcemap: true,
