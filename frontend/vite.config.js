@@ -9,7 +9,7 @@ export default defineConfig({
         react(),
         compression(),
         visualizer({
-            open: true,
+            open: false,
         }),
     ],
     build: {

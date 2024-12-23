@@ -20,6 +20,7 @@ import Register from "./pages/Auth/Register";
 // import ForgotPassword from "./pages/Auth/ForgotPassword";
 import DeleteAccount from "./pages/Auth/DeleteAccount";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
+import NotFound from "./pages/404";
 
 import "./App.css";
 
@@ -53,6 +54,9 @@ const App = () => {
                         path="/auth/verify-email"
                         element={<VerifyEmail />}
                     />
+
+                    {/* handle 404 */}
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
         </DarkModeProvider>
