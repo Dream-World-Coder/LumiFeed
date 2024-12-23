@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-    Feather,
     BookMarked,
     ArrowRight,
     Layout,
@@ -10,6 +9,7 @@ import {
     Sparkles,
 } from "lucide-react";
 import { VisitLandingPageBtn } from "./components";
+import AppLogo from "../../assets/Logo";
 import Footer from "../../components/Footer/Footer";
 
 const LandingPage = () => {
@@ -187,7 +187,14 @@ const LandingPage = () => {
                     {/* Animated Logo */}
                     <div className="text-center mb-16 relative">
                         <div className="relative inline-block">
-                            <Feather className="w-24 h-24 mx-auto text-[#8B4513] mb-6 transform hover:scale-110 transition-transform duration-300" />
+                            {/* <Feather className="w-24 h-24 mx-auto text-[#8B4513] mb-6 transform hover:scale-110 transition-transform duration-300" /> */}
+                            <AppLogo
+                                width={96}
+                                height={96}
+                                backgroundColor="#8B4513"
+                                letterColor="#FFFFFF"
+                                className="mx-auto text-[#8B4513] mb-6 transform hover:scale-110 transition-transform duration-300"
+                            />
                             {/* sparkling background */}
                             {/* <div className="absolute inset-0 animate-pulse opacity-[-50]">
                                 <Sparkles className="w-24 h-24 mx-auto text-[#8B4513]" />

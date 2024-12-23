@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Eye, EyeOff, Mail, Lock, Feather } from "lucide-react";
-
+import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import AppLogo from "../../assets/Logo";
 import BackButton from "./components";
 
 const LoginPage = () => {
@@ -85,7 +85,13 @@ const LoginPage = () => {
                 <div className="relative max-w-md w-full">
                     {/* Logo */}
                     <div className="text-center mb-8">
-                        <Feather className="w-16 h-16 mx-auto text-[#8B4513] mb-4 form-element" />
+                        <AppLogo
+                            width={64}
+                            height={64}
+                            backgroundColor="#8B4513"
+                            letterColor="#FFFFFF"
+                            className={`mx-auto mb-4 form-element`}
+                        />
                         <h1 className="text-4xl md:text-5xl font-[Cinzel] text-[#8B4513] tracking-wider mb-2 form-element">
                             LumiFeed
                         </h1>

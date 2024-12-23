@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Feather, Search, Menu, X, LogIn, Moon, Sun } from "lucide-react";
+import { Search, Menu, X, LogIn, Moon, Sun } from "lucide-react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+import AppLogo from "../../assets/Logo";
 
 const Header = () => {
     // const { isDark, setIsDark } = useDarkMode();
@@ -18,8 +19,12 @@ const Header = () => {
                         {/* Logo */}
                         <div className="flex items-center">
                             <a className="flex items-center" href="/">
-                                <Feather
-                                    className={`h-8 w-8 ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                                <AppLogo
+                                    width={28}
+                                    height={28}
+                                    backgroundColor="#8B4513"
+                                    letterColor="#FFFFFF"
+                                    className={`${isDark ? "invert" : "invert-0"}`}
                                 />
                                 <span
                                     className={`ml-2 text-xl font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}

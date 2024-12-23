@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    Feather,
     Linkedin,
     Mail,
     Globe,
@@ -11,9 +10,29 @@ import {
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+// import AppLogo from "../../assets/Logo";
 
 const ContactSection = () => {
-    const { isDark, setIsDark } = useDarkMode();
+    const { isDark } = useDarkMode();
+
+    const mySocials = [
+        {
+            name: "LinkedIn",
+            url: "https://www.linkedin.com/in/subhajitgorai",
+        },
+        {
+            name: "Portfolio Website",
+            url: "https://subhajit.pages.dev/",
+        },
+        {
+            name: "Email",
+            url: "mailto:lumifeed101@gmail.com",
+        },
+        {
+            name: "Personal Blog",
+            url: "https://myopencanvas.pages.dev/",
+        },
+    ];
 
     return (
         <>
@@ -25,9 +44,13 @@ const ContactSection = () => {
                 <div className="max-w-4xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <Feather
-                            className={`w-16 h-16 mx-auto ${isDark ? "text-gray-200" : "text-[#8B4513]"} mb-4`}
-                        />
+                        {/* <AppLogo
+                            width={64}
+                            height={64}
+                            backgroundColor="#8B4513"
+                            letterColor="#FFFFFF"
+                            className={`${isDark ? "invert" : "invert-0"} mx-auto mb-4`}
+                        /> */}
                         <h1
                             className={`text-4xl md:text-5xl font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"} tracking-wider mb-4`}
                         >
@@ -83,22 +106,18 @@ const ContactSection = () => {
                             </h3>
 
                             {/* Social Link Items */}
-                            {[
-                                "LinkedIn",
-                                "Portfolio Website",
-                                "Email",
-                                "Personal Blog",
-                            ].map((item, index) => (
+                            {mySocials.map((social, index) => (
                                 <a
                                     key={index}
-                                    href="#"
+                                    href={`${social.url}`}
+                                    target="_blank"
                                     className={`flex items-center p-4 ${isDark ? "bg-gray-800/40 hover:bg-gray-700/60" : "bg-white/40 hover:bg-white/60"} rounded-lg border ${isDark ? "border-gray-700" : "border-[#8B4513]/20"} transition-all`}
                                 >
                                     {/* Icon component would go here */}
                                     <span
                                         className={`text-lg ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
                                     >
-                                        {item}
+                                        {social.name}
                                     </span>
                                 </a>
                             ))}
@@ -123,7 +142,8 @@ const ContactSection = () => {
                                 </p>
 
                                 <a
-                                    href="#"
+                                    href="https://github.com/Dream-World-Coder/LumiFeed"
+                                    target="_blank"
                                     className={`flex items-center justify-center p-4 ${isDark ? "bg-gray-700 hover:bg-gray-600" : "bg-[#8B4513] hover:bg-[#8B4513]/90"} text-white rounded-lg transition-all`}
                                 >
                                     <Github className="w-6 h-6 mr-2" />

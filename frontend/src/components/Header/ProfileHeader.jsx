@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-    Feather,
     Search,
     Menu,
     X,
@@ -15,13 +14,14 @@ import {
     Trash2,
     ChevronDown,
 } from "lucide-react";
+import AppLogo from "../../assets/Logo";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 const Header = () => {
     // provide usedata from props
     const userData = {
-        name: "John Doe",
-        email: "john@example.com",
+        name: "Mr X",
+        email: "mr@x.com",
         profilePic: "https://picsum.photos/100/100",
     };
 
@@ -40,8 +40,12 @@ const Header = () => {
                         {/* Logo */}
                         <div className="flex items-center">
                             <a className="flex items-center" href="/">
-                                <Feather
-                                    className={`h-8 w-8 ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                                <AppLogo
+                                    width={28}
+                                    height={28}
+                                    backgroundColor="#8B4513"
+                                    letterColor="#FFFFFF"
+                                    className={`${isDark ? "invert" : "invert-0"}`}
                                 />
                                 <span
                                     className={`ml-2 text-xl font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}

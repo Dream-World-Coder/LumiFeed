@@ -1,6 +1,7 @@
 import React from "react";
-import { Feather, Mail, Github } from "lucide-react";
+import { Mail, Github, Instagram } from "lucide-react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+import AppLogo from "../../assets/Logo";
 
 const Footer = () => {
     const { isDark } = useDarkMode();
@@ -20,12 +21,12 @@ const Footer = () => {
                         {/* Brand */}
                         <div className="text-center md:text-left">
                             <div className="flex items-center justify-center md:justify-start mb-4">
-                                <Feather
-                                    className={`h-8 w-8 ${
-                                        isDark
-                                            ? "text-gray-200"
-                                            : "text-[#8B4513]"
-                                    }`}
+                                <AppLogo
+                                    width={28}
+                                    height={28}
+                                    backgroundColor="#8B4513"
+                                    letterColor="#FFFFFF"
+                                    className={`${isDark ? "invert" : "invert-0"}`}
                                 />
                                 <span
                                     className={`ml-2 text-xl font-[Cinzel] ${
@@ -92,8 +93,8 @@ const Footer = () => {
                                 Connect
                             </h3>
                             <div className="space-y-2">
-                                <a
-                                    href="#"
+                                {/* <a
+                                    href="mailto:lumifeed101@gmail.com"
                                     className={`flex items-center justify-center md:justify-start ${
                                         isDark
                                             ? "text-gray-400 hover:text-gray-200"
@@ -102,6 +103,19 @@ const Footer = () => {
                                 >
                                     <Mail className="h-5 w-5 mr-2" />
                                     Email
+                                </a> */}
+                                <a
+                                    href="https://github.com/Dream-World-Coder/LumiFeed"
+                                    target="_blank"
+                                    title="visit github repository"
+                                    className={`flex items-center justify-center md:justify-start ${
+                                        isDark
+                                            ? "text-gray-400 hover:text-gray-200"
+                                            : "text-[#8B4513]/80 hover:text-[#8B4513]"
+                                    } font-[Cormorant]`}
+                                >
+                                    <Github className="h-5 w-5 mr-2" />
+                                    Github
                                 </a>
                                 <a
                                     href="#"
@@ -111,8 +125,8 @@ const Footer = () => {
                                             : "text-[#8B4513]/80 hover:text-[#8B4513]"
                                     } font-[Cormorant]`}
                                 >
-                                    <Github className="h-5 w-5 mr-2" />
-                                    Github
+                                    <Instagram className="h-5 w-5 mr-2" />
+                                    Socials
                                 </a>
                             </div>
                         </div>

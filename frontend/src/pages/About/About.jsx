@@ -1,11 +1,12 @@
 import React from "react";
-import { Feather, BookOpen, Newspaper, Star } from "lucide-react";
+import { BookOpen, Newspaper, Star } from "lucide-react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+// import AppLogo from "../../assets/Logo";
 
 const AboutSection = () => {
-    const { isDark, setIsDark } = useDarkMode();
+    const { isDark } = useDarkMode();
 
     return (
         <>
@@ -17,9 +18,13 @@ const AboutSection = () => {
                 <div className="max-w-4xl mx-auto">
                     {/* Header Section */}
                     <div className="text-center mb-16">
-                        <Feather
-                            className={`w-16 h-16 mx-auto ${isDark ? "text-gray-200" : "text-[#8B4513]"} mb-4`}
-                        />
+                        {/* <AppLogo
+                            width={64}
+                            height={64}
+                            backgroundColor="#8B4513"
+                            letterColor="#FFFFFF"
+                            className={`${isDark ? "invert" : "invert-0"} mx-auto mb-4`}
+                        /> */}
                         <h1
                             className={`text-4xl md:text-5xl font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"} tracking-wider mb-4`}
                         >

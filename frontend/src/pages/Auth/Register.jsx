@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Eye, EyeOff, Mail, Lock, Feather, User } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import BackButton from "./components";
+// import AppLogo from "../../assets/Logo";
 
 const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -84,7 +85,6 @@ const RegisterPage = () => {
                 <div className="relative max-w-md w-full">
                     {/* Logo */}
                     <div className="text-center mb-8">
-                        <Feather className="w-16 h-16 mx-auto text-[#8B4513] mb-4 form-element" />
                         <h1 className="text-4xl md:text-5xl font-[Cinzel] text-[#8B4513] tracking-wider mb-2 form-element">
                             LumiFeed
                         </h1>

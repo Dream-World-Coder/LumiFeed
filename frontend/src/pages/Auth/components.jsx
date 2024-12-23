@@ -8,7 +8,7 @@ const BackButton = () => {
     return (
         <button
             onClick={() => navigate(-1)}
-            className="fixed top-8 left-8 flex items-center gap-1 px-1 py-1 bg-[#F2E8CF] font-[Cinzel] text-sm text-[#8B4513] border border-[#8B4513] rounded-md shadow-lg hover:bg-[#8B4513] hover:text-[#F2E8CF] transition-all duration-300"
+            className="fixed top-8 left-8 flex items-center gap-1 px-1 pt-1 bg-[#F2E8CF] font-[Cinzel] text-sm text-[#8B4513] border-b border-[#8B4513] hover:bg-[#8B4513]/20 transition-all duration-300"
         >
             <ChevronLeftIcon size={20} />
             Go Back

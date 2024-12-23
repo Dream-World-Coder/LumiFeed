@@ -17,9 +17,11 @@ import {
     ExternalLink,
 } from "lucide-react";
 import ProfileHeader from "../../components/Header/ProfileHeader";
-import Footer from "../../components/Footer/Footer";
+// import Footer from "../../components/Footer/Footer";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 
 const ProfilePage = () => {
+    const { isDark } = useDarkMode();
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const [showNewCollectionModal, setShowNewCollectionModal] = useState(false);
     const [selectedCollection, setSelectedCollection] = useState(null);
@@ -65,6 +67,36 @@ const ProfilePage = () => {
         },
     ];
 
+    /*
+        Key dark mode changes made:
+        Table Container:
+
+        Light: bg-white/40 → Dark: bg-gray-800/40
+        Border colors adjusted for dark mode
+
+        Table Header:
+
+        Background: bg-[#8B4513]/10 → bg-gray-700/50
+        Text: text-[#8B4513] → text-gray-200
+
+        Table Body:
+
+        Row hover: hover:bg-[#8B4513]/5 → hover:bg-gray-700/30
+        Dividers: divide-[#8B4513]/10 → divide-gray-700
+
+        Text Colors:
+
+        Primary text: text-[#8B4513] → text-gray-200
+        Secondary text: text-[#8B4513]/80 → text-gray-300
+        Muted text: text-[#8B4513]/60 → text-gray-400
+
+        Interactive Elements:
+
+        Buttons hover states adjusted for dark mode
+        Delete/remove buttons maintain red color but with adjusted hover states
+        Pagination controls adapted for dark mode
+    */
+
     const CollectionView = ({ collection }) => {
         const totalPages = Math.ceil(
             collection.articles.length / articlesPerPage,
@@ -74,27 +106,35 @@ const ProfilePage = () => {
         const currentArticles = collection.articles.slice(startIndex, endIndex);
 
         return (
-            <div className="bg-white/40 backdrop-blur-md rounded-lg shadow-xl border border-[#8B4513]/20">
+            <div
+                className={`${isDark ? "bg-gray-800/40" : "bg-white/40"} backdrop-blur-md rounded-lg shadow-xl border ${isDark ? "border-gray-700" : "border-[#8B4513]/20"}`}
+            >
                 {/* Collection Header */}
-                <div className="p-4 border-b border-[#8B4513]/10 flex justify-between items-center">
+                <div
+                    className={`p-4 border-b ${isDark ? "border-gray-700" : "border-[#8B4513]/10"} flex justify-between items-center`}
+                >
                     <div className="flex items-center space-x-4">
                         <button
                             onClick={() => setSelectedCollection(null)}
-                            className="text-[#8B4513] hover:bg-[#8B4513]/10 p-2 rounded-full transition-colors"
+                            className={`${isDark ? "text-gray-200 hover:bg-gray-700" : "text-[#8B4513] hover:bg-[#8B4513]/10"} p-2 rounded-full transition-colors`}
                         >
                             <ChevronLeft size={24} />
                         </button>
                         <div>
-                            <h2 className="font-[Cinzel] text-2xl text-[#8B4513]">
+                            <h2
+                                className={`font-[Cinzel] text-2xl ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                            >
                                 {collection.name}
                             </h2>
-                            <p className="text-[#8B4513]/60">
+                            <p
+                                className={`${isDark ? "text-gray-400" : "text-[#8B4513]/60"}`}
+                            >
                                 {collection.articles.length} articles
                             </p>
                         </div>
                     </div>
                     <button
-                        className="text-red-600 hover:text-red-700 transition-colors"
+                        className="text-red-600 hover:text-red-500 transition-colors"
                         title="Delete Collection"
                     >
                         <Trash2 size={20} />
@@ -104,8 +144,12 @@ const ProfilePage = () => {
                 {/* Articles Table */}
                 <div className="overflow-x-auto">
                     <table className="w-full">
-                        <thead className="bg-[#8B4513]/10">
-                            <tr className="font-[Cinzel] text-[#8B4513]">
+                        <thead
+                            className={`${isDark ? "bg-gray-700/50" : "bg-[#8B4513]/10"}`}
+                        >
+                            <tr
+                                className={`font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                            >
                                 <th className="py-3 px-4 text-left">Article</th>
                                 <th className="py-3 px-4 text-left">Source</th>
                                 <th className="py-3 px-4 text-left">Date</th>
@@ -114,31 +158,40 @@ const ProfilePage = () => {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-[#8B4513]/10">
+                        <tbody
+                            className={`divide-y ${isDark ? "divide-gray-700" : "divide-[#8B4513]/10"}`}
+                        >
                             {currentArticles.map((article) => (
                                 <tr
                                     key={article.id}
-                                    className="hover:bg-[#8B4513]/5"
+                                    className={`${isDark ? "hover:bg-gray-700/30" : "hover:bg-[#8B4513]/5"}`}
                                 >
                                     <td className="py-4 px-4">
-                                        <h4 className="font-medium text-[#8B4513] text-lg">
-                                            {/* remove text lg for default */}
+                                        <h4
+                                            className={`font-medium ${isDark ? "text-gray-200" : "text-[#8B4513]"} text-lg`}
+                                        >
                                             {article.title}
                                         </h4>
-                                        <p className="text-sm text-[#8B4513]/60 mt-1">
+                                        <p
+                                            className={`text-sm ${isDark ? "text-gray-400" : "text-[#8B4513]/60"} mt-1`}
+                                        >
                                             {article.summary}
                                         </p>
                                     </td>
-                                    <td className="py-4 px-4 text-[#8B4513]/80">
+                                    <td
+                                        className={`py-4 px-4 ${isDark ? "text-gray-300" : "text-[#8B4513]/80"}`}
+                                    >
                                         {article.source}
                                     </td>
-                                    <td className="py-4 px-4 text-[#8B4513]/80">
+                                    <td
+                                        className={`py-4 px-4 ${isDark ? "text-gray-300" : "text-[#8B4513]/80"}`}
+                                    >
                                         {article.date}
                                     </td>
                                     <td className="py-4 px-4">
                                         <div className="flex items-center justify-center space-x-2">
                                             <button
-                                                className="text-[#8B4513] hover:bg-[#8B4513]/10 p-2 rounded-full transition-colors"
+                                                className={`${isDark ? "text-gray-200 hover:bg-gray-700" : "text-[#8B4513] hover:bg-[#8B4513]/10"} p-2 rounded-full transition-colors`}
                                                 title="Read Article"
                                             >
                                                 <BookOpen size={20} />
@@ -147,13 +200,13 @@ const ProfilePage = () => {
                                                 href={article.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-[#8B4513] hover:bg-[#8B4513]/10 p-2 rounded-full transition-colors"
+                                                className={`${isDark ? "text-gray-200 hover:bg-gray-700" : "text-[#8B4513] hover:bg-[#8B4513]/10"} p-2 rounded-full transition-colors`}
                                                 title="Visit Original"
                                             >
                                                 <ExternalLink size={20} />
                                             </a>
                                             <button
-                                                className="text-red-600 hover:bg-red-50 p-2 rounded-full transition-colors"
+                                                className={`text-red-600 ${isDark ? "hover:bg-gray-700" : "hover:bg-red-50"} p-2 rounded-full transition-colors`}
                                                 title="Remove from Collection"
                                             >
                                                 <Trash2 size={20} />
@@ -168,8 +221,12 @@ const ProfilePage = () => {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                    <div className="border-t border-[#8B4513]/10 p-4 flex justify-between items-center">
-                        <p className="text-[#8B4513]/60">
+                    <div
+                        className={`border-t ${isDark ? "border-gray-700" : "border-[#8B4513]/10"} p-4 flex justify-between items-center`}
+                    >
+                        <p
+                            className={`${isDark ? "text-gray-400" : "text-[#8B4513]/60"}`}
+                        >
                             Showing {startIndex + 1}-
                             {Math.min(endIndex, collection.articles.length)} of{" "}
                             {collection.articles.length}
@@ -182,12 +239,14 @@ const ProfilePage = () => {
                                     )
                                 }
                                 disabled={currentPage === 1}
-                                className="text-[#8B4513] hover:bg-[#8B4513]/10 p-2 rounded-full transition-colors
-                  disabled:opacity-50 disabled:cursor-not-allowed"
+                                className={`${isDark ? "text-gray-200 hover:bg-gray-700" : "text-[#8B4513] hover:bg-[#8B4513]/10"}
+                                        p-2 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
                             >
                                 <ChevronLeft size={20} />
                             </button>
-                            <span className="text-[#8B4513]">
+                            <span
+                                className={`${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                            >
                                 Page {currentPage} of {totalPages}
                             </span>
                             <button
@@ -197,8 +256,8 @@ const ProfilePage = () => {
                                     )
                                 }
                                 disabled={currentPage === totalPages}
-                                className="text-[#8B4513] hover:bg-[#8B4513]/10 p-2 rounded-full transition-colors
-                  disabled:opacity-50 disabled:cursor-not-allowed"
+                                className={`${isDark ? "text-gray-200 hover:bg-gray-700" : "text-[#8B4513] hover:bg-[#8B4513]/10"}
+                                        p-2 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
                             >
                                 <ChevronRight size={20} />
                             </button>
@@ -209,8 +268,11 @@ const ProfilePage = () => {
         );
     };
 
+    // ok, now generate an appropriate logo for my site, normal image or svg
     return (
-        <div className="min-h-screen bg-[#F2E8CF] font-[Cormorant] relative">
+        <div
+            className={`min-h-screen ${isDark ? `bg-gray-900 text-gray-200` : `bg-[#F2E8CF]`} font-[Cormorant] relative`}
+        >
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-0 left-0 w-64 h-64">
                     <svg
@@ -254,13 +316,15 @@ const ProfilePage = () => {
                     <>
                         {/* Collections Header */}
                         <div className="flex justify-between items-center mb-8">
-                            <h2 className="text-3xl font-[Cinzel] text-[#8B4513]">
+                            <h2
+                                className={`text-3xl font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                            >
                                 Your Collections
                             </h2>
                             <button
                                 onClick={() => setShowNewCollectionModal(true)}
-                                className="bg-[#8B4513] text-[#F2E8CF] px-4 py-2 rounded-md font-[Cinzel]
-                  hover:bg-[#8B4513]/90 transition-all duration-300 flex items-center space-x-2"
+                                className={`${isDark ? "bg-gray-700 text-gray-200 hover:bg-gray-600" : "bg-[#8B4513] text-[#F2E8CF] hover:bg-[#8B4513]/90"}
+                                px-4 py-2 rounded-md font-[Cinzel] transition-all duration-300 flex items-center space-x-2`}
                             >
                                 <Plus size={20} />
                                 <span>New Collection</span>
@@ -272,10 +336,15 @@ const ProfilePage = () => {
                             {collections.map((collection) => (
                                 <div
                                     key={collection.id}
-                                    className="bg-white/40 backdrop-blur-md rounded-lg shadow-xl border border-[#8B4513]/20 overflow-hidden"
+                                    className={`${isDark ? "bg-gray-800/40 border-gray-700" : "bg-white/40 border-[#8B4513]/20"}
+                                    backdrop-blur-md rounded-lg shadow-xl border overflow-hidden`}
                                 >
-                                    <div className="p-4 border-b border-[#8B4513]/10 flex justify-between items-center">
-                                        <h3 className="font-[Cinzel] text-xl text-[#8B4513]">
+                                    <div
+                                        className={`p-4 border-b ${isDark ? "border-gray-700" : "border-[#8B4513]/10"} flex justify-between items-center`}
+                                    >
+                                        <h3
+                                            className={`font-[Cinzel] text-xl ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                                        >
                                             {collection.name}
                                         </h3>
                                         <button
@@ -286,7 +355,9 @@ const ProfilePage = () => {
                                         </button>
                                     </div>
                                     <div className="p-4">
-                                        <p className="text-[#8B4513]/60 mb-4">
+                                        <p
+                                            className={`${isDark ? "text-gray-400" : "text-[#8B4513]/60"} mb-4`}
+                                        >
                                             {collection.articles.length}{" "}
                                             articles
                                         </p>
@@ -296,13 +367,21 @@ const ProfilePage = () => {
                                                 .map((article) => (
                                                     <div
                                                         key={article.id}
-                                                        className="flex justify-between items-start space-x-4 pb-4 border-b border-[#8B4513]/10 last:border-0"
+                                                        className={`flex justify-between items-start space-x-4 pb-4 border-b ${
+                                                            isDark
+                                                                ? "border-gray-700"
+                                                                : "border-[#8B4513]/10"
+                                                        } last:border-0`}
                                                     >
                                                         <div className="flex-1">
-                                                            <h4 className="font-medium text-[#8B4513]">
+                                                            <h4
+                                                                className={`font-medium ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                                                            >
                                                                 {article.title}
                                                             </h4>
-                                                            <p className="text-sm text-[#8B4513]/60">
+                                                            <p
+                                                                className={`text-sm ${isDark ? "text-gray-400" : "text-[#8B4513]/60"}`}
+                                                            >
                                                                 {article.source}{" "}
                                                                 • {article.date}
                                                             </p>
@@ -318,7 +397,11 @@ const ProfilePage = () => {
                                                     );
                                                     setCurrentPage(1);
                                                 }}
-                                                className="mt-4 text-[#8B4513] hover:text-[#8B4513]/80 transition-colors text-sm"
+                                                className={`mt-4 ${
+                                                    isDark
+                                                        ? "text-gray-200 hover:text-gray-400"
+                                                        : "text-[#8B4513] hover:text-[#8B4513]/80"
+                                                } transition-colors text-sm`}
                                             >
                                                 View all{" "}
                                                 {collection.articles.length}{" "}
