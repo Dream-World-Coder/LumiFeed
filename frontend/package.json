@@ -9,7 +9,7 @@
         "build": "vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "deploy": "vite-plugin-gh-pages"
+        "deploy": "gh-pages -d dist"
     },
     "dependencies": {
         "lucide-react": "^0.469.0",
@@ -28,13 +28,13 @@
         "eslint-plugin-react": "^7.37.2",
         "eslint-plugin-react-hooks": "^5.0.0",
         "eslint-plugin-react-refresh": "^0.4.14",
+        "gh-pages": "^6.2.0",
         "globals": "^15.12.0",
         "postcss": "^8.4.49",
         "rollup-plugin-visualizer": "^5.12.0",
         "tailwindcss": "^3.4.16",
         "vite": "^6.0.1",
-        "vite-plugin-compression": "^0.5.1",
-        "vite-plugin-gh-pages": "^1.0.0"
+        "vite-plugin-compression": "^0.5.1"
     },
     "keywords": [
         "Subhajit",
