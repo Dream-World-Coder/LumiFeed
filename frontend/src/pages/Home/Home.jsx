@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { useDarkMode } from "../../contexts/DarkModeContext";
@@ -32,7 +33,7 @@ const newsAgencies = [
 const newsCategories = [
     "Trending",
     "India",
-    "City Wise",
+    "City",
     "Science",
     "Technology",
     "Business",
@@ -44,8 +45,11 @@ const newsCategories = [
     "Entertainment",
 ];
 
+// Dynamic Home page with latest news? No
+
 const HomePage = () => {
     const { isDark } = useDarkMode();
+    const navigate = useNavigate();
     const [isExpanded, setIsExpanded] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState("");
     const [newsCount, setNewsCount] = useState(25);
@@ -54,22 +58,70 @@ const HomePage = () => {
     const [showAgencyDropdown, setShowAgencyDropdown] = useState(false);
     const [selectedAgency, setSelectedAgency] = useState("The Indian Express");
 
-    const handleFetch = () => {
+    const handleNewsFetch = () => {
         setIsLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setIsLoading(false);
-            setArticles([
-                {
-                    title: "Sample Article 1",
-                    summary: "Lorem ipsum dolor sit amet...",
-                },
-                {
-                    title: "Sample Article 2",
-                    summary: "Consectetur adipiscing elit...",
-                },
-            ]);
-        }, 500);
+        var newsApiUrl = `http://127.0.0.1:8000/api/fetch/news?news_agency=${selectedAgency.toLowerCase().replace(/\s+/g, "")}&news_type=${selectedCategory.toLowerCase()}&news_count=${newsCount}`;
+        fetch(newsApiUrl)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Some error occurred.");
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setArticles(JSON.parse(data.news_list));
+            })
+            .catch((e) => {
+                console.log(e);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+        // to-do: Toast msg add
+    };
+
+    const handleArticleClick = (url) => {
+        // setIsLoading(true);
+        const apiUrl = `http://127.0.0.1:8000/api/fetch/article?url=${encodeURIComponent(url)}`;
+
+        fetch(apiUrl)
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to fetch");
+                return res.json();
+            })
+            .then((data) => {
+                data = JSON.parse(data);
+                // Convert array of objects to a single object
+                const articleData = data.reduce(
+                    (acc, item) => ({ ...acc, ...item }),
+                    {},
+                );
+
+                // Navigate to article page with state
+                navigate("/article", {
+                    state: articleData,
+                    // {
+                    //     heading:
+                    //         articleData.heading ||
+                    //         "Some error occurred, Heading Not found",
+                    //     subHeading:
+                    //         articleData.subHeading ||
+                    //         "Some error occurred, Subheading Not found",
+                    //     imgUrl:
+                    //         articleData.imgUrl ||
+                    //         "https://picsum.photos/800/450",
+                    //     articleContent:
+                    //         articleData.articleContent ||
+                    //         "Some error occurred, Article Content Not found",
+                    // },
+                });
+            })
+            .catch((error) => {
+                console.error("Error fetching article:", error);
+            })
+            .finally(() => {
+                // setIsLoading(false);
+            });
     };
 
     return (
@@ -134,11 +186,13 @@ const HomePage = () => {
                                                 : "text-[#8B4513]"
                                         }
                                     >
-                                        Enter Number of News to Fetch:
+                                        Number of News to Fetch:
                                     </label>
                                     <input
                                         type="number"
                                         value={newsCount}
+                                        min={1}
+                                        max={256}
                                         onChange={(e) =>
                                             setNewsCount(e.target.value)
                                         }
@@ -152,7 +206,7 @@ const HomePage = () => {
 
                                 <div className="flex gap-3 mt-4">
                                     <button
-                                        onClick={handleFetch}
+                                        onClick={handleNewsFetch}
                                         disabled={isLoading}
                                         className={`flex-1 py-2 rounded-md transition-colors disabled:opacity-50 ${
                                             isDark
@@ -160,7 +214,7 @@ const HomePage = () => {
                                                 : "bg-[#8B4513] text-[#F2E8CF] hover:bg-[#8B4513]/90"
                                         }`}
                                     >
-                                        {isLoading ? "Fetching..." : "Fetch"}
+                                        {isLoading ? "Fetching..." : "Select"}
                                     </button>
                                     <button
                                         onClick={() => {
@@ -245,7 +299,7 @@ const HomePage = () => {
                             isDark
                                 ? "bg-gray-800/40 border-gray-700"
                                 : "bg-white/40 border-[#8B4513]/20"
-                        } backdrop-blur-md rounded-lg border p-3 md:p-6`}
+                        } hiddenX md:flexX backdrop-blur-md rounded-lg border p-3 md:p-6`}
                     >
                         <h2
                             className={`text-xl font-[Cinzel] ${
@@ -359,7 +413,7 @@ const HomePage = () => {
                                 </p>
                             </div>
                         ) : (
-                            <div className="space-y-6">
+                            <div className="space-y-3 md:space-y-6">
                                 {articles.map((article, index) => (
                                     <article
                                         key={index}
@@ -380,16 +434,28 @@ const HomePage = () => {
                                         </h3>
                                         <div className="flex justify-between items-center">
                                             <button
+                                                // href="#"
+                                                // href="/article"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    handleArticleClick(
+                                                        e.target.dataset.url,
+                                                    );
+                                                }}
                                                 className={`px-4 py-1 rounded-md transition-colors ${
                                                     isDark
                                                         ? "bg-gray-600 text-gray-200 hover:bg-gray-500"
                                                         : "bg-[#8B4513] text-[#F2E8CF] hover:bg-[#8B4513]/90"
                                                 }`}
+                                                data-url={`${article.url}`}
                                             >
+                                                {/* {isLoading? "Loading...": "Read Here"} */}
                                                 Read Here
                                             </button>
                                             <div className="flex gap-6 items-center justify-center">
-                                                <button
+                                                <a
+                                                    href={article.url}
+                                                    target="_blank"
                                                     className={`${
                                                         isDark
                                                             ? "text-gray-200 hover:text-gray-400"
@@ -397,7 +463,7 @@ const HomePage = () => {
                                                     } transition-colors`}
                                                 >
                                                     <ExternalLink size={16} />
-                                                </button>
+                                                </a>
                                                 <div className="flex items-center gap-2">
                                                     {[Clock, Bookmark].map(
                                                         (Icon, i) => (
@@ -434,7 +500,7 @@ const HomePage = () => {
                 <ChevronUp size={24} />
             </button>
 
-            <style jsx global>{`
+            <style>{`
                 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
             `}</style>
         </div>

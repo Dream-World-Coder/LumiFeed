@@ -1,6 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Moon, Sun, FileText, ChevronLeft, Type } from "lucide-react";
 import AppLogo from "../../assets/Logo";
+import { useNavigate, useLocation } from "react-router-dom";
+
+/*
+    {
+        heading = "Heading",
+        subHeading = "SubHeading",
+        imgUrl = "https://picsum.photos/800/450",
+        articleContent = "article content",
+    }
+*/
 
 const NewsArticle = () => {
     const [fontSize, setFontSize] = useState("base");
@@ -51,6 +61,22 @@ const NewsArticle = () => {
             content: "text-xl",
         },
     };
+
+    const location = useLocation();
+    // const navigate = useNavigate();
+    const [articleData, setArticleData] = useState(null);
+
+    useEffect(() => {
+        if (location.state) {
+            setArticleData(location.state);
+        }
+    }, [location.state]);
+
+    if (!articleData) {
+        return <div>Loading article...</div>;
+    }
+
+    const { heading, subHeading, imgUrl, articleContent } = articleData;
 
     return (
         <div
@@ -198,14 +224,13 @@ const NewsArticle = () => {
                     <h1
                         className={`font-[Cinzel] ${fontSizes[fontSize].heading} mb-4`}
                     >
-                        Historic Peace Deal Signed in Middle East
+                        {heading}
                     </h1>
 
                     <h2
                         className={`font-[Cinzel] ${fontSizes[fontSize].subheading} mb-8 opacity-80`}
                     >
-                        Leaders from multiple nations gather for groundbreaking
-                        ceremony
+                        {subHeading}
                     </h2>
 
                     {/* Summary Drawer */}
@@ -221,11 +246,7 @@ const NewsArticle = () => {
                             <p
                                 className={`${fonts[fontFamily].class} opacity-80`}
                             >
-                                Key points from the historic peace deal,
-                                including main agreements, participating
-                                nations, and expected outcomes. The ceremony
-                                marks a significant step toward regional
-                                stability.
+                                {subHeading}
                             </p>
                         </div>
                     )}
@@ -233,8 +254,8 @@ const NewsArticle = () => {
                     {/* Article Image */}
                     <div className="relative aspect-video mb-8 rounded-lg overflow-hidden">
                         <img
-                            src="https://picsum.photos/800/450"
-                            alt="Peace Deal Signing Ceremony"
+                            src={`${imgUrl}`}
+                            alt={`${heading}`}
                             className="w-full h-full object-cover"
                         />
                     </div>
@@ -242,37 +263,13 @@ const NewsArticle = () => {
                     {/* Article Content */}
                     <div
                         className={`${fonts[fontFamily].class} ${fontSizes[fontSize].content} space-y-6 leading-relaxed`}
-                    >
-                        <p>
-                            In a historic moment that will be remembered for
-                            generations, leaders from multiple nations gathered
-                            today to sign a comprehensive peace agreement that
-                            promises to reshape regional dynamics and foster
-                            unprecedented cooperation.
-                        </p>
-
-                        <p>
-                            The ceremony, held in the opulent Grand Palace, saw
-                            representatives from twelve nations coming together
-                            in a display of unity that many thought impossible
-                            just a few years ago. The agreement, which has been
-                            in negotiation for over two years, addresses
-                            long-standing territorial disputes and establishes
-                            new frameworks for economic cooperation.
-                        </p>
-
-                        <p>
-                            "This is more than just a document," declared the
-                            Secretary General in their opening speech. "This is
-                            a promise to future generations that we choose
-                            cooperation over conflict, dialogue over discord,
-                            and peace over all else."
-                        </p>
-                    </div>
+                        dangerouslySetInnerHTML={{ __html: articleContent }}
+                    ></div>
                 </article>
             </main>
 
-            <style jsx global>{`
+            {/* jsx global */}
+            <style>{`
                 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Merriweather:ital,wght@0,300;0,400;1,300&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap");
             `}</style>
         </div>

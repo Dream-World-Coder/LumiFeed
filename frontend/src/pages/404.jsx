@@ -112,7 +112,7 @@ const NotFound = () => {
                 </div>
             </div>
 
-            <style jsx global>{`
+            <style>{`
                 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
             `}</style>
         </div>
