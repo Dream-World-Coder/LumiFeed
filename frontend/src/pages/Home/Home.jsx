@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -53,10 +53,18 @@ const HomePage = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState("");
     const [newsCount, setNewsCount] = useState(25);
-    const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [showAgencyDropdown, setShowAgencyDropdown] = useState(false);
     const [selectedAgency, setSelectedAgency] = useState("The Indian Express");
+    // const [articles, setArticles] = useState([]);
+    const [articles, setArticles] = useState(() => {
+        const savedArticles = localStorage.getItem("articles");
+        return savedArticles ? JSON.parse(savedArticles) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem("articles", JSON.stringify(articles));
+    }, [articles]);
 
     const handleNewsFetch = () => {
         setIsLoading(true);
@@ -77,8 +85,8 @@ const HomePage = () => {
             .finally(() => {
                 setIsLoading(false);
             });
-        // to-do: Toast msg add
     };
+    // to-do: Toast msg add
 
     const handleArticleClick = (url) => {
         // setIsLoading(true);

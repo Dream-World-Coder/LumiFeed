@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Moon, Sun, FileText, ChevronLeft, Type } from "lucide-react";
 import AppLogo from "../../assets/Logo";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 
 /*
     {
@@ -14,7 +15,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const NewsArticle = () => {
     const [fontSize, setFontSize] = useState("base");
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const { isDark, toggleDarkMode } = useDarkMode();
     const [showSummary, setShowSummary] = useState(false);
     const [fontFamily, setFontFamily] = useState("cormorant");
 
@@ -81,7 +82,7 @@ const NewsArticle = () => {
     return (
         <div
             className={`min-h-screen transition-colors duration-300 ${
-                isDarkMode
+                isDark
                     ? "bg-gray-900 text-gray-100"
                     : "bg-[#F2E8CF] text-[#8B4513]"
             }`}
@@ -89,7 +90,7 @@ const NewsArticle = () => {
             {/* Header */}
             <header
                 className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
-                    isDarkMode
+                    isDark
                         ? "bg-gray-900 border-gray-700"
                         : "bg-[#F2E8CF] border-[#8B4513]/20"
                 } border-b`}
@@ -100,7 +101,7 @@ const NewsArticle = () => {
                         <div className="flex items-center">
                             <button
                                 onClick={() => window.history.back()}
-                                className={`mr-4 ${isDarkMode ? "text-gray-100" : "text-[#8B4513]"} hover:opacity-80`}
+                                className={`mr-4 ${isDark ? "text-gray-100" : "text-[#8B4513]"} hover:opacity-80`}
                             >
                                 <ChevronLeft className="w-6 h-6" />
                             </button>
@@ -109,7 +110,7 @@ const NewsArticle = () => {
                                 height={26}
                                 backgroundColor="#8B4513"
                                 letterColor="#FFFFFF"
-                                className={`${isDarkMode ? "invert" : "invert-0"}`}
+                                className={`${isDark ? "invert" : "invert-0"}`}
                             />
                             <span className="ml-2 text-xl font-[Cinzel]">
                                 LumiFeed
@@ -121,7 +122,7 @@ const NewsArticle = () => {
                             <button
                                 onClick={() => setShowSummary(!showSummary)}
                                 className={`p-2 rounded-md transition-colors ${
-                                    isDarkMode
+                                    isDark
                                         ? "hover:bg-gray-800"
                                         : "hover:bg-[#8B4513]/10"
                                 }`}
@@ -158,7 +159,7 @@ const NewsArticle = () => {
                                         setShowFontMenu(!showFontMenu)
                                     }
                                     className={`p-2 rounded-md transition-colors ${
-                                        isDarkMode
+                                        isDark
                                             ? "hover:bg-gray-800"
                                             : "hover:bg-[#8B4513]/10"
                                     }`}
@@ -171,7 +172,7 @@ const NewsArticle = () => {
                                 {showFontMenu && (
                                     <div
                                         className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
-                                        ${isDarkMode ? "bg-gray-800" : "bg-white"} ring-1 ring-black ring-opacity-5`}
+                                        ${isDark ? "bg-gray-800" : "bg-white"} ring-1 ring-black ring-opacity-5`}
                                     >
                                         {Object.entries(fonts).map(
                                             ([key, font]) => (
@@ -184,11 +185,11 @@ const NewsArticle = () => {
                                                     className={`${font.class} block px-4 py-2 text-lg w-full text-left
                                                     ${
                                                         fontFamily === key
-                                                            ? isDarkMode
+                                                            ? isDark
                                                                 ? "bg-gray-700"
                                                                 : "bg-[#8B4513]/10"
                                                             : ""
-                                                    } hover:${isDarkMode ? "bg-gray-700" : "bg-[#8B4513]/10"}`}
+                                                    } hover:${isDark ? "bg-gray-700" : "bg-[#8B4513]/10"}`}
                                                 >
                                                     {font.name}
                                                 </button>
@@ -199,15 +200,15 @@ const NewsArticle = () => {
                             </div>
 
                             <button
-                                onClick={() => setIsDarkMode(!isDarkMode)}
+                                onClick={() => toggleDarkMode(!isDark)}
                                 className={`p-2 rounded-md transition-colors ${
-                                    isDarkMode
+                                    isDark
                                         ? "hover:bg-gray-800"
                                         : "hover:bg-[#8B4513]/10"
                                 }`}
                                 title="Toggle Dark Mode"
                             >
-                                {isDarkMode ? (
+                                {isDark ? (
                                     <Sun className="w-5 h-5" />
                                 ) : (
                                     <Moon className="w-5 h-5" />
@@ -237,7 +238,7 @@ const NewsArticle = () => {
                     {showSummary && (
                         <div
                             className={`mb-8 p-6 rounded-lg ${
-                                isDarkMode ? "bg-gray-800" : "bg-white/40"
+                                isDark ? "bg-gray-800" : "bg-white/40"
                             }`}
                         >
                             <h3 className="font-[Cinzel] text-xl mb-4">
