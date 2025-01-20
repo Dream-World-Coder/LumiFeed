@@ -8,13 +8,12 @@ const BackButton = () => {
     return (
         <button
             onClick={() => navigate(-1)}
-            className="fixed top-8 left-8 flex items-center gap-1 px-1 pt-1 bg-[#F2E8CF] font-[Cinzel] text-sm text-[#8B4513] border-b border-[#8B4513] hover:bg-[#8B4513]/20 transition-all duration-300"
+            className="fixed top-8 left-8 flex items-center box-content rounded-lg
+            gap-1 px-1 pt-1 bg-cream-dark/40 font-zodiak text-sm text-[#8B4513]
+            border-b border-[#8B4513] hover:bg-[#8B4513]/20 transition-all duration-300"
         >
             <ChevronLeftIcon size={20} />
             Go Back
-            <style jsx global>{`
-                @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
-            `}</style>
         </button>
     );
 };

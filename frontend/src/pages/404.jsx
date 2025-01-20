@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { BookX, ArrowLeft } from "lucide-react";
 
@@ -6,7 +5,7 @@ const NotFound = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen bg-[#F2E8CF] flex items-center justify-center p-4 font-[Cormorant]">
+        <div className="min-h-screen bg-cream flex items-center justify-center p-4 font-sentient">
             {/* Decorative Background */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-0 left-0 w-64 h-64">
@@ -68,7 +67,7 @@ const NotFound = () => {
                 {/* Logo */}
                 <div className="text-center mb-8">
                     <BookX className="w-16 h-16 mx-auto text-[#8B4513] mb-4" />
-                    <h1 className="text-4xl md:text-5xl font-[Cinzel] text-[#8B4513] tracking-wider mb-2">
+                    <h1 className="text-4xl md:text-5xl font-zodiak text-[#8B4513] tracking-wider mb-2">
                         Page Not Found
                     </h1>
                     <p className="text-[#8B4513]/80 italic text-lg">
@@ -80,7 +79,7 @@ const NotFound = () => {
                 <div className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-xl border border-[#8B4513]/20">
                     <div className="text-center space-y-6">
                         <div className="space-y-4">
-                            <p className="text-4xl text-[#8B4513] font-[Cinzel]">
+                            <p className="text-4xl text-[#8B4513] font-zodiak">
                                 404
                             </p>
                             <p className="text-xl text-[#8B4513]">
@@ -95,7 +94,7 @@ const NotFound = () => {
                         <button
                             onClick={() => navigate(-1)}
                             className="group inline-flex items-center gap-2 bg-[#8B4513] text-[#F2E8CF] px-6 py-3 rounded-md
-                     font-[Cinzel] hover:bg-[#8B4513]/90 transition-all duration-300"
+                     font-zodiak hover:bg-[#8B4513]/90 transition-all duration-300"
                         >
                             <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
                             Return to Previous Page
@@ -107,14 +106,10 @@ const NotFound = () => {
                 <div className="mt-8 text-center opacity-60">
                     <div className="w-24 h-1 bg-[#8B4513]/20 mx-auto mb-4" />
                     <p className="text-[#8B4513]/60 text-sm italic">
-                        "Not all who wander are lost"
+                        &quot;Not all who wander are lost&quot;
                     </p>
                 </div>
             </div>
-
-            <style>{`
-                @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
-            `}</style>
         </div>
     );
 };

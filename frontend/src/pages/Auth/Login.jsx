@@ -21,7 +21,7 @@ const LoginPage = () => {
     return (
         <>
             <BackButton />
-            <div className="min-h-screen bg-[#F2E8CF] flex items-center justify-center p-4 font-[Cormorant]">
+            <div className="min-h-screen bg-cream flex items-center justify-center p-4 font-sentient">
                 {/* Decorative Background */}
                 <div
                     ref={decorRef}
@@ -92,11 +92,11 @@ const LoginPage = () => {
                             letterColor="#FFFFFF"
                             className={`mx-auto mb-4 form-element`}
                         />
-                        <h1 className="text-4xl md:text-5xl font-[Cinzel] text-[#8B4513] tracking-wider mb-2 form-element">
+                        <h1 className="text-4xl md:text-5xl font-zodiak text-[#8B4513] tracking-wider mb-2 form-element">
                             LumiFeed
                         </h1>
                         <p className="text-[#8B4513]/80 italic text-lg form-element">
-                            Welcome back to the renaissance of reading
+                            Welcome back
                         </p>
                     </div>
 
@@ -108,7 +108,7 @@ const LoginPage = () => {
                     >
                         {/* Email Field */}
                         <div className="mb-6 form-element">
-                            <label className="block text-[#8B4513] font-[Cinzel] mb-2">
+                            <label className="block text-[#8B4513] font-zodiak mb-2">
                                 Email
                             </label>
                             <div className="relative">
@@ -125,7 +125,7 @@ const LoginPage = () => {
 
                         {/* Password Field */}
                         <div className="mb-6 form-element">
-                            <label className="block text-[#8B4513] font-[Cinzel] mb-2">
+                            <label className="block text-[#8B4513] font-zodiak mb-2">
                                 Password
                             </label>
                             <div className="relative">
@@ -175,7 +175,7 @@ const LoginPage = () => {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full bg-[#8B4513] text-[#F2E8CF] py-3 rounded-md font-[Cinzel]
+                            className="w-full bg-[#8B4513] text-[#F2E8CF] py-3 rounded-md font-zodiak
                      hover:bg-[#8B4513]/90 transition-all duration-300 form-element
                      disabled:opacity-70 disabled:cursor-not-allowed
                      relative overflow-hidden group"
@@ -194,7 +194,7 @@ const LoginPage = () => {
 
                         {/* Sign Up Link */}
                         <p className="text-center mt-6 text-[#8B4513]/80 form-element">
-                            Don't have an account?{" "}
+                            Don&apos;t have an account?{" "}
                             <a
                                 href="/auth/register"
                                 className="text-[#8B4513] hover:underline font-semibold"
@@ -208,14 +208,10 @@ const LoginPage = () => {
                     <div className="mt-8 text-center opacity-60 form-element">
                         <div className="w-24 h-1 bg-[#8B4513]/20 mx-auto mb-4" />
                         <p className="text-[#8B4513]/60 text-sm italic">
-                            "Knowledge is the light of the mind"
+                            &quot;Knowledge is the light of the mind&quot;
                         </p>
                     </div>
                 </div>
-
-                <style>{`
-                    @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
-                `}</style>
             </div>
         </>
     );

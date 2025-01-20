@@ -1,13 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-    BookMarked,
-    ArrowRight,
-    Layout,
-    Filter,
-    Brain,
-    Star,
-    Sparkles,
-} from "lucide-react";
+import { BookMarked, Layout, Filter, Brain } from "lucide-react";
 import { VisitLandingPageBtn } from "./components";
 import AppLogo from "../../assets/Logo";
 import Footer from "../../components/Footer/Footer";
@@ -17,6 +9,7 @@ const LandingPage = () => {
     const [scrollY, setScrollY] = useState(0);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const decorRef = useRef(null);
+    const letters = "LumiFeed".split("");
 
     useEffect(() => {
         const handleScroll = () => setScrollY(window.scrollY);
@@ -74,7 +67,7 @@ const LandingPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#F2E8CF] via-[#F2E8CF] to-[#E8D5B5] font-[Cormorant] overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br bg-cream font-sentient overflow-hidden">
             {/* Animated Background Pattern */}
             <div
                 className="fixed inset-0 opacity-10"
@@ -187,7 +180,6 @@ const LandingPage = () => {
                     {/* Animated Logo */}
                     <div className="text-center mb-16 relative">
                         <div className="relative inline-block">
-                            {/* <Feather className="w-24 h-24 mx-auto text-[#8B4513] mb-6 transform hover:scale-110 transition-transform duration-300" /> */}
                             <AppLogo
                                 width={96}
                                 height={96}
@@ -195,36 +187,16 @@ const LandingPage = () => {
                                 letterColor="#FFFFFF"
                                 className="mx-auto text-[#8B4513] mb-6 transform hover:scale-110 transition-transform duration-300"
                             />
-                            {/* sparkling background */}
-                            {/* <div className="absolute inset-0 animate-pulse opacity-[-50]">
-                                <Sparkles className="w-24 h-24 mx-auto text-[#8B4513]" />
-                            </div> */}
                         </div>
-                        <h1 className="text-6xl md:text-8xl font-[Cinzel] text-[#8B4513] tracking-wider mb-6 relative">
-                            <span className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300">
-                                L
-                            </span>
-                            <span className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300">
-                                u
-                            </span>
-                            <span className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300">
-                                m
-                            </span>
-                            <span className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300">
-                                i
-                            </span>
-                            <span className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300">
-                                F
-                            </span>
-                            <span className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300">
-                                e
-                            </span>
-                            <span className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300">
-                                e
-                            </span>
-                            <span className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300">
-                                d
-                            </span>
+                        <h1 className="text-4xl md:text-6xl font-zodiak text-[#8B4513] tracking-tighter mb-6 relative">
+                            {letters.map((item, index) => (
+                                <span
+                                    key={index}
+                                    className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300"
+                                >
+                                    {item}
+                                </span>
+                            ))}
                         </h1>
                         <p className="text-2xl md:text-3xl text-[#8B4513]/80 italic max-w-2xl mx-auto">
                             Welcome to the renaissance of reading
@@ -241,7 +213,7 @@ const LandingPage = () => {
                     <div className="grid md:grid-cols-4 gap-8 mb-16">
                         {features.map((feature, index) => (
                             <div key={index} className="group relative">
-                                <div className="absolute inset-0 bg-[#8B4513] rounded-lg transform transition-all duration-300 group-hover:rotate-6 opacity-20" />
+                                <div className="absolute inset-0 bg-cream-light rounded-lg transform transition-all duration-300 group-hover:rotate-6 opacity-20" />
                                 <div
                                     className="relative bg-white/40 backdrop-blur-md rounded-lg p-8 border border-[#8B4513]/20 size-full
                               transform transition-all duration-300 group-hover:-translate-y-2 group-hover:translate-x-1
@@ -254,7 +226,7 @@ const LandingPage = () => {
                                     <div className="text-[#8B4513] mb-4 transform group-hover:scale-110 transition-transform duration-300">
                                         {feature.icon}
                                     </div>
-                                    <h3 className="font-[Cinzel] text-2xl text-[#8B4513] mb-2">
+                                    <h3 className="font-zodiak text-2xl text-[#8B4513] mb-2">
                                         {feature.title}
                                     </h3>
                                     <p className="text-[#8B4513]/80 text-lg">
@@ -267,10 +239,10 @@ const LandingPage = () => {
 
                     {/* Interactive News Sources */}
                     <div className="relative mb-16">
-                        <div className="absolute inset-0 bg-[#8B4513]/5 rounded-lg transform -rotate-1" />
-                        <div className="relative bg-white/40 backdrop-blur-md rounded-lg p-8 border border-[#8B4513]/20">
-                            <h2 className="font-[Cinzel] text-3xl text-[#8B4513] mb-8 text-center">
-                                Trusted News Sources
+                        <div className="absolute inset-0 bg-cream-light/5 rounded-lg transform -rotate-1" />
+                        <div className="relative bg-cream-light backdrop-blur-md rounded-lg p-8 border border-[#8B4513]/20">
+                            <h2 className="font-zodiak text-3xl text-[#8B4513] mb-8 text-center">
+                                News Sources
                             </h2>
                             <div className="flex flex-wrap justify-center gap-4">
                                 {sources.map((source, index) => (
@@ -278,7 +250,7 @@ const LandingPage = () => {
                                         key={index}
                                         className="group relative px-6 py-3"
                                     >
-                                        <div className="absolute inset-0 bg-[#8B4513] rounded-full transform group-hover:scale-110 transition-transform duration-300 opacity-0 group-hover:opacity-100" />
+                                        <div className="absolute inset-0 bg-[#8B4513] rounded-full transform group-hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100" />
                                         <span className="relative text-lg text-[#8B4513] group-hover:text-[#F2E8CF] transition-colors duration-300">
                                             {/* why sudden animation when mouseleave? */}
                                             {source}
@@ -302,8 +274,6 @@ const LandingPage = () => {
             <Footer />
 
             <style>{`
-                @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
-
                 @keyframes float {
                     0% {
                         transform: translate(-50%, -50%) translateY(0px);

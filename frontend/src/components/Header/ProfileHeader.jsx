@@ -3,14 +3,10 @@ import {
     Search,
     Menu,
     X,
-    LogIn,
     Moon,
     Sun,
     LogOut,
     User,
-    Home,
-    Mail,
-    Info,
     Trash2,
     ChevronDown,
 } from "lucide-react";
@@ -33,7 +29,7 @@ const Header = () => {
     return (
         <>
             <header
-                className={`${isDark ? "bg-gray-900 border-gray-700" : "bg-[#F2E8CF] border-[#8B4513]/20"} border-b fixed w-full top-0 z-50 transition-colors duration-300`}
+                className={`${isDark ? "bg-stone-900 border-stone-700" : "bg-cream-light border-[#8B4513]/20"} border-b fixed w-full top-0 z-50 transition-colors duration-300`}
             >
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="flex items-center justify-between h-16">
@@ -48,7 +44,7 @@ const Header = () => {
                                     className={`${isDark ? "invert" : "invert-0"}`}
                                 />
                                 <span
-                                    className={`ml-2 text-xl font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                                    className={`ml-2 text-xl font-zodiak ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
                                 >
                                     LumiFeed
                                 </span>
@@ -59,19 +55,19 @@ const Header = () => {
                         <nav className="hidden text-lg md:flex items-center space-x-8">
                             <a
                                 href="/home"
-                                className={`${isDark ? "text-gray-200 hover:text-gray-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-[Cormorant]`}
+                                className={`${isDark ? "text-stone-200 hover:text-stone-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-sentient`}
                             >
                                 Home
                             </a>
                             <a
                                 href="/about"
-                                className={`${isDark ? "text-gray-200 hover:text-gray-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-[Cormorant]`}
+                                className={`${isDark ? "text-stone-200 hover:text-stone-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-sentient`}
                             >
                                 About
                             </a>
                             <a
                                 href="/contact"
-                                className={`${isDark ? "text-gray-200 hover:text-gray-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-[Cormorant]`}
+                                className={`${isDark ? "text-stone-200 hover:text-stone-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-sentient`}
                             >
                                 Contact
                             </a>
@@ -80,7 +76,7 @@ const Header = () => {
                                 onClick={toggleDarkMode}
                             >
                                 {isDark ? (
-                                    <Sun size={20} className="text-gray-200" />
+                                    <Sun size={20} className="text-stone-200" />
                                 ) : (
                                     <Moon
                                         size={20}
@@ -90,7 +86,7 @@ const Header = () => {
                             </button>
                             <button
                                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                                className={`${isDark ? "text-gray-200 hover:text-gray-400" : "text-[#8B4513] hover:text-[#8B4513]/80"}`}
+                                className={`${isDark ? "text-stone-200 hover:text-stone-400" : "text-[#8B4513] hover:text-[#8B4513]/80"}`}
                             >
                                 <Search className="h-5 w-5" />
                             </button>
@@ -104,9 +100,7 @@ const Header = () => {
                                     className="flex items-center space-x-2 text-[#8B4513] hover:text-[#8B4513]/80 transition-colors"
                                 >
                                     <User size={20} />
-                                    <span className="font-[Cinzel]">
-                                        Profile
-                                    </span>
+                                    <span className="font-zodiak">Profile</span>
                                     <ChevronDown size={16} />
                                 </button>
 
@@ -120,7 +114,7 @@ const Header = () => {
                                                     className="w-10 h-10 rounded-full"
                                                 />
                                                 <div>
-                                                    <p className="font-[Cinzel] text-[#8B4513]">
+                                                    <p className="font-zodiak text-[#8B4513]">
                                                         {userData.name}
                                                     </p>
                                                     <p className="text-sm text-[#8B4513]/60">
@@ -150,7 +144,7 @@ const Header = () => {
 
                         {/* Mobile Controls */}
                         <div
-                            className={`md:hidden ${isDark ? "text-gray-200" : "text-[#8B4513]"} flex justify-center items-center gap-4 pr-0`}
+                            className={`md:hidden ${isDark ? "text-stone-200" : "text-[#8B4513]"} flex justify-center items-center gap-4 pr-0`}
                         >
                             {/* Profile Dropdown */}
                             <div className="relative">
@@ -173,7 +167,7 @@ const Header = () => {
                                                     className="w-10 h-10 rounded-full"
                                                 />
                                                 <div>
-                                                    <p className="font-[Cinzel] text-[#8B4513]">
+                                                    <p className="font-zodiak text-[#8B4513]">
                                                         {userData.name}
                                                     </p>
                                                     <p className="text-sm text-[#8B4513]/60">
@@ -205,7 +199,7 @@ const Header = () => {
                                 onClick={toggleDarkMode}
                             >
                                 {isDark ? (
-                                    <Sun size={20} className="text-gray-200" />
+                                    <Sun size={20} className="text-stone-200" />
                                 ) : (
                                     <Moon
                                         size={20}
@@ -238,10 +232,10 @@ const Header = () => {
                                 <input
                                     type="text"
                                     placeholder="Search for articles..."
-                                    className={`w-full px-4 py-2 pl-10 ${isDark ? "bg-gray-800 border-gray-700 text-gray-200 focus:ring-gray-600" : "bg-white/50 border-[#8B4513]/20 focus:ring-[#8B4513]/40"} border rounded-md focus:outline-none focus:ring-1 font-[Cormorant]`}
+                                    className={`w-full px-4 py-2 pl-10 ${isDark ? "bg-stone-800 border-stone-700 text-stone-200 focus:ring-stone-600" : "bg-white/50 border-[#8B4513]/20 focus:ring-[#8B4513]/40"} border rounded-md focus:outline-none focus:ring-1 font-sentient`}
                                 />
                                 <Search
-                                    className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 ${isDark ? "text-gray-400" : "text-[#8B4513]/60"}`}
+                                    className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 ${isDark ? "text-stone-400" : "text-[#8B4513]/60"}`}
                                 />
                             </div>
                         </div>
@@ -250,24 +244,24 @@ const Header = () => {
 
                 {/* Mobile Menu */}
                 <div
-                    className={`md:hidden transition-all duration-300 ${isMobileMenuOpen ? "h-64" : "h-0"} overflow-hidden ${isDark ? "bg-gray-900 border-gray-700" : "bg-[#F2E8CF] border-[#8B4513]/20"} border-t`}
+                    className={`md:hidden transition-all duration-300 ${isMobileMenuOpen ? "h-64" : "h-0"} overflow-hidden ${isDark ? "bg-stone-900 border-stone-700" : "bg-[#F2E8CF] border-[#8B4513]/20"} border-t`}
                 >
                     <div className="px-4 py-2 space-y-4 pr-10">
                         <a
                             href="/home"
-                            className={`block ${isDark ? "text-gray-200 hover:text-gray-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-[Cormorant]`}
+                            className={`block ${isDark ? "text-stone-200 hover:text-stone-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-sentient`}
                         >
                             Home
                         </a>
                         <a
                             href="/about"
-                            className={`block ${isDark ? "text-gray-200 hover:text-gray-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-[Cormorant]`}
+                            className={`block ${isDark ? "text-stone-200 hover:text-stone-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-sentient`}
                         >
                             About
                         </a>
                         <a
                             href="/contact"
-                            className={`block ${isDark ? "text-gray-200 hover:text-gray-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-[Cormorant]`}
+                            className={`block ${isDark ? "text-stone-200 hover:text-stone-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-sentient`}
                         >
                             Contact
                         </a>
@@ -275,19 +269,15 @@ const Header = () => {
                             <input
                                 type="text"
                                 placeholder="Search..."
-                                className={`w-full px-4 py-2 pl-10 ${isDark ? "bg-gray-800 border-gray-700 text-gray-200 focus:ring-gray-600" : "bg-white/50 border-[#8B4513]/20 focus:ring-[#8B4513]/40"} border rounded-md focus:outline-none focus:ring-1 font-[Cormorant]`}
+                                className={`w-full px-4 py-2 pl-10 ${isDark ? "bg-stone-800 border-stone-700 text-stone-200 focus:ring-stone-600" : "bg-white/50 border-[#8B4513]/20 focus:ring-[#8B4513]/40"} border rounded-md focus:outline-none focus:ring-1 font-sentient`}
                             />
                             <Search
-                                className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 ${isDark ? "text-gray-400" : "text-[#8B4513]/60"}`}
+                                className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 ${isDark ? "text-stone-400" : "text-[#8B4513]/60"}`}
                             />
                         </div>
                     </div>
                 </div>
             </header>
-
-            <style>{`
-                @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
-            `}</style>
         </>
     );
 };

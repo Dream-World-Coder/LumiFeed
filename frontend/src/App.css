@@ -2,3 +2,20 @@ body {
     position: relative;
     background-color: rgb(242, 232, 207);
 }
+@font-face {
+    font-family: Zodiak;
+    src: url("/fonts/Zodiak-Light.woff2") format("woff2");
+}
+@font-face {
+    font-family: SentientLight;
+    src: url("/fonts/Sentient-Light.woff2") format("woff2");
+}
+/*
+@font-face {
+    font-family: Sentient;
+    src: url("/fonts/Sentient-Regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: SentientMedium;
+    src: url("/fonts/Sentient-Medium.woff2") format("woff2");
+} */

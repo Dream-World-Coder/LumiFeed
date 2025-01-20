@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+// import HeroInfoBook from "../../assets/hero-info-book"; : the old svg icon i usd in lumifeed
 import {
     Plus,
     Minus,
@@ -134,7 +135,7 @@ const HomePage = () => {
 
     return (
         <div
-            className={`min-h-screen ${isDark ? "bg-gray-900" : "bg-[#F2E8CF]"} p-4 font-[Cormorant] transition-colors duration-300`}
+            className={`min-h-screen ${isDark ? "bg-stone-900" : "bg-cream"} p-4 font-sentient transition-colors duration-300`}
         >
             {/* Header */}
             <Header />
@@ -144,11 +145,11 @@ const HomePage = () => {
                 <div className="w-full md:w-96">
                     {/* Category Selection */}
                     <div
-                        className={`${isDark ? "bg-gray-800/40 border-gray-700" : "bg-white/40 border-[#8B4513]/20"} backdrop-blur-md rounded-lg border overflow-hidden mb-6`}
+                        className={`${isDark ? "bg-stone-800/40 border-stone-700" : "bg-white/40 border-[#8B4513]/20"} backdrop-blur-md rounded-lg border overflow-hidden mb-6`}
                     >
                         <button
                             onClick={() => setIsExpanded(!isExpanded)}
-                            className={`w-full px-6 py-4 flex items-center justify-between text-xl font-[Cinzel] ${isDark ? "text-gray-200" : "text-[#8B4513]"}`}
+                            className={`w-full px-6 py-4 flex items-center justify-between text-xl font-zodiak ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
                         >
                             <span>Select News Category</span>
                             {isExpanded ? (
@@ -160,7 +161,7 @@ const HomePage = () => {
 
                         {isExpanded && (
                             <div
-                                className={`p-6 border-t ${isDark ? "border-gray-700" : "border-[#8B4513]/20"}`}
+                                className={`p-6 border-t ${isDark ? "border-stone-700" : "border-[#8B4513]/20"}`}
                             >
                                 <div className="grid grid-cols-2 gap-3 mb-6">
                                     {newsCategories.map((category) => (
@@ -174,10 +175,10 @@ const HomePage = () => {
                                                                 selectedCategory ===
                                                                 category
                                                                     ? isDark
-                                                                        ? "bg-gray-700 text-gray-200"
-                                                                        : "bg-[#8B4513] text-[#F2E8CF]"
+                                                                        ? "bg-stone-700 text-stone-200"
+                                                                        : "bg-[#8B4513] text-cream-light"
                                                                     : isDark
-                                                                      ? "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"
+                                                                      ? "bg-stone-800/50 text-stone-300 hover:bg-stone-700/50"
                                                                       : "bg-[#8B4513]/10 text-[#8B4513] hover:bg-[#8B4513]/20"
                                                             }`}
                                         >
@@ -190,7 +191,7 @@ const HomePage = () => {
                                     <label
                                         className={
                                             isDark
-                                                ? "text-gray-200"
+                                                ? "text-stone-200"
                                                 : "text-[#8B4513]"
                                         }
                                     >
@@ -206,7 +207,7 @@ const HomePage = () => {
                                         }
                                         className={`w-20 p-2 border rounded-md ${
                                             isDark
-                                                ? "bg-gray-800 border-gray-700 text-gray-200"
+                                                ? "bg-stone-800 border-stone-700 text-stone-200"
                                                 : "bg-white/50 border-[#8B4513]/20"
                                         }`}
                                     />
@@ -218,8 +219,8 @@ const HomePage = () => {
                                         disabled={isLoading}
                                         className={`flex-1 py-2 rounded-md transition-colors disabled:opacity-50 ${
                                             isDark
-                                                ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
-                                                : "bg-[#8B4513] text-[#F2E8CF] hover:bg-[#8B4513]/90"
+                                                ? "bg-stone-700 text-stone-200 hover:bg-stone-600"
+                                                : "bg-[#8B4513] text-cream-light hover:bg-[#8B4513]/90"
                                         }`}
                                     >
                                         {isLoading ? "Fetching..." : "Select"}
@@ -231,7 +232,7 @@ const HomePage = () => {
                                         }}
                                         className={`flex-1 border py-2 rounded-md transition-colors ${
                                             isDark
-                                                ? "border-gray-700 text-gray-200 hover:bg-gray-800"
+                                                ? "border-stone-700 text-stone-200 hover:bg-stone-800"
                                                 : "border-[#8B4513] text-[#8B4513] hover:bg-[#8B4513]/10"
                                         }`}
                                     >
@@ -251,13 +252,13 @@ const HomePage = () => {
                                 }
                                 className={`w-full ${
                                     isDark
-                                        ? "bg-gray-800/40 border-gray-700"
+                                        ? "bg-stone-800/40 border-stone-700"
                                         : "bg-white/40 border-[#8B4513]/20"
                                 } backdrop-blur-md rounded-lg border px-6 py-4 flex items-center justify-between ${
-                                    isDark ? "text-gray-200" : "text-[#8B4513]"
+                                    isDark ? "text-stone-200" : "text-[#8B4513]"
                                 }`}
                             >
-                                <span className="font-[Cinzel]">
+                                <span className="font-zodiak">
                                     {selectedAgency}
                                 </span>
                                 <ChevronDown
@@ -270,7 +271,7 @@ const HomePage = () => {
                                 <div
                                     className={`absolute top-full left-0 right-0 mt-2 ${
                                         isDark
-                                            ? "bg-gray-800/90 border-gray-700"
+                                            ? "bg-stone-800/90 border-stone-700"
                                             : "bg-white/90 border-[#8B4513]/20"
                                     } backdrop-blur-md border rounded-lg shadow-xl z-50 max-h-96 overflow-y-auto`}
                                 >
@@ -283,15 +284,15 @@ const HomePage = () => {
                                             }}
                                             className={`w-full px-6 py-3 text-left transition-colors ${
                                                 isDark
-                                                    ? "hover:bg-gray-700 text-gray-200"
+                                                    ? "hover:bg-stone-700 text-stone-200"
                                                     : "hover:bg-[#8B4513]/10 text-[#8B4513]"
                                             } ${
                                                 agency === selectedAgency
                                                     ? isDark
-                                                        ? "bg-gray-700"
+                                                        ? "bg-stone-700"
                                                         : "bg-[#8B4513]/5"
                                                     : ""
-                                            } font-semibold`}
+                                            } font-thin`}
                                         >
                                             {agency}
                                         </button>
@@ -305,13 +306,13 @@ const HomePage = () => {
                     <div
                         className={`${
                             isDark
-                                ? "bg-gray-800/40 border-gray-700"
+                                ? "bg-stone-800/40 border-stone-700"
                                 : "bg-white/40 border-[#8B4513]/20"
                         } hiddenX md:flexX backdrop-blur-md rounded-lg border p-3 md:p-6`}
                     >
                         <h2
-                            className={`text-xl font-[Cinzel] ${
-                                isDark ? "text-gray-200" : "text-[#8B4513]"
+                            className={`text-xl font-zodiak ${
+                                isDark ? "text-stone-200" : "text-[#8B4513]"
                             } mb-4`}
                         >
                             Quick Stats
@@ -343,7 +344,7 @@ const HomePage = () => {
                                     key={index}
                                     className={`p-4 ${
                                         isDark
-                                            ? "bg-gray-700/50 border-gray-600"
+                                            ? "bg-stone-700/50 border-stone-600"
                                             : "bg-white/50 border-[#8B4513]/20"
                                     } rounded-lg border`}
                                 >
@@ -352,14 +353,14 @@ const HomePage = () => {
                                             size={20}
                                             className={
                                                 isDark
-                                                    ? "text-gray-200"
+                                                    ? "text-stone-200"
                                                     : "text-[#8B4513]"
                                             }
                                         />
                                         <span
                                             className={`text-2xl ${
                                                 isDark
-                                                    ? "text-gray-200"
+                                                    ? "text-stone-200"
                                                     : "text-[#8B4513]"
                                             }`}
                                         >
@@ -369,7 +370,7 @@ const HomePage = () => {
                                     <p
                                         className={
                                             isDark
-                                                ? "text-gray-400"
+                                                ? "text-stone-400"
                                                 : "text-[#8B4513]/80"
                                         }
                                     >
@@ -386,9 +387,9 @@ const HomePage = () => {
                     <div
                         className={`${
                             isDark
-                                ? "bg-gray-800/40 border-gray-700"
+                                ? "bg-stone-800/40 border-stone-700"
                                 : "bg-white/40 border-[#8B4513]/20"
-                        } backdrop-blur-md rounded-lg border p-3 md:p-6`}
+                        } backdrop-blur-md rounded-lg border p-4`}
                     >
                         {articles.length === 0 ? (
                             <div className="text-center py-12">
@@ -396,14 +397,14 @@ const HomePage = () => {
                                     size={48}
                                     className={`mx-auto ${
                                         isDark
-                                            ? "text-gray-600"
+                                            ? "text-stone-600"
                                             : "text-[#8B4513]/40"
                                     } mb-4`}
                                 />
                                 <p
-                                    className={`text-xl font-[Cinzel] ${
+                                    className={`text-xl font-zodiak ${
                                         isDark
-                                            ? "text-gray-400"
+                                            ? "text-stone-400"
                                             : "text-[#8B4513]/60"
                                     }`}
                                 >
@@ -413,28 +414,28 @@ const HomePage = () => {
                                 <p
                                     className={`mt-2 italic ${
                                         isDark
-                                            ? "text-gray-400"
+                                            ? "text-stone-400"
                                             : "text-[#8B4513]/60"
                                     }`}
                                 >
-                                    "Knowledge awaits your curiosity"
+                                    &quot;Knowledge awaits your curiosity&quot;
                                 </p>
                             </div>
                         ) : (
-                            <div className="space-y-3 md:space-y-6">
+                            <div className="space-y-2">
                                 {articles.map((article, index) => (
                                     <article
                                         key={index}
                                         className={`${
                                             isDark
-                                                ? "bg-gray-700/50 border-gray-600"
+                                                ? "bg-stone-700/50 border-stone-600"
                                                 : "bg-white/50 border-[#8B4513]/20"
                                         } rounded-lg border p-6 hover:shadow-lg transition-shadow`}
                                     >
                                         <h3
-                                            className={`text-xl font-[Cinzel] ${
+                                            className={`text-xl font-sentient ${
                                                 isDark
-                                                    ? "text-gray-200"
+                                                    ? "text-stone-200"
                                                     : "text-[#8B4513]"
                                             } mb-2`}
                                         >
@@ -452,8 +453,8 @@ const HomePage = () => {
                                                 }}
                                                 className={`px-4 py-1 rounded-md transition-colors ${
                                                     isDark
-                                                        ? "bg-gray-600 text-gray-200 hover:bg-gray-500"
-                                                        : "bg-[#8B4513] text-[#F2E8CF] hover:bg-[#8B4513]/90"
+                                                        ? "bg-stone-600 text-stone-200 hover:bg-stone-500"
+                                                        : "bg-[#8B4513] text-cream-light hover:bg-[#8B4513]/90"
                                                 }`}
                                                 data-url={`${article.url}`}
                                             >
@@ -466,7 +467,7 @@ const HomePage = () => {
                                                     target="_blank"
                                                     className={`${
                                                         isDark
-                                                            ? "text-gray-200 hover:text-gray-400"
+                                                            ? "text-stone-200 hover:text-stone-400"
                                                             : "text-[#8B4513] hover:text-[#8B4513]/50"
                                                     } transition-colors`}
                                                 >
@@ -480,7 +481,7 @@ const HomePage = () => {
                                                                 size={16}
                                                                 className={`cursor-pointer ${
                                                                     isDark
-                                                                        ? "text-gray-200 hover:bg-gray-600"
+                                                                        ? "text-stone-200 hover:bg-stone-600"
                                                                         : "text-[#8B4513] hover:bg-[#8B4513]/20"
                                                                 } transition-colors rounded-lg box-content p-1`}
                                                             />
@@ -503,14 +504,10 @@ const HomePage = () => {
             {/* Scroll to Top Button */}
             <button
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="fixed bottom-6 right-6 p-3 bg-[#8B4513] text-[#F2E8CF] rounded-full shadow-lg hover:bg-[#8B4513]/90 transition-colors"
+                className="fixed bottom-6 right-6 p-3 bg-[#8B4513] text-cream-light rounded-full shadow-lg hover:bg-[#8B4513]/90 transition-colors"
             >
                 <ChevronUp size={24} />
             </button>
-
-            <style>{`
-                @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
-            `}</style>
         </div>
     );
 };

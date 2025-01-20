@@ -1,5 +1,5 @@
 import React from "react";
-import { Mail, Github, Instagram } from "lucide-react";
+import { Github, Instagram } from "lucide-react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 import AppLogo from "../../assets/Logo";
 
@@ -11,8 +11,8 @@ const Footer = () => {
             <footer
                 className={`${
                     isDark
-                        ? "bg-gray-900 border-gray-700"
-                        : "bg-[#F2E8CF] border-[#8B4513]/20"
+                        ? "bg-stone-900 border-stone-700"
+                        : "bg-cream-light border-[#8B4513]/20"
                 } border-t mt-0 transition-colors duration-300 isolate z-50`}
             >
                 {/* mt-16 -> mt-0 */}
@@ -29,7 +29,7 @@ const Footer = () => {
                                     className={`${isDark ? "invert" : "invert-0"}`}
                                 />
                                 <span
-                                    className={`ml-2 text-xl font-[Cinzel] ${
+                                    className={`ml-2 text-xl font-zodiak ${
                                         isDark
                                             ? "text-gray-200"
                                             : "text-[#8B4513]"
@@ -43,7 +43,7 @@ const Footer = () => {
                         {/* Navigation */}
                         <div className="text-center md:text-left">
                             <h3
-                                className={`font-[Cinzel] ${
+                                className={`font-zodiak ${
                                     isDark ? "text-gray-200" : "text-[#8B4513]"
                                 } mb-4`}
                             >
@@ -56,7 +56,7 @@ const Footer = () => {
                                         isDark
                                             ? "text-gray-400 hover:text-gray-200"
                                             : "text-[#8B4513]/80 hover:text-[#8B4513]"
-                                    } font-[Cormorant]`}
+                                    } font-sentient`}
                                 >
                                     Home
                                 </a>
@@ -66,7 +66,7 @@ const Footer = () => {
                                         isDark
                                             ? "text-gray-400 hover:text-gray-200"
                                             : "text-[#8B4513]/80 hover:text-[#8B4513]"
-                                    } font-[Cormorant]`}
+                                    } font-sentient`}
                                 >
                                     About
                                 </a>
@@ -76,7 +76,7 @@ const Footer = () => {
                                         isDark
                                             ? "text-gray-400 hover:text-gray-200"
                                             : "text-[#8B4513]/80 hover:text-[#8B4513]"
-                                    } font-[Cormorant]`}
+                                    } font-sentient`}
                                 >
                                     Contact
                                 </a>
@@ -86,7 +86,7 @@ const Footer = () => {
                         {/* Social Links */}
                         <div className="text-center md:text-left">
                             <h3
-                                className={`font-[Cinzel] ${
+                                className={`font-zodiak ${
                                     isDark ? "text-gray-200" : "text-[#8B4513]"
                                 } mb-4`}
                             >
@@ -99,7 +99,7 @@ const Footer = () => {
                                         isDark
                                             ? "text-gray-400 hover:text-gray-200"
                                             : "text-[#8B4513]/80 hover:text-[#8B4513]"
-                                    } font-[Cormorant]`}
+                                    } font-sentient`}
                                 >
                                     <Mail className="h-5 w-5 mr-2" />
                                     Email
@@ -112,7 +112,7 @@ const Footer = () => {
                                         isDark
                                             ? "text-gray-400 hover:text-gray-200"
                                             : "text-[#8B4513]/80 hover:text-[#8B4513]"
-                                    } font-[Cormorant]`}
+                                    } font-sentient`}
                                 >
                                     <Github className="h-5 w-5 mr-2" />
                                     Github
@@ -123,7 +123,7 @@ const Footer = () => {
                                         isDark
                                             ? "text-gray-400 hover:text-gray-200"
                                             : "text-[#8B4513]/80 hover:text-[#8B4513]"
-                                    } font-[Cormorant]`}
+                                    } font-sentient`}
                                 >
                                     <Instagram className="h-5 w-5 mr-2" />
                                     Socials
@@ -141,18 +141,14 @@ const Footer = () => {
                         <p
                             className={`${
                                 isDark ? "text-gray-500" : "text-[#8B4513]/60"
-                            } font-[Cormorant]`}
+                            } font-sentient`}
                         >
-                            Copyright © 2024 Subhajit Gorai. All rights
+                            Copyright © 2025 Subhajit Gorai. All rights
                             reserved.
                         </p>
                     </div>
                 </div>
             </footer>
-
-            <style>{`
-                @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
-            `}</style>
         </>
     );
 };

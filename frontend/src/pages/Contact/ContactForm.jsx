@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, User, MessageSquare, Feather, Send } from "lucide-react";
+import { Mail, User, MessageSquare, Send } from "lucide-react";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -21,17 +21,13 @@ const ContactForm = () => {
     return (
         <>
             <Header />
-            <div className="min-h-screen bg-[#F2E8CF] flex items-center justify-center p-4 font-[Cormorant] mt-[4rem]">
+            <div className="min-h-screen bg-cream flex items-center justify-center p-4 font-sentient mt-[4rem]">
                 <div className="w-full max-w-md">
                     {/* Header */}
                     <div className="text-center mb-8">
-                        <Feather className="w-16 h-16 mx-auto text-[#8B4513] mb-4" />
-                        <h1 className="text-4xl md:text-5xl font-[Cinzel] text-[#8B4513] tracking-wider mb-2">
+                        <h1 className="text-4xl md:text-5xl font-zodiak text-[#8B4513] tracking-wider mb-2">
                             Contact Us
                         </h1>
-                        <p className="text-[#8B4513]/80 italic text-lg">
-                            Share your thoughts with the keepers of knowledge
-                        </p>
                     </div>
 
                     {/* Contact Form */}
@@ -41,7 +37,7 @@ const ContactForm = () => {
                     >
                         {/* Name Field */}
                         <div className="mb-6">
-                            <label className="block text-[#8B4513] font-[Cinzel] mb-2">
+                            <label className="block text-[#8B4513] font-zodiak mb-2">
                                 Name
                             </label>
                             <div className="relative">
@@ -59,7 +55,7 @@ const ContactForm = () => {
 
                         {/* Email Field */}
                         <div className="mb-6">
-                            <label className="block text-[#8B4513] font-[Cinzel] mb-2">
+                            <label className="block text-[#8B4513] font-zodiak mb-2">
                                 Email
                             </label>
                             <div className="relative">
@@ -77,7 +73,7 @@ const ContactForm = () => {
 
                         {/* Message Field */}
                         <div className="mb-6">
-                            <label className="block text-[#8B4513] font-[Cinzel] mb-2">
+                            <label className="block text-[#8B4513] font-zodiak mb-2">
                                 Message
                             </label>
                             <div className="relative">
@@ -96,7 +92,7 @@ const ContactForm = () => {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full bg-[#8B4513] text-[#F2E8CF] py-3 rounded-md font-[Cinzel]
+                            className="w-full bg-[#8B4513] text-[#F2E8CF] py-3 rounded-md font-zodiak
                         hover:bg-[#8B4513]/90 disabled:opacity-70 disabled:cursor-not-allowed
                         flex items-center justify-center gap-2"
                         >
@@ -116,19 +112,7 @@ const ContactForm = () => {
                             discretion
                         </p>
                     </form>
-
-                    {/* Decorative Bottom Element */}
-                    <div className="mt-8 text-center">
-                        <div className="w-24 h-1 bg-[#8B4513]/20 mx-auto mb-4" />
-                        <p className="text-[#8B4513]/60 text-sm italic">
-                            "Words are the messengers of the heart"
-                        </p>
-                    </div>
                 </div>
-
-                <style>{`
-                    @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
-                `}</style>
             </div>
             <Footer />
         </>

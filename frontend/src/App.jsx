@@ -11,10 +11,9 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import ContactForm from "./pages/Contact/ContactForm";
-import ArtGallery from "./pages/ArtGallery/ArtGallery";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Profile from "./pages/Profile/Profile";
-import Article from "./pages/ReaderPage/Article";
+import Article from "./pages/ArticleReader/Article";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 // import ForgotPassword from "./pages/Auth/ForgotPassword";
@@ -39,7 +38,6 @@ const App = () => {
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/contact-form" element={<ContactForm />} />
-                    <Route path="/gallery" element={<ArtGallery />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/article" element={<Article />} />
                     {/* Auth routes */}

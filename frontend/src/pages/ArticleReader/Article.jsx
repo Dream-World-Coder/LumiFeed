@@ -3,65 +3,15 @@ import { Moon, Sun, FileText, ChevronLeft, Type } from "lucide-react";
 import AppLogo from "../../assets/Logo";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDarkMode } from "../../contexts/DarkModeContext";
-
-/*
-    {
-        heading = "Heading",
-        subHeading = "SubHeading",
-        imgUrl = "https://picsum.photos/800/450",
-        articleContent = "article content",
-    }
-*/
+import fontSizes from "./fontsSizes";
+import fonts from "./fontFamilies";
 
 const NewsArticle = () => {
     const [fontSize, setFontSize] = useState("base");
     const { isDark, toggleDarkMode } = useDarkMode();
     const [showSummary, setShowSummary] = useState(false);
-    const [fontFamily, setFontFamily] = useState("cormorant");
-
-    // Font families with display names and actual CSS values
-    const fonts = {
-        cormorant: {
-            name: "Cormorant",
-            class: "font-[Cormorant]",
-        },
-        crimson: {
-            name: "Crimson",
-            class: "font-[Crimson_Text]",
-        },
-        lora: {
-            name: "Lora",
-            class: "font-[Lora]",
-        },
-        merriweather: {
-            name: "Merriweather",
-            class: "font-[Merriweather]",
-        },
-        spectral: {
-            name: "Spectral",
-            class: "font-[Spectral]",
-        },
-    };
-
+    const [fontFamily, setFontFamily] = useState("easyRead");
     const [showFontMenu, setShowFontMenu] = useState(false);
-
-    const fontSizes = {
-        sm: {
-            heading: "text-3xl md:text-4xl",
-            subheading: "text-xl md:text-2xl",
-            content: "text-base",
-        },
-        base: {
-            heading: "text-4xl md:text-5xl",
-            subheading: "text-2xl md:text-3xl",
-            content: "text-lg",
-        },
-        lg: {
-            heading: "text-5xl md:text-6xl",
-            subheading: "text-3xl md:text-4xl",
-            content: "text-xl",
-        },
-    };
 
     const location = useLocation();
     // const navigate = useNavigate();
@@ -83,16 +33,16 @@ const NewsArticle = () => {
         <div
             className={`min-h-screen transition-colors duration-300 ${
                 isDark
-                    ? "bg-gray-900 text-gray-100"
-                    : "bg-[#F2E8CF] text-[#8B4513]"
+                    ? "bg-stone-900 text-stone-200"
+                    : "bg-cream-light text-stone-800"
             }`}
         >
             {/* Header */}
             <header
                 className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
                     isDark
-                        ? "bg-gray-900 border-gray-700"
-                        : "bg-[#F2E8CF] border-[#8B4513]/20"
+                        ? "bg-stone-900 border-stone-700"
+                        : "bg-cream border-[#8B4513]/20"
                 } border-b`}
             >
                 <div className="max-w-7xl mx-auto px-4">
@@ -223,13 +173,13 @@ const NewsArticle = () => {
             <main className="max-w-4xl mx-auto px-4 pt-24 pb-16">
                 <article>
                     <h1
-                        className={`font-[Cinzel] ${fontSizes[fontSize].heading} mb-4`}
+                        className={`font-sentient font-bold ${fontSizes[fontSize].heading} mb-6`}
                     >
                         {heading}
                     </h1>
 
                     <h2
-                        className={`font-[Cinzel] ${fontSizes[fontSize].subheading} mb-8 opacity-80`}
+                        className={`font-sentient ${fontSizes[fontSize].subheading} mb-8 opacity-80`}
                     >
                         {subHeading}
                     </h2>
@@ -237,7 +187,7 @@ const NewsArticle = () => {
                     {/* Summary Drawer */}
                     {showSummary && (
                         <div
-                            className={`mb-8 p-6 rounded-lg ${
+                            className={`mb-8 p-6 rounded-lg transition-all duration-500 ${
                                 isDark ? "bg-gray-800" : "bg-white/40"
                             }`}
                         >
@@ -245,7 +195,7 @@ const NewsArticle = () => {
                                 Article Summary
                             </h3>
                             <p
-                                className={`${fonts[fontFamily].class} opacity-80`}
+                                className={`${fonts[fontFamily].class} text-lg opacity-80`}
                             >
                                 {subHeading}
                             </p>
@@ -263,7 +213,7 @@ const NewsArticle = () => {
 
                     {/* Article Content */}
                     <div
-                        className={`${fonts[fontFamily].class} ${fontSizes[fontSize].content} space-y-6 leading-relaxed`}
+                        className={`${fonts[fontFamily].class} ${fontSizes[fontSize].content} space-y-6`}
                         dangerouslySetInnerHTML={{ __html: articleContent }}
                     ></div>
                 </article>
@@ -271,7 +221,7 @@ const NewsArticle = () => {
 
             {/* jsx global */}
             <style>{`
-                @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Merriweather:ital,wght@0,300;0,400;1,300&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap");
+                @import url("https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;1,400&display=swap");
             `}</style>
         </div>
     );
