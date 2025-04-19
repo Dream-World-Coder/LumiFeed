@@ -391,5 +391,22 @@
 
         <!-- extra scripts -->
         {% block scripts %} {% endblock %}
+        <script
+            type="text/javascript"
+            src="{{url_for('static', filename='js/lenis.js')}}"
+        ></script>
+        <script>
+            const lenis = new Lenis({
+                duration: 0.1,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smooth: true,
+            });
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+        </script>
+  
     </body>
 </html>

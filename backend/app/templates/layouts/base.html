@@ -1008,5 +1008,19 @@
             type="text/javascript"
             src="{{url_for('static', filename='js/ajax/mobile_search.js')}}"
         ></script>
+        <script
+            type="text/javascript"
+            src="{{url_for(static, filename='js/lenis.js')}}"
+        ></script>
+        <script>
+            const lenis = new Lenis();
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+        </script>
     </body>
 </html>

@@ -16,17 +16,18 @@ from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError
 from flask_mail import Message
 import re
+import os
+from dotenv import load_dotenv
 
-
-
+load_dotenv()
+BACKEND_URL=os.environ.get("BACKEND_URL")
+FRONTEND_URL=os.environ.get("FRONTEND_URL")
 
 """
-
     when i am registering, then i am going back to lumifeed insted of /verify-eamil as
     i have used window.location.assign('lumifeed url') inn the auth/register.html
     so i have to switch it to window.location.href = '/verify-email'
     else just keep it that way.
-
 """
 
 
@@ -74,13 +75,12 @@ def verify():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def send_verification_email(user: User):
     subject = "Verify Your Email Address"
-    # verification_link = f"http://127.0.0.1:8000/verify?token={user.generate_verification_token(user.email)}"
-    verification_link = f"https://lumifeed.up.railway.app/verify?token={user.generate_verification_token(user.email)}"
+    verification_link = f"{BACKEND_URL}/verify?token={user.generate_verification_token(user.email)}"
 
     try:
         msg = Message(
             subject=subject,
-            sender="noreply@lumifeed101.com",
+            sender="lumifeed101@gmail.com",
             recipients=[user.email]
         )
 
@@ -230,10 +230,10 @@ def login():
             if not usr:
                 return jsonify({'error': 'User not found'}), 404
 
-            if not usr.email_verified:
-                return jsonify({
-                    'error': 'Email unverified. User\'s data cannot be retrieved. Try again after 24 hours.'
-                }), 401
+            # if not usr.email_verified:
+            #     return jsonify({
+            #         'error': 'Email unverified. User\'s data cannot be retrieved. Try again after 24 hours.'
+            #     }), 401
 
             if usr.failed_logins >= 5:  # Optional: Add max attempts
                 return jsonify({

@@ -28,6 +28,7 @@ from ..routes._routes__auth import (
     delete_account,
     forgot_password,
     reset_password,
+    send_verification_email
 )
 from ..routes._routes__collections_related import add_new_collection, delete_collection, share_collection
 from ..routes._routes__fetch_news import fetchnews
