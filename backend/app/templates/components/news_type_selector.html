@@ -1,0 +1,19 @@
+{% macro news_type_selector(news_types=[]) %}
+<div class="options__container flexed f-gap-2">
+    {% for news in news_types %}
+    <div class="flex align-center">
+        <input
+            class="border"
+            type="radio"
+            name="news_type"
+            value="{{ news.value }}"
+            id="{{ news.id }}"
+            required
+        />
+        <label class="custom-radio" for="{{ news.id }}">
+            {{ news.label }}
+        </label>
+    </div>
+    {% endfor %}
+</div>
+{% endmacro %}

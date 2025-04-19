@@ -9,17 +9,17 @@ class Config:
     FLASK_APP = os.environ.get("FLASK_APP", "run")
     PORT=8000
     SECRET_KEY = os.environ.get("SECRET_KEY", os.urandom(512))
-    # print(SECRET_KEY)
-    # FLASKY_ADMIN = os.environ.get('ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_POOL_SIZE = 40
     # SQLALCHEMY_POOL_TIMEOUT = 35
     # SQLALCHEMY_MAX_OVERFLOW = 20
+    #
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_USE_TLS = True
     MAIL_PORT = 587
     MAIL_USERNAME = os.getenv('EMAIL_USER')
     MAIL_PASSWORD = os.getenv('EMAIL_PASS')
+
     JWT_SECRET_KEY = "bi5bx4o5u"
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)

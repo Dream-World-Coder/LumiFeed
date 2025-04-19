@@ -1,0 +1,63 @@
+{% macro home_footer(current_user=None) %}
+<footer
+    id="footer"
+    class="flex section-element"
+    role="footer"
+    itemscope
+    itemtype="https://schema.org/WPFooter"
+>
+    <div id="table-end" class="footer__logo dahlia">LumiFeed</div>
+
+    <div class="footer__socials flexed">
+        <ul
+            class="full flexed flex-col f-gap-1 align-start justify-start p-top-2"
+        >
+            <li class="animated-underline-white">
+                <a href="mailto:lumifeed101@gmail.com">Email</a>
+            </li>
+            <li class="animated-underline-white">
+                <a
+                    target="_blank"
+                    href="https://github.com/Dream-World-Coder/LumiFeed"
+                    >Github</a
+                >
+            </li>
+        </ul>
+    </div>
+
+    <div class="footer__links flexed">
+        <ul
+            class="full flexed flex-col f-gap-1 align-start justify-start p-top-2"
+        >
+            <li class="animated-underline-white"><a href="/">Home</a></li>
+            {% if current_user and current_user.is_authenticated %}
+            <li class="animated-underline-white">
+                <a href="/profile/{{ current_user.username }}">Profile</a>
+            </li>
+            {% endif %}
+            <li class="animated-underline-white"><a href="/about">About</a></li>
+            <li class="animated-underline-white">
+                <a href="/contact">Contact</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="footer__cc flexed">
+        Copyright &copy;
+        <script>
+            document.write(new Date().getFullYear());
+        </script>
+        Subhajit Gorai.
+        <meta name="copyright" content="Subhajit Gorai" />
+    </div>
+
+    <script>
+        const footerLis = document.querySelectorAll("footer li");
+        footerLis.forEach((li) => {
+            li.addEventListener("click", () => {
+                li.querySelector("a").click();
+            });
+        });
+    </script>
+</footer>
+{% endmacro %}
