@@ -4,3 +4,4 @@ newspapers-th-it/
 .venv/
 node_modules/
 package-lock.json
+lumifeed-old-mobile
