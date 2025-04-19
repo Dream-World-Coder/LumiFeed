@@ -1,89 +1,128 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext"; // Make sure path is correct
 import BackButton from "./components";
-// import AppLogo from "../../assets/Logo";
+import DecorativeElement from "./DecortiveElements";
 
 const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [formData, setFormData] = useState({
+        username: "",
+        email: "",
+        password: "",
+        rememberMe: false,
+    });
+
     const formRef = useRef(null);
     const decorRef = useRef(null);
+    const navigate = useNavigate();
+    const { login } = useAuth();
+
+    const handleInputChange = (e) => {
+        const { name, value, checked } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: name === "rememberMe" ? checked : value,
+        }));
+    };
+
+    const validateForm = () => {
+        if (!formData.username || formData.username.length < 3) {
+            setError("Username must be at least 3 characters long");
+            return false;
+        }
+        if (!formData.email || !formData.email.includes("@")) {
+            setError("Please enter a valid email address");
+            return false;
+        }
+        if (!formData.password || formData.password.length < 6) {
+            setError("Password must be at least 6 characters long");
+            return false;
+        }
+        return true;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        setError("");
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setIsLoading(false);
+        if (!validateForm()) {
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            // Register request
+            const registerResponse = await fetch(
+                "http://localhost:8000/api/register",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: formData.username,
+                        email: formData.email,
+                        password: formData.password,
+                    }),
+                },
+            );
+
+            const registerData = await registerResponse.json();
+
+            if (!registerResponse.ok) {
+                throw new Error(registerData.msg || "Registration failed");
+            }
+
+            // After successful registration, automatically log in
+            const loginResponse = await fetch(
+                "http://localhost:5000/api/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: formData.email,
+                        password: formData.password,
+                    }),
+                },
+            );
+
+            const loginData = await loginResponse.json();
+
+            if (!loginResponse.ok) {
+                throw new Error("Login after registration failed");
+            }
+
+            // If remember me is checked, store in localStorage
+            if (formData.rememberMe) {
+                localStorage.setItem("rememberMe", formData.email);
+            }
+
+            // Use the login function from Auth Context
+            await login(loginData.access_token, loginData.user);
+
+            // Redirect to dashboard or home page
+            navigate("/dashboard");
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
         <>
             <BackButton />
             <div className="min-h-screen bg-cream flex items-center justify-center p-4 font-sentient">
-                {/* Decorative Background */}
-                <div
-                    ref={decorRef}
-                    className="fixed inset-0 pointer-events-none overflow-hidden"
-                >
-                    <div className="absolute top-0 left-0 w-64 h-64 decor-element">
-                        <svg
-                            viewBox="0 0 100 100"
-                            className="w-full h-full opacity-10"
-                        >
-                            <circle
-                                cx="50"
-                                cy="50"
-                                r="40"
-                                fill="none"
-                                stroke="#8B4513"
-                                strokeWidth="0.5"
-                            />
-                            <circle
-                                cx="50"
-                                cy="50"
-                                r="35"
-                                fill="none"
-                                stroke="#8B4513"
-                                strokeWidth="0.5"
-                            />
-                            <circle
-                                cx="50"
-                                cy="50"
-                                r="30"
-                                fill="none"
-                                stroke="#8B4513"
-                                strokeWidth="0.5"
-                            />
-                        </svg>
-                    </div>
-                    <div className="absolute bottom-0 right-0 w-96 h-96 decor-element">
-                        <svg
-                            viewBox="0 0 100 100"
-                            className="w-full h-full opacity-10"
-                        >
-                            <pattern
-                                id="grid"
-                                width="10"
-                                height="10"
-                                patternUnits="userSpaceOnUse"
-                            >
-                                <path
-                                    d="M 10 0 L 0 0 0 10"
-                                    fill="none"
-                                    stroke="#8B4513"
-                                    strokeWidth="0.5"
-                                />
-                            </pattern>
-                            <rect width="100" height="100" fill="url(#grid)" />
-                        </svg>
-                    </div>
-                </div>
+                <DecorativeElement decorRef={decorRef} />
 
-                {/* Main Container */}
                 <div className="relative max-w-md w-full">
-                    {/* Logo */}
                     <div className="text-center mb-8">
                         <h1 className="text-4xl md:text-5xl font-zodiak text-[#8B4513] tracking-wider mb-2 form-element">
                             LumiFeed
@@ -93,13 +132,19 @@ const RegisterPage = () => {
                         </p>
                     </div>
 
-                    {/* Login Form */}
+                    {/* Error Message */}
+                    {error && (
+                        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                            {error}
+                        </div>
+                    )}
+
                     <form
                         ref={formRef}
                         onSubmit={handleSubmit}
                         className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-xl border border-[#8B4513]/20"
                     >
-                        {/* username Field */}
+                        {/* Username Field */}
                         <div className="mb-6 form-element">
                             <label className="block text-[#8B4513] font-zodiak mb-2">
                                 Username
@@ -108,10 +153,14 @@ const RegisterPage = () => {
                                 <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B4513]/60" />
                                 <input
                                     type="text"
+                                    name="username"
+                                    value={formData.username}
+                                    onChange={handleInputChange}
                                     className="w-full bg-white/50 border border-[#8B4513]/20 rounded-md py-3 px-12
-                         focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
-                         transition-all duration-300 outline-none"
+                                    focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
+                                    transition-all duration-300 outline-none"
                                     placeholder="Enter your username"
+                                    required
                                 />
                             </div>
                         </div>
@@ -125,10 +174,14 @@ const RegisterPage = () => {
                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B4513]/60" />
                                 <input
                                     type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
                                     className="w-full bg-white/50 border border-[#8B4513]/20 rounded-md py-3 px-12
-                         focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
-                         transition-all duration-300 outline-none"
+                                    focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
+                                    transition-all duration-300 outline-none"
                                     placeholder="Enter your email"
+                                    required
                                 />
                             </div>
                         </div>
@@ -142,10 +195,14 @@ const RegisterPage = () => {
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B4513]/60" />
                                 <input
                                     type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleInputChange}
                                     className="w-full bg-white/50 border border-[#8B4513]/20 rounded-md py-3 px-12
-                         focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
-                         transition-all duration-300 outline-none"
+                                    focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
+                                    transition-all duration-300 outline-none"
                                     placeholder="Enter your password"
+                                    required
                                 />
                                 <button
                                     type="button"
@@ -153,7 +210,7 @@ const RegisterPage = () => {
                                         setShowPassword(!showPassword)
                                     }
                                     className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8B4513]/60
-                         hover:text-[#8B4513] transition-colors duration-300"
+                                    hover:text-[#8B4513] transition-colors duration-300"
                                 >
                                     {showPassword ? (
                                         <EyeOff size={20} />
@@ -164,11 +221,14 @@ const RegisterPage = () => {
                             </div>
                         </div>
 
-                        {/* Remember Me & Forgot Password */}
-                        <div className="flex items-center justify-between mb-6 form-element">
+                        {/* Remember Me */}
+                        <div className="flex items-center mb-6 form-element">
                             <label className="flex items-center space-x-2 text-[#8B4513]/80">
                                 <input
                                     type="checkbox"
+                                    name="rememberMe"
+                                    checked={formData.rememberMe}
+                                    onChange={handleInputChange}
                                     className="rounded border-[#8B4513]/20"
                                 />
                                 <span>Remember me</span>
@@ -180,9 +240,9 @@ const RegisterPage = () => {
                             type="submit"
                             disabled={isLoading}
                             className="w-full bg-[#8B4513] text-[#F2E8CF] py-3 rounded-md font-zodiak
-                     hover:bg-[#8B4513]/90 transition-all duration-300 form-element
-                     disabled:opacity-70 disabled:cursor-not-allowed
-                     relative overflow-hidden group"
+                            hover:bg-[#8B4513]/90 transition-all duration-300 form-element
+                            disabled:opacity-70 disabled:cursor-not-allowed
+                            relative overflow-hidden group"
                         >
                             <span
                                 className={`inline-block transition-all duration-300 ${isLoading ? "opacity-0" : "opacity-100"}`}
@@ -196,7 +256,7 @@ const RegisterPage = () => {
                             )}
                         </button>
 
-                        {/* Sign Up Link */}
+                        {/* Login Link */}
                         <p className="text-center mt-6 text-[#8B4513]/80 form-element">
                             Already have an account?{" "}
                             <a

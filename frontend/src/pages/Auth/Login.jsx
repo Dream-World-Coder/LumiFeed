@@ -1,89 +1,96 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext"; // Make sure path is correct
 import AppLogo from "../../assets/Logo";
 import BackButton from "./components";
+import DecorativeElement from "./DecortiveElements";
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+        rememberMe: false,
+    });
+
     const formRef = useRef(null);
     const decorRef = useRef(null);
+    const navigate = useNavigate();
+    const { login } = useAuth(); // Get login function from Auth Context
+
+    const handleInputChange = (e) => {
+        const { name, value, checked } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: name === "rememberMe" ? checked : value,
+        }));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        setError("");
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setIsLoading(false);
+        try {
+            const response = await fetch("http://localhost:8000/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    password: formData.password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.msg || "Login failed");
+            }
+
+            // If remember me is checked, store in localStorage
+            if (formData.rememberMe) {
+                localStorage.setItem("rememberMe", formData.email);
+            } else {
+                localStorage.removeItem("rememberMe");
+            }
+
+            // Use the login function from Auth Context
+            await login(data.access_token, data.user);
+
+            // Redirect to dashboard or home page
+            navigate("/dashboard");
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
+
+    // Load remembered email if exists
+    useEffect(() => {
+        const rememberedEmail = localStorage.getItem("rememberMe");
+        if (rememberedEmail) {
+            setFormData((prev) => ({
+                ...prev,
+                email: rememberedEmail,
+                rememberMe: true,
+            }));
+        }
+    }, []);
 
     return (
         <>
             <BackButton />
             <div className="min-h-screen bg-cream flex items-center justify-center p-4 font-sentient">
-                {/* Decorative Background */}
-                <div
-                    ref={decorRef}
-                    className="fixed inset-0 pointer-events-none overflow-hidden"
-                >
-                    <div className="absolute top-0 left-0 w-64 h-64 decor-element">
-                        <svg
-                            viewBox="0 0 100 100"
-                            className="w-full h-full opacity-10"
-                        >
-                            <circle
-                                cx="50"
-                                cy="50"
-                                r="40"
-                                fill="none"
-                                stroke="#8B4513"
-                                strokeWidth="0.5"
-                            />
-                            <circle
-                                cx="50"
-                                cy="50"
-                                r="35"
-                                fill="none"
-                                stroke="#8B4513"
-                                strokeWidth="0.5"
-                            />
-                            <circle
-                                cx="50"
-                                cy="50"
-                                r="30"
-                                fill="none"
-                                stroke="#8B4513"
-                                strokeWidth="0.5"
-                            />
-                        </svg>
-                    </div>
-                    <div className="absolute bottom-0 right-0 w-96 h-96 decor-element">
-                        <svg
-                            viewBox="0 0 100 100"
-                            className="w-full h-full opacity-10"
-                        >
-                            <pattern
-                                id="grid"
-                                width="10"
-                                height="10"
-                                patternUnits="userSpaceOnUse"
-                            >
-                                <path
-                                    d="M 10 0 L 0 0 0 10"
-                                    fill="none"
-                                    stroke="#8B4513"
-                                    strokeWidth="0.5"
-                                />
-                            </pattern>
-                            <rect width="100" height="100" fill="url(#grid)" />
-                        </svg>
-                    </div>
-                </div>
+                <DecorativeElement decorRef={decorRef} />
 
-                {/* Main Container */}
                 <div className="relative max-w-md w-full">
-                    {/* Logo */}
+                    {/* Logo section remains the same */}
                     <div className="text-center mb-8">
                         <AppLogo
                             width={64}
@@ -100,7 +107,13 @@ const LoginPage = () => {
                         </p>
                     </div>
 
-                    {/* Login Form */}
+                    {/* Error Message */}
+                    {error && (
+                        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                            {error}
+                        </div>
+                    )}
+
                     <form
                         ref={formRef}
                         onSubmit={handleSubmit}
@@ -115,10 +128,14 @@ const LoginPage = () => {
                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B4513]/60" />
                                 <input
                                     type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
                                     className="w-full bg-white/50 border border-[#8B4513]/20 rounded-md py-3 px-12
-                         focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
-                         transition-all duration-300 outline-none"
+                                    focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
+                                    transition-all duration-300 outline-none"
                                     placeholder="Enter your email"
+                                    required
                                 />
                             </div>
                         </div>
@@ -132,10 +149,14 @@ const LoginPage = () => {
                                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B4513]/60" />
                                 <input
                                     type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleInputChange}
                                     className="w-full bg-white/50 border border-[#8B4513]/20 rounded-md py-3 px-12
-                         focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
-                         transition-all duration-300 outline-none"
+                                    focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
+                                    transition-all duration-300 outline-none"
                                     placeholder="Enter your password"
+                                    required
                                 />
                                 <button
                                     type="button"
@@ -143,7 +164,7 @@ const LoginPage = () => {
                                         setShowPassword(!showPassword)
                                     }
                                     className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8B4513]/60
-                         hover:text-[#8B4513] transition-colors duration-300"
+                                    hover:text-[#8B4513] transition-colors duration-300"
                                 >
                                     {showPassword ? (
                                         <EyeOff size={20} />
@@ -159,6 +180,9 @@ const LoginPage = () => {
                             <label className="flex items-center space-x-2 text-[#8B4513]/80">
                                 <input
                                     type="checkbox"
+                                    name="rememberMe"
+                                    checked={formData.rememberMe}
+                                    onChange={handleInputChange}
                                     className="rounded border-[#8B4513]/20"
                                 />
                                 <span>Remember me</span>
@@ -176,12 +200,14 @@ const LoginPage = () => {
                             type="submit"
                             disabled={isLoading}
                             className="w-full bg-[#8B4513] text-[#F2E8CF] py-3 rounded-md font-zodiak
-                     hover:bg-[#8B4513]/90 transition-all duration-300 form-element
-                     disabled:opacity-70 disabled:cursor-not-allowed
-                     relative overflow-hidden group"
+                            hover:bg-[#8B4513]/90 transition-all duration-300 form-element
+                            disabled:opacity-70 disabled:cursor-not-allowed
+                            relative overflow-hidden group"
                         >
                             <span
-                                className={`inline-block transition-all duration-300 ${isLoading ? "opacity-0" : "opacity-100"}`}
+                                className={`inline-block transition-all duration-300 ${
+                                    isLoading ? "opacity-0" : "opacity-100"
+                                }`}
                             >
                                 Sign In
                             </span>
