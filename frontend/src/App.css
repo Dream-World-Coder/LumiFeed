@@ -1,3 +1,4 @@
+@import url("https://fonts.cdnfonts.com/css/poppins");
 body {
     position: relative;
     background-color: rgb(242, 232, 207);
@@ -10,12 +11,23 @@ body {
     font-family: SentientLight;
     src: url("/fonts/Sentient-Light.woff2") format("woff2");
 }
-/*
 @font-face {
-    font-family: Sentient;
-    src: url("/fonts/Sentient-Regular.woff2") format("woff2");
+    font-family: Dahlia;
+    src: url("/fonts/dahlia.woff2") format("woff2");
 }
 @font-face {
-    font-family: SentientMedium;
-    src: url("/fonts/Sentient-Medium.woff2") format("woff2");
-} */
+    font-family: Scribe;
+    src: url("/fonts/scribe.woff2") format("woff2");
+}
+@font-face {
+    font-family: Title;
+    src: url("/fonts/title.woff") format("woff");
+}
+@font-face {
+    font-family: Content;
+    src: url("/fonts/content.woff") format("woff");
+}
+@font-face {
+    font-family: ApercuBold;
+    src: url("/fonts/apercu-bold-pro.woff") format("woff");
+}

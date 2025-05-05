@@ -13,10 +13,15 @@
         "devDeploy": "npm run build && git add . && git commit -m 'devDeploy' && git push origin main"
     },
     "dependencies": {
+        "@radix-ui/react-avatar": "^1.1.7",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
         "lucide-react": "^0.469.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-router-dom": "^7.1.0",
+        "tailwind-merge": "^3.2.0",
+        "tailwindcss-animate": "^1.0.7",
         "vite-plugin-image-optimizer": "^1.1.8"
     },
     "devDependencies": {

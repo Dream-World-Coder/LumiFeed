@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { AuthProvider } from "./contexts/AuthContext";
 
-import Home from "./pages/Home/Home";
+import Home from "./pages/Home/HomePage";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import ContactForm from "./pages/Contact/ContactForm";
@@ -30,7 +30,8 @@ const App = () => {
             <DarkModeProvider>
                 <Router>
                     <Routes>
-                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/landing-page" element={<LandingPage />} />
+                        <Route path="/" element={<Home />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/contact" element={<Contact />} />
