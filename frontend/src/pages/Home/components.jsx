@@ -181,7 +181,6 @@ export function SelectNews({
     const [contentHeight, setContentHeight] = useState("auto");
     const contentRef = useRef(null);
     const dropdownRef = useRef(null);
-    const { isDark } = useDarkMode();
 
     const categories = [
         "Trending",
@@ -323,7 +322,7 @@ export function SelectNews({
                 ref={dropdownRef}
             >
                 <div
-                    className="w-full p-4 bg-[#F8F2E2] dark:bg-[#171717] border border-[#D8D2C2] dark:border-[#333] rounded-lg flex justify-between items-center cursor-pointer shadow-sm"
+                    className="w-full p-4 bg-[#F8F2E2] dark:text-neutral-400 dark:bg-[#171717] border border-[#D8D2C2] dark:border-[#333] rounded-lg flex justify-between items-center cursor-pointer shadow-sm"
                     onClick={() => setIsSourceOpen(!isSourceOpen)}
                 >
                     <span className="font-medium">{selectedSource}</span>
@@ -412,10 +411,14 @@ export function InfoContainer() {
 
     return (
         <div
-            className="w-full bg-[#F1EDE0] flex flex-col justify-center items-center
-            text-center rounded-lg px-4 py-8 text-lg font-poppins"
+            className="w-full bg-[#F1EDE0] dark:bg-[#222] dark:text-neutral-300 flex flex-col justify-center items-center
+            text-center rounded-lg px-4 py-8 text-base font-poppins"
         >
-            <BookSvg fillClr="#000000" width="350px" height="350px" />
+            <BookSvg
+                fillClr={isDark ? "#fff" : "#000"}
+                width="350px"
+                height="350px"
+            />
             Select any news agency and a news category to fetch news.
             <br /> That’s it! Now, read peacefully without any distractions or
             ads.
@@ -512,12 +515,12 @@ export function Footer({ currentUser }) {
     const [year] = useState(new Date().getFullYear());
 
     return (
-        <footer className="bg-[#d8d2c2] py-6 px-4 w-full mt-16 dark:invert">
+        <footer className="bg-[#d8d2c2] py-6 px-4 w-full mt-16 dark:bg-[#222]">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-start">
                     {/* Logo */}
                     <div className="mb-6 md:mb-0">
-                        <h2 className="text-5xl font-dahlia text-stone-700">
+                        <h2 className="text-5xl font-dahlia text-stone-700 dark:text-neutral-300">
                             LumiFeed
                         </h2>
                     </div>
@@ -530,7 +533,7 @@ export function Footer({ currentUser }) {
                                 <li className="hover:underline decoration-2 underline-offset-4">
                                     <a
                                         href="mailto:lumifeed101@gmail.com"
-                                        className="text-stone-700"
+                                        className="text-stone-700 dark:text-neutral-300"
                                     >
                                         Email
                                     </a>
@@ -540,7 +543,7 @@ export function Footer({ currentUser }) {
                                         href="https://github.com/Dream-World-Coder/LumiFeed"
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="text-stone-700"
+                                        className="text-stone-700 dark:text-neutral-300"
                                     >
                                         Github
                                     </a>
@@ -552,7 +555,10 @@ export function Footer({ currentUser }) {
                         <div>
                             <ul className="space-y-2">
                                 <li className="hover:underline decoration-2 underline-offset-4">
-                                    <a href="/" className="text-stone-700">
+                                    <a
+                                        href="/"
+                                        className="text-stone-700 dark:text-neutral-300"
+                                    >
                                         Home
                                     </a>
                                 </li>
@@ -560,21 +566,24 @@ export function Footer({ currentUser }) {
                                     <li className="hover:underline decoration-2 underline-offset-4">
                                         <a
                                             href={`/profile`}
-                                            className="text-stone-700"
+                                            className="text-stone-700 dark:text-neutral-300"
                                         >
                                             Profile
                                         </a>
                                     </li>
                                 )}
                                 <li className="hover:underline decoration-2 underline-offset-4">
-                                    <a href="/about" className="text-stone-700">
+                                    <a
+                                        href="/about"
+                                        className="text-stone-700 dark:text-neutral-300"
+                                    >
                                         About
                                     </a>
                                 </li>
                                 <li className="hover:underline decoration-2 underline-offset-4">
                                     <a
                                         href="/contact"
-                                        className="text-stone-700"
+                                        className="text-stone-700 dark:text-neutral-300"
                                     >
                                         Contact
                                     </a>
@@ -585,7 +594,7 @@ export function Footer({ currentUser }) {
                 </div>
 
                 {/* Copyright */}
-                <div className="mt-8 pt-4 border-t border-[#c8c2b2] text-stone-700 text-sm flex justify-between items-center">
+                <div className="mt-8 pt-4 border-t border-[#c8c2b2] dark:border-[#333] text-stone-700 dark:text-neutral-300 text-sm flex justify-between items-center">
                     <div>Copyright © {year} Lumifeed</div>
                     <div className="flex gap-2">
                         <button className="bg-stone-700 text-white p-2 rounded-full hover:bg-stone-800">
@@ -604,7 +613,7 @@ export function Footer({ currentUser }) {
                                 />
                             </svg>
                         </button>
-                        <button className="bg-stone-700 text-white p-2 rounded-full hover:bg-stone-800">
+                        <button className="bg-stone-700 text-white p-2 rounded-full hover:bg-stone-800 dark:hover:bg-stone-600">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-4 w-4"
