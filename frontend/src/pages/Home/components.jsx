@@ -83,7 +83,7 @@ export function Header({
                                         key={index}
                                         onClick={() => navigate(link.href)}
                                         className={`text-neutral-600 hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-[#fff]
-                                            box-content px-3 py-1 rounded-lg text-base font-poppins`}
+                                            box-content px-3 py-1 rounded-lg text-sm font-poppins`}
                                     >
                                         {link.href !== "/profile" ? (
                                             link.name
@@ -150,6 +150,13 @@ export function Header({
                                     {link.name}
                                 </button>
                             ))}
+                            <button onClick={toggleDarkMode}>
+                                {isDark ? (
+                                    <Sun size={20} />
+                                ) : (
+                                    <Moon size={20} />
+                                )}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -203,11 +210,10 @@ export function SelectNews({
         "CNN",
         "The New York Times",
         "The Guardian",
-        "The Washington Post",
-        "Al Jazeera",
-        "The Times of India",
-        "NDTV",
-        "Hindustan Times",
+        // "The Washington Post",
+        // "The Times of India",
+        // "NDTV",
+        // "Hindustan Times",
     ];
 
     useEffect(() => {
@@ -243,7 +249,7 @@ export function SelectNews({
                     className="flex justify-between items-center px-4 py-2 cursor-pointer"
                     onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                 >
-                    <h2 className="text-4xl text-black dark:text-white font-serif font-semibold">
+                    <h2 className="text-2xl md:text-4xl text-black dark:text-white font-serif font-semibold">
                         Select News Category
                     </h2>
                     <button className="h-8 w-8 flex items-center justify-center rounded-full transition-all duration-300">
@@ -296,7 +302,7 @@ export function SelectNews({
                                             parseInt(e.target.value) || 0,
                                         )
                                     }
-                                    className="w-full sm:w-32 px-4 py-2 border border-[#D8D2C2] dark:border-[#333] rounded-full focus:outline-none focus:ring-2 focus:ring-[#D8D2C2] dark:focus:ring-[#333] transition-all dark:bg-[#171717]"
+                                    className="w-32 px-4 py-2 border border-[#D8D2C2] dark:border-[#333] rounded-full focus:outline-none focus:ring-2 focus:ring-[#D8D2C2] dark:focus:ring-[#333] transition-all dark:bg-[#171717]"
                                 />
                                 <div className="flex items-center gap-2">
                                     <button
@@ -322,7 +328,7 @@ export function SelectNews({
                 ref={dropdownRef}
             >
                 <div
-                    className="w-full p-4 bg-[#F8F2E2] dark:text-neutral-400 dark:bg-[#171717] border border-[#D8D2C2] dark:border-[#333] rounded-lg flex justify-between items-center cursor-pointer shadow-sm"
+                    className="w-full px-4 py-2 md:px-4 md:py-4 bg-[#F8F2E2] dark:text-neutral-400 dark:bg-[#171717] border border-[#D8D2C2] dark:border-[#333] rounded-lg flex justify-between items-center cursor-pointer shadow-sm"
                     onClick={() => setIsSourceOpen(!isSourceOpen)}
                 >
                     <span className="font-medium">{selectedSource}</span>
@@ -412,19 +418,17 @@ export function InfoContainer() {
     return (
         <div
             className="w-full bg-[#F1EDE0] dark:bg-[#222] dark:text-neutral-300 flex flex-col justify-center items-center
-            text-center rounded-lg px-4 py-8 text-base font-poppins"
+            text-center rounded-lg px-4 py-8 text-sm md:text-base font-poppins"
         >
             <BookSvg
                 fillClr={isDark ? "#fff" : "#000"}
-                width="350px"
-                height="350px"
+                width={window.innerWidth > 768 ? "350px" : "250px"}
+                height={window.innerWidth > 768 ? "350px" : "250px"}
             />
-            Select any news agency and a news category to fetch news.
-            <br /> That’s it! Now, read peacefully without any distractions or
-            ads.
-            <br />
-            Log in to unlock many features, such as high-quality summaries
-            <br /> of each article and save articles in collections.
+            Select any news agency and a news category to fetch news. That’s it!
+            Now, read peacefully without any distractions or ads. Log in to
+            unlock many features, such as high-quality summaries of each article
+            and save articles in collections.
         </div>
     );
 }
@@ -434,7 +438,7 @@ export function NewsList({ news: articles, handleArticleClick, loading }) {
     const skeletonItems = Array(4).fill(0);
 
     return (
-        <div className="space-y-2">
+        <div className="space-y-4">
             {loading &&
                 skeletonItems.map((_, index) => (
                     <div key={index} className="rounded-lg border p-2 z-10">
@@ -459,16 +463,16 @@ export function NewsList({ news: articles, handleArticleClick, loading }) {
                         key={index}
                         className="rounded-lg border p-2 hover:shadow-md transition-shadow"
                     >
-                        <h3 className="text-base font-poppins mb-1 dark:text-gray-50">
+                        <h3 className="text-base font-poppins leading-tight mb-3 md:mb-2 dark:text-gray-50">
                             {article.title}
                         </h3>
                         {article.subtitle && (
-                            <p className="text-sm mb-4 dark:text-gray-400">
+                            <p className="text-sm mb-4 leading-tight dark:text-gray-400">
                                 {article.subtitle}
                             </p>
                         )}
-                        <div className="flex justify-between items-center">
-                            <div className="flex gap-8 items-center justify-center">
+                        <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center">
+                            <div className="flex gap-8 mb-4 md:mb-0 items-center justify-between md:justify-center">
                                 <div className="text-xs dark:text-gray-400">
                                     {article.date || ""}
                                 </div>
@@ -491,6 +495,7 @@ export function NewsList({ news: articles, handleArticleClick, loading }) {
                                     <ExternalLink size={16} />
                                 </a>
                             </div>
+
                             <button
                                 data-url={article.url}
                                 onClick={(e) => {

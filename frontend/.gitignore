@@ -26,3 +26,4 @@ claude-landing-page/
 stats.html
 pnpm-lock.yaml
 #dist
+.en*

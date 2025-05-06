@@ -12,6 +12,7 @@ import { useDarkMode } from "../../contexts/DarkModeContext";
 
 /*
 /saved : /profile
+in case of env in vite always have to add VITE_ prefix to every variable
 */
 export default function LumiFeed() {
     const [numberOfNews, setNumberOfNews] = useState(25);
@@ -35,7 +36,8 @@ export default function LumiFeed() {
     const handleNewsFetch = () => {
         setIsLoading(true);
         let newsApiUrl =
-            `http://127.0.0.1:8000/api/fetch/news?news_agency=${selectedSource.toLowerCase().replace(/\s+/g, "")}` +
+            `${import.meta.env.VITE_BACKEND_URL}/api/fetch/news` +
+            `?news_agency=${selectedSource.toLowerCase().replace(/\s+/g, "")}` +
             `&news_type=${selectedCategory.toLowerCase()}` +
             `&news_count=${numberOfNews}`;
 
@@ -47,8 +49,8 @@ export default function LumiFeed() {
                 return res.json();
             })
             .then((data) => {
+                // console.log(data);
                 setNews(JSON.parse(data.news_list));
-                // console.log(data.news_list);
             })
             .catch((e) => {
                 console.error(e);
@@ -65,7 +67,9 @@ export default function LumiFeed() {
 
     const handleArticleClick = (url) => {
         setArticleLoading(true);
-        const apiUrl = `http://127.0.0.1:8000/api/fetch/article?url=${encodeURIComponent(url)}`;
+        const apiUrl =
+            `${import.meta.env.VITE_BACKEND_URL}/api/fetch/article` +
+            `?url=${encodeURIComponent(url)}`;
 
         fetch(apiUrl)
             .then((res) => {
@@ -102,7 +106,9 @@ export default function LumiFeed() {
             <Header />
 
             {/* container */}
-            <div className={`max-w-7xl mx-auto min-h-[calc(80vh)]`}>
+            <div
+                className={`max-w-7xl px-4 md:px-0 mx-auto min-h-[calc(80vh)]`}
+            >
                 {articleLoading && (
                     <div className="fixed top-0 left-0 h-screen w-full inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                         <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
