@@ -52,7 +52,11 @@ export default function LumiFeed() {
             })
             .catch((e) => {
                 console.error(e);
-                toast.error(e.toString());
+                if (e instanceof TypeError) {
+                    toast.error("Server unreachable");
+                } else {
+                    toast.error(e.message);
+                }
             })
             .finally(() => {
                 setIsLoading(false);

@@ -333,14 +333,14 @@ export function SelectNews({
                 </div>
 
                 {isSourceOpen && (
-                    <div className="absolute z-10 mt-2 pl-4 pb-4 w-full bg-[#000] border border-[#222] rounded-lg shadow-lg overflow-hidden transition-all duration-300 opacity-100 scale-100 origin-top">
-                        <div className="p-2 text-gray-400 border-b border-[#171717]">
+                    <div className="absolute z-10 mt-2 px-4 pb-4 w-full bg-[#F8F2E2] dark:bg-[#000] border border-[#D8D2C2] dark:border-[#222] rounded-lg shadow-lg overflow-hidden transition-all duration-300 opacity-100 scale-100 origin-top">
+                        <div className="p-2 text-gray-400 border-b border-[#D8D2C2] dark:border-[#171717]">
                             --select--
                         </div>
                         {newsSources.map((source) => (
                             <div
                                 key={source}
-                                className={`p-2 cursor-pointer hover:bg-[#171717] flex items-center transition-colors ${selectedSource === source ? "text-white" : "text-gray-300"}`}
+                                className={`p-2 cursor-pointer hover:bg-[#d8d2c2] dark:hover:bg-[#171717] flex items-center transition-colors ${selectedSource === source ? "text-black dark:text-white" : "text-neutral-700 dark:text-gray-300"}`}
                                 onClick={() => {
                                     setSelectedSource(source);
                                     setIsSourceOpen(false);
