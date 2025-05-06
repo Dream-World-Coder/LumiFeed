@@ -104,7 +104,7 @@ export default function LumiFeed() {
             {/* container */}
             <div className={`max-w-7xl mx-auto min-h-[calc(80vh)]`}>
                 {articleLoading && (
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="fixed top-0 left-0 h-screen w-full inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                         <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                     </div>
                 )}
