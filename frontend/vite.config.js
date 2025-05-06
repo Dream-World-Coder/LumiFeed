@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import compression from "vite-plugin-compression";
 import { visualizer } from "rollup-plugin-visualizer";
+import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,13 +14,16 @@ export default defineConfig({
         }),
     ],
     server: {
-        proxy: {
-            "/api": {
-                target: "http://127.0.0.1:8000",
-                changeOrigin: true,
-            },
-        },
+        port: 5173,
     },
+    // server: {
+    //     proxy: {
+    //         "/api": {
+    //             target: "http://127.0.0.1:8000",
+    //             changeOrigin: true,
+    //         },
+    //     },
+    // },
     build: {
         outDir: "dist",
         sourcemap: true,
@@ -29,6 +33,11 @@ export default defineConfig({
                     vendor: ["react", "react-dom"],
                 },
             },
+        },
+    },
+    resolve: {
+        alias: {
+            "@": path.resolve(__dirname, "./src"),
         },
     },
 });

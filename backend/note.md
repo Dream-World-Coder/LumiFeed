@@ -33,3 +33,5 @@ gunicorn run:app --bind 192.168.131.238:8000 --log-level debug
 ```
 
 web: gunicorn run:app --workers 4 --threads 3
+
+npx tailwindcss -i ./app/static/css/src/input.css -o ./app/static/css/output.css --watch

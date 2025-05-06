@@ -15,18 +15,18 @@ export const useAuth = () => {
 
 // Provider component that wraps your app and makes auth available to any child component
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState(null);
     const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Check if user is logged in when the component mounts
+    // Check if currentUser is logged in when the component mounts
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
-        const storedUser = localStorage.getItem("user");
+        const storedUser = localStorage.getItem("currentUser");
 
         if (storedToken && storedUser) {
             setToken(storedToken);
-            setUser(JSON.parse(storedUser));
+            setCurrentUser(JSON.parse(storedUser));
         }
         setLoading(false);
     }, []);
@@ -50,10 +50,10 @@ export const AuthProvider = ({ children }) => {
 
             // Store user data and token
             localStorage.setItem("token", data.access_token);
-            localStorage.setItem("user", JSON.stringify(data.user));
+            localStorage.setItem("currentUser", JSON.stringify(data.user));
 
             setToken(data.access_token);
-            setUser(data.user);
+            setCurrentUser(data.user);
 
             return { success: true };
         } catch (error) {
@@ -64,12 +64,12 @@ export const AuthProvider = ({ children }) => {
     // Logout method
     const logout = () => {
         localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        localStorage.removeItem("currentUser");
         setToken(null);
-        setUser(null);
+        setCurrentUser(null);
     };
 
-    // Check if user is authenticated
+    // Check if currentUser is authenticated
     const isAuthenticated = () => {
         return !!token;
     };
@@ -107,7 +107,7 @@ export const AuthProvider = ({ children }) => {
 
     // Value object that will be passed to provider
     const value = {
-        user,
+        currentUser,
         token,
         loading,
         login,
