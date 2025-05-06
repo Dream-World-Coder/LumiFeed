@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search, Menu, X, LogIn, Moon, Sun } from "lucide-react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 import AppLogo from "../Logo";
 
 const Header = () => {
     // const { isDark, setIsDark } = useDarkMode();
+    const navigate = useNavigate();
     const { isDark, toggleDarkMode } = useDarkMode();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -43,13 +45,14 @@ const Header = () => {
                         {/* Desktop Navigation */}
                         <nav className="hidden md:flex items-center space-x-4">
                             {headerLinks.map((item, index) => (
-                                <a
+                                <div
                                     key={index}
+                                    onClick={() => navigate(item.href)}
                                     href={item.href}
                                     className={`${isDark ? "text-stone-200 hover:bg-stone-400/40" : "text-[#8B4513] hover:bg-cream-dark/40"} rounded-lg box-content px-2 py-1 font-sentient`}
                                 >
                                     {item.name}
-                                </a>
+                                </div>
                             ))}
                             <button
                                 className="block cursor-pointer hover:rotate-[0deg] transition-all duration-500"
@@ -138,13 +141,13 @@ const Header = () => {
                 >
                     <div className="px-4 py-2 space-y-4 pr-10">
                         {headerLinks.map((item, index) => (
-                            <a
+                            <div
                                 key={index}
-                                href={item.href}
+                                onClick={() => navigate(item.href)}
                                 className={`${isDark ? "text-stone-200 hover:text-stone-400" : "text-[#8B4513] hover:text-[#8B4513]/80"} font-sentient`}
                             >
                                 {item.name}
-                            </a>
+                            </div>
                         ))}
                         <a
                             href="/auth/login"
