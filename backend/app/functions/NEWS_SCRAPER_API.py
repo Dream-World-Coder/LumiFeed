@@ -121,7 +121,7 @@ class NewsScrapeApi:
 
                 if count == len(news_list) - 1:
                     news_title = "You have caught up to all headlines for now. visit other sections/categories"
-                    news_link = "javascript:void(0);"
+                    news_link = "#"
 
                 zipped_json = {
                     "title":news_title,

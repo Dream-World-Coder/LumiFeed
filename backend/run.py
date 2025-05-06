@@ -18,5 +18,5 @@ if __name__ == "__main__":
   scheduler.start() # debug should be False for this, else it starts many times when reloading for debug mode
   # thats why turning off the debug mode for all
   port = int(os.environ.get("PORT", 8000))
-  app.run(port=port)
-  # app.run(host="0.0.0.0", port=port)
+  # app.run(port=port)
+  app.run(host="0.0.0.0", port=port)
