@@ -60,7 +60,6 @@ const NewsArticle = () => {
                                 height={26}
                                 backgroundColor="#8B4513"
                                 letterColor="#FFFFFF"
-                                className={`${isDark ? "invert" : "invert-0"}`}
                             />
                             <span className="ml-2 text-xl font-dahlia">
                                 LumiFeed

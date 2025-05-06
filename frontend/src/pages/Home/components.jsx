@@ -9,6 +9,8 @@ import {
     ExternalLink,
     Clock,
     Bookmark,
+    Sun,
+    Moon,
 } from "lucide-react";
 import PropTypes from "prop-types";
 
@@ -16,17 +18,19 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { useAuth } from "../../contexts/AuthContext";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 import SearchBar from "../../components/SearchBar";
 import AppLogo from "../../components/Logo";
 
 export function Header({
     exclude = [""],
     abs = false,
-    darkBg = "dark:bg-[#222]",
+    darkBg = "dark:bg-[#282828]",
 }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { currentUser } = useAuth();
     const navigate = useNavigate();
+    const { isDark, toggleDarkMode } = useDarkMode();
 
     let navLinks = [
         { name: "Home", href: "/home" },
@@ -45,7 +49,7 @@ export function Header({
     return (
         <header
             className={`${abs ? "absolute" : "fixed"} w-full top-0 z-50
-                bg-[#d8d2c2] ${darkBg} dark:text-white`}
+                bg-[#d8d2c2] ${darkBg} dark:text-white border-b ${isDark ? "border-[#222]" : "border-[#b8b2a2]"}`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-0 py-3">
                 <nav className="flex items-center justify-between">
@@ -59,10 +63,11 @@ export function Header({
                                 width={32}
                                 height={32}
                                 backgroundColor="#8B4513"
-                                letterColor="#FFFFFF"
-                                // className={`${isDark ? "invert" : "invert-0"}`}
+                                letterColor="#fff"
                             />
-                            <span className="font-dahlia text-2xl text-[#4a4947]">
+                            <span
+                                className={`font-dahlia text-2xl ${isDark ? "text-[f8f8f8]" : "text-[#4a4947]"}`}
+                            >
                                 LumiFeed
                             </span>
                         </div>
@@ -77,7 +82,7 @@ export function Header({
                                     <button
                                         key={index}
                                         onClick={() => navigate(link.href)}
-                                        className={`text-neutral-600 hover:text-neutral-800 dark:text-[#f8f8f8] dark:hover:text-[#fff]
+                                        className={`text-neutral-600 hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-[#fff]
                                             box-content px-3 py-1 rounded-lg text-base font-poppins`}
                                     >
                                         {link.href !== "/profile" ? (
@@ -100,6 +105,9 @@ export function Header({
                                     </button>
                                 ),
                         )}
+                        <button onClick={toggleDarkMode}>
+                            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                        </button>
                     </div>
 
                     <div className="md:hidden flex items-center justify-center gap-2">
@@ -173,6 +181,7 @@ export function SelectNews({
     const [contentHeight, setContentHeight] = useState("auto");
     const contentRef = useRef(null);
     const dropdownRef = useRef(null);
+    const { isDark } = useDarkMode();
 
     const categories = [
         "Trending",
@@ -230,12 +239,12 @@ export function SelectNews({
     return (
         <div className="flex flex-col md:flex-row gap-4 w-full py-4 mb-12">
             {/* News Category Selector */}
-            <div className="w-full md:w-3/4 border border-[#D8D2C2] rounded-lg overflow-hidden bg-transparent">
+            <div className="w-full md:w-3/4 border border-[#D8D2C2] dark:border-[#333] rounded-lg overflow-hidden bg-transparent">
                 <div
                     className="flex justify-between items-center px-4 py-2 cursor-pointer"
                     onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                 >
-                    <h2 className="text-4xl text-black font-[ApercuBold] tracking-tight">
+                    <h2 className="text-4xl text-black dark:text-white font-[ApercuBold] tracking-tight">
                         Select News Category
                     </h2>
                     <button className="h-8 w-8 flex items-center justify-center rounded-full transition-all duration-300">
@@ -260,7 +269,11 @@ export function SelectNews({
                             {categories.map((category) => (
                                 <button
                                     key={category}
-                                    className={`${selectedCategory === category ? "bg-[#B17457] hover:bg-[#B17457] text-white" : "bg-[#D8D2C2] hover:bg-[#C8C2B2]"}
+                                    className={`${
+                                        selectedCategory === category
+                                            ? "bg-[#B17457] hover:bg-[#B17457] text-white dark:bg-[#333]"
+                                            : "bg-[#D8D2C2] hover:bg-[#C8C2B2] dark:bg-[#222] dark:hover:bg-[#252525]"
+                                    }
                                         py-3 px-4 rounded text-center transition-colors font-poppins text-sm`}
                                     onClick={() =>
                                         setSelectedCategory(category)
@@ -284,17 +297,17 @@ export function SelectNews({
                                             parseInt(e.target.value) || 0,
                                         )
                                     }
-                                    className="w-full sm:w-32 px-4 py-2 border border-[#D8D2C2] rounded-full focus:outline-none focus:ring-2 focus:ring-[#D8D2C2] transition-all"
+                                    className="w-full sm:w-32 px-4 py-2 border border-[#D8D2C2] dark:border-[#333] rounded-full focus:outline-none focus:ring-2 focus:ring-[#D8D2C2] dark:focus:ring-[#333] transition-all dark:bg-[#171717]"
                                 />
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={handleNewsFetch}
-                                        className="px-4 py-1 bg-[#D25769] hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins"
+                                        className="px-4 py-1 bg-[#D25769] dark:bg-rose-600 hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins"
                                         disabled={loading}
                                     >
                                         {loading ? "Fetching..." : "Fetch"}
                                     </button>
-                                    <button className="px-4 py-1 bg-[#D25769] hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins">
+                                    <button className="px-4 py-1 bg-[#D25769] dark:bg-rose-600 hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins">
                                         Reset
                                     </button>
                                 </div>
@@ -310,7 +323,7 @@ export function SelectNews({
                 ref={dropdownRef}
             >
                 <div
-                    className="w-full p-4 bg-[#F8F2E2] border border-[#D8D2C2] rounded-lg flex justify-between items-center cursor-pointer shadow-sm"
+                    className="w-full p-4 bg-[#F8F2E2] dark:bg-[#171717] border border-[#D8D2C2] dark:border-[#333] rounded-lg flex justify-between items-center cursor-pointer shadow-sm"
                     onClick={() => setIsSourceOpen(!isSourceOpen)}
                 >
                     <span className="font-medium">{selectedSource}</span>
@@ -321,7 +334,7 @@ export function SelectNews({
                 </div>
 
                 {isSourceOpen && (
-                    <div className="absolute z-10 mt-2 w-full bg-[#000] border border-[#222] rounded-lg shadow-lg overflow-hidden transition-all duration-300 opacity-100 scale-100 origin-top">
+                    <div className="absolute z-10 mt-2 pl-4 pb-4 w-full bg-[#000] border border-[#222] rounded-lg shadow-lg overflow-hidden transition-all duration-300 opacity-100 scale-100 origin-top">
                         <div className="p-2 text-gray-400 border-b border-[#171717]">
                             --select--
                         </div>
@@ -395,6 +408,8 @@ BookSvg.propTypes = {
 };
 
 export function InfoContainer() {
+    const { isDark } = useDarkMode();
+
     return (
         <div
             className="w-full bg-[#F1EDE0] flex flex-col justify-center items-center
@@ -441,21 +456,23 @@ export function NewsList({ news: articles, handleArticleClick, loading }) {
                         key={index}
                         className="rounded-lg border p-2 hover:shadow-md transition-shadow"
                     >
-                        <h3 className="text-base font-poppins mb-1">
+                        <h3 className="text-base font-poppins mb-1 dark:text-gray-50">
                             {article.title}
                         </h3>
                         {article.subtitle && (
-                            <p className="text-sm mb-4">{article.subtitle}</p>
+                            <p className="text-sm mb-4 dark:text-gray-400">
+                                {article.subtitle}
+                            </p>
                         )}
                         <div className="flex justify-between items-center">
                             <div className="flex gap-6 items-center justify-center">
-                                <div className="text-xs">
+                                <div className="text-xs dark:text-gray-400">
                                     {article.date || ""}
                                 </div>
                                 <a
                                     href={article.url}
                                     target="_blank"
-                                    className="text-neutral-800 hover:text-neutral-700 transition-colors"
+                                    className="text-neutral-800 dark:text-neutral-200 hover:text-neutral-700 transition-colors"
                                 >
                                     <ExternalLink size={16} />
                                 </a>
@@ -464,7 +481,7 @@ export function NewsList({ news: articles, handleArticleClick, loading }) {
                                         <Icon
                                             key={i}
                                             size={16}
-                                            className="cursor-pointer text-neutral-800 hover:bg-neutral-200 transition-colors rounded-lg box-content p-1"
+                                            className="cursor-pointer text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-[#000] transition-colors rounded-lg box-content p-1"
                                         />
                                     ))}
                                 </div>
@@ -475,7 +492,7 @@ export function NewsList({ news: articles, handleArticleClick, loading }) {
                                     e.preventDefault();
                                     handleArticleClick(e.target.dataset.url);
                                 }}
-                                className="px-4 py-1 text-sm rounded-lg transition-colors bg-[#D8D2C2] hover:bg-[#C8C2B2]"
+                                className="px-4 py-1 text-sm rounded-lg transition-colors bg-[#D8D2C2] dark:bg-[#000] hover:bg-[#C8C2B2]"
                             >
                                 Read Here
                             </button>
@@ -495,7 +512,7 @@ export function Footer({ currentUser }) {
     const [year] = useState(new Date().getFullYear());
 
     return (
-        <footer className="bg-[#d8d2c2] py-6 px-4 w-full mt-16">
+        <footer className="bg-[#d8d2c2] py-6 px-4 w-full mt-16 dark:invert">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-start">
                     {/* Logo */}

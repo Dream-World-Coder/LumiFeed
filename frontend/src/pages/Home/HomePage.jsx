@@ -8,12 +8,10 @@ import {
     NewsList,
     Footer,
 } from "./components";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 
 /*
 /saved : /profile
-in profile:
-- dark mode
-- bigger font
 */
 export default function LumiFeed() {
     const [numberOfNews, setNumberOfNews] = useState(25);
@@ -28,6 +26,7 @@ export default function LumiFeed() {
     const [loading, setIsLoading] = useState(false);
     const [articleLoading, setArticleLoading] = useState(false);
     const navigate = useNavigate();
+    const { isDark } = useDarkMode();
 
     useEffect(() => {
         localStorage.setItem("newsArticles", JSON.stringify(news));
@@ -93,7 +92,9 @@ export default function LumiFeed() {
     };
 
     return (
-        <section className="pt-16 bg-[#fffcf5] __min-h-screen">
+        <section
+            className={`pt-16 ${isDark ? "bg-[#171717]" : "bg-[#fffcf5]"} __min-h-screen`}
+        >
             <Header />
 
             {/* container */}

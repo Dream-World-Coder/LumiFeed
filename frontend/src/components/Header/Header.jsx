@@ -31,7 +31,6 @@ const Header = () => {
                                     height={28}
                                     backgroundColor="#8B4513"
                                     letterColor="#FFFFFF"
-                                    className={`${isDark ? "invert" : "invert-0"}`}
                                 />
                                 <span
                                     className={`ml-2 text-xl font-dahlia ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
