@@ -1,12 +1,12 @@
 const fonts = {
-    easyRead: { name: "Comfortable", class: "font-reader" },
+    easyRead: { name: "Default", class: "font-sentient" },
+    spectral: {
+        name: "Zodiak",
+        class: "font-zodiak",
+    },
     crimson: {
         name: "Modern",
-        class: "font-sans",
-    },
-    spectral: {
-        name: "Spectral",
-        class: "font-[Spectral]",
+        class: "font-poppins",
     },
 };
 

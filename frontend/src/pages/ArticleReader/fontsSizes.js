@@ -7,12 +7,12 @@ const fontSizes = {
     base: {
         heading: "text-3xl md:text-4xl",
         subheading: "text-lg md:text-xl leading-tight",
-        content: "text-[18px] md:text-[20px] leading-[28px] md:leading-[32px]",
+        content: "text-[18px] md:text-[20px] leading-[28px]",
     },
     lg: {
         heading: "text-4xl md:text-5xl",
         subheading: "text-xl md:text-2xl",
-        content: "text-lg md:text-xl leading-relaxed",
+        content: "text-xl md:text-2xl leading-relaxed",
     },
 };
 

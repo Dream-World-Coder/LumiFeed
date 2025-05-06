@@ -83,55 +83,58 @@ const NewsArticle = () => {
                             <div className="flex items-center space-x-2 border-l border-r px-4 mx-2">
                                 <button
                                     onClick={() => setFontSize("sm")}
-                                    className={`font-[Cinzel] ${fontSize === "sm" ? "font-bold" : ""}`}
+                                    className={`font-serif ${fontSize === "sm" ? "font-bold" : ""}`}
                                 >
                                     A-
                                 </button>
                                 <button
                                     onClick={() => setFontSize("base")}
-                                    className={`font-[Cinzel] ${fontSize === "base" ? "font-bold" : ""}`}
+                                    className={`font-serif ${fontSize === "base" ? "font-bold" : ""}`}
                                 >
                                     A
                                 </button>
                                 <button
                                     onClick={() => setFontSize("lg")}
-                                    className={`font-[Cinzel] ${fontSize === "lg" ? "font-bold" : ""}`}
+                                    className={`font-serif ${fontSize === "lg" ? "font-bold" : ""}`}
                                 >
                                     A+
                                 </button>
                             </div>
 
-                            {/* Font Family Selector */}
-                            <div className="relative">
-                                <button
-                                    onClick={() =>
-                                        setShowFontMenu(!showFontMenu)
-                                    }
-                                    className={`p-2 rounded-md transition-colors ${
-                                        isDark
-                                            ? "hover:bg-gray-800"
-                                            : "hover:bg-[#8B4513]/10"
-                                    }`}
-                                    title="Change Font"
-                                >
-                                    <Type className="w-5 h-5" />
-                                </button>
-
-                                {/* Font Menu Dropdown */}
-                                {showFontMenu && (
-                                    <div
-                                        className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
-                                        ${isDark ? "bg-gray-800" : "bg-white"} ring-1 ring-black ring-opacity-5`}
+                            <div className="flex items-center justify-center gap-1">
+                                {/* Font Family Selector */}
+                                <div className="relative">
+                                    <button
+                                        onClick={() =>
+                                            setShowFontMenu(!showFontMenu)
+                                        }
+                                        className={`p-1 rounded-md transition-colors ${
+                                            isDark
+                                                ? "hover:bg-gray-800"
+                                                : "hover:bg-[#8B4513]/10"
+                                        }`}
+                                        title="Change Font"
                                     >
-                                        {Object.entries(fonts).map(
-                                            ([key, font]) => (
-                                                <button
-                                                    key={key}
-                                                    onClick={() => {
-                                                        setFontFamily(key);
-                                                        setShowFontMenu(false);
-                                                    }}
-                                                    className={`${font.class} block px-4 py-2 text-lg w-full text-left
+                                        <Type className="w-5 h-5" />
+                                    </button>
+
+                                    {/* Font Menu Dropdown */}
+                                    {showFontMenu && (
+                                        <div
+                                            className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1
+                                        ${isDark ? "bg-gray-800" : "bg-white"} ring-1 ring-black ring-opacity-5`}
+                                        >
+                                            {Object.entries(fonts).map(
+                                                ([key, font]) => (
+                                                    <button
+                                                        key={key}
+                                                        onClick={() => {
+                                                            setFontFamily(key);
+                                                            setShowFontMenu(
+                                                                false,
+                                                            );
+                                                        }}
+                                                        className={`${font.class} block px-4 py-2 text-lg w-full text-left
                                                     ${
                                                         fontFamily === key
                                                             ? isDark
@@ -139,30 +142,31 @@ const NewsArticle = () => {
                                                                 : "bg-[#8B4513]/10"
                                                             : ""
                                                     } hover:${isDark ? "bg-gray-700" : "bg-[#8B4513]/10"}`}
-                                                >
-                                                    {font.name}
-                                                </button>
-                                            ),
-                                        )}
-                                    </div>
-                                )}
-                            </div>
+                                                    >
+                                                        {font.name}
+                                                    </button>
+                                                ),
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
 
-                            <button
-                                onClick={() => toggleDarkMode(!isDark)}
-                                className={`p-2 rounded-md transition-colors ${
-                                    isDark
-                                        ? "hover:bg-gray-800"
-                                        : "hover:bg-[#8B4513]/10"
-                                }`}
-                                title="Toggle Dark Mode"
-                            >
-                                {isDark ? (
-                                    <Sun className="w-5 h-5" />
-                                ) : (
-                                    <Moon className="w-5 h-5" />
-                                )}
-                            </button>
+                                <button
+                                    onClick={() => toggleDarkMode(!isDark)}
+                                    className={`p-1 rounded-md transition-colors ${
+                                        isDark
+                                            ? "hover:bg-gray-800"
+                                            : "hover:bg-[#8B4513]/10"
+                                    }`}
+                                    title="Toggle Dark Mode"
+                                >
+                                    {isDark ? (
+                                        <Sun className="w-5 h-5" />
+                                    ) : (
+                                        <Moon className="w-5 h-5" />
+                                    )}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,7 +176,7 @@ const NewsArticle = () => {
             <main className="max-w-4xl mx-auto px-4 pt-24 pb-16">
                 <article>
                     <h1
-                        className={`font-sentient font-bold ${fontSizes[fontSize].heading} mb-6`}
+                        className={`font-serif font-bold ${fontSizes[fontSize].heading} mb-6`}
                     >
                         {heading}
                     </h1>
@@ -190,7 +194,7 @@ const NewsArticle = () => {
                                 isDark ? "bg-gray-800" : "bg-white/40"
                             }`}
                         >
-                            <h3 className="font-[Cinzel] text-xl mb-4">
+                            <h3 className="font-sentient text-xl mb-4">
                                 Article Summary
                             </h3>
                             <p
@@ -217,11 +221,6 @@ const NewsArticle = () => {
                     ></div>
                 </article>
             </main>
-
-            {/* jsx global */}
-            <style>{`
-                @import url("https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;1,400&display=swap");
-            `}</style>
         </div>
     );
 };

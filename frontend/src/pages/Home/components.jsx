@@ -243,7 +243,7 @@ export function SelectNews({
                     className="flex justify-between items-center px-4 py-2 cursor-pointer"
                     onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                 >
-                    <h2 className="text-4xl text-black dark:text-white font-[ApercuBold] tracking-tight">
+                    <h2 className="text-4xl text-black dark:text-white font-serif font-semibold">
                         Select News Category
                     </h2>
                     <button className="h-8 w-8 flex items-center justify-center rounded-full transition-all duration-300">
@@ -468,18 +468,12 @@ export function NewsList({ news: articles, handleArticleClick, loading }) {
                             </p>
                         )}
                         <div className="flex justify-between items-center">
-                            <div className="flex gap-6 items-center justify-center">
+                            <div className="flex gap-8 items-center justify-center">
                                 <div className="text-xs dark:text-gray-400">
                                     {article.date || ""}
                                 </div>
-                                <a
-                                    href={article.url}
-                                    target="_blank"
-                                    className="text-neutral-800 dark:text-neutral-200 hover:text-neutral-700 transition-colors"
-                                >
-                                    <ExternalLink size={16} />
-                                </a>
-                                <div className="flex items-center gap-2">
+
+                                <div className="flex items-center gap-1">
                                     {[Clock, Bookmark].map((Icon, i) => (
                                         <Icon
                                             key={i}
@@ -488,6 +482,14 @@ export function NewsList({ news: articles, handleArticleClick, loading }) {
                                         />
                                     ))}
                                 </div>
+
+                                <a
+                                    href={article.url}
+                                    target="_blank"
+                                    className="text-neutral-800 dark:text-neutral-200 hover:text-neutral-700 transition-colors"
+                                >
+                                    <ExternalLink size={16} />
+                                </a>
                             </div>
                             <button
                                 data-url={article.url}
