@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
@@ -26,6 +26,7 @@ export default function LumiFeed() {
     });
     // const [searchResults, setSearchResults] = useState([]);
     const [loading, setIsLoading] = useState(false);
+    const [articleLoading, setArticleLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -60,7 +61,7 @@ export default function LumiFeed() {
     };
 
     const handleArticleClick = (url) => {
-        setIsLoading(true);
+        setArticleLoading(true);
         const apiUrl = `http://127.0.0.1:8000/api/fetch/article?url=${encodeURIComponent(url)}`;
 
         fetch(apiUrl)
@@ -87,7 +88,7 @@ export default function LumiFeed() {
                 toast.error(e.toString());
             })
             .finally(() => {
-                setIsLoading(false);
+                setArticleLoading(false);
             });
     };
 
@@ -96,7 +97,12 @@ export default function LumiFeed() {
             <Header />
 
             {/* container */}
-            <div className="max-w-7xl mx-auto min-h-[calc(80vh)]">
+            <div className={`max-w-7xl mx-auto min-h-[calc(80vh)]`}>
+                {articleLoading && (
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                )}
                 <SelectNews
                     news={news}
                     setNews={setNews}
@@ -106,6 +112,7 @@ export default function LumiFeed() {
                     setSelectedCategory={setSelectedCategory}
                     selectedSource={selectedSource}
                     setSelectedSource={setSelectedSource}
+                    loading={loading}
                     handleNewsFetch={handleNewsFetch}
                 />
 
@@ -115,6 +122,7 @@ export default function LumiFeed() {
                             <NewsList
                                 news={news}
                                 handleArticleClick={handleArticleClick}
+                                loading={loading}
                             />
                         ) : (
                             <InfoContainer />

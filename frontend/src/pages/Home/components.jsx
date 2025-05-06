@@ -11,9 +11,12 @@ import {
     Bookmark,
 } from "lucide-react";
 import PropTypes from "prop-types";
+
+import { Skeleton } from "@/components/ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import { useAuth } from "../../contexts/AuthContext";
 import SearchBar from "../../components/SearchBar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AppLogo from "../../components/Logo";
 
 export function Header({
@@ -52,13 +55,6 @@ export function Header({
                             onClick={() => navigate("/")}
                             className="flex items-center justify-center gap-2"
                         >
-                            {/* <div className="rounded-xl bg-white size-8 overflow-hidden box-content p-1">
-                                <img
-                                    src="/favicon.png"
-                                    alt=""
-                                    className="object-cover size-full"
-                                />
-                            </div> */}
                             <AppLogo
                                 width={32}
                                 height={32}
@@ -169,6 +165,7 @@ export function SelectNews({
     selectedSource,
     setSelectedSource,
 
+    loading,
     handleNewsFetch,
 }) {
     const [isCategoryOpen, setIsCategoryOpen] = useState(true);
@@ -293,8 +290,9 @@ export function SelectNews({
                                     <button
                                         onClick={handleNewsFetch}
                                         className="px-4 py-1 bg-[#D25769] hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins"
+                                        disabled={loading}
                                     >
-                                        Fetch
+                                        {loading ? "Fetching..." : "Fetch"}
                                     </button>
                                     <button className="px-4 py-1 bg-[#D25769] hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins">
                                         Reset
@@ -357,6 +355,7 @@ SelectNews.propTypes = {
     setNumberOfNews: PropTypes.func,
     setSelectedCategory: PropTypes.func,
     setSelectedSource: PropTypes.func,
+    loading: PropTypes.bool,
     handleNewsFetch: PropTypes.func,
 };
 
@@ -413,59 +412,82 @@ export function InfoContainer() {
 }
 InfoContainer.propTypes = { currentUser: PropTypes.object };
 
-export function NewsList({ news: articles, handleArticleClick }) {
+export function NewsList({ news: articles, handleArticleClick, loading }) {
+    const skeletonItems = Array(4).fill(0);
+
     return (
         <div className="space-y-2">
-            {articles.map((article, index) => (
-                <article
-                    key={index}
-                    className={`rounded-lg border p-2 hover:shadow-md transition-shadow`}
-                >
-                    <h3 className={`text-base font-poppins mb-2`}>
-                        {article.title}
-                    </h3>
-                    <div className="flex justify-between items-center">
-                        <button
-                            data-url={article.url}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleArticleClick(e.target.dataset.url);
-                            }}
-                            className={`px-2 py-1 text-sm rounded-md transition-colors bg-[#D8D2C2] hover:bg-[#C8C2B2]`}
-                        >
-                            Read Here
-                        </button>
-
-                        {/*  */}
-                        <div className="flex gap-6 items-center justify-center">
-                            <div className="text-xs">{article.date || ""}</div>
-                            <a
-                                href={article.url}
-                                target="_blank"
-                                className={`text-neutral-800 hover:text-neutral-700 transition-colors`}
-                            >
-                                <ExternalLink size={16} />
-                            </a>
-
-                            <div className="flex items-center gap-2">
-                                {[Clock, Bookmark].map((Icon, i) => (
-                                    <Icon
-                                        key={i}
-                                        size={16}
-                                        className={`cursor-pointer text-neutral-800 hover:bg-neutral-200 transition-colors rounded-lg box-content p-1`}
-                                    />
-                                ))}
+            {loading &&
+                skeletonItems.map((_, index) => (
+                    <div key={index} className="rounded-lg border p-2 z-10">
+                        <Skeleton className="h-6 w-3/4 mb-1" />
+                        <Skeleton className="h-4 w-5/6 mb-4" />
+                        <div className="flex justify-between items-center">
+                            <Skeleton className="h-8 w-24" />
+                            <div className="flex gap-6 items-center justify-center">
+                                <Skeleton className="h-4 w-16" />
+                                <Skeleton className="h-6 w-6 rounded-full" />
+                                <div className="flex items-center gap-2">
+                                    <Skeleton className="h-6 w-6 rounded-full" />
+                                    <Skeleton className="h-6 w-6 rounded-full" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </article>
-            ))}
+                ))}
+            {!loading &&
+                articles.map((article, index) => (
+                    <article
+                        key={index}
+                        className="rounded-lg border p-2 hover:shadow-md transition-shadow"
+                    >
+                        <h3 className="text-base font-poppins mb-1">
+                            {article.title}
+                        </h3>
+                        {article.subtitle && (
+                            <p className="text-sm mb-4">{article.subtitle}</p>
+                        )}
+                        <div className="flex justify-between items-center">
+                            <div className="flex gap-6 items-center justify-center">
+                                <div className="text-xs">
+                                    {article.date || ""}
+                                </div>
+                                <a
+                                    href={article.url}
+                                    target="_blank"
+                                    className="text-neutral-800 hover:text-neutral-700 transition-colors"
+                                >
+                                    <ExternalLink size={16} />
+                                </a>
+                                <div className="flex items-center gap-2">
+                                    {[Clock, Bookmark].map((Icon, i) => (
+                                        <Icon
+                                            key={i}
+                                            size={16}
+                                            className="cursor-pointer text-neutral-800 hover:bg-neutral-200 transition-colors rounded-lg box-content p-1"
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                            <button
+                                data-url={article.url}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleArticleClick(e.target.dataset.url);
+                                }}
+                                className="px-4 py-1 text-sm rounded-lg transition-colors bg-[#D8D2C2] hover:bg-[#C8C2B2]"
+                            >
+                                Read Here
+                            </button>
+                        </div>
+                    </article>
+                ))}
         </div>
     );
 }
 NewsList.propTypes = {
     news: PropTypes.array,
-    isDark: PropTypes.bool,
+    loading: PropTypes.bool,
     handleArticleClick: PropTypes.func,
 };
 
