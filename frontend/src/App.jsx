@@ -17,6 +17,8 @@ import DeleteAccount from "./pages/Auth/DeleteAccount";
 import VerifyEmail from "./pages/Auth/VerifyEmail";
 import NotFound from "./pages/404";
 
+import { Toaster } from "@/components/ui/sonner";
+
 import "./App.css";
 
 // I should not use open in new tab for reading articles specially in phones;
@@ -55,6 +57,7 @@ const App = () => {
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Router>
+                <Toaster />
             </DarkModeProvider>
         </AuthProvider>
     );

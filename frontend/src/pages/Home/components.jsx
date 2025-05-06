@@ -1,10 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronDown, Plus, Minus, X, Menu } from "lucide-react";
+import {
+    ChevronDown,
+    Plus,
+    Minus,
+    X,
+    Menu,
+    ExternalLink,
+    Clock,
+    Bookmark,
+} from "lucide-react";
 import PropTypes from "prop-types";
 import { useAuth } from "../../contexts/AuthContext";
 import SearchBar from "../../components/SearchBar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import AppLogo from "../../components/Logo";
 
 export function Header({
     exclude = [""],
@@ -42,13 +52,20 @@ export function Header({
                             onClick={() => navigate("/")}
                             className="flex items-center justify-center gap-2"
                         >
-                            <div className="rounded-xl bg-white size-8 overflow-hidden box-content p-1">
+                            {/* <div className="rounded-xl bg-white size-8 overflow-hidden box-content p-1">
                                 <img
                                     src="/favicon.png"
                                     alt=""
                                     className="object-cover size-full"
                                 />
-                            </div>
+                            </div> */}
+                            <AppLogo
+                                width={32}
+                                height={32}
+                                backgroundColor="#8B4513"
+                                letterColor="#FFFFFF"
+                                // className={`${isDark ? "invert" : "invert-0"}`}
+                            />
                             <span className="font-dahlia text-2xl text-[#4a4947]">
                                 LumiFeed
                             </span>
@@ -142,12 +159,20 @@ Header.propTypes = {
     exclude: PropTypes.array,
 };
 
-export function SelectNews({ news, setNews }) {
+export function SelectNews({
+    numberOfNews,
+    setNumberOfNews,
+
+    selectedCategory,
+    setSelectedCategory,
+
+    selectedSource,
+    setSelectedSource,
+
+    handleNewsFetch,
+}) {
     const [isCategoryOpen, setIsCategoryOpen] = useState(true);
     const [isSourceOpen, setIsSourceOpen] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedSource, setSelectedSource] = useState("The Indian Express");
-    const [numberOfNews, setNumberOfNews] = useState(25);
     const [contentHeight, setContentHeight] = useState("auto");
     const contentRef = useRef(null);
     const dropdownRef = useRef(null);
@@ -265,7 +290,10 @@ export function SelectNews({ news, setNews }) {
                                     className="w-full sm:w-32 px-4 py-2 border border-[#D8D2C2] rounded-full focus:outline-none focus:ring-2 focus:ring-[#D8D2C2] transition-all"
                                 />
                                 <div className="flex items-center gap-2">
-                                    <button className="px-4 py-1 bg-[#D25769] hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins">
+                                    <button
+                                        onClick={handleNewsFetch}
+                                        className="px-4 py-1 bg-[#D25769] hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins"
+                                    >
                                         Fetch
                                     </button>
                                     <button className="px-4 py-1 bg-[#D25769] hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins">
@@ -320,7 +348,17 @@ export function SelectNews({ news, setNews }) {
         </div>
     );
 }
-SelectNews.propTypes = { news: PropTypes.array, setNews: PropTypes.func };
+SelectNews.propTypes = {
+    news: PropTypes.array,
+    numberOfNews: PropTypes.number,
+    selectedCategory: PropTypes.string,
+    selectedSource: PropTypes.string,
+    setNews: PropTypes.func,
+    setNumberOfNews: PropTypes.func,
+    setSelectedCategory: PropTypes.func,
+    setSelectedSource: PropTypes.func,
+    handleNewsFetch: PropTypes.func,
+};
 
 function BookSvg({ fillClr = "#000", width = "100px", height = "100px" }) {
     return (
@@ -375,9 +413,61 @@ export function InfoContainer() {
 }
 InfoContainer.propTypes = { currentUser: PropTypes.object };
 
-export function NewsTable({ news }) {
-    return <table></table>;
+export function NewsList({ news: articles, handleArticleClick }) {
+    return (
+        <div className="space-y-2">
+            {articles.map((article, index) => (
+                <article
+                    key={index}
+                    className={`rounded-lg border p-2 hover:shadow-md transition-shadow`}
+                >
+                    <h3 className={`text-base font-poppins mb-2`}>
+                        {article.title}
+                    </h3>
+                    <div className="flex justify-between items-center">
+                        <button
+                            data-url={article.url}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleArticleClick(e.target.dataset.url);
+                            }}
+                            className={`px-2 py-1 text-sm rounded-md transition-colors bg-[#D8D2C2] hover:bg-[#C8C2B2]`}
+                        >
+                            Read Here
+                        </button>
+
+                        {/*  */}
+                        <div className="flex gap-6 items-center justify-center">
+                            <div className="text-xs">{article.date || ""}</div>
+                            <a
+                                href={article.url}
+                                target="_blank"
+                                className={`text-neutral-800 hover:text-neutral-700 transition-colors`}
+                            >
+                                <ExternalLink size={16} />
+                            </a>
+
+                            <div className="flex items-center gap-2">
+                                {[Clock, Bookmark].map((Icon, i) => (
+                                    <Icon
+                                        key={i}
+                                        size={16}
+                                        className={`cursor-pointer text-neutral-800 hover:bg-neutral-200 transition-colors rounded-lg box-content p-1`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            ))}
+        </div>
+    );
 }
+NewsList.propTypes = {
+    news: PropTypes.array,
+    isDark: PropTypes.bool,
+    handleArticleClick: PropTypes.func,
+};
 
 export function Footer({ currentUser }) {
     const [year] = useState(new Date().getFullYear());

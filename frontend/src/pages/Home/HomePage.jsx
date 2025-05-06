@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import {
     Header,
     SelectNews,
     InfoContainer,
-    NewsTable,
+    NewsList,
     Footer,
 } from "./components";
 
@@ -14,8 +16,80 @@ in profile:
 - bigger font
 */
 export default function LumiFeed() {
-    const [news, setNews] = useState([]);
-    const [searchResults, setSearchResults] = useState([]);
+    const [numberOfNews, setNumberOfNews] = useState(25);
+    const [selectedCategory, setSelectedCategory] = useState("Trending");
+    const [selectedSource, setSelectedSource] = useState("The Indian Express");
+
+    const [news, setNews] = useState(() => {
+        const savedArticles = localStorage.getItem("newsArticles");
+        return savedArticles ? JSON.parse(savedArticles) : [];
+    });
+    // const [searchResults, setSearchResults] = useState([]);
+    const [loading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        localStorage.setItem("newsArticles", JSON.stringify(news));
+    }, [news]);
+
+    const handleNewsFetch = () => {
+        setIsLoading(true);
+        let newsApiUrl =
+            `http://127.0.0.1:8000/api/fetch/news?news_agency=${selectedSource.toLowerCase().replace(/\s+/g, "")}` +
+            `&news_type=${selectedCategory.toLowerCase()}` +
+            `&news_count=${numberOfNews}`;
+
+        fetch(newsApiUrl)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Some error occurred.");
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setNews(JSON.parse(data.news_list));
+                // console.log(data.news_list);
+            })
+            .catch((e) => {
+                console.error(e);
+                toast.error(e.toString());
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    };
+
+    const handleArticleClick = (url) => {
+        setIsLoading(true);
+        const apiUrl = `http://127.0.0.1:8000/api/fetch/article?url=${encodeURIComponent(url)}`;
+
+        fetch(apiUrl)
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to fetch");
+                return res.json();
+            })
+            .then((data) => {
+                data = JSON.parse(data);
+
+                // array of objects to a single object
+                const articleData = data.reduce(
+                    (acc, item) => ({ ...acc, ...item }),
+                    {},
+                );
+
+                // Navigate to article page with data
+                navigate("/article", {
+                    state: articleData,
+                });
+            })
+            .catch((e) => {
+                console.error("Error fetching article:", e);
+                toast.error(e.toString());
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    };
 
     return (
         <section className="pt-16 bg-[#fffcf5] __min-h-screen">
@@ -23,12 +97,25 @@ export default function LumiFeed() {
 
             {/* container */}
             <div className="max-w-7xl mx-auto min-h-[calc(80vh)]">
-                <SelectNews news={news} setNews={setNews} />
+                <SelectNews
+                    news={news}
+                    setNews={setNews}
+                    numberOfNews={numberOfNews}
+                    setNumberOfNews={setNumberOfNews}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                    selectedSource={selectedSource}
+                    setSelectedSource={setSelectedSource}
+                    handleNewsFetch={handleNewsFetch}
+                />
 
                 <div className="w-full flex gap-4">
                     <main className="w-full md:w-3/4">
                         {news?.length > 0 ? (
-                            <NewsTable news={news} />
+                            <NewsList
+                                news={news}
+                                handleArticleClick={handleArticleClick}
+                            />
                         ) : (
                             <InfoContainer />
                         )}

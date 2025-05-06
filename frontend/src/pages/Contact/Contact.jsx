@@ -1,4 +1,3 @@
-import React from "react";
 import {
     Linkedin,
     Mail,
@@ -10,7 +9,7 @@ import {
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { useDarkMode } from "../../contexts/DarkModeContext";
-// import AppLogo from "../../assets/Logo";
+// import AppLogo from "../../components/Logo";
 
 const ContactSection = () => {
     const { isDark } = useDarkMode();

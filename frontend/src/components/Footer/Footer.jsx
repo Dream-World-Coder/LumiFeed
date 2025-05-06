@@ -1,7 +1,6 @@
-import React from "react";
 import { Github, Instagram } from "lucide-react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
-import AppLogo from "../../assets/Logo";
+import AppLogo from "../Logo";
 
 const Footer = () => {
     const { isDark } = useDarkMode();

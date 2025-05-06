@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AlertTriangle } from "lucide-react";
 
 // Delete Account Component

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BookMarked, Layout, Filter, Brain } from "lucide-react";
 import { VisitLandingPageBtn } from "./components";
-import AppLogo from "../../assets/Logo";
+import AppLogo from "../../components/Logo";
 import Footer from "../../components/Footer/Footer";
 
 const LandingPage = () => {

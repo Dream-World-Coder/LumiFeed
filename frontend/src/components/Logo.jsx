@@ -1,5 +1,3 @@
-import React from "react";
-
 const SheriffLLogo = ({
     width = 40,
     height = 54,

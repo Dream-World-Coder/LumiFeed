@@ -1,4 +1,3 @@
-import React from "react";
 import { BookOpen, Newspaper, Star } from "lucide-react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";

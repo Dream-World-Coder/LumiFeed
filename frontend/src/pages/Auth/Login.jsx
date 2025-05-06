@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext"; // Make sure path is correct
-import AppLogo from "../../assets/Logo";
+import AppLogo from "../../components/Logo";
 import BackButton from "./components";
 import DecorativeElement from "./DecortiveElements";
 

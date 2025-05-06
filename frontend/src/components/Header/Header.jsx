@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Search, Menu, X, LogIn, Moon, Sun } from "lucide-react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
-import AppLogo from "../../assets/Logo";
+import AppLogo from "../Logo";
 
 const Header = () => {
     // const { isDark, setIsDark } = useDarkMode();
@@ -34,7 +34,7 @@ const Header = () => {
                                     className={`${isDark ? "invert" : "invert-0"}`}
                                 />
                                 <span
-                                    className={`ml-2 text-xl font-zodiak ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
+                                    className={`ml-2 text-xl font-dahlia ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
                                 >
                                     LumiFeed
                                 </span>

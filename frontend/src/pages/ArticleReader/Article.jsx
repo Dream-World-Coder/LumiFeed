@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Moon, Sun, FileText, ChevronLeft, Type } from "lucide-react";
-import AppLogo from "../../assets/Logo";
-import { useNavigate, useLocation } from "react-router-dom";
+import AppLogo from "../../components/Logo";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 import fontSizes from "./fontsSizes";
 import fonts from "./fontFamilies";
@@ -62,7 +62,7 @@ const NewsArticle = () => {
                                 letterColor="#FFFFFF"
                                 className={`${isDark ? "invert" : "invert-0"}`}
                             />
-                            <span className="ml-2 text-xl font-[Cinzel]">
+                            <span className="ml-2 text-xl font-dahlia">
                                 LumiFeed
                             </span>
                         </div>

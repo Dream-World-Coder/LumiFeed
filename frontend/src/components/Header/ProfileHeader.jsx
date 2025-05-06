@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     Search,
     Menu,
@@ -10,7 +10,7 @@ import {
     Trash2,
     ChevronDown,
 } from "lucide-react";
-import AppLogo from "../../assets/Logo";
+import AppLogo from "../Logo";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 const Header = () => {
