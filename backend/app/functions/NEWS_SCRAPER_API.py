@@ -12,7 +12,7 @@ from app.functions._utility__scraping import make_soup
 # to open an image with pillow,first we need to load it in our memory, so, requests.get(img.url) , then as its an image, so we need to use bytesIO
 
 
-class NewsScrape:
+class NewsScrapeApi:
     def __init__(self) -> None:
         self.urls = {
             "indianExpressMain": "https://indianexpress.com/",
@@ -162,12 +162,14 @@ class NewsScrape:
                 news_link = quote(snaps.a.get("href", "#"), safe=":/")
                 context_part = news.find("div", class_="img-context")
                 news_title = context_part.h2.a.get("title")
-                # news_date = context_part.find("div", class_="date").text
-                # addtional_info = context_part.p.text
+                news_date = context_part.find("div", class_="date").text or None
+                additional_info = context_part.p.text or None
 
                 zipped_json = {
                     "title":news_title,
-                    "url":news_link
+                    "url":news_link,
+                    "date":news_date,
+                    "subtitle": additional_info
                 }
                 fetched_news_data.append(zipped_json)
                 count += 1
@@ -259,11 +261,14 @@ class NewsScrape:
 
                 other_part = article.find("div", class_="img-context")
                 news_title = other_part.h2.a.get("title")
-                # addtional_info = other_part.p.text
+                news_date = other_part.find("div", class_="date").text or None
+                additional_info = other_part.p.text or None
 
                 zipped_json = {
                     "title":news_title,
-                    "url":news_link
+                    "url":news_link,
+                    "date":news_date,
+                    "subtitle": additional_info
                 }
                 fetched_news_data.append(zipped_json)
                 count += 1
@@ -350,9 +355,15 @@ class NewsScrape:
 
                 news_title = titleDiv.a.text
                 news_link = quote(titleDiv.a.get("href", "#"), safe=":/")
+                news_date = imgContextDiv.find("div", class_="date").text or None
 
-                zip_list = [news_title, news_link]
-                fetched_news_data.append(zip_list)
+                zipped_json = {
+                    "title":news_title,
+                    "url":news_link,
+                    "date":news_date,
+                }
+
+                fetched_news_data.append(zipped_json)
                 count += 1
             pgNo += 1
 
@@ -548,7 +559,7 @@ class NewsScrape:
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if __name__ == "__main__":
-    news = NewsScrape()
+    news = NewsScrapeApi()
     data = news.getTopNews(20)
     for d in data:
         print(d)

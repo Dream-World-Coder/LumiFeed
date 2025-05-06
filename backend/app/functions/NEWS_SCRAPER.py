@@ -124,7 +124,7 @@ class NewsScrape:
                 if count == len(news_list) - 1:
                     serial = serial
                     news_title = "You have caught up to all headlines for now. visit other sections/categories"
-                    news_link = "javascript:void(0);"
+                    news_link = "#"
 
                 zip_list = [serial, news_title, news_link]
                 fetched_news_data.append(zip_list)

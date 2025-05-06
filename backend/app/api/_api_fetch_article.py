@@ -31,7 +31,7 @@ def fetch_article__API():
         {"imgUrl": imgUrl},
         {"articleContent": news_data_string}
     ]
-    print(json.dumps(response, indent=4))
+    # print(json.dumps(response, indent=4))
     return jsonify(json.dumps(response, indent=4))
 
   except Exception as e:
