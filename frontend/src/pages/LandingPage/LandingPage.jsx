@@ -179,28 +179,31 @@ const LandingPage = () => {
                 <div className="container mx-auto max-w-6xl px-4 pt-32 relative z-10">
                     {/* Animated Logo */}
                     <div className="text-center mb-16 relative">
-                        <div className="relative inline-block">
-                            <AppLogo
-                                width={96}
-                                height={96}
-                                backgroundColor="#8B4513"
-                                letterColor="#FFFFFF"
-                                className="mx-auto text-[#8B4513] mb-6 transform hover:scale-110 transition-transform duration-300"
-                            />
+                        <div className="flex justify-center items-center gap-1 mb-16">
+                            <div className="relative inline-block">
+                                <AppLogo
+                                    width={48}
+                                    height={48}
+                                    backgroundColor="#8B4513"
+                                    letterColor="#FFFFFF"
+                                    className="text-[#8B4513]"
+                                />
+                            </div>
+                            <h1 className="text-4xl md:text-6xl font-dahlia text-[#8B4513] relative">
+                                {letters.map((item, index) => (
+                                    <span
+                                        key={index}
+                                        className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300"
+                                    >
+                                        {item}
+                                    </span>
+                                ))}
+                            </h1>
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-zodiak text-[#8B4513] tracking-tighter mb-6 relative">
-                            {letters.map((item, index) => (
-                                <span
-                                    key={index}
-                                    className="inline-block hover:transform hover:translate-y-[-2px] transition-all duration-300"
-                                >
-                                    {item}
-                                </span>
-                            ))}
-                        </h1>
-                        <p className="text-2xl md:text-3xl text-[#8B4513]/80 italic max-w-2xl mx-auto">
+                        <p className="text-lg md:text-xl text-[#8B4513]/80 italic max-w-2xl mx-auto">
                             Welcome to the renaissance of reading
                         </p>
+
                         {/* CTA Section 1 */}
                         <VisitLandingPageBtn
                             myClass="mt-10 mb-10"
@@ -210,7 +213,7 @@ const LandingPage = () => {
                     </div>
 
                     {/* Feature Cards */}
-                    <div className="grid md:grid-cols-4 gap-8 mb-16">
+                    <div className="grid md:grid-cols-4 gap-8 mb-32">
                         {features.map((feature, index) => (
                             <div key={index} className="group relative">
                                 <div className="absolute inset-0 bg-cream-light rounded-lg transform transition-all duration-300 group-hover:rotate-6 opacity-20" />
@@ -226,10 +229,10 @@ const LandingPage = () => {
                                     <div className="text-[#8B4513] mb-4 transform group-hover:scale-110 transition-transform duration-300">
                                         {feature.icon}
                                     </div>
-                                    <h3 className="font-zodiak text-2xl text-[#8B4513] mb-2">
+                                    <h3 className="font-zodiak text-2xl text-[#8B4513] mb-4 font-semibold">
                                         {feature.title}
                                     </h3>
-                                    <p className="text-[#8B4513]/80 text-lg">
+                                    <p className="text-[#8B4513]/80 text-lg leading-tight">
                                         {feature.description}
                                     </p>
                                 </div>

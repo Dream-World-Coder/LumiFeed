@@ -19,8 +19,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { useAuth } from "../../contexts/AuthContext";
 import { useDarkMode } from "../../contexts/DarkModeContext";
-import SearchBar from "../../components/SearchBar";
+// import SearchBar from "../../components/SearchBar";
 import AppLogo from "../../components/Logo";
+import { Search } from "lucide-react";
 
 export function Header({
     exclude = [""],
@@ -56,8 +57,8 @@ export function Header({
                     <div className="flex items-center justify-center gap-2">
                         {/* Logo */}
                         <div
-                            onClick={() => navigate("/")}
-                            className="flex items-center justify-center gap-2"
+                            onClick={() => navigate("/landing-page")}
+                            className="flex items-center justify-center gap-2 cursor-pointer"
                         >
                             <AppLogo
                                 width={32}
@@ -71,7 +72,7 @@ export function Header({
                                 LumiFeed
                             </span>
                         </div>
-                        <SearchBar round={true} hideSubmitBtn={true} />
+                        {/* <SearchBar round={true} hideSubmitBtn={true} /> */}
                     </div>
 
                     {/* Desktop Navigation */}
@@ -105,8 +106,17 @@ export function Header({
                                     </button>
                                 ),
                         )}
-                        <button onClick={toggleDarkMode}>
-                            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+
+                        <button onClick={toggleDarkMode} className="">
+                            {isDark ? (
+                                <Sun size={16} />
+                            ) : (
+                                <Moon className="text-neutral-600" size={16} />
+                            )}
+                        </button>
+
+                        <button className="hidden md:block text-neutral-600 dark:text-white">
+                            <Search size={16} className="ml-2" />
                         </button>
                     </div>
 
