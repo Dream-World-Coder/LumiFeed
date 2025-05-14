@@ -92,14 +92,18 @@ const LoginPage = () => {
                 <div className="relative max-w-md w-full">
                     {/* Logo section remains the same */}
                     <div className="text-center mb-8">
-                        <AppLogo
-                            width={64}
-                            height={64}
-                            backgroundColor="#8B4513"
-                            letterColor="#FFFFFF"
-                            className={`mx-auto mb-4 form-element`}
-                        />
-                        <h1 className="text-4xl md:text-5xl font-zodiak text-[#8B4513] tracking-wider mb-2 form-element">
+                        <h1
+                            onClick={() => navigate("/")}
+                            className="text-4xl md:text-5xl font-dahlia text-[#8B4513] tracking-wider mb-2 form-element
+                            flex justify-center items-center gap-1 cursor-pointer"
+                        >
+                            <AppLogo
+                                width={36}
+                                height={36}
+                                backgroundColor="#8B4513"
+                                letterColor="#FFFFFF"
+                                className={`form-element`}
+                            />
                             LumiFeed
                         </h1>
                         <p className="text-[#8B4513]/80 italic text-lg form-element">
@@ -117,7 +121,7 @@ const LoginPage = () => {
                     <form
                         ref={formRef}
                         onSubmit={handleSubmit}
-                        className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-xl border border-[#8B4513]/20"
+                        className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-sm border border-[#8B4513]/20"
                     >
                         {/* Email Field */}
                         <div className="mb-6 form-element">

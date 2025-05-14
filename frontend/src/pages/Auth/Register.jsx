@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext"; // Make sure path is correct
+import AppLogo from "../../components/Logo";
 import BackButton from "./components";
 import DecorativeElement from "./DecortiveElements";
 
@@ -124,12 +125,23 @@ const RegisterPage = () => {
 
                 <div className="relative max-w-md w-full">
                     <div className="text-center mb-8">
-                        <h1 className="text-4xl md:text-5xl font-zodiak text-[#8B4513] tracking-wider mb-2 form-element">
+                        <h1
+                            onClick={() => navigate("/")}
+                            className="text-4xl md:text-5xl font-dahlia text-[#8B4513] tracking-wider mb-2 form-element
+                            flex justify-center items-center gap-1 cursor-pointer"
+                        >
+                            <AppLogo
+                                width={36}
+                                height={36}
+                                backgroundColor="#8B4513"
+                                letterColor="#FFFFFF"
+                                className={`form-element`}
+                            />
                             LumiFeed
                         </h1>
-                        <p className="text-[#8B4513]/80 italic text-lg form-element">
+                        {/* <p className="text-[#8B4513]/80 italic text-lg form-element">
                             Welcome back to the renaissance of reading
-                        </p>
+                        </p> */}
                     </div>
 
                     {/* Error Message */}
@@ -142,7 +154,7 @@ const RegisterPage = () => {
                     <form
                         ref={formRef}
                         onSubmit={handleSubmit}
-                        className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-xl border border-[#8B4513]/20"
+                        className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-sm border border-[#8B4513]/20"
                     >
                         {/* Username Field */}
                         <div className="mb-6 form-element">
