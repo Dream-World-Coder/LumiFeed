@@ -103,7 +103,7 @@ export default function LumiFeed() {
         <section
             className={`pt-16 ${isDark ? "bg-[#171717]" : "bg-[#fffcf5]"} __min-h-screen`}
         >
-            <Header />
+            <Header exclude={["/contact", "/about"]} />
 
             {/* container */}
             <div

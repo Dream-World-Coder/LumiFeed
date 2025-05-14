@@ -297,6 +297,8 @@ export function SelectNews({
                                 <input
                                     type="number"
                                     value={numberOfNews}
+                                    min={1}
+                                    max={256}
                                     onChange={(e) =>
                                         setNumberOfNews(
                                             parseInt(e.target.value) || 0,
@@ -463,7 +465,7 @@ export function NewsList({ news: articles, handleArticleClick, loading }) {
                         key={index}
                         className="rounded-lg border p-2 hover:shadow-md transition-shadow"
                     >
-                        <h3 className="text-base font-poppins leading-tight mb-3 md:mb-2 dark:text-gray-50">
+                        <h3 className="text-xl font-serif font-semibold leading-tight mb-3 md:mb-2 dark:text-gray-50">
                             {article.title}
                         </h3>
                         {article.subtitle && (
