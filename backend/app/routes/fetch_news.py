@@ -1,9 +1,12 @@
-from flask import request, session, url_for, jsonify
-from app.routes import app, obj, gen_table, gen_table_india_news  # NewsForm
+from flask import Blueprint, request, session, url_for, jsonify
 from flask_login import current_user
+from ..functions.NEWS_SCRAPER import NewsScraper
+from ..functions.html_generator import gen_table, gen_table_india_news
 
+fetchnews_bp = Blueprint("fetchnews_bp", __name__)
+scraper:NewsScraper = NewsScraper()
 
-@app.route("/fetchnews", methods=["GET"])
+@fetchnews_bp.route("/fetchnews", methods=["GET"])
 def fetchnews():
     name_of_city = None
 
@@ -24,7 +27,7 @@ def fetchnews():
         return jsonify({"error": "Invalid news count"}), 400
 
     # storing the current url in session to get back from the reading page tab
-    home_url = f"{url_for('index')}"
+    home_url = f"{url_for('main_bp.index')}"
     # now fetch news does not render template, so i have to submit the form on home btn click. Thats
     # why, currenltly i am only returning home_url , later i will store the parameters of fetch news in a session and submit the form, oherwise i need to think og different approaches
     # session.clear()
@@ -32,11 +35,11 @@ def fetchnews():
 
     match news_type:
         case "top":
-            news_list = obj.getTopNews(num=news_count)
+            news_list = scraper.getTopNews(num=news_count)
             news_table = gen_table(news_list, current_user)
 
         case "india":
-            news_list = obj.getIndiaNews(num=news_count)
+            news_list = scraper.getIndiaNews(num=news_count)
             news_table = gen_table_india_news(news_list, current_user)
 
         case "city":
@@ -53,43 +56,43 @@ def fetchnews():
             ]:
                 return jsonify({"error": "Select a city"}), 400
             else:
-                news_list = obj.getCitiesNews(cityname=name_of_city, num=news_count)
+                news_list = scraper.getCitiesNews(cityname=name_of_city, num=news_count)
                 news_table = gen_table(news_list, current_user)
 
         case "science":
-            news_list = obj.getOthersNews(section_name="technology/science", num=news_count)
+            news_list = scraper.getOthersNews(section_name="technology/science", num=news_count)
             news_table = gen_table_india_news(news_list, current_user)
 
         case "tech":
-            news_list = obj.getOthersNews2(section_name="technology", num=news_count)
+            news_list = scraper.getOthersNews2(section_name="technology", num=news_count)
             news_table = gen_table(news_list, current_user)
 
         case "business":
-            news_list = obj.getOthersNews(section_name="business", num=news_count)
+            news_list = scraper.getOthersNews(section_name="business", num=news_count)
             news_table = gen_table_india_news(news_list, current_user)
 
         case "health":
-            news_list = obj.getOthersNews(section_name="lifestyle/health", num=news_count)
+            news_list = scraper.getOthersNews(section_name="lifestyle/health", num=news_count)
             news_table = gen_table_india_news(news_list, current_user)
 
         case "cricket":
-            news_list = obj.getOthersNews(section_name="sports/cricket", num=news_count)
+            news_list = scraper.getOthersNews(section_name="sports/cricket", num=news_count)
             news_table = gen_table_india_news(news_list, current_user)
 
         case "sports":
-            news_list = obj.getOthersNews(section_name="sports", num=news_count)
+            news_list = scraper.getOthersNews(section_name="sports", num=news_count)
             news_table = gen_table_india_news(news_list, current_user)
 
         case "political_pulse":
-            news_list = obj.getOthersNews(section_name="political-pulse", num=news_count)
+            news_list = scraper.getOthersNews(section_name="political-pulse", num=news_count)
             news_table = gen_table_india_news(news_list, current_user)
 
         case "lifestyle":
-            news_list = obj.getOthersNews(section_name="lifestyle", num=news_count)
+            news_list = scraper.getOthersNews(section_name="lifestyle", num=news_count)
             news_table = gen_table_india_news(news_list, current_user)
 
         case "entertainment":
-            news_list = obj.getOthersNews3(section_name="entertainment", num=news_count)
+            news_list = scraper.getOthersNews3(section_name="entertainment", num=news_count)
             news_table = gen_table_india_news(news_list, current_user)
 
         case _:

@@ -1,9 +1,13 @@
-from flask import request, jsonify, session
+from flask import Blueprint, request, jsonify, session
 from flask_login import current_user
-from app.routes import app, db, User
 import requests
 import os
 import datetime
+from ..models import db
+from ..models.user import User
+# from ..functions.summariser import generate_summary
+
+summary_bp = Blueprint("summary_bp", __name__)
 
 # getAttribute('src') :- gives src as it is, like /image/url
 # $(#img).src :- gives the complete image src. http://subdomain.domain/image/url
@@ -28,7 +32,7 @@ def reset_user_credits():
         print(f"[{datetime.datetime.now()}] Error resetting credits: {e}")
 
 
-@app.route("/make_summary", methods=["POST"])
+@summary_bp.route("/make_summary", methods=["POST"])
 def make_summary():
     if not current_user.is_authenticated:
         return jsonify({'message':'please log in first to get summaries.'}), 401
@@ -42,7 +46,7 @@ def make_summary():
     # length check
     if len(text_to_summarise) < 200:
         return jsonify({"summary": f'{imgTag}{text_to_summarise}'}), 200
-    
+
     if 'TOTAL_CREDITS_REMAINING' not in session:
         session['TOTAL_CREDITS_REMAINING'] = 10
 

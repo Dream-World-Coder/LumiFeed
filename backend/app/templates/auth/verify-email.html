@@ -1,39 +1,61 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Title -->
-    <title>LumiFeed - Verify Email</title>
-    <meta name="author" content="Subhajit Gorai" />
-    <!-- Linking CSS -->
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename='css/components/auth.css')}}" />
-    <!-- Linking Favicon -->
-    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png')}}" type="image/x-icon" />
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Title -->
+        <title>LumiFeed - Verify Email</title>
+        <meta name="author" content="Subhajit Gorai" />
+        <!-- Linking CSS -->
+        <link
+            rel="stylesheet"
+            href="{{url_for('static', filename='css/style.css')}}"
+        />
+        <link
+            rel="stylesheet"
+            href="{{url_for('static', filename='css/components/auth.css')}}"
+        />
+        <!-- Linking Favicon -->
+        <link
+            rel="shortcut icon"
+            href="{{url_for('static', filename='images/favicon.png')}}"
+            type="image/x-icon"
+        />
+    </head>
 
-  <body>
-    <div class="main">
-      <section class="sign-in">
-        <div class="container">
-          <ul class="flash_ul">
-            <li class="flash_li"></li>
-          </ul>
-          <div class="signin-content">
-            <div class="signin-image">
-              <a class="redirection_link" href="{{url_for('resend')}}" class="signup-image-link">Resend Verification Email</a>
-              <a href="{% block origin %}{{url_for('index')}}{% endblock %}" class="home-link">Home</a>
-            </div>
+    <body>
+        <div class="main">
+            <section class="sign-in">
+                <div class="container">
+                    <ul class="flash_ul">
+                        <li class="flash_li"></li>
+                    </ul>
+                    <div class="signin-content">
+                        <div class="signin-image">
+                            <a
+                                class="redirection_link"
+                                href="{{url_for('resend')}}"
+                                class="signup-image-link"
+                                >Resend Verification Email</a
+                            >
+                            <a
+                                href="{% block origin %}{{url_for('main_bp.index')}}{% endblock %}"
+                                class="home-link"
+                                >Home</a
+                            >
+                        </div>
 
-            <div class="signin-form">
-              <h1 class="form-title">Check your Email and click on the verification link.</h1>
-            </div>
-          </div>
+                        <div class="signin-form">
+                            <h1 class="form-title">
+                                Check your Email and click on the verification
+                                link.
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-      </section>
-    </div>
 
-    <script></script>
-  </body>
+        <script></script>
+    </body>
 </html>

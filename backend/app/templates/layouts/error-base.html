@@ -43,7 +43,9 @@
                             {% block image %} {% endblock %}
                             <!-- Redirect Link -->
                             {% block redirect %} {% endblock %}
-                            <a href="{{url_for('index')}}" class="home-link"
+                            <a
+                                href="{{url_for('main_bp.index')}}"
+                                class="home-link"
                                 >Go Back to Homepage</a
                             >
                         </div>
@@ -73,6 +75,5 @@
             }
             requestAnimationFrame(raf);
         </script>
-  
     </body>
 </html>

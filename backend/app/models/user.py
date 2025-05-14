@@ -1,17 +1,18 @@
-# type: ignore
-
-from copy import Error
 from flask_login import UserMixin
 from sqlalchemy.orm import aliased
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from itsdangerous import URLSafeTimedSerializer
-from app import app
-from app.models import db
+from copy import Error
+import os
+from dotenv import load_dotenv
+
+from . import db
 from .article import Article
 from .collection import Collection
 from .utils import user_article_collections, user_collections, CollectionType
 
+load_dotenv()
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -92,9 +93,9 @@ class User(db.Model, UserMixin):
             .filter(collection_alias.id == collection_id)
             .distinct()
         )
-        
+
         return result.all()
-        
+
 
     def save_article(self, article_title, article_url, collection_name):
         # check collection
@@ -121,10 +122,10 @@ class User(db.Model, UserMixin):
         existing = db.session.query(user_article_collections)\
             .filter_by(user_id=self.id, article_id=article.id, collection_id=collection.id)\
             .first()
-        
+
         if existing:
             return -1
-        
+
         # print("Article is addable")
 
         # Add article to collection
@@ -164,7 +165,7 @@ class User(db.Model, UserMixin):
         existing = db.session.query(user_article_collections)\
             .filter_by(user_id=self.id, article_id=article.id, collection_id=collection.id)\
             .first()
-        
+
         if not existing:
             return -1
 
@@ -266,12 +267,12 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
     def generate_verification_token(self, data):
-        serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
+        serializer = URLSafeTimedSerializer(os.environ.get("SECRET_KEY", os.urandom(512)))
         return serializer.dumps(data)
 
     @staticmethod
     def verify_token(token, expiration=900):
-        serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
+        serializer = URLSafeTimedSerializer(os.environ.get("SECRET_KEY", os.urandom(512)))
         try:
             data = serializer.loads(token, max_age=expiration)
             return data
@@ -280,13 +281,13 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<User id: {self.id}, username: {self.username}, email: {self.email}>"
-    
+
 
 
 
 """
 from sqlalchemy import event
-from app.models import db, User, Collection, CollectionType, user_collections
+from app,models import db, User, Collection, CollectionType, user_collections
 
 @event.listens_for(User, 'after_insert')
 def create_default_collections(mapper, connection, user):

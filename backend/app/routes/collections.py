@@ -1,18 +1,24 @@
-# type: ignore
-from flask.templating import render_template
-from app.routes import app, db, make_collection, Collection, CollectionType, user_article_collections
-from flask import request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from flask_login import login_required, current_user
 
-MAX_COLLECTIONS = 10
-MAX_ARTICLES_PER_COLLECTION = 250
+from ..functions.html_generator import make_collection
+
+from ..models import db
+from ..models.collection import Collection
+from ..models.utils import CollectionType, user_article_collections
+
+collection_bp = Blueprint("collection_bp", __name__)
+
+MAX_COLLECTIONS:int = 10
+MAX_ARTICLES_PER_COLLECTION:int = 256
 
 
 @login_required
-@app.route("/add_new_collection", methods=["POST"])
+@collection_bp.route("/create-new-collection", methods=["POST"])
+@collection_bp.route("/add_new_collection", methods=["POST"])
 def add_new_collection():
     data = request.json or {}
-    collection_name = data.get("name")
+    collection_name = data.get("name") or ""
 
     # recheking if None
     if not collection_name or not collection_name.strip():
@@ -60,7 +66,8 @@ def add_new_collection():
 # --------------------------------------
 # delete collection
 # --------------------------------------
-@app.route("/delete_collection", methods=["POST"])
+@collection_bp.route("/delete-collection", methods=["POST"])
+@collection_bp.route("/delete_collection", methods=["POST"])
 @login_required
 def delete_collection():
     data = request.json or {}
@@ -91,10 +98,10 @@ def delete_collection():
             # its giving error if i use collection.users_who_own_it.all()
             db.session.delete(collection)
             db.session.flush()
-            
+
         # now delete the articles in the collection for the user
-        
-        # SELECT * 
+
+        # SELECT *
         # FROM user_article_collections
         # WHERE user_id = current_user.id AND collection_id = collection.id
         all_rows_to_delete = db.session.query(user_article_collections).filter(
@@ -107,7 +114,7 @@ def delete_collection():
         # WHERE condition;
         # db.session.execute(
             # user_article_collections.delete().where(
-                # user_article_collections.c.user_id == current_user.id, 
+                # user_article_collections.c.user_id == current_user.id,
                 # user_article_collections.c.collection_id == collection.id
             # )
         # )
@@ -128,6 +135,6 @@ def delete_collection():
 
 
 @login_required
-@app.route("/share-collection/<username>/<collection_name>", methods=["GET"])
+@collection_bp.route("/share-collection/<username>/<collection_name>", methods=["GET"])
 def share_collection(username, collection_name):
     return render_template("share-collection.html", username=username, collection=collection_name)

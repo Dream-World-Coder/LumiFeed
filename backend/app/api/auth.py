@@ -105,11 +105,6 @@ def api_login():
         if not usr:
             return jsonify({"error": "User not found"}), 404
 
-        # if not usr.email_verified:
-        #     return jsonify({
-        #         "error": "Email not verified. Please verify your email first."
-        #     }), 401
-
         if usr.failed_logins >= 5:
             return jsonify({
                 "error": "Account locked due to too many failed attempts"

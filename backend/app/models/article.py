@@ -1,9 +1,6 @@
-from sqlalchemy.orm import dynamic
-from app import app
 from app.models import db
 from datetime import datetime
-from .collection import Collection
-from .utils import user_article_collections, article_collections
+from .utils import user_article_collections
 
 
 class Article(db.Model):

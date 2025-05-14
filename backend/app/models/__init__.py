@@ -1,10 +1,22 @@
-from app import db
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
+db = SQLAlchemy()
+migrate = Migrate()
 
-from .utils import CollectionType, user_article_collections, user_collections
-from .user import User
-from .article import Article
-from .collection import Collection
+def init_app(app: Flask):
+    db.init_app(app)
+    migrate.init_app(app, db)
+
+    from .user import User
+    from .article import Article
+    from .collection import Collection
+    from .utils import CollectionType, user_article_collections, user_collections
+
+    with app.app_context():
+        db.create_all()
+
 
 
 '''

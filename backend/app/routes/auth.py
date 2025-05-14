@@ -1,27 +1,26 @@
-# type: ignore
-from flask import render_template, request, redirect, url_for, flash, jsonify
-from app.routes import(
-    app,
-    db,
-    User,
-    mail,
-    RegistrationForm,
-    LoginForm,
-    CollectionType,
-    Collection,
-    user_article_collections,
-    user_collections
-)
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
-from sqlalchemy.exc import IntegrityError
 from flask_mail import Message
+from sqlalchemy.exc import IntegrityError
 import re
 import os
 from dotenv import load_dotenv
 
+from . import mail
+
+from ..models import db
+from ..models.user import User
+from ..models.collection import Collection
+from ..models.utils import CollectionType, user_collections, user_article_collections
+
+from ..forms import RegistrationForm, LoginForm
+
 load_dotenv()
-BACKEND_URL=os.environ.get("BACKEND_URL")
-FRONTEND_URL=os.environ.get("FRONTEND_URL")
+BACKEND_URL = os.environ.get("BACKEND_URL")
+FRONTEND_URL = os.environ.get("FRONTEND_URL")
+
+auth_bp = Blueprint("auth_bp", __name__)
+
 
 """
     when i am registering, then i am going back to lumifeed insted of /verify-eamil as
@@ -32,25 +31,25 @@ FRONTEND_URL=os.environ.get("FRONTEND_URL")
 
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ Render Verify email page
+# -------------------------
+# Render Verify email page
 # Just an intermediate page, no such functionality up until now
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@app.route("/verify-email")
+# ------------------------
+@auth_bp.route("/verify-email")
 def verify_email():
     if current_user.is_authenticated:
-        return redirect(url_for("index"))
+        return redirect(url_for("main_bp.index"))
     return render_template("auth/verify-email.html")
 
 
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ verify email token
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@app.route("/verify", methods=["GET"])
+# verify email token
+# -------------------------
+@auth_bp.route("/verify", methods=["GET"])
 def verify():
   if current_user.is_authenticated:
-    return redirect(url_for("index"))
+    return redirect(url_for("main_bp.index"))
 
   token = request.args.get("token") if request.args.get("token") else None
 
@@ -61,7 +60,7 @@ def verify():
       user.email_verified = True
       db.session.commit()
       login_user(user)
-      return redirect(url_for("index"))
+      return redirect(url_for("main_bp.index"))
     else:
       return render_template("auth/verify-email.html", token=token)
 
@@ -71,8 +70,8 @@ def verify():
 
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ send email
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# send email
+# -------------------------
 def send_verification_email(user: User):
     subject = "Verify Your Email Address"
     verification_link = f"{BACKEND_URL}/verify?token={user.generate_verification_token(user.email)}"
@@ -108,12 +107,12 @@ def send_verification_email(user: User):
 
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ resend verification email
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@app.route("/resend-verification-email", methods=["GET", "POST"])
+# resend verification email
+# ------------------------
+@auth_bp.route("/resend-verification-email", methods=["GET", "POST"])
 def resend():
     if current_user.is_authenticated:
-        return redirect(url_for("index"))
+        return redirect(url_for("main_bp.index"))
 
     return "This feature will be available later."
 
@@ -121,12 +120,12 @@ def resend():
 
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ Register
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@app.route("/register", methods=["GET", "POST"])
+# Register
+# -------------------------
+@auth_bp.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for("index"))
+        return redirect(url_for("main_bp.index"))
 
     form = RegistrationForm()
 
@@ -199,12 +198,12 @@ def register():
     return render_template("errors/unknown-method.html")
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ Login
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@app.route("/login", methods=["GET", "POST"])
+# Login
+# -------------------------
+@auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("index"))
+        return redirect(url_for("main_bp.index"))
 
     form = LoginForm()
 
@@ -252,7 +251,7 @@ def login():
             return jsonify({'success': 'Login successful'}), 200
 
         except Exception as e:
-            app.logger.error(f"Login error: {str(e)}")
+            print(e)
             return jsonify({
                 'error': 'An error occurred during login'
             }), 500
@@ -260,25 +259,26 @@ def login():
     return render_template("errors/unknown-method.html")
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ Logout
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@app.route("/logout")
+# Logout
+# -------------------------
+@auth_bp.route("/logout")
 @login_required
 def logout():
-  logout_user()  # Clears the session
-  flash("logout successfull", "success")
-  return redirect(url_for("index"))
+    logout_user()  # Clears the session
+    flash("logout successfull", "success")
+    return redirect(url_for("main_bp.index"))
 
 
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ Delete Account
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@app.route("/delete_account", methods=["GET", "POST"])
+# Delete Account
+# -------------------------
 @login_required
+@auth_bp.route("/delete-account", methods=["GET", "POST"])
+@auth_bp.route("/delete_account", methods=["GET", "POST"])
 def delete_account():
     if not current_user.is_authenticated:
-        return redirect(url_for("index"))
+        return redirect(url_for("main_bp.index"))
 
     form = LoginForm()
     if request.method == "GET":
@@ -314,7 +314,7 @@ def delete_account():
                 db.session.delete(current_user)
                 db.session.commit()
                 logout_user()
-                return redirect(url_for("index"))
+                return redirect(url_for("main_bp.index"))
             else:
                 flash("Incorrect password.", "error")
                 return redirect(url_for("delete_account"))
@@ -326,10 +326,11 @@ def delete_account():
             return redirect(url_for("delete_account"))
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ Forgot Password
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Forgot Password
+# -------------------------
 @login_required
-@app.route("/forgot_password", methods=["GET", "POST"])
+@auth_bp.route("/forgot-password", methods=["GET", "POST"])
+@auth_bp.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
     # input username and email and then send a reset password email
     return "This Freature will be added later"
@@ -337,9 +338,10 @@ def forgot_password():
 
 
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~ Reset Password
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Reset Password
+# -------------------------
 @login_required
-@app.route("/reset_password", methods=["GET", "POST"])
+@auth_bp.route("/reset-password", methods=["GET", "POST"])
+@auth_bp.route("/reset_password", methods=["GET", "POST"])
 def reset_password():
     return "This Feature will be added later"

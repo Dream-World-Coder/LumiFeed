@@ -1,9 +1,5 @@
-from enum import unique
-from app import app
-from app.models import db
-from datetime import datetime
-from .utils import user_collections, article_collections, CollectionType, user_article_collections
-
+from . import db
+from .utils import user_collections, CollectionType
 
 class Collection(db.Model):
     __tablename__ = "collections"

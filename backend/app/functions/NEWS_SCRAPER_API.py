@@ -12,7 +12,7 @@ from app.functions._utility__scraping import make_soup
 # to open an image with pillow,first we need to load it in our memory, so, requests.get(img.url) , then as its an image, so we need to use bytesIO
 
 
-class NewsScrapeApi:
+class NewsScraperApi:
     def __init__(self) -> None:
         self.urls = {
             "indianExpressMain": "https://indianexpress.com/",
@@ -559,7 +559,7 @@ class NewsScrapeApi:
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if __name__ == "__main__":
-    news = NewsScrapeApi()
+    news = NewsScraperApi()
     data = news.getTopNews(20)
     for d in data:
         print(d)

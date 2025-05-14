@@ -1,5 +1,5 @@
 from enum import Enum
-from app.models import db
+from . import db
 
 # Enum for CollectionType
 class CollectionType(Enum):
@@ -12,15 +12,15 @@ class CollectionType(Enum):
 user_articles = db.Table(
     'user_articles',
     db.Column(
-        'user_id', 
-        db.Integer, 
-        db.ForeignKey('users.id', name='fk_user_articles_user_id'), 
+        'user_id',
+        db.Integer,
+        db.ForeignKey('users.id', name='fk_user_articles_user_id'),
         primary_key=True
     ),
     db.Column(
-        'article_id', 
-        db.Integer, 
-        db.ForeignKey('articles.id', name='fk_user_articles_article_id'), 
+        'article_id',
+        db.Integer,
+        db.ForeignKey('articles.id', name='fk_user_articles_article_id'),
         primary_key=True
     )
 )
@@ -30,15 +30,15 @@ user_articles = db.Table(
 user_collections = db.Table(
     'user_collections',
     db.Column(
-        'user_id', 
-        db.Integer, 
-        db.ForeignKey('users.id', name='fk_user_collections_user_id'), 
+        'user_id',
+        db.Integer,
+        db.ForeignKey('users.id', name='fk_user_collections_user_id'),
         primary_key=True
     ),
     db.Column(
-        'collection_id', 
-        db.Integer, 
-        db.ForeignKey('collections.id', name='fk_user_collections_collection_id'), 
+        'collection_id',
+        db.Integer,
+        db.ForeignKey('collections.id', name='fk_user_collections_collection_id'),
         primary_key=True
     )
 )
@@ -48,15 +48,15 @@ user_collections = db.Table(
 article_collections = db.Table(
     'article_collections',
     db.Column(
-        'article_id', 
-        db.Integer, 
-        db.ForeignKey('articles.id', name='fk_article_collections_article_id'), 
+        'article_id',
+        db.Integer,
+        db.ForeignKey('articles.id', name='fk_article_collections_article_id'),
         primary_key=True
     ),
     db.Column(
-        'collection_id', 
-        db.Integer, 
-        db.ForeignKey('collections.id', name='fk_article_collections_collection_id'), 
+        'collection_id',
+        db.Integer,
+        db.ForeignKey('collections.id', name='fk_article_collections_collection_id'),
         primary_key=True
     )
 )

@@ -1,17 +1,19 @@
-from flask import request, jsonify
-from app.routes import app, generate_search_reasult, s1, s2, s2x1, s3
+from flask import Blueprint, request, jsonify
+from ..functions.html_generator import generate_search_reasult
+from ..functions.search_algorithms import s1
 
+search_bp = Blueprint("search_bp", __name__)
 
-@app.route("/search_in_title", methods=["POST"])
+@search_bp.route("/search_in_title", methods=["POST"])
 def search_in_title():
     # Data getting from the client-side request
-    data = request.json
+    data = request.json or {}
     news_list = data.get("news_list", [])
-    part = data.get("searchPart")
-    
+    part = data.get("searchPart") or ''
+
     if not news_list:
         return jsonify({"error": "Fetch news first to enable search."}), 400
-    
+
     if not part and not news_list:
         return jsonify({'error':'POST data keys are: searchPart<string to search>, news_list<news_list>.'})
 
@@ -23,7 +25,7 @@ def search_in_title():
 
     if not matches:
         return jsonify({"error": "No matches found."})
-    
+
     search_results_html = generate_search_reasult(matches=matches)
 
     # Response with the search result HTML

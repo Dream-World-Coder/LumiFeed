@@ -1,22 +1,31 @@
-from app import app, db, scheduler
-from app.models import User, Article, Collection
+from app import create_app
+
+from app.models import db
+from app.models.user import User
+from app.models.article import Article
+from app.models.collection import Collection
+
+from dotenv import load_dotenv
 import os
-# from dotenv import load_dotenv
+
+load_dotenv()
+
+app, scheduler = create_app()
 
 # Shell context for Flask CLI
 @app.shell_context_processor
 def make_shell_context():
-  return {
-    "db": db,
-    "User": User,
-    "Article":Article,
-    "Collection":Collection
-  }
+    return {
+        "db" : db,
+        "User" : User,
+        "Article" : Article,
+        "Collection" : Collection
+    }
 
 
 if __name__ == "__main__":
-  scheduler.start() # debug should be False for this, else it starts many times when reloading for debug mode
-  # thats why turning off the debug mode for all
-  port = int(os.environ.get("PORT", 8000))
-  app.run(port=port)
-  # app.run(host="0.0.0.0", port=port)
+    PORT = int(os.environ.get("PORT", 3000))
+    HOST = "0.0.0.0"
+
+    scheduler.start()
+    app.run(port=PORT, host=HOST)

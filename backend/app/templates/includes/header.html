@@ -47,7 +47,7 @@
                         </div>
                         <div class="delete_account flexed flex-col f-gap-1">
                             <form
-                                action="{{url_for('reset_password')}}"
+                                action="{{url_for('auth_bp.reset_password')}}"
                                 method="post"
                             >
                                 <button type="submit" class="flexed">
@@ -64,7 +64,10 @@
                 </div>
 
                 <div class="li li1 animated-underline-white og-li">
-                    <a href="{{url_for('index')}}" class="flexed" rel="noopener"
+                    <a
+                        href="{{url_for('main_bp.index')}}"
+                        class="flexed"
+                        rel="noopener"
                         >Home</a
                     >
                 </div>
@@ -77,7 +80,7 @@
 
                 <div class="li li5 animated-underline-white">
                     <a
-                        href="{{url_for('logout')}}"
+                        href="{{url_for('auth_bp.logout')}}"
                         class="flexed"
                         rel="noopener"
                         >logout</a
