@@ -1,29 +1,30 @@
-from flask import request, jsonify
-from app.api import app, obj
+from flask import Blueprint, request, jsonify
 import json
+from ...functions.NEWS_SCRAPER_API import NewsScraperApi
 
-@app.route("/api/fetch/article", methods=["GET"])
+articles_api_bp = Blueprint("articles_api_bp", __name__)
+scraper:NewsScraperApi = NewsScraperApi()
+
+@articles_api_bp.route("/fetch/article", methods=["GET"])
+@articles_api_bp.route("/fetch-article", methods=["GET"])
+@articles_api_bp.route("/extract-article", methods=["GET"])
 def fetch_article__API():
   # data = request.json or {}
   # url:str = data.get("url") or ''
-  # only single parameter, so no need to use application  json
+  # only single parameter, so no need to use application json
   url = request.args.get("url") or {}
 
-  max_limit = 150000
 
   try:
     if len(url) == 0:
         return jsonify({"error":"url not found"})
 
-    if len(url) > max_limit:
-        return jsonify({"error":"Too long url..."})
-
     if "indianexpress.com/section/india/" in url:
-        heading, subheading, imgUrl, news_data_string = obj.extractNewsContentIndia(
+        heading, subheading, imgUrl, news_data_string = scraper.extractNewsContentIndia(
             url=url
         )
     else:
-        heading, subheading, imgUrl, news_data_string = obj.extractNewsContent(url=url)
+        heading, subheading, imgUrl, news_data_string = scraper.extractNewsContent(url=url)
 
     response = [
         {"heading": heading},

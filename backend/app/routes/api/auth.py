@@ -1,6 +1,4 @@
-from app.api import app, User, db, Collection, CollectionType
-from app.routes import send_verification_email
-from flask import jsonify, request
+from flask import Blueprint, jsonify, request
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
@@ -10,7 +8,17 @@ from flask_jwt_extended import (
 )
 import re
 
-@app.route("/api/register", methods=["POST"])
+from ...routes.auth import send_verification_email
+
+from ...models import db
+from ...models.user import User
+from ...models.collection import Collection
+from ...models.utils import CollectionType
+
+auth_api_bp = Blueprint("auth_api_bp", __name__)
+
+
+@auth_api_bp.route("/register", methods=["POST"])
 def api_register():
     data = request.get_json()
 
@@ -87,7 +95,7 @@ def api_register():
             "details": str(e)
         }), 500
 
-@app.route("/api/login", methods=["POST"])
+@auth_api_bp.route("/login", methods=["POST"])
 def api_login():
     data = request.get_json()
 
@@ -140,7 +148,7 @@ def api_login():
             "details": str(e)
         }), 500
 
-@app.route("/api/logout", methods=["POST"])
+@auth_api_bp.route("/logout", methods=["POST"])
 @jwt_required()
 def api_logout():
     try:
@@ -156,7 +164,7 @@ def api_logout():
             "details": str(e)
         }), 500
 
-@app.route("/api/refresh", methods=["POST"])
+@auth_api_bp.route("/refresh", methods=["POST"])
 @jwt_required(refresh=True)
 def refresh():
     current_user = get_jwt_identity()
