@@ -1,0 +1,142 @@
+theIndianExpress:
+    trending:
+        Trending	https://indianexpress.com/section/trending/feed/
+        Trending In India	https://indianexpress.com/section/trending/trending-in-india/feed/
+        Trending Globally	https://indianexpress.com/section/trending/trending-globally/feed/
+        Trending Videos	https://indianexpress.com/videos/trending/feed/
+
+    international
+        World	https://indianexpress.com/section/world/feed/
+        Pakistan	https://indianexpress.com/section/pakistan/feed/
+        Bangladesh	https://indianexpress.com/section/world/bangladesh/feed/
+
+    indian
+        India	https://indianexpress.com/section/india/feed/
+        North East India	https://indianexpress.com/section/north-east-india/feed/
+        Kerala	https://indianexpress.com/section/india/kerala/feed/
+
+    cities
+        Bangalore	https://indianexpress.com/section/cities/bangalore/feed/
+        Chennai	https://indianexpress.com/section/cities/chennai/feed/
+        Delhi	https://indianexpress.com/section/cities/delhi/feed/
+        Hyderabad	https://indianexpress.com/section/cities/hyderabad/feed/
+        Kolkata	https://indianexpress.com/section/cities/kolkata/feed/
+        Lucknow	https://indianexpress.com/section/cities/lucknow/feed/
+        Mumbai	https://indianexpress.com/section/cities/mumbai/feed/
+        Manipur	https://indianexpress.com/section/north-east-india/manipur/feed/
+
+    entertainment
+        Bollywood	https://indianexpress.com/section/entertainment/bollywood/feed/
+        Hollywood	https://indianexpress.com/section/entertainment/hollywood/feed/
+        Box Office Collection	https://indianexpress.com/section/entertainment/bollywood/box-office-collection/feed/
+        Movie Review	https://indianexpress.com/section/entertainment/movie-review/feed/
+
+    education
+        Education	https://indianexpress.com/section/education/feed/
+        Exams	https://indianexpress.com/section/education/exams/feed/
+        Editorials	https://indianexpress.com/section/opinion/editorials/feed/
+        Upsc Current Affairs	https://indianexpress.com/section/upsc-current-affairs/feed/
+        Upsc Current Affairs	https://indianexpress.com/section/upsc-current-affairs/upsc-essentials/feed/
+
+    research
+        Research	https://indianexpress.com/section/research/feed/
+        Science	https://indianexpress.com/section/technology/science/feed/
+
+    tech
+        Tech Reviews	https://indianexpress.com/section/technology/tech-reviews/feed/
+        Technology	https://indianexpress.com/section/technology/feed/
+
+    jobs
+        Jobs	https://indianexpress.com/section/jobs/feed/
+        Bank Jobs	https://indianexpress.com/section/jobs/bank-jobs/feed/
+        Railway Jobs	https://indianexpress.com/section/jobs/railway-jobs/feed/
+        Defence Jobs	https://indianexpress.com/section/jobs/defence-jobs/feed/
+        Workplace	https://indianexpress.com/section/lifestyle/workplace/feed/
+
+    enterprise
+        Budget	https://indianexpress.com/section/business/budget/feed/
+        Business	https://indianexpress.com/section/business/feed/
+        Companies	https://indianexpress.com/section/business/companies/feed/
+        Economy	https://indianexpress.com/section/business/economy/feed/
+        Smart Stocks	https://indianexpress.com/section/smart-stocks/feed/
+        Market	https://indianexpress.com/section/business/market/feed/
+        Personal Finance	https://indianexpress.com/section/personal-finance/feed/
+
+    politics
+        Political Pulse	https://indianexpress.com/section/political-pulse/feed/
+        Opinion	https://indianexpress.com/section/opinion/feed/
+
+    sports
+        Sports	https://indianexpress.com/section/sports/feed/
+        Chess	https://indianexpress.com/section/sports/chess/feed/
+        Cricket	https://indianexpress.com/section/sports/cricket/feed/
+        Ipl	https://indianexpress.com/section/sports/ipl/feed/
+        Football	https://indianexpress.com/section/sports/football/feed/
+        Hockey	https://indianexpress.com/section/sports/hockey/feed/
+        Olympics	https://indianexpress.com/section/olympics/feed/
+
+    nature
+        Climate Change	https://indianexpress.com/section/world/climate-change/feed/
+        Weather	https://indianexpress.com/section/weather/feed/
+
+    health
+        Health	https://indianexpress.com/section/lifestyle/health/feed/
+        Lifestyle	https://indianexpress.com/section/lifestyle/feed/
+        Nutrition	https://indianexpress.com/parenting/nutrition/feed/
+        Fitness	https://indianexpress.com/section/lifestyle/fitness/feed/
+
+    culture
+        Art And Culture	https://indianexpress.com/section/lifestyle/art-and-culture/feed/
+        Books And Literature	https://indianexpress.com/section/books-and-literature/feed/
+        Fine Reading	https://indianexpress.com/section/fine-reading/feed/
+        Good News	https://indianexpress.com/section/good-news/feed/
+        Long Reads	https://indianexpress.com/section/long-reads/feed/
+        Festivals	https://indianexpress.com/section/education/festivals/feed/
+
+
+cnn:
+    ...
+
+reuters:
+    ...
+
+bbc:
+    ...
+
+'BBC News': {
+                'rss_feeds': {
+                    'trending': 'http://feeds.bbci.co.uk/news/rss.xml',
+                    'world': 'http://feeds.bbci.co.uk/news/world/rss.xml',
+                    'sports': 'http://feeds.bbci.co.uk/sport/rss.xml',
+                    'technology': 'http://feeds.bbci.co.uk/news/technology/rss.xml',
+                    'entertainment': 'http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml',
+                    'health': 'http://feeds.bbci.co.uk/news/health/rss.xml',
+                    'science': 'http://feeds.bbci.co.uk/news/science_and_environment/rss.xml',
+                    'politics': 'http://feeds.bbci.co.uk/news/politics/rss.xml'
+                },
+                'default_feed': 'http://feeds.bbci.co.uk/news/rss.xml'
+            },
+            'CNN': {
+                'rss_feeds': {
+                    'trending': 'http://rss.cnn.com/rss/edition.rss',
+                    'world': 'http://rss.cnn.com/rss/edition_world.rss',
+                    'sports': 'http://rss.cnn.com/rss/edition_sport.rss',
+                    'technology': 'http://rss.cnn.com/rss/edition_technology.rss',
+                    'entertainment': 'http://rss.cnn.com/rss/edition_entertainment.rss',
+                    'health': 'http://rss.cnn.com/rss/edition_health.rss',
+                    'science': 'http://rss.cnn.com/rss/edition_space.rss',
+                    'politics': 'http://rss.cnn.com/rss/edition_politics.rss'
+                },
+
+'the_washington_post': {
+        'base_url': 'http://feeds.washingtonpost.com/rss/homepage',
+        'genres': {
+            'trending': 'http://feeds.washingtonpost.com/rss/homepage',
+            'sports': 'http://feeds.washingtonpost.com/rss/sports',
+            'technology': 'http://feeds.washingtonpost.com/rss/business/technology',
+            'entertainment': 'http://feeds.washingtonpost.com/rss/entertainment',
+            'health': 'http://feeds.washingtonpost.com/rss/health',
+            'science': 'http://feeds.washingtonpost.com/rss/science',
+            'politics': 'http://feeds.washingtonpost.com/rss/politics'
+        }
+    }

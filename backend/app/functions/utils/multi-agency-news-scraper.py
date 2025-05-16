@@ -41,6 +41,8 @@ class MultiAgencyNewsScraper:
     def fetch_news(self, news_agency: str, news_genre: str = 'trending', news_count: int = 25) -> List[Dict[str, str]]:
         """
         Fetch news articles from specified news agency and genre
-        
+
         :param news_agency: Name of the news agency
         :param news_genre: Genre of news
+        """
+        pass

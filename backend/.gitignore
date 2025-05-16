@@ -127,3 +127,4 @@ readme-pdfs/
 .backup/LumiFeed
 .ropeproject
 __backup
+*/functions/*/*.json

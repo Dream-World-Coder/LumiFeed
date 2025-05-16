@@ -3,14 +3,9 @@ import logging
 import requests
 from bs4 import BeautifulSoup
 import json
-from app.functions._utility__scraping import make_soup
-
-# from web_scraper import make_soup
+from app.functions.utils.scraping import make_soup
 
 # will have to set the paths a/c to app.py , not this file.
-# from io import BytesIO
-# to open an image with pillow,first we need to load it in our memory, so, requests.get(img.url) , then as its an image, so we need to use bytesIO
-
 
 class NewsScraperApi:
     def __init__(self) -> None:
@@ -40,13 +35,13 @@ class NewsScraperApi:
 
     def validateNum(self, num) -> int:
         """
-        validates parameter 'news_count' and sets it to 10 if not given / None
+            validates parameter 'news_count' and sets it to 10 if not given / None
 
-        Args:
-            num (any): _description_
+            Args:
+                num (any): _description_
 
-        Returns:
-            num:int : type converts and sets to 10 if None
+            Returns:
+                num:int : type converts and sets to 10 if None
         """
         if not str(num).isdigit():
             num = 10
@@ -57,7 +52,7 @@ class NewsScraperApi:
         return num
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # top news -> change it to trending scraping and GLOBAL if needed
+    # top news -> change it to trending scraping and GLOBAL news if needed
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def getTopNews(self, num=10) -> list:
         news_num = self.validateNum(num)
@@ -186,7 +181,6 @@ class NewsScraperApi:
         news_num = self.validateNum(num)
         fetched_news_data = []
         count = 0
-        serial = 0
 
         while count < news_num and pgNo <= self.max_pages:
             url = baseUrl + f"{cityname}/page/{pgNo}/"
@@ -202,25 +196,31 @@ class NewsScraperApi:
                 logging.info(f"Found {len(news_list)} news items on page {pgNo}")
 
                 for news in news_list:
+                    # news -> a(>figure>img) + h3(>a>{title})
                     if count >= news_num:
                         break
-                    serial += 1
 
                     news_link = quote(news.a.get("href", "#"), safe=":/")
                     news_title = news.h2.text if news.h2 else news.h3.text
+                    news_thumbnail = news.a.figure.img.get("src", "#")
 
-                    zip_list = [serial, news_title, news_link]
-                    logging.info(f"News {serial}: {news_title}, {news_link}")
-                    fetched_news_data.append(zip_list)
+                    zipped_json = {
+                        "title": news_title,
+                        "url" : news_link,
+                        "date": None,
+                        "subtitle": None,
+                        "thumbnail": news_thumbnail
+                    }
+                    fetched_news_data.append(zipped_json)
                     count += 1
 
             except AttributeError as e:
                 logging.error(f"Error processing page {pgNo}: {e}")
-                return fetched_news_data
+                return json.dumps(fetched_news_data, indent=4)
 
             pgNo += 1
 
-        return fetched_news_data
+        return json.dumps(fetched_news_data, indent=4)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Others news
@@ -367,7 +367,7 @@ class NewsScraperApi:
                 count += 1
             pgNo += 1
 
-        return fetched_news_data
+        return json.dumps(fetched_news_data, indent=4)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Extract news pages
@@ -490,7 +490,7 @@ class NewsScraperApi:
         return heading, subheading, imgUrl, news_data_string
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    # India News Scraper
+    # India News Article Scraper
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def extractNewsContentIndia(self, url):
         soup = make_soup(url)

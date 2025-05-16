@@ -27,5 +27,5 @@ if __name__ == "__main__":
     PORT = int(os.environ.get("PORT", 3000))
     HOST = "0.0.0.0"
 
-    scheduler.start()
+    # scheduler.start()
     app.run(port=PORT, host=HOST)

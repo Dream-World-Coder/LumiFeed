@@ -1,0 +1,179 @@
+{
+    "the-indian-express": {
+        "trending": {
+            "top-news": "https://indianexpress.com/section/trending/feed/",
+            "trending-in-india": "https://indianexpress.com/section/trending/trending-in-india/feed/",
+            "trending-globally": "https://indianexpress.com/section/trending/trending-globally/feed/",
+            "trending-videos": "https://indianexpress.com/videos/trending/feed/"
+        },
+        "international": {
+            "world": "https://indianexpress.com/section/world/feed/",
+            "pakistan": "https://indianexpress.com/section/pakistan/feed/",
+            "bangladesh": "https://indianexpress.com/section/world/bangladesh/feed/"
+        },
+        "indian": {
+            "india": "https://indianexpress.com/section/india/feed/",
+            "north-east-india": "https://indianexpress.com/section/north-east-india/feed/",
+            "kerala": "https://indianexpress.com/section/india/kerala/feed/"
+        },
+        "cities": {
+            "bangalore": "https://indianexpress.com/section/cities/bangalore/feed/",
+            "chennai": "https://indianexpress.com/section/cities/chennai/feed/",
+            "delhi": "https://indianexpress.com/section/cities/delhi/feed/",
+            "hyderabad": "https://indianexpress.com/section/cities/hyderabad/feed/",
+            "kolkata": "https://indianexpress.com/section/cities/kolkata/feed/",
+            "lucknow": "https://indianexpress.com/section/cities/lucknow/feed/",
+            "mumbai": "https://indianexpress.com/section/cities/mumbai/feed/",
+            "manipur": "https://indianexpress.com/section/north-east-india/manipur/feed/"
+        },
+        "entertainment": {
+            "bollywood": "https://indianexpress.com/section/entertainment/bollywood/feed/",
+            "hollywood": "https://indianexpress.com/section/entertainment/hollywood/feed/",
+            "box-office-collection": "https://indianexpress.com/section/entertainment/bollywood/box-office-collection/feed/",
+            "movie-review": "https://indianexpress.com/section/entertainment/movie-review/feed/"
+        },
+        "education": {
+            "education": "https://indianexpress.com/section/education/feed/",
+            "exams": "https://indianexpress.com/section/education/exams/feed/",
+            "editorials": "https://indianexpress.com/section/opinion/editorials/feed/",
+            "upsc-current-affairs": "https://indianexpress.com/section/upsc-current-affairs/feed/",
+            "upsc-essentials": "https://indianexpress.com/section/upsc-current-affairs/upsc-essentials/feed/"
+        },
+        "research": {
+            "research": "https://indianexpress.com/section/research/feed/",
+            "science": "https://indianexpress.com/section/technology/science/feed/"
+        },
+        "tech": {
+            "tech-reviews": "https://indianexpress.com/section/technology/tech-reviews/feed/",
+            "technology": "https://indianexpress.com/section/technology/feed/"
+        },
+        "jobs": {
+            "jobs": "https://indianexpress.com/section/jobs/feed/",
+            "bank-jobs": "https://indianexpress.com/section/jobs/bank-jobs/feed/",
+            "railway-jobs": "https://indianexpress.com/section/jobs/railway-jobs/feed/",
+            "defence-jobs": "https://indianexpress.com/section/jobs/defence-jobs/feed/",
+            "workplace": "https://indianexpress.com/section/lifestyle/workplace/feed/"
+        },
+        "enterprise": {
+            "budget": "https://indianexpress.com/section/business/budget/feed/",
+            "business": "https://indianexpress.com/section/business/feed/",
+            "companies": "https://indianexpress.com/section/business/companies/feed/",
+            "economy": "https://indianexpress.com/section/business/economy/feed/",
+            "smart-stocks": "https://indianexpress.com/section/smart-stocks/feed/",
+            "market": "https://indianexpress.com/section/business/market/feed/",
+            "personal-finance": "https://indianexpress.com/section/personal-finance/feed/"
+        },
+        "politics": {
+            "political-pulse": "https://indianexpress.com/section/political-pulse/feed/",
+            "opinion": "https://indianexpress.com/section/opinion/feed/"
+        },
+        "sports": {
+            "sports": "https://indianexpress.com/section/sports/feed/",
+            "chess": "https://indianexpress.com/section/sports/chess/feed/",
+            "cricket": "https://indianexpress.com/section/sports/cricket/feed/",
+            "ipl": "https://indianexpress.com/section/sports/ipl/feed/",
+            "football": "https://indianexpress.com/section/sports/football/feed/",
+            "hockey": "https://indianexpress.com/section/sports/hockey/feed/",
+            "olympics": "https://indianexpress.com/section/olympics/feed/"
+        },
+        "nature": {
+            "climate-change": "https://indianexpress.com/section/world/climate-change/feed/",
+            "weather": "https://indianexpress.com/section/weather/feed/"
+        },
+        "health": {
+            "health": "https://indianexpress.com/section/lifestyle/health/feed/",
+            "lifestyle": "https://indianexpress.com/section/lifestyle/feed/",
+            "nutrition": "https://indianexpress.com/parenting/nutrition/feed/",
+            "fitness": "https://indianexpress.com/section/lifestyle/fitness/feed/"
+        },
+        "culture": {
+            "art-and-culture": "https://indianexpress.com/section/lifestyle/art-and-culture/feed/",
+            "books-and-literature": "https://indianexpress.com/section/books-and-literature/feed/",
+            "fine-reading": "https://indianexpress.com/section/fine-reading/feed/",
+            "good-news": "https://indianexpress.com/section/good-news/feed/",
+            "long-reads": "https://indianexpress.com/section/long-reads/feed/",
+            "festivals": "https://indianexpress.com/section/education/festivals/feed/"
+        }
+    },
+    "bbc": {
+        "trending": {
+            "top-news": "http://feeds.bbci.co.uk/news/rss.xml",
+            "world": "http://feeds.bbci.co.uk/news/world/rss.xml",
+            "uk": "http://feeds.bbci.co.uk/news/uk/rss.xml",
+            "business": "http://feeds.bbci.co.uk/news/business/rss.xml",
+            "politics": "http://feeds.bbci.co.uk/news/politics/rss.xml",
+            "health": "http://feeds.bbci.co.uk/news/health/rss.xml",
+            "education": "http://feeds.bbci.co.uk/news/education/rss.xml",
+            "science-&-environment": "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
+            "technology": "http://feeds.bbci.co.uk/news/technology/rss.xml",
+            "entertainment-&-arts": "http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml"
+        },
+        "regions": {
+            "england": "http://feeds.bbci.co.uk/news/england/rss.xml",
+            "northern-ireland": "http://feeds.bbci.co.uk/news/northern_ireland/rss.xml",
+            "scotland": "http://feeds.bbci.co.uk/news/scotland/rss.xml",
+            "wales": "http://feeds.bbci.co.uk/news/wales/rss.xml"
+        },
+        "others": {
+            "magazine": "http://feeds.bbci.co.uk/news/magazine/rss.xml",
+            "also-in-the-news": "http://feeds.bbci.co.uk/news/also_in_the_news/rss.xml",
+            "have-your-say": "http://feeds.bbci.co.uk/news/have_your_say/rss.xml",
+            "in-pictures": "http://feeds.bbci.co.uk/news/in_pictures/rss.xml"
+        }
+    },
+    "cnn": {
+        "trending": {
+            "top-news": "http://rss.cnn.com/rss/cnn_topstories.rss",
+            "world": "http://rss.cnn.com/rss/cnn_world.rss",
+            "us": "http://rss.cnn.com/rss/cnn_us.rss",
+            "business": "http://rss.cnn.com/rss/money_latest.rss",
+            "politics": "http://rss.cnn.com/rss/cnn_politics.rss",
+            "technology": "http://rss.cnn.com/rss/cnn_tech.rss",
+            "health": "http://rss.cnn.com/rss/cnn_health.rss",
+            "entertainment": "http://rss.cnn.com/rss/cnn_showbiz.rss",
+            "travel": "http://rss.cnn.com/rss/cnn_travel.rss",
+            "latest": "http://rss.cnn.com/rss/cnn_latest.rss"
+        },
+        "specialized": {
+            "most-recent": "http://rss.cnn.com/rss/cnn_freevideo.rss",
+            "opinion": "http://rss.cnn.com/rss/cnn_allpolitics.rss"
+        }
+    },
+    "reuters": {
+        "trending": {
+            "top-news": "http://feeds.reuters.com/reuters/topNews",
+            "world": "http://feeds.reuters.com/reuters/worldNews",
+            "business": "http://feeds.reuters.com/reuters/businessNews",
+            "technology": "http://feeds.reuters.com/reuters/technologyNews",
+            "lifestyle": "http://feeds.reuters.com/reuters/lifestyle",
+            "science": "http://feeds.reuters.com/reuters/scienceNews"
+        },
+        "markets": {
+            "us-market": "http://feeds.reuters.com/reuters/USmarketsNews",
+            "uk-market": "http://feeds.reuters.com/reuters/UKmarketsNews",
+            "asia-market": "http://feeds.reuters.com/reuters/ASmarketsNews",
+            "europe-market": "http://feeds.reuters.com/reuters/EUmarketsNews"
+        },
+        "sports": {
+            "sports": "http://feeds.reuters.com/reuters/sportsNews",
+            "football": "http://feeds.reuters.com/reuters/sportsSoccer",
+            "tennis": "http://feeds.reuters.com/reuters/sportsTennis",
+            "golf": "http://feeds.reuters.com/reuters/sportsGolf"
+        }
+    },
+    "new-york-times": {
+        "trending": {
+            "home-page": "http://feeds.nytimes.com/nyt/rss/HomePage",
+            "world": "http://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+            "us": "http://rss.nytimes.com/services/xml/rss/nyt/US.xml",
+            "politics": "http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml",
+            "business": "http://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
+            "technology": "http://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
+            "science": "http://rss.nytimes.com/services/xml/rss/nyt/Science.xml",
+            "health": "http://rss.nytimes.com/services/xml/rss/nyt/Health.xml",
+            "sports": "http://rss.nytimes.com/services/xml/rss/nyt/Sports.xml",
+            "arts": "http://rss.nytimes.com/services/xml/rss/nyt/Arts.xml",
+            "travel": "http://rss.nytimes.com/services/xml/rss/nyt/Travel.xml"
+        }
+    }
+}

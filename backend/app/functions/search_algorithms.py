@@ -4,7 +4,7 @@ import re
     here database is a 2d list, and part is the sequence we need to find
     each row-list in database has 3 elements i.e. [serial, title, link],
     and this serach algorithms are for searching in title, i.e database[i][1]
-    
+
     the elements in the database may be same for some rows.
 """
 
@@ -20,7 +20,7 @@ def s1(database: list, part: str) -> list:
 
     except Exception as e:
         print(e)
-        return None
+        return []
 
 
 # alongside checking if part is in title, it also counts the num of occurrance of the part for each title
@@ -57,7 +57,7 @@ def s2(database: list, part: str) -> list:
 
     except Exception as e:
         print(e)
-        return None
+        return []
 
 
 def s2x1(database: list, part: str) -> list:
@@ -83,7 +83,7 @@ def s2x1(database: list, part: str) -> list:
 
     except Exception as e:
         print(e)
-        return None
+        return []
 
 
 def s3(database: list, part: str) -> list:
@@ -110,11 +110,11 @@ def s3(database: list, part: str) -> list:
 
     except Exception as e:
         print(e)
-        return None
+        return []
 
 
 if __name__ == "__main__":
-    d = {1: "1", 1: "2", 2: "1"}
+    d = {1: "1", 2: "2", 3: "1"}
 
     print(d[1], d[2])
     x, y = [1, 2]

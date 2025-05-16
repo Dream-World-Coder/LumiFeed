@@ -3,9 +3,7 @@ import logging
 import requests
 from bs4 import BeautifulSoup
 
-from app.functions._utility__scraping import make_soup
-
-# from web_scraper import make_soup
+from app.functions.utils.scraping import make_soup
 
 # will have to set the paths a/c to app.py , not this file.
 # from io import BytesIO

@@ -1,8 +1,6 @@
 import os
-import time
 
 MAX_FILES = 10  # Set a limit on how many alternate files can exist at one time
-
 
 def makeAlternateFilePath(path: str) -> str:
     if not os.path.exists(path):
