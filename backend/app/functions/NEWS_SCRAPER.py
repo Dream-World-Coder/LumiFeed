@@ -417,7 +417,7 @@ class NewsScraper:
                 try:
                     paragraphs = newsBody.find("div", class_="story_details").find_all(
                         "p"
-                    )[:-1]
+                    )# [:-1]
                     news_data_list = []
                     for p in paragraphs:
                         news_data_list.append(p.text)

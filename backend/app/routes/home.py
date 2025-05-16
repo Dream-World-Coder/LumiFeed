@@ -6,22 +6,22 @@ main_bp = Blueprint("main_bp", __name__)
 @main_bp.route("/")
 @main_bp.route("/home")
 def index():
-  return render_template("index.html", current_user=current_user)
+  return render_template("index.html", current_user=current_user), 200
 
 @main_bp.route("/<path:any_path>")
 @main_bp.route("/home/<path:any_path>")
 def anything(any_path):
-  return render_template("errors/404.html")
+  return render_template("errors/404.html"), 404
 
 
 @main_bp.route("/about")
 def about():
-  return render_template('about.html')
+  return render_template('about.html'), 200
 
 
 @main_bp.route("/contact")
 def contact():
-  return render_template('contact.html')
+  return render_template('contact.html'), 200
 
 # add error handlers later
 # @app.err

@@ -43,22 +43,10 @@ def is_valid_url(url: str) -> bool:
     parts = urlparse(url)
     return parts.scheme in ("http", "https") and bool(parts.netloc)
 
-def fetch_all(feeds, max_items=5):
+def fetch_all(rss_links, max_items=5):
     all_data = {}
-    for name, url in feeds.items():
+    for name, url in rss_links.items():
         feed = feedparser.parse(url)
-
-        def convert(obj):
-            if isinstance(obj, feedparser.FeedParserDict):
-                return {k: convert(v) for k, v in obj.items()}
-            elif isinstance(obj, list):
-                return [convert(i) for i in obj]
-            else:
-                return obj
-
-        with open('io.txt', 'w', encoding='utf-8') as f:
-            json.dump(convert(feed), f, indent=4, ensure_ascii=False)
-
 
         items = []
         for entry in feed.get('entries', [])[:max_items]:

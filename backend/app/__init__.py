@@ -64,6 +64,7 @@ def create_app(configs_dictionary_key="_"):
 
 
     # error handler
+    # it will make every unhandled error to a res with sts code 500
     @app.errorhandler(Exception)
     def handle_exception(e):
         print(e)

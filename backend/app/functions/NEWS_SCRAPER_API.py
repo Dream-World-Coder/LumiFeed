@@ -429,7 +429,7 @@ class NewsScraperApi:
                 try:
                     paragraphs = newsBody.find("div", class_="story_details").find_all(
                         "p"
-                    )[:-1]
+                    ) # [:-1]
                     news_data_list = []
                     for p in paragraphs:
                         news_data_list.append(p.text)
@@ -487,7 +487,12 @@ class NewsScraperApi:
         except Exception as e:
             print(f"General error: {e}")
 
-        return heading, subheading, imgUrl, news_data_string
+        return {
+            "title": heading,
+            "description": subheading,
+            "thumbnail": imgUrl,
+            "articleContent": news_data_string
+        }
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # India News Article Scraper
@@ -554,7 +559,12 @@ class NewsScraperApi:
         except Exception as e:
             print(f"Error extracting content: {e}")
 
-        return heading, subheading, imgUrl, news_data_string
+        return {
+            "title": heading,
+            "description": subheading,
+            "thumbnail": imgUrl,
+            "articleContent": news_data_string
+        }
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

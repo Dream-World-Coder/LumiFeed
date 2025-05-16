@@ -4,6 +4,10 @@ from ...functions.NEWS_EXTRACTOR import NewsExtractor
 fetchnews_api_bp = Blueprint("fetchnews_api_bp", __name__)
 extractor:NewsExtractor = NewsExtractor()
 
+# issues:
+#   reuters links are invalid
+#   some links are invalid in others also
+
 
 @fetchnews_api_bp.route("/fetch/news", methods=["GET"])
 @fetchnews_api_bp.route("/fetch-news", methods=["GET"])
@@ -21,9 +25,8 @@ def fetchnews__API():
         if number < 1 or number > 256:
             return jsonify({
                 "success": False,
-                "error": "number of news must be in 1-256 range"
+                "error": "Number of news must be in 1-256 range"
             }), 400
-
     except Exception as e:
         print(e)
         return jsonify({
@@ -34,16 +37,16 @@ def fetchnews__API():
     if not rss_link:
         return jsonify({
             "success": False,
-            "error": "rss link is required"
+            "error": "Select a sub-category"
         }), 400
 
     rss_link = extractor.normalize_link(rss_link)
-    is_valid = extractor.is_valid_url(rss_link)
-
-    if not is_valid:
+    # print(rss_link)
+    if not extractor.is_valid_url(rss_link):
         return jsonify({
             "success": False,
-            "error": "rss link is invalid"
+            "error": "Some error occurred",
+            "devmsg": "Rss link is invalid"
         }), 400
 
     try:
@@ -52,7 +55,6 @@ def fetchnews__API():
             "success": True,
             "news_list": news_list
         }), 200
-
     except Exception as e:
         print(e)
         return jsonify({
