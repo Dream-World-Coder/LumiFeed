@@ -7,8 +7,8 @@ import {
     BookOpen,
     ExternalLink,
 } from "lucide-react";
-import ProfileHeader from "../../components/Header/ProfileHeader";
-// import Footer from "../../components/Footer/Footer";
+import ProfileHeader from "../../components/Headers/ProfileHeader";
+// import Footer from "../../components/Footers/Footer";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 const ProfilePage = () => {

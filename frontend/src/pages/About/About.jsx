@@ -1,6 +1,6 @@
 import { BookOpen, Newspaper, Star } from "lucide-react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Headers/Header";
+import Footer from "../../components/Footers/Footer";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 const AboutSection = () => {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext"; // Make sure path is correct
+import { useAuth } from "../../contexts/AuthContext";
 import AppLogo from "../../components/Logo";
 import BackButton from "./components";
 import DecorativeElement from "./DecortiveElements";
@@ -34,8 +34,10 @@ const LoginPage = () => {
         setIsLoading(true);
         setError("");
 
+        const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/login`;
+
         try {
-            const response = await fetch("http://localhost:8000/api/login", {
+            const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -43,13 +45,14 @@ const LoginPage = () => {
                 body: JSON.stringify({
                     email: formData.email,
                     password: formData.password,
+                    rememberMe: formData.rememberMe,
                 }),
             });
 
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.msg || "Login failed");
+                throw new Error(data.details || "Login failed");
             }
 
             // If remember me is checked, store in localStorage
@@ -62,8 +65,8 @@ const LoginPage = () => {
             // Use the login function from Auth Context
             await login(data.access_token, data.user);
 
-            // Redirect to dashboard or home page
-            navigate("/dashboard");
+            // Redirect to home page
+            navigate("/");
         } catch (err) {
             setError(err.message);
         } finally {
@@ -121,7 +124,7 @@ const LoginPage = () => {
                     <form
                         ref={formRef}
                         onSubmit={handleSubmit}
-                        className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-sm border border-[#8B4513]/20"
+                        className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-sm text-black border border-[#8B4513]/20"
                     >
                         {/* Email Field */}
                         <div className="mb-6 form-element">

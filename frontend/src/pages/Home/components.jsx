@@ -1,184 +1,18 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import {
     ChevronDown,
     Plus,
     Minus,
-    X,
-    Menu,
     ExternalLink,
     Clock,
     Bookmark,
-    Sun,
-    Moon,
 } from "lucide-react";
 import PropTypes from "prop-types";
 
 import { Skeleton } from "@/components/ui/skeleton";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { useAuth } from "../../contexts/AuthContext";
 import { useDarkMode } from "../../contexts/DarkModeContext";
-// import SearchBar from "../../components/SearchBar";
-import AppLogo from "../../components/Logo";
-import { Search } from "lucide-react";
-
-export function Header({
-    exclude = [""],
-    abs = false,
-    darkBg = "dark:bg-[#282828]",
-}) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { currentUser } = useAuth();
-    const navigate = useNavigate();
-    const { isDark, toggleDarkMode } = useDarkMode();
-
-    let navLinks = [
-        { name: "Home", href: "/home" },
-        { name: "Saved", href: "/saved" },
-        { name: "About", href: "/about" },
-        { name: "Contact", href: "/contact" },
-    ];
-
-    if (!currentUser) {
-        navLinks.push({ name: "Login", href: "/auth/login" });
-    }
-    if (currentUser) {
-        navLinks.push({ name: "Profile", href: "/profile" });
-    }
-
-    return (
-        <header
-            className={`${abs ? "absolute" : "fixed"} w-full top-0 z-50
-                bg-[#d8d2c2] ${darkBg} dark:text-white border-b ${isDark ? "border-[#222]" : "border-[#b8b2a2]"}`}
-        >
-            <div className="max-w-7xl mx-auto px-4 sm:px-0 py-3">
-                <nav className="flex items-center justify-between">
-                    <div className="flex items-center justify-center gap-2">
-                        {/* Logo */}
-                        <div
-                            onClick={() => navigate("/landing-page")}
-                            className="flex items-center justify-center gap-2 cursor-pointer"
-                        >
-                            <AppLogo
-                                width={32}
-                                height={32}
-                                backgroundColor="#8B4513"
-                                letterColor="#fff"
-                            />
-                            <span
-                                className={`font-dahlia text-2xl ${isDark ? "text-[f8f8f8]" : "text-[#4a4947]"}`}
-                            >
-                                LumiFeed
-                            </span>
-                        </div>
-                        {/* <SearchBar round={true} hideSubmitBtn={true} /> */}
-                    </div>
-
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-2">
-                        {navLinks.map(
-                            (link, index) =>
-                                !exclude.includes(link.href) && (
-                                    <button
-                                        key={index}
-                                        onClick={() => navigate(link.href)}
-                                        className={`text-neutral-600 hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-[#fff]
-                                            box-content px-3 py-1 rounded-lg text-sm font-poppins`}
-                                    >
-                                        {link.href !== "/profile" ? (
-                                            link.name
-                                        ) : (
-                                            <Avatar className="size-6 md:size-8">
-                                                <AvatarImage
-                                                    src={
-                                                        currentUser.profilePicture
-                                                    }
-                                                    alt={`${currentUser.username}`}
-                                                />
-                                                <AvatarFallback>
-                                                    {currentUser.fullName
-                                                        .slice(0, 2)
-                                                        .toUpperCase()}
-                                                </AvatarFallback>
-                                            </Avatar>
-                                        )}
-                                    </button>
-                                ),
-                        )}
-
-                        <button onClick={toggleDarkMode} className="">
-                            {isDark ? (
-                                <Sun size={16} />
-                            ) : (
-                                <Moon className="text-neutral-600" size={16} />
-                            )}
-                        </button>
-
-                        <button className="hidden md:block text-neutral-600 dark:text-white">
-                            <Search size={16} className="ml-2" />
-                        </button>
-                    </div>
-
-                    <div className="md:hidden flex items-center justify-center gap-2">
-                        {/* mobile menu button */}
-                        <button
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="md:hidden p-2 hover:bg-white/50 rounded-sm transition-colors dark:hover:bg-[#222]/50"
-                            aria-label="Toggle menu"
-                        >
-                            {isMenuOpen ? (
-                                <X className="h-6 w-6 text-stone-600 dark:text-gray-200" />
-                            ) : (
-                                <Menu className="h-6 w-6 text-stone-600 dark:text-gray-200" />
-                            )}
-                        </button>
-                    </div>
-                </nav>
-
-                {/* mobile menu */}
-                <div
-                    className={`md:hidden absolute left-0 right-0 bg-white dark:bg-[#111] backdrop-blur-md border-b border-stone-200/50 dark:border-stone-700/50 transition-all duration-300 ease-in-out ${
-                        isMenuOpen
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 -translate-y-2 pointer-events-none"
-                    }`}
-                >
-                    <div className="px-4 py-6 space-y-6">
-                        {/* mobile nav links */}
-                        <div className="flex flex-col">
-                            {navLinks.map((link, index) => (
-                                <button
-                                    key={index}
-                                    className="py-2 pl-4 rounded-lg text-stone-600 dark:text-gray-300 hover:text-stone-800 dark:hover:text-gray-200
-                                    hover:bg-lime-300/50 transition-colors font-poppins"
-                                    onClick={() => {
-                                        setIsMenuOpen(false);
-                                        navigate(link.href);
-                                    }}
-                                >
-                                    {link.name}
-                                </button>
-                            ))}
-                            <button onClick={toggleDarkMode}>
-                                {isDark ? (
-                                    <Sun size={20} />
-                                ) : (
-                                    <Moon size={20} />
-                                )}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-    );
-}
-Header.propTypes = {
-    abs: PropTypes.bool,
-    darkBg: PropTypes.string,
-    exclude: PropTypes.array,
-};
+import rssLinks from "../../assets/data/rss-links.json";
 
 export function SelectNews({
     numberOfNews,
@@ -192,39 +26,20 @@ export function SelectNews({
 
     loading,
     handleNewsFetch,
+
+    selectedCity,
+    setSelectedCity,
 }) {
     const [isCategoryOpen, setIsCategoryOpen] = useState(true);
     const [isSourceOpen, setIsSourceOpen] = useState(false);
     const [contentHeight, setContentHeight] = useState("auto");
+
     const contentRef = useRef(null);
     const dropdownRef = useRef(null);
 
-    const categories = [
-        "Trending",
-        "India",
-        "City Wise",
-        "Science",
-        "Technology",
-        "Business",
-        "Health",
-        "Cricket",
-        "Sports",
-        "Politics",
-        "Lifestyle",
-        "Entertainment",
-    ];
-
-    const newsSources = [
-        "The Indian Express",
-        "BBC News",
-        "CNN",
-        "The New York Times",
-        "The Guardian",
-        // "The Washington Post",
-        // "The Times of India",
-        // "NDTV",
-        // "Hindustan Times",
-    ];
+    const newsSources = Object.keys(rssLinks);
+    const categories = Object.keys(rssLinks[selectedSource]);
+    const subCategories = rssLinks[selectedSource][selectedCategory];
 
     useEffect(() => {
         // Handle click outside dropdown
@@ -249,7 +64,7 @@ export function SelectNews({
                 setContentHeight("0px");
             }
         }
-    }, [isCategoryOpen]);
+    }, [isCategoryOpen, selectedCategory]);
 
     return (
         <div className="flex flex-col md:flex-row gap-4 w-full py-4 mb-12">
@@ -298,6 +113,32 @@ export function SelectNews({
                                 </button>
                             ))}
                         </div>
+
+                        {selectedCategory === "City Wise" && (
+                            <div className="mt-4">
+                                <h2 className="text-xl font-serif mb-2">
+                                    Select a subcategory
+                                </h2>
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                                    {subCategories.map((city) => (
+                                        <button
+                                            key={city}
+                                            onClick={() =>
+                                                setSelectedCity(city)
+                                            }
+                                            className={`${
+                                                selectedCity === city
+                                                    ? "bg-[#B17457] hover:bg-[#B17457] text-white dark:bg-[#333]"
+                                                    : "bg-[#D8D2C2] hover:bg-[#C8C2B2] dark:bg-[#222] dark:hover:bg-[#252525]"
+                                            }
+                                                py-3 px-4 rounded text-center transition-colors font-poppins text-sm capitalize`}
+                                        >
+                                            {city}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                             <span className="whitespace-nowrap font-poppins">
@@ -387,6 +228,8 @@ SelectNews.propTypes = {
     setSelectedSource: PropTypes.func,
     loading: PropTypes.bool,
     handleNewsFetch: PropTypes.func,
+    selectedCity: PropTypes.bool,
+    setSelectedCity: PropTypes.func,
 };
 
 function BookSvg({ fillClr = "#000", width = "100px", height = "100px" }) {
@@ -528,133 +371,4 @@ NewsList.propTypes = {
     news: PropTypes.array,
     loading: PropTypes.bool,
     handleArticleClick: PropTypes.func,
-};
-
-export function Footer({ currentUser }) {
-    const [year] = useState(new Date().getFullYear());
-
-    return (
-        <footer className="bg-[#d8d2c2] py-6 px-4 w-full mt-16 dark:bg-[#222]">
-            <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-start">
-                    {/* Logo */}
-                    <div className="mb-6 md:mb-0">
-                        <h2 className="text-5xl font-dahlia text-stone-700 dark:text-neutral-300">
-                            LumiFeed
-                        </h2>
-                    </div>
-
-                    {/* Links Container */}
-                    <div className="flex flex-col sm:flex-row gap-8 md:gap-16">
-                        {/* Social Links */}
-                        <div className="mb-4 sm:mb-0">
-                            <ul className="space-y-2">
-                                <li className="hover:underline decoration-2 underline-offset-4">
-                                    <a
-                                        href="mailto:lumifeed101@gmail.com"
-                                        className="text-stone-700 dark:text-neutral-300"
-                                    >
-                                        Email
-                                    </a>
-                                </li>
-                                <li className="hover:underline decoration-2 underline-offset-4">
-                                    <a
-                                        href="https://github.com/Dream-World-Coder/LumiFeed"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="text-stone-700 dark:text-neutral-300"
-                                    >
-                                        Github
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Navigation Links */}
-                        <div>
-                            <ul className="space-y-2">
-                                <li className="hover:underline decoration-2 underline-offset-4">
-                                    <a
-                                        href="/"
-                                        className="text-stone-700 dark:text-neutral-300"
-                                    >
-                                        Home
-                                    </a>
-                                </li>
-                                {currentUser && (
-                                    <li className="hover:underline decoration-2 underline-offset-4">
-                                        <a
-                                            href={`/profile`}
-                                            className="text-stone-700 dark:text-neutral-300"
-                                        >
-                                            Profile
-                                        </a>
-                                    </li>
-                                )}
-                                <li className="hover:underline decoration-2 underline-offset-4">
-                                    <a
-                                        href="/about"
-                                        className="text-stone-700 dark:text-neutral-300"
-                                    >
-                                        About
-                                    </a>
-                                </li>
-                                <li className="hover:underline decoration-2 underline-offset-4">
-                                    <a
-                                        href="/contact"
-                                        className="text-stone-700 dark:text-neutral-300"
-                                    >
-                                        Contact
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Copyright */}
-                <div className="mt-8 pt-4 border-t border-[#c8c2b2] dark:border-[#333] text-stone-700 dark:text-neutral-300 text-sm flex justify-between items-center">
-                    <div>Copyright © {year} Lumifeed</div>
-                    <div className="flex gap-2">
-                        <button className="bg-stone-700 text-white p-2 rounded-full hover:bg-stone-800">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-4 w-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M19 9l-7 7-7-7"
-                                />
-                            </svg>
-                        </button>
-                        <button className="bg-stone-700 text-white p-2 rounded-full hover:bg-stone-800 dark:hover:bg-stone-600">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-4 w-4"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M5 15l7-7 7 7"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    );
-}
-
-Footer.propTypes = {
-    currentUser: PropTypes.object,
 };

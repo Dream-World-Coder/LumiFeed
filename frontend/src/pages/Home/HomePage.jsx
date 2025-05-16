@@ -1,23 +1,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import {
-    Header,
-    SelectNews,
-    InfoContainer,
-    NewsList,
-    Footer,
-} from "./components";
+
 import { useDarkMode } from "../../contexts/DarkModeContext";
+
+import Header from "../../components/Headers/HomeHeader";
+import Footer from "../../components/Footers/HomeFooter";
+import { SelectNews, InfoContainer, NewsList } from "./components";
 
 /*
 /saved : /profile
 in case of env in vite always have to add VITE_ prefix to every variable
 */
 export default function LumiFeed() {
-    const [numberOfNews, setNumberOfNews] = useState(25);
-    const [selectedCategory, setSelectedCategory] = useState("Trending");
     const [selectedSource, setSelectedSource] = useState("The Indian Express");
+    const [selectedCategory, setSelectedCategory] = useState("Top");
+    const [selectedSubCategory, setSelectedSubCategory] = useState("kolkata");
+    const [numberOfNews, setNumberOfNews] = useState(25);
 
     const [news, setNews] = useState(() => {
         const savedArticles = localStorage.getItem("newsArticles");
@@ -35,10 +34,15 @@ export default function LumiFeed() {
 
     const handleNewsFetch = () => {
         setIsLoading(true);
+        let category = null;
+        selectedCategory === "City Wise"
+            ? (category = "city")
+            : (category = selectedCategory);
         let newsApiUrl =
-            `${import.meta.env.VITE_BACKEND_URL}/api/fetch/news` +
+            `${import.meta.env.VITE_BACKEND_URL}/fetch/news` +
             `?news_agency=${selectedSource.toLowerCase().replace(/\s+/g, "")}` +
-            `&news_type=${selectedCategory.toLowerCase()}` +
+            `&news_type=${category.toLowerCase()}` +
+            `&name_of_city=${selectedSubCategory.toLowerCase()}` +
             `&news_count=${numberOfNews}`;
 
         fetch(newsApiUrl)
@@ -68,7 +72,7 @@ export default function LumiFeed() {
     const handleArticleClick = (url) => {
         setArticleLoading(true);
         const apiUrl =
-            `${import.meta.env.VITE_BACKEND_URL}/api/fetch/article` +
+            `${import.meta.env.VITE_BACKEND_URL}/fetch/article` +
             `?url=${encodeURIComponent(url)}`;
 
         fetch(apiUrl)
@@ -86,7 +90,7 @@ export default function LumiFeed() {
                 );
 
                 // Navigate to article page with data
-                navigate("/article", {
+                navigate("/article-reader", {
                     state: articleData,
                 });
             })
@@ -102,6 +106,10 @@ export default function LumiFeed() {
     return (
         <section
             className={`pt-16 ${isDark ? "bg-[#171717]" : "bg-[#fffcf5]"} __min-h-screen`}
+            // style={{
+            //     background:
+            //         "radial-gradient(35.36% 35.36% at 100% 25%,transparent 66%,#fff 68% 70%,transparent 72%) 80px 80px/160px 160px,radial-gradient(35.36% 35.36% at 0 75%,transparent 66%,#fff 68% 70%,transparent 72%) 80px 80px/160px 160px,radial-gradient(35.36% 35.36% at 100% 25%,transparent 66%,#fff 68% 70%,transparent 72%) 0 0/160px 160px,radial-gradient(35.36% 35.36% at 0 75%,transparent 66%,#fff 68% 70%,transparent 72%) 0 0/160px 160px,repeating-conic-gradient(#f4f4f4 0 25%,transparent 0 50%) 0 0/160px 160px,radial-gradient(transparent 66%,#fff 68% 70%,transparent 72%) 0 40px/80px 80px #f4f4f4",
+            // }}
         >
             <Header exclude={["/contact", "/about"]} />
 
@@ -125,6 +133,8 @@ export default function LumiFeed() {
                     setSelectedSource={setSelectedSource}
                     loading={loading}
                     handleNewsFetch={handleNewsFetch}
+                    selectedSubCategory={selectedSubCategory}
+                    setSelectedSubCategory={setSelectedSubCategory}
                 />
 
                 <div className="w-full flex gap-4">

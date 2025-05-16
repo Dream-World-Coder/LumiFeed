@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext"; // Make sure path is correct
+import { useAuth } from "../../contexts/AuthContext";
 import AppLogo from "../../components/Logo";
 import BackButton from "./components";
 import DecorativeElement from "./DecortiveElements";
@@ -56,22 +56,21 @@ const RegisterPage = () => {
             return;
         }
 
+        const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/register`;
+
         try {
             // Register request
-            const registerResponse = await fetch(
-                "http://localhost:8000/api/register",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        username: formData.username,
-                        email: formData.email,
-                        password: formData.password,
-                    }),
+            const registerResponse = await fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
                 },
-            );
+                body: JSON.stringify({
+                    username: formData.username,
+                    email: formData.email,
+                    password: formData.password,
+                }),
+            });
 
             const registerData = await registerResponse.json();
 
@@ -154,7 +153,7 @@ const RegisterPage = () => {
                     <form
                         ref={formRef}
                         onSubmit={handleSubmit}
-                        className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-sm border border-[#8B4513]/20"
+                        className="bg-white/40 backdrop-blur-md rounded-lg p-8 shadow-sm text-black border border-[#8B4513]/20"
                     >
                         {/* Username Field */}
                         <div className="mb-6 form-element">

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { BookMarked, Layout, Filter, Brain } from "lucide-react";
 import { VisitLandingPageBtn } from "./components";
 import AppLogo from "../../components/Logo";
-import Footer from "../../components/Footer/Footer";
+import Footer from "../../components/Footers/Footer";
 
 const LandingPage = () => {
     // const [activeFeature, setActiveFeature] = useState(0);
@@ -60,9 +60,8 @@ const LandingPage = () => {
         "The New York Times",
         "The Guardian",
         "The Washington Post",
-        "Al Jazeera",
-        "The Times of India",
-        "NDTV",
+        "Reuters",
+        "The Hindu",
         "Hindustan Times",
     ];
 

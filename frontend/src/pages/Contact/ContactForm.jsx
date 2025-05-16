@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Mail, User, MessageSquare, Send } from "lucide-react";
 
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Headers/Header";
+import Footer from "../../components/Footers/Footer";
 
 // i will take name and email from database if the user is logged in
 // maybe this route should be opened only when logged in

@@ -1,13 +1,6 @@
-import {
-    Linkedin,
-    Mail,
-    Globe,
-    Book,
-    Github,
-    MessageSquare,
-} from "lucide-react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import { Github, MessageSquare } from "lucide-react";
+import Header from "../../components/Headers/Header";
+import Footer from "../../components/Footers/Footer";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 // import AppLogo from "../../components/Logo";
 

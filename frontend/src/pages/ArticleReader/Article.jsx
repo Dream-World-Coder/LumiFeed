@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
 import { Moon, Sun, FileText, ChevronLeft, Type } from "lucide-react";
 import AppLogo from "../../components/Logo";
 import { useDarkMode } from "../../contexts/DarkModeContext";
@@ -55,15 +55,18 @@ const NewsArticle = () => {
                             >
                                 <ChevronLeft className="w-6 h-6" />
                             </button>
-                            <AppLogo
-                                width={26}
-                                height={26}
-                                backgroundColor="#8B4513"
-                                letterColor="#FFFFFF"
-                            />
-                            <span className="ml-2 text-xl font-dahlia">
-                                LumiFeed
-                            </span>
+
+                            <NavLink to={"/"} className={`flex items-center`}>
+                                <AppLogo
+                                    width={26}
+                                    height={26}
+                                    backgroundColor="#8B4513"
+                                    letterColor="#FFFFFF"
+                                />
+                                <span className="ml-2 text-xl font-dahlia">
+                                    LumiFeed
+                                </span>
+                            </NavLink>
                         </div>
 
                         {/* Controls */}
