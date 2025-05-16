@@ -5,6 +5,7 @@ import AppLogo from "../../components/Logo";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 import fontSizes from "./fontsSizes";
 import fonts from "./fontFamilies";
+import { formatDate } from "../../services/dateFormat";
 
 const NewsArticle = () => {
     const [fontSize, setFontSize] = useState("base");
@@ -27,7 +28,7 @@ const NewsArticle = () => {
         return <div>Loading article...</div>;
     }
 
-    const { heading, subHeading, imgUrl, articleContent } = articleData;
+    // const { heading, subHeading, imgUrl, articleContent } = articleData;
 
     return (
         <div
@@ -178,17 +179,37 @@ const NewsArticle = () => {
             {/* Main Content */}
             <main className="max-w-4xl mx-auto px-4 pt-24 pb-16">
                 <article>
-                    <h1
-                        className={`font-serif font-bold ${fontSizes[fontSize].heading} mb-6`}
-                    >
-                        {heading}
-                    </h1>
+                    {articleData.title && (
+                        <h1
+                            className={`font-serif font-bold ${fontSizes[fontSize].heading} mb-6`}
+                        >
+                            {articleData.title}
+                        </h1>
+                    )}
 
-                    <h2
-                        className={`font-sentient ${fontSizes[fontSize].subheading} mb-8 opacity-80`}
-                    >
-                        {subHeading}
-                    </h2>
+                    {(articleData.date || articleData.author?.length > 0) && (
+                        <div className="flex items-center justify-between mt-2 mb-4 text-sm dark:text-neutral-400 text-neutral-700">
+                            {articleData.date && (
+                                <span>{formatDate(articleData.date)}</span>
+                            )}
+                            {articleData.author?.length > 0 && (
+                                <span className="">
+                                    By{" "}
+                                    <span className="font-serif italic">
+                                        {articleData.author[0]}
+                                    </span>
+                                </span>
+                            )}
+                        </div>
+                    )}
+
+                    {articleData.description && (
+                        <h2
+                            className={`font-sentient ${fontSizes[fontSize].subheading} mb-8 opacity-80`}
+                        >
+                            {articleData.description}
+                        </h2>
+                    )}
 
                     {/* Summary Drawer */}
                     {showSummary && (
@@ -203,24 +224,29 @@ const NewsArticle = () => {
                             <p
                                 className={`${fonts[fontFamily].class} text-lg opacity-80`}
                             >
-                                {subHeading}
+                                {articleData.description ||
+                                    "Summary Unavilable"}
                             </p>
                         </div>
                     )}
 
                     {/* Article Image */}
-                    <div className="relative aspect-video mb-8 rounded-lg overflow-hidden">
-                        <img
-                            src={`${imgUrl}`}
-                            alt={`${heading}`}
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
+                    {articleData.thumbnail && (
+                        <div className="relative aspect-video mb-8 rounded-lg overflow-hidden">
+                            <img
+                                src={articleData.thumbnail}
+                                alt={articleData.title}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                    )}
 
                     {/* Article Content */}
                     <div
                         className={`${fonts[fontFamily].class} ${fontSizes[fontSize].content} space-y-6`}
-                        dangerouslySetInnerHTML={{ __html: articleContent }}
+                        dangerouslySetInnerHTML={{
+                            __html: articleData.articleContent,
+                        }}
                     ></div>
                 </article>
             </main>
