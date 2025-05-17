@@ -216,9 +216,9 @@ export function useSelectNews() {
                                                 ? "Fetching..."
                                                 : "Fetch"}
                                         </button>
-                                        <button className="px-4 py-2 bg-[#D25769] dark:bg-rose-600 hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins">
+                                        {/* <button className="px-4 py-2 bg-[#D25769] dark:bg-rose-600 hover:bg-[#B24759] text-white rounded-full transition-colors text-sm font-poppins">
                                             Reset
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                             </div>
