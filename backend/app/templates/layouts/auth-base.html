@@ -39,7 +39,7 @@
                             <!-- Redirect Link -->
                             {% block redirect %} {% endblock %}
                             <a
-                                href="{% block origin %}{{url_for('index')}}{% endblock %}"
+                                href="{% block origin %}{{url_for('main_bp.index')}}{% endblock %}"
                                 class="home-link"
                                 >Go Back</a
                             >
@@ -327,7 +327,7 @@
         {% block scripts %} {% endblock %}
         <script
             type="text/javascript"
-            src="{{url_for(static, filename=js/lenis.js)}}"
+            src="{{url_for('static', filename='js/lenis.js')}}"
         ></script>
         <script>
             const lenis = new Lenis({
