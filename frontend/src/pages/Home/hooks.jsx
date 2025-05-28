@@ -345,9 +345,9 @@ export function useNewsList({ news: articles, newsLoading }) {
                             key={index}
                             className="rounded-lg border p-3 hover:shadow-md transition-shadow"
                         >
-                            <div className="flex justify-start gap-4 mb-2">
+                            <div className="flex flex-col md:flex-row justify-start gap-4 mb-2">
                                 {article.thumbnail && (
-                                    <div className="overflow-hidden aspect-video min-w-40 max-w-40 rounded">
+                                    <div className="overflow-hidden aspect-video md:min-w-40 md:max-w-40 rounded">
                                         <img src={article.thumbnail} alt="" />
                                     </div>
                                 )}
