@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --bg1: bisque;
+    --bg2: black;
+    --clr2: rgb(221, 43, 79);
+    --c2: #dd2b4f;
+}
+
+body{
+    /* background-color: bisque; */
+    background-color: var(--bg1);
+    color: black;
+}
+
+.f0{
+    font-size: 0rem;
+}
+
+
+@media (min-width: 300px) and (max-width: 768px) {
+    /* :root{
+        
+    } */
+
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+
+}

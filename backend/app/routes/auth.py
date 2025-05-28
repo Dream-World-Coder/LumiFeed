@@ -44,8 +44,10 @@ def verify_email():
 
 
 
-# verify email token
+# verify email token !!!
 # -------------------------
+# flawed logic, store the email of the registering person, the check if those emails matched or not
+# or else at current system, you just get the verification link to get complete access of someone's account
 @auth_bp.route("/verify", methods=["GET"])
 def verify():
   if current_user.is_authenticated:
@@ -170,6 +172,7 @@ def register():
             # ------------------------------------------------------------------
             read_later = Collection.query.filter_by(collection_name="Read Later").first()
             liked_articles = Collection.query.filter_by(collection_name="Liked Articles").first()
+
             if not read_later or not liked_articles:
                 read_later = Collection(collection_name="Read Later", collection_type=CollectionType.READ_LATER)
                 liked_articles = Collection(collection_name="Liked Articles", collection_type=CollectionType.LIKED)
@@ -229,15 +232,22 @@ def login():
             if not usr:
                 return jsonify({'error': 'User not found'}), 404
 
-            # if not usr.email_verified:
-            #     return jsonify({
-            #         'error': 'Email unverified. User\'s data cannot be retrieved. Try again after 24 hours.'
-            #     }), 401
+            '''
+            no need, their accounts will be deleted in a week & they are almost same as logged out
 
+            if not usr.email_verified:
+                return jsonify({
+                    'error': 'Email unverified. User\'s data cannot be retrieved. Try again after 24 hours.'
+                }), 401
+            '''
+
+            '''
+            will activate when a scheduler is set for removing the time, need a db attribute
             if usr.failed_logins >= 5:  # Optional: Add max attempts
                 return jsonify({
                     'error': 'Account temporarily locked due to too many failed attempts'
                 }), 429
+            '''
 
             if not usr.check_password(user_password):
                 usr.increment_failed_logins()

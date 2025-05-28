@@ -16,16 +16,21 @@ load_dotenv()
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False, unique=True)
     email = db.Column(db.String(128), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False)
+
     email_verified = db.Column(db.Boolean, nullable=False, default=False)
-    profile_pic = db.Column(db.String(256), nullable=False, default="images/default-profile.webp")
+    profile_pic = db.Column(db.String(256), nullable=False, default="/images/defaults/profile.webp")
+    # now the backend based webapp will not show this image, because the path is /static/images/... for that
+
     ip_address = db.Column(db.String(40), nullable=False)  # IPv6-compatible
     device_info = db.Column(db.Text, nullable=False)
     last_login = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     failed_logins = db.Column(db.SmallInteger, nullable=False, default=0)
+
     total_credits = 10
     used_credits = db.Column(db.SmallInteger, nullable=False, default=0)
 
@@ -45,12 +50,12 @@ class User(db.Model, UserMixin):
         lazy='dynamic'
     )
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     # Create default collections after user creation
-    #     if 'username' in kwargs:  # Only create if it's a new user being created
-    #         db.session.flush()  # This gets us the ID
-    #         self.create_default_collections()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Create default collections after user creation
+        if 'username' in kwargs:  # Only create if it's a new user being created
+            db.session.flush()  # This gets us the ID
+            self.create_default_collections()
 
     def create_default_collections(self):
         """Create default Read Later and Liked Articles collections for new user"""

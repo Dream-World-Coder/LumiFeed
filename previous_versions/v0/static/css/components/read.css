@@ -1,0 +1,106 @@
+
+
+:root{
+    --read-h: 85vh;
+    --read-w: 90vw;
+    /* --read-left: 90vh; */
+}
+
+#read{
+    position: fixed;
+    z-index: 9999;
+    top: calc(var(--header-height) + 1rem);
+    left: calc((100vw - var(--read-w)) / 2);
+    width: var(--read-w);
+    height: var(--read-h);
+    /* background-color: darkorange; */
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 35px;
+    padding: 10px;
+    display: none;
+}
+
+.read__container{
+    position: relative;
+    background-color: rgb(255, 245, 233);
+    border-radius: 25px;
+    border: 3px solid darkorange;
+}
+
+.read__navigations{
+    position: relative;
+    height: 3.5rem;
+    /* background-color: rgb(255, 206, 146); */
+    background-color: darkorange;
+    border-radius: 20px 20px 0 0;
+    border-bottom: 2px solid rgb(255, 201, 135);
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+
+.read__icons,
+.read__icons img{
+    width: 35px;
+    height: 35px;
+}
+
+.read__icons{
+    z-index: 99999;
+}
+
+.read__page{
+    position: relative;
+    border-radius: 0px 0px 25px 25px;
+    height: calc(100% - 3.5rem);
+    padding: 30px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-image: url(../../images/paper-texture.webp);
+}
+
+.read__page p{
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+#read.hide{
+    display: none;
+}
+
+
+
+
+@media (min-width: 300px) and (max-width: 768px) {
+    #read{
+        height: 75vh;
+    }
+    .read__navigations{
+        height: 2rem;
+    }
+    .read__page{
+        height: calc(100% - 2rem);
+    }
+    .read__page h1{
+        font-size: 1.5rem;
+    }
+    .read__page p{
+        font-size: 0.8rem;
+    }
+    .read__icons,
+    .read__icons img{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+
+}

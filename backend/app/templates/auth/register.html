@@ -30,10 +30,7 @@
 
 <!-- redirect -->
 {% block redirect %}
-<a
-    class="redirection_link"
-    href="{{url_for('login')}}"
-    class="signup-image-link"
+<a class="redirection_link" href="/login" class="signup-image-link"
     >Have an account? Log In</a
 >
 {% endblock %}
@@ -202,7 +199,7 @@
 
                 if (response.ok && result.success) {
                     window.location.assign(
-                        "http://127.0.0.1:8000/verify-email",
+                        "http://127.0.0.1:3000/verify-email",
                     );
                 } else {
                     displayFlashMessage(

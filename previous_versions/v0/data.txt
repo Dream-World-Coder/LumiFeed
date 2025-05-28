@@ -1,0 +1,76 @@
+city
+# wrapper>#north-east-data>ul>li>h2>a#href>text
+# li> a[all + figure>img] + h2[a>text+link]
+
+https://indianexpress.com/section/cities/kolkata/page/2/
+# body> #wrapper> #section > div.contaiiner > div.row.ev-meter-content > div.leftpanel > div.nation > div.articles.first
+
+
+
+
+
+
+
+
+# main home link
+# body> #wrapper > .container>.left-sidebar+.right-sidebar> div.left-part + div.right-part* > div.other-article> .story-image + .content-txt>h3>a>text+link[href]
+# div.right-part> top-news >ul >li>h3>a
+
+# //*[@id="HP_LATEST_NEWS"]/div[1]/div[3] what is this? x-path
+
+
+
+
+
+findAll vs find_all
+
+
+
+
+
+# https://indianexpress.com/section/india/
+# https://indianexpress.com/section/india/page/1/
+#section > div.container > div.row > div.leftpanel > div.nation > div.articles > .img-context > h2> a + .date + p> text+href
+
+get_text
+output
+                        encoded_href = quote(href, safe=":/")
+                        href = notice_tag.get('href', '#')
+                        vs elem.attrs['href'] ?
+
+                        how to make my own modulw. like utility class
+
+
+
+
+
+
+import pandas as pd
+
+# Step 2: Create a DataFrame
+data = {
+    'Name': ['John', 'Emily', 'Mike', 'Lisa'],
+    'Age': [28, 23, 35, 31],
+    'Gender': ['M', 'F', 'M', 'F']
+}
+df = pd.DataFrame(data)
+
+# Step 3 & 4: Save the DataFrame to a CSV file
+df.to_csv('example_data.csv', index=False)
+
+print("DataFrame has been saved to 'example_data.csv'")
+
+
+
+yt#content
+
+class="style-scope ytd-rich-grid-media", #details > {all info}
+
+title: 
+
+#meta && style-scope >h3>a#video-title-link.yt-simple-endpoint[href, title aria-label] > yt-formatted-string.style-scope ytd-rich-grid-media>text == title 
+
+channel name = a .yt-simple-endpoint style-scope yt-formatted-string [href]>text
+
+views> span .inline-metadata-item style-scope ytd-video-meta-block> text [0]
+time> span .inline-metadata-item style-scope ytd-video-meta-block > text [1]
