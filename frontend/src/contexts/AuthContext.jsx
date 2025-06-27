@@ -1,124 +1,116 @@
-// src/contexts/AuthContext.js
+// src/contexts/AuthContext.jsx
 import { createContext, useState, useContext, useEffect } from "react";
+import { DatabaseService, initializeDatabase } from "../db/database";
+import PropTypes from "prop-types";
 
-// Create the context
 const AuthContext = createContext(null);
 
-// Custom hook for using the auth context
-export const useAuth = () => {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error("useAuth must be used within an AuthProvider");
-    }
-    return context;
-};
-
-// Provider component that wraps your app and makes auth available to any child component
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);
-    const [token, setToken] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    // Check if currentUser is logged in when the component mounts
-    useEffect(() => {
-        const storedToken = localStorage.getItem("token");
-        const storedUser = localStorage.getItem("currentUser");
+  // Check if currentUser has stored his info in the indexedDB when the component mounts
+  useEffect(() => {
+    const initializeApp = async () => {
+      try {
+        // Initialize database
+        await initializeDatabase();
 
-        if (storedToken && storedUser) {
-            setToken(storedToken);
-            setCurrentUser(JSON.parse(storedUser));
+        // Check if user exists
+        const user = await DatabaseService.getCurrentUser();
+        if (user) {
+          setCurrentUser(user);
         }
+      } catch (error) {
+        console.error("Error initializing app:", error);
+      } finally {
         setLoading(false);
-    }, []);
-
-    // Login method
-    const login = async (email, password) => {
-        try {
-            const response = await fetch("http://localhost:5000/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
-            });
-
-            if (!response.ok) {
-                throw new Error("Login failed");
-            }
-
-            const data = await response.json();
-
-            // Store user data and token
-            localStorage.setItem("token", data.access_token);
-            localStorage.setItem("currentUser", JSON.stringify(data.user));
-
-            setToken(data.access_token);
-            setCurrentUser(data.user);
-
-            return { success: true };
-        } catch (error) {
-            return { success: false, error: error.message };
-        }
+      }
     };
 
-    // Logout method
-    const logout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("currentUser");
-        setToken(null);
-        setCurrentUser(null);
-    };
+    initializeApp();
+  }, []);
 
-    // Check if currentUser is authenticated
-    const isAuthenticated = () => {
-        return !!token;
-    };
+  const login = async (userData) => {
+    try {
+      // Validate required fields
+      if (!userData.username || !userData.fullName) {
+        throw new Error("Username and Full Name are required");
+      }
 
-    // Get the auth header for API calls
-    const getAuthHeader = () => {
-        return token ? { Authorization: `Bearer ${token}` } : {};
-    };
+      // Create or update user in database
+      const user = await DatabaseService.createUser(userData);
+      setCurrentUser(user);
 
-    // Create an authenticated fetch wrapper
-    const authFetch = async (url, options = {}) => {
-        if (!token) {
-            throw new Error("No authentication token available");
-        }
+      return { success: true, user };
+    } catch (error) {
+      console.error("Login error:", error);
+      return { success: false, error: error.message };
+    }
+  };
 
-        const headers = {
-            ...options.headers,
-            ...getAuthHeader(),
-        };
+  const logout = async () => {
+    try {
+      setCurrentUser(null);
+      return { success: true };
+    } catch (error) {
+      console.error("Logout error:", error);
+      return { success: false, error: error.message };
+    }
+  };
 
-        // try {
-        const response = await fetch(url, { ...options, headers });
+  const updateUser = async (userData) => {
+    try {
+      if (!currentUser) {
+        throw new Error("No user logged in");
+      }
 
-        // Handle token expiration
-        if (response.status === 401) {
-            logout();
-            throw new Error("Session expired");
-        }
+      const updatedUser = await DatabaseService.createUser({
+        ...currentUser,
+        ...userData,
+      });
 
-        return response;
-        // } catch (error) {
-        //     throw error;
-        // }
-    };
+      setCurrentUser(updatedUser);
+      return { success: true, user: updatedUser };
+    } catch (error) {
+      console.error("Update user error:", error);
+      return { success: false, error: error.message };
+    }
+  };
 
-    // Value object that will be passed to provider
-    const value = {
-        currentUser,
-        token,
-        loading,
-        login,
-        logout,
-        isAuthenticated,
-        authFetch,
-    };
+  const deleteAllData = async () => {
+    try {
+      await DatabaseService.deleteAllUserData();
+      setCurrentUser(null);
+      return { success: true };
+    } catch (error) {
+      console.error("Delete all data error:", error);
+      return { success: false, error: error.message };
+    }
+  };
 
-    return (
-        <AuthContext.Provider value={value}>
-            {!loading && children}
-        </AuthContext.Provider>
-    );
+  const value = {
+    currentUser,
+    loading,
+    login,
+    logout,
+    updateUser,
+    deleteAllData,
+    isAuthenticated: !!currentUser,
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
+};
+AuthProvider.propTypes = { children: PropTypes.node };
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 };
