@@ -1,4 +1,5 @@
 // src/pages/Auth/Dexie/register.js
+
 import { useState, useRef } from "react";
 import { User, UserCheck, Camera } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import AppLogo from "../../../components/Logo";
 import BackButton from "../components";
 import DecorativeElement from "../DecortiveElements";
+import { useEffect } from "react";
 
 const RegisterPageDexie = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +18,7 @@ const RegisterPageDexie = () => {
     profilePicture: "https://picsum.photos/id/18/200/200",
   });
 
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
   const formRef = useRef(null);
   const decorRef = useRef(null);
   const navigate = useNavigate();
@@ -88,7 +90,8 @@ const RegisterPageDexie = () => {
     try {
       new URL(string);
       return true;
-    } catch (_) {
+    } catch (e) {
+      console.log(e);
       return false;
     }
   };
@@ -111,7 +114,7 @@ const RegisterPageDexie = () => {
       });
 
       if (result.success) {
-        navigate("/dashboard"); // Redirect to dashboard or home page
+        navigate("/");
       } else {
         setError(result.error || "Registration failed");
       }
@@ -121,6 +124,10 @@ const RegisterPageDexie = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (currentUser) navigate("/");
+  }, [currentUser, navigate]);
 
   return (
     <>
