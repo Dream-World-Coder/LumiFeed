@@ -7,7 +7,7 @@ from flask_apscheduler import APScheduler
 
 from .configs import configs_dictionary
 
-from .models import init_app as init_db, db
+# from .models import init_app as init_db, db
 from .models.user import User
 
 from .routes import init_app as init_routes
@@ -24,7 +24,8 @@ def create_app(configs_dictionary_key="_"):
   cors.init_app(app, origins=[
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://lumifeed.netlify.app"
+    "https://lumifeed.netlify.app",
+    "https://lumifeed.vercel.app",
   ])
 
   # csrf
@@ -36,7 +37,7 @@ def create_app(configs_dictionary_key="_"):
   login_manager.init_app(app)
 
   # models + db + migrate
-  init_db(app)
+  # init_db(app)
 
   # routes + mail
   init_routes(app)
@@ -52,7 +53,7 @@ def create_app(configs_dictionary_key="_"):
     with app.app_context():
       try:
         deleted_count = User.query.filter_by(email_verified=False).delete()
-        db.session.commit()
+        # db.session.commit()
         if deleted_count > 0:
           print(f"\n\n{deleted_count} unverified users deleted.\n")
       except Exception as e:
