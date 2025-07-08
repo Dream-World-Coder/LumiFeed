@@ -26,6 +26,7 @@ def create_app(configs_dictionary_key="_"):
     "http://127.0.0.1:5173",
     "https://lumifeed.netlify.app",
     "https://lumifeed.vercel.app",
+    "https://encryptease.pythonanywhere.com"
   ])
 
   # csrf
