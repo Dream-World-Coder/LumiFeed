@@ -20,8 +20,8 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_USE_TLS = True
     MAIL_PORT = 587
-    MAIL_USERNAME = os.getenv('EMAIL_USER')
-    MAIL_PASSWORD = os.getenv('EMAIL_PASS')
+    MAIL_USERNAME = os.getenv('EMAIL_USER', 'abc')
+    MAIL_PASSWORD = os.getenv('EMAIL_PASS', 'def')
 
     JWT_SECRET_KEY = SECRET_KEY
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)

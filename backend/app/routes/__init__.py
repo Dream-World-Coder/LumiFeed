@@ -1,11 +1,11 @@
 from flask import Flask
-from flask_mail import Mail
+# from flask_mail import Mail
 
-mail = Mail()
+# mail = Mail()
 
 
 def init_app(app:Flask):
-    mail.init_app(app)
+    # mail.init_app(app)
 
     # from .home import main_bp
     # from .fetch_news import fetchnews_bp
