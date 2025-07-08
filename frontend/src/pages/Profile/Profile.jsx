@@ -1,24 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Plus,
   Trash2,
   ChevronLeft,
   ChevronRight,
-  BookOpen,
-  ExternalLink,
+  Settings,
 } from "lucide-react";
 import PropTypes from "prop-types";
+import { toast } from "sonner";
 
 import Header from "../../components/Headers/HomeHeader";
 import Footer from "../../components/Footers/HomeFooter";
 import { useAuth } from "../../contexts/AuthContext";
-import {
-  useCollections,
-  useArticles,
-  useSearch,
-  useDatabase,
-} from "../../hooks/useDB";
+import { useCollections, useArticles, useSearch } from "../../hooks/useDB";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+import DecorativeElm, {
+  Article,
+  ArticleRow,
+  NewCollectionModal,
+} from "./components";
+
+/**
+ *
+ * collection +, - ~~> done
+ * article - ~~> Halfway done, bugfix needed
+ * diff Collection choise when saving ~~> done
+ * acc Delete ~~> 50% done
+ * search ~~>
+ *
+ */
 
 const ProfilePage = () => {
   const { isDark } = useDarkMode();
@@ -26,16 +36,47 @@ const ProfilePage = () => {
   const { currentUser, deleteAllData } = useAuth();
   const {
     collections,
+    setCollections,
     loading: collectionsLoading,
     error: collectionsError,
-    createCollection,
     deleteCollection,
   } = useCollections();
 
   const [selectedCollection, setSelectedCollection] = useState(null);
-  const [selectedCollectionId, setSelectedCollectionId] = useState(null);
+  // const [selectedCollectionId, setSelectedCollectionId] = useState(null);
   const [showNewCollectionModal, setShowNewCollectionModal] = useState(false);
 
+  const {
+    loadArticles,
+    loading: articlesLoading,
+    error: articlesError,
+  } = useArticles();
+
+  const [collectionsWithArticles, setCollectionsWithArticles] = useState([]);
+
+  useEffect(() => {
+    const loadAll = async () => {
+      const updated = await Promise.all(
+        collections.map(async (collection) => {
+          const res = await loadArticles(collection.id);
+          const articles = res?.success ? res.articlesData : [];
+          return { ...collection, articles };
+        }),
+      );
+
+      setCollectionsWithArticles(updated);
+    };
+
+    if (collections.length > 0) {
+      loadAll();
+    }
+  }, [collections, loadArticles]);
+
+  /**
+   *
+   * CollectionView Component
+   *
+   */
   const [currentPage, setCurrentPage] = useState(1);
   const articlesPerPage = 10;
 
@@ -75,12 +116,32 @@ const ProfilePage = () => {
               </p>
             </div>
           </div>
-          <button
-            className="text-red-600 hover:text-red-500 transition-colors"
-            title="Delete Collection"
-          >
-            <Trash2 size={20} />
-          </button>
+
+          {collection?.name?.toLowerCase() !== "read later" &&
+            collection?.name?.toLowerCase() !== "liked articles" && (
+              <button
+                className="text-red-600 hover:text-red-500 transition-colors"
+                title="Delete Collection"
+                onClick={async () => {
+                  const confirm = window.confirm("Are you sure? Its permanent");
+                  if (confirm) {
+                    const res = await deleteCollection(collection.id);
+                    if (res.success) {
+                      toast.success("Collection deleted successfully");
+                      setCollections((prev) =>
+                        prev.filter((c) => c.id != collection.id),
+                      );
+                    } else {
+                      toast.error(
+                        `Collection Deletion Error: ${collectionsError.toString()}`,
+                      );
+                    }
+                  }
+                }}
+              >
+                <Trash2 size={20} />
+              </button>
+            )}
         </div>
 
         {/* Articles Table */}
@@ -92,8 +153,8 @@ const ProfilePage = () => {
               <tr
                 className={`font-zodiak ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
               >
+                <th className="py-3 px-4 text-left">Index</th>
                 <th className="py-3 px-4 text-left">Article</th>
-                <th className="py-3 px-4 text-left">Source</th>
                 <th className="py-3 px-4 text-left">Date</th>
                 <th className="py-3 px-4 text-center">Actions</th>
               </tr>
@@ -101,60 +162,20 @@ const ProfilePage = () => {
             <tbody
               className={`divide-y ${isDark ? "divide-stone-700" : "divide-[#8B4513]/10"}`}
             >
-              {currentArticles.map((article, idx) => (
-                <tr
-                  key={article?.id || idx}
-                  className={`${isDark ? "hover:bg-stone-700/30" : "hover:bg-[#8B4513]/5"}`}
-                >
-                  <td className="py-4 px-4">
-                    <h4
-                      className={`font-medium ${isDark ? "text-stone-200" : "text-[#8B4513]"} text-lg`}
-                    >
-                      {article?.title}
-                    </h4>
-                    <p
-                      className={`text-sm ${isDark ? "text-stone-400" : "text-[#8B4513]/60"} mt-1`}
-                    >
-                      {article?.summary}
-                    </p>
-                  </td>
-                  <td
-                    className={`py-4 px-4 ${isDark ? "text-stone-300" : "text-[#8B4513]/80"}`}
-                  >
-                    {article?.source}
-                  </td>
-                  <td
-                    className={`py-4 px-4 ${isDark ? "text-stone-300" : "text-[#8B4513]/80"}`}
-                  >
-                    {article?.date}
-                  </td>
-                  <td className="py-4 px-4">
-                    <div className="flex items-center justify-center space-x-2">
-                      <button
-                        className={`${isDark ? "text-stone-200 hover:bg-stone-700" : "text-[#8B4513] hover:bg-[#8B4513]/10"} p-2 rounded-full transition-colors`}
-                        title="Read Article"
-                      >
-                        <BookOpen size={20} />
-                      </button>
-                      <a
-                        href={article?.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`${isDark ? "text-stone-200 hover:bg-stone-700" : "text-[#8B4513] hover:bg-[#8B4513]/10"} p-2 rounded-full transition-colors`}
-                        title="Visit Original"
-                      >
-                        <ExternalLink size={20} />
-                      </a>
-                      <button
-                        className={`text-red-600 ${isDark ? "hover:bg-stone-700" : "hover:bg-red-50"} p-2 rounded-full transition-colors`}
-                        title="Remove from Collection"
-                      >
-                        <Trash2 size={20} />
-                      </button>
-                    </div>
-                  </td>
+              {articlesLoading ? (
+                <tr>
+                  <td>Loading...</td>
                 </tr>
-              ))}
+              ) : (
+                currentArticles.map((article, idx) => (
+                  <ArticleRow
+                    key={article?.id || idx}
+                    article={article}
+                    index={startIndex + idx}
+                    isDark={isDark}
+                  />
+                ))
+              )}
             </tbody>
           </table>
         </div>
@@ -210,113 +231,107 @@ const ProfilePage = () => {
       <div
         className={`min-h-[80dvh] ${isDark ? `bg-stone-900 text-stone-200` : `bg-cream`} font-sentient relative pb-16`}
       >
-        {/* <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 left-0 w-64 h-64">
-            <svg viewBox="0 0 100 100" className="w-full h-full opacity-10">
-              <circle
-                cx="50"
-                cy="50"
-                r="40"
-                fill="none"
-                stroke="#8B4513"
-                strokeWidth="0.5"
-              />
-              <circle
-                cx="50"
-                cy="50"
-                r="35"
-                fill="none"
-                stroke="#8B4513"
-                strokeWidth="0.5"
-              />
-              <circle
-                cx="50"
-                cy="50"
-                r="30"
-                fill="none"
-                stroke="#8B4513"
-                strokeWidth="0.5"
-              />
-            </svg>
-          </div>
-        </div> */}
+        <DecorativeElm />
 
-        {/* Main Content */}
         <main className="container mx-auto px-4 py-8 mt-14">
           {!selectedCollection ? (
             <>
-              {/* Collections Header */}
+              {/* Header */}
               <div className="flex justify-between items-center mb-8">
                 <h2
                   className={`text-3xl font-zodiak ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
                 >
                   Your Collections
                 </h2>
-                <button
-                  onClick={() => setShowNewCollectionModal(true)}
-                  className={`${isDark ? "bg-stone-700 text-stone-200 hover:bg-stone-600" : "bg-[#8B4513] text-[#F2E8CF] hover:bg-[#8B4513]/90"}
+
+                <div className="flex items-center justify-center gap-4">
+                  <button
+                    onClick={() => setShowNewCollectionModal(true)}
+                    className={`${isDark ? "bg-stone-700 text-stone-200 hover:bg-stone-600" : "bg-[#8B4513] text-[#F2E8CF] hover:bg-[#8B4513]/90"}
                                 px-4 py-2 rounded-md font-zodiak transition-all duration-300 flex items-center space-x-2`}
-                >
-                  <Plus size={20} />
-                  <span>New Collection</span>
-                </button>
+                  >
+                    <Plus size={20} />
+                    <span>New Collection</span>
+                  </button>
+
+                  <button
+                    onClick={() => {}}
+                    className={`bg-[#8B4513] text-[#F2E8CF] p-3 rounded-full transition-all duration-300 flex items-center`}
+                  >
+                    <Settings size={20} />
+                  </button>
+                </div>
               </div>
+              {/* end Header */}
 
               {/* Collections Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {collections.map((collection) => (
-                  <div
-                    key={collection?.id}
-                    className={`${isDark ? "bg-stone-800/40 border-stone-700" : "bg-white/40 border-[#8B4513]/20"}
-                                    backdrop-blur-md rounded-lg shadow-xl border overflow-hidden`}
-                  >
+                {collectionsLoading ? (
+                  <div className="text-xl text-center p-5">Loading...</div>
+                ) : (
+                  collectionsWithArticles.map((collection) => (
                     <div
-                      className={`p-4 border-b ${isDark ? "border-stone-700" : "border-[#8B4513]/10"} flex justify-between items-center`}
+                      key={collection?.id}
+                      className={`${isDark ? "bg-stone-800/40 border-stone-700" : "bg-white/40 border-[#8B4513]/20"}
+                                    backdrop-blur-md rounded-lg shadow-xl border overflow-hidden`}
                     >
-                      <h3
-                        className={`font-zodiak text-xl ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
+                      <div
+                        className={`p-4 border-b ${isDark ? "border-stone-700" : "border-[#8B4513]/10"} flex justify-between items-center`}
                       >
-                        {collection?.name}
-                      </h3>
-                      <button
-                        className="text-red-600 hover:text-red-700 transition-colors"
-                        title="Delete Collection"
-                      >
-                        <Trash2 size={20} />
-                      </button>
-                    </div>
-                    <div className="p-4">
-                      <p
-                        className={`${isDark ? "text-stone-400" : "text-[#8B4513]/60"} mb-4`}
-                      >
-                        {collection?.articles?.length} articles
-                      </p>
-                      <div className="space-y-4">
-                        {collection?.articles?.slice(0, 3).map((article) => (
-                          <div
-                            key={article?.id}
-                            className={`flex justify-between items-start space-x-4 pb-4 border-b ${
-                              isDark
-                                ? "border-stone-700"
-                                : "border-[#8B4513]/10"
-                            } last:border-0`}
-                          >
-                            <div className="flex-1">
-                              <h4
-                                className={`font-medium ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
-                              >
-                                {article?.title}
-                              </h4>
-                              <p
-                                className={`text-sm ${isDark ? "text-stone-400" : "text-[#8B4513]/60"}`}
-                              >
-                                {article?.source} • {article?.date}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
+                        <h3
+                          className={`font-zodiak text-xl ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
+                        >
+                          {collection?.name}
+                        </h3>
+                        {collection?.name?.toLowerCase() !== "read later" &&
+                          collection?.name?.toLowerCase() !==
+                            "liked articles" && (
+                            <button
+                              className="text-red-600 hover:text-red-700 transition-colors"
+                              title="Delete Collection"
+                              onClick={async () => {
+                                const confirm = window.confirm(
+                                  "Are you sure? Its permanent",
+                                );
+                                if (confirm) {
+                                  const res = await deleteCollection(
+                                    collection.id,
+                                  );
+                                  if (res.success) {
+                                    toast.success(
+                                      "Collection deleted successfully",
+                                    );
+                                    setCollections((prev) =>
+                                      prev.filter((c) => c.id != collection.id),
+                                    );
+                                  } else {
+                                    toast.error(
+                                      `Collection Deletion Error: ${collectionsError.toString()}`,
+                                    );
+                                  }
+                                }
+                              }}
+                            >
+                              <Trash2 size={20} />
+                            </button>
+                          )}
                       </div>
-                      {collection?.articles?.length > 3 && (
+                      <div className="p-4">
+                        <p
+                          className={`${isDark ? "text-stone-400" : "text-[#8B4513]/60"} mb-4`}
+                        >
+                          {collection?.articles?.length} articles
+                        </p>
+                        <div className="space-y-4">
+                          {collection?.articles?.slice(0, 3).map((article) => (
+                            <Article
+                              key={article.id}
+                              article={article}
+                              isDark={isDark}
+                            />
+                          ))}
+                        </div>
+
                         <button
                           onClick={() => {
                             setSelectedCollection(collection);
@@ -330,10 +345,10 @@ const ProfilePage = () => {
                         >
                           View all {collection?.articles?.length} articles →
                         </button>
-                      )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </>
           ) : (
@@ -341,36 +356,11 @@ const ProfilePage = () => {
           )}
         </main>
 
-        {/* New Collection Modal */}
+        {/* new Collection modal */}
         {showNewCollectionModal && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
-              <h3 className="text-2xl font-zodiak text-[#8B4513] mb-4">
-                Create New Collection
-              </h3>
-              <input
-                type="text"
-                placeholder="Collection Name"
-                className="w-full bg-[#F2E8CF]/30 border border-[#8B4513]/20 rounded-md py-2 px-4
-                            focus:ring-2 focus:ring-[#8B4513]/20 focus:border-[#8B4513]/40
-                            transition-all duration-300 outline-none mb-4"
-              />
-              <div className="flex justify-end space-x-4">
-                <button
-                  onClick={() => setShowNewCollectionModal(false)}
-                  className="px-4 py-2 text-[#8B4513] hover:bg-[#8B4513]/10 rounded-md transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  className="px-4 py-2 bg-[#8B4513] text-[#F2E8CF] rounded-md
-                              hover:bg-[#8B4513]/90 transition-colors"
-                >
-                  Create Collection
-                </button>
-              </div>
-            </div>
-          </div>
+          <NewCollectionModal
+            setShowNewCollectionModal={setShowNewCollectionModal}
+          />
         )}
       </div>
       <Footer />

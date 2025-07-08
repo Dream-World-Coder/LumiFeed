@@ -23,20 +23,16 @@ export const useCollections = () => {
   }, []);
 
   // Create new collection
-  const createCollection = useCallback(
-    async (name) => {
-      setError(null);
-      try {
-        const newCollection = await DatabaseService.createCollection(name);
-        await loadCollections(); // Refresh the list
-        return { success: true, collection: newCollection };
-      } catch (err) {
-        setError(err.message);
-        return { success: false, error: err.message };
-      }
-    },
-    [loadCollections],
-  );
+  const createCollection = useCallback(async (name) => {
+    setError(null);
+    try {
+      const newCollection = await DatabaseService.createCollection(name);
+      return { success: true, collection: newCollection };
+    } catch (err) {
+      setError(err.message);
+      return { success: false, error: err.message };
+    }
+  }, []);
 
   // Delete collection
   const deleteCollection = useCallback(
@@ -71,6 +67,7 @@ export const useCollections = () => {
 
   return {
     collections,
+    setCollections,
     loading,
     error,
     loadCollections,
@@ -82,7 +79,6 @@ export const useCollections = () => {
 };
 
 export const useArticles = () => {
-  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -95,7 +91,7 @@ export const useArticles = () => {
     try {
       const articlesData =
         await DatabaseService.getArticlesByCollection(collectionId);
-      setArticles(articlesData);
+      return { success: true, articlesData };
     } catch (err) {
       setError(err.message);
       console.error("Error loading articles:", err);
@@ -153,7 +149,6 @@ export const useArticles = () => {
   }, []);
 
   return {
-    articles,
     loading,
     error,
     loadArticles,

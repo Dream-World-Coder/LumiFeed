@@ -20,7 +20,7 @@ export default function LumiFeed() {
 
   return (
     <section className={`pt-16 ${isDark ? "bg-[#171717]" : "bg-[#fffcf5]"}`}>
-      <Header exclude={["/contact", "/about"]} />
+      <Header exclude={["/contact", "/about", "/home"]} />
 
       {/* container */}
       <div

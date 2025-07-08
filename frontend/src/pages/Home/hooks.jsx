@@ -7,6 +7,8 @@ import {
   ExternalLink,
   Clock,
   Bookmark,
+  Circle,
+  X,
 } from "lucide-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
@@ -263,14 +265,12 @@ export function useNewsList({ news: articles, newsLoading }) {
     collections,
     loading: collectionsLoading,
     error: collectionsError,
-    createCollection,
   } = useCollections();
 
   const {
     loading: articlesLoading,
     error: articlesError,
     addArticle,
-    removeArticle,
   } = useArticles();
 
   function NewsList() {
@@ -314,130 +314,176 @@ export function useNewsList({ news: articles, newsLoading }) {
           setArticleLoading(false);
         });
     };
+    const [collListOpen, setCollListOpen] = useState(false);
+    const [articleToSave, setArticleToSave] = useState(null);
 
     return (
       <div className="space-y-4">
-        {newsLoading &&
-          skeletonItems.map((_, index) => (
-            <div key={index} className="rounded-lg border p-2 z-10">
-              <Skeleton className="h-6 w-3/4 mb-1" />
-              <Skeleton className="h-4 w-5/6 mb-4" />
-              <div className="flex justify-between items-center">
-                <Skeleton className="h-8 w-24" />
-                <div className="flex gap-6 items-center justify-center">
-                  <Skeleton className="h-4 w-16" />
-                  <Skeleton className="h-6 w-6 rounded-full" />
-                  <div className="flex items-center gap-2">
+        {newsLoading
+          ? skeletonItems.map((_, index) => (
+              <div key={index} className="rounded-lg border p-2 z-10">
+                <Skeleton className="h-6 w-3/4 mb-1" />
+                <Skeleton className="h-4 w-5/6 mb-4" />
+                <div className="flex justify-between items-center">
+                  <Skeleton className="h-8 w-24" />
+                  <div className="flex gap-6 items-center justify-center">
+                    <Skeleton className="h-4 w-16" />
                     <Skeleton className="h-6 w-6 rounded-full" />
-                    <Skeleton className="h-6 w-6 rounded-full" />
+                    <div className="flex items-center gap-2">
+                      <Skeleton className="h-6 w-6 rounded-full" />
+                      <Skeleton className="h-6 w-6 rounded-full" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        {!newsLoading &&
-          articles.map((article, index) => (
-            <article
-              key={index}
-              className="rounded-lg border p-3 hover:shadow-md transition-shadow"
-            >
-              <div className="flex flex-col md:flex-row justify-start gap-4 mb-2">
-                {article.thumbnail && (
-                  <div className="overflow-hidden aspect-video md:min-w-40 md:max-w-40 rounded">
-                    <img src={article.thumbnail} alt="" />
-                  </div>
-                )}
+            ))
+          : articles.map((article, index) => (
+              <article
+                key={index}
+                className="rounded-lg border p-3 hover:shadow-md transition-shadow"
+              >
+                <div className="flex flex-col md:flex-row justify-start gap-4 mb-2">
+                  {article.thumbnail && (
+                    <div className="overflow-hidden aspect-video md:min-w-40 md:max-w-40 rounded">
+                      <img src={article.thumbnail} alt="" />
+                    </div>
+                  )}
 
-                <div className="">
-                  <h3
-                    className={`${article.description ? `text-xl font-serif font-semibold` : `text-lg font-serif`}
+                  <div className="">
+                    <h3
+                      className={`${article.description ? `text-xl font-serif font-semibold` : `text-lg font-serif`}
                                         leading-tight mb-3 md:mb-2 dark:text-gray-50`}
-                  >
-                    {article.title}
-                  </h3>
-                  {article.description && (
-                    <p className="text-sm mb-4 leading-tight dark:text-gray-400">
-                      {article.description}
-                    </p>
-                  )}
+                    >
+                      {article.title}
+                    </h3>
+                    {article.description && (
+                      <p className="text-sm mb-4 leading-tight dark:text-gray-400">
+                        {article.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center">
-                <div className="flex gap-8 mb-4 md:mb-0 items-center justify-between md:justify-center">
-                  {article.date && (
-                    <div className="text-xs dark:text-gray-400">
-                      {formatDate(article.date)}
-                    </div>
-                  )}
+                <div className="flex flex-col md:flex-row justify-between items-stretch md:items-center">
+                  <div className="flex gap-8 mb-4 md:mb-0 items-center justify-between md:justify-center">
+                    {article.date && (
+                      <div className="text-xs dark:text-gray-400">
+                        {formatDate(article.date)}
+                      </div>
+                    )}
 
-                  {currentUser && (
-                    <div className="flex items-center gap-1">
-                      <Clock
-                        size={16}
-                        className="cursor-pointer text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200
+                    {currentUser && (
+                      <div className="flex items-center gap-1">
+                        <Clock
+                          size={16}
+                          className="cursor-pointer text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200
                         dark:hover:bg-[#000] transition-colors rounded-lg box-content p-1"
-                        onClick={async () => {
-                          // console.log("collections", collections);
-                          const collId = collections?.find(
-                            (col) => col.name === "Read Later",
-                          )?.id;
-                          if (!collId) {
-                            toast.error("Some error occurred");
-                            console.log("collection Id not found");
-                            return;
-                          }
+                          onClick={async () => {
+                            // console.log("collections", collections);
+                            const collId = collections?.find(
+                              (col) => col.name === "Read Later",
+                            )?.id;
+                            if (!collId) {
+                              toast.error("Some error occurred");
+                              console.log("collection Id not found");
+                              return;
+                            }
 
-                          const res = await addArticle(article, collId);
-                          if (res.success) {
-                            toast.success("Article saved in Read Later");
-                          } else {
-                            console.log(res.error);
-                            toast.error(res.error);
-                          }
-                        }}
-                      />
-                      <Bookmark
-                        size={16}
-                        className="cursor-pointer text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200
+                            const res = await addArticle(article, collId);
+                            if (res.success) {
+                              toast.success("Article saved in Read Later");
+                            } else {
+                              console.log(res.error);
+                              toast.error(res.error);
+                            }
+                          }}
+                        />
+
+                        <Bookmark
+                          size={16}
+                          className="cursor-pointer text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200
                         dark:hover:bg-[#000] transition-colors rounded-lg box-content p-1"
-                        onClick={async () => {
-                          toast("will be added later");
-                        }}
-                      />
-                    </div>
-                  )}
+                          onClick={async () => {
+                            setArticleToSave(article);
+                            setCollListOpen(true);
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    {article.url && (
+                      <a
+                        href={article.url}
+                        target="_blank"
+                        className="text-neutral-800 dark:text-neutral-200 hover:text-neutral-700 transition-colors"
+                      >
+                        <ExternalLink size={16} />
+                      </a>
+                    )}
+                  </div>
 
                   {article.url && (
-                    <a
-                      href={article.url}
-                      target="_blank"
-                      className="text-neutral-800 dark:text-neutral-200 hover:text-neutral-700 transition-colors"
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleArticleClick(
+                          // e.target.dataset.url,
+                          article.url,
+                          article.description || null,
+                          article.date || null,
+                        );
+                      }}
+                      className="px-4 py-1 text-sm rounded-lg transition-colors bg-[#D8D2C2] dark:bg-[#000] hover:bg-[#C8C2B2]"
                     >
-                      <ExternalLink size={16} />
-                    </a>
+                      Read Here
+                    </button>
                   )}
                 </div>
+              </article>
+            ))}
 
-                {article.url && (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleArticleClick(
-                        // e.target.dataset.url,
-                        article.url,
-                        article.description || null,
-                        article.date || null,
-                      );
+        {collListOpen && (
+          <div className="w-screen h-screen z-50 bg-neutral-800 bg-opacity-45 top-0 left-0 fixed flex items-center justify-center">
+            <div className="modal w-96 h-auto rounded flex flex-col items-start p-4 bg-black text-white">
+              <header className="mb-4 flex items-center justify-between w-full">
+                <h1 className="text-xl">Choose Collection to save</h1>
+                <button onClick={() => setCollListOpen(false)}>
+                  <X />
+                </button>
+              </header>
+
+              {collectionsLoading ? (
+                <div className="">Loading Collections...</div>
+              ) : (
+                collections.map((coll) => (
+                  <div
+                    key={coll.id}
+                    className={`flex justify-start items-center gap-2 group py-2 text-sm w-full`}
+                    onClick={async () => {
+                      try {
+                        const res = await addArticle(articleToSave, coll.id);
+                        if (res.success) {
+                          toast.success(`Article saved in ${coll.name}`);
+                        } else {
+                          console.log(res.error);
+                          toast.error(res.error);
+                        }
+                      } finally {
+                        setCollListOpen(false);
+                      }
                     }}
-                    className="px-4 py-1 text-sm rounded-lg transition-colors bg-[#D8D2C2] dark:bg-[#000] hover:bg-[#C8C2B2]"
                   >
-                    Read Here
-                  </button>
-                )}
-              </div>
-            </article>
-          ))}
+                    <Circle
+                      size={16}
+                      className="group-hover:fill-white rounded-full"
+                    />{" "}
+                    {coll.name}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        )}
       </div>
     );
   }

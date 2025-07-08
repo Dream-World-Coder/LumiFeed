@@ -177,7 +177,7 @@ export class DatabaseService {
       return await db.articles
         .where("collectionId")
         .equals(collectionId)
-        .orderBy("createdAt")
+        // .orderBy("createdAt")
         .reverse()
         .toArray();
     } catch (error) {
