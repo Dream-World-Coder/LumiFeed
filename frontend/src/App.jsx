@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Lenis from "lenis";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
 
 import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -20,6 +21,8 @@ import Profile from "./pages/Profile/Profile";
 
 import NotFound from "./pages/404";
 import "./App.css";
+
+// https://lumifeed.onrender.com/api/fetch/news?source=the-indian-express&category=trending&subcategory=top-news&rssLink=_https_indianexpress.com--section--trending--feed--&number=25
 
 const App = () => {
   useEffect(() => {
@@ -42,6 +45,7 @@ const App = () => {
     <AuthProvider>
       <DarkModeProvider>
         <Router>
+          <Analytics />
           <Routes>
             <Route path="/landing-page" element={<LandingPage />} />
             <Route path="/" element={<Home />} />
