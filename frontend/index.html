@@ -1,65 +1,66 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>LumiFeed</title>
-        <meta
-            name="description"
-            content="LumiFeed offers ad-free news with comprehensive summaries and key points. Stay updated with news from Kolkata and Indian cities through a clean and clutter-free UI/UX."
-        />
-        <meta
-            name="keywords"
-            content="LumiFeed, ad free news, news summary, key points, news reader"
-        />
-        <meta name="author" content="Subhajit Gorai" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LumiFeed</title>
+    <meta
+      name="description"
+      content="A rss reader with clutterless UI to read news without advertisements, along with A.I. Summary of each news available. Many other mindblowing features awaits you."
+    />
+    <meta
+      name="keywords"
+      content="LumiFeed, ad free news, rss, reader, key points, rssreader"
+    />
+    <meta name="author" content="Subhajit Gorai" />
 
-        <!-- favicon -->
-        <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/manifest.json" />
 
-        <!-- og meta data -->
-        <meta
-            property="og:title"
-            content="LumiFeed - Ad Free News, Summaries, and library"
-        />
-        <meta
-            property="og:description"
-            content="News reader with Renaissance theme UI, read news completely ad-free with comprehensive summaries. Many awesome features awaits you!"
-        />
-        <meta property="og:image" content="/images/preview-image.png" />
-        <!-- <meta property="og:url" content="https://lumifeed.up.railway.app" /> -->
-        <meta property="og:url" content="https://lumifeed.netlify.app" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="LumiFeed" />
+    <!-- og meta data -->
+    <meta
+      property="og:title"
+      content="LumiFeed - Ad Free News, Summaries, and library"
+    />
+    <meta
+      property="og:description"
+      content="News reader with Renaissance theme UI, read news completely ad-free with comprehensive summaries. Many awesome features awaits you!"
+    />
+    <meta property="og:image" content="/images/preview-image.png" />
 
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "NewsArticle",
-                "headline": "LumiFeed - Ad Free News, Summaries, and Key Points",
-                "image": [
-                    "https://lumifeed.netlify.app/images/preview-image.png"
-                ],
-                "datePublished": "2024-07-15",
-                "dateModified": "2025-5-17",
-                "author": {
-                    "@type": "Person",
-                    "name": "Subhajit Gorai"
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "LumiFeed",
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": "https://lumifeed.netlify.app/lumifeed.svg"
-                    }
-                },
-                "description": "News reader with Renaissance theme UI, read news completely ad-free with comprehensive summaries. Many awesome features awaits you!"
-            }
-        </script>
-    </head>
-    <body>
-        <div id="root"></div>
-        <script type="module" src="/src/main.jsx"></script>
-    </body>
+    <meta property="og:url" content="https://lumifeed.vercel.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LumiFeed" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": "LumiFeed - Ad Free News, Summaries, and Key Points",
+        "image": ["https://lumifeed.vercel.app/images/preview-image.png"],
+        "datePublished": "2024-07-15",
+        "dateModified": "2025-7-15",
+        "author": {
+          "@type": "Person",
+          "name": "Subhajit Gorai"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LumiFeed",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://lumifeed.vercel.app/lumifeed.svg"
+          }
+        },
+        "description": "A rss reader with clutterless UI to read news without advertisements, along with A.I. Summary of each news available. Many other mindblowing features awaits you."
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
