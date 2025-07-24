@@ -35,12 +35,12 @@ All development so far by [DWC](https://github.com/Dream-World-Coder) — over 2
 git clone https://github.com/Dream-World-Coder/LumiFeed.git
 cd lumifeed
 
---- frontend ---
+# --- frontend ---
 cd frontend
 pnpm i
 pnpm dev
 
---- backend ---
+# --- backend ---
 cd ../backend
 python3 -m venv .venv # or python -m venv .venv
 source .venv/bin/activate  # For Windows: .venv\Scripts\activate
