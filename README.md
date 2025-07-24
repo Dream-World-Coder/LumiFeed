@@ -24,35 +24,30 @@ All development so far by [DWC](https://github.com/Dream-World-Coder) — over 2
 
 ## Tech Stack
 
-- **Backend**: N/A now | Flask (Python), Gunicorn
+- **Backend**: Flask (Python), Gunicorn
 - **Frontend**: React (jsx), Dexie, Tailwind
 - **Database**: N/A now | SQLite + PostgreSQL
-- **Other Tools**:
-  - N/A now 
-  - Flask-SQLAlchemy
-  - Ajax for dynamic content loading
 
 
 ## Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/Dream-World-Coder/LumiFeed.git
-cd lumifeed/frontend
+cd lumifeed
+
+--- frontend ---
+cd frontend
 pnpm i
 pnpm dev
 
---- N/A ---
+--- backend ---
+cd ../backend
+python3 -m venv .venv # or python -m venv .venv
+source .venv/bin/activate  # For Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+flask run or python run.py
 
-# Create and activate a virtual environment
-# python -m venv venv
-# source venv/bin/activate  # For Windows: venv\Scripts\activate
-
-# Install dependencies
-# pip install -r requirements.txt
-
-# Run the app
-# flask run or python run.py
+# Now visit <u>localhost:5173</u> in your brower to see the dev site
 ```
 
 
