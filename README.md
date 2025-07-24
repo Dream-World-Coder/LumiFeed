@@ -1,26 +1,22 @@
 # LumiFeed
 
-### Ad-Free News Platform with Summaries & Key Points, clutterless ui
+### Ad-Free News Platform with Summaries & Key Points
 
-**LumiFeed** is an ad-free news platform that delivers the latest news with a clean, clutter-free user experience. It provides quick summaries of articles to help you stay informed without the noise. News is delivered from multiple sources, with a focus on user experience.
+[Live Demo](https://lumifeed.vercel.app)
 
-all development up until now done by [Dream World Coder](https://github.com/Dream-World-Coder), 20000+ Lines of code.
+> Note: This deployment is for **personal and educational purposes only**. It may include scraped content under fair use for demo/testing.
 
-![LumiFeed Profile](preview-images/lines-of-code.png)
+**LumiFeed** is an ad-free news platform that delivers the latest news with a clean, clutter-free user experience. It provides quick summaries of articles to help you stay informed without the noise. News is fetched from multiple sources, with a strong focus on readability and performance. You can also organise your articles in collections.
 
-____Interested peeps are heartily welcome to contribute____
-
-## Why LumiFeed?
+All development so far by [DWC](https://github.com/Dream-World-Coder) — over 23,000 lines of code.
 
 ## Features
 
-- **Ad-Free Browsing**: Enjoy news articles without the interruption of advertisements. Stay focused while reading
-- **Clean UI/UX**: A simple and intuitive interface designed to prioritize user comfort.
+- **Ad-Free**: Enjoy news articles without the interruption of advertisements. Stay focused while reading
 - **Collections to Store Articles**: Collections like `Read Later` and `Liked Articles` for easy organization, also you can create custom collections of your own.
-- **Quick Summaries**: Each news article is summarized into key points for quick consumption.
-- **Single Page Application (SPA)**: Using Ajax for a seamless experience, all interactions happen on a single page.
+- **Quick Summaries**: Each news article is summarized into key points for quick consumption. [in development]
 - **Responsive Design**: Fully responsive, works smoothly across all devices.
-- **Dark Mode**: A optimised dark mode for 'night-owls'.
+- **Clean UI/UX**: A simple and intuitive interface designed to prioritize user comfort.
 
 ## In Progress
 
@@ -68,4 +64,10 @@ Feel free to open an issue or submit a pull request if you'd like to contribute 
 ## License
 
 This project is licensed under the MIT License.
+
+## Disclaimer
+
+LumiFeed is intended for **personal and educational use only**. It fetches article headlines via RSS and uses `newspaper3k` to extract summary text _for your learning purposes_.  
+Please ensure any site’s Terms of Service permit this kind of access. Avoid publicly hosting full scraped content or using it in commercial applications.
+
 
