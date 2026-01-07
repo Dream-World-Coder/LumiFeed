@@ -19,6 +19,7 @@ def init_app(app:Flask):
     # from .api.auth import auth_api_bp
     from .api.fetch_news import fetchnews_api_bp
     from .api.articles import articles_api_bp
+    from .api.summary import summary_api_bp
 
     # app.register_blueprint(main_bp, url_prefix='')
     # app.register_blueprint(fetchnews_bp, url_prefix='')
@@ -32,3 +33,4 @@ def init_app(app:Flask):
     # app.register_blueprint(auth_api_bp, url_prefix='/api')
     app.register_blueprint(fetchnews_api_bp, url_prefix='/api')
     app.register_blueprint(articles_api_bp, url_prefix='/api')
+    app.register_blueprint(summary_api_bp, url_prefix='/api')

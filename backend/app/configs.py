@@ -6,11 +6,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))  # i.e. ./app/
 load_dotenv()
 
 class Config:
-    FLASK_APP = os.environ.get("FLASK_APP", "run")
-    PORT = os.environ.get("PORT", 3000)
+    FLASK_APP = os.getenv("FLASK_APP", "run")
+    PORT = os.getenv("PORT", 3000)
     HOST = "0.0.0.0"
 
-    SECRET_KEY = os.environ.get("SECRET_KEY", os.urandom(512))
+    SECRET_KEY = os.getenv("SECRET_KEY", os.urandom(512))
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_POOL_SIZE = 40
@@ -28,6 +28,7 @@ class Config:
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
 
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
+    GROQ_API_KEY=os.getenv('GROQ_API_KEY')
 
 
 class DevelopmentConfig(Config):
