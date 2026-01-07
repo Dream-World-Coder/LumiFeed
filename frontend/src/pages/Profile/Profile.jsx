@@ -153,9 +153,9 @@ const ProfilePage = () => {
               <tr
                 className={`font-zodiak ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
               >
-                <th className="py-3 px-4 text-left">Index</th>
+                <th className="py-3 px-4 text-left hidden md:block">Index</th>
                 <th className="py-3 px-4 text-left">Article</th>
-                <th className="py-3 px-4 text-left">Date</th>
+                <th className="py-3 px-4 text-left hidden md:block">Date</th>
                 <th className="py-3 px-4 text-center">Actions</th>
               </tr>
             </thead>

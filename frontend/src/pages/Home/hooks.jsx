@@ -17,20 +17,28 @@ import { toast } from "sonner";
 import { formatDate } from "../../services/dateFormat";
 import rssLinks from "../../assets/data/rss-links.json";
 import { useAuth } from "../../contexts/AuthContext";
-import { useCollections, useArticles, useSearch } from "../../hooks/useDB";
+import { useCollections, useArticles } from "../../hooks/useDB"; // useSearch
 
 export function useSelectNews() {
-  // make a context and store them there so it stays:
-  const [selectedSource, setSelectedSource] = useState("The Indian Express");
-  const [selectedCategory, setSelectedCategory] = useState("trending");
-  const [selectedSubCategory, setSelectedSubCategory] = useState("Top News");
+  const [selectedSource, setSelectedSource] = useState(
+    () => localStorage.getItem("news_selectedSource") || "The Indian Express",
+  );
+
+  const [selectedCategory, setSelectedCategory] = useState(
+    () => localStorage.getItem("news_selectedCategory") || "trending",
+  );
+
+  const [selectedSubCategory, setSelectedSubCategory] = useState(
+    () => localStorage.getItem("news_selectedSubCategory") || "Top News",
+  );
+
   const [numberOfNews, setNumberOfNews] = useState(25);
-  // ----
 
   const [news, setNews] = useState(() => {
     const savedArticles = localStorage.getItem("newsArticles");
     return savedArticles ? JSON.parse(savedArticles) : [];
   });
+
   const [newsLoading, setIsNewsLoading] = useState(false);
 
   const [isCategoryOpen, setIsCategoryOpen] = useState(true);
@@ -88,6 +96,12 @@ export function useSelectNews() {
   useEffect(() => {
     localStorage.setItem("newsArticles", JSON.stringify(news));
   }, [news]);
+
+  useEffect(() => {
+    localStorage.setItem("news_selectedSource", selectedSource);
+    localStorage.setItem("news_selectedCategory", selectedCategory);
+    localStorage.setItem("news_selectedSubCategory", selectedSubCategory);
+  }, [selectedSource, selectedCategory, selectedSubCategory]);
 
   useEffect(() => {
     // Handle click outside dropdown

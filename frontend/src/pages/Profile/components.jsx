@@ -175,7 +175,7 @@ export function ArticleRow({ article, isDark, index }) {
     >
       <>
         <td
-          className={`py-4 px-4 ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
+          className={`py-4 px-4 hidden md:block ${isDark ? "text-stone-200" : "text-[#8B4513]"}`}
         >
           {index + 1}.
         </td>
@@ -194,13 +194,13 @@ export function ArticleRow({ article, isDark, index }) {
         </td>
 
         <td
-          className={`py-4 px-4 ${isDark ? "text-stone-300" : "text-[#8B4513]/80"}`}
+          className={`py-4 px-4 hidden md:block ${isDark ? "text-stone-300" : "text-[#8B4513]/80"}`}
         >
           {article?.date ? formatDate(article.date) : article?.date}
         </td>
 
         <td className="py-4 px-4">
-          <div className="flex items-center justify-center space-x-2">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-center space-x-2">
             <button
               className={`flex justify-center items-center gap-1
                   ${isDark ? "text-stone-200 hover:bg-stone-700" : "text-[#8B4513] hover:bg-[#8B4513]/10"} p-2 rounded-full transition-colors`}
